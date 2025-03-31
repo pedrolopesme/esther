@@ -4,15 +4,36 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Heart, Book, Languages, Calculator, Palette, Globe, Music, Sparkles, Star } from 'lucide-react';
 
+// Definindo as interfaces para melhorar a tipagem
+interface Subject {
+  id: string;
+  name: string;
+  icon: React.ReactNode;
+  bgColor: string;
+  borderColor: string;
+  textColor: string;
+  iconBgColor: string;
+  hoverBgColor: string;
+  path: string;
+  description: string;
+}
+
+interface Decoration {
+  element: React.ReactNode;
+  position: string;
+  size: string;
+  rotate: string;
+}
+
 export default function HomePage() {
-  const [hoveredSubject, setHoveredSubject] = useState(null);
-  const [mounted, setMounted] = useState(false);
+  const [hoveredSubject, setHoveredSubject] = useState<string | null>(null);
+  const [mounted, setMounted] = useState<boolean>(false);
   
   useEffect(() => {
     setMounted(true);
   }, []);
   
-  const subjects = [
+  const subjects: Subject[] = [
     { 
       id: 'portugues', 
       name: 'Português', 
@@ -88,7 +109,7 @@ export default function HomePage() {
   ];
 
   // Elementos decorativos
-  const decorations = [
+  const decorations: Decoration[] = [
     { element: <Star className="w-full h-full text-yellow-400 fill-yellow-300" />, position: "top-20 left-10", size: "w-12 h-12", rotate: "rotate-12" },
     { element: <Star className="w-full h-full text-yellow-400 fill-yellow-300" />, position: "bottom-16 right-12", size: "w-10 h-10", rotate: "-rotate-12" },
     { element: <Sparkles className="w-full h-full text-pink-400" />, position: "top-32 right-16", size: "w-10 h-10", rotate: "rotate-6" },
@@ -96,6 +117,78 @@ export default function HomePage() {
     { element: <Heart className="w-full h-full text-pink-400 fill-pink-200" />, position: "top-40 left-1/4", size: "w-8 h-8", rotate: "rotate-12" },
     { element: <Heart className="w-full h-full text-pink-400 fill-pink-200" />, position: "bottom-40 right-1/4", size: "w-10 h-10", rotate: "-rotate-12" },
   ];
+
+  // Funções auxiliares para converter os valores do Tailwind para estilos CSS
+  const getRotationStyle = (rotate: string): string => {
+    if (rotate === 'rotate-12') return 'rotate(12deg)';
+    if (rotate === '-rotate-12') return 'rotate(-12deg)';
+    if (rotate === 'rotate-6') return 'rotate(6deg)';
+    if (rotate === '-rotate-6') return 'rotate(-6deg)';
+    return 'rotate(0)';
+  };
+  
+  const getPositionStyle = (position: string): Record<string, string> => {
+    const positions = position.split(' ');
+    const result: Record<string, string> = {};
+    
+    positions.forEach(pos => {
+      if (pos.startsWith('top-')) {
+        const value = pos.replace('top-', '');
+        result.top = value === '1/4' ? '25%' : 
+                      value === '1/3' ? '33.333%' :
+                      value === '1/2' ? '50%' :
+                      `${parseInt(value, 10) * 4}px`;
+      } else if (pos.startsWith('bottom-')) {
+        const value = pos.replace('bottom-', '');
+        result.bottom = value === '1/4' ? '25%' : 
+                        value === '1/3' ? '33.333%' :
+                        value === '1/2' ? '50%' :
+                        `${parseInt(value, 10) * 4}px`;
+      } else if (pos.startsWith('left-')) {
+        const value = pos.replace('left-', '');
+        result.left = value === '1/4' ? '25%' : 
+                      value === '1/3' ? '33.333%' :
+                      value === '1/2' ? '50%' :
+                      `${parseInt(value, 10) * 4}px`;
+      } else if (pos.startsWith('right-')) {
+        const value = pos.replace('right-', '');
+        result.right = value === '1/4' ? '25%' : 
+                       value === '1/3' ? '33.333%' :
+                       value === '1/2' ? '50%' :
+                       `${parseInt(value, 10) * 4}px`;
+      }
+    });
+    
+    return result;
+  };
+  
+  const getSizeStyle = (size: string): Record<string, string> => {
+    const sizes = size.split(' ');
+    const result: Record<string, string> = {};
+    
+    sizes.forEach(s => {
+      if (s.startsWith('w-')) {
+        const value = s.replace('w-', '');
+        if (!isNaN(parseInt(value, 10))) {
+          result.width = `${parseInt(value, 10) * 4}px`;
+        } else {
+          // Tratamento para valores não numéricos
+          result.width = '100%';
+        }
+      }
+      if (s.startsWith('h-')) {
+        const value = s.replace('h-', '');
+        if (!isNaN(parseInt(value, 10))) {
+          result.height = `${parseInt(value, 10) * 4}px`;
+        } else {
+          // Tratamento para valores não numéricos
+          result.height = '100%';
+        }
+      }
+    });
+    
+    return result;
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-purple-50 relative overflow-hidden">
@@ -109,86 +202,23 @@ export default function HomePage() {
       }}></div>
       
       {/* Elementos decorativos flutuantes */}
-      {mounted && decorations.map((item, index) => {
-        const getRotationStyle = (rotate) => {
-          if (rotate === 'rotate-12') return 'rotate(12deg)';
-          if (rotate === '-rotate-12') return 'rotate(-12deg)';
-          if (rotate === 'rotate-6') return 'rotate(6deg)';
-          if (rotate === '-rotate-6') return 'rotate(-6deg)';
-          return 'rotate(0)';
-        };
-        
-        const getPositionStyle = (position) => {
-          const positions = position.split(' ');
-          const result = {};
-          
-          positions.forEach(pos => {
-            if (pos.startsWith('top-')) {
-              const value = pos.replace('top-', '');
-              result.top = value === '1/4' ? '25%' : 
-                           value === '1/3' ? '33.333%' :
-                           value === '1/2' ? '50%' :
-                           `${parseInt(value, 10) * 4}px`;
-            } else if (pos.startsWith('bottom-')) {
-              const value = pos.replace('bottom-', '');
-              result.bottom = value === '1/4' ? '25%' : 
-                              value === '1/3' ? '33.333%' :
-                              value === '1/2' ? '50%' :
-                              `${parseInt(value, 10) * 4}px`;
-            } else if (pos.startsWith('left-')) {
-              const value = pos.replace('left-', '');
-              result.left = value === '1/4' ? '25%' : 
-                            value === '1/3' ? '33.333%' :
-                            value === '1/2' ? '50%' :
-                            `${parseInt(value, 10) * 4}px`;
-            } else if (pos.startsWith('right-')) {
-              const value = pos.replace('right-', '');
-              result.right = value === '1/4' ? '25%' : 
-                             value === '1/3' ? '33.333%' :
-                             value === '1/2' ? '50%' :
-                             `${parseInt(value, 10) * 4}px`;
-            }
-          });
-          
-          return result;
-        };
-        
-        const getSizeStyle = (size) => {
-          const sizes = size.split(' ');
-          const result = {};
-          
-          sizes.forEach(s => {
-            if (s.startsWith('w-')) {
-              const value = s.replace('w-', '');
-              result.width = `${parseInt(value, 10) * 4}px`;
-            }
-            if (s.startsWith('h-')) {
-              const value = s.replace('h-', '');
-              result.height = `${parseInt(value, 10) * 4}px`;
-            }
-          });
-          
-          return result;
-        };
-        
-        return (
-          <div 
-            key={index}
-            style={{ 
-              position: 'absolute',
-              opacity: 0.7,
-              transform: getRotationStyle(item.rotate),
-              animation: 'bounce 6s ease-in-out infinite',
-              animationDelay: `${index * 0.5}s`,
-              filter: 'drop-shadow(0 0 2px rgba(255,255,255,0.7))',
-              ...getPositionStyle(item.position),
-              ...getSizeStyle(item.size)
-            }}
-          >
-            {item.element}
-          </div>
-        );
-      })}
+      {mounted && decorations.map((item, index) => (
+        <div 
+          key={index}
+          style={{ 
+            position: 'absolute',
+            opacity: 0.7,
+            transform: getRotationStyle(item.rotate),
+            animation: 'bounce 6s ease-in-out infinite',
+            animationDelay: `${index * 0.5}s`,
+            filter: 'drop-shadow(0 0 2px rgba(255,255,255,0.7))',
+            ...getPositionStyle(item.position),
+            ...getSizeStyle(item.size)
+          }}
+        >
+          {item.element}
+        </div>
+      ))}
       
       {/* Container principal */}
       <div style={{ 
@@ -282,9 +312,7 @@ export default function HomePage() {
                   </p>
                   
                   {/* Decorative icon at bottom right */}
-                  <div className="absolute opacity-20" style={{ bottom: '8px', right: '8px' }}>
-                    {React.cloneElement(subject.icon, { className: 'w-10 h-10' })}
-                  </div>
+
                   
                   {/* Sparkle effect on hover */}
                   {hoveredSubject === subject.id && (

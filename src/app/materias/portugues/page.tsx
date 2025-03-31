@@ -2,14 +2,28 @@
 
 import React, { useState } from 'react';
 
-const QuizApp = () => {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [score, setScore] = useState(0);
-  const [showResults, setShowResults] = useState(false);
-  const [answers, setAnswers] = useState({});
-  const [showExplanation, setShowExplanation] = useState(false);
+// Definir interfaces para garantir tipagem correta
+interface Question {
+  id: number;
+  question: string;
+  options: string[];
+  correct: string;
+  type: string;
+  explanation: string;
+}
 
-  const questions = [
+interface AnswersState {
+  [key: number]: string;
+}
+
+const QuizApp = () => {
+  const [currentQuestion, setCurrentQuestion] = useState<number>(0);
+  const [score, setScore] = useState<number>(0);
+  const [showResults, setShowResults] = useState<boolean>(false);
+  const [answers, setAnswers] = useState<AnswersState>({});
+  const [showExplanation, setShowExplanation] = useState<boolean>(false);
+
+  const questions: Question[] = [
     {
       id: 1,
       question: "O Sol e a Lua eram ________ que se transformaram em astros celestes.",
@@ -177,12 +191,12 @@ const QuizApp = () => {
     }
   ];
 
-  const handleAnswer = (answer) => {
-    const newAnswers = { ...answers, [currentQuestion]: answer };
+  const handleAnswer = (answer: string): void => {
+    const newAnswers: AnswersState = { ...answers, [currentQuestion]: answer };
     setAnswers(newAnswers);
   };
 
-  const handleNextQuestion = () => {
+  const handleNextQuestion = (): void => {
     const correct = questions[currentQuestion].correct;
     const currentAnswer = answers[currentQuestion];
     
@@ -198,7 +212,7 @@ const QuizApp = () => {
     }
   };
 
-  const restartQuiz = () => {
+  const restartQuiz = (): void => {
     setCurrentQuestion(0);
     setScore(0);
     setAnswers({});
@@ -206,7 +220,7 @@ const QuizApp = () => {
     setShowExplanation(false);
   };
 
-  const getFeedback = () => {
+  const getFeedback = (): string => {
     const percentage = (score / questions.length) * 100;
     
     if (percentage >= 90) {
@@ -220,7 +234,7 @@ const QuizApp = () => {
     }
   };
 
-  const renderOptions = () => {
+  const renderOptions = (): React.ReactNode => {
     const question = questions[currentQuestion];
     
     if (question.type === "radio") {
