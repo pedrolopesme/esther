@@ -1,0 +1,79 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap');
+
+:root {
+  --primary-color: #ff80ab;
+  --secondary-color: #b388ff;
+  --text-color: #4a148c;
+  --background-light: #fff8fa;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--background-light);
+  font-family: 'Arial', sans-serif;
+  overflow-x: hidden;
+}
+
+.font-display {
+  font-family: 'Bubblegum Sans', cursive;
+}
+
+/* Animações */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-shine {
+  animation: shine 2s infinite;
+}
+
+/* Estilo para cards */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(255, 128, 171, 0.2);
+}
+
+/* Efeitos de cursor personalizados */
+.cursor-star {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewport='0 0 100 100' style='fill:none;'><path d='M20,2L20,2 L12,18 L2,19 L10,29 L8,40 L20,34 L32,40 L30,29 L38,19 L28,18 L20,2' stroke='pink' stroke-width='2' fill='%23ffccee'/></svg>") 16 16, auto;
+}
+
+/* Fundo com padrão suave */
+.bg-pattern {
+  background-image: 
+    radial-gradient(circle, rgba(255, 255, 255, 0.8) 1px, transparent 1px), 
+    radial-gradient(circle, rgba(255, 255, 255, 0.8) 1px, transparent 1px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
