@@ -70,18 +70,18 @@ export default function HomePage() {
     //   path: '/materias/ingles',
     //   description: 'Vocabulário e conversação'
     // },
-    // { 
-    //   id: 'ciencias', 
-    //   name: 'Ciências', 
-    //   icon: <Globe className="w-6 h-6" />, 
-    //   bgColor: 'bg-green-100', 
-    //   borderColor: 'border-green-300',
-    //   textColor: 'text-green-600',
-    //   iconBgColor: 'bg-green-50',
-    //   hoverBgColor: 'hover:bg-green-200',
-    //   path: '/materias/ciencias',
-    //   description: 'Natureza, plantas e animais'
-    // },
+    { 
+      id: 'ciencias', 
+      name: 'Ciências', 
+      icon: <Globe className="w-6 h-6" />, 
+      bgColor: 'bg-green-100', 
+      borderColor: 'border-green-300',
+      textColor: 'text-green-600',
+      iconBgColor: 'bg-green-50',
+      hoverBgColor: 'hover:bg-green-200',
+      path: '/materias/ciencias',
+      description: 'Natureza, plantas e animais'
+    },
     // { 
     //   id: 'artes', 
     //   name: 'Artes', 
