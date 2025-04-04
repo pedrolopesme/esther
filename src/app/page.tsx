@@ -46,18 +46,18 @@ export default function HomePage() {
       path: '/materias/portugues',
       description: 'Leitura, escrita e gramática'
     },
-    // { 
-    //   id: 'matematica', 
-    //   name: 'Matemática', 
-    //   icon: <Calculator className="w-6 h-6" />, 
-    //   bgColor: 'bg-purple-100', 
-    //   borderColor: 'border-purple-300',
-    //   textColor: 'text-purple-600',
-    //   iconBgColor: 'bg-purple-50',
-    //   hoverBgColor: 'hover:bg-purple-200',
-    //   path: '/materias/matematica',
-    //   description: 'Números, operações e problemas'
-    // },
+    { 
+      id: 'matematica', 
+      name: 'Matemática', 
+      icon: <Calculator className="w-6 h-6" />, 
+      bgColor: 'bg-purple-100', 
+      borderColor: 'border-purple-300',
+      textColor: 'text-purple-600',
+      iconBgColor: 'bg-purple-50',
+      hoverBgColor: 'hover:bg-purple-200',
+      path: '/materias/matematica/20250404',
+      description: 'Números, operações e problemas'
+    },
     // { 
     //   id: 'ingles', 
     //   name: 'Inglês', 
