@@ -26,6 +26,7 @@ export const MinecraftButton: React.FC<MinecraftButtonProps> = ({
         active:border-b-2 active:border-r-2 
         active:translate-y-1 active:translate-x-1
         transition-all duration-100
+        cursor-pointer
         disabled:opacity-50 disabled:cursor-not-allowed
         ${className}
       `}
@@ -48,18 +49,18 @@ export const ProgressBar: React.FC<{ progress: number }> = ({ progress }) => {
 
 export const CharacterSelection: React.FC<{ onSelect: (character: string) => void }> = ({ onSelect }) => {
   return (
-    <div className="bg-green-800 min-h-screen p-4 font-minecraft flex items-center justify-center">
-      <div className="bg-gray-800 bg-opacity-80 rounded-lg p-8 shadow-lg border-4 border-gray-900 max-w-2xl w-full">
+    <div className="bg-green-800 min-h-screen font-minecraft flex items-center justify-center">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-800 bg-opacity-80 rounded-lg p-8 shadow-lg border-4 border-gray-900 max-w-2xl w-full">
         <h1 className="text-3xl text-white text-center mb-8">Escolha seu personagem</h1>
         <div className="grid grid-cols-2 gap-6">
           <div className="flex flex-col items-center">
-            <img src="/images/steve.png" alt="Steve" className="w-32 h-32 mb-4" />
+            <img src="/images/steve.png" alt="Steve" className="w-32 h-32 mb-4 cursor-pointer hover:scale-105 transition-transform" onClick={() => onSelect('steve')} />
             <MinecraftButton onClick={() => onSelect('steve')}>
               Steve
             </MinecraftButton>
           </div>
           <div className="flex flex-col items-center">
-            <img src="/images/alex.png" alt="Alex" className="w-32 h-32 mb-4" />
+            <img src="/images/alex.png" alt="Alex" className="w-32 h-32 mb-4 cursor-pointer hover:scale-105 transition-transform" onClick={() => onSelect('alex')} />
             <MinecraftButton onClick={() => onSelect('alex')}>
               Alex
             </MinecraftButton>
@@ -97,8 +98,8 @@ export const ResultScreen: React.FC<{
   }
 
   return (
-    <div className="bg-green-800 min-h-screen p-4 font-minecraft flex items-center justify-center">
-      <div className="bg-gray-800 bg-opacity-80 rounded-lg p-8 shadow-lg border-4 border-gray-900 max-w-2xl w-full">
+    <div className="bg-green-800 min-h-screen font-minecraft flex items-center justify-center">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-800 bg-opacity-80 rounded-lg p-8 shadow-lg border-4 border-gray-900 max-w-2xl w-full">
         <h1 className="text-3xl text-white text-center mb-6">Resultados</h1>
         
         <div className="flex justify-center mb-8">

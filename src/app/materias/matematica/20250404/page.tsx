@@ -1,4 +1,3 @@
-
 "use client"
 
 import React, { useState } from 'react';
@@ -68,7 +67,7 @@ export default function MathQuiz() {
     setDiamonds(0);
   };
 
-  const startGame = (selectedCharacter:string) => {
+  const startGame = (selectedCharacter: string) => {
     setCharacter(selectedCharacter);
     setGameStarted(true);
   };
@@ -85,8 +84,8 @@ export default function MathQuiz() {
   const currentQuestionData = Questions[currentQuestion];
 
   return (
-    <div className="bg-green-800 min-h-screen p-4 font-minecraft">
-      <div className="max-w-4xl mx-auto">
+    <div className="bg-green-800 min-h-screen font-minecraft flex items-center justify-center">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl px-4">
         <div className="bg-gray-800 bg-opacity-80 rounded-lg p-6 shadow-lg border-4 border-gray-900">
           <div className="flex justify-between items-center mb-4">
             <div className="text-white font-bold text-2xl">Quiz de Matemática</div>
