@@ -13,24 +13,24 @@ export default function Home() {
       icon: "/globe.svg", // Placeholder, você pode substituir por ícones específicos
       color: "rgba(88, 204, 2, 0.1)"
     },
-    // {
-    //   id: "portugues",
-    //   title: "Português",
-    //   icon: "/globe.svg",
-    //   color: "rgba(255, 200, 0, 0.1)"
-    // },
-    // {
-    //   id: "ingles",
-    //   title: "Inglês",
-    //   icon: "/globe.svg",
-    //   color: "rgba(28, 176, 246, 0.1)"
-    // },
-    // {
-    //   id: "ciencias",
-    //   title: "Ciências",
-    //   icon: "/globe.svg",
-    //   color: "rgba(255, 82, 193, 0.1)"
-    // },
+    {
+      id: "portugues",
+      title: "Português",
+      icon: "/file.svg",
+      color: "rgba(255, 200, 0, 0.1)"
+    },
+    {
+      id: "ingles",
+      title: "Inglês",
+      icon: "/window.svg",
+      color: "rgba(28, 176, 246, 0.1)"
+    },
+    {
+      id: "ciencias",
+      title: "Ciências",
+      icon: "/vercel.svg",
+      color: "rgba(255, 82, 193, 0.1)"
+    },
   ];
 
   const container = {
@@ -49,19 +49,30 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col items-center min-h-screen p-6">
-      <motion.header 
-        className="flex items-center justify-center w-full py-6 mb-8"
-        initial={{ y: -50, opacity: 0 }}
+    <div className="flex flex-col items-center py-12 px-6">
+      <motion.div
+        className="mb-8"
+        initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-[var(--primary)] via-[var(--blue)] to-[var(--purple)] text-transparent bg-clip-text">
-          Exercícios Escolares
+        <h1 className="text-5xl font-bold text-center bg-gradient-to-r from-[var(--primary)] via-[var(--blue)] to-[var(--purple)] text-transparent bg-clip-text">
+          Aprenda brincando!
         </h1>
-      </motion.header>
+      </motion.div>
 
-      <main className="flex flex-col items-center w-full max-w-4xl">
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="max-w-2xl mx-auto mb-12 text-center"
+      >
+        <p className="text-xl text-[var(--text-secondary)]">
+          Pratique seus exercícios escolares de forma divertida e interativa com a nossa plataforma inspirada no Duolingo!
+        </p>
+      </motion.div>
+
+      <div className="flex flex-col items-center w-full max-w-4xl">
         <motion.h2 
           className="text-2xl font-bold mb-8 text-[var(--text-primary)]"
           initial={{ opacity: 0 }}
@@ -96,16 +107,7 @@ export default function Home() {
             </motion.div>
           ))}
         </motion.div>
-      </main>
-
-      <motion.footer 
-        className="mt-auto py-6 text-center text-[var(--text-secondary)] text-sm"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.6 }}
-      >
-        <p>Sistema de exercícios escolares © {new Date().getFullYear()}</p>
-      </motion.footer>
+      </div>
     </div>
   );
 }

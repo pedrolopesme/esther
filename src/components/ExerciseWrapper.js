@@ -5,12 +5,14 @@ import { motion } from 'framer-motion';
 import ProgressBar from './ProgressBar';
 import Button from './Button';
 import MultipleChoiceExercise from './MultipleChoiceExercise';
+import { useSounds } from '../hooks/useSounds';
 
 export default function ExerciseWrapper({ exercises }) {
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const [completed, setCompleted] = useState(false);
   const [score, setScore] = useState(0);
+  const { playCompletedSound } = useSounds();
 
   const currentExercise = exercises[currentExerciseIndex];
   const totalExercises = exercises.length;
@@ -34,6 +36,8 @@ export default function ExerciseWrapper({ exercises }) {
       // All exercises completed
       setCompleted(true);
       setProgress(100);
+      // Play the completion sound when all exercises are done
+      playCompletedSound();
     }
   };
 

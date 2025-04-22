@@ -8,6 +8,7 @@ import OptionCard from './OptionCard';
 import Button from './Button';
 import Feedback from './Feedback';
 import ExerciseContainer from './ExerciseContainer';
+import { useSounds } from '../hooks/useSounds';
 
 export default function MultipleChoiceExercise({ 
   question, 
@@ -22,6 +23,7 @@ export default function MultipleChoiceExercise({
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [showHint, setShowHint] = useState(false);
   const isCorrect = selectedIndex === correctIndex;
+  const { playCorrectSound, playWrongSound } = useSounds();
 
   const handleOptionClick = (index) => {
     if (!hasSubmitted) {
@@ -36,6 +38,14 @@ export default function MultipleChoiceExercise({
   const handleSubmit = () => {
     if (selectedIndex !== null && !hasSubmitted) {
       setHasSubmitted(true);
+      
+      // Play the appropriate sound effect
+      if (isCorrect) {
+        playCorrectSound();
+      } else {
+        playWrongSound();
+      }
+      
       // Wait a bit before calling onComplete to let user see feedback
       setTimeout(() => {
         if (onComplete) {

@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -20,9 +21,33 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt-BR">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
-        {children}
+        <header className="app-header">
+          <div className="app-logo">Esther</div>
+          <nav className="app-nav">
+            <Link href="/" className="app-nav-item">Início</Link>
+            <Link href="/materias/matematica" className="app-nav-item">Matemática</Link>
+            <Link href="#" className="app-nav-item">Ajuda</Link>
+          </nav>
+        </header>
+        
+        <main className="flex-grow">
+          {children}
+        </main>
+        
+        <footer className="app-footer">
+          <div className="app-footer-content">
+            <div className="app-footer-links">
+              <Link href="/">Início</Link>
+              <Link href="#">Sobre</Link>
+              <Link href="#">Contato</Link>
+            </div>
+            <div className="app-footer-copyright">
+              © {new Date().getFullYear()} Esther - Exercícios Escolares
+            </div>
+          </div>
+        </footer>
       </body>
     </html>
   );
