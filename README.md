@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Esther - Plataforma de Exercícios Escolares
 
-## Getting Started
+Este projeto é uma plataforma inspirada no Duolingo, mas focada em exercícios escolares para crianças de 8 anos. O objetivo é proporcionar uma experiência gamificada para os estudantes praticarem o conteúdo aprendido na escola.
 
-First, run the development server:
+## Características
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Interface amigável inspirada no Duolingo
+- Divisão por matérias escolares (Matemática, Português, Inglês, Ciências)
+- Exercícios interativos do tipo "marque a opção correta"
+- Feedback imediato para as respostas
+- Barra de progresso para acompanhamento
+- Design responsivo para diferentes dispositivos
+
+## Tecnologias Utilizadas
+
+- Next.js 15
+- React 19
+- TailwindCSS 4
+- JSON para armazenamento dos exercícios
+
+## Estrutura dos Dados
+
+Os exercícios são armazenados em arquivos JSON com a seguinte estrutura:
+
+```json
+{
+  "title": "Título da Lista de Exercícios",
+  "description": "Descrição da lista de exercícios",
+  "exercises": [
+    {
+      "type": "multiple-choice",
+      "question": "Pergunta do exercício",
+      "options": ["Opção 1", "Opção 2", "Opção 3", "Opção 4"],
+      "correctIndex": 2
+    }
+  ]
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Executando o Projeto
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Instalar dependências
+npm install
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Iniciar o servidor de desenvolvimento
+npm run dev
 
-## Learn More
+# Construir para produção
+npm run build
 
-To learn more about Next.js, take a look at the following resources:
+# Iniciar o servidor de produção
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Componentes de UI
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+O projeto inclui vários componentes inspirados no estilo visual do Duolingo:
 
-## Deploy on Vercel
+- Button - Botão principal com estilo Duolingo
+- Card - Card para conteúdo
+- ExerciseContainer - Container para os exercícios
+- Feedback - Componente para feedback de respostas
+- MultipleChoiceExercise - Exercício de múltipla escolha
+- OptionCard - Card para opções de resposta
+- ProgressBar - Barra de progresso
+- Question - Componente para exibir perguntas
+- SubjectCard - Card para exibir matérias
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Desenvolvimento Futuro
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Adicionar mais tipos de exercícios
+- Implementar sistema de pontuação e conquistas
+- Adicionar suporte para áudio e imagens nos exercícios
+- Criar painel administrativo para professores adicionarem exercícios

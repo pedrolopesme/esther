@@ -1,0 +1,355 @@
+{
+  "nome": "Matemática Básica Completa - Pokémon",
+  "materia": "Matemática",
+  "ano_letivo": "3º ano do Ensino Fundamental",
+  "data": "2025-04-22",
+  "title": "Matemática com Pokémon",
+  "description": "Exercícios interativos com personagens Pokémon para trabalhar adição, multiplicação, números ordinais, números romanos e sistema decimal.",
+  "exercises": [
+    {
+      "id": "q1",
+      "type": "multiple-choice",
+      "question": "1. Para derrotar um Gengar selvagem, Pikachu precisa calcular: 456 + 305 + 12 = ?",
+      "options": [
+        "771",
+        "772",
+        "773",
+        "774"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "773",
+      "explicacao": "Somando 456 + 305 + 12 = 761 + 12 = 773",
+      "dica": "Primeiro some 456 + 305, depois adicione 12."
+    },
+    {
+      "id": "q2",
+      "type": "multiple-choice",
+      "question": "2. Bulbasaur está contando folhas. Ele tem 256 folhas verdes, 358 folhas amarelas e 64 folhas marrons. Quantas folhas ele tem no total?",
+      "options": [
+        "676",
+        "677",
+        "678",
+        "679"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "678",
+      "explicacao": "Somando 256 + 358 + 64 = 614 + 64 = 678",
+      "dica": "Some primeiro 256 + 358, depois adicione 64."
+    },
+    {
+      "id": "q3",
+      "type": "multiple-choice",
+      "question": "3. Para evoluir, Squirtle precisa somar 148 + 208 + 304. Qual é o resultado?",
+      "options": [
+        "658",
+        "659",
+        "660",
+        "661"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "660",
+      "explicacao": "Somando 148 + 208 + 304 = 356 + 304 = 660",
+      "dica": "Some primeiro 148 + 208, depois adicione 304."
+    },
+    {
+      "id": "q4",
+      "type": "multiple-choice",
+      "question": "4. Charmander precisa de 551 pontos para vencer uma batalha. Ele já tem 263 + 163 + 125 pontos. Conseguiu o suficiente?",
+      "options": [
+        "549",
+        "550",
+        "551",
+        "552"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "551",
+      "explicacao": "Somando 263 + 163 + 125 = 426 + 125 = 551. Ele conseguiu exatamente o necessário.",
+      "dica": "Some primeiro 263 + 163, depois adicione 125."
+    },
+    {
+      "id": "q5",
+      "type": "multiple-choice",
+      "question": "5. No Jardim Pokémon, a Treinadora viu 255 Pidgeys e 135 Spearows. Quantas aves ela viu ao todo?",
+      "options": [
+        "388",
+        "389",
+        "390",
+        "391"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "390",
+      "explicacao": "Somando 255 + 135 = 390",
+      "dica": "Some centenas com centenas, dezenas com dezenas e unidades com unidades."
+    },
+    {
+      "id": "q6",
+      "type": "multiple-choice",
+      "question": "6. Professor Carvalho tem 124 Poké Bolas e 86 Great Bolas. Quantas bolas ele tem no total?",
+      "options": [
+        "208",
+        "209",
+        "210",
+        "211"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "210",
+      "explicacao": "Somando 124 + 86 = 210",
+      "dica": "124 + 86 = 120 + 80 + 4 + 6 = 200 + 10 = 210"
+    },
+    {
+      "id": "q7",
+      "type": "multiple-choice",
+      "question": "7. Havia 486 Pokémons no centro Pokémon. 46 deles foram embora com seus treinadores. Quantos Pokémons restaram?",
+      "options": [
+        "438",
+        "439",
+        "440",
+        "441"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "440",
+      "explicacao": "486 - 46 = 440",
+      "dica": "Subtraia 46 de 486."
+    },
+    {
+      "id": "q8",
+      "type": "multiple-choice",
+      "question": "8. Ash tem 256 vitórias e Gary tem 123. Quantas vitórias Ash tem a mais que Gary?",
+      "options": [
+        "131",
+        "132",
+        "133",
+        "134"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "133",
+      "explicacao": "256 - 123 = 133",
+      "dica": "Subtraia 123 de 256."
+    },
+    {
+      "id": "q9",
+      "type": "multiple-choice",
+      "question": "9. Havia 576 Pokémons no Centro Pokémon. Chegaram mais 183. Quantos Pokémons estão no Centro agora?",
+      "options": [
+        "757",
+        "758",
+        "759",
+        "760"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "759",
+      "explicacao": "576 + 183 = 759",
+      "dica": "Some 576 com 183."
+    },
+    {
+      "id": "q10",
+      "type": "multiple-choice",
+      "question": "10. Num torneio Pokémon, o Time Rocket fez 94 pontos e o Time Aqua fez 57. Quantos pontos o Time Rocket fez a mais?",
+      "options": [
+        "35",
+        "36",
+        "37",
+        "38"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "37",
+      "explicacao": "94 - 57 = 37",
+      "dica": "Subtraia 57 de 94."
+    },
+    {
+      "id": "q11",
+      "type": "multiple-choice",
+      "question": "11. Se o ataque Raio de Pikachu causa 8 de dano e ele acerta 4 vezes, quanto de dano ele causou?",
+      "options": [
+        "30",
+        "31",
+        "32",
+        "33"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "32",
+      "explicacao": "8 × 4 = 32",
+      "dica": "Multiplique 8 por 4, ou some 8 + 8 + 8 + 8."
+    },
+    {
+      "id": "q12",
+      "type": "multiple-choice",
+      "question": "12. Cada Togepi come 3 bagas por dia. Se temos 8 Togepis, quantas bagas eles comem num dia?",
+      "options": [
+        "22",
+        "23",
+        "24",
+        "25"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "24",
+      "explicacao": "3 × 8 = 24",
+      "dica": "Multiplique 3 por 8, ou some 3 oito vezes."
+    },
+    {
+      "id": "q13",
+      "type": "multiple-choice",
+      "question": "13. Uma equipe de 8 treinadores, cada um com 5 Pokémons. Quantos Pokémons no total?",
+      "options": [
+        "38",
+        "39",
+        "40",
+        "41"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "40",
+      "explicacao": "8 × 5 = 40",
+      "dica": "Multiplique 8 por 5."
+    },
+    {
+      "id": "q14",
+      "type": "multiple-choice",
+      "question": "14. Um Vivillon tem 6 padrões diferentes em cada asa e tem 3 asas. Quantos padrões ele tem no total?",
+      "options": [
+        "16",
+        "17",
+        "18",
+        "19"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "18",
+      "explicacao": "6 × 3 = 18",
+      "dica": "Multiplique 6 por 3."
+    },
+    {
+      "id": "q15",
+      "type": "multiple-choice",
+      "question": "15. Em um ginásio, há 4 colunas e 5 linhas de treinadores. Quantos treinadores há no total?",
+      "options": [
+        "18",
+        "19",
+        "20",
+        "21"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "20",
+      "explicacao": "4 × 5 = 20",
+      "dica": "Multiplique o número de colunas pelo número de linhas."
+    },
+    {
+      "id": "q16",
+      "type": "multiple-choice",
+      "question": "16. Se em uma Poké Bola cabem 9 miniaturas de Pokémon, quantas miniaturas caberão em 3 Poké Bolas iguais?",
+      "options": [
+        "25",
+        "26",
+        "27",
+        "28"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "27",
+      "explicacao": "9 × 3 = 27",
+      "dica": "Multiplique 9 por 3."
+    },
+    {
+      "id": "q17",
+      "type": "multiple-choice",
+      "question": "17. Brock tem 6 caixas de Poké Bolas. Em cada caixa há 4 bolas. Se ele ganhar mais 10 bolas, com quantas bolas ficará?",
+      "options": [
+        "32",
+        "33",
+        "34",
+        "35"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "34",
+      "explicacao": "(6 × 4) + 10 = 24 + 10 = 34",
+      "dica": "Primeiro calcule quantas bolas ele tem nas caixas, depois adicione as 10 novas."
+    },
+    {
+      "id": "q18",
+      "type": "multiple-choice",
+      "question": "18. Professor Carvalho precisa calcular 260 × 3 para descobrir quantos Pokémons existem em uma região. Qual é o resultado?",
+      "options": [
+        "778",
+        "779",
+        "780",
+        "781"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "780",
+      "explicacao": "260 × 3 = 780",
+      "dica": "Multiplique 260 por 3."
+    },
+    {
+      "id": "q19",
+      "type": "multiple-choice",
+      "question": "19. Para evoluir um Grotle, Ash precisa multiplicar 2 × 489. Qual é o resultado?",
+      "options": [
+        "976",
+        "977",
+        "978",
+        "979"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "978",
+      "explicacao": "2 × 489 = 978",
+      "dica": "Multiplique 489 por 2."
+    },
+    {
+      "id": "q20",
+      "type": "multiple-choice",
+      "question": "20. Em uma competição Pokémon estavam presentes 58 treinadores. Cada treinador usou 4 Pokémons diferentes. Quantos Pokémons participaram da competição?",
+      "options": [
+        "230",
+        "231",
+        "232",
+        "233"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "232",
+      "explicacao": "58 × 4 = 232",
+      "dica": "Multiplique o número de treinadores pelo número de Pokémons por treinador."
+    },
+    {
+      "id": "q21",
+      "type": "multiple-choice",
+      "question": "21. Escreva por extenso: 7º",
+      "options": [
+        "sétimo",
+        "sete",
+        "setenta",
+        "séptimo"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "sétimo",
+      "explicacao": "O número ordinal 7º se escreve como 'sétimo'.",
+      "dica": "Os números ordinais indicam posição ou ordem."
+    },
+    {
+      "id": "q22",
+      "type": "multiple-choice",
+      "question": "22. Na sala de aula Pokémon, seu número é 23. Qual é seu número de ordem por extenso?",
+      "options": [
+        "vigésimo terceiro",
+        "vinte e três",
+        "vigésimo segundo",
+        "vigésimo quarto"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "vigésimo terceiro",
+      "explicacao": "O número ordinal 23º se escreve como 'vigésimo terceiro'.",
+      "dica": "Para números acima de 10, o ordinal se forma com as palavras 'décimo', 'vigésimo', etc."
+    },
+    {
+      "id": "q23",
+      "type": "multiple-choice",
+      "question": "23. Escreva por extenso: 40º",
+      "options": [
+        "quadragésimo",
+        "quarenta",
+        "quatriésimo",
+        "quarentésimo"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "quadragésimo",
+      "explicacao": "O número ordinal 40º se escreve como 'quadragésimo'.",
+      "dica": "Para dezenas exatas, use a forma 'vigésimo', 'trigésimo', 'quadragésimo', etc."
+    }
+  ]
+}
