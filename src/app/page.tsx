@@ -55,21 +55,21 @@ export default function HomePage() {
       textColor: 'text-purple-600',
       iconBgColor: 'bg-purple-50',
       hoverBgColor: 'hover:bg-purple-200',
-      path: '/materias/matematica/20250404',
+      path: '/materias/matematica',
       description: 'Números, operações e problemas'
     },
-    // { 
-    //   id: 'ingles', 
-    //   name: 'Inglês', 
-    //   icon: <Languages className="w-6 h-6" />, 
-    //   bgColor: 'bg-blue-100', 
-    //   borderColor: 'border-blue-300',
-    //   textColor: 'text-blue-600',
-    //   iconBgColor: 'bg-blue-50',
-    //   hoverBgColor: 'hover:bg-blue-200',
-    //   path: '/materias/ingles',
-    //   description: 'Vocabulário e conversação'
-    // },
+    { 
+      id: 'ingles', 
+      name: 'Inglês', 
+      icon: <Languages className="w-6 h-6" />, 
+      bgColor: 'bg-blue-100', 
+      borderColor: 'border-blue-300',
+      textColor: 'text-blue-600',
+      iconBgColor: 'bg-blue-50',
+      hoverBgColor: 'hover:bg-blue-200',
+      path: '/materias/ingles',
+      description: 'Vocabulário e conversação'
+    },
     { 
       id: 'ciencias', 
       name: 'Ciências', 
