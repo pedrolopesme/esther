@@ -1,0 +1,50 @@
+{
+  "nome": "Exemplo de Inglês - Básico",
+  "materia": "Inglês",
+  "ano_letivo": "1º ano do Ensino Médio",
+  "data": "2025-05-04",
+  "title": "Exercícios de Inglês - Exemplo",
+  "description": "Lista de exercícios de exemplo contendo múltipla escolha e lacunas.",
+  "exercises": [
+    {
+      "id": "e1",
+      "type": "multiple-choice",
+      "question": "What is the plural form of 'mouse'?",
+      "options": ["mouses", "mice", "mousees", "micees"],
+      "correctIndex": 1,
+      "resposta_correta": "mice",
+      "explicacao": "O plural de 'mouse' em inglês é 'mice'.",
+      "dica": "É uma palavra irregular."
+    },
+    {
+      "id": "e2",
+      "type": "fill-gap",
+      "question": "She ____ to the store yesterday.",
+      "options": ["go", "went"],
+      "correctIndex": 1,
+      "resposta_correta": "went",
+      "explicacao": "'She went' é o passado de 'go'.",
+      "dica": "Pense no passado."
+    },
+    {
+      "id": "e3",
+      "type": "multiple-choice",
+      "question": "Choose the correct article: ___ apple a day keeps the doctor away.",
+      "options": ["A", "An"],
+      "correctIndex": 1,
+      "resposta_correta": "An",
+      "explicacao": "Usamos 'an' antes de palavras iniciadas com som de vogal.",
+      "dica": "A palavra 'apple' começa com som de vogal."
+    },
+    {
+      "id": "e4",
+      "type": "fill-gap",
+      "question": "They have ____ books in their backpack.",
+      "options": ["few", "a few"],
+      "correctIndex": 1,
+      "resposta_correta": "a few",
+      "explicacao": "'They have a few books' significa que eles têm alguns livros.",
+      "dica": "'a few' indica quantidade positiva."
+    }
+  ]
+}

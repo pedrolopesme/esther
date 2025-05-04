@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import ProgressBar from './ProgressBar';
 import Button from './Button';
 import MultipleChoiceExercise from './MultipleChoiceExercise';
+import FillGapExercise from './FillGapExercise';
 import { useSounds } from '../hooks/useSounds';
 
 export default function ExerciseWrapper({ exercises }) {
@@ -97,6 +98,16 @@ export default function ExerciseWrapper({ exercises }) {
       >
         {currentExercise.type === 'multiple-choice' ? (
           <MultipleChoiceExercise
+            question={currentExercise.question}
+            options={currentExercise.options}
+            correctIndex={currentExercise.correctIndex}
+            onComplete={handleExerciseComplete}
+            dica={currentExercise.dica}
+            explicacao={currentExercise.explicacao}
+            resposta_correta={currentExercise.resposta_correta}
+          />
+        ) : currentExercise.type === 'fill-gap' ? (
+          <FillGapExercise
             question={currentExercise.question}
             options={currentExercise.options}
             correctIndex={currentExercise.correctIndex}
