@@ -1,0 +1,361 @@
+{
+    "nome": "Livro de Matematica unidade 6",
+    "materia": "Matemática",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "data": "2025-05-04",
+    "title": "Sistema de Numeração Decimal",
+    "description": "Lista com 25 exercícios de matemática baseados no conteúdo da unidade 6 sobre Sistema de Numeração Decimal.",
+    "exercises": [
+      {
+        "id": "e1",
+        "type": "fill-gap",
+        "question": "No sistema de numeração decimal, cada grupo de 10 centenas corresponde a ____ .",
+        "options": [
+          "1 milhar",
+          "1 centena"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "1 milhar",
+        "explicacao": "No sistema de numeração decimal, 10 centenas equivalem a 1 milhar.",
+        "dica": "Lembre-se da equivalência: 10 centenas = 1000 unidades."
+      },
+      {
+        "id": "e2",
+        "type": "multiple-choice",
+        "question": "Como se lê o número 1.248?",
+        "options": [
+          "Mil e duzentos e quarenta e oito",
+          "Um mil, duzentos e quarenta e oito",
+          "Doze mil e quarenta e oito",
+          "Um, dois, quatro, oito"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Um mil, duzentos e quarenta e oito",
+        "explicacao": "O número 1.248 é lido como 'um mil, duzentos e quarenta e oito'.",
+        "dica": "Observe a ordem das unidades: milhar, centena, dezena e unidade."
+      },
+      {
+        "id": "e3",
+        "type": "multiple-choice",
+        "question": "Quantas ordens tem o número 7.689?",
+        "options": [
+          "3 ordens",
+          "4 ordens",
+          "5 ordens",
+          "7 ordens"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "4 ordens",
+        "explicacao": "O número 7.689 tem 4 ordens: unidade, dezena, centena e milhar.",
+        "dica": "Conte os algarismos no número."
+      },
+      {
+        "id": "e4",
+        "type": "fill-gap",
+        "question": "No número 7.689, o algarismo da 2ª ordem é ____ .",
+        "options": [
+          "8",
+          "6"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "8",
+        "explicacao": "A 2ª ordem corresponde à dezena, que no número 7.689 é o algarismo 8.",
+        "dica": "Da direita para a esquerda: 1ª ordem (unidade), 2ª ordem (dezena)."
+      },
+      {
+        "id": "e5",
+        "type": "multiple-choice",
+        "question": "Qual é o valor relativo do algarismo 4 no número 4.235?",
+        "options": [
+          "4",
+          "40",
+          "400",
+          "4000"
+        ],
+        "correctIndex": 3,
+        "resposta_correta": "4000",
+        "explicacao": "O valor relativo do algarismo 4 no número 4.235 é 4000 porque ele está na ordem do milhar.",
+        "dica": "O valor relativo depende da posição do algarismo no número."
+      },
+      {
+        "id": "e6",
+        "type": "fill-gap",
+        "question": "O algarismo da ordem das dezenas no número 3.829 é ____ .",
+        "options": [
+          "2",
+          "8"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "2",
+        "explicacao": "No número 3.829, o algarismo 2 está na posição das dezenas (2ª ordem).",
+        "dica": "A ordem das dezenas é a 2ª ordem da direita para a esquerda."
+      },
+      {
+        "id": "e7",
+        "type": "multiple-choice",
+        "question": "O número formado por 1 unidade de milhar, 7 centenas, 4 dezenas e 3 unidades é:",
+        "options": [
+          "1.743",
+          "1.734",
+          "1.473",
+          "1.437"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "1.743",
+        "explicacao": "1 unidade de milhar (1000) + 7 centenas (700) + 4 dezenas (40) + 3 unidades (3) = 1.743",
+        "dica": "Coloque cada valor na sua respectiva ordem: milhar, centena, dezena e unidade."
+      },
+      {
+        "id": "e8",
+        "type": "fill-gap",
+        "question": "A decomposição correta do número 5.289 em ordens é: ____ unidade de milhar, ____ centenas, ____ dezenas e ____ unidades.",
+        "options": [
+          "5, 2, 8, 9",
+          "5, 2, 9, 8"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "5, 2, 8, 9",
+        "explicacao": "O número 5.289 decomposto em ordens: 5 unidades de milhar, 2 centenas, 8 dezenas e 9 unidades.",
+        "dica": "Cada posição representa uma ordem: milhar, centena, dezena e unidade."
+      },
+      {
+        "id": "e9",
+        "type": "multiple-choice",
+        "question": "Qual é a decomposição do número 9.713 em unidades?",
+        "options": [
+          "9 + 7 + 1 + 3",
+          "9000 + 700 + 10 + 3",
+          "9000 + 700 + 13",
+          "9700 + 13"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "9000 + 700 + 10 + 3",
+        "explicacao": "O número 9.713 decomposto em unidades: 9000 + 700 + 10 + 3.",
+        "dica": "Cada posição tem um valor relativo: milhar (x1000), centena (x100), dezena (x10) e unidade (x1)."
+      },
+      {
+        "id": "e10",
+        "type": "fill-gap",
+        "question": "O maior número de 4 ordens é ____ .",
+        "options": [
+          "9999",
+          "1000"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "9999",
+        "explicacao": "O maior número de 4 ordens é 9999, pois tem os maiores algarismos possíveis em cada uma das 4 ordens.",
+        "dica": "Um número de 4 ordens vai de 1000 até 9999."
+      },
+      {
+        "id": "e11",
+        "type": "multiple-choice",
+        "question": "Qual é o menor número de 4 ordens?",
+        "options": [
+          "1",
+          "10",
+          "100",
+          "1000"
+        ],
+        "correctIndex": 3,
+        "resposta_correta": "1000",
+        "explicacao": "O menor número de 4 ordens é 1000, pois é o primeiro número que tem 4 algarismos.",
+        "dica": "Um número de 4 ordens tem 4 algarismos."
+      },
+      {
+        "id": "e12",
+        "type": "fill-gap",
+        "question": "No número 4.904, o valor relativo do algarismo 9 é ____ .",
+        "options": [
+          "900",
+          "90"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "900",
+        "explicacao": "O algarismo 9 está na ordem das centenas, então seu valor relativo é 900.",
+        "dica": "O valor relativo depende da posição: centena = x100."
+      },
+      {
+        "id": "e13",
+        "type": "multiple-choice",
+        "question": "Quais são os algarismos pares no número 3.829?",
+        "options": [
+          "3 e 9",
+          "8 e 2",
+          "3, 8 e 2",
+          "8, 2 e 9"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "8 e 2",
+        "explicacao": "Os algarismos pares são aqueles divisíveis por 2: 8 e 2.",
+        "dica": "Números pares são: 0, 2, 4, 6 e 8."
+      },
+      {
+        "id": "e14",
+        "type": "fill-gap",
+        "question": "Usando os algarismos 1, 2, 4 e 5 uma única vez, o maior número possível é ____ .",
+        "options": [
+          "5421",
+          "5412"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "5421",
+        "explicacao": "Para formar o maior número, colocamos os algarismos em ordem decrescente: 5, 4, 2, 1.",
+        "dica": "O maior algarismo deve ficar na maior ordem (esquerda)."
+      },
+      {
+        "id": "e15",
+        "type": "multiple-choice",
+        "question": "Como se escreve por extenso o número 9.256?",
+        "options": [
+          "Nove mil, duzentos e cinquenta e seis",
+          "Nove mil e duzentos e cinquenta e seis",
+          "Nove, dois, cinco, seis",
+          "Noventa e dois mil e cinquenta e seis"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "Nove mil, duzentos e cinquenta e seis",
+        "explicacao": "O número 9.256 é lido como 'nove mil, duzentos e cinquenta e seis'.",
+        "dica": "Leia conforme as ordens: milhar, centena, dezena e unidade."
+      },
+      {
+        "id": "e16",
+        "type": "fill-gap",
+        "question": "O valor absoluto do algarismo 3 no número 4.235 é ____ .",
+        "options": [
+          "3",
+          "30"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "3",
+        "explicacao": "O valor absoluto de um algarismo é sempre o próprio algarismo, independente da posição que ocupa.",
+        "dica": "Valor absoluto = o próprio algarismo."
+      },
+      {
+        "id": "e17",
+        "type": "multiple-choice",
+        "question": "Qual é o sucessor de 3.840?",
+        "options": [
+          "3.839",
+          "3.841",
+          "3.850",
+          "4.840"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "3.841",
+        "explicacao": "O sucessor de um número é o número que vem imediatamente depois, ou seja, soma-se 1.",
+        "dica": "Sucessor = número + 1."
+      },
+      {
+        "id": "e18",
+        "type": "fill-gap",
+        "question": "O antecessor de 7.877 é ____ .",
+        "options": [
+          "7.876",
+          "7.878"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "7.876",
+        "explicacao": "O antecessor de um número é o número que vem imediatamente antes, ou seja, subtrai-se 1.",
+        "dica": "Antecessor = número - 1."
+      },
+      {
+        "id": "e19",
+        "type": "multiple-choice",
+        "question": "Qual destas comparações é verdadeira?",
+        "options": [
+          "4.753 > 5.688",
+          "4.753 < 5.688",
+          "4.753 = 5.688",
+          "4.753 ≥ 5.688"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "4.753 < 5.688",
+        "explicacao": "Comparando os algarismos da esquerda para a direita, 4 é menor que 5, então 4.753 < 5.688.",
+        "dica": "Compare primeiro os algarismos de maior ordem."
+      },
+      {
+        "id": "e20",
+        "type": "fill-gap",
+        "question": "O número que vem antes de 9.690 e depois de 9.688 é ____ .",
+        "options": [
+          "9.689",
+          "9.691"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "9.689",
+        "explicacao": "O número entre 9.688 e 9.690 é 9.689.",
+        "dica": "Pense na sequência numérica."
+      },
+      {
+        "id": "e21",
+        "type": "multiple-choice",
+        "question": "Quantas centenas tem o número 7.689?",
+        "options": [
+          "6 centenas",
+          "68 centenas",
+          "76 centenas",
+          "768 centenas"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "76 centenas",
+        "explicacao": "7.689 = 7 milhares + 6 centenas + 8 dezenas + 9 unidades = 76 centenas + 89 unidades = 76 centenas e 89 unidades.",
+        "dica": "Para saber quantas centenas tem um número, divida-o por 100."
+      },
+      {
+        "id": "e22",
+        "type": "fill-gap",
+        "question": "O número formado por 3 unidades de milhar, 9 dezenas e 2 unidades é ____ .",
+        "options": [
+          "3.092",
+          "3.902"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "3.092",
+        "explicacao": "3 unidades de milhar (3000) + 9 dezenas (90) + 2 unidades (2) = 3.092.",
+        "dica": "Na ausência de centenas, coloque 0 na posição das centenas."
+      },
+      {
+        "id": "e23",
+        "type": "multiple-choice",
+        "question": "Qual é o maior número entre 3.549, 6.083 e 4.904?",
+        "options": [
+          "3.549",
+          "6.083",
+          "4.904",
+          "São iguais"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "6.083",
+        "explicacao": "Comparando os algarismos da esquerda para a direita, 6 é maior que 3 e 4, então 6.083 é o maior.",
+        "dica": "Compare primeiro os algarismos de maior ordem (milhar)."
+      },
+      {
+        "id": "e24",
+        "type": "fill-gap",
+        "question": "O menor número formado por 4 algarismos diferentes é ____ .",
+        "options": [
+          "1023",
+          "1234"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "1023",
+        "explicacao": "O menor número de 4 algarismos começa com 1. Para ser o menor possível com algarismos diferentes, usamos 0, 2 e 3 nas demais posições.",
+        "dica": "O zero não pode estar na primeira posição em um número de 4 algarismos."
+      },
+      {
+        "id": "e25",
+        "type": "multiple-choice",
+        "question": "Se João tem 2 centenas de bolinhas de gude e seu irmão tem 3 dezenas e 5 unidades, quantas bolinhas eles têm juntos?",
+        "options": [
+          "235 bolinhas",
+          "200 + 35 = 235 bolinhas",
+          "2 centenas e 35 unidades = 235 bolinhas",
+          "Todas as alternativas anteriores estão corretas"
+        ],
+        "correctIndex": 3,
+        "resposta_correta": "Todas as alternativas anteriores estão corretas",
+        "explicacao": "2 centenas (200) + 3 dezenas (30) + 5 unidades (5) = 235 bolinhas.",
+        "dica": "Some os valores conforme suas ordens: 200 + 30 + 5."
+      }
+    ]
+  }
