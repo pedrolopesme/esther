@@ -1,0 +1,426 @@
+{
+  "nome": "Apostila Inglês até página 47",
+  "materia": "Inglês",
+  "ano_letivo": "3º ano do Ensino Fundamental",
+  "data": "2025-05-04",
+  "title": "Revisão de Inglês - Unidades 1, 2 e 3",
+  "description": "Lista com 30 exercícios variados com base no conteúdo da apostila de inglês até a página 47.",
+  "exercises": [
+    {
+      "id": "e1",
+      "type": "fill-gap",
+      "question": "You _________ (to watch) movies right now.",
+      "options": [
+        "are watching",
+        "is watching"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "are watching",
+      "explicacao": "Para o sujeito 'you', usamos 'are' no Present Continuous.",
+      "dica": "Lembre-se que o Present Continuous é formado pelo verbo to be + verbo principal com -ing."
+    },
+    {
+      "id": "e2",
+      "type": "fill-gap",
+      "question": "He _________ (to dance) because he loves this song.",
+      "options": [
+        "are dancing",
+        "is dancing"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "is dancing",
+      "explicacao": "Para o sujeito 'he', usamos 'is' no Present Continuous.",
+      "dica": "O verbo auxiliar 'is' é usado para os pronomes he, she e it."
+    },
+    {
+      "id": "e3",
+      "type": "multiple-choice",
+      "question": "How often does Lucy go to French classes?",
+      "options": [
+        "Every day",
+        "Twice a week",
+        "Three times a week",
+        "Once a week"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Twice a week",
+      "explicacao": "Conforme a tabela de atividades da Lucy, ela tem aulas de francês às terças e quintas-feiras.",
+      "dica": "Observe os dias da semana na tabela de Lucy."
+    },
+    {
+      "id": "e4",
+      "type": "multiple-choice",
+      "question": "Does Lucy play tennis on Tuesdays?",
+      "options": [
+        "Yes, she does",
+        "No, she doesn't"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "No, she doesn't",
+      "explicacao": "Segundo a tabela, Lucy joga tênis às segundas, quartas e sextas-feiras.",
+      "dica": "Verifique as atividades de Lucy na terça-feira."
+    },
+    {
+      "id": "e5",
+      "type": "fill-gap",
+      "question": "We _________ (to speak) English in class.",
+      "options": [
+        "must",
+        "mustn't"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "must",
+      "explicacao": "Usamos 'must' para indicar obrigação ou necessidade.",
+      "dica": "É uma regra positiva que devemos seguir."
+    },
+    {
+      "id": "e6",
+      "type": "fill-gap",
+      "question": "You _________ eat in class.",
+      "options": [
+        "must",
+        "mustn't"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "mustn't",
+      "explicacao": "Usamos 'mustn't' para indicar proibição.",
+      "dica": "É uma regra negativa, algo que não é permitido."
+    },
+    {
+      "id": "e7",
+      "type": "multiple-choice",
+      "question": "What is Hanna Lang's profession?",
+      "options": [
+        "Doctor",
+        "Nurse",
+        "Teacher",
+        "Firefighter"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Doctor",
+      "explicacao": "No texto sobre Hanna Lang, ela se apresenta dizendo 'I'm a doctor'.",
+      "dica": "Leia o texto de compreensão sobre Hanna Lang."
+    },
+    {
+      "id": "e8",
+      "type": "multiple-choice",
+      "question": "What time does Hanna start to work?",
+      "options": [
+        "At five o'clock",
+        "At six o'clock",
+        "At seven o'clock",
+        "At eight o'clock"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "At seven o'clock",
+      "explicacao": "Segundo o texto, Hanna começa a trabalhar às sete horas.",
+      "dica": "Verifique os horários mencionados no texto sobre a rotina de Hanna."
+    },
+    {
+      "id": "e9",
+      "type": "fill-gap",
+      "question": "Catherine _________ (to cook) a cake for her sister's birthday party now.",
+      "options": [
+        "is cooking",
+        "are cooking"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "is cooking",
+      "explicacao": "Para o sujeito 'Catherine', usamos 'is' no Present Continuous.",
+      "dica": "Lembre-se que nomes próprios no singular usam 'is' como auxiliar."
+    },
+    {
+      "id": "e10",
+      "type": "fill-gap",
+      "question": "John _________ (to like) to read comics.",
+      "options": [
+        "like",
+        "likes"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "likes",
+      "explicacao": "No presente simples, para terceira pessoa do singular (he, she, it), adicionamos 's' ao verbo.",
+      "dica": "Observe a conjugação do Present Simple para 'he/she/it'."
+    },
+    {
+      "id": "e11",
+      "type": "multiple-choice",
+      "question": "Why are you studying Maths?",
+      "options": [
+        "Because I'm bored",
+        "Because I have a test",
+        "Because I like it",
+        "Because my parents told me to"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Because I have a test",
+      "explicacao": "Segundo o exercício, a resposta para 'Why are you studying Maths?' é 'Because I have a test'.",
+      "dica": "Observe as respostas para as perguntas de 'Why' na apostila."
+    },
+    {
+      "id": "e12",
+      "type": "multiple-choice",
+      "question": "When does Claire have English classes?",
+      "options": [
+        "On Mondays",
+        "On Tuesdays",
+        "On Wednesdays",
+        "On Thursdays"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "On Wednesdays",
+      "explicacao": "No texto sobre Claire, ela diz que tem aulas de inglês às quartas-feiras.",
+      "dica": "Leia o texto sobre a rotina de Claire."
+    },
+    {
+      "id": "e13",
+      "type": "multiple-choice",
+      "question": "What does Claire do on Sundays?",
+      "options": [
+        "She goes shopping",
+        "She plays football",
+        "She does her homework",
+        "She watches movies"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "She does her homework",
+      "explicacao": "No texto sobre Claire, ela menciona que aos domingos faz a lição de casa.",
+      "dica": "Verifique a atividade de domingo de Claire no texto."
+    },
+    {
+      "id": "e14",
+      "type": "fill-gap",
+      "question": "My name's Hanna Lang and I'm a _________.",
+      "options": [
+        "doctor",
+        "nurse"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "doctor",
+      "explicacao": "Hanna Lang se apresenta como médica no início do texto.",
+      "dica": "Leia a primeira frase do texto de compreensão."
+    },
+    {
+      "id": "e15",
+      "type": "fill-gap",
+      "question": "They _________ (to visit) us often.",
+      "options": [
+        "visit",
+        "visits"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "visit",
+      "explicacao": "Para o sujeito 'they', não adicionamos 's' ao verbo no presente simples.",
+      "dica": "Não acrescentamos 's' para os pronomes I, you, we, they."
+    },
+    {
+      "id": "e16",
+      "type": "fill-gap",
+      "question": "_________ he always tell us funny stories?",
+      "options": [
+        "Do",
+        "Does"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Does",
+      "explicacao": "Usamos 'does' para fazer perguntas na terceira pessoa do singular (he, she, it) no presente simples.",
+      "dica": "A pergunta está na terceira pessoa do singular."
+    },
+    {
+      "id": "e17",
+      "type": "multiple-choice",
+      "question": "Which day comes after Sunday?",
+      "options": [
+        "Friday",
+        "Saturday",
+        "Monday",
+        "Tuesday"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Monday",
+      "explicacao": "Segunda-feira (Monday) vem após domingo (Sunday).",
+      "dica": "Lembre-se da ordem dos dias da semana."
+    },
+    {
+      "id": "e18",
+      "type": "multiple-choice",
+      "question": "Which day is between Tuesday and Thursday?",
+      "options": [
+        "Monday",
+        "Wednesday",
+        "Friday",
+        "Saturday"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Wednesday",
+      "explicacao": "Quarta-feira (Wednesday) está entre terça-feira (Tuesday) e quinta-feira (Thursday).",
+      "dica": "Pense na sequência dos dias da semana."
+    },
+    {
+      "id": "e19",
+      "type": "fill-gap",
+      "question": "_________ often do you go swimming?",
+      "options": [
+        "What",
+        "How"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "How",
+      "explicacao": "Usamos 'How often' para perguntar sobre frequência.",
+      "dica": "'How often' significa 'com que frequência'."
+    },
+    {
+      "id": "e20",
+      "type": "fill-gap",
+      "question": "_________ is your favourite singer?",
+      "options": [
+        "Who",
+        "What"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Who",
+      "explicacao": "Usamos 'Who' para perguntar sobre pessoas.",
+      "dica": "Cantores são pessoas, então usamos 'who'."
+    },
+    {
+      "id": "e21",
+      "type": "multiple-choice",
+      "question": "Where is the book?",
+      "options": [
+        "It's on the desk",
+        "It's under the desk",
+        "It's in front of the desk",
+        "It's between the desks"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "It's on the desk",
+      "explicacao": "A preposição 'on' indica que algo está em cima de uma superfície.",
+      "dica": "Escolha a preposição de lugar correta."
+    },
+    {
+      "id": "e22",
+      "type": "fill-gap",
+      "question": "_________ there any windows in the house?",
+      "options": [
+        "Is",
+        "Are"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Are",
+      "explicacao": "Usamos 'Are there' para perguntar sobre substantivos no plural.",
+      "dica": "'Windows' (janelas) está no plural."
+    },
+    {
+      "id": "e23",
+      "type": "fill-gap",
+      "question": "_________ there a dog in the house?",
+      "options": [
+        "Is",
+        "Are"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Is",
+      "explicacao": "Usamos 'Is there' para perguntar sobre substantivos no singular.",
+      "dica": "'A dog' (um cachorro) está no singular."
+    },
+    {
+      "id": "e24",
+      "type": "multiple-choice",
+      "question": "I need _________ apple for my lunch.",
+      "options": [
+        "a",
+        "an"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "an",
+      "explicacao": "Usamos 'an' antes de palavras que começam com som de vogal.",
+      "dica": "'Apple' começa com som de vogal."
+    },
+    {
+      "id": "e25",
+      "type": "multiple-choice",
+      "question": "There is _________ hotel next to the school.",
+      "options": [
+        "a",
+        "an"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "a",
+      "explicacao": "Usamos 'a' antes de palavras que começam com som de consoante.",
+      "dica": "'Hotel' começa com som de consoante /h/."
+    },
+    {
+      "id": "e26",
+      "type": "fill-gap",
+      "question": "We _________ best friends.",
+      "options": [
+        "am",
+        "is",
+        "are"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "are",
+      "explicacao": "Para o sujeito 'we', usamos o verbo 'are'.",
+      "dica": "O pronome 'we' usa o verbo 'are' no presente."
+    },
+    {
+      "id": "e27",
+      "type": "fill-gap",
+      "question": "My name _________ Nikita.",
+      "options": [
+        "am",
+        "is",
+        "are"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "is",
+      "explicacao": "Para o sujeito 'my name', usamos o verbo 'is'.",
+      "dica": "'My name' é tratado como terceira pessoa do singular."
+    },
+    {
+      "id": "e28",
+      "type": "multiple-choice",
+      "question": "Which number comes after twenty-nine?",
+      "options": [
+        "Twenty-eight",
+        "Thirty",
+        "Thirty-one",
+        "Twenty-seven"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Thirty",
+      "explicacao": "Após vinte e nove (twenty-nine) vem trinta (thirty).",
+      "dica": "Pense na ordem dos números."
+    },
+    {
+      "id": "e29",
+      "type": "multiple-choice",
+      "question": "What word means 'FINO' in English?",
+      "options": [
+        "Fat",
+        "Tall",
+        "Thin",
+        "Short"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Thin",
+      "explicacao": "'Thin' significa 'fino' em português.",
+      "dica": "É o oposto de 'fat' (gordo)."
+    },
+    {
+      "id": "e30",
+      "type": "multiple-choice",
+      "question": "What time does Lucy get up?",
+      "options": [
+        "At six o'clock",
+        "At seven o'clock",
+        "At eight o'clock",
+        "At nine o'clock"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "At seven o'clock",
+      "explicacao": "No texto sobre Lucy, ela menciona que acorda às sete horas.",
+      "dica": "Leia o começo do texto sobre a rotina diária de Lucy."
+    }
+  ]
+}
