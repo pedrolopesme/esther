@@ -1,0 +1,206 @@
+{
+  "nome": "Inglês - Revisão",
+  "materia": "Inglês",
+  "ano_letivo": "5º ano do Ensino Fundamental",
+  "data": "2025-05-04",
+  "title": "Revisão de Inglês - Unidades 1 e 2",
+  "description": "Lista com 30 exercícios variados com base no conteúdo do PDF de revisão de inglês.",
+  "exercises": [
+    {
+      "id": "e1",
+      "type": "multiple-choice",
+      "question": "What do plants and animals need to live?",
+      "options": [
+        "Plastic and sunlight",
+        "Air and water",
+        "Books and food",
+        "Sugar and salt"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Air and water",
+      "explicacao": "Todos os seres vivos precisam de ar e água para sobreviver.",
+      "dica": "Pense nos elementos básicos da natureza."
+    },
+    {
+      "id": "e2",
+      "type": "multiple-choice",
+      "question": "What must you do to save water at home?",
+      "options": [
+        "Take long baths",
+        "Leave the tap open",
+        "Turn off the tap when brushing teeth",
+        "Use more plastic bottles"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Turn off the tap when brushing teeth",
+      "explicacao": "Fechar a torneira enquanto escova os dentes economiza água.",
+      "dica": "Conservar água é uma atitude sustentável."
+    },
+    {
+      "id": "e3",
+      "type": "fill-gap",
+      "question": "I always ____ my teeth after meals.",
+      "options": [
+        "brush",
+        "paint"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "brush",
+      "explicacao": "O verbo correto é 'brush' (escovar).",
+      "dica": "Pense em higiene pessoal."
+    },
+    {
+      "id": "e4",
+      "type": "multiple-choice",
+      "question": "Which activity is good for the planet?",
+      "options": [
+        "Throwing trash on the street",
+        "Recycling paper and plastic",
+        "Leaving the lights on",
+        "Using new plastic bags"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Recycling paper and plastic",
+      "explicacao": "Reciclar ajuda a reduzir o lixo e conservar recursos.",
+      "dica": "Sustentabilidade é importante."
+    },
+    {
+      "id": "e5",
+      "type": "fill-gap",
+      "question": "She ____ lunch at one o'clock.",
+      "options": [
+        "has",
+        "have"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "has",
+      "explicacao": "'She' exige o verbo 'has' no presente simples.",
+      "dica": "Observe o sujeito da frase."
+    },
+    {
+      "id": "e6",
+      "type": "fill-gap",
+      "question": "I always ____ my teeth after meals.?",
+      "options": [
+        "brush",
+        "paint"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "brush",
+      "explicacao": "O verbo correto é 'brush' (escovar).",
+      "dica": "Pense em higiene pessoal."
+    },
+    {
+      "id": "e7",
+      "type": "fill-gap",
+      "question": "She ____ lunch at one o'clock.?",
+      "options": [
+        "has",
+        "have"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "has",
+      "explicacao": "'She' exige o verbo 'has' no presente simples.",
+      "dica": "Observe o sujeito da frase."
+    },
+    {
+      "id": "e8",
+      "type": "multiple-choice",
+      "question": "What do we wear to protect our knees when skating?",
+      "options": [
+        "Helmets",
+        "Gloves",
+        "Knee pads",
+        "Sunglasses"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Knee pads",
+      "explicacao": "Usamos joelheiras para proteger os joelhos.",
+      "dica": "Lembre-se do equipamento de segurança."
+    },
+    {
+      "id": "e9",
+      "type": "fill-gap",
+      "question": "You mustn't ____ when the teacher is talking.",
+      "options": [
+        "talk",
+        "sleep"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "talk",
+      "explicacao": "É uma regra comum de sala de aula.",
+      "dica": "Boa educação na aula!"
+    },
+    {
+      "id": "e10",
+      "type": "multiple-choice",
+      "question": "Which one is a daily routine activity?",
+      "options": [
+        "Go swimming on holidays",
+        "Brush teeth",
+        "Play video games all night",
+        "Go to the zoo"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Brush teeth",
+      "explicacao": "Escovar os dentes é uma rotina diária comum.",
+      "dica": "Pense no que você faz todos os dias."
+    },
+    {
+      "id": "e11",
+      "type": "fill-gap",
+      "question": "He ____ a comic every Saturday.",
+      "options": [
+        "reads",
+        "read"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "reads",
+      "explicacao": "No presente simples, usamos 'reads' para 'he'.",
+      "dica": "Observe a conjugação para 'he/she/it'."
+    },
+    {
+      "id": "e12",
+      "type": "multiple-choice",
+      "question": "What do we use sun cream for?",
+      "options": [
+        "To wash our hands",
+        "To protect our skin",
+        "To clean our teeth",
+        "To play in the sand"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "To protect our skin",
+      "explicacao": "O protetor solar protege a pele dos raios solares.",
+      "dica": "Use-o mesmo em dias nublados!"
+    },
+    {
+      "id": "e13",
+      "type": "fill-gap",
+      "question": "They always ____ their homework before dinner.",
+      "options": [
+        "do",
+        "make"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "do",
+      "explicacao": "Usamos 'do' com 'homework'.",
+      "dica": "'Make' é usado para coisas físicas, como 'make a cake'."
+    },
+    {
+      "id": "e14",
+      "type": "multiple-choice",
+      "question": "Which job helps people in emergencies?",
+      "options": [
+        "Teacher",
+        "Police officer",
+        "Baker",
+        "Farmer"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Police officer",
+      "explicacao": "Policiais ajudam em emergências e mantêm a ordem.",
+      "dica": "Quem você chama quando há perigo?"
+    }
+  ]
+}
