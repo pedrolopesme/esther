@@ -13,24 +13,24 @@ export default function Home() {
       icon: "/globe.svg", // Placeholder, você pode substituir por ícones específicos
       color: "rgba(88, 204, 2, 0.1)"
     },
-    {
-      id: "portugues",
-      title: "Português",
-      icon: "/file.svg",
-      color: "rgba(255, 200, 0, 0.1)"
-    },
+    // {
+    //   id: "portugues",
+    //   title: "Português",
+    //   icon: "/file.svg",
+    //   color: "rgba(255, 200, 0, 0.1)"
+    // },
     {
       id: "ingles",
       title: "Inglês",
       icon: "/window.svg",
       color: "rgba(28, 176, 246, 0.1)"
     },
-    {
-      id: "ciencias",
-      title: "Ciências",
-      icon: "/vercel.svg",
-      color: "rgba(255, 82, 193, 0.1)"
-    },
+    // {
+    //   id: "ciencias",
+    //   title: "Ciências",
+    //   icon: "/vercel.svg",
+    //   color: "rgba(255, 82, 193, 0.1)"
+    // },
   ];
 
   const container = {
