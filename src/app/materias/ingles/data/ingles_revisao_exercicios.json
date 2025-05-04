@@ -1,0 +1,432 @@
+{
+  "nome": "Inglês - Revisão",
+  "materia": "Inglês",
+  "ano_letivo": "5º ano do Ensino Fundamental",
+  "data": "2025-05-04",
+  "title": "Revisão de Ingles - Pupils Book - Unidades 1 a 3",
+  "description": "Lista com 30 exercícios variados com base no conteúdo do PDF de revisão de inglês.",
+  "exercises": [
+    {
+      "id": "e1",
+      "type": "multiple-choice",
+      "question": "What do plants and animals need to live?",
+      "options": [
+        "Plastic and sunlight",
+        "Air and water",
+        "Books and food",
+        "Sugar and salt"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Air and water",
+      "explicacao": "Todos os seres vivos precisam de ar e água para sobreviver.",
+      "dica": "Pense nos elementos básicos da natureza."
+    },
+    {
+      "id": "e2",
+      "type": "multiple-choice",
+      "question": "What must you do to save water at home?",
+      "options": [
+        "Take long baths",
+        "Leave the tap open",
+        "Turn off the tap when brushing teeth",
+        "Use more plastic bottles"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Turn off the tap when brushing teeth",
+      "explicacao": "Fechar a torneira enquanto escova os dentes economiza água.",
+      "dica": "Conservar água é uma atitude sustentável."
+    },
+    {
+      "id": "e3",
+      "type": "fill-gap",
+      "question": "I always ____ my teeth after meals.",
+      "options": [
+        "brush",
+        "paint"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "brush",
+      "explicacao": "O verbo correto é 'brush' (escovar).",
+      "dica": "Pense em higiene pessoal."
+    },
+    {
+      "id": "e4",
+      "type": "multiple-choice",
+      "question": "Which activity is good for the planet?",
+      "options": [
+        "Throwing trash on the street",
+        "Recycling paper and plastic",
+        "Leaving the lights on",
+        "Using new plastic bags"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Recycling paper and plastic",
+      "explicacao": "Reciclar ajuda a reduzir o lixo e conservar recursos.",
+      "dica": "Sustentabilidade é importante."
+    },
+    {
+      "id": "e5",
+      "type": "fill-gap",
+      "question": "She ____ lunch at one o'clock.",
+      "options": [
+        "has",
+        "have"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "has",
+      "explicacao": "'She' exige o verbo 'has' no presente simples.",
+      "dica": "Observe o sujeito da frase."
+    },
+    {
+      "id": "e6",
+      "type": "multiple-choice",
+      "question": "What do plants and animals need to live?",
+      "options": [
+        "Plastic and sunlight",
+        "Air and water",
+        "Books and food",
+        "Sugar and salt"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Air and water",
+      "explicacao": "Todos os seres vivos precisam de ar e água para sobreviver.",
+      "dica": "Pense nos elementos básicos da natureza."
+    },
+    {
+      "id": "e7",
+      "type": "multiple-choice",
+      "question": "What must you do to save water at home?",
+      "options": [
+        "Take long baths",
+        "Leave the tap open",
+        "Turn off the tap when brushing teeth",
+        "Use more plastic bottles"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Turn off the tap when brushing teeth",
+      "explicacao": "Fechar a torneira enquanto escova os dentes economiza água.",
+      "dica": "Conservar água é uma atitude sustentável."
+    },
+    {
+      "id": "e8",
+      "type": "multiple-choice",
+      "question": "What do plants and animals need to live?",
+      "options": [
+        "Plastic and sunlight",
+        "Air and water",
+        "Books and food",
+        "Sugar and salt"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Air and water",
+      "explicacao": "Todos os seres vivos precisam de ar e água para sobreviver.",
+      "dica": "Pense nos elementos básicos da natureza."
+    },
+    {
+      "id": "e9",
+      "type": "fill-gap",
+      "question": "I always ____ my teeth after meals.?",
+      "options": [
+        "brush",
+        "paint"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "brush",
+      "explicacao": "O verbo correto é 'brush' (escovar).",
+      "dica": "Pense em higiene pessoal."
+    },
+    {
+      "id": "e10",
+      "type": "fill-gap",
+      "question": "I always ____ my teeth after meals.?",
+      "options": [
+        "brush",
+        "paint"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "brush",
+      "explicacao": "O verbo correto é 'brush' (escovar).",
+      "dica": "Pense em higiene pessoal."
+    },
+    {
+      "id": "e11",
+      "type": "multiple-choice",
+      "question": "What do plants and animals need to live?",
+      "options": [
+        "Plastic and sunlight",
+        "Air and water",
+        "Books and food",
+        "Sugar and salt"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Air and water",
+      "explicacao": "Todos os seres vivos precisam de ar e água para sobreviver.",
+      "dica": "Pense nos elementos básicos da natureza."
+    },
+    {
+      "id": "e12",
+      "type": "fill-gap",
+      "question": "I always ____ my teeth after meals.?",
+      "options": [
+        "brush",
+        "paint"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "brush",
+      "explicacao": "O verbo correto é 'brush' (escovar).",
+      "dica": "Pense em higiene pessoal."
+    },
+    {
+      "id": "e13",
+      "type": "multiple-choice",
+      "question": "What do plants and animals need to live?",
+      "options": [
+        "Plastic and sunlight",
+        "Air and water",
+        "Books and food",
+        "Sugar and salt"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Air and water",
+      "explicacao": "Todos os seres vivos precisam de ar e água para sobreviver.",
+      "dica": "Pense nos elementos básicos da natureza."
+    },
+    {
+      "id": "e14",
+      "type": "multiple-choice",
+      "question": "What do plants and animals need to live?",
+      "options": [
+        "Plastic and sunlight",
+        "Air and water",
+        "Books and food",
+        "Sugar and salt"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Air and water",
+      "explicacao": "Todos os seres vivos precisam de ar e água para sobreviver.",
+      "dica": "Pense nos elementos básicos da natureza."
+    },
+    {
+      "id": "e15",
+      "type": "multiple-choice",
+      "question": "What do plants and animals need to live?",
+      "options": [
+        "Plastic and sunlight",
+        "Air and water",
+        "Books and food",
+        "Sugar and salt"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Air and water",
+      "explicacao": "Todos os seres vivos precisam de ar e água para sobreviver.",
+      "dica": "Pense nos elementos básicos da natureza."
+    },
+    {
+      "id": "e16",
+      "type": "multiple-choice",
+      "question": "What do plants and animals need to live?",
+      "options": [
+        "Plastic and sunlight",
+        "Air and water",
+        "Books and food",
+        "Sugar and salt"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Air and water",
+      "explicacao": "Todos os seres vivos precisam de ar e água para sobreviver.",
+      "dica": "Pense nos elementos básicos da natureza."
+    },
+    {
+      "id": "e17",
+      "type": "fill-gap",
+      "question": "She ____ lunch at one o'clock.?",
+      "options": [
+        "has",
+        "have"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "has",
+      "explicacao": "'She' exige o verbo 'has' no presente simples.",
+      "dica": "Observe o sujeito da frase."
+    },
+    {
+      "id": "e18",
+      "type": "fill-gap",
+      "question": "She ____ lunch at one o'clock.?",
+      "options": [
+        "has",
+        "have"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "has",
+      "explicacao": "'She' exige o verbo 'has' no presente simples.",
+      "dica": "Observe o sujeito da frase."
+    },
+    {
+      "id": "e19",
+      "type": "multiple-choice",
+      "question": "What do plants and animals need to live?",
+      "options": [
+        "Plastic and sunlight",
+        "Air and water",
+        "Books and food",
+        "Sugar and salt"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Air and water",
+      "explicacao": "Todos os seres vivos precisam de ar e água para sobreviver.",
+      "dica": "Pense nos elementos básicos da natureza."
+    },
+    {
+      "id": "e20",
+      "type": "fill-gap",
+      "question": "She ____ lunch at one o'clock.?",
+      "options": [
+        "has",
+        "have"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "has",
+      "explicacao": "'She' exige o verbo 'has' no presente simples.",
+      "dica": "Observe o sujeito da frase."
+    },
+    {
+      "id": "e21",
+      "type": "fill-gap",
+      "question": "I always ____ my teeth after meals.?",
+      "options": [
+        "brush",
+        "paint"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "brush",
+      "explicacao": "O verbo correto é 'brush' (escovar).",
+      "dica": "Pense em higiene pessoal."
+    },
+    {
+      "id": "e22",
+      "type": "fill-gap",
+      "question": "I always ____ my teeth after meals.?",
+      "options": [
+        "brush",
+        "paint"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "brush",
+      "explicacao": "O verbo correto é 'brush' (escovar).",
+      "dica": "Pense em higiene pessoal."
+    },
+    {
+      "id": "e23",
+      "type": "fill-gap",
+      "question": "She ____ lunch at one o'clock.?",
+      "options": [
+        "has",
+        "have"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "has",
+      "explicacao": "'She' exige o verbo 'has' no presente simples.",
+      "dica": "Observe o sujeito da frase."
+    },
+    {
+      "id": "e24",
+      "type": "fill-gap",
+      "question": "I always ____ my teeth after meals.?",
+      "options": [
+        "brush",
+        "paint"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "brush",
+      "explicacao": "O verbo correto é 'brush' (escovar).",
+      "dica": "Pense em higiene pessoal."
+    },
+    {
+      "id": "e25",
+      "type": "fill-gap",
+      "question": "I always ____ my teeth after meals.?",
+      "options": [
+        "brush",
+        "paint"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "brush",
+      "explicacao": "O verbo correto é 'brush' (escovar).",
+      "dica": "Pense em higiene pessoal."
+    },
+    {
+      "id": "e26",
+      "type": "fill-gap",
+      "question": "I always ____ my teeth after meals.?",
+      "options": [
+        "brush",
+        "paint"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "brush",
+      "explicacao": "O verbo correto é 'brush' (escovar).",
+      "dica": "Pense em higiene pessoal."
+    },
+    {
+      "id": "e27",
+      "type": "multiple-choice",
+      "question": "What do plants and animals need to live?",
+      "options": [
+        "Plastic and sunlight",
+        "Air and water",
+        "Books and food",
+        "Sugar and salt"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Air and water",
+      "explicacao": "Todos os seres vivos precisam de ar e água para sobreviver.",
+      "dica": "Pense nos elementos básicos da natureza."
+    },
+    {
+      "id": "e28",
+      "type": "multiple-choice",
+      "question": "What do plants and animals need to live?",
+      "options": [
+        "Plastic and sunlight",
+        "Air and water",
+        "Books and food",
+        "Sugar and salt"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Air and water",
+      "explicacao": "Todos os seres vivos precisam de ar e água para sobreviver.",
+      "dica": "Pense nos elementos básicos da natureza."
+    },
+    {
+      "id": "e29",
+      "type": "multiple-choice",
+      "question": "What do plants and animals need to live?",
+      "options": [
+        "Plastic and sunlight",
+        "Air and water",
+        "Books and food",
+        "Sugar and salt"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Air and water",
+      "explicacao": "Todos os seres vivos precisam de ar e água para sobreviver.",
+      "dica": "Pense nos elementos básicos da natureza."
+    },
+    {
+      "id": "e30",
+      "type": "multiple-choice",
+      "question": "What do plants and animals need to live?",
+      "options": [
+        "Plastic and sunlight",
+        "Air and water",
+        "Books and food",
+        "Sugar and salt"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Air and water",
+      "explicacao": "Todos os seres vivos precisam de ar e água para sobreviver.",
+      "dica": "Pense nos elementos básicos da natureza."
+    }
+  ]
+}
