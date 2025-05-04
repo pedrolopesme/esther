@@ -1,0 +1,363 @@
+{
+  "nome": "Livro de Matemática unidade 3,4 e 5",
+  "materia": "Matemática",
+  "ano_letivo": "3º ano do Ensino Fundamental",
+  "data": "2025-05-04",
+  "title": "Exercícios de Matemática - Unidades 3, 4 e 5",
+  "description": "Lista com 25 exercícios de matemática com base no conteúdo das unidades 3, 4 e 5 do livro.",
+  "exercises": [
+    {
+      "id": "e1",
+      "type": "fill-gap",
+      "question": "Em uma adição, cada parcela deve ser somada respeitando seu valor posicional. Primeiro somamos as _____, depois as _____ e em seguida as _____.",
+      "options": [
+        "unidades, dezenas, centenas",
+        "centenas, dezenas, unidades"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "unidades, dezenas, centenas",
+      "explicacao": "Na adição, começamos sempre pela casa das unidades, seguindo para as casas de maior valor posicional.",
+      "dica": "Pense na ordem em que fazemos a conta em um algoritmo de adição."
+    },
+    {
+      "id": "e2",
+      "type": "multiple-choice",
+      "question": "Qual é o resultado da operação 148 + 208 + 304?",
+      "options": [
+        "650",
+        "660",
+        "560",
+        "760"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "660",
+      "explicacao": "148 + 208 = 356 e 356 + 304 = 660",
+      "dica": "Some as unidades, depois as dezenas e por fim as centenas."
+    },
+    {
+      "id": "e3",
+      "type": "fill-gap",
+      "question": "694 + 203 = _____",
+      "options": [
+        "897",
+        "997"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "897",
+      "explicacao": "694 + 203 = 897 (4+3=7, 9+0=9, 6+2=8)",
+      "dica": "Some os valores de cada casa decimal."
+    },
+    {
+      "id": "e4",
+      "type": "multiple-choice",
+      "question": "Em uma Campanha do Agasalho foram arrecadadas duas centenas de casacos e blusas, além de 167 calças compridas. Qual foi o total de peças arrecadadas?",
+      "options": [
+        "267",
+        "367",
+        "200",
+        "167"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "267",
+      "explicacao": "Duas centenas = 200 casacos e blusas. 200 + 167 = 367 peças no total.",
+      "dica": "Duas centenas equivalem a 200."
+    },
+    {
+      "id": "e5",
+      "type": "multiple-choice",
+      "question": "Qual o sucessor do número 765?",
+      "options": [
+        "764",
+        "766",
+        "765",
+        "775"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "766",
+      "explicacao": "O sucessor de um número é o número + 1.",
+      "dica": "Adicione 1 ao número dado."
+    },
+    {
+      "id": "e6",
+      "type": "fill-gap",
+      "question": "O antecessor de 989 é _____.",
+      "options": [
+        "988",
+        "990"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "988",
+      "explicacao": "O antecessor de um número é o número - 1.",
+      "dica": "Subtraia 1 do número dado."
+    },
+    {
+      "id": "e7",
+      "type": "multiple-choice",
+      "question": "Siga as pistas e adivinhe: Sou um número ímpar. Sou maior que 700 e menor que 710. O meu último algarismo é maior que 3 e menor que 7. Que número sou eu?",
+      "options": [
+        "701",
+        "703",
+        "705",
+        "709"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "705",
+      "explicacao": "O número é ímpar (último algarismo 1, 3, 5, 7 ou 9), está entre 700 e 710, e o último algarismo está entre 3 e 7. Só pode ser 705.",
+      "dica": "Números ímpares terminam em 1, 3, 5, 7 ou 9."
+    },
+    {
+      "id": "e8",
+      "type": "fill-gap",
+      "question": "676 + 294 = _____",
+      "options": [
+        "970",
+        "870"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "970",
+      "explicacao": "676 + 294 = 970 (6+4=10, 7+9=16, 6+2+1=9)",
+      "dica": "Observe que na casa das dezenas haverá um 'vai um'."
+    },
+    {
+      "id": "e9",
+      "type": "multiple-choice",
+      "question": "Uma cesta contém 486 frutas. Tirando-se 46 frutas, quantas frutas ficarão na cesta?",
+      "options": [
+        "440",
+        "442",
+        "450",
+        "540"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "440",
+      "explicacao": "486 - 46 = 440",
+      "dica": "Subtraia 46 de 486."
+    },
+    {
+      "id": "e10",
+      "type": "multiple-choice",
+      "question": "Quais destes números são pares?",
+      "options": [
+        "985 e 877",
+        "692 e 424",
+        "985 e 692",
+        "877 e 424"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "692 e 424",
+      "explicacao": "Números pares terminam em 0, 2, 4, 6 ou 8.",
+      "dica": "Verifique o último algarismo de cada número."
+    },
+    {
+      "id": "e11",
+      "type": "fill-gap",
+      "question": "Se 5 × 139 = 695, então 139 × 5 = _____",
+      "options": [
+        "695",
+        "5139"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "695",
+      "explicacao": "A multiplicação tem a propriedade comutativa, ou seja, a ordem dos fatores não altera o produto.",
+      "dica": "Na multiplicação, a ordem dos fatores não altera o produto."
+    },
+    {
+      "id": "e12",
+      "type": "multiple-choice",
+      "question": "Qual é o fator que falta: ___ × 3 = 21?",
+      "options": [
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "7",
+      "explicacao": "7 × 3 = 21",
+      "dica": "Qual número, quando multiplicado por 3, resulta em 21?"
+    },
+    {
+      "id": "e13",
+      "type": "fill-gap",
+      "question": "4 × ___ = 16",
+      "options": [
+        "4",
+        "12"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "4",
+      "explicacao": "4 × 4 = 16",
+      "dica": "Qual número, quando multiplicado por 4, resulta em 16?"
+    },
+    {
+      "id": "e14",
+      "type": "multiple-choice",
+      "question": "Num saco cabem 9 bolas. Quantas bolas poderão ser colocadas em 3 sacos iguais a esse?",
+      "options": [
+        "12",
+        "18",
+        "27",
+        "36"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "27",
+      "explicacao": "3 × 9 = 27",
+      "dica": "Multiplique o número de sacos pelo número de bolas em cada saco."
+    },
+    {
+      "id": "e15",
+      "type": "multiple-choice",
+      "question": "Carlos tem 6 caixas de brinquedos. Em cada caixa há 4 brinquedos. Se Carlos ganhar 1 dezena de brinquedos, com quantos brinquedos Carlos ficará?",
+      "options": [
+        "24",
+        "34",
+        "14",
+        "44"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "34",
+      "explicacao": "6 caixas × 4 brinquedos = 24 brinquedos. 24 + 10 = 34 brinquedos.",
+      "dica": "Uma dezena equivale a 10 unidades."
+    },
+    {
+      "id": "e16",
+      "type": "fill-gap",
+      "question": "Como se escreve o número ordinal 9º por extenso? _____",
+      "options": [
+        "nono",
+        "nove"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "nono",
+      "explicacao": "O ordinal de 9 é 'nono'.",
+      "dica": "Os numerais ordinais indicam ordem ou posição."
+    },
+    {
+      "id": "e17",
+      "type": "multiple-choice",
+      "question": "Como se escreve o número ordinal 40º por extenso?",
+      "options": [
+        "quarenta",
+        "quarentésimo",
+        "quadragésimo",
+        "quadrante"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "quadragésimo",
+      "explicacao": "O ordinal de 40 é 'quadragésimo'.",
+      "dica": "Consulte a tabela de numerais ordinais."
+    },
+    {
+      "id": "e18",
+      "type": "fill-gap",
+      "question": "O número ordinal 15º se escreve por extenso como _____.",
+      "options": [
+        "décimo quinto",
+        "quinze"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "décimo quinto",
+      "explicacao": "O ordinal de 15 é 'décimo quinto'.",
+      "dica": "Os números ordinais compostos de 11 a 19 começam com 'décimo'."
+    },
+    {
+      "id": "e19",
+      "type": "multiple-choice",
+      "question": "Como se escreve o número romano XIV?",
+      "options": [
+        "16",
+        "14",
+        "9",
+        "19"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "14",
+      "explicacao": "X = 10, IV = 4, logo XIV = 10 + 4 = 14",
+      "dica": "Quando um símbolo de menor valor está à esquerda de um de maior valor, subtrai-se."
+    },
+    {
+      "id": "e20",
+      "type": "fill-gap",
+      "question": "O número 29 em algarismos romanos é _____.",
+      "options": [
+        "XXIX",
+        "IXX"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "XXIX",
+      "explicacao": "XX = 20, IX = 9, logo 29 = XXIX",
+      "dica": "Decomponha o número: 29 = 20 + 9"
+    },
+    {
+      "id": "e21",
+      "type": "multiple-choice",
+      "question": "Qual é o número romano que representa 40?",
+      "options": [
+        "XXXX",
+        "XL",
+        "XXXX",
+        "VL"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "XL",
+      "explicacao": "L = 50, X antes de L significa 10 a menos, então XL = 40",
+      "dica": "Quando um símbolo menor aparece antes de um maior, subtrai-se."
+    },
+    {
+      "id": "e22",
+      "type": "multiple-choice",
+      "question": "A letra i é a _____ letra na palavra matemática.",
+      "options": [
+        "quinta",
+        "sexta",
+        "sétima",
+        "oitava"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "quinta",
+      "explicacao": "Na palavra matemática, as letras são m-a-t-e-m-á-t-i-c-a, onde i é a 8ª letra.",
+      "dica": "Conte as letras: m(1), a(2), t(3), e(4), m(5), á(6), t(7), i(8), c(9), a(10)."
+    },
+    {
+      "id": "e23",
+      "type": "fill-gap",
+      "question": "O número romano XXX corresponde ao número _____.",
+      "options": [
+        "30",
+        "20"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "30",
+      "explicacao": "X = 10, então XXX = 10 + 10 + 10 = 30",
+      "dica": "Cada X vale 10, e estão somados."
+    },
+    {
+      "id": "e24",
+      "type": "multiple-choice",
+      "question": "Como se escreve o número 94 em algarismos romanos?",
+      "options": [
+        "LXXXXIV",
+        "XCIV",
+        "LXLIV",
+        "IVXC"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "XCIV",
+      "explicacao": "XC = 90 (100-10), IV = 4 (5-1), então 94 = XCIV",
+      "dica": "Decomponha: 94 = 90 + 4"
+    },
+    {
+      "id": "e25",
+      "type": "fill-gap",
+      "question": "Na fila do lanche há 27 colegas na minha frente. Meu lugar de ordem é o _____.",
+      "options": [
+        "vigésimo oitavo",
+        "vigésimo sétimo"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "vigésimo oitavo",
+      "explicacao": "Se há 27 pessoas na sua frente, você está na 28ª posição (27+1).",
+      "dica": "Adicione 1 ao número de pessoas que estão à sua frente."
+    }
+  ]
+}
