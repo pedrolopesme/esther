@@ -1,0 +1,178 @@
+{
+    "nome": "Caderno de Matemática Maio",
+    "materia": "Matemática",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "data": "2025-05-04",
+    "title": "Caderno de Matemática Maio",
+    "description": "Lista com 12 exercícios de matemática para revisão com base no conteúdo do caderno.",
+    "exercises": [
+      {
+        "id": "m1",
+        "type": "fill-gap",
+        "question": "O resultado de 6 + 30 é _____.",
+        "options": [
+          "36",
+          "26"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "36",
+        "explicacao": "Para resolver essa adição, somamos as unidades 6 + 0 = 6 e depois a dezena 0 + 3 = 3, formando 36.",
+        "dica": "Somamos as unidades primeiro, depois as dezenas."
+      },
+      {
+        "id": "m2",
+        "type": "multiple-choice",
+        "question": "Qual é o resultado da operação 3 × 4?",
+        "options": [
+          "7",
+          "12",
+          "9",
+          "10"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "12",
+        "explicacao": "A multiplicação 3 × 4 significa somar o 3 quatro vezes: 3 + 3 + 3 + 3 = 12.",
+        "dica": "Pense na tabuada do 3."
+      },
+      {
+        "id": "m3",
+        "type": "fill-gap",
+        "question": "Se Ana tem 7 figurinhas e ganha mais 3, ela fica com _____ figurinhas.",
+        "options": [
+          "10",
+          "4"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "10",
+        "explicacao": "Para resolver esse problema, somamos 7 + 3 = 10.",
+        "dica": "É uma operação de adição."
+      },
+      {
+        "id": "m4",
+        "type": "multiple-choice",
+        "question": "Qual é a forma correta de escrever o número 30?",
+        "options": [
+          "3",
+          "03",
+          "30",
+          "300"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "30",
+        "explicacao": "O número trinta é formado por 3 dezenas e 0 unidades, escrito como 30.",
+        "dica": "Pense em 3 dezenas."
+      },
+      {
+        "id": "m5",
+        "type": "fill-gap",
+        "question": "Uma dúzia tem _____ unidades.",
+        "options": [
+          "12",
+          "10"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "12",
+        "explicacao": "Uma dúzia corresponde a 12 unidades.",
+        "dica": "É um número maior que 10."
+      },
+      {
+        "id": "m6",
+        "type": "multiple-choice",
+        "question": "Quanto é 4 × 9?",
+        "options": [
+          "13",
+          "36",
+          "45",
+          "27"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "36",
+        "explicacao": "Multiplicando 4 × 9 = 36, ou seja, somando 9 quatro vezes: 9 + 9 + 9 + 9 = 36.",
+        "dica": "Pense na tabuada do 9."
+      },
+      {
+        "id": "m7",
+        "type": "fill-gap",
+        "question": "O resultado de 7 - 4 é _____.",
+        "options": [
+          "3",
+          "11"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "3",
+        "explicacao": "Na subtração 7 - 4, retiramos 4 unidades de 7 e obtemos 3.",
+        "dica": "É uma operação de subtração."
+      },
+      {
+        "id": "m8",
+        "type": "multiple-choice",
+        "question": "Qual número vem antes do 7?",
+        "options": [
+          "5",
+          "6",
+          "8",
+          "9"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "6",
+        "explicacao": "Na sequência numérica, o número que vem imediatamente antes do 7 é o 6.",
+        "dica": "Pense na ordem dos números."
+      },
+      {
+        "id": "m9",
+        "type": "fill-gap",
+        "question": "Para calcular 8 + 5, podemos pensar em 8 + 2 + _____ = 15.",
+        "options": [
+          "3",
+          "5"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "3",
+        "explicacao": "Podemos decompor o 5 em 2 + 3. Assim, 8 + 5 = 8 + 2 + 3 = 10 + 3 = 15.",
+        "dica": "Decomponha o número 5."
+      },
+      {
+        "id": "m10",
+        "type": "multiple-choice",
+        "question": "Quanto é a metade de 6?",
+        "options": [
+          "2",
+          "3",
+          "4",
+          "12"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "3",
+        "explicacao": "A metade de um número é o resultado da divisão desse número por 2. Assim, 6 ÷ 2 = 3.",
+        "dica": "Divida o número por 2."
+      },
+      {
+        "id": "m11",
+        "type": "fill-gap",
+        "question": "O dobro de 6 é _____.",
+        "options": [
+          "12",
+          "8"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "12",
+        "explicacao": "O dobro de um número é o resultado da multiplicação desse número por 2. Assim, 6 × 2 = 12.",
+        "dica": "Multiplique o número por 2."
+      },
+      {
+        "id": "m12",
+        "type": "multiple-choice",
+        "question": "Quais são os algarismos que formam o número 36?",
+        "options": [
+          "3 e 6",
+          "30 e 6",
+          "3 e 60",
+          "36 e 0"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "3 e 6",
+        "explicacao": "O número 36 é formado pelos algarismos 3 e 6, onde o 3 representa 3 dezenas (30) e o 6 representa 6 unidades.",
+        "dica": "Algarismos são os símbolos que compõem os números."
+      }
+    ]
+  }
