@@ -1,0 +1,432 @@
+{
+    "nome": "Livro de Português Unidade 8",
+    "materia": "Português",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "data": "2025-05-05",
+    "title": "Lista de Exercícios de Português - Unidade 8",
+    "description": "Lista com 30 exercícios de português para revisão com base no conteúdo da Unidade 8 do livro.",
+    "exercises": [
+      {
+        "id": "p1",
+        "type": "fill-gap",
+        "question": "As sílabas são junções de vogais e consoantes, ou somente vogais, que reunidas formam as _____.",
+        "options": [
+          "palavras",
+          "frases"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "palavras",
+        "explicacao": "As sílabas são as junções de vogais e consoantes, ou somente vogais, que reunidas formam as palavras.",
+        "dica": "Pense no que compõe o texto escrito."
+      },
+      {
+        "id": "p2",
+        "type": "multiple-choice",
+        "question": "O que é um ditongo?",
+        "options": [
+          "Encontro de uma vogal e uma consoante na mesma sílaba",
+          "Encontro de duas vogais na mesma sílaba",
+          "Encontro de três vogais na mesma sílaba",
+          "Encontro de duas vogais em sílabas diferentes"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Encontro de duas vogais na mesma sílaba",
+        "explicacao": "Ditongo é o encontro de duas vogais na mesma sílaba, como em 'pai', 'céu', 'mão'.",
+        "dica": "Pense em duas vogais juntas que são pronunciadas em um único som."
+      },
+      {
+        "id": "p3",
+        "type": "multiple-choice",
+        "question": "O que é um tritongo?",
+        "options": [
+          "Encontro de três consoantes na mesma sílaba",
+          "Encontro de duas vogais em sílabas diferentes",
+          "Encontro de três vogais na mesma sílaba",
+          "Encontro de uma vogal e duas consoantes"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Encontro de três vogais na mesma sílaba",
+        "explicacao": "Tritongo é o encontro de três vogais na mesma sílaba, como em 'Paraguai' (ua-i).",
+        "dica": "Pense em três vogais juntas que são pronunciadas em um único som."
+      },
+      {
+        "id": "p4",
+        "type": "fill-gap",
+        "question": "O encontro de duas vogais em sílabas diferentes é chamado de _____.",
+        "options": [
+          "hiato",
+          "ditongo"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "hiato",
+        "explicacao": "Hiato é o encontro de duas vogais em sílabas diferentes, como em 'sa-ú-de', 'po-e-ta'.",
+        "dica": "Pense em vogais que são pronunciadas separadamente."
+      },
+      {
+        "id": "p5",
+        "type": "multiple-choice",
+        "question": "Na palavra 'saúde', qual é o tipo de encontro vocálico?",
+        "options": [
+          "Ditongo",
+          "Tritongo",
+          "Hiato",
+          "Dígrafo"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Hiato",
+        "explicacao": "Em 'saúde' (sa-ú-de), as vogais 'a' e 'ú' estão em sílabas diferentes, formando um hiato.",
+        "dica": "Observe a separação silábica da palavra."
+      },
+      {
+        "id": "p6",
+        "type": "fill-gap",
+        "question": "A palavra 'coração' é separada em sílabas como _____.",
+        "options": [
+          "co-ra-ção",
+          "cor-a-ção"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "co-ra-ção",
+        "explicacao": "A palavra 'coração' é separada em sílabas como 'co-ra-ção'.",
+        "dica": "Tente pronunciar a palavra lentamente para identificar as sílabas."
+      },
+      {
+        "id": "p7",
+        "type": "multiple-choice",
+        "question": "O sinal de pontuação que indica que a frase terminou é:",
+        "options": [
+          "Vírgula",
+          "Ponto final",
+          "Ponto de interrogação",
+          "Ponto e vírgula"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Ponto final",
+        "explicacao": "O ponto final (.) é o sinal de pontuação que indica que a frase terminou.",
+        "dica": "É o sinal que usamos para encerrar uma declaração."
+      },
+      {
+        "id": "p8",
+        "type": "multiple-choice",
+        "question": "Qual é a separação silábica correta da palavra 'aldeia'?",
+        "options": [
+          "al-dei-a",
+          "a-ldei-a",
+          "al-de-i-a",
+          "al-de-ia"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "al-dei-a",
+        "explicacao": "A separação silábica correta da palavra 'aldeia' é 'al-dei-a', onde 'dei' contém um ditongo.",
+        "dica": "Identifique o ditongo na palavra."
+      },
+      {
+        "id": "p9",
+        "type": "fill-gap",
+        "question": "Na palavra 'muitos', o encontro vocálico 'ui' é um _____.",
+        "options": [
+          "ditongo",
+          "hiato"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "ditongo",
+        "explicacao": "Na palavra 'muitos' (mui-tos), o encontro vocálico 'ui' é um ditongo porque as duas vogais estão na mesma sílaba.",
+        "dica": "Observe se as vogais estão na mesma sílaba ou em sílabas diferentes."
+      },
+      {
+        "id": "p10",
+        "type": "multiple-choice",
+        "question": "Quantas sílabas tem a palavra 'pernilongo'?",
+        "options": [
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "4",
+        "explicacao": "A palavra 'pernilongo' tem 4 sílabas: 'per-ni-lon-go'.",
+        "dica": "Tente separar a palavra em sílabas mentalmente."
+      },
+      {
+        "id": "p11",
+        "type": "fill-gap",
+        "question": "A palavra com 3 sílabas é classificada como _____.",
+        "options": [
+          "trissílaba",
+          "polissílaba"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "trissílaba",
+        "explicacao": "Uma palavra com 3 sílabas é classificada como trissílaba, como 'ca-cho-rro'.",
+        "dica": "O prefixo 'tri' indica três."
+      },
+      {
+        "id": "p12",
+        "type": "multiple-choice",
+        "question": "O que são palavras oxítonas?",
+        "options": [
+          "Palavras com acento tônico na última sílaba",
+          "Palavras com acento tônico na penúltima sílaba",
+          "Palavras com acento tônico na antepenúltima sílaba",
+          "Palavras sem acento tônico"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "Palavras com acento tônico na última sílaba",
+        "explicacao": "Palavras oxítonas são aquelas que têm acento tônico na última sílaba, como em 'ca-fé', 'a-mor'.",
+        "dica": "Pense em palavras onde a sílaba mais forte está no final."
+      },
+      {
+        "id": "p13",
+        "type": "fill-gap",
+        "question": "Palavras com acento tônico na penúltima sílaba são chamadas de _____.",
+        "options": [
+          "paroxítonas",
+          "proparoxítonas"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "paroxítonas",
+        "explicacao": "Palavras paroxítonas são aquelas que têm acento tônico na penúltima sílaba, como em 'ca-sa', 'me-ni-na'.",
+        "dica": "É o tipo mais comum de palavras em português."
+      },
+      {
+        "id": "p14",
+        "type": "multiple-choice",
+        "question": "Na palavra 'árvore', a sílaba tônica é:",
+        "options": [
+          "ár",
+          "vo",
+          "re",
+          "árvore não tem sílaba tônica"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "ár",
+        "explicacao": "Em 'árvore' (ár-vo-re), a sílaba tônica é 'ár', que é a antepenúltima sílaba, tornando-a uma palavra proparoxítona.",
+        "dica": "Observe onde está o acento gráfico."
+      },
+      {
+        "id": "p15",
+        "type": "fill-gap",
+        "question": "Palavras com acento tônico na antepenúltima sílaba são chamadas de _____.",
+        "options": [
+          "proparoxítonas",
+          "oxítonas"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "proparoxítonas",
+        "explicacao": "Palavras proparoxítonas são aquelas que têm acento tônico na antepenúltima sílaba, como em 'mú-si-ca', 'pá-gi-na'.",
+        "dica": "Em português, todas as proparoxítonas são acentuadas graficamente."
+      },
+      {
+        "id": "p16",
+        "type": "multiple-choice",
+        "question": "Qual destas palavras é uma paroxítona?",
+        "options": [
+          "café",
+          "lápis",
+          "árvore",
+          "sabiá"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "lápis",
+        "explicacao": "A palavra 'lápis' (lá-pis) é paroxítona porque a sílaba tônica é 'lá', que é a penúltima sílaba.",
+        "dica": "Identifique onde está a sílaba mais forte na palavra."
+      },
+      {
+        "id": "p17",
+        "type": "fill-gap",
+        "question": "Na palavra 'português', a sílaba tônica é _____.",
+        "options": [
+          "guês",
+          "por"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "guês",
+        "explicacao": "Em 'português' (por-tu-guês), a sílaba tônica é 'guês', que é a última sílaba, tornando-a uma palavra oxítona.",
+        "dica": "Observe onde está o acento gráfico."
+      },
+      {
+        "id": "p18",
+        "type": "multiple-choice",
+        "question": "Qual é o sinal de pontuação usado para indicar uma pergunta?",
+        "options": [
+          "Ponto final",
+          "Ponto de interrogação",
+          "Ponto de exclamação",
+          "Reticências"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Ponto de interrogação",
+        "explicacao": "O ponto de interrogação (?) é usado para indicar que a frase é uma pergunta.",
+        "dica": "É o sinal que usamos no final de perguntas."
+      },
+      {
+        "id": "p19",
+        "type": "fill-gap",
+        "question": "O sinal de pontuação que indica surpresa, espanto, medo, raiva, pena ou alegria é o _____.",
+        "options": [
+          "ponto de exclamação",
+          "ponto e vírgula"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "ponto de exclamação",
+        "explicacao": "O ponto de exclamação (!) indica surpresa, espanto, medo, raiva, pena, alegria.",
+        "dica": "É usado para dar ênfase a sentimentos ou emoções."
+      },
+      {
+        "id": "p20",
+        "type": "multiple-choice",
+        "question": "Qual a diferença entre 'mas' e 'mais'?",
+        "options": [
+          "'Mas' é uma conjunção adversativa e 'mais' indica quantidade",
+          "'Mas' indica quantidade e 'mais' é uma conjunção adversativa",
+          "'Mas' e 'mais' são sinônimos e podem ser usados indistintamente",
+          "Não há diferença entre 'mas' e 'mais'"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "'Mas' é uma conjunção adversativa e 'mais' indica quantidade",
+        "explicacao": "'Mas' é uma conjunção adversativa (expressa oposição, contraste) e 'mais' indica quantidade, intensidade ou adição.",
+        "dica": "Uma estabelece contraste e a outra indica quantidade."
+      },
+      {
+        "id": "p21",
+        "type": "fill-gap",
+        "question": "Na frase 'A menina ficou interessada em saber mais sobre a história de tartarugas', a palavra destacada é _____.",
+        "options": [
+          "mais",
+          "mas"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "mais",
+        "explicacao": "Nessa frase, usamos 'mais' porque indica quantidade/intensidade - ela quer saber uma quantidade maior de informações sobre a história.",
+        "dica": "Pergunte-se se estamos indicando quantidade ou contraste."
+      },
+      {
+        "id": "p22",
+        "type": "multiple-choice",
+        "question": "O que é um encontro consonantal?",
+        "options": [
+          "Encontro de duas vogais na mesma sílaba",
+          "Encontro de duas consoantes na mesma sílaba",
+          "Encontro de duas vogais em sílabas diferentes",
+          "Encontro de duas consoantes em sílabas diferentes"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Encontro de duas consoantes na mesma sílaba",
+        "explicacao": "Encontro consonantal é quando duas ou mais consoantes aparecem juntas na mesma sílaba, como em 'pra-to', 'blo-co'.",
+        "dica": "Pense em consoantes que aparecem juntas sem vogal entre elas."
+      },
+      {
+        "id": "p23",
+        "type": "fill-gap",
+        "question": "Palavras com apenas uma sílaba são chamadas de _____.",
+        "options": [
+          "monossílabas",
+          "dissílabas"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "monossílabas",
+        "explicacao": "Palavras com apenas uma sílaba são chamadas de monossílabas, como 'pão', 'sol', 'mar'.",
+        "dica": "O prefixo 'mono' indica um."
+      },
+      {
+        "id": "p24",
+        "type": "multiple-choice",
+        "question": "Qual é a classificação da palavra 'responsabilidade' quanto ao número de sílabas?",
+        "options": [
+          "Dissílaba",
+          "Trissílaba",
+          "Tetrassílaba",
+          "Polissílaba"
+        ],
+        "correctIndex": 3,
+        "resposta_correta": "Polissílaba",
+        "explicacao": "A palavra 'responsabilidade' (res-pon-sa-bi-li-da-de) tem 7 sílabas, sendo classificada como polissílaba (mais de 4 sílabas).",
+        "dica": "Conte o número de sílabas e lembre-se que polissílabas têm mais de 4 sílabas."
+      },
+      {
+        "id": "p25",
+        "type": "fill-gap",
+        "question": "Palavras com duas sílabas são chamadas de _____.",
+        "options": [
+          "dissílabas",
+          "trissílabas"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "dissílabas",
+        "explicacao": "Palavras com duas sílabas são chamadas de dissílabas, como 'ca-sa', 'pa-to'.",
+        "dica": "O prefixo 'di' indica dois."
+      },
+      {
+        "id": "p26",
+        "type": "multiple-choice",
+        "question": "O que são dígrafos?",
+        "options": [
+          "Encontro de duas consoantes com som único",
+          "Encontro de duas vogais na mesma sílaba",
+          "Encontro de três vogais na mesma sílaba",
+          "Encontro de duas vogais em sílabas diferentes"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "Encontro de duas consoantes com som único",
+        "explicacao": "Dígrafos são encontros de duas letras que representam um único som, como 'ch', 'nh', 'lh', 'rr', 'ss'.",
+        "dica": "Pense em duas letras que, juntas, produzem apenas um som."
+      },
+      {
+        "id": "p27",
+        "type": "fill-gap",
+        "question": "O tipo de substantivo que dá origem a outros substantivos é chamado de substantivo _____.",
+        "options": [
+          "primitivo",
+          "derivado"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "primitivo",
+        "explicacao": "Substantivo primitivo é aquele que dá origem a outros substantivos, como 'pedra' (que origina 'pedreiro').",
+        "dica": "É a forma original, não derivada de outra palavra."
+      },
+      {
+        "id": "p28",
+        "type": "multiple-choice",
+        "question": "Na frase 'Se houver tempo, cuidaremos de tudo', a vírgula é usada para:",
+        "options": [
+          "Separar o sujeito do predicado",
+          "Separar uma oração adverbial anteposta",
+          "Indicar uma enumeração",
+          "Marcar a presença de um vocativo"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Separar uma oração adverbial anteposta",
+        "explicacao": "Na frase 'Se houver tempo, cuidaremos de tudo', a vírgula é usada para separar a oração adverbial condicional 'Se houver tempo', que está anteposta à oração principal.",
+        "dica": "Observe a ordem das orações na frase."
+      },
+      {
+        "id": "p29",
+        "type": "fill-gap",
+        "question": "Os substantivos que se originam de outros substantivos são chamados de substantivos _____.",
+        "options": [
+          "derivados",
+          "compostos"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "derivados",
+        "explicacao": "Substantivos derivados são aqueles que se originam de outros substantivos, como 'pedreiro' (que deriva de 'pedra').",
+        "dica": "São formados a partir de um substantivo primitivo."
+      },
+      {
+        "id": "p30",
+        "type": "multiple-choice",
+        "question": "Quais são os principais sinais de pontuação utilizados em diálogos?",
+        "options": [
+          "Ponto final e vírgula",
+          "Ponto de interrogação e ponto de exclamação",
+          "Dois pontos e travessão",
+          "Ponto e vírgula e reticências"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Dois pontos e travessão",
+        "explicacao": "Em diálogos, usamos principalmente dois pontos (:) para indicar que alguém vai falar e travessão (—) antes da fala de cada personagem.",
+        "dica": "Pense nos sinais que aparecem antes e no início das falas de personagens em textos."
+      }
+    ]
+  }

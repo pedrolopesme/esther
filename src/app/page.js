@@ -13,12 +13,12 @@ export default function Home() {
       icon: "/globe.svg", // Placeholder, você pode substituir por ícones específicos
       color: "rgba(88, 204, 2, 0.1)"
     },
-    // {
-    //   id: "portugues",
-    //   title: "Português",
-    //   icon: "/file.svg",
-    //   color: "rgba(255, 200, 0, 0.1)"
-    // },
+    {
+      id: "portugues",
+      title: "Português",
+      icon: "/file.svg",
+      color: "rgba(255, 200, 0, 0.1)"
+    },
     {
       id: "ingles",
       title: "Inglês",
