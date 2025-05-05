@@ -1,0 +1,432 @@
+{
+  "nome": "Revisão de Português Unidade 8",
+  "materia": "Português",
+  "ano_letivo": "3º ano do Ensino Fundamental",
+  "data": "2025-05-05",
+  "title": "Lista de Exercícios de Português - Revisão Unidade 8",
+  "description": "Lista com 30 exercícios de português para revisão com base no conteúdo da Unidade 8 do livro.",
+  "exercises": [
+    {
+      "id": "p1",
+      "type": "fill-gap",
+      "question": "Cada vez que abrimos a boca para pronunciar uma palavra, damos uma batida de ar. Cada batida é uma _____.",
+      "options": [
+        "sílaba",
+        "letra"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "sílaba",
+      "explicacao": "Cada batida de ar ao pronunciar uma palavra corresponde a uma sílaba.",
+      "dica": "Coloque a mão embaixo do queixo e perceba quantas vezes ele se move ao falar a palavra."
+    },
+    {
+      "id": "p2",
+      "type": "multiple-choice",
+      "question": "Na palavra 'herói', qual é o tipo de encontro vocálico?",
+      "options": [
+        "Ditongo",
+        "Tritongo",
+        "Hiato",
+        "Dígrafo"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Ditongo",
+      "explicacao": "Em 'herói' (he-rói), temos o ditongo 'ói', que é o encontro de duas vogais na mesma sílaba.",
+      "dica": "Observe se as vogais são pronunciadas juntas ou separadas."
+    },
+    {
+      "id": "p3",
+      "type": "multiple-choice",
+      "question": "Qual palavra tem um tritongo?",
+      "options": [
+        "Pássaro",
+        "Uruguai",
+        "Herói",
+        "Saúde"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Uruguai",
+      "explicacao": "Em 'Uruguai' (U-ru-guai), temos o tritongo 'uai', que é o encontro de três vogais na mesma sílaba.",
+      "dica": "Procure uma palavra que tenha três vogais juntas em uma única pronúncia."
+    },
+    {
+      "id": "p4",
+      "type": "fill-gap",
+      "question": "Quando duas vogais estão em sílabas diferentes, como em 'sa-í-da', temos um _____.",
+      "options": [
+        "hiato",
+        "ditongo"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "hiato",
+      "explicacao": "Hiato é o encontro de duas vogais em sílabas diferentes, como em 'sa-í-da', 'ba-ú'.",
+      "dica": "Observe se as vogais são pronunciadas em movimentos diferentes."
+    },
+    {
+      "id": "p5",
+      "type": "multiple-choice",
+      "question": "Na palavra 'poesia', qual é o tipo de encontro vocálico entre o 'e' e o 'i'?",
+      "options": [
+        "Ditongo",
+        "Tritongo",
+        "Hiato",
+        "Dígrafo"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Hiato",
+      "explicacao": "Em 'poesia' (po-e-si-a), as vogais 'e' e 'i' estão em sílabas diferentes, formando um hiato.",
+      "dica": "Separe as sílabas da palavra mentalmente para verificar."
+    },
+    {
+      "id": "p6",
+      "type": "fill-gap",
+      "question": "A palavra 'borboleta' é separada em sílabas como _____.",
+      "options": [
+        "bor-bo-le-ta",
+        "bo-rbo-le-ta"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "bor-bo-le-ta",
+      "explicacao": "A palavra 'borboleta' é separada em sílabas como 'bor-bo-le-ta'.",
+      "dica": "Pronuncie a palavra lentamente, percebendo cada batida de voz."
+    },
+    {
+      "id": "p7",
+      "type": "multiple-choice",
+      "question": "O sinal de pontuação que usamos para fazer uma pergunta é:",
+      "options": [
+        "Ponto final (.)",
+        "Ponto de interrogação (?)",
+        "Ponto de exclamação (!)",
+        "Vírgula (,)"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Ponto de interrogação (?)",
+      "explicacao": "O ponto de interrogação (?) é o sinal de pontuação que usamos para fazer perguntas.",
+      "dica": "Pense no sinal que você coloca no final quando quer saber alguma coisa."
+    },
+    {
+      "id": "p8",
+      "type": "multiple-choice",
+      "question": "Qual é a separação silábica correta da palavra 'caixa'?",
+      "options": [
+        "ca-i-xa",
+        "cai-xa",
+        "ca-ix-a",
+        "c-ai-xa"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "cai-xa",
+      "explicacao": "A separação silábica correta da palavra 'caixa' é 'cai-xa', onde 'ai' é um ditongo na primeira sílaba.",
+      "dica": "Preste atenção ao ditongo 'ai'."
+    },
+    {
+      "id": "p9",
+      "type": "fill-gap",
+      "question": "Na palavra 'rainha', o encontro vocálico 'ai' é um _____.",
+      "options": [
+        "ditongo",
+        "hiato"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "ditongo",
+      "explicacao": "Na palavra 'rainha' (rai-nha), o encontro vocálico 'ai' é um ditongo porque as duas vogais estão na mesma sílaba.",
+      "dica": "Veja se as vogais são pronunciadas juntas, em uma única batida de voz."
+    },
+    {
+      "id": "p10",
+      "type": "multiple-choice",
+      "question": "Quantas sílabas tem a palavra 'chocolate'?",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "4",
+      "explicacao": "A palavra 'chocolate' tem 4 sílabas: 'cho-co-la-te'.",
+      "dica": "Bata palmas para cada sílaba enquanto fala a palavra."
+    },
+    {
+      "id": "p11",
+      "type": "fill-gap",
+      "question": "Uma palavra com 4 sílabas é classificada como _____.",
+      "options": [
+        "tetrassílaba",
+        "polissílaba"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "tetrassílaba",
+      "explicacao": "Uma palavra com 4 sílabas é classificada como tetrassílaba, como 'cho-co-la-te'.",
+      "dica": "O prefixo 'tetra' significa quatro."
+    },
+    {
+      "id": "p12",
+      "type": "multiple-choice",
+      "question": "Em qual das palavras a sílaba forte está na última sílaba?",
+      "options": [
+        "lápis",
+        "caderno",
+        "café",
+        "árvore"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "café",
+      "explicacao": "Em 'café' (ca-FÉ), a sílaba forte está na última posição, sendo uma palavra oxítona.",
+      "dica": "Pronuncie as palavras e identifique onde está a sílaba mais forte."
+    },
+    {
+      "id": "p13",
+      "type": "fill-gap",
+      "question": "Palavras como 'casa', 'mesa' e 'livro', que têm a sílaba forte na penúltima posição, são chamadas de _____.",
+      "options": [
+        "paroxítonas",
+        "oxítonas"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "paroxítonas",
+      "explicacao": "Palavras paroxítonas são aquelas que têm a sílaba forte na penúltima posição, como em 'ca-sa', 'me-sa', 'li-vro'.",
+      "dica": "São as palavras mais comuns em português."
+    },
+    {
+      "id": "p14",
+      "type": "multiple-choice",
+      "question": "Na palavra 'música', a sílaba tônica é:",
+      "options": [
+        "mú",
+        "si",
+        "ca",
+        "Não tem sílaba tônica"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "mú",
+      "explicacao": "Em 'música' (mú-si-ca), a sílaba tônica é 'mú', que é a antepenúltima sílaba, tornando-a uma palavra proparoxítona.",
+      "dica": "Observe onde está o acento gráfico na palavra."
+    },
+    {
+      "id": "p15",
+      "type": "fill-gap",
+      "question": "Palavras como 'relâmpago', 'pássaro' e 'médico', que têm acento na antepenúltima sílaba, são chamadas de _____.",
+      "options": [
+        "proparoxítonas",
+        "paroxítonas"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "proparoxítonas",
+      "explicacao": "Palavras proparoxítonas são aquelas que têm acento tônico na antepenúltima sílaba, como em 're-lâm-pa-go', 'pás-sa-ro', 'mé-di-co'.",
+      "dica": "Em português, todas as proparoxítonas têm acento gráfico."
+    },
+    {
+      "id": "p16",
+      "type": "multiple-choice",
+      "question": "Qual destas palavras é uma oxítona?",
+      "options": [
+        "caderno",
+        "açúcar",
+        "sofá",
+        "lápis"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "sofá",
+      "explicacao": "A palavra 'sofá' (so-FÁ) é oxítona porque a sílaba tônica é 'fá', que é a última sílaba.",
+      "dica": "Oxítonas têm a última sílaba como a mais forte."
+    },
+    {
+      "id": "p17",
+      "type": "fill-gap",
+      "question": "Na palavra 'jacaré', a sílaba tônica é _____.",
+      "options": [
+        "ré",
+        "ja"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "ré",
+      "explicacao": "Em 'jacaré' (ja-ca-RÉ), a sílaba tônica é 'ré', que é a última sílaba, tornando-a uma palavra oxítona.",
+      "dica": "O acento gráfico indica a sílaba tônica."
+    },
+    {
+      "id": "p18",
+      "type": "multiple-choice",
+      "question": "Qual sinal de pontuação usamos para mostrar surpresa ou emoção forte?",
+      "options": [
+        "Ponto final (.)",
+        "Reticências (...)",
+        "Ponto de exclamação (!)",
+        "Vírgula (,)"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Ponto de exclamação (!)",
+      "explicacao": "O ponto de exclamação (!) é usado para mostrar surpresa, alegria, raiva ou qualquer emoção forte.",
+      "dica": "É o sinal que usamos quando queremos expressar sentimentos fortes."
+    },
+    {
+      "id": "p19",
+      "type": "fill-gap",
+      "question": "O sinal que usamos para indicar uma pausa na leitura, separando ideias dentro de uma frase é a _____.",
+      "options": [
+        "vírgula",
+        "reticências"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "vírgula",
+      "explicacao": "A vírgula (,) é usada para indicar uma pausa curta na leitura, separando ideias ou elementos dentro de uma frase.",
+      "dica": "É o sinal mais comum usado dentro das frases para separar partes."
+    },
+    {
+      "id": "p20",
+      "type": "multiple-choice",
+      "question": "Qual é a diferença entre 'por que' e 'porque'?",
+      "options": [
+        "'Por que' é usado em perguntas e 'porque' é usado em respostas",
+        "'Por que' é usado em respostas e 'porque' é usado em perguntas",
+        "Não há diferença, ambos podem ser usados da mesma forma",
+        "'Por que' é usado apenas no início de frases e 'porque' no meio"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "'Por que' é usado em perguntas e 'porque' é usado em respostas",
+      "explicacao": "'Por que' é geralmente usado em perguntas (Por que você está triste?) e 'porque' é usado em respostas (Estou triste porque perdi meu brinquedo).",
+      "dica": "Nas perguntas, 'por que' aparece separado, e nas respostas, 'porque' aparece junto."
+    },
+    {
+      "id": "p21",
+      "type": "fill-gap",
+      "question": "Na frase 'O menino correu para o parque, _____ estava com pressa de brincar', a palavra correta é:",
+      "options": [
+        "pois",
+        "mais"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "pois",
+      "explicacao": "Nessa frase, usamos 'pois' porque indica uma explicação ou motivo - ele correu por este motivo: estava com pressa.",
+      "dica": "A palavra indica causa ou explicação."
+    },
+    {
+      "id": "p22",
+      "type": "multiple-choice",
+      "question": "Em qual das palavras temos um encontro consonantal?",
+      "options": [
+        "casa",
+        "planta",
+        "mala",
+        "gato"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "planta",
+      "explicacao": "Em 'planta', temos o encontro consonantal 'pl', onde duas consoantes aparecem juntas na mesma sílaba.",
+      "dica": "Procure por duas consoantes que aparecem juntas sem vogal entre elas."
+    },
+    {
+      "id": "p23",
+      "type": "fill-gap",
+      "question": "Palavras como 'sol', 'pé', 'flor' e 'mar', que têm apenas uma sílaba, são chamadas de _____.",
+      "options": [
+        "monossílabas",
+        "dissílabas"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "monossílabas",
+      "explicacao": "Palavras com apenas uma sílaba são chamadas de monossílabas, como 'sol', 'pé', 'flor', 'mar'.",
+      "dica": "'Mono' significa um."
+    },
+    {
+      "id": "p24",
+      "type": "multiple-choice",
+      "question": "A palavra 'borboleta' é classificada quanto ao número de sílabas como:",
+      "options": [
+        "Dissílaba",
+        "Trissílaba",
+        "Tetrassílaba",
+        "Polissílaba"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Tetrassílaba",
+      "explicacao": "A palavra 'borboleta' (bor-bo-le-ta) tem 4 sílabas, sendo classificada como tetrassílaba.",
+      "dica": "Tetrassílaba significa que a palavra tem quatro sílabas."
+    },
+    {
+      "id": "p25",
+      "type": "fill-gap",
+      "question": "Uma palavra com cinco ou mais sílabas é chamada de _____.",
+      "options": [
+        "polissílaba",
+        "tetrassílaba"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "polissílaba",
+      "explicacao": "Palavras com cinco ou mais sílabas são chamadas de polissílabas, como 'bi-ci-cle-ta-ri-a'.",
+      "dica": "O prefixo 'poli' significa muitos."
+    },
+    {
+      "id": "p26",
+      "type": "multiple-choice",
+      "question": "Em qual palavra temos um dígrafo?",
+      "options": [
+        "prato",
+        "casa",
+        "palha",
+        "bola"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "palha",
+      "explicacao": "Em 'palha', temos o dígrafo 'lh', onde duas letras (l+h) representam um único som.",
+      "dica": "Dígrafos são duas letras que formam um único som, como ch, nh, lh, rr, ss."
+    },
+    {
+      "id": "p27",
+      "type": "fill-gap",
+      "question": "Em 'casa → casinha', a palavra 'casa' é um substantivo _____ e 'casinha' é um substantivo _____.",
+      "options": [
+        "primitivo - derivado",
+        "derivado - primitivo"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "primitivo - derivado",
+      "explicacao": "'Casa' é um substantivo primitivo (não vem de outra palavra) e 'casinha' é um substantivo derivado (formado a partir de 'casa').",
+      "dica": "O substantivo primitivo é a palavra original, e o derivado vem dela."
+    },
+    {
+      "id": "p28",
+      "type": "multiple-choice",
+      "question": "Na frase 'Maria, venha aqui!', o uso da vírgula serve para:",
+      "options": [
+        "Separar o sujeito do predicado",
+        "Indicar uma pausa longa",
+        "Marcar a presença de um vocativo",
+        "Separar itens de uma lista"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Marcar a presença de um vocativo",
+      "explicacao": "Na frase 'Maria, venha aqui!', a vírgula é usada para marcar o vocativo 'Maria', que é o nome da pessoa a quem nos dirigimos.",
+      "dica": "O vocativo é o termo que usamos para chamar ou interpelar alguém."
+    },
+    {
+      "id": "p29",
+      "type": "fill-gap",
+      "question": "Substantivos formados pela junção de duas ou mais palavras, como 'guarda-chuva' e 'passatempo', são chamados de substantivos _____.",
+      "options": [
+        "compostos",
+        "coletivos"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "compostos",
+      "explicacao": "Substantivos compostos são formados pela junção de duas ou mais palavras, como 'guarda-chuva' (guardar + chuva) e 'passatempo' (passar + tempo).",
+      "dica": "São formados pela composição de duas ou mais palavras."
+    },
+    {
+      "id": "p30",
+      "type": "multiple-choice",
+      "question": "Qual é a função das reticências (...) em um texto?",
+      "options": [
+        "Indicar o fim de uma frase",
+        "Indicar surpresa ou espanto",
+        "Indicar uma pergunta",
+        "Indicar uma interrupção ou continuação de um pensamento"
+      ],
+      "correctIndex": 3,
+      "resposta_correta": "Indicar uma interrupção ou continuação de um pensamento",
+      "explicacao": "As reticências (...) são usadas para indicar uma interrupção na fala, uma hesitação, ou sugerir que o pensamento continua além do que foi escrito.",
+      "dica": "Pense em quando alguém para de falar no meio de uma ideia ou quando algo fica subentendido."
+    }
+  ]
+}
