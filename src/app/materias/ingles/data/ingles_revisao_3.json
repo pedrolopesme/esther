@@ -1,0 +1,409 @@
+{
+    "nome": "Exercícios de Inglês - Gramática",
+    "materia": "Inglês",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "data": "2025-05-06",
+    "title": "Exercícios de Inglês - Possessivos, Demonstrativos, Have/Has e Question Words",
+    "description": "Lista com 30 exercícios focados em possessivos, this/that/these/those, have/has/haven't/hasn't, preposições e question words (what/where/when/who).",
+    "exercises": [
+      {
+        "id": "e2",
+        "type": "fill-gap",
+        "question": "_________ are my books.",
+        "options": [
+          "This",
+          "These"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "These",
+        "explicacao": "Usamos 'these' para objetos plurais que estão próximos de quem fala.",
+        "dica": "'Books' está no plural, então precisamos de um demonstrativo plural."
+      },
+      {
+        "id": "e3",
+        "type": "fill-gap",
+        "question": "She _________ a new bike.",
+        "options": [
+          "have",
+          "has"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "has",
+        "explicacao": "Usamos 'has' com a terceira pessoa do singular (he, she, it).",
+        "dica": "O sujeito é 'she', então precisamos do verbo conjugado para a terceira pessoa."
+      },
+      {
+        "id": "e4",
+        "type": "multiple-choice",
+        "question": "The cat is _________ the table.",
+        "options": [
+          "in",
+          "on",
+          "under",
+          "between"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "under",
+        "explicacao": "A preposição 'under' indica que algo está embaixo de um objeto.",
+        "dica": "Onde o gato se esconde da chuva?"
+      },
+      {
+        "id": "e5",
+        "type": "fill-gap",
+        "question": "_________ is that? It's my cousin.",
+        "options": [
+          "What",
+          "Who"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Who",
+        "explicacao": "Usamos 'Who' para perguntar sobre pessoas.",
+        "dica": "A resposta se refere a uma pessoa (cousin)."
+      },
+      {
+        "id": "e6",
+        "type": "multiple-choice",
+        "question": "Is _________ your backpack?",
+        "options": [
+          "this",
+          "that",
+          "these",
+          "those"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "this",
+        "explicacao": "Usamos 'this' para um objeto próximo no singular.",
+        "dica": "O objeto está próximo da pessoa que fala."
+      },
+      {
+        "id": "e7",
+        "type": "multiple-choice",
+        "question": "The ball is _________ the box.",
+        "options": [
+          "in",
+          "on",
+          "at",
+          "between"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "in",
+        "explicacao": "A preposição 'in' indica que algo está dentro de um objeto.",
+        "dica": "Onde a bola está guardada?"
+      },
+      {
+        "id": "e8",
+        "type": "fill-gap",
+        "question": "_________ do you go to school? At eight o'clock.",
+        "options": [
+          "Where",
+          "When"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "When",
+        "explicacao": "Usamos 'When' para perguntar sobre tempo.",
+        "dica": "A resposta menciona horário, que é uma informação temporal."
+      },
+      {
+        "id": "e9",
+        "type": "fill-gap",
+        "question": "We _________ a new teacher this year.",
+        "options": [
+          "have",
+          "has"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "have",
+        "explicacao": "Usamos 'have' com os pronomes I, you, we, they.",
+        "dica": "O sujeito é 'we', então escolha a forma correta do verbo ter."
+      },
+      {
+        "id": "e10",
+        "type": "fill-gap",
+        "question": "_________ are my parents.",
+        "options": [
+          "This",
+          "Those"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Those",
+        "explicacao": "Usamos 'those' para objetos ou pessoas plurais que estão distantes de quem fala.",
+        "dica": "'Parents' está no plural e provavelmente não tão próximos."
+      },
+      {
+        "id": "e11",
+        "type": "multiple-choice",
+        "question": "_________ is your favorite color?",
+        "options": [
+          "Who",
+          "What",
+          "Where",
+          "When"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "What",
+        "explicacao": "Usamos 'What' para perguntar sobre coisas, não pessoas.",
+        "dica": "Cores são coisas, não pessoas."
+      },
+      {
+        "id": "e12",
+        "type": "fill-gap",
+        "question": "The book is _________ the shelf.",
+        "options": [
+          "in",
+          "on"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "on",
+        "explicacao": "A preposição 'on' indica que algo está em cima de uma superfície.",
+        "dica": "Onde os livros ficam em uma estante?"
+      },
+      {
+        "id": "e13",
+        "type": "fill-gap",
+        "question": "_________ pencil is red.",
+        "options": [
+          "Her",
+          "His"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "Her",
+        "explicacao": "Usamos 'her' como adjetivo possessivo feminino.",
+        "dica": "Se o lápis pertence a uma menina, qual adjetivo possessivo usamos?"
+      },
+      {
+        "id": "e14",
+        "type": "multiple-choice",
+        "question": "The toys are _________ the box.",
+        "options": [
+          "in",
+          "on",
+          "at",
+          "for"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "in",
+        "explicacao": "A preposição 'in' indica que algo está dentro de um objeto.",
+        "dica": "Onde guardamos os brinquedos?"
+      },
+      {
+        "id": "e15",
+        "type": "fill-gap",
+        "question": "I _________ have a pet.",
+        "options": [
+          "don't",
+          "doesn't"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "don't",
+        "explicacao": "Usamos 'don't' (do not) com os pronomes I, you, we, they.",
+        "dica": "O sujeito é 'I', então qual auxiliar negativo usamos?"
+      },
+      {
+        "id": "e16",
+        "type": "fill-gap",
+        "question": "She _________ have a sister.",
+        "options": [
+          "don't",
+          "doesn't"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "doesn't",
+        "explicacao": "Usamos 'doesn't' (does not) com terceira pessoa do singular (he, she, it).",
+        "dica": "O sujeito é 'she', então qual auxiliar negativo usamos?"
+      },
+      {
+        "id": "e17",
+        "type": "multiple-choice",
+        "question": "_________ is your birthday?",
+        "options": [
+          "When",
+          "Where",
+          "What",
+          "Who"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "When",
+        "explicacao": "Usamos 'When' para perguntar sobre datas e tempo.",
+        "dica": "Aniversário é uma data."
+      },
+      {
+        "id": "e18",
+        "type": "fill-gap",
+        "question": "_________ is your school?",
+        "options": [
+          "What",
+          "Where"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Where",
+        "explicacao": "Usamos 'Where' para perguntar sobre lugares.",
+        "dica": "A pergunta é sobre o local da escola."
+      },
+      {
+        "id": "e19",
+        "type": "multiple-choice",
+        "question": "Is _________ your teacher?",
+        "options": [
+          "this",
+          "that",
+          "these",
+          "those"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "that",
+        "explicacao": "Usamos 'that' para um objeto ou pessoa distante no singular.",
+        "dica": "A pessoa está distante de quem fala."
+      },
+      {
+        "id": "e20",
+        "type": "fill-gap",
+        "question": "The cat is sleeping _________ the sofa.",
+        "options": [
+          "on",
+          "in"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "on",
+        "explicacao": "A preposição 'on' indica que algo está em cima de uma superfície.",
+        "dica": "O gato está em cima do sofá, não dentro dele."
+      },
+      {
+        "id": "e21",
+        "type": "fill-gap",
+        "question": "Are _________ your shoes?",
+        "options": [
+          "these",
+          "this"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "these",
+        "explicacao": "Usamos 'these' para objetos plurais que estão próximos de quem fala.",
+        "dica": "'Shoes' está no plural."
+      },
+      {
+        "id": "e22",
+        "type": "multiple-choice",
+        "question": "The dog is _________ the garden.",
+        "options": [
+          "at",
+          "on",
+          "in",
+          "for"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "in",
+        "explicacao": "A preposição 'in' indica que algo está dentro de uma área.",
+        "dica": "O jardim é uma área onde o cachorro está."
+      },
+      {
+        "id": "e23",
+        "type": "fill-gap",
+        "question": "_________ is your best friend?",
+        "options": [
+          "What",
+          "Who"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Who",
+        "explicacao": "Usamos 'Who' para perguntar sobre pessoas.",
+        "dica": "Um amigo é uma pessoa."
+      },
+      {
+        "id": "e24",
+        "type": "fill-gap",
+        "question": "They _________ a big house.",
+        "options": [
+          "has",
+          "have"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "have",
+        "explicacao": "Usamos 'have' com os pronomes I, you, we, they.",
+        "dica": "O sujeito é 'they', então escolha a forma correta do verbo ter."
+      },
+      {
+        "id": "e25",
+        "type": "multiple-choice",
+        "question": "The chair is _________ the table.",
+        "options": [
+          "in",
+          "on",
+          "next to",
+          "between"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "next to",
+        "explicacao": "A preposição 'next to' indica que algo está ao lado de outra coisa.",
+        "dica": "A cadeira está posicionada ao lado da mesa."
+      },
+      {
+        "id": "e26",
+        "type": "fill-gap",
+        "question": "The ball is _________ the box.",
+        "options": [
+          "inside",
+          "outside"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "inside",
+        "explicacao": "A preposição 'inside' indica que algo está dentro de um objeto.",
+        "dica": "O oposto de fora é dentro."
+      },
+      {
+        "id": "e27",
+        "type": "fill-gap",
+        "question": "_________ is your favorite food?",
+        "options": [
+          "What",
+          "Where"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "What",
+        "explicacao": "Usamos 'What' para perguntar sobre coisas.",
+        "dica": "Comida é uma coisa, não um lugar."
+      },
+      {
+        "id": "e28",
+        "type": "multiple-choice",
+        "question": "The book is _________ the desk and the chair.",
+        "options": [
+          "on",
+          "in",
+          "between",
+          "behind"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "between",
+        "explicacao": "A preposição 'between' indica que algo está entre duas coisas.",
+        "dica": "O livro está no meio da mesa e da cadeira."
+      },
+      {
+        "id": "e29",
+        "type": "fill-gap",
+        "question": "That is _________ father.",
+        "options": [
+          "my",
+          "your"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "your",
+        "explicacao": "Usamos 'your' como adjetivo possessivo da segunda pessoa.",
+        "dica": "A pessoa está falando com você sobre o seu pai."
+      },
+      {
+        "id": "e30",
+        "type": "multiple-choice",
+        "question": "The table is _________ the window.",
+        "options": [
+          "under",
+          "in",
+          "on",
+          "near"
+        ],
+        "correctIndex": 3,
+        "resposta_correta": "near",
+        "explicacao": "A preposição 'near' indica que algo está próximo de outra coisa.",
+        "dica": "A mesa está próxima à janela, mas não debaixo ou em cima dela."
+      }
+    ]
+  }
