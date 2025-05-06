@@ -1,0 +1,497 @@
+{
+    "nome": "Novos Exercícios de Inglês",
+    "materia": "Inglês",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "data": "2025-05-06",
+    "title": "Exercícios de Revisão de Inglês - Conteúdo Completo",
+    "description": "Lista com 35 novos exercícios variados para prática e revisão dos conteúdos de inglês para o 3º ano do Ensino Fundamental.",
+    "exercises": [
+      {
+        "id": "e1",
+        "type": "fill-gap",
+        "question": "They _________ (to play) football in the park now.",
+        "options": [
+          "are playing",
+          "is playing"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "are playing",
+        "explicacao": "Para o sujeito 'they', usamos 'are' no Present Continuous.",
+        "dica": "O verbo auxiliar 'are' é usado para os pronomes they, we, you."
+      },
+      {
+        "id": "e2",
+        "type": "fill-gap",
+        "question": "She _________ (to read) a book at the moment.",
+        "options": [
+          "are reading",
+          "is reading"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "is reading",
+        "explicacao": "Para o sujeito 'she', usamos 'is' no Present Continuous.",
+        "dica": "O verbo auxiliar 'is' é usado para os pronomes he, she, it."
+      },
+      {
+        "id": "e3",
+        "type": "multiple-choice",
+        "question": "What time do you go to bed?",
+        "options": [
+          "At seven o'clock",
+          "At eight o'clock",
+          "At nine o'clock",
+          "At ten o'clock"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "At nine o'clock",
+        "explicacao": "A resposta correta para esta pergunta é 'At nine o'clock', que é um horário comum para crianças desta idade irem dormir.",
+        "dica": "Pense em um horário comum para crianças irem dormir."
+      },
+      {
+        "id": "e4",
+        "type": "multiple-choice",
+        "question": "Which day comes before Saturday?",
+        "options": [
+          "Thursday",
+          "Friday",
+          "Sunday",
+          "Monday"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Friday",
+        "explicacao": "Sexta-feira (Friday) vem antes do sábado (Saturday).",
+        "dica": "Pense na ordem dos dias da semana."
+      },
+      {
+        "id": "e5",
+        "type": "fill-gap",
+        "question": "We _________ (to use) mobile phones in class.",
+        "options": [
+          "must",
+          "mustn't"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "mustn't",
+        "explicacao": "Usamos 'mustn't' para indicar proibição. Não é permitido usar celulares na aula.",
+        "dica": "É uma regra negativa, algo que não é permitido."
+      },
+      {
+        "id": "e6",
+        "type": "fill-gap",
+        "question": "Students _________ do their homework every day.",
+        "options": [
+          "must",
+          "mustn't"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "must",
+        "explicacao": "Usamos 'must' para indicar obrigação ou necessidade. É necessário fazer a lição de casa todos os dias.",
+        "dica": "É uma regra positiva que devemos seguir."
+      },
+      {
+        "id": "e7",
+        "type": "multiple-choice",
+        "question": "What do you need for a picnic?",
+        "options": [
+          "A book and a pen",
+          "A ball and a bat",
+          "A blanket and food",
+          "A computer and a phone"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "A blanket and food",
+        "explicacao": "Para um piquenique, normalmente precisamos de uma manta para sentar e comida para comer.",
+        "dica": "Pense no que você leva para comer ao ar livre."
+      },
+      {
+        "id": "e8",
+        "type": "multiple-choice",
+        "question": "What do you do in the morning before school?",
+        "options": [
+          "I sleep",
+          "I watch TV",
+          "I brush my teeth",
+          "I play football"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "I brush my teeth",
+        "explicacao": "Escovar os dentes é uma atividade comum da rotina matinal antes de ir para a escola.",
+        "dica": "Pense em hábitos de higiene matinais."
+      },
+      {
+        "id": "e9",
+        "type": "fill-gap",
+        "question": "The children _________ (to swim) in the pool right now.",
+        "options": [
+          "is swimming",
+          "are swimming"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "are swimming",
+        "explicacao": "Para o sujeito 'the children' (plural), usamos 'are' no Present Continuous.",
+        "dica": "Para substantivos no plural, usamos 'are' como auxiliar."
+      },
+      {
+        "id": "e10",
+        "type": "fill-gap",
+        "question": "Peter _________ (to eat) fruit every day.",
+        "options": [
+          "eat",
+          "eats"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "eats",
+        "explicacao": "No presente simples, para terceira pessoa do singular (Peter), adicionamos 's' ao verbo.",
+        "dica": "Observe a conjugação do Present Simple para nomes próprios."
+      },
+      {
+        "id": "e11",
+        "type": "multiple-choice",
+        "question": "Why are you happy today?",
+        "options": [
+          "Because it's my birthday",
+          "Because I'm at school",
+          "Because it's Monday",
+          "Because I'm tired"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "Because it's my birthday",
+        "explicacao": "Aniversários são geralmente motivos de felicidade.",
+        "dica": "Pense em um evento especial que deixa as pessoas felizes."
+      },
+      {
+        "id": "e12",
+        "type": "multiple-choice",
+        "question": "What color is a banana?",
+        "options": [
+          "Red",
+          "Blue",
+          "Yellow",
+          "Green"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Yellow",
+        "explicacao": "Bananas maduras são amarelas (yellow).",
+        "dica": "Pense na cor mais comum de uma banana madura."
+      },
+      {
+        "id": "e13",
+        "type": "multiple-choice",
+        "question": "How do you go to school?",
+        "options": [
+          "By car",
+          "By bus",
+          "By bike",
+          "On foot"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "By bus",
+        "explicacao": "Muitas crianças vão para a escola de ônibus.",
+        "dica": "Pense em um meio de transporte comum para ir à escola."
+      },
+      {
+        "id": "e14",
+        "type": "fill-gap",
+        "question": "My sister _________ (to listen) to music every afternoon.",
+        "options": [
+          "listen",
+          "listens"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "listens",
+        "explicacao": "Para o sujeito 'my sister', usamos a forma 'listens' no presente simples.",
+        "dica": "Para a terceira pessoa do singular, adicionamos 's' ao verbo."
+      },
+      {
+        "id": "e15",
+        "type": "fill-gap",
+        "question": "We _________ (to go) to the park on Saturdays.",
+        "options": [
+          "go",
+          "goes"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "go",
+        "explicacao": "Para o sujeito 'we', não adicionamos 's' ao verbo no presente simples.",
+        "dica": "Não acrescentamos 's' para os pronomes I, you, we, they."
+      },
+      {
+        "id": "e16",
+        "type": "fill-gap",
+        "question": "_________ your parents work on weekends?",
+        "options": [
+          "Do",
+          "Does"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "Do",
+        "explicacao": "Usamos 'do' para fazer perguntas com sujeitos plurais como 'your parents'.",
+        "dica": "A pergunta está relacionada a 'parents', que é plural."
+      },
+      {
+        "id": "e17",
+        "type": "multiple-choice",
+        "question": "What season comes after spring?",
+        "options": [
+          "Winter",
+          "Autumn",
+          "Summer",
+          "Spring again"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Summer",
+        "explicacao": "Verão (Summer) vem após a primavera (Spring).",
+        "dica": "Pense na ordem das estações do ano."
+      },
+      {
+        "id": "e18",
+        "type": "multiple-choice",
+        "question": "What month comes before July?",
+        "options": [
+          "May",
+          "June",
+          "August",
+          "September"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "June",
+        "explicacao": "Junho (June) vem antes de julho (July).",
+        "dica": "Pense na ordem dos meses do ano."
+      },
+      {
+        "id": "e19",
+        "type": "fill-gap",
+        "question": "_________ is your favourite toy?",
+        "options": [
+          "What",
+          "Who"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "What",
+        "explicacao": "Usamos 'What' para perguntar sobre coisas ou objetos.",
+        "dica": "Brinquedos são objetos, não pessoas."
+      },
+      {
+        "id": "e20",
+        "type": "fill-gap",
+        "question": "_________ is your best friend?",
+        "options": [
+          "What",
+          "Who"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Who",
+        "explicacao": "Usamos 'Who' para perguntar sobre pessoas.",
+        "dica": "Amigos são pessoas, então usamos 'who'."
+      },
+      {
+        "id": "e21",
+        "type": "multiple-choice",
+        "question": "Where is the cat?",
+        "options": [
+          "It's under the table",
+          "It's behind the sofa",
+          "It's next to the door",
+          "It's in front of the TV"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "It's under the table",
+        "explicacao": "A preposição 'under' indica que algo está embaixo de um objeto.",
+        "dica": "Escolha a preposição de lugar correta."
+      },
+      {
+        "id": "e22",
+        "type": "fill-gap",
+        "question": "_________ there any apples in the fridge?",
+        "options": [
+          "Is",
+          "Are"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Are",
+        "explicacao": "Usamos 'Are there' para perguntar sobre substantivos no plural.",
+        "dica": "'Apples' (maçãs) está no plural."
+      },
+      {
+        "id": "e23",
+        "type": "fill-gap",
+        "question": "_________ there a computer in the classroom?",
+        "options": [
+          "Is",
+          "Are"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "Is",
+        "explicacao": "Usamos 'Is there' para perguntar sobre substantivos no singular.",
+        "dica": "'A computer' (um computador) está no singular."
+      },
+      {
+        "id": "e24",
+        "type": "multiple-choice",
+        "question": "She needs _________ umbrella because it's raining.",
+        "options": [
+          "a",
+          "an"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "an",
+        "explicacao": "Usamos 'an' antes de palavras que começam com som de vogal.",
+        "dica": "'Umbrella' começa com som de vogal."
+      },
+      {
+        "id": "e25",
+        "type": "multiple-choice",
+        "question": "I want _________ banana for breakfast.",
+        "options": [
+          "a",
+          "an"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "a",
+        "explicacao": "Usamos 'a' antes de palavras que começam com som de consoante.",
+        "dica": "'Banana' começa com som de consoante /b/."
+      },
+      {
+        "id": "e26",
+        "type": "fill-gap",
+        "question": "You _________ my best friend.",
+        "options": [
+          "am",
+          "is",
+          "are"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "are",
+        "explicacao": "Para o sujeito 'you', usamos o verbo 'are'.",
+        "dica": "O pronome 'you' usa o verbo 'are' no presente."
+      },
+      {
+        "id": "e27",
+        "type": "fill-gap",
+        "question": "I _________ a student.",
+        "options": [
+          "am",
+          "is",
+          "are"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "am",
+        "explicacao": "Para o sujeito 'I', usamos o verbo 'am'.",
+        "dica": "O pronome 'I' usa o verbo 'am' no presente."
+      },
+      {
+        "id": "e28",
+        "type": "multiple-choice",
+        "question": "Which number comes before fifteen?",
+        "options": [
+          "Thirteen",
+          "Fourteen",
+          "Sixteen",
+          "Seventeen"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Fourteen",
+        "explicacao": "Quatorze (fourteen) vem antes de quinze (fifteen).",
+        "dica": "Pense na ordem dos números de 1 a 20."
+      },
+      {
+        "id": "e29",
+        "type": "multiple-choice",
+        "question": "What word means 'ALTO' in English?",
+        "options": [
+          "Short",
+          "Tall",
+          "Fat",
+          "Small"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Tall",
+        "explicacao": "'Tall' significa 'alto' em português.",
+        "dica": "É o oposto de 'short' (baixo)."
+      },
+      {
+        "id": "e30",
+        "type": "multiple-choice",
+        "question": "What must you wear when riding a bike?",
+        "options": [
+          "A helmet",
+          "A hat",
+          "A scarf",
+          "Sunglasses"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "A helmet",
+        "explicacao": "Por segurança, devemos usar capacete (helmet) ao andar de bicicleta.",
+        "dica": "Pense em equipamentos de segurança para ciclismo."
+      },
+      {
+        "id": "e31",
+        "type": "fill-gap",
+        "question": "We _________ recycle paper and plastic.",
+        "options": [
+          "must",
+          "mustn't"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "must",
+        "explicacao": "Reciclar é uma obrigação para cuidar do meio ambiente.",
+        "dica": "Cuidar do planeta é uma obrigação positiva."
+      },
+      {
+        "id": "e32",
+        "type": "fill-gap",
+        "question": "Students _________ be late for class.",
+        "options": [
+          "must",
+          "mustn't"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "mustn't",
+        "explicacao": "Chegar atrasado é algo proibido nas regras da escola.",
+        "dica": "Pontualidade é importante na escola."
+      },
+      {
+        "id": "e33",
+        "type": "multiple-choice",
+        "question": "When do you have breakfast?",
+        "options": [
+          "In the morning",
+          "In the afternoon",
+          "In the evening",
+          "At night"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "In the morning",
+        "explicacao": "O café da manhã é tipicamente consumido pela manhã.",
+        "dica": "Pense nos horários das refeições."
+      },
+      {
+        "id": "e34",
+        "type": "multiple-choice",
+        "question": "What do we need to keep clean?",
+        "options": [
+          "Only our hands",
+          "Only our face",
+          "Only our teeth",
+          "Our whole body"
+        ],
+        "correctIndex": 3,
+        "resposta_correta": "Our whole body",
+        "explicacao": "A higiene completa do corpo é importante para a saúde.",
+        "dica": "Higiene pessoal envolve todo o corpo."
+      },
+      {
+        "id": "e35",
+        "type": "fill-gap",
+        "question": "Look! The baby _________ (to cry) now.",
+        "options": [
+          "cries",
+          "is crying"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "is crying",
+        "explicacao": "Usamos o Present Continuous para ações que estão acontecendo no momento. 'Look!' indica que algo está acontecendo agora.",
+        "dica": "A palavra 'now' e 'Look!' indicam uma ação que está acontecendo no momento."
+      }
+    ]
+  }
