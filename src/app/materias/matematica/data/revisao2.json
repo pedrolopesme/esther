@@ -1,0 +1,430 @@
+{
+  "nome": "Exercícios de Matemática - Nível Intermediário",
+  "materia": "Matemática",
+  "ano_letivo": "3º ano do Ensino Fundamental",
+  "data": "2025-05-08",
+  "title": "Exercícios Intermediários de Matemática",
+  "description": "Lista com 30 exercícios de matemática com desafios intermediários para revisão dos conteúdos.",
+  "exercises": [
+    {
+      "id": "ex1",
+      "type": "fill-gap",
+      "question": "O resultado de 47 + 38 é _____.",
+      "options": [
+        "75",
+        "85"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "85",
+      "explicacao": "47 + 38 = (40 + 30) + (7 + 8) = 70 + 15 = 85.",
+      "dica": "Decomponha os números em dezenas e unidades antes de somar."
+    },
+    {
+      "id": "ex2",
+      "type": "multiple-choice",
+      "question": "Qual é o resultado da operação 6 × 7 + 3?",
+      "options": [
+        "45",
+        "42",
+        "39",
+        "51"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "45",
+      "explicacao": "Primeiro resolva a multiplicação: 6 × 7 = 42. Depois some 3: 42 + 3 = 45.",
+      "dica": "Lembre-se da ordem das operações: multiplicação antes da adição."
+    },
+    {
+      "id": "ex3",
+      "type": "fill-gap",
+      "question": "Se uma caixa tem 24 lápis e outra tem 37, o total de lápis é _____.",
+      "options": [
+        "51",
+        "61"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "61",
+      "explicacao": "24 + 37 = (20 + 30) + (4 + 7) = 50 + 11 = 61.",
+      "dica": "Some as dezenas primeiro e depois as unidades."
+    },
+    {
+      "id": "ex4",
+      "type": "multiple-choice",
+      "question": "Qual é o valor de 9 × 8 - 12?",
+      "options": [
+        "60",
+        "72",
+        "68",
+        "76"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "60",
+      "explicacao": "9 × 8 = 72. Depois subtraia 12: 72 - 12 = 60.",
+      "dica": "Resolva a multiplicação antes da subtração."
+    },
+    {
+      "id": "ex5",
+      "type": "fill-gap",
+      "question": "O dobro de 25 mais o triplo de 10 é _____.",
+      "options": [
+        "80",
+        "70"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "80",
+      "explicacao": "Dobro de 25 = 50. Triplo de 10 = 30. 50 + 30 = 80.",
+      "dica": "Calcule o dobro e o triplo separadamente antes de somar."
+    },
+    {
+      "id": "ex6",
+      "type": "multiple-choice",
+      "question": "Qual é o resultado de 15 × 4 ÷ 5?",
+      "options": [
+        "12",
+        "10",
+        "15",
+        "20"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "12",
+      "explicacao": "15 × 4 = 60. 60 ÷ 5 = 12.",
+      "dica": "Resolva a multiplicação antes da divisão."
+    },
+    {
+      "id": "ex7",
+      "type": "fill-gap",
+      "question": "A diferença entre 92 e 47 é _____.",
+      "options": [
+        "45",
+        "55"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "45",
+      "explicacao": "92 - 47 = (90 - 40) + (2 - 7) = 50 - 5 = 45.",
+      "dica": "Subtraia as dezenas e depois as unidades."
+    },
+    {
+      "id": "ex8",
+      "type": "multiple-choice",
+      "question": "Qual é o número que falta na sequência: 18, 24, 30, ____, 42?",
+      "options": [
+        "34",
+        "36",
+        "38",
+        "40"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "36",
+      "explicacao": "A sequência aumenta de 6 em 6: 18 + 6 = 24, 24 + 6 = 30, 30 + 6 = 36, 36 + 6 = 42.",
+      "dica": "Observe a diferença entre os números consecutivos."
+    },
+    {
+      "id": "ex9",
+      "type": "fill-gap",
+      "question": "O resultado de 56 ÷ 8 + 5 é _____.",
+      "options": [
+        "12",
+        "13"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "12",
+      "explicacao": "56 ÷ 8 = 7. Depois some 5: 7 + 5 = 12.",
+      "dica": "Resolva a divisão antes da adição."
+    },
+    {
+      "id": "ex10",
+      "type": "multiple-choice",
+      "question": "Qual é o valor de 7 × (4 + 3)?",
+      "options": [
+        "49",
+        "25",
+        "28",
+        "42"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "49",
+      "explicacao": "Primeiro resolva a adição dentro dos parênteses: 4 + 3 = 7. Depois multiplique por 7: 7 × 7 = 49.",
+      "dica": "Resolva a operação dentro dos parênteses primeiro."
+    },
+    {
+      "id": "ex11",
+      "type": "fill-gap",
+      "question": "O triplo de 12 menos o dobro de 9 é _____.",
+      "options": [
+        "18",
+        "24"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "18",
+      "explicacao": "Triplo de 12 = 36. Dobro de 9 = 18. 36 - 18 = 18.",
+      "dica": "Calcule o triplo e o dobro separadamente antes de subtrair."
+    },
+    {
+      "id": "ex12",
+      "type": "multiple-choice",
+      "question": "Qual é o resultado de 144 ÷ 12?",
+      "options": [
+        "10",
+        "12",
+        "14",
+        "16"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "12",
+      "explicacao": "144 ÷ 12 = 12, pois 12 × 12 = 144.",
+      "dica": "Pense em qual número multiplicado por 12 resulta em 144."
+    },
+    {
+      "id": "ex13",
+      "type": "fill-gap",
+      "question": "A soma de 128 e 256 é _____.",
+      "options": [
+        "374",
+        "384"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "384",
+      "explicacao": "128 + 256 = (100 + 200) + (20 + 50) + (8 + 6) = 300 + 70 + 14 = 384.",
+      "dica": "Some as centenas, dezenas e unidades separadamente."
+    },
+    {
+      "id": "ex14",
+      "type": "multiple-choice",
+      "question": "Qual é o valor de 5 × 9 - 3 × 7?",
+      "options": [
+        "24",
+        "36",
+        "42",
+        "54"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "24",
+      "explicacao": "5 × 9 = 45. 3 × 7 = 21. 45 - 21 = 24.",
+      "dica": "Resolva as multiplicações antes da subtração."
+    },
+    {
+      "id": "ex15",
+      "type": "fill-gap",
+      "question": "O quádruplo de 15 dividido por 5 é _____.",
+      "options": [
+        "12",
+        "15"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "12",
+      "explicacao": "Quádruplo de 15 = 60. 60 ÷ 5 = 12.",
+      "dica": "Calcule o quádruplo primeiro e depois divida."
+    },
+    {
+      "id": "ex16",
+      "type": "multiple-choice",
+      "question": "Qual é o resultado de 72 ÷ (8 - 2)?",
+      "options": [
+        "9",
+        "12",
+        "8",
+        "6"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "12",
+      "explicacao": "Primeiro resolva a subtração dentro dos parênteses: 8 - 2 = 6. Depois divida 72 por 6: 72 ÷ 6 = 12.",
+      "dica": "Resolva a operação dentro dos parênteses primeiro."
+    },
+    {
+      "id": "ex17",
+      "type": "fill-gap",
+      "question": "A diferença entre 200 e 137 é _____.",
+      "options": [
+        "63",
+        "73"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "63",
+      "explicacao": "200 - 137 = (200 - 100) - (37) = 100 - 37 = 63.",
+      "dica": "Subtraia as centenas primeiro e depois o restante."
+    },
+    {
+      "id": "ex18",
+      "type": "multiple-choice",
+      "question": "Qual é o número que falta na sequência: 5, 10, 20, ____, 80?",
+      "options": [
+        "30",
+        "40",
+        "50",
+        "60"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "40",
+      "explicacao": "A sequência dobra a cada passo: 5 × 2 = 10, 10 × 2 = 20, 20 × 2 = 40, 40 × 2 = 80.",
+      "dica": "Observe como cada número se relaciona com o anterior."
+    },
+    {
+      "id": "ex19",
+      "type": "fill-gap",
+      "question": "O resultado de 25 × 4 - 50 é _____.",
+      "options": [
+        "50",
+        "100"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "50",
+      "explicacao": "25 × 4 = 100. 100 - 50 = 50.",
+      "dica": "Resolva a multiplicação antes da subtração."
+    },
+    {
+      "id": "ex20",
+      "type": "multiple-choice",
+      "question": "Qual é o valor de (14 + 16) ÷ 5?",
+      "options": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "6",
+      "explicacao": "14 + 16 = 30. 30 ÷ 5 = 6.",
+      "dica": "Resolva a adição dentro dos parênteses primeiro."
+    },
+    {
+      "id": "ex21",
+      "type": "fill-gap",
+      "question": "O triplo de 18 dividido por 2 é _____.",
+      "options": [
+        "27",
+        "36"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "27",
+      "explicacao": "Triplo de 18 = 54. 54 ÷ 2 = 27.",
+      "dica": "Calcule o triplo primeiro e depois divida."
+    },
+    {
+      "id": "ex22",
+      "type": "multiple-choice",
+      "question": "Qual é o resultado de 81 ÷ 9 × 3?",
+      "options": [
+        "27",
+        "9",
+        "18",
+        "24"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "27",
+      "explicacao": "81 ÷ 9 = 9. 9 × 3 = 27.",
+      "dica": "Resolva a divisão antes da multiplicação."
+    },
+    {
+      "id": "ex23",
+      "type": "fill-gap",
+      "question": "A soma de 345 e 278 é _____.",
+      "options": [
+        "613",
+        "623"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "623",
+      "explicacao": "345 + 278 = (300 + 200) + (40 + 70) + (5 + 8) = 500 + 110 + 13 = 623.",
+      "dica": "Some as centenas, dezenas e unidades separadamente."
+    },
+    {
+      "id": "ex24",
+      "type": "multiple-choice",
+      "question": "Qual é o valor de 12 × 5 - 8 × 4?",
+      "options": [
+        "28",
+        "32",
+        "36",
+        "40"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "28",
+      "explicacao": "12 × 5 = 60. 8 × 4 = 32. 60 - 32 = 28.",
+      "dica": "Resolva as multiplicações antes da subtração."
+    },
+    {
+      "id": "ex25",
+      "type": "fill-gap",
+      "question": "O dobro de 35 mais a metade de 50 é _____.",
+      "options": [
+        "85",
+        "95"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "85",
+      "explicacao": "Dobro de 35 = 70. Metade de 50 = 25. 70 + 25 = 85.",
+      "dica": "Calcule o dobro e a metade separadamente antes de somar."
+    },
+    {
+      "id": "ex26",
+      "type": "multiple-choice",
+      "question": "Qual é o resultado de 64 ÷ 8 + 7 × 2?",
+      "options": [
+        "22",
+        "24",
+        "26",
+        "28"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "22",
+      "explicacao": "64 ÷ 8 = 8. 7 × 2 = 14. 8 + 14 = 22.",
+      "dica": "Resolva a divisão e a multiplicação antes da adição."
+    },
+    {
+      "id": "ex27",
+      "type": "fill-gap",
+      "question": "A diferença entre 500 e 327 é _____.",
+      "options": [
+        "173",
+        "183"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "173",
+      "explicacao": "500 - 327 = (500 - 300) - (27) = 200 - 27 = 173.",
+      "dica": "Subtraia as centenas primeiro e depois o restante."
+    },
+    {
+      "id": "ex28",
+      "type": "multiple-choice",
+      "question": "Qual é o número que falta na sequência: 3, 9, 27, ____, 243?",
+      "options": [
+        "54",
+        "81",
+        "108",
+        "162"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "81",
+      "explicacao": "A sequência multiplica por 3 a cada passo: 3 × 3 = 9, 9 × 3 = 27, 27 × 3 = 81, 81 × 3 = 243.",
+      "dica": "Observe como cada número se relaciona com o anterior."
+    },
+    {
+      "id": "ex29",
+      "type": "fill-gap",
+      "question": "O resultado de 18 × 4 ÷ 6 é _____.",
+      "options": [
+        "12",
+        "18"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "12",
+      "explicacao": "18 × 4 = 72. 72 ÷ 6 = 12.",
+      "dica": "Resolva a multiplicação antes da divisão."
+    },
+    {
+      "id": "ex30",
+      "type": "multiple-choice",
+      "question": "Qual é o valor de (20 + 15) × 2?",
+      "options": [
+        "50",
+        "60",
+        "70",
+        "80"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "70",
+      "explicacao": "20 + 15 = 35. 35 × 2 = 70.",
+      "dica": "Resolva a adição dentro dos parênteses primeiro."
+    }
+  ]
+}
