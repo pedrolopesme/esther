@@ -1,0 +1,430 @@
+{
+  "nome": "Exercícios de Matemática - Revisão Geral",
+  "materia": "Matemática",
+  "ano_letivo": "3º ano do Ensino Fundamental",
+  "data": "2025-05-10",
+  "title": "Exercícios de Revisão Geral",
+  "description": "Lista com 30 exercícios de matemática para revisão geral dos conteúdos estudados.",
+  "exercises": [
+    {
+      "id": "ex1",
+      "type": "fill-gap",
+      "question": "O resultado de 5 + 25 é _____.",
+      "options": [
+        "30",
+        "20"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "30",
+      "explicacao": "Para resolver essa adição, somamos as unidades 5 + 5 = 10 e depois a dezena 0 + 2 = 2, formando 30.",
+      "dica": "Somamos as unidades primeiro, depois as dezenas."
+    },
+    {
+      "id": "ex2",
+      "type": "multiple-choice",
+      "question": "Qual é o resultado da operação 4 × 5?",
+      "options": [
+        "9",
+        "20",
+        "15",
+        "10"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "20",
+      "explicacao": "A multiplicação 4 × 5 significa somar o 4 cinco vezes: 4 + 4 + 4 + 4 + 4 = 20.",
+      "dica": "Pense na tabuada do 4."
+    },
+    {
+      "id": "ex3",
+      "type": "fill-gap",
+      "question": "Se João tem 8 balas e ganha mais 4, ele fica com _____ balas.",
+      "options": [
+        "12",
+        "4"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "12",
+      "explicacao": "Para resolver esse problema, somamos 8 + 4 = 12.",
+      "dica": "É uma operação de adição."
+    },
+    {
+      "id": "ex4",
+      "type": "multiple-choice",
+      "question": "Qual é a forma correta de escrever o número 50?",
+      "options": [
+        "5",
+        "05",
+        "50",
+        "500"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "50",
+      "explicacao": "O número cinquenta é formado por 5 dezenas e 0 unidades, escrito como 50.",
+      "dica": "Pense em 5 dezenas."
+    },
+    {
+      "id": "ex5",
+      "type": "fill-gap",
+      "question": "Uma dúzia e meia tem _____ unidades.",
+      "options": [
+        "18",
+        "12"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "18",
+      "explicacao": "Uma dúzia = 12 unidades. Meia dúzia = 6 unidades. Total = 12 + 6 = 18 unidades.",
+      "dica": "Uma dúzia = 12, meia dúzia = 6."
+    },
+    {
+      "id": "ex6",
+      "type": "multiple-choice",
+      "question": "Quanto é 5 × 8?",
+      "options": [
+        "13",
+        "40",
+        "35",
+        "45"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "40",
+      "explicacao": "Multiplicando 5 × 8 = 40, ou seja, somando 8 cinco vezes: 8 + 8 + 8 + 8 + 8 = 40.",
+      "dica": "Pense na tabuada do 8."
+    },
+    {
+      "id": "ex7",
+      "type": "fill-gap",
+      "question": "O resultado de 9 - 5 é _____.",
+      "options": [
+        "4",
+        "14"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "4",
+      "explicacao": "Na subtração 9 - 5, retiramos 5 unidades de 9 e obtemos 4.",
+      "dica": "É uma operação de subtração."
+    },
+    {
+      "id": "ex8",
+      "type": "multiple-choice",
+      "question": "Qual número vem antes do 9?",
+      "options": [
+        "7",
+        "8",
+        "10",
+        "11"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "8",
+      "explicacao": "Na sequência numérica, o número que vem imediatamente antes do 9 é o 8.",
+      "dica": "Pense na ordem dos números."
+    },
+    {
+      "id": "ex9",
+      "type": "fill-gap",
+      "question": "Para calcular 9 + 6, podemos pensar em 9 + 1 + _____ = 15.",
+      "options": [
+        "5",
+        "6"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "5",
+      "explicacao": "Podemos decompor o 6 em 1 + 5. Assim, 9 + 6 = 9 + 1 + 5 = 10 + 5 = 15.",
+      "dica": "Decomponha o número 6."
+    },
+    {
+      "id": "ex10",
+      "type": "multiple-choice",
+      "question": "Quanto é a metade de 10?",
+      "options": [
+        "2",
+        "5",
+        "6",
+        "20"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "5",
+      "explicacao": "A metade de um número é o resultado da divisão desse número por 2. Assim, 10 ÷ 2 = 5.",
+      "dica": "Divida o número por 2."
+    },
+    {
+      "id": "ex11",
+      "type": "fill-gap",
+      "question": "O triplo de 5 é _____.",
+      "options": [
+        "15",
+        "10"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "15",
+      "explicacao": "O triplo de um número é o resultado da multiplicação desse número por 3. Assim, 5 × 3 = 15.",
+      "dica": "Multiplique o número por 3."
+    },
+    {
+      "id": "ex12",
+      "type": "multiple-choice",
+      "question": "Quais são os algarismos que formam o número 48?",
+      "options": [
+        "4 e 8",
+        "40 e 8",
+        "4 e 80",
+        "48 e 0"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "4 e 8",
+      "explicacao": "O número 48 é formado pelos algarismos 4 e 8, onde o 4 representa 4 dezenas (40) e o 8 representa 8 unidades.",
+      "dica": "Algarismos são os símbolos que compõem os números."
+    },
+    {
+      "id": "ex13",
+      "type": "fill-gap",
+      "question": "Em uma adição, primeiramente somamos as _____, depois as dezenas.",
+      "options": [
+        "unidades",
+        "centenas"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "unidades",
+      "explicacao": "Na adição, começamos somando os valores da direita para a esquerda, ou seja, primeiramente as unidades, depois as dezenas e assim por diante.",
+      "dica": "Pense na ordem em que fazemos a conta em um algoritmo de adição."
+    },
+    {
+      "id": "ex14",
+      "type": "multiple-choice",
+      "question": "Qual é o resultado da operação 215 + 134?",
+      "options": [
+        "349",
+        "339",
+        "449",
+        "359"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "349",
+      "explicacao": "215 + 134 = 349 (somando unidades: 5+4=9; somando dezenas: 1+3=4; somando centenas: 2+1=3)",
+      "dica": "Some as unidades, depois as dezenas e por fim as centenas."
+    },
+    {
+      "id": "ex15",
+      "type": "fill-gap",
+      "question": "O sucessor do número 499 é _____.",
+      "options": [
+        "500",
+        "498"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "500",
+      "explicacao": "O sucessor de um número é o número + 1. Então, 499 + 1 = 500.",
+      "dica": "Adicione 1 ao número dado."
+    },
+    {
+      "id": "ex16",
+      "type": "multiple-choice",
+      "question": "Qual é o antecessor do número 301?",
+      "options": [
+        "300",
+        "302",
+        "290",
+        "310"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "300",
+      "explicacao": "O antecessor de um número é o número - 1. Então, 301 - 1 = 300.",
+      "dica": "Subtraia 1 do número dado."
+    },
+    {
+      "id": "ex17",
+      "type": "fill-gap",
+      "question": "O número romano XV corresponde ao número _____.",
+      "options": [
+        "15",
+        "10"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "15",
+      "explicacao": "X = 10, V = 5, então XV = 10 + 5 = 15.",
+      "dica": "X = 10, V = 5."
+    },
+    {
+      "id": "ex18",
+      "type": "multiple-choice",
+      "question": "Como se escreve o número 12 em algarismos romanos?",
+      "options": [
+        "IIX",
+        "XII",
+        "XVII",
+        "IXIII"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "XII",
+      "explicacao": "X = 10, II = 2, então 12 = XII.",
+      "dica": "Decomponha: 12 = 10 + 2."
+    },
+    {
+      "id": "ex19",
+      "type": "fill-gap",
+      "question": "No sistema de numeração decimal, cada grupo de 10 unidades corresponde a ____ .",
+      "options": [
+        "1 dezena",
+        "1 centena"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "1 dezena",
+      "explicacao": "No sistema de numeração decimal, 10 unidades equivalem a 1 dezena.",
+      "dica": "Lembre-se da equivalência: 10 unidades = 1 dezena."
+    },
+    {
+      "id": "ex20",
+      "type": "multiple-choice",
+      "question": "Como se lê o número 2.345?",
+      "options": [
+        "Dois mil e trezentos e quarenta e cinco",
+        "Dois mil, trezentos e quarenta e cinco",
+        "Dois, três, quatro, cinco",
+        "Vinte e três mil e quarenta e cinco"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Dois mil, trezentos e quarenta e cinco",
+      "explicacao": "O número 2.345 é lido como 'dois mil, trezentos e quarenta e cinco'.",
+      "dica": "Observe a ordem das unidades: milhar, centena, dezena e unidade."
+    },
+    {
+      "id": "ex21",
+      "type": "fill-gap",
+      "question": "No número 3.567, o algarismo da 2ª ordem é ____ .",
+      "options": [
+        "6",
+        "5"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "6",
+      "explicacao": "A 2ª ordem corresponde à dezena, que no número 3.567 é o algarismo 6.",
+      "dica": "Da direita para a esquerda: 1ª ordem (unidade), 2ª ordem (dezena)."
+    },
+    {
+      "id": "ex22",
+      "type": "multiple-choice",
+      "question": "Qual é o valor relativo do algarismo 5 no número 5.678?",
+      "options": [
+        "5",
+        "50",
+        "500",
+        "5000"
+      ],
+      "correctIndex": 3,
+      "resposta_correta": "5000",
+      "explicacao": "O valor relativo do algarismo 5 no número 5.678 é 5000 porque ele está na ordem do milhar.",
+      "dica": "O valor relativo depende da posição do algarismo no número."
+    },
+    {
+      "id": "ex23",
+      "type": "fill-gap",
+      "question": "A decomposição correta do número 6.789 em ordens é: ____ unidade de milhar, ____ centenas, ____ dezenas e ____ unidades.",
+      "options": [
+        "6, 7, 8, 9",
+        "6, 7, 9, 8"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "6, 7, 8, 9",
+      "explicacao": "O número 6.789 decomposto em ordens: 6 unidades de milhar, 7 centenas, 8 dezenas e 9 unidades.",
+      "dica": "Cada posição representa uma ordem: milhar, centena, dezena e unidade."
+    },
+    {
+      "id": "ex24",
+      "type": "multiple-choice",
+      "question": "Qual é a decomposição do número 8.642 em unidades?",
+      "options": [
+        "8 + 6 + 4 + 2",
+        "8000 + 600 + 40 + 2",
+        "8000 + 600 + 42",
+        "8600 + 42"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "8000 + 600 + 40 + 2",
+      "explicacao": "O número 8.642 decomposto em unidades: 8000 + 600 + 40 + 2.",
+      "dica": "Cada posição tem um valor relativo: milhar (x1000), centena (x100), dezena (x10) e unidade (x1)."
+    },
+    {
+      "id": "ex25",
+      "type": "fill-gap",
+      "question": "O maior número de 3 ordens é ____ .",
+      "options": [
+        "999",
+        "100"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "999",
+      "explicacao": "O maior número de 3 ordens é 999, pois tem os maiores algarismos possíveis em cada uma das 3 ordens.",
+      "dica": "Um número de 3 ordens vai de 100 até 999."
+    },
+    {
+      "id": "ex26",
+      "type": "multiple-choice",
+      "question": "Qual é o menor número de 3 ordens?",
+      "options": [
+        "1",
+        "10",
+        "100",
+        "1000"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "100",
+      "explicacao": "O menor número de 3 ordens é 100, pois é o primeiro número que tem 3 algarismos.",
+      "dica": "Um número de 3 ordens tem 3 algarismos."
+    },
+    {
+      "id": "ex27",
+      "type": "fill-gap",
+      "question": "No número 5.904, o valor relativo do algarismo 9 é ____ .",
+      "options": [
+        "900",
+        "90"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "900",
+      "explicacao": "O algarismo 9 está na ordem das centenas, então seu valor relativo é 900.",
+      "dica": "O valor relativo depende da posição: centena = x100."
+    },
+    {
+      "id": "ex28",
+      "type": "multiple-choice",
+      "question": "Quais são os algarismos pares no número 4.738?",
+      "options": [
+        "4 e 7",
+        "8 e 4",
+        "4, 7 e 8",
+        "7, 3 e 8"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "8 e 4",
+      "explicacao": "Os algarismos pares são aqueles divisíveis por 2: 8 e 4.",
+      "dica": "Números pares são: 0, 2, 4, 6 e 8."
+    },
+    {
+      "id": "ex29",
+      "type": "fill-gap",
+      "question": "Usando os algarismos 3, 5, 7 e 9 uma única vez, o maior número possível é ____ .",
+      "options": [
+        "9753",
+        "9573"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "9753",
+      "explicacao": "Para formar o maior número, colocamos os algarismos em ordem decrescente: 9, 7, 5, 3.",
+      "dica": "O maior algarismo deve ficar na maior ordem (esquerda)."
+    },
+    {
+      "id": "ex30",
+      "type": "multiple-choice",
+      "question": "Como se escreve por extenso o número 7.891?",
+      "options": [
+        "Sete mil, oitocentos e noventa e um",
+        "Sete mil e oitocentos e noventa e um",
+        "Sete, oito, nove, um",
+        "Setenta e oito mil e noventa e um"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Sete mil, oitocentos e noventa e um",
+      "explicacao": "O número 7.891 é lido como 'sete mil, oitocentos e noventa e um'.",
+      "dica": "Leia conforme as ordens: milhar, centena, dezena e unidade."
+    }
+  ]
+}
