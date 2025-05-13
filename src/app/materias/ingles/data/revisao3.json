@@ -1,0 +1,428 @@
+{
+    "nome": "Exercícios de Inglês - Nível Pre A1 Starters",
+    "materia": "Inglês",
+    "ano_letivo": "1º ao 3º ano do Ensino Fundamental",
+    "data": "2025-05-14",
+    "title": "Exercícios de Inglês para Iniciantes",
+    "description": "Lista com 30 exercícios de inglês baseados no nível Pre A1 Starters, focando em vocabulário, gramática e habilidades básicas.",
+    "exercises": [
+      {
+        "id": "ex1",
+        "type": "multiple-choice",
+        "question": "Which word describes a long, yellow fruit?",
+        "options": [
+          "Apple",
+          "Banana",
+          "Orange",
+          "Grape"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Banana",
+        "explicacao": "A banana is a long, yellow fruit.",
+        "dica": "Think about fruits that are typically yellow."
+      },
+      {
+        "id": "ex2",
+        "type": "fill-gap",
+        "question": "Complete the sentence: This is a ______. (Hint: It's a brown, hard fruit.)",
+        "options": [
+          "coconut",
+          "potato"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "coconut",
+        "explicacao": "A coconut is a brown, hard fruit.",
+        "dica": "Think about tropical fruits."
+      },
+      {
+        "id": "ex3",
+        "type": "multiple-choice",
+        "question": "What do you say when you want bread for lunch?",
+        "options": [
+          "I would like some bread.",
+          "I want to play.",
+          "This is a book.",
+          "I like bananas."
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "I would like some bread.",
+        "explicacao": "The correct phrase to express a food preference is 'I would like some bread.'",
+        "dica": "Use 'I would like...' to ask for food."
+      },
+      {
+        "id": "ex4",
+        "type": "fill-gap",
+        "question": "Complete the sentence: I like fish ______ chips.",
+        "options": [
+          "and",
+          "but"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "and",
+        "explicacao": "The correct conjunction to connect two similar items is 'and.'",
+        "dica": "Use 'and' to add similar things together."
+      },
+      {
+        "id": "ex5",
+        "type": "multiple-choice",
+        "question": "Which word completes the sentence: I like apples ______ I don't like oranges.",
+        "options": [
+          "and",
+          "but"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "but",
+        "explicacao": "The correct conjunction to show contrast is 'but.'",
+        "dica": "Use 'but' to show a difference."
+      },
+      {
+        "id": "ex6",
+        "type": "fill-gap",
+        "question": "Complete the sentence: Would you like orange juice ______ lemonade?",
+        "options": [
+          "or",
+          "and"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "or",
+        "explicacao": "The correct conjunction to offer a choice is 'or.'",
+        "dica": "Use 'or' when giving options."
+      },
+      {
+        "id": "ex7",
+        "type": "multiple-choice",
+        "question": "Which word describes a place where you study?",
+        "options": [
+          "School",
+          "Park",
+          "Zoo",
+          "Shop"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "School",
+        "explicacao": "A school is a place where you study.",
+        "dica": "Think about places where children learn."
+      },
+      {
+        "id": "ex8",
+        "type": "fill-gap",
+        "question": "Complete the sentence: There are lots of desks in a ______.",
+        "options": [
+          "classroom",
+          "kitchen"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "classroom",
+        "explicacao": "A classroom is where you find desks for studying.",
+        "dica": "Think about places in a school."
+      },
+      {
+        "id": "ex9",
+        "type": "multiple-choice",
+        "question": "Which word is a piece of furniture for books?",
+        "options": [
+          "Bookcase",
+          "Chair",
+          "Table",
+          "Bed"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "Bookcase",
+        "explicacao": "A bookcase is used to store books.",
+        "dica": "Think about furniture that holds books."
+      },
+      {
+        "id": "ex10",
+        "type": "fill-gap",
+        "question": "Complete the sentence: You can play music in the ______.",
+        "options": [
+          "classroom",
+          "garden"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "classroom",
+        "explicacao": "Music can be played in a classroom.",
+        "dica": "Think about school activities."
+      },
+      {
+        "id": "ex11",
+        "type": "multiple-choice",
+        "question": "Which word describes an animal that is grey and big?",
+        "options": [
+          "Elephant",
+          "Lion",
+          "Giraffe",
+          "Monkey"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "Elephant",
+        "explicacao": "An elephant is a big, grey animal.",
+        "dica": "Think about large animals."
+      },
+      {
+        "id": "ex12",
+        "type": "fill-gap",
+        "question": "Complete the sentence: The frog is ______.",
+        "options": [
+          "green",
+          "blue"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "green",
+        "explicacao": "Frogs are typically green.",
+        "dica": "Think about the color of frogs."
+      },
+      {
+        "id": "ex13",
+        "type": "multiple-choice",
+        "question": "Which word is a piece of clothing?",
+        "options": [
+          "T-shirt",
+          "Book",
+          "Apple",
+          "Chair"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "T-shirt",
+        "explicacao": "A T-shirt is an item of clothing.",
+        "dica": "Think about things you wear."
+      },
+      {
+        "id": "ex14",
+        "type": "fill-gap",
+        "question": "Complete the sentence: The dress is ______.",
+        "options": [
+          "orange",
+          "square"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "orange",
+        "explicacao": "Dresses can be described by their color, such as orange.",
+        "dica": "Think about colors."
+      },
+      {
+        "id": "ex15",
+        "type": "multiple-choice",
+        "question": "Which word is part of the face?",
+        "options": [
+          "Nose",
+          "Foot",
+          "Hand",
+          "Leg"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "Nose",
+        "explicacao": "The nose is part of the face.",
+        "dica": "Think about facial features."
+      },
+      {
+        "id": "ex16",
+        "type": "fill-gap",
+        "question": "Complete the sentence: The burger is ______ the box.",
+        "options": [
+          "behind",
+          "inside"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "behind",
+        "explicacao": "The word 'behind' describes the position of the burger relative to the box.",
+        "dica": "Think about prepositions of place."
+      },
+      {
+        "id": "ex17",
+        "type": "multiple-choice",
+        "question": "Which word is a school object?",
+        "options": [
+          "Pencil",
+          "Banana",
+          "Dog",
+          "Car"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "Pencil",
+        "explicacao": "A pencil is used at school.",
+        "dica": "Think about items used for writing."
+      },
+      {
+        "id": "ex18",
+        "type": "fill-gap",
+        "question": "Complete the sentence: The children are ______.",
+        "options": [
+          "happy",
+          "running"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "happy",
+        "explicacao": "The word 'happy' describes the children's emotion.",
+        "dica": "Think about feelings."
+      },
+      {
+        "id": "ex19",
+        "type": "multiple-choice",
+        "question": "Which word is a verb?",
+        "options": [
+          "Jump",
+          "Blue",
+          "Table",
+          "Cold"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "Jump",
+        "explicacao": "Jump is an action word (verb).",
+        "dica": "Think about actions."
+      },
+      {
+        "id": "ex20",
+        "type": "fill-gap",
+        "question": "Complete the sentence: I am ______ a story.",
+        "options": [
+          "telling",
+          "eating"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "telling",
+        "explicacao": "The correct verb for sharing a story is 'telling.'",
+        "dica": "Think about activities with stories."
+      },
+      {
+        "id": "ex21",
+        "type": "multiple-choice",
+        "question": "Which word is a color?",
+        "options": [
+          "Purple",
+          "Book",
+          "Run",
+          "Water"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "Purple",
+        "explicacao": "Purple is a color.",
+        "dica": "Think about colors."
+      },
+      {
+        "id": "ex22",
+        "type": "fill-gap",
+        "question": "Complete the sentence: The hat is ______.",
+        "options": [
+          "yellow",
+          "square"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "yellow",
+        "explicacao": "Hats can be described by their color, such as yellow.",
+        "dica": "Think about colors."
+      },
+      {
+        "id": "ex23",
+        "type": "multiple-choice",
+        "question": "Which word is a number?",
+        "options": [
+          "Three",
+          "Banana",
+          "Jump",
+          "Blue"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "Three",
+        "explicacao": "Three is a number.",
+        "dica": "Think about numbers."
+      },
+      {
+        "id": "ex24",
+        "type": "fill-gap",
+        "question": "Complete the sentence: There ______ one cow.",
+        "options": [
+          "is",
+          "are"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "is",
+        "explicacao": "Use 'is' for singular nouns.",
+        "dica": "Think about singular and plural."
+      },
+      {
+        "id": "ex25",
+        "type": "multiple-choice",
+        "question": "Which word is a conjunction?",
+        "options": [
+          "And",
+          "Book",
+          "Run",
+          "Blue"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "And",
+        "explicacao": "And is a conjunction used to connect words or phrases.",
+        "dica": "Think about connecting words."
+      },
+      {
+        "id": "ex26",
+        "type": "fill-gap",
+        "question": "Complete the sentence: I like milk. I drink it at breakfast, at lunch ______ at dinner!",
+        "options": [
+          "and",
+          "but"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "and",
+        "explicacao": "Use 'and' to add similar items together.",
+        "dica": "Think about adding items to a list."
+      },
+      {
+        "id": "ex27",
+        "type": "multiple-choice",
+        "question": "Which word is a preposition?",
+        "options": [
+          "Under",
+          "Banana",
+          "Jump",
+          "Happy"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "Under",
+        "explicacao": "Under is a preposition that describes position.",
+        "dica": "Think about words that describe location."
+      },
+      {
+        "id": "ex28",
+        "type": "fill-gap",
+        "question": "Complete the sentence: The burger is ______ the boxes.",
+        "options": [
+          "between",
+          "inside"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "between",
+        "explicacao": "The word 'between' describes the position of the burger relative to two boxes.",
+        "dica": "Think about prepositions of place."
+      },
+      {
+        "id": "ex29",
+        "type": "multiple-choice",
+        "question": "Which word is a question word?",
+        "options": [
+          "What",
+          "Banana",
+          "Run",
+          "Blue"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "What",
+        "explicacao": "What is used to ask questions.",
+        "dica": "Think about words used to ask questions."
+      },
+      {
+        "id": "ex30",
+        "type": "fill-gap",
+        "question": "Complete the sentence: ______ is that on your desk, Nick?",
+        "options": [
+          "What",
+          "Where"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "What",
+        "explicacao": "Use 'What' to ask about objects.",
+        "dica": "Think about question words."
+      }
+    ]
+  }
