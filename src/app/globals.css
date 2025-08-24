@@ -1,28 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fff9e5; /* Light warm yellow background */
+  --background: #ffeef7; /* Soft pink background */
   --foreground: #171717;
   
-  /* Duolingo inspired vibrant colors */
-  --primary: #58cc02;
-  --primary-hover: #47a700;
-  --primary-disabled: #b5e085;
-  --secondary: #ffc800;
-  --secondary-hover: #e5b400;
-  --tertiary: #ff9600; /* orange */
-  --purple: #9a5cf6;
-  --blue: #1CB0F6;
+  /* Pink theme for 8-year-old girl */
+  --primary: #ff69b4; /* Hot pink primary */
+  --primary-hover: #e55b9e;
+  --primary-disabled: #ffb3db;
+  --secondary: #ff1493; /* Deep pink secondary */
+  --secondary-hover: #d11177;
+  --tertiary: #ff69b4; /* Pink tertiary */
+  --purple: #da70d6; /* Orchid purple */
+  --blue: #ff69b4; /* Keep pink theme consistent */
   --pink: #ff82c1;
-  --red: #ff4b4b;
-  --error: #ff4b4b;
-  --correct: #58cc02;
-  --neutral: #e5e5e5;
-  --neutral-dark: #b5b5b5;
-  --text-primary: #3c3c3c;
-  --text-secondary: #777777;
-  --border-light: #e5e5e5;
-  --shadow: rgba(0, 0, 0, 0.15);
+  --red: #ff1493;
+  --error: #ff1493;
+  --correct: #ff69b4;
+  --neutral: #f5e6ef;
+  --neutral-dark: #d4a8c4;
+  --text-primary: #4a1a3d;
+  --text-secondary: #8b4a7a;
+  --border-light: #f5e6ef;
+  --shadow: rgba(255, 105, 180, 0.25);
   --card-bg: #ffffff;
 }
 
@@ -35,12 +35,12 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #1a237e; /* Vibrant dark blue background */
+    --background: #4d1a3d; /* Dark pink background */
     --foreground: #ededed;
     --text-primary: #f0f0f0;
-    --text-secondary: #b0b0b0;
-    --border-light: #3949ab;
-    --card-bg: #283593;
+    --text-secondary: #d4a8c4;
+    --border-light: #8b4a7a;
+    --card-bg: #6b2c57;
   }
 }
 
@@ -206,12 +206,12 @@ body {
 
 .duolingo-option.selected {
   border-color: var(--primary);
-  background-color: rgba(88, 204, 2, 0.1);
+  background-color: rgba(255, 105, 180, 0.1);
 }
 
 .duolingo-option.correct {
   border-color: var(--correct);
-  background-color: rgba(88, 204, 2, 0.15);
+  background-color: rgba(255, 105, 180, 0.15);
 }
 
 .duolingo-option.incorrect {
@@ -286,23 +286,23 @@ body {
 }
 
 .duolingo-subject-card:nth-child(1) {
-  background-color: rgba(88, 204, 2, 0.15);
+  background-color: rgba(255, 105, 180, 0.15);
   border-bottom-color: var(--primary-hover);
 }
 
 .duolingo-subject-card:nth-child(2) {
-  background-color: rgba(255, 200, 0, 0.15);
+  background-color: rgba(255, 20, 147, 0.15);
   border-bottom-color: var(--secondary-hover);
 }
 
 .duolingo-subject-card:nth-child(3) {
-  background-color: rgba(28, 176, 246, 0.15);
-  border-bottom-color: #0e91cf;
+  background-color: rgba(218, 112, 214, 0.15);
+  border-bottom-color: #b8669c;
 }
 
 .duolingo-subject-card:nth-child(4) {
-  background-color: rgba(255, 82, 193, 0.15);
-  border-bottom-color: #d94fa7;
+  background-color: rgba(255, 130, 193, 0.15);
+  border-bottom-color: #e07ab8;
 }
 
 .duolingo-subject-card:hover {
@@ -328,7 +328,7 @@ body {
   left: 0;
   width: 100%;
   height: 8px;
-  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--blue), var(--pink));
+  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--purple), var(--pink));
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -387,7 +387,7 @@ body {
 }
 
 .duolingo-feedback.correct {
-  background-color: rgba(88, 204, 2, 0.15);
+  background-color: rgba(255, 105, 180, 0.15);
   border-left: 8px solid var(--correct);
 }
 

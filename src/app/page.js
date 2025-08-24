@@ -9,27 +9,27 @@ export default function Home() {
   const subjects = [
     {
       id: "matematica",
-      title: "Matemática",
-      icon: "/globe.svg", // Placeholder, você pode substituir por ícones específicos
-      color: "rgba(88, 204, 2, 0.1)"
+      title: "🔢 Matemática",
+      icon: "/globe.svg",
+      color: "rgba(255, 105, 180, 0.1)"
     },
     {
-      id: "portugues",
-      title: "Português",
+      id: "portugues", 
+      title: "📚 Português",
       icon: "/file.svg",
-      color: "rgba(255, 200, 0, 0.1)"
+      color: "rgba(255, 20, 147, 0.1)"
     },
     {
       id: "ingles",
-      title: "Inglês",
+      title: "🇺🇸 Inglês",
       icon: "/window.svg",
-      color: "rgba(28, 176, 246, 0.1)"
+      color: "rgba(218, 112, 214, 0.1)"
     },
     {
       id: "geografia",
-      title: "Geografia",
+      title: "🌍 Geografia",
       icon: "/vercel.svg",
-      color: "rgba(255, 82, 193, 0.1)"
+      color: "rgba(255, 130, 193, 0.1)"
     },
   ];
 
@@ -56,8 +56,8 @@ export default function Home() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className="text-5xl font-bold text-center bg-gradient-to-r from-[var(--primary)] via-[var(--blue)] to-[var(--purple)] text-transparent bg-clip-text">
-          Aprenda brincando!
+        <h1 className="text-5xl font-bold text-center bg-gradient-to-r from-[var(--primary)] via-[var(--secondary)] to-[var(--purple)] text-transparent bg-clip-text">
+          ✨ Vamos estudar juntas! ✨
         </h1>
       </motion.div>
 
@@ -68,7 +68,7 @@ export default function Home() {
         className="max-w-2xl mx-auto mb-12 text-center"
       >
         <p className="text-xl text-[var(--text-secondary)]">
-          Pratique seus exercícios escolares de forma divertida e interativa com a nossa plataforma inspirada no Duolingo!
+          🌟 Hora de se preparar para as provas! Aqui você vai aprender de um jeito super divertido e colorido! 🌈
         </p>
       </motion.div>
 
@@ -79,7 +79,7 @@ export default function Home() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          Escolha uma matéria
+          💖 Escolha sua matéria favorita 💖
         </motion.h2>
 
         <motion.div 
