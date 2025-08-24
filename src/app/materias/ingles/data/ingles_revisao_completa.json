@@ -1,0 +1,1132 @@
+{
+    "nome": "Revisão Completa de Inglês",
+    "materia": "Inglês",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "data": "2025-08-24",
+    "title": "🇺🇸 Inglês - Revisão Completa 🌟",
+    "description": "Lista extensa com 80 exercícios de inglês baseados no material de revisão, cobrindo clima, verbo 'to be', 'there was/were', comparativos, superlativos, pronomes possessivos, present simple, present continuous e leitura de textos.",
+    "exercises": [
+      {
+        "id": "ing001",
+        "type": "multiple-choice",
+        "question": "What's the weather like in the picture with clouds? ☁️",
+        "options": [
+          "It's sunny",
+          "It's cloudy", 
+          "It's raining",
+          "It's snowing"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "It's cloudy",
+        "explicacao": "Quando há nuvens no céu, o clima está nublado (cloudy).",
+        "dica": "Olhe para as nuvens no céu!"
+      },
+      {
+        "id": "ing002",
+        "type": "multiple-choice",
+        "question": "What activities can you do when it's raining? 🌧️",
+        "options": [
+          "Go to the beach",
+          "Jump in puddles",
+          "Have a picnic",
+          "Fly a kite"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Jump in puddles",
+        "explicacao": "Quando está chovendo, uma atividade divertida é pular nas poças d'água (puddles).",
+        "dica": "O que podemos fazer com a água da chuva?"
+      },
+      {
+        "id": "ing003",
+        "type": "fill-gap",
+        "question": "When it's snowing, everything is _____! ❄️",
+        "options": [
+          "white",
+          "black"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "white",
+        "explicacao": "Quando está nevando, tudo fica branco por causa da neve.",
+        "dica": "Qual é a cor da neve?"
+      },
+      {
+        "id": "ing004",
+        "type": "multiple-choice",
+        "question": "What do we wear when it's cold and windy? 🧥",
+        "options": [
+          "T-shirt and shorts",
+          "Boots, coat and scarf",
+          "Swimsuit",
+          "Sandals"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Boots, coat and scarf",
+        "explicacao": "Quando está frio e ventoso, vestimos botas, casaco e cachecol para nos aquecer.",
+        "dica": "Que roupas nos deixam quentinhos?"
+      },
+      {
+        "id": "ing005",
+        "type": "fill-gap",
+        "question": "The sun starts shining and it's nice and _____ today! ☀️",
+        "options": [
+          "sunny",
+          "rainy"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "sunny",
+        "explicacao": "Quando o sol está brilhando, o dia está ensolarado (sunny).",
+        "dica": "Como chamamos um dia com muito sol?"
+      },
+      {
+        "id": "ing006",
+        "type": "multiple-choice",
+        "question": "Complete: 'I _____ eight years old.'",
+        "options": [
+          "am",
+          "is",
+          "are",
+          "be"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "am",
+        "explicacao": "Com o pronome 'I' (eu), sempre usamos 'am' no verbo to be.",
+        "dica": "I sempre vem com 'am'."
+      },
+      {
+        "id": "ing007",
+        "type": "multiple-choice",
+        "question": "Complete: 'She _____ very happy.'",
+        "options": [
+          "am",
+          "is", 
+          "are",
+          "was"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "is",
+        "explicacao": "Com 'she' (ela), usamos 'is' no presente do verbo to be.",
+        "dica": "She, he e it usam 'is'."
+      },
+      {
+        "id": "ing008",
+        "type": "multiple-choice",
+        "question": "Complete: 'They _____ at school.'",
+        "options": [
+          "am",
+          "is",
+          "are",
+          "were"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "are",
+        "explicacao": "Com 'they' (eles/elas), usamos 'are' no presente do verbo to be.",
+        "dica": "You, we e they usam 'are'."
+      },
+      {
+        "id": "ing009",
+        "type": "fill-gap",
+        "question": "Yesterday I _____ very happy! (past simple of 'to be')",
+        "options": [
+          "was",
+          "were"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "was",
+        "explicacao": "No passado, com 'I' usamos 'was'.",
+        "dica": "I, he, she, it usam 'was' no passado."
+      },
+      {
+        "id": "ing010",
+        "type": "fill-gap",
+        "question": "Last week you _____ late for class. (past simple of 'to be')",
+        "options": [
+          "was",
+          "were"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "were",
+        "explicacao": "No passado, com 'you' usamos 'were'.",
+        "dica": "You, we, they usam 'were' no passado."
+      },
+      {
+        "id": "ing011",
+        "type": "multiple-choice",
+        "question": "Complete the negative form: 'She _____ at home yesterday.'",
+        "options": [
+          "wasn't",
+          "weren't",
+          "isn't",
+          "aren't"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "wasn't",
+        "explicacao": "'Wasn't' é a forma negativa de 'was' (was not).",
+        "dica": "She usa 'was', então a negativa é 'wasn't'."
+      },
+      {
+        "id": "ing012",
+        "type": "multiple-choice",
+        "question": "Complete the interrogative form: '_____ you sick yesterday?'",
+        "options": [
+          "Was",
+          "Were",
+          "Are",
+          "Is"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Were",
+        "explicacao": "Em perguntas no passado com 'you', usamos 'Were you...?'",
+        "dica": "You sempre usa 'were' nas perguntas do passado."
+      },
+      {
+        "id": "ing013",
+        "type": "fill-gap",
+        "question": "There _____ a dog on the bed yesterday.",
+        "options": [
+          "was",
+          "were"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "was",
+        "explicacao": "Usamos 'there was' com substantivos no singular no passado.",
+        "dica": "'A dog' é singular, então usamos 'was'."
+      },
+      {
+        "id": "ing014",
+        "type": "fill-gap",
+        "question": "There _____ many kids at the party yesterday.",
+        "options": [
+          "was",
+          "were"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "were",
+        "explicacao": "Usamos 'there were' com substantivos no plural no passado.",
+        "dica": "'Many kids' é plural, então usamos 'were'."
+      },
+      {
+        "id": "ing015",
+        "type": "multiple-choice",
+        "question": "Complete: 'There _____ four people in the house last night.'",
+        "options": [
+          "was",
+          "were",
+          "is",
+          "are"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "were",
+        "explicacao": "'Four people' é plural, então usamos 'there were' no passado.",
+        "dica": "Números maiores que um são sempre plurais."
+      },
+      {
+        "id": "ing016",
+        "type": "fill-gap",
+        "question": "Mark is _____ than Philippe. (tall)",
+        "options": [
+          "taller",
+          "tallest"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "taller",
+        "explicacao": "Para adjetivos curtos, adicionamos '-er' para formar o comparativo.",
+        "dica": "Comparativo de adjetivos curtos: adicione '-er'."
+      },
+      {
+        "id": "ing017",
+        "type": "multiple-choice",
+        "question": "Complete: 'My friend is _____ than you.' (happy)",
+        "options": [
+          "happy",
+          "happyer",
+          "happier",
+          "more happy"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "happier",
+        "explicacao": "Adjetivos terminados em 'y' trocam o 'y' por 'ier' no comparativo.",
+        "dica": "Happy → happier (y vira ier)."
+      },
+      {
+        "id": "ing018",
+        "type": "fill-gap",
+        "question": "Water is _____ than oil. (heavy)",
+        "options": [
+          "heavier",
+          "heavyer"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "heavier",
+        "explicacao": "Heavy termina em 'y', então vira 'heavier' no comparativo.",
+        "dica": "Lembre-se: y → ier nos comparativos."
+      },
+      {
+        "id": "ing019",
+        "type": "multiple-choice",
+        "question": "Complete: 'Juice is _____ than water.' (good)",
+        "options": [
+          "gooder",
+          "better",
+          "more good",
+          "best"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "better",
+        "explicacao": "'Good' tem comparativo irregular: good → better → best.",
+        "dica": "Good, better, best - é uma exceção!"
+      },
+      {
+        "id": "ing020",
+        "type": "fill-gap",
+        "question": "A Mercedes is _____ than a Fiat. (expensive)",
+        "options": [
+          "more expensive",
+          "expensiver"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "more expensive",
+        "explicacao": "Adjetivos longos (3+ sílabas) usam 'more + adjetivo' no comparativo.",
+        "dica": "Adjetivos longos usam 'more'."
+      },
+      {
+        "id": "ing021",
+        "type": "multiple-choice",
+        "question": "Complete with superlative: 'This movie is the _____ I love it!' (good)",
+        "options": [
+          "goodest",
+          "better",
+          "best",
+          "most good"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "best",
+        "explicacao": "'Good' tem superlativo irregular: good → better → best.",
+        "dica": "O superlativo de 'good' é 'best'."
+      },
+      {
+        "id": "ing022",
+        "type": "fill-gap",
+        "question": "You are the _____ girl in the world! (happy)",
+        "options": [
+          "happiest",
+          "most happy"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "happiest",
+        "explicacao": "Adjetivos terminados em 'y': y → iest no superlativo.",
+        "dica": "Happy → happiest (y vira iest)."
+      },
+      {
+        "id": "ing023",
+        "type": "multiple-choice",
+        "question": "Complete: 'John is the _____ boy in class.' (tall)",
+        "options": [
+          "taller",
+          "tallest",
+          "most tall",
+          "tall"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "tallest",
+        "explicacao": "Adjetivos curtos: the + adj + est no superlativo.",
+        "dica": "Tall → tallest (adicione -est)."
+      },
+      {
+        "id": "ing024",
+        "type": "fill-gap",
+        "question": "This is the _____ shirt that you have. (ugly)",
+        "options": [
+          "ugliest",
+          "most ugly"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "ugliest",
+        "explicacao": "Ugly termina em 'y', então: y → iest = ugliest.",
+        "dica": "Ugly → ugliest (y vira iest)."
+      },
+      {
+        "id": "ing025",
+        "type": "multiple-choice",
+        "question": "Complete: 'This book is _____.' (you - possessive pronoun)",
+        "options": [
+          "your",
+          "yours",
+          "you",
+          "yourself"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "yours",
+        "explicacao": "Quando não há substantivo após, usamos o pronome possessivo 'yours'.",
+        "dica": "Your book → This book is yours."
+      },
+      {
+        "id": "ing026",
+        "type": "fill-gap",
+        "question": "The ball is _____. (I - possessive pronoun)",
+        "options": [
+          "mine",
+          "my"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "mine",
+        "explicacao": "'Mine' é o pronome possessivo para 'I'.",
+        "dica": "My ball → The ball is mine."
+      },
+      {
+        "id": "ing027",
+        "type": "multiple-choice",
+        "question": "Complete: 'The blue car is _____.' (we - possessive pronoun)",
+        "options": [
+          "our",
+          "ours",
+          "we",
+          "us"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "ours",
+        "explicacao": "'Ours' é o pronome possessivo para 'we'.",
+        "dica": "Our car → The car is ours."
+      },
+      {
+        "id": "ing028",
+        "type": "fill-gap",
+        "question": "The ring is _____. (she - possessive pronoun)",
+        "options": [
+          "hers",
+          "her"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "hers",
+        "explicacao": "'Hers' é o pronome possessivo para 'she'.",
+        "dica": "Her ring → The ring is hers."
+      },
+      {
+        "id": "ing029",
+        "type": "multiple-choice",
+        "question": "Complete with possessive adjective: 'This is _____ book.' (I)",
+        "options": [
+          "mine",
+          "my",
+          "me",
+          "I"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "my",
+        "explicacao": "Antes de um substantivo, usamos o adjetivo possessivo 'my'.",
+        "dica": "Antes de substantivo: my, your, his, her..."
+      },
+      {
+        "id": "ing030",
+        "type": "fill-gap",
+        "question": "Where is _____ friend? (you - possessive adjective)",
+        "options": [
+          "your",
+          "yours"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "your",
+        "explicacao": "Antes de 'friend', usamos o adjetivo possessivo 'your'.",
+        "dica": "Antes de substantivo usamos adjetivos possessivos."
+      },
+      {
+        "id": "ing031",
+        "type": "multiple-choice",
+        "question": "She usually _____ to school by bus.",
+        "options": [
+          "go",
+          "goes",
+          "going",
+          "went"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "goes",
+        "explicacao": "No Present Simple, com he/she/it adicionamos 's' ao verbo.",
+        "dica": "She goes (3ª pessoa adiciona 's')."
+      },
+      {
+        "id": "ing032",
+        "type": "fill-gap",
+        "question": "They often _____ us. (visit)",
+        "options": [
+          "visit",
+          "visits"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "visit",
+        "explicacao": "Com 'they', o verbo não muda no Present Simple.",
+        "dica": "I, you, we, they → verbo sem 's'."
+      },
+      {
+        "id": "ing033",
+        "type": "multiple-choice",
+        "question": "Complete the negative: 'You _____ basketball once a week.'",
+        "options": [
+          "don't play",
+          "doesn't play",
+          "not play",
+          "aren't play"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "don't play",
+        "explicacao": "Para I, you, we, they usamos 'don't' + verbo.",
+        "dica": "Don't = do not (para I, you, we, they)."
+      },
+      {
+        "id": "ing034",
+        "type": "fill-gap",
+        "question": "Tom _____ every day. (work - negative)",
+        "options": [
+          "doesn't work",
+          "don't work"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "doesn't work",
+        "explicacao": "Para he, she, it usamos 'doesn't' + verbo.",
+        "dica": "Doesn't = does not (para he, she, it)."
+      },
+      {
+        "id": "ing035",
+        "type": "multiple-choice",
+        "question": "Complete: 'He always _____ us funny stories.'",
+        "options": [
+          "tell",
+          "tells",
+          "telling",
+          "told"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "tells",
+        "explicacao": "Com 'he', adicionamos 's' ao verbo no Present Simple.",
+        "dica": "He tells (3ª pessoa adiciona 's')."
+      },
+      {
+        "id": "ing036",
+        "type": "fill-gap",
+        "question": "Catherine _____ a cake for her sister's birthday party now. (cook - Present Continuous)",
+        "options": [
+          "is cooking",
+          "cooks"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "is cooking",
+        "explicacao": "Present Continuous: verbo to be + verbo + ing (ação acontecendo agora).",
+        "dica": "'Now' indica Present Continuous."
+      },
+      {
+        "id": "ing037",
+        "type": "multiple-choice",
+        "question": "Complete: 'John _____ to read comics.' (like - habit)",
+        "options": [
+          "is liking",
+          "likes",
+          "like",
+          "liked"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "likes",
+        "explicacao": "Para hábitos, usamos Present Simple. Com 'he' adiciona 's'.",
+        "dica": "Hábitos = Present Simple."
+      },
+      {
+        "id": "ing038",
+        "type": "fill-gap",
+        "question": "It's raining, so Connor and I _____ DVDs now. (watch - Present Continuous)",
+        "options": [
+          "are watching",
+          "watch"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "are watching",
+        "explicacao": "Ação acontecendo agora = Present Continuous (are + watching).",
+        "dica": "'Now' e 'it's raining' indicam ação atual."
+      },
+      {
+        "id": "ing039",
+        "type": "multiple-choice",
+        "question": "Complete the negative: 'I _____ to listen to music when I study.'",
+        "options": [
+          "don't like",
+          "am not liking",
+          "doesn't like",
+          "not like"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "don't like",
+        "explicacao": "Preferência é Present Simple. Com 'I' usamos 'don't'.",
+        "dica": "Gostos e preferências = Present Simple."
+      },
+      {
+        "id": "ing040",
+        "type": "fill-gap",
+        "question": "What _____ you _____ right now? It smells delicious! (eat - Present Continuous question)",
+        "options": [
+          "are, eating",
+          "do, eat"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "are, eating",
+        "explicacao": "Pergunta no Present Continuous: What are you eating?",
+        "dica": "'Right now' indica Present Continuous."
+      },
+      {
+        "id": "ing041",
+        "type": "multiple-choice",
+        "question": "From the poem, what does the girl do when it's raining? 🌧️",
+        "options": [
+          "She stays inside",
+          "She jumps in puddles",
+          "She sleeps",
+          "She watches TV"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "She jumps in puddles",
+        "explicacao": "No poema, ela pula nas poças quando está chovendo.",
+        "dica": "Releia o primeiro verso do poema."
+      },
+      {
+        "id": "ing042",
+        "type": "fill-gap",
+        "question": "In the poem, when it's windy, the trees are _____ from side to side. 🌬️",
+        "options": [
+          "dancing",
+          "sleeping"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "dancing",
+        "explicacao": "O poema diz: 'The trees are dancing from side to side'.",
+        "dica": "Como as árvores se movem no vento?"
+      },
+      {
+        "id": "ing043",
+        "type": "multiple-choice",
+        "question": "What does the girl imagine when it's cloudy? ☁️",
+        "options": [
+          "She imagines animals in the clouds",
+          "She imagines she's at sea",
+          "She imagines snow",
+          "She imagines rain"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "She imagines animals in the clouds",
+        "explicacao": "Ela imagina elefantes, coelhos e cavalos correndo nas nuvens.",
+        "dica": "O que ela vê nas formas das nuvens?"
+      },
+      {
+        "id": "ing044",
+        "type": "fill-gap",
+        "question": "When it's sunny and hot, the girl loves splashing at the _____! ☀️",
+        "options": [
+          "pool",
+          "school"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "pool",
+        "explicacao": "No poema: 'I love splashing at the pool!'",
+        "dica": "Onde vamos nos refrescar quando está quente?"
+      },
+      {
+        "id": "ing045",
+        "type": "multiple-choice",
+        "question": "In the kangaroo story, why was the wombat crying? 😢",
+        "options": [
+          "He was hungry",
+          "He couldn't see and had no friends",
+          "He was cold",
+          "He was lost"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "He couldn't see and had no friends",
+        "explicacao": "O wombat disse: 'I can't see and I haven't got any friends to help me!'",
+        "dica": "Leia o que o wombat responde quando perguntado."
+      },
+      {
+        "id": "ing046",
+        "type": "fill-gap",
+        "question": "The kangaroo was very _____ to the old wombat. 🦘",
+        "options": [
+          "kind",
+          "mean"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "kind",
+        "explicacao": "A história mostra que o canguru foi gentil e ajudou o wombat.",
+        "dica": "Como a canguru tratou o wombat?"
+      },
+      {
+        "id": "ing047",
+        "type": "multiple-choice",
+        "question": "What did the wombat give the kangaroo as a present? 🎁",
+        "options": [
+          "Food",
+          "A pouch",
+          "Money",
+          "A house"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "A pouch",
+        "explicacao": "O wombat deu uma bolsa (pouch) para o canguru carregar seu bebê.",
+        "dica": "O que todos os cangurus têm para carregar seus filhotes?"
+      },
+      {
+        "id": "ing048",
+        "type": "fill-gap",
+        "question": "A joey is a baby _____. 🦘",
+        "options": [
+          "kangaroo",
+          "wombat"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "kangaroo",
+        "explicacao": "O texto explica: 'A joey's a baby kangaroo.'",
+        "dica": "Como chamamos um filhote de canguru?"
+      },
+      {
+        "id": "ing049",
+        "type": "multiple-choice",
+        "question": "From Sammy's text, how old is he? 👦",
+        "options": [
+          "Seven years old",
+          "Eight years old", 
+          "Nine years old",
+          "Ten years old"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Eight years old",
+        "explicacao": "Sammy diz: 'My name is Sammy and I am eight years old.'",
+        "dica": "Leia a primeira linha do texto do Sammy."
+      },
+      {
+        "id": "ing050",
+        "type": "fill-gap",
+        "question": "Sammy doesn't have to go to school because today is _____. 📅",
+        "options": [
+          "Saturday",
+          "Monday"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "Saturday",
+        "explicacao": "Sammy diz: 'Today is Saturday so I don't have to go to school.'",
+        "dica": "Que dia da semana não temos aula?"
+      },
+      {
+        "id": "ing051",
+        "type": "multiple-choice",
+        "question": "What is the weather like in Sammy's story? 🌦️",
+        "options": [
+          "Hot and sunny",
+          "Raining, windy and cold",
+          "Snowy and windy",
+          "Just cloudy"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Raining, windy and cold",
+        "explicacao": "Sammy diz: 'today it is raining a lot. It's also very windy and cold'",
+        "dica": "Por que Sammy tem que ficar em casa?"
+      },
+      {
+        "id": "ing052",
+        "type": "fill-gap",
+        "question": "Sammy doesn't have a brother or a _____, so he plays with his toys. 👨‍👩‍👧‍👦",
+        "options": [
+          "sister",
+          "friend"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "sister",
+        "explicacao": "O texto diz: 'I don't have a brother or a sister'",
+        "dica": "Qual palavra completa 'brother or a...'?"
+      },
+      {
+        "id": "ing053",
+        "type": "multiple-choice",
+        "question": "What are Sammy and his parents doing? 📺",
+        "options": [
+          "Playing games",
+          "Watching a movie",
+          "Reading books",
+          "Cooking dinner"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Watching a movie",
+        "explicacao": "Sammy diz: 'my parents and I are watching a movie on the TV'",
+        "dica": "O que eles estão fazendo na TV?"
+      },
+      {
+        "id": "ing054",
+        "type": "fill-gap",
+        "question": "Name one piece of clothing: T-_____",
+        "options": [
+          "shirt",
+          "pants"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "shirt",
+        "explicacao": "T-shirt é uma camiseta, uma peça de roupa comum.",
+        "dica": "Uma roupa que usamos na parte de cima do corpo."
+      },
+      {
+        "id": "ing055",
+        "type": "multiple-choice",
+        "question": "What do we wear on our feet? 👟",
+        "options": [
+          "Hats",
+          "Gloves",
+          "Boots",
+          "Scarves"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Boots",
+        "explicacao": "Boots (botas) são calçados que vestimos nos pés.",
+        "dica": "O que protege nossos pés?"
+      },
+      {
+        "id": "ing056",
+        "type": "fill-gap",
+        "question": "When it's cold, we wear a _____ around our neck.",
+        "options": [
+          "scarf",
+          "hat"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "scarf",
+        "explicacao": "Scarf (cachecol) é usado ao redor do pescoço para nos aquecer.",
+        "dica": "O que vestimos no pescoço quando está frio?"
+      },
+      {
+        "id": "ing057",
+        "type": "multiple-choice",
+        "question": "Complete: 'Today is the _____ day of the year!' (hot - superlative)",
+        "options": [
+          "hotter",
+          "hottest",
+          "most hot",
+          "more hot"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "hottest",
+        "explicacao": "Hot é adjetivo curto: hot → hotter → hottest.",
+        "dica": "Adjetivos de uma sílaba: duplica consoante + est."
+      },
+      {
+        "id": "ing058",
+        "type": "fill-gap",
+        "question": "Elephants are the _____ animals in the zoo. (fat - superlative)",
+        "options": [
+          "fattest",
+          "most fat"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "fattest",
+        "explicacao": "Fat → fattest (duplica 't' + est).",
+        "dica": "Adjetivos CVC duplicam a última consoante."
+      },
+      {
+        "id": "ing059",
+        "type": "multiple-choice",
+        "question": "Complete with the superlative: 'Tigers are the _____ animals.' (quick)",
+        "options": [
+          "quicker",
+          "quickest", 
+          "most quick",
+          "quick"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "quickest",
+        "explicacao": "Quick → quickest (adjetivo curto + est).",
+        "dica": "Adjetivos curtos: the + adj + est."
+      },
+      {
+        "id": "ing060",
+        "type": "fill-gap",
+        "question": "The sun is _____ the mountains. (position)",
+        "options": [
+          "above",
+          "below"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "above",
+        "explicacao": "O sol fica acima (above) das montanhas no céu.",
+        "dica": "Onde fica o sol em relação às montanhas?"
+      },
+      {
+        "id": "ing061",
+        "type": "multiple-choice",
+        "question": "How often do you watch TV? (frequency question)",
+        "options": [
+          "I watch TV every day",
+          "I am watching TV",
+          "TV is good",
+          "I like TV"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "I watch TV every day",
+        "explicacao": "'How often' pergunta sobre frequência, respondemos com advérbios de frequência.",
+        "dica": "How often = com que frequência."
+      },
+      {
+        "id": "ing062",
+        "type": "fill-gap",
+        "question": "I _____ play badminton. (frequency: 0%)",
+        "options": [
+          "never",
+          "always"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "never",
+        "explicacao": "Never = nunca (0% de frequência).",
+        "dica": "Qual advérbio significa 0% de frequência?"
+      },
+      {
+        "id": "ing063",
+        "type": "multiple-choice",
+        "question": "She _____ studies English. (frequency: 100%)",
+        "options": [
+          "never",
+          "sometimes",
+          "always",
+          "rarely"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "always",
+        "explicacao": "Always = sempre (100% de frequência).",
+        "dica": "Qual advérbio significa 100% de frequência?"
+      },
+      {
+        "id": "ing064",
+        "type": "fill-gap",
+        "question": "They _____ listen to music. (frequency: many times)",
+        "options": [
+          "often",
+          "never"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "often",
+        "explicacao": "Often = frequentemente (muitas vezes).",
+        "dica": "Qual advérbio significa 'muitas vezes'?"
+      },
+      {
+        "id": "ing065",
+        "type": "multiple-choice",
+        "question": "What's your favorite weather?",
+        "options": [
+          "My favorite is sunny weather",
+          "I am sunny",
+          "Weather is good",
+          "I like weather"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "My favorite is sunny weather",
+        "explicacao": "Esta é a resposta correta para perguntar sobre clima favorito.",
+        "dica": "Responda com 'My favorite is...' + tipo de clima."
+      },
+      {
+        "id": "ing066",
+        "type": "fill-gap",
+        "question": "In the story, all mummy kangaroos have _____ to carry their babies.",
+        "options": [
+          "pouches",
+          "bags"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "pouches",
+        "explicacao": "O final da história diz que todas as mamães cangurus têm bolsas (pouches).",
+        "dica": "Como os cangurus carregam seus bebês?"
+      },
+      {
+        "id": "ing067",
+        "type": "multiple-choice",
+        "question": "Complete: '_____ your best friend?' (She - interrogative past)",
+        "options": [
+          "Was she",
+          "Were she",
+          "Is she",
+          "Are she"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "Was she",
+        "explicacao": "Pergunta no passado com 'she': Was she...?",
+        "dica": "She usa 'was' no passado."
+      },
+      {
+        "id": "ing068",
+        "type": "fill-gap",
+        "question": "He _____ a new teacher. (negative past)",
+        "options": [
+          "wasn't",
+          "weren't"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "wasn't",
+        "explicacao": "'He' usa 'wasn't' na forma negativa do passado.",
+        "dica": "He, she, it usam 'wasn't'."
+      },
+      {
+        "id": "ing069",
+        "type": "multiple-choice",
+        "question": "What do you do when you're sad?",
+        "options": [
+          "I'm crying because I'm sad",
+          "I cry when I'm sad",
+          "I was sad",
+          "Sad is bad"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "I cry when I'm sad",
+        "explicacao": "Esta é a resposta mais natural usando Present Simple para hábitos.",
+        "dica": "Use Present Simple para falar sobre o que você faz em geral."
+      },
+      {
+        "id": "ing070",
+        "type": "fill-gap",
+        "question": "My house is _____ than yours. (small)",
+        "options": [
+          "smaller",
+          "smallest"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "smaller",
+        "explicacao": "Comparativo de 'small' é 'smaller' (small + er).",
+        "dica": "Than indica comparativo (-er)."
+      },
+      {
+        "id": "ing071",
+        "type": "multiple-choice",
+        "question": "The kangaroo finds her joey sleeping under the _____ tree.",
+        "options": [
+          "smallest",
+          "biggest",
+          "tallest",
+          "oldest"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "biggest",
+        "explicacao": "A história diz: 'He's asleep below the biggest tree.'",
+        "dica": "Releia onde a canguru encontra seu bebê."
+      },
+      {
+        "id": "ing072",
+        "type": "fill-gap",
+        "question": "This chocolate cake is so _____! (delicious)",
+        "options": [
+          "good",
+          "bad"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "good",
+        "explicacao": "Bolo de chocolate é geralmente bom/gostoso.",
+        "dica": "Como descrevemos algo gostoso?"
+      },
+      {
+        "id": "ing073",
+        "type": "multiple-choice",
+        "question": "Complete: 'It's Sunday, so I _____ to the beach with my friends right now.'",
+        "options": [
+          "go",
+          "am going",
+          "went",
+          "goes"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "am going",
+        "explicacao": "'Right now' indica Present Continuous: am going.",
+        "dica": "'Right now' = ação acontecendo agora."
+      },
+      {
+        "id": "ing074",
+        "type": "fill-gap",
+        "question": "Riley _____ the piano on Mondays. (habit)",
+        "options": [
+          "plays",
+          "is playing"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "plays",
+        "explicacao": "'On Mondays' indica hábito, então Present Simple: plays.",
+        "dica": "Dias da semana indicam rotina/hábito."
+      },
+      {
+        "id": "ing075",
+        "type": "multiple-choice",
+        "question": "What are you eating right now? It smells delicious!",
+        "options": [
+          "I eat pizza",
+          "I am eating pizza",
+          "I was eating pizza",
+          "I will eat pizza"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "I am eating pizza",
+        "explicacao": "'Right now' pede Present Continuous na resposta.",
+        "dica": "Responda no mesmo tempo da pergunta."
+      },
+      {
+        "id": "ing076",
+        "type": "fill-gap",
+        "question": "The luggage is _____. (he - possessive pronoun)",
+        "options": [
+          "his",
+          "him"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "his",
+        "explicacao": "'His' funciona como adjetivo e pronome possessivo.",
+        "dica": "His é igual nas duas formas."
+      },
+      {
+        "id": "ing077",
+        "type": "multiple-choice",
+        "question": "Complete: 'The pictures are _____.' (she - possessive pronoun)",
+        "options": [
+          "her",
+          "hers",
+          "she",
+          "herself"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "hers",
+        "explicacao": "Sem substantivo após, usamos o pronome possessivo 'hers'.",
+        "dica": "Her pictures → The pictures are hers."
+      },
+      {
+        "id": "ing078",
+        "type": "fill-gap",
+        "question": "This cat is _____. (we - possessive pronoun)",
+        "options": [
+          "ours",
+          "our"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "ours",
+        "explicacao": "'Ours' é o pronome possessivo para 'we'.",
+        "dica": "Our cat → This cat is ours."
+      },
+      {
+        "id": "ing079",
+        "type": "multiple-choice",
+        "question": "What's the past simple of 'go'?",
+        "options": [
+          "goed",
+          "went", 
+          "gone",
+          "going"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "went",
+        "explicacao": "'Go' tem passado irregular: go → went → gone.",
+        "dica": "É um verbo irregular muito comum."
+      },
+      {
+        "id": "ing080",
+        "type": "fill-gap",
+        "question": "Complete the rhyme: 'I'm having lots of fun. How about _____?'",
+        "options": [
+          "you",
+          "me"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "you",
+        "explicacao": "Esta é a frase repetida no poema: 'How about you?'",
+        "dica": "Releia o refrão do poema sobre o clima."
+      }
+    ]
+  }
