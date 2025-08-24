@@ -25,12 +25,12 @@ export default function Home() {
       icon: "/window.svg",
       color: "rgba(28, 176, 246, 0.1)"
     },
-    // {
-    //   id: "ciencias",
-    //   title: "Ciências",
-    //   icon: "/vercel.svg",
-    //   color: "rgba(255, 82, 193, 0.1)"
-    // },
+    {
+      id: "geoografia",
+      title: "Geografia",
+      icon: "/vercel.svg",
+      color: "rgba(255, 82, 193, 0.1)"
+    },
   ];
 
   const container = {

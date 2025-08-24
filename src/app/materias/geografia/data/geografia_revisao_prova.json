@@ -1,0 +1,663 @@
+{
+    "nome": "Revisão para Prova de Geografia",
+    "materia": "Geografia",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "data": "2025-08-24",
+    "title": "Geografia - Revisão para Prova",
+    "description": "Lista extensa com 45 exercícios de geografia baseados no material de revisão, cobrindo orientação espacial, atividades econômicas, formação socioespacial e diversidade cultural do Brasil.",
+    "exercises": [
+      {
+        "id": "geo1",
+        "type": "multiple-choice",
+        "question": "A rosa dos ventos é a figura que representa:",
+        "options": [
+          "Apenas os pontos cardeais",
+          "Os pontos cardeais e colaterais",
+          "Somente as direções norte e sul",
+          "As estações do ano"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Os pontos cardeais e colaterais",
+        "explicacao": "A rosa dos ventos é uma figura que representa tanto os pontos cardeais (norte, sul, leste, oeste) quanto os pontos colaterais (nordeste, noroeste, sudeste, sudoeste).",
+        "dica": "A rosa dos ventos mostra todas as direções principais."
+      },
+      {
+        "id": "geo2",
+        "type": "multiple-choice",
+        "question": "Os pontos cardeais são compostos por:",
+        "options": [
+          "Norte, sul, leste e noroeste",
+          "Norte, sul, leste e oeste",
+          "Nordeste, sudeste, noroeste e sudoeste",
+          "Norte, sul e leste apenas"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Norte, sul, leste e oeste",
+        "explicacao": "Os pontos cardeais são os quatro pontos principais de orientação: norte, sul, leste e oeste.",
+        "dica": "São quatro direções principais básicas."
+      },
+      {
+        "id": "geo3",
+        "type": "fill-gap",
+        "question": "A bússola funciona com uma agulha magnetizada que aponta para o _____ devido ao magnetismo da Terra.",
+        "options": [
+          "norte",
+          "sul"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "norte",
+        "explicacao": "A bússola possui uma agulha magnetizada que sempre aponta para o polo norte magnético da Terra.",
+        "dica": "A agulha da bússola aponta sempre para o mesmo ponto."
+      },
+      {
+        "id": "geo4",
+        "type": "multiple-choice",
+        "question": "Qual é a menor unidade político-administrativa do país?",
+        "options": [
+          "Estado",
+          "Região",
+          "Município",
+          "Bairro"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Município",
+        "explicacao": "O município é a menor unidade político-administrativa do Brasil, sendo formado pelo espaço urbano (cidade) e rural (campo).",
+        "dica": "É a menor divisão administrativa oficial do país."
+      },
+      {
+        "id": "geo5",
+        "type": "fill-gap",
+        "question": "A atividade econômica de cultivo de plantas para a alimentação ou para o fornecimento de matérias-primas é chamada de _____.",
+        "options": [
+          "agricultura",
+          "pecuária"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "agricultura",
+        "explicacao": "A agricultura é a atividade econômica que envolve o cultivo de plantas para alimentação ou produção de matérias-primas.",
+        "dica": "Atividade relacionada ao plantio."
+      },
+      {
+        "id": "geo6",
+        "type": "fill-gap",
+        "question": "A atividade econômica de criação de animais para o consumo alimentar ou fornecimento de matérias-primas é chamada de _____.",
+        "options": [
+          "pecuária",
+          "agricultura"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "pecuária",
+        "explicacao": "A pecuária é a atividade econômica que envolve a criação de animais para consumo ou produção de matérias-primas.",
+        "dica": "Atividade relacionada à criação de animais."
+      },
+      {
+        "id": "geo7",
+        "type": "fill-gap",
+        "question": "A atividade econômica de extração de recursos naturais para consumo direto ou fabricação de outros produtos é chamada de _____.",
+        "options": [
+          "extrativismo",
+          "agricultura"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "extrativismo",
+        "explicacao": "O extrativismo é a atividade que retira recursos naturais diretamente da natureza, podendo ser vegetal, animal ou mineral.",
+        "dica": "Atividade que retira recursos da natureza."
+      },
+      {
+        "id": "geo8",
+        "type": "multiple-choice",
+        "question": "O setor secundário da economia é responsável por:",
+        "options": [
+          "Retirada de matéria-prima da natureza",
+          "Transformação da matéria-prima em produto",
+          "Venda e distribuição dos produtos",
+          "Criação de animais"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Transformação da matéria-prima em produto",
+        "explicacao": "O setor secundário engloba as indústrias que transformam matérias-primas em produtos acabados ou intermediários.",
+        "dica": "Setor das indústrias e transformação."
+      },
+      {
+        "id": "geo9",
+        "type": "multiple-choice",
+        "question": "Qual povo contribuiu para a criação da capoeira no Brasil?",
+        "options": [
+          "Europeus",
+          "Africanos",
+          "Indígenas",
+          "Asiáticos"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Africanos",
+        "explicacao": "A capoeira foi criada pelos povos africanos que foram trazidos como escravos para o Brasil.",
+        "dica": "Arte marcial desenvolvida pelos escravizados."
+      },
+      {
+        "id": "geo10",
+        "type": "multiple-choice",
+        "question": "A língua portuguesa foi trazida ao Brasil pelos:",
+        "options": [
+          "Africanos",
+          "Indígenas",
+          "Europeus",
+          "Asiáticos"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Europeus",
+        "explicacao": "A língua portuguesa foi trazida pelos colonizadores portugueses, que são europeus.",
+        "dica": "Veio com os colonizadores."
+      },
+      {
+        "id": "geo11",
+        "type": "fill-gap",
+        "question": "A rede, utensílio usado para dormir, foi criada pelos povos _____.",
+        "options": [
+          "indígenas",
+          "europeus"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "indígenas",
+        "explicacao": "A rede é uma invenção dos povos indígenas brasileiros, adaptada ao clima tropical.",
+        "dica": "Povo que já vivia no Brasil antes da colonização."
+      },
+      {
+        "id": "geo12",
+        "type": "multiple-choice",
+        "question": "O guaraná é uma contribuição cultural dos povos:",
+        "options": [
+          "Europeus",
+          "Africanos",
+          "Indígenas",
+          "Árabes"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Indígenas",
+        "explicacao": "O guaraná é uma fruta nativa do Brasil, conhecida e utilizada pelos povos indígenas.",
+        "dica": "Fruta nativa brasileira."
+      },
+      {
+        "id": "geo13",
+        "type": "multiple-choice",
+        "question": "As comunidades quilombolas são formadas por descendentes de:",
+        "options": [
+          "Indígenas",
+          "Europeus",
+          "Escravos africanos",
+          "Imigrantes asiáticos"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Escravos africanos",
+        "explicacao": "Os quilombos foram territórios ocupados por escravos fugitivos e ex-escravos africanos e seus descendentes.",
+        "dica": "Comunidades formadas por pessoas que fugiram da escravidão."
+      },
+      {
+        "id": "geo14",
+        "type": "multiple-choice",
+        "question": "Os seringueiros vivem principalmente da extração de:",
+        "options": [
+          "Castanha-do-pará",
+          "Látex da seringueira",
+          "Madeira",
+          "Açaí"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Látex da seringueira",
+        "explicacao": "Os seringueiros extraem o látex das seringueiras, que é usado para produzir borracha.",
+        "dica": "Substância usada para fazer borracha."
+      },
+      {
+        "id": "geo15",
+        "type": "multiple-choice",
+        "question": "Os castanheiros vivem principalmente da coleta de:",
+        "options": [
+          "Látex",
+          "Castanha-do-pará",
+          "Açaí",
+          "Madeira"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Castanha-do-pará",
+        "explicacao": "Os castanheiros coletam a castanha-do-pará, que fica dentro do ouriço da castanheira.",
+        "dica": "Semente comestível da Amazônia."
+      },
+      {
+        "id": "geo16",
+        "type": "multiple-choice",
+        "question": "As comunidades caiçaras são formadas por descendentes de:",
+        "options": [
+          "Apenas indígenas",
+          "Apenas portugueses",
+          "Indígenas e portugueses",
+          "Africanos e europeus"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Indígenas e portugueses",
+        "explicacao": "As comunidades caiçaras são formadas pela miscigenação entre indígenas e colonizadores portugueses.",
+        "dica": "Mistura de dois povos diferentes."
+      },
+      {
+        "id": "geo17",
+        "type": "multiple-choice",
+        "question": "A principal atividade das comunidades caiçaras é:",
+        "options": [
+          "Agricultura",
+          "Pecuária",
+          "Pesca artesanal",
+          "Mineração"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Pesca artesanal",
+        "explicacao": "As comunidades caiçaras vivem principalmente da pesca artesanal no litoral brasileiro.",
+        "dica": "Atividade realizada no mar."
+      },
+      {
+        "id": "geo18",
+        "type": "fill-gap",
+        "question": "As comunidades ribeirinhas que existem próximas às cidades sofrem com o _____ e a poluição dos rios.",
+        "options": [
+          "desmatamento",
+          "frio"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "desmatamento",
+        "explicacao": "O desmatamento compromete a qualidade de vida das comunidades ribeirinhas, que dependem dos rios.",
+        "dica": "Destruição da vegetação."
+      },
+      {
+        "id": "geo19",
+        "type": "multiple-choice",
+        "question": "O que significa 'diversidade cultural'?",
+        "options": [
+          "Existir apenas uma cultura",
+          "Existir muitas culturas diferentes no mundo",
+          "Não ter culturas",
+          "Ter culturas iguais"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Existir muitas culturas diferentes no mundo",
+        "explicacao": "Diversidade cultural significa que existem muitas culturas diferentes que podem conviver em relação.",
+        "dica": "Variedade de culturas."
+      },
+      {
+        "id": "geo20",
+        "type": "multiple-choice",
+        "question": "O Brasil possui uma sociedade:",
+        "options": [
+          "Homogênea",
+          "Miscigenada",
+          "Uniforme",
+          "Simples"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Miscigenada",
+        "explicacao": "O Brasil possui uma sociedade miscigenada, resultado da mistura de diferentes povos e culturas.",
+        "dica": "Mistura de diferentes povos."
+      },
+      {
+        "id": "geo21",
+        "type": "multiple-choice",
+        "question": "O setor terciário da economia engloba:",
+        "options": [
+          "Agricultura e pecuária",
+          "Indústrias",
+          "Comércio e serviços",
+          "Apenas mineração"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Comércio e serviços",
+        "explicacao": "O setor terciário é responsável pela venda e distribuição de produtos, incluindo comércio e serviços.",
+        "dica": "Setor que vende e oferece serviços."
+      },
+      {
+        "id": "geo22",
+        "type": "multiple-choice",
+        "question": "A agricultura familiar se caracteriza por:",
+        "options": [
+          "Uso intensivo de máquinas",
+          "Monocultura",
+          "Trabalho da própria família",
+          "Grandes propriedades"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Trabalho da própria família",
+        "explicacao": "Na agricultura familiar, a maior parte dos trabalhadores pertence à família proprietária da terra.",
+        "dica": "Trabalho realizado pelos membros da família."
+      },
+      {
+        "id": "geo23",
+        "type": "multiple-choice",
+        "question": "A monocultura é caracterizada por:",
+        "options": [
+          "Plantio de várias culturas diferentes",
+          "Plantio de um único tipo de cultura",
+          "Não plantio de nada",
+          "Plantio apenas de árvores"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Plantio de um único tipo de cultura",
+        "explicacao": "Monocultura é a prática agrícola de cultivar apenas um tipo de planta em grandes áreas.",
+        "dica": "Cultivo de uma única espécie."
+      },
+      {
+        "id": "geo24",
+        "type": "multiple-choice",
+        "question": "A policultura é caracterizada por:",
+        "options": [
+          "Plantio de um único tipo de cultura",
+          "Plantio de várias culturas diferentes",
+          "Não usar fertilizantes",
+          "Usar apenas máquinas"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Plantio de várias culturas diferentes",
+        "explicacao": "Policultura é a prática de cultivar diferentes tipos de plantas na mesma propriedade.",
+        "dica": "Variedade de cultivos."
+      },
+      {
+        "id": "geo25",
+        "type": "fill-gap",
+        "question": "O extrativismo vegetal inclui a retirada da natureza de recursos como madeira, palmito, açaí e _____.",
+        "options": [
+          "borracha",
+          "ferro"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "borracha",
+        "explicacao": "A borracha é extraída do látex das seringueiras, sendo um exemplo de extrativismo vegetal.",
+        "dica": "Substância extraída das árvores."
+      },
+      {
+        "id": "geo26",
+        "type": "multiple-choice",
+        "question": "O extrativismo mineral inclui a extração de:",
+        "options": [
+          "Madeira e borracha",
+          "Sal, ferro, petróleo e carvão",
+          "Castanha e açaí",
+          "Peixe e camarão"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Sal, ferro, petróleo e carvão",
+        "explicacao": "O extrativismo mineral envolve a retirada de recursos minerais como sal, ferro, petróleo e carvão da natureza.",
+        "dica": "Recursos retirados do subsolo."
+      },
+      {
+        "id": "geo27",
+        "type": "multiple-choice",
+        "question": "A pesca é um exemplo de extrativismo:",
+        "options": [
+          "Vegetal",
+          "Mineral",
+          "Animal",
+          "Industrial"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Animal",
+        "explicacao": "A pesca é um tipo de extrativismo animal, pois retira recursos animais da natureza.",
+        "dica": "Tipo de extrativismo que captura seres vivos."
+      },
+      {
+        "id": "geo28",
+        "type": "multiple-choice",
+        "question": "O espaço urbano é caracterizado por:",
+        "options": [
+          "Muita vegetação e poucos prédios",
+          "Muitos prédios e pouca vegetação",
+          "Apenas fazendas",
+          "Apenas florestas"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Muitos prédios e pouca vegetação",
+        "explicacao": "O espaço urbano (cidade) possui maior concentração de construções e menor quantidade de vegetação.",
+        "dica": "Características das cidades."
+      },
+      {
+        "id": "geo29",
+        "type": "multiple-choice",
+        "question": "O espaço rural é caracterizado por:",
+        "options": [
+          "Muitos arranha-céus",
+          "Muita vegetação e atividades agrícolas",
+          "Muito trânsito",
+          "Muitas indústrias"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Muita vegetação e atividades agrícolas",
+        "explicacao": "O espaço rural (campo) possui mais vegetação e é onde se desenvolvem atividades como agricultura e pecuária.",
+        "dica": "Características do campo."
+      },
+      {
+        "id": "geo30",
+        "type": "fill-gap",
+        "question": "A integração entre campo e cidade demonstra que as atividades do espaço urbano e rural _____ umas das outras.",
+        "options": [
+          "dependem",
+          "independem"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "dependem",
+        "explicacao": "Campo e cidade possuem uma relação de interdependência, onde um necessita do outro.",
+        "dica": "Relação de necessidade mútua."
+      },
+      {
+        "id": "geo31",
+        "type": "multiple-choice",
+        "question": "Qual é o principal fator para localização de indústrias?",
+        "options": [
+          "Apenas mão de obra",
+          "Infraestrutura, energia e mercado",
+          "Apenas clima",
+          "Apenas água"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Infraestrutura, energia e mercado",
+        "explicacao": "As indústrias necessitam de infraestrutura adequada, energia, mercado consumidor e outros fatores.",
+        "dica": "Vários fatores são importantes."
+      },
+      {
+        "id": "geo32",
+        "type": "multiple-choice",
+        "question": "A indústria de transformação:",
+        "options": [
+          "Não transforma nada",
+          "Transforma matéria-prima em produto",
+          "Apenas vende produtos",
+          "Apenas cultiva plantas"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Transforma matéria-prima em produto",
+        "explicacao": "A indústria de transformação processa matérias-primas e as transforma em produtos finais ou intermediários.",
+        "dica": "Processo de transformação industrial."
+      },
+      {
+        "id": "geo33",
+        "type": "multiple-choice",
+        "question": "O Centro de Tradições Nordestinas no Rio de Janeiro foi criado:",
+        "options": [
+          "Pelos cariocas",
+          "Pelos nordestinos que migraram",
+          "Pelo governo",
+          "Por turistas"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Pelos nordestinos que migraram",
+        "explicacao": "O Centro foi criado pelos nordestinos que migraram para o Rio de Janeiro em busca de trabalho e melhores condições de vida.",
+        "dica": "Pessoas que saíram de sua região de origem."
+      },
+      {
+        "id": "geo34",
+        "type": "fill-gap",
+        "question": "Os alemães que migraram para o Brasil influenciaram a cultura local através dos Centros de Tradições _____.",
+        "options": [
+          "Gaúchas",
+          "Nordestinas"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "Gaúchas",
+        "explicacao": "Os alemães contribuíram para espalhar os costumes gaúchos por diversas regiões do país através dos Centros de Tradições Gaúchas.",
+        "dica": "Tradições do Sul do Brasil."
+      },
+      {
+        "id": "geo35",
+        "type": "multiple-choice",
+        "question": "Quais pratos fazem parte da culinária brasileira?",
+        "options": [
+          "Apenas pizza",
+          "Feijoada, moqueca, pão de queijo e sushi",
+          "Apenas hambúrguer",
+          "Apenas salada"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Feijoada, moqueca, pão de queijo e sushi",
+        "explicacao": "A culinária brasileira é diversa, incluindo pratos de origem indígena, africana, europeia e asiática.",
+        "dica": "Mistura de influências culinárias."
+      },
+      {
+        "id": "geo36",
+        "type": "multiple-choice",
+        "question": "Os povos originários do Brasil são:",
+        "options": [
+          "Os europeus",
+          "Os africanos",
+          "Os indígenas",
+          "Os asiáticos"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Os indígenas",
+        "explicacao": "Os povos indígenas são os povos originários que já habitavam o território brasileiro antes da colonização.",
+        "dica": "Primeiros habitantes do Brasil."
+      },
+      {
+        "id": "geo37",
+        "type": "multiple-choice",
+        "question": "O que aconteceu com os povos originários durante a colonização?",
+        "options": [
+          "Foram respeitados",
+          "Foram dominados e escravizados",
+          "Não foram afetados",
+          "Migraram voluntariamente"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Foram dominados e escravizados",
+        "explicacao": "Os povos indígenas foram dominados pelos colonizadores, que tomaram suas terras e impuseram seus hábitos.",
+        "dica": "Sofreram com a colonização."
+      },
+      {
+        "id": "geo38",
+        "type": "fill-gap",
+        "question": "A distribuição das terras indígenas no Brasil está mais concentrada na região _____.",
+        "options": [
+          "Norte",
+          "Sudeste"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "Norte",
+        "explicacao": "A maior concentração de terras indígenas está na região Norte, principalmente na Amazônia.",
+        "dica": "Região com a maior floresta do país."
+      },
+      {
+        "id": "geo39",
+        "type": "multiple-choice",
+        "question": "As comunidades quilombolas estão mais concentradas em qual região?",
+        "options": [
+          "Norte",
+          "Nordeste",
+          "Sul",
+          "Centro-Oeste"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Nordeste",
+        "explicacao": "As comunidades quilombolas estão mais concentradas no Nordeste, região onde havia maior número de escravizados.",
+        "dica": "Região com histórico de plantation escravista."
+      },
+      {
+        "id": "geo40",
+        "type": "multiple-choice",
+        "question": "O que é cultura?",
+        "options": [
+          "Apenas comida",
+          "Apenas roupas",
+          "Costumes, alimentação, arte, arquitetura e manifestações de um povo",
+          "Apenas música"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Costumes, alimentação, arte, arquitetura e manifestações de um povo",
+        "explicacao": "Cultura engloba todos os aspectos da vida de um povo: costumes, alimentação, arte, arquitetura, religião, entre outros.",
+        "dica": "Conjunto de características de um povo."
+      },
+      {
+        "id": "geo41",
+        "type": "fill-gap",
+        "question": "Para conviver com pessoas que pensam diferente do nosso modo, precisamos de compreensão e _____ às diferenças.",
+        "options": [
+          "respeito",
+          "indiferença"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "respeito",
+        "explicacao": "O respeito às diferenças é fundamental para a convivência harmoniosa entre pessoas de culturas diferentes.",
+        "dica": "Valor importante para a convivência."
+      },
+      {
+        "id": "geo42",
+        "type": "multiple-choice",
+        "question": "Mapas, imagens de satélites e fotografias aéreas são:",
+        "options": [
+          "Formas de representar o espaço geográfico",
+          "Apenas decoração",
+          "Não servem para nada",
+          "Apenas para turismo"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "Formas de representar o espaço geográfico",
+        "explicacao": "Mapas, imagens de satélite e fotografias aéreas são diferentes formas de representar e estudar o espaço geográfico.",
+        "dica": "Ferramentas de representação espacial."
+      },
+      {
+        "id": "geo43",
+        "type": "multiple-choice",
+        "question": "O trabalho das comunidades tradicionais prejudica a natureza?",
+        "options": [
+          "Sim, sempre prejudica",
+          "Não, geralmente preserva os recursos",
+          "Às vezes sim, às vezes não",
+          "Não sabemos"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Não, geralmente preserva os recursos",
+        "explicacao": "As comunidades tradicionais geralmente desenvolvem atividades sustentáveis que preservam os recursos naturais.",
+        "dica": "Práticas tradicionais são mais sustentáveis."
+      },
+      {
+        "id": "geo44",
+        "type": "multiple-choice",
+        "question": "Uma das dificuldades das comunidades tradicionais é:",
+        "options": [
+          "Ter muitos recursos",
+          "Pressão de atividades econômicas modernas",
+          "Ter muita terra",
+          "Não ter tradições"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Pressão de atividades econômicas modernas",
+        "explicacao": "As comunidades tradicionais enfrentam pressões de atividades como agronegócio, mineração e urbanização que ameaçam seus territórios.",
+        "dica": "Ameaças externas ao seu modo de vida."
+      },
+      {
+        "id": "geo45",
+        "type": "multiple-choice",
+        "question": "A preservação das diferentes culturas é importante para:",
+        "options": [
+          "Criar conflitos",
+          "Preservar nossa identidade coletiva",
+          "Diminuir a diversidade",
+          "Não é importante"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Preservar nossa identidade coletiva",
+        "explicacao": "A preservação das diferentes culturas mantém nossa identidade coletiva e nos ajuda a compreender e respeitar as diferenças.",
+        "dica": "Valorização da diversidade cultural."
+      }
+    ]
+  }
