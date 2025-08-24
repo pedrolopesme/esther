@@ -658,6 +658,361 @@
         "resposta_correta": "Preservar nossa identidade coletiva",
         "explicacao": "A preservação das diferentes culturas mantém nossa identidade coletiva e nos ajuda a compreender e respeitar as diferenças.",
         "dica": "Valorização da diversidade cultural."
+      },
+      {
+        "id": "geo46",
+        "type": "fill-gap",
+        "question": "Podemos usar o _____ como referência para nos orientarmos, pois ele aparece sempre na mesma direção pela manhã.",
+        "options": [
+          "sol",
+          "lua"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "sol",
+        "explicacao": "O sol é um ponto de referência natural para orientação, pois nasce sempre na direção leste.",
+        "dica": "É a estrela que ilumina nosso dia."
+      },
+      {
+        "id": "geo47",
+        "type": "multiple-choice",
+        "question": "O conjunto de municípios forma uma unidade maior chamada:",
+        "options": [
+          "Bairro",
+          "País",
+          "Estado",
+          "Continente"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Estado",
+        "explicacao": "Um estado, ou Unidade Federativa (UF), é formado por um conjunto de municípios. O Brasil é composto por 26 estados e o Distrito Federal.",
+        "dica": "É uma divisão maior que o município, mas menor que o país."
+      },
+      {
+        "id": "geo48",
+        "type": "multiple-choice",
+        "question": "Qual setor da economia é responsável pela agricultura, pecuária e extrativismo?",
+        "options": [
+          "Setor Primário",
+          "Setor Secundário",
+          "Setor Terciário",
+          "Setor Quaternário"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "Setor Primário",
+        "explicacao": "O setor primário da economia envolve todas as atividades que produzem matérias-primas, como a agricultura (plantio), a pecuária (criação de animais) e o extrativismo (coleta de recursos naturais).",
+        "dica": "É o primeiro setor, que lida diretamente com os recursos da natureza."
+      },
+      {
+        "id": "geo49",
+        "type": "fill-gap",
+        "question": "A cidade depende do campo para obter _____ e o campo depende da cidade para comprar máquinas e ferramentas.",
+        "options": [
+          "alimentos",
+          "roupas"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "alimentos",
+        "explicacao": "Existe uma forte relação de interdependência entre o campo e a cidade. O campo fornece alimentos e matérias-primas para a cidade, que por sua vez fornece produtos industrializados, tecnologia e serviços para o campo.",
+        "dica": "O que o campo produz que comemos na cidade?"
+      },
+      {
+        "id": "geo50",
+        "type": "multiple-choice",
+        "question": "Qual destes é um exemplo de contribuição dos povos indígenas para a nossa cultura?",
+        "options": [
+          "O uso da pizza na culinária",
+          "O costume de tomar banho todos os dias",
+          "A festa de Carnaval",
+          "A língua inglesa"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "O costume de tomar banho todos os dias",
+        "explicacao": "Muitos dos nossos hábitos, palavras e alimentos são herdados dos povos indígenas, os habitantes originais do Brasil. O costume de tomar banho diariamente é um forte exemplo dessa herança cultural.",
+        "dica": "É um hábito de higiene que praticamos diariamente."
+      },
+      {
+        "id": "geo51",
+        "type": "multiple-choice",
+        "question": "Qual é o nome do ponto de orientação localizado entre o Norte e o Leste?",
+        "options": [
+          "Sudoeste",
+          "Noroeste",
+          "Sudeste",
+          "Nordeste"
+        ],
+        "correctIndex": 3,
+        "resposta_correta": "Nordeste",
+        "explicacao": "Os pontos colaterais são formados pela junção de dois pontos cardeais. O Nordeste está localizado exatamente entre o Norte e o Leste.",
+        "dica": "É a combinação das direções Norte e Leste."
+      },
+      {
+        "id": "geo52",
+        "type": "fill-gap",
+        "question": "A direção onde o sol nasce é chamada de _____ e a direção onde ele se põe é chamada de _____.",
+        "options": [
+          "Leste, Oeste",
+          "Norte, Sul"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "Leste, Oeste",
+        "explicacao": "O movimento aparente do sol é uma referência de orientação fundamental. Ele sempre nasce no Leste e se põe no Oeste.",
+        "dica": "Pense em que lado o sol aparece de manhã e desaparece à noite."
+      },
+      {
+        "id": "geo53",
+        "type": "multiple-choice",
+        "question": "O Brasil é uma república federativa formada por 26 estados e o:",
+        "options": [
+          "Território de Guanabara",
+          "Distrito Federal",
+          "Estado da Guanabara",
+          "Plano Piloto"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Distrito Federal",
+        "explicacao": "A organização político-administrativa do Brasil compreende 26 estados e o Distrito Federal, onde se localiza a capital do país, Brasília.",
+        "dica": "É a unidade federativa onde fica a capital do Brasil."
+      },
+      {
+        "id": "geo54",
+        "type": "fill-gap",
+        "question": "A capital do Brasil, _____, está localizada no Distrito Federal.",
+        "options": [
+          "Brasília",
+          "Rio de Janeiro"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "Brasília",
+        "explicacao": "Brasília, a capital federal do Brasil, foi planejada e construída para ser a sede do governo e está localizada no Distrito Federal.",
+        "dica": "É a cidade que é a capital do nosso país."
+      },
+      {
+        "id": "geo55",
+        "type": "multiple-choice",
+        "question": "A agricultura que utiliza grandes áreas, muitas máquinas e tecnologia, com produção voltada para a exportação, é a:",
+        "options": [
+          "Agricultura familiar",
+          "Agricultura de subsistência",
+          "Agricultura comercial",
+          "Horticultura"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Agricultura comercial",
+        "explicacao": "A agricultura comercial, também conhecida como agronegócio, é caracterizada pelo uso intensivo de tecnologia e grandes extensões de terra para produzir em larga escala, geralmente para exportação.",
+        "dica": "É o tipo de agricultura das grandes fazendas."
+      },
+      {
+        "id": "geo56",
+        "type": "fill-gap",
+        "question": "O cultivo de vários tipos de produtos na mesma propriedade agrícola é chamado de _____.",
+        "options": [
+          "policultura",
+          "monocultura"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "policultura",
+        "explicacao": "A policultura é uma prática agrícola que consiste em cultivar diversas espécies vegetais em uma mesma área, o que é comum na agricultura familiar.",
+        "dica": "'Poli' significa 'vários'."
+      },
+      {
+        "id": "geo57",
+        "type": "multiple-choice",
+        "question": "A extração de ouro, ferro e petróleo são exemplos de qual tipo de extrativismo?",
+        "options": [
+          "Extrativismo vegetal",
+          "Extrativismo animal",
+          "Extrativismo mineral",
+          "Extrativismo industrial"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Extrativismo mineral",
+        "explicacao": "O extrativismo mineral consiste na retirada de recursos de origem mineral da natureza, como metais (ouro, ferro) e combustíveis fósseis (petróleo).",
+        "dica": "São recursos retirados de rochas e do subsolo."
+      },
+      {
+        "id": "geo58",
+        "type": "multiple-choice",
+        "question": "Hospitais, escolas e lojas fazem parte de qual setor da economia?",
+        "options": [
+          "Setor primário",
+          "Setor secundário",
+          "Setor terciário",
+          "Setor de base"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Setor terciário",
+        "explicacao": "O setor terciário abrange o comércio e a prestação de serviços, como saúde (hospitais), educação (escolas) e vendas (lojas).",
+        "dica": "Este setor não produz bens, mas oferece serviços."
+      },
+      {
+        "id": "geo59",
+        "type": "fill-gap",
+        "question": "A área de um município com grande concentração de prédios, ruas e atividades comerciais é o espaço _____.",
+        "options": [
+          "urbano",
+          "rural"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "urbano",
+        "explicacao": "O espaço urbano, que corresponde à cidade, é caracterizado pela alta densidade de construções, pessoas e atividades econômicas como comércio e serviços.",
+        "dica": "É o mesmo que 'cidade'."
+      },
+      {
+        "id": "geo60",
+        "type": "multiple-choice",
+        "question": "Como é chamado o espaço de um município onde predominam as chácaras, fazendas e atividades agrícolas?",
+        "options": [
+          "Espaço urbano",
+          "Espaço rural",
+          "Espaço industrial",
+          "Espaço comercial"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Espaço rural",
+        "explicacao": "O espaço rural, também conhecido como campo, é a área onde se desenvolvem principalmente as atividades agrícolas e de criação de animais, com paisagens mais naturais.",
+        "dica": "É o mesmo que 'campo'."
+      },
+      {
+        "id": "geo61",
+        "type": "multiple-choice",
+        "question": "Qual povo foi trazido à força da África para o Brasil para ser escravizado?",
+        "options": [
+          "Indígenas",
+          "Portugueses",
+          "Africanos",
+          "Espanhóis"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Africanos",
+        "explicacao": "Durante o período colonial e imperial, milhões de africanos foram sequestrados e trazidos para o Brasil para trabalhar como escravos, principalmente nos engenhos de açúcar e nas minas.",
+        "dica": "Eles vieram de outro continente contra a sua vontade."
+      },
+      {
+        "id": "geo62",
+        "type": "fill-gap",
+        "question": "Um prato muito famoso no Brasil, a _____, é um exemplo da herança cultural dos povos africanos.",
+        "options": [
+          "feijoada",
+          "pizza"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "feijoada",
+        "explicacao": "A feijoada é um dos pratos mais representativos da culinária brasileira e tem suas origens na cultura dos africanos escravizados, que adaptaram receitas com os ingredientes disponíveis.",
+        "dica": "É um prato feito com feijão preto e carne de porco."
+      },
+      {
+        "id": "geo63",
+        "type": "multiple-choice",
+        "question": "O costume de dormir em redes é uma herança cultural de qual povo?",
+        "options": [
+          "Portugueses",
+          "Africanos",
+          "Indígenas",
+          "Italianos"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Indígenas",
+        "explicacao": "A rede de dormir é uma criação dos povos indígenas do Brasil, que foi incorporada aos hábitos de muitos brasileiros, especialmente em regiões mais quentes.",
+        "dica": "Eles já viviam aqui antes da chegada dos europeus."
+      },
+      {
+        "id": "geo64",
+        "type": "multiple-choice",
+        "question": "Qual é a principal atividade econômica que sustenta as comunidades de seringueiros?",
+        "options": [
+          "Pesca artesanal",
+          "Coleta de castanha",
+          "Extração de látex",
+          "Plantação de soja"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Extração de látex",
+        "explicacao": "Os seringueiros são comunidades tradicionais da Amazônia cujo modo de vida e economia são baseados na extração do látex das seringueiras para a produção de borracha.",
+        "dica": "A matéria-prima da borracha."
+      },
+      {
+        "id": "geo65",
+        "type": "fill-gap",
+        "question": "As comunidades caiçaras vivem no _____ brasileiro e sua principal atividade é a pesca artesanal.",
+        "options": [
+          "litoral",
+          "interior"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "litoral",
+        "explicacao": "As comunidades caiçaras são populações tradicionais formadas pela miscigenação de indígenas e europeus, que habitam a faixa litorânea do Brasil e dependem da pesca.",
+        "dica": "É a área de contato entre a terra e o mar."
+      },
+      {
+        "id": "geo66",
+        "type": "multiple-choice",
+        "question": "Como são chamadas as comunidades formadas por descendentes de africanos que fugiram da escravidão?",
+        "options": [
+          "Aldeias",
+          "Quilombos",
+          "Colônias",
+          "Reservas"
+        ],
+        "correctIndex": 1,
+        "resposta_correta": "Quilombos",
+        "explicacao": "Os quilombos eram locais de refúgio para escravos fugitivos. Hoje, as comunidades quilombolas são formadas por seus descendentes, que mantêm suas tradições culturais.",
+        "dica": "O mais famoso foi o Quilombo dos Palmares."
+      },
+      {
+        "id": "geo67",
+        "type": "fill-gap",
+        "question": "As comunidades _____ vivem nas margens dos _____ e dependem deles para transporte e alimentação.",
+        "options": [
+          "ribeirinhas, rios",
+          "caiçaras, mares"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "ribeirinhas, rios",
+        "explicacao": "Os ribeirinhos são populações tradicionais que vivem ao longo dos rios, especialmente na Amazônia. Seus modos de vida estão profundamente ligados aos ciclos das águas.",
+        "dica": "A palavra 'ribeirinha' vem de 'rio'."
+      },
+      {
+        "id": "geo68",
+        "type": "multiple-choice",
+        "question": "Os Centros de Tradições Gaúchas (CTGs) são espaços que preservam e divulgam a cultura do sul do Brasil, que teve forte influência de imigrantes:",
+        "options": [
+          "Japoneses",
+          "Africanos",
+          "Europeus",
+          "Árabes"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Europeus",
+        "explicacao": "A cultura gaúcha, celebrada nos CTGs, foi formada com grande contribuição de imigrantes europeus, como alemães e italianos, que se estabeleceram no sul do Brasil.",
+        "dica": "Alemães e italianos são exemplos desses imigrantes."
+      },
+      {
+        "id": "geo69",
+        "type": "multiple-choice",
+        "question": "Qual instrumento de orientação, inventado pelos chineses, usa uma agulha magnética que sempre aponta para o norte?",
+        "options": [
+          "GPS",
+          "Astrolábio",
+          "Bússola",
+          "Rosa dos ventos"
+        ],
+        "correctIndex": 2,
+        "resposta_correta": "Bússola",
+        "explicacao": "A bússola é um antigo instrumento de navegação, criado na China, que foi fundamental para as grandes navegações. Sua agulha imantada alinha-se com o campo magnético da Terra, apontando para o norte.",
+        "dica": "É um objeto muito usado por exploradores."
+      },
+      {
+        "id": "geo70",
+        "type": "fill-gap",
+        "question": "A relação entre campo e cidade é de interdependência, pois o campo fornece alimentos e _____ para a cidade.",
+        "options": [
+          "matérias-primas",
+          "serviços médicos"
+        ],
+        "correctIndex": 0,
+        "resposta_correta": "matérias-primas",
+        "explicacao": "O campo fornece à cidade não apenas alimentos, mas também matérias-primas (como algodão, madeira e minérios) que serão transformadas nas indústrias.",
+        "dica": "São os produtos básicos usados pelas indústrias."
       }
     ]
   }
