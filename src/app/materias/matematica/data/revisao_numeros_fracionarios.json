@@ -1,0 +1,990 @@
+{
+  "nome": "Exercícios de Matemática - Números Fracionários",
+  "materia": "Matemática",
+  "ano_letivo": "3º ano do Ensino Fundamental",
+  "data": "2025-08-31",
+  "title": "Exercícios de Números Fracionários",
+  "description": "Lista com exercícios de matemática baseada em materiais de revisão - números fracionários, sistema de numeração decimal, números naturais, números ordinais, numeração romana e problemas aplicados.",
+  "exercises": [
+    {
+      "id": "ex1",
+      "type": "multiple-choice",
+      "question": "A metade de 10 é:",
+      "options": [
+        "5",
+        "20",
+        "2",
+        "15"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "5",
+      "explicacao": "Para calcular a metade de um número, dividimos por 2: 10 ÷ 2 = 5.",
+      "dica": "A metade significa dividir por 2."
+    },
+    {
+      "id": "ex2",
+      "type": "fill-gap",
+      "question": "A metade de 54 é _____.",
+      "options": [
+        "27",
+        "108"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "27",
+      "explicacao": "54 ÷ 2 = 27.",
+      "dica": "Para encontrar a metade, divida o número por 2."
+    },
+    {
+      "id": "ex3",
+      "type": "multiple-choice",
+      "question": "A metade de 80 é:",
+      "options": [
+        "160",
+        "40",
+        "20",
+        "8"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "40",
+      "explicacao": "80 ÷ 2 = 40.",
+      "dica": "Metade é o mesmo que dividir por 2."
+    },
+    {
+      "id": "ex4",
+      "type": "fill-gap",
+      "question": "A terça parte de 15 é _____.",
+      "options": [
+        "5",
+        "45"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "5",
+      "explicacao": "15 ÷ 3 = 5.",
+      "dica": "Terça parte significa dividir por 3."
+    },
+    {
+      "id": "ex5",
+      "type": "multiple-choice",
+      "question": "A terça parte de 60 é:",
+      "options": [
+        "180",
+        "30",
+        "20",
+        "6"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "20",
+      "explicacao": "60 ÷ 3 = 20.",
+      "dica": "Para encontrar a terça parte, divida por 3."
+    },
+    {
+      "id": "ex6",
+      "type": "fill-gap",
+      "question": "A terça parte de 120 é _____.",
+      "options": [
+        "40",
+        "360"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "40",
+      "explicacao": "120 ÷ 3 = 40.",
+      "dica": "Divida 120 por 3 para encontrar a terça parte."
+    },
+    {
+      "id": "ex7",
+      "type": "multiple-choice",
+      "question": "A quarta parte de 20 é:",
+      "options": [
+        "5",
+        "80",
+        "4",
+        "10"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "5",
+      "explicacao": "20 ÷ 4 = 5.",
+      "dica": "Quarta parte significa dividir por 4."
+    },
+    {
+      "id": "ex8",
+      "type": "fill-gap",
+      "question": "A quarta parte de 32 é _____.",
+      "options": [
+        "8",
+        "128"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "8",
+      "explicacao": "32 ÷ 4 = 8.",
+      "dica": "Para encontrar a quarta parte, divida por 4."
+    },
+    {
+      "id": "ex9",
+      "type": "multiple-choice",
+      "question": "A quarta parte de 60 é:",
+      "options": [
+        "240",
+        "15",
+        "6",
+        "20"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "15",
+      "explicacao": "60 ÷ 4 = 15.",
+      "dica": "Divida 60 por 4."
+    },
+    {
+      "id": "ex10",
+      "type": "fill-gap",
+      "question": "A metade de 186 figurinhas é _____ figurinhas.",
+      "options": [
+        "93",
+        "372"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "93",
+      "explicacao": "186 ÷ 2 = 93.",
+      "dica": "Calcule 186 dividido por 2."
+    },
+    {
+      "id": "ex11",
+      "type": "multiple-choice",
+      "question": "A terça parte de 474 jogos é:",
+      "options": [
+        "158",
+        "1422",
+        "237",
+        "316"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "158",
+      "explicacao": "474 ÷ 3 = 158.",
+      "dica": "Divida 474 por 3."
+    },
+    {
+      "id": "ex12",
+      "type": "fill-gap",
+      "question": "1/3 de 510 reais corresponde a _____ reais.",
+      "options": [
+        "170",
+        "1530"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "170",
+      "explicacao": "510 ÷ 3 = 170.",
+      "dica": "1/3 significa dividir por 3."
+    },
+    {
+      "id": "ex13",
+      "type": "multiple-choice",
+      "question": "A metade de 104 é:",
+      "options": [
+        "52",
+        "208",
+        "26",
+        "54"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "52",
+      "explicacao": "104 ÷ 2 = 52.",
+      "dica": "Divida 104 por 2."
+    },
+    {
+      "id": "ex14",
+      "type": "fill-gap",
+      "question": "A metade de 250 é _____.",
+      "options": [
+        "125",
+        "500"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "125",
+      "explicacao": "250 ÷ 2 = 125.",
+      "dica": "Calcule 250 dividido por 2."
+    },
+    {
+      "id": "ex15",
+      "type": "multiple-choice",
+      "question": "A metade de 360 é:",
+      "options": [
+        "720",
+        "180",
+        "36",
+        "120"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "180",
+      "explicacao": "360 ÷ 2 = 180.",
+      "dica": "Metade significa dividir por 2."
+    },
+    {
+      "id": "ex16",
+      "type": "fill-gap",
+      "question": "A sexta parte de 270 jogos é _____.",
+      "options": [
+        "45",
+        "1620"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "45",
+      "explicacao": "270 ÷ 6 = 45.",
+      "dica": "Sexta parte significa dividir por 6."
+    },
+    {
+      "id": "ex17",
+      "type": "multiple-choice",
+      "question": "A décima parte de 800 doces é:",
+      "options": [
+        "80",
+        "8000",
+        "8",
+        "160"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "80",
+      "explicacao": "800 ÷ 10 = 80.",
+      "dica": "Décima parte significa dividir por 10."
+    },
+    {
+      "id": "ex18",
+      "type": "fill-gap",
+      "question": "1/9 de 702 reais é _____.",
+      "options": [
+        "78",
+        "6318"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "78",
+      "explicacao": "702 ÷ 9 = 78.",
+      "dica": "1/9 significa dividir por 9."
+    },
+    {
+      "id": "ex19",
+      "type": "multiple-choice",
+      "question": "1/5 de 625 reais é:",
+      "options": [
+        "125",
+        "3125",
+        "25",
+        "250"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "125",
+      "explicacao": "625 ÷ 5 = 125.",
+      "dica": "1/5 significa dividir por 5."
+    },
+    {
+      "id": "ex20",
+      "type": "fill-gap",
+      "question": "Ana tinha 36 maçãs. Vendeu 1/3 dessas maçãs. Ana vendeu _____ maçãs.",
+      "options": [
+        "12",
+        "108"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "12",
+      "explicacao": "36 ÷ 3 = 12. Ana vendeu 12 maçãs.",
+      "dica": "1/3 de 36 significa 36 dividido por 3."
+    },
+    {
+      "id": "ex21",
+      "type": "multiple-choice",
+      "question": "Ana vendeu 1/3 de suas 36 maçãs. Quantas maçãs sobraram?",
+      "options": [
+        "24",
+        "12",
+        "18",
+        "30"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "24",
+      "explicacao": "Ana vendeu 12 maçãs (36 ÷ 3 = 12). Sobraram 36 - 12 = 24 maçãs.",
+      "dica": "Calcule quantas vendeu e depois subtraia do total."
+    },
+    {
+      "id": "ex22",
+      "type": "fill-gap",
+      "question": "Plínio tinha 144 laranjas. Deu 1/2 para seu irmão. Plínio ficou com _____ laranjas.",
+      "options": [
+        "72",
+        "288"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "72",
+      "explicacao": "Plínio deu 144 ÷ 2 = 72 laranjas. Ficou com 144 - 72 = 72 laranjas.",
+      "dica": "Calcule a metade de 144 e depois subtraia do total."
+    },
+    {
+      "id": "ex23",
+      "type": "multiple-choice",
+      "question": "Um boliche tem 12 peças. Julinho derrubou 1/4 dessas peças. Quantas peças ele derrubou?",
+      "options": [
+        "3",
+        "48",
+        "4",
+        "6"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "3",
+      "explicacao": "12 ÷ 4 = 3. Julinho derrubou 3 peças.",
+      "dica": "1/4 de 12 significa 12 dividido por 4."
+    },
+    {
+      "id": "ex24",
+      "type": "fill-gap",
+      "question": "Julinho derrubou 1/4 das 12 peças do boliche. Quantas peças ficaram em pé? _____",
+      "options": [
+        "9",
+        "3"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "9",
+      "explicacao": "Julinho derrubou 3 peças (12 ÷ 4 = 3). Ficaram em pé 12 - 3 = 9 peças.",
+      "dica": "Subtraia as peças derrubadas do total."
+    },
+    {
+      "id": "ex25",
+      "type": "multiple-choice",
+      "question": "O resultado de 6.432 ÷ 8 é:",
+      "options": [
+        "804",
+        "51456",
+        "640",
+        "800"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "804",
+      "explicacao": "6.432 ÷ 8 = 804.",
+      "dica": "Faça a divisão passo a passo."
+    },
+    {
+      "id": "ex26",
+      "type": "fill-gap",
+      "question": "1.207 ÷ 6 = _____.",
+      "options": [
+        "201",
+        "7242"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "201",
+      "explicacao": "1.207 ÷ 6 = 201, resto 1.",
+      "dica": "Execute a divisão com resto."
+    },
+    {
+      "id": "ex27",
+      "type": "multiple-choice",
+      "question": "6 × 2.407 é igual a:",
+      "options": [
+        "14.442",
+        "2413",
+        "12.035",
+        "24.070"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "14.442",
+      "explicacao": "6 × 2.407 = 14.442.",
+      "dica": "Multiplique 6 por cada algarismo de 2.407."
+    },
+    {
+      "id": "ex28",
+      "type": "fill-gap",
+      "question": "8 × 1.036 = _____.",
+      "options": [
+        "8288",
+        "1044"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "8288",
+      "explicacao": "8 × 1.036 = 8.288.",
+      "dica": "Faça a multiplicação passo a passo."
+    },
+    {
+      "id": "ex29",
+      "type": "multiple-choice",
+      "question": "1/2 de 216 bombons é:",
+      "options": [
+        "108",
+        "432",
+        "54",
+        "216"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "108",
+      "explicacao": "216 ÷ 2 = 108.",
+      "dica": "1/2 significa metade, ou seja, dividir por 2."
+    },
+    {
+      "id": "ex30",
+      "type": "fill-gap",
+      "question": "1/3 de 564 jogos é _____.",
+      "options": [
+        "188",
+        "1692"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "188",
+      "explicacao": "564 ÷ 3 = 188.",
+      "dica": "1/3 significa terça parte, ou seja, dividir por 3."
+    },
+    {
+      "id": "ex31",
+      "type": "multiple-choice",
+      "question": "1/4 de 680 reais é:",
+      "options": [
+        "170",
+        "2720",
+        "680",
+        "340"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "170",
+      "explicacao": "680 ÷ 4 = 170.",
+      "dica": "1/4 significa quarta parte, ou seja, dividir por 4."
+    },
+    {
+      "id": "ex32",
+      "type": "fill-gap",
+      "question": "1/2 de 80 é _____.",
+      "options": [
+        "40",
+        "160"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "40",
+      "explicacao": "80 ÷ 2 = 40.",
+      "dica": "Metade de 80 é 80 dividido por 2."
+    },
+    {
+      "id": "ex33",
+      "type": "multiple-choice",
+      "question": "1/4 de 48 é:",
+      "options": [
+        "12",
+        "192",
+        "4",
+        "24"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "12",
+      "explicacao": "48 ÷ 4 = 12.",
+      "dica": "Divida 48 por 4."
+    },
+    {
+      "id": "ex34",
+      "type": "fill-gap",
+      "question": "1/3 de 27 é _____.",
+      "options": [
+        "9",
+        "81"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "9",
+      "explicacao": "27 ÷ 3 = 9.",
+      "dica": "Terça parte de 27 é 27 dividido por 3."
+    },
+    {
+      "id": "ex35",
+      "type": "multiple-choice",
+      "question": "1/3 de 36 é:",
+      "options": [
+        "12",
+        "108",
+        "9",
+        "18"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "12",
+      "explicacao": "36 ÷ 3 = 12.",
+      "dica": "Divida 36 por 3."
+    },
+    {
+      "id": "ex36",
+      "type": "fill-gap",
+      "question": "1/3 de 48 é _____.",
+      "options": [
+        "16",
+        "144"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "16",
+      "explicacao": "48 ÷ 3 = 16.",
+      "dica": "Calcule 48 dividido por 3."
+    },
+    {
+      "id": "ex37",
+      "type": "multiple-choice",
+      "question": "A metade de 48 é:",
+      "options": [
+        "24",
+        "96",
+        "12",
+        "6"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "24",
+      "explicacao": "48 ÷ 2 = 24.",
+      "dica": "Para encontrar a metade, divida por 2."
+    },
+    {
+      "id": "ex38",
+      "type": "fill-gap",
+      "question": "1/4 de 100 é _____.",
+      "options": [
+        "25",
+        "400"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "25",
+      "explicacao": "100 ÷ 4 = 25.",
+      "dica": "Quarta parte de 100 é 100 dividido por 4."
+    },
+    {
+      "id": "ex39",
+      "type": "multiple-choice",
+      "question": "1/4 de 160 é:",
+      "options": [
+        "40",
+        "640",
+        "160",
+        "80"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "40",
+      "explicacao": "160 ÷ 4 = 40.",
+      "dica": "Divida 160 por 4."
+    },
+    {
+      "id": "ex40",
+      "type": "fill-gap",
+      "question": "O dobro de 25 mais o triplo de 10 é _____.",
+      "options": [
+        "80",
+        "70"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "80",
+      "explicacao": "Dobro de 25 = 50. Triplo de 10 = 30. 50 + 30 = 80.",
+      "dica": "Calcule o dobro e o triplo separadamente, depois some."
+    },
+    {
+      "id": "ex41",
+      "type": "multiple-choice",
+      "question": "45 + 22 é igual a:",
+      "options": [
+        "67",
+        "23",
+        "75",
+        "65"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "67",
+      "explicacao": "45 + 22 = 67.",
+      "dica": "Some as dezenas e depois as unidades."
+    },
+    {
+      "id": "ex42",
+      "type": "fill-gap",
+      "question": "184 + 213 = _____.",
+      "options": [
+        "397",
+        "971"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "397",
+      "explicacao": "184 + 213 = 397.",
+      "dica": "Faça a adição passo a passo, coluna por coluna."
+    },
+    {
+      "id": "ex43",
+      "type": "multiple-choice",
+      "question": "2.186 + 1.234 é igual a:",
+      "options": [
+        "3.420",
+        "952",
+        "3.410",
+        "4.420"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "3.420",
+      "explicacao": "2.186 + 1.234 = 3.420.",
+      "dica": "Alinhe os números pelas ordens e some coluna por coluna."
+    },
+    {
+      "id": "ex44",
+      "type": "fill-gap",
+      "question": "168 - 23 = _____.",
+      "options": [
+        "145",
+        "191"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "145",
+      "explicacao": "168 - 23 = 145.",
+      "dica": "Subtraia as unidades primeiro, depois as dezenas."
+    },
+    {
+      "id": "ex45",
+      "type": "multiple-choice",
+      "question": "2.643 - 1.231 é igual a:",
+      "options": [
+        "1.412",
+        "3.874",
+        "1.422",
+        "1.512"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "1.412",
+      "explicacao": "2.643 - 1.231 = 1.412.",
+      "dica": "Alinhe os números e subtraia ordem por ordem."
+    },
+    {
+      "id": "ex46",
+      "type": "fill-gap",
+      "question": "425 - 236 = _____.",
+      "options": [
+        "189",
+        "661"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "189",
+      "explicacao": "425 - 236 = 189.",
+      "dica": "Faça a subtração passo a passo."
+    },
+    {
+      "id": "ex47",
+      "type": "multiple-choice",
+      "question": "Uma boneca custa R$ 625,00. Se tenho R$ 418,00, quanto falta para comprá-la?",
+      "options": [
+        "R$ 207,00",
+        "R$ 1.043,00",
+        "R$ 217,00",
+        "R$ 197,00"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "R$ 207,00",
+      "explicacao": "625 - 418 = 207. Faltam R$ 207,00.",
+      "dica": "Subtraia o valor que você tem do preço da boneca."
+    },
+    {
+      "id": "ex48",
+      "type": "fill-gap",
+      "question": "Uma boneca custa R$ 753,00. Se tenho R$ 318,00, faltam R$ _____.",
+      "options": [
+        "435",
+        "1071"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "435",
+      "explicacao": "753 - 318 = 435. Faltam R$ 435,00.",
+      "dica": "Calcule a diferença entre o preço e o valor que você tem."
+    },
+    {
+      "id": "ex49",
+      "type": "multiple-choice",
+      "question": "João tem 2 centenas de bolas de gude e seu irmão tem 3 dezenas e 5 unidades. Quantas bolinhas os dois têm juntos?",
+      "options": [
+        "235",
+        "65",
+        "200",
+        "135"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "235",
+      "explicacao": "João tem 200 bolas. O irmão tem 35 bolas (3 dezenas + 5 unidades). 200 + 35 = 235.",
+      "dica": "Primeiro converta centenas, dezenas e unidades em números, depois some."
+    },
+    {
+      "id": "ex50",
+      "type": "fill-gap",
+      "question": "O número 9.876 tem _____ ordens.",
+      "options": [
+        "4",
+        "9"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "4",
+      "explicacao": "9.876 tem 4 ordens: unidades de milhar, centenas, dezenas e unidades.",
+      "dica": "Conte quantos algarismos tem o número."
+    },
+    {
+      "id": "ex51",
+      "type": "multiple-choice",
+      "question": "No numeral 7.689, qual é o algarismo da 1ª ordem?",
+      "options": [
+        "9",
+        "7",
+        "8",
+        "6"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "9",
+      "explicacao": "A 1ª ordem é das unidades, que é representada pelo último algarismo à direita: 9.",
+      "dica": "A 1ª ordem é sempre das unidades."
+    },
+    {
+      "id": "ex52",
+      "type": "fill-gap",
+      "question": "No numeral 7.689, o algarismo da ordem das dezenas é _____.",
+      "options": [
+        "8",
+        "6"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "8",
+      "explicacao": "A ordem das dezenas é a 2ª ordem da direita para a esquerda: 8.",
+      "dica": "As dezenas ficam na segunda posição da direita para a esquerda."
+    },
+    {
+      "id": "ex53",
+      "type": "multiple-choice",
+      "question": "Quantas unidades tem o número 7.689?",
+      "options": [
+        "7.689",
+        "9",
+        "7",
+        "89"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "7.689",
+      "explicacao": "O número 7.689 tem exatamente 7.689 unidades.",
+      "dica": "O próprio número representa a quantidade total de unidades."
+    },
+    {
+      "id": "ex54",
+      "type": "fill-gap",
+      "question": "O número 9.713 decomposto em ordens é 9 mil + 7 centenas + 1 dezena + _____ unidades.",
+      "options": [
+        "3",
+        "13"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "3",
+      "explicacao": "9.713 = 9.000 + 700 + 10 + 3.",
+      "dica": "O último algarismo à direita representa as unidades."
+    },
+    {
+      "id": "ex55",
+      "type": "multiple-choice",
+      "question": "O número 9.713 decomposto em unidades é:",
+      "options": [
+        "9.000 + 700 + 10 + 3",
+        "9 + 7 + 1 + 3",
+        "97 + 13",
+        "971 + 3"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "9.000 + 700 + 10 + 3",
+      "explicacao": "Cada algarismo deve ser multiplicado pelo seu valor posicional.",
+      "dica": "Lembre-se do valor posicional de cada ordem."
+    },
+    {
+      "id": "ex56",
+      "type": "fill-gap",
+      "question": "O maior número de 4 ordens é _____.",
+      "options": [
+        "9999",
+        "1000"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "9999",
+      "explicacao": "O maior número de 4 ordens usa o maior algarismo (9) em todas as posições.",
+      "dica": "Use o maior algarismo possível em cada posição."
+    },
+    {
+      "id": "ex57",
+      "type": "multiple-choice",
+      "question": "O menor número de 4 ordens é:",
+      "options": [
+        "1000",
+        "0000",
+        "1111",
+        "0001"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "1000",
+      "explicacao": "O menor número de 4 ordens é 1000 (não pode começar com 0).",
+      "dica": "Um número não pode começar com zero."
+    },
+    {
+      "id": "ex58",
+      "type": "fill-gap",
+      "question": "Usando os algarismos 1, 2, 4 e 5 apenas uma vez, o maior número possível é _____.",
+      "options": [
+        "5421",
+        "1245"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "5421",
+      "explicacao": "Para formar o maior número, coloque os algarismos em ordem decrescente.",
+      "dica": "Coloque o maior algarismo na posição de maior valor."
+    },
+    {
+      "id": "ex59",
+      "type": "multiple-choice",
+      "question": "Usando os algarismos 1, 2, 4 e 5 apenas uma vez, o menor número é:",
+      "options": [
+        "1245",
+        "5421",
+        "2145",
+        "1254"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "1245",
+      "explicacao": "Para formar o menor número, coloque os algarismos em ordem crescente.",
+      "dica": "Coloque o menor algarismo na posição de maior valor."
+    },
+    {
+      "id": "ex60",
+      "type": "fill-gap",
+      "question": "O numeral romano XIV corresponde ao número _____.",
+      "options": [
+        "14",
+        "16"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "14",
+      "explicacao": "XIV = 10 + 4 = 14 (X = 10, IV = 4).",
+      "dica": "I antes de V significa 4."
+    },
+    {
+      "id": "ex61",
+      "type": "multiple-choice",
+      "question": "O numeral romano XXVI corresponde a:",
+      "options": [
+        "26",
+        "24",
+        "31",
+        "16"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "26",
+      "explicacao": "XXVI = 20 + 6 = 26 (XX = 20, VI = 6).",
+      "dica": "Conte os símbolos X (10) e some com VI (6)."
+    },
+    {
+      "id": "ex62",
+      "type": "fill-gap",
+      "question": "O número 94 em numerais romanos é _____.",
+      "options": [
+        "XCIV",
+        "LXXXXIV"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "XCIV",
+      "explicacao": "94 = 90 + 4 = XC + IV = XCIV.",
+      "dica": "90 = XC (100 - 10) e 4 = IV (5 - 1)."
+    },
+    {
+      "id": "ex63",
+      "type": "multiple-choice",
+      "question": "O número 256 em numerais romanos é:",
+      "options": [
+        "CCLVI",
+        "CCVI",
+        "CCLV",
+        "CCLX"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "CCLVI",
+      "explicacao": "256 = 200 + 50 + 6 = CC + L + VI = CCLVI.",
+      "dica": "200 = CC, 50 = L, 6 = VI."
+    },
+    {
+      "id": "ex64",
+      "type": "fill-gap",
+      "question": "O número ordinal que indica a 15ª posição é _____.",
+      "options": [
+        "décimo quinto",
+        "quinze"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "décimo quinto",
+      "explicacao": "O 15º lugar se lê: décimo quinto.",
+      "dica": "Números ordinais indicam posição ou ordem."
+    },
+    {
+      "id": "ex65",
+      "type": "multiple-choice",
+      "question": "O número ordinal que indica a 23ª posição é:",
+      "options": [
+        "vigésimo terceiro",
+        "vinte e três",
+        "vigésimo segundo",
+        "trigésimo terceiro"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "vigésimo terceiro",
+      "explicacao": "O 23º lugar se lê: vigésimo terceiro.",
+      "dica": "Vigésimo = 20º, terceiro = 3º."
+    },
+    {
+      "id": "ex66",
+      "type": "fill-gap",
+      "question": "710 + 239 = _____.",
+      "options": [
+        "949",
+        "471"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "949",
+      "explicacao": "710 + 239 = 949.",
+      "dica": "Some coluna por coluna, da direita para a esquerda."
+    },
+    {
+      "id": "ex67",
+      "type": "multiple-choice",
+      "question": "328 + 45 + 107 é igual a:",
+      "options": [
+        "480",
+        "373",
+        "435",
+        "470"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "480",
+      "explicacao": "328 + 45 + 107 = 480.",
+      "dica": "Adicione os três números passo a passo."
+    },
+    {
+      "id": "ex68",
+      "type": "fill-gap",
+      "question": "876 - 23 = _____.",
+      "options": [
+        "853",
+        "899"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "853",
+      "explicacao": "876 - 23 = 853.",
+      "dica": "Subtraia as unidades primeiro, depois as dezenas."
+    },
+    {
+      "id": "ex69",
+      "type": "multiple-choice",
+      "question": "O valor absoluto do algarismo 5 no número 4.753 é:",
+      "options": [
+        "5",
+        "50",
+        "500",
+        "5000"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "5",
+      "explicacao": "O valor absoluto é sempre o próprio algarismo, independente da posição.",
+      "dica": "Valor absoluto é o algarismo sem considerar sua posição."
+    },
+    {
+      "id": "ex70",
+      "type": "fill-gap",
+      "question": "O valor relativo do algarismo 5 no número 4.753 é _____.",
+      "options": [
+        "50",
+        "5"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "50",
+      "explicacao": "O algarismo 5 está na casa das dezenas, então seu valor relativo é 50.",
+      "dica": "Valor relativo considera a posição do algarismo no número."
+    }
+  ]
+}
