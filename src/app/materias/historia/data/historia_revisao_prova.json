@@ -1,0 +1,2173 @@
+{
+  "nome": "Revisão para Prova de História",
+  "materia": "História",
+  "ano_letivo": "3º ano do Ensino Fundamental",
+  "data": "2025-09-01",
+  "title": "História - Revisão para Prova",
+  "description": "Lista extensa com 150+ exercícios de história cobrindo Grandes Navegações, Descobrimento do Brasil, Sistema Colonial, Capitanias Hereditárias, Governo-Geral, Fundação do Rio de Janeiro, Ciclo da Cana-de-Açúcar, Entradas e Bandeiras. Exercícios baseados no material de revisão completo das Unidades 2, 3, 4, 5 e 6.",
+  "exercises": [
+    {
+      "id": "hist1",
+      "type": "multiple-choice",
+      "question": "Em que ano foi fundada a cidade do Rio de Janeiro por Estácio de Sá?",
+      "options": [
+        "1555",
+        "1565",
+        "1567",
+        "1575"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "1565",
+      "explicacao": "A cidade do Rio de Janeiro foi fundada em 1º de março de 1565 por Estácio de Sá.",
+      "dica": "Foi no século XVI, pouco depois da chegada dos franceses."
+    },
+    {
+      "id": "hist2",
+      "type": "multiple-choice",
+      "question": "Qual era o nome completo da cidade do Rio de Janeiro quando foi fundada?",
+      "options": [
+        "Rio de Janeiro",
+        "São Sebastião do Rio de Janeiro",
+        "São Paulo do Rio de Janeiro",
+        "Santa Cruz do Rio de Janeiro"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "São Sebastião do Rio de Janeiro",
+      "explicacao": "O nome completo da cidade quando foi fundada era São Sebastião do Rio de Janeiro.",
+      "dica": "O nome homenageava um santo católico."
+    },
+    {
+      "id": "hist3",
+      "type": "fill-gap",
+      "question": "A França Antártica foi estabelecida pelos franceses na Baía de Guanabara em _____.",
+      "options": [
+        "1555",
+        "1565"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "1555",
+      "explicacao": "A França Antártica foi estabelecida pelos franceses na Baía de Guanabara em 1555.",
+      "dica": "Foi 10 anos antes da fundação do Rio de Janeiro."
+    },
+    {
+      "id": "hist4",
+      "type": "multiple-choice",
+      "question": "Qual tribo indígena se aliou aos franceses na França Antártica?",
+      "options": [
+        "Tupinambás",
+        "Tamoios",
+        "Guaranis",
+        "Xavantes"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Tamoios",
+      "explicacao": "Os franceses contaram com a ajuda dos indígenas Tamoios para se estabelecer na Baía de Guanabara.",
+      "dica": "Esta tribo era inimiga dos portugueses."
+    },
+    {
+      "id": "hist5",
+      "type": "fill-gap",
+      "question": "O local inicial onde foi fundada a cidade do Rio de Janeiro foi o _____.",
+      "options": [
+        "Morro da Urca",
+        "Morro do Castelo"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Morro da Urca",
+      "explicacao": "A cidade foi inicialmente fundada no Morro da Urca e depois transferida para o Morro do Castelo.",
+      "dica": "Depois foi transferida para outro morro."
+    },
+    {
+      "id": "hist6",
+      "type": "multiple-choice",
+      "question": "Em que ano os franceses foram definitivamente expulsos do Rio de Janeiro?",
+      "options": [
+        "1565",
+        "1567",
+        "1570",
+        "1575"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "1567",
+      "explicacao": "A expulsão definitiva dos franceses ocorreu em 1567, quando Estácio de Sá morreu nesta batalha final.",
+      "dica": "Foi dois anos depois da fundação da cidade."
+    },
+    {
+      "id": "hist7",
+      "type": "fill-gap",
+      "question": "A Igreja de Santa Luzia foi construída para dar _____ às pessoas e suas atividades religiosas.",
+      "options": [
+        "confiança",
+        "proteção"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "confiança",
+      "explicacao": "A Igreja de Santa Luzia foi construída para dar confiança às pessoas e suas atividades religiosas.",
+      "dica": "Era importante para a fé dos moradores."
+    },
+    {
+      "id": "hist8",
+      "type": "multiple-choice",
+      "question": "Qual era o objetivo principal da colonização brasileira pelos portugueses?",
+      "options": [
+        "Evangelizar os indígenas",
+        "Encontrar ouro",
+        "Desenvolver atividades econômicas para render lucro à Coroa Portuguesa",
+        "Criar colônias de povoamento"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Desenvolver atividades econômicas para render lucro à Coroa Portuguesa",
+      "explicacao": "O objetivo da colonização era desenvolver atividades econômicas para render lucro à Coroa Portuguesa.",
+      "dica": "Era uma colonização de exploração."
+    },
+    {
+      "id": "hist9",
+      "type": "fill-gap",
+      "question": "O Pacto Colonial estabelecia que o Brasil só podia comprar e vender produtos para _____.",
+      "options": [
+        "Portugal",
+        "Espanha"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Portugal",
+      "explicacao": "O Pacto Colonial determinava que o Brasil só podia comercializar com Portugal, sua metrópole.",
+      "dica": "Era o país colonizador do Brasil."
+    },
+    {
+      "id": "hist10",
+      "type": "multiple-choice",
+      "question": "Quais eram as três características principais do Sistema de Plantation?",
+      "options": [
+        "Pequenas propriedades, policultura, trabalho livre",
+        "Grandes latifúndios, monocultura, mão de obra escrava",
+        "Médias propriedades, agricultura de subsistência, trabalho assalariado",
+        "Propriedades familiares, cultivo diversificado, trabalho cooperativo"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Grandes latifúndios, monocultura, mão de obra escrava",
+      "explicacao": "O Sistema de Plantation se caracterizava por grandes latifúndios, monocultura (cana-de-açúcar) e mão de obra escrava.",
+      "dica": "Era um sistema voltado para a exportação."
+    },
+    {
+      "id": "hist11",
+      "type": "fill-gap",
+      "question": "A monocultura do período colonial brasileiro se baseava principalmente no cultivo da _____.",
+      "options": [
+        "cana-de-açúcar",
+        "mandioca"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "cana-de-açúcar",
+      "explicacao": "A monocultura colonial se baseava principalmente no cultivo da cana-de-açúcar, especialmente no Nordeste.",
+      "dica": "Era o principal produto de exportação do período."
+    },
+    {
+      "id": "hist12",
+      "type": "multiple-choice",
+      "question": "Na estrutura dos engenhos, onde moravam os senhores de engenho e suas famílias?",
+      "options": [
+        "Senzala",
+        "Casa Grande",
+        "Capela",
+        "Engenho"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Casa Grande",
+      "explicacao": "A Casa Grande era onde moravam os senhores de engenho e suas famílias.",
+      "dica": "Era a residência principal do engenho."
+    },
+    {
+      "id": "hist13",
+      "type": "fill-gap",
+      "question": "Os escravos africanos ficavam na _____ após o trabalho.",
+      "options": [
+        "senzala",
+        "casa grande"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "senzala",
+      "explicacao": "A senzala era o local onde os escravos africanos ficavam após o trabalho.",
+      "dica": "Era a habitação dos escravos no engenho."
+    },
+    {
+      "id": "hist14",
+      "type": "multiple-choice",
+      "question": "Na pirâmide social da sociedade açucareira, quem ocupava a base?",
+      "options": [
+        "Donos de Engenhos",
+        "Trabalhadores Livres",
+        "Escravos",
+        "Comerciantes"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Escravos",
+      "explicacao": "Na sociedade açucareira, os escravos formavam a base da pirâmide social e constituíam a maior parte da população.",
+      "dica": "Era o grupo mais numeroso e menos privilegiado."
+    },
+    {
+      "id": "hist15",
+      "type": "fill-gap",
+      "question": "A maior parte dos escravos africanos vinha da região da _____.",
+      "options": [
+        "Guiné",
+        "Etiópia"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Guiné",
+      "explicacao": "A maior parte dos escravos africanos que vieram para o Brasil eram originários da região da Guiné, na África.",
+      "dica": "Era uma região da costa ocidental africana."
+    },
+    {
+      "id": "hist16",
+      "type": "multiple-choice",
+      "question": "Quanto tempo durava a viagem dos navios negreiros da África ao Recife?",
+      "options": [
+        "10 dias",
+        "15 dias",
+        "30 dias",
+        "50 dias"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "15 dias",
+      "explicacao": "A viagem dos navios negreiros da África ao Recife durava cerca de 15 dias.",
+      "dica": "Era mais rápida que a viagem para o Rio de Janeiro."
+    },
+    {
+      "id": "hist17",
+      "type": "fill-gap",
+      "question": "Os quilombos eram aldeias de escravos _____ em locais de difícil acesso.",
+      "options": [
+        "fugitivos",
+        "libertos"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "fugitivos",
+      "explicacao": "Os quilombos eram aldeias formadas por escravos fugitivos que se refugiavam em locais de difícil acesso.",
+      "dica": "Eram comunidades de resistência à escravidão."
+    },
+    {
+      "id": "hist18",
+      "type": "multiple-choice",
+      "question": "Qual era o quilombo mais famoso do período colonial?",
+      "options": [
+        "Quilombo do Ambrósio",
+        "Quilombo dos Palmares",
+        "Quilombo de Cachoeira",
+        "Quilombo do Jabaquara"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Quilombo dos Palmares",
+      "explicacao": "O Quilombo dos Palmares era o mais famoso quilombo do período colonial brasileiro.",
+      "dica": "Seu líder mais conhecido foi Zumbi."
+    },
+    {
+      "id": "hist19",
+      "type": "fill-gap",
+      "question": "Zumbi dos Palmares morreu em _____ de novembro, data que se tornou o Dia da Consciência Negra.",
+      "options": [
+        "20",
+        "15"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "20",
+      "explicacao": "Zumbi dos Palmares morreu em 20 de novembro, data que se tornou o Dia da Consciência Negra.",
+      "dica": "É uma data importante para a cultura afro-brasileira."
+    },
+    {
+      "id": "hist20",
+      "type": "multiple-choice",
+      "question": "Qual foi o motivo da primeira invasão holandesa na Bahia (1624)?",
+      "options": [
+        "Busca por ouro",
+        "União Ibérica proibiu comércio holandês com Portugal",
+        "Rivalidade religiosa",
+        "Disputa territorial"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "União Ibérica proibiu comércio holandês com Portugal",
+      "explicacao": "A primeira invasão holandesa na Bahia ocorreu porque a União Ibérica proibiu o comércio holandês com Portugal.",
+      "dica": "Foi uma consequência de mudanças políticas europeias."
+    },
+    {
+      "id": "hist21",
+      "type": "fill-gap",
+      "question": "A segunda invasão holandesa no Nordeste durou _____ anos.",
+      "options": [
+        "24",
+        "30"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "24",
+      "explicacao": "A segunda invasão holandesa em Pernambuco durou 24 anos, de 1630 a 1654.",
+      "dica": "Foi bem mais longa que a primeira invasão."
+    },
+    {
+      "id": "hist22",
+      "type": "multiple-choice",
+      "question": "Durante o domínio holandês, qual cidade se tornou capital de Pernambuco?",
+      "options": [
+        "Olinda",
+        "Recife",
+        "Salvador",
+        "Natal"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Recife",
+      "explicacao": "Durante o governo de Maurício de Nassau, Recife se tornou capital de Pernambuco.",
+      "dica": "Foi uma importante transformação urbana do período."
+    },
+    {
+      "id": "hist23",
+      "type": "fill-gap",
+      "question": "Frans Post era um artista holandês especialista em _____.",
+      "options": [
+        "paisagens",
+        "retratos"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "paisagens",
+      "explicacao": "Frans Post era especialista em paisagens e retratou muitas cenas do Brasil colonial.",
+      "dica": "Ele pintava a natureza e os cenários brasileiros."
+    },
+    {
+      "id": "hist24",
+      "type": "multiple-choice",
+      "question": "Qual artista holandês se especializou na caracterização do povo brasileiro?",
+      "options": [
+        "Frans Post",
+        "Albert Eckhout",
+        "Pieter Post",
+        "Rembrandt"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Albert Eckhout",
+      "explicacao": "Albert Eckhout se especializou na caracterização do povo brasileiro, retratando diferentes tipos humanos.",
+      "dica": "Ele pintava pessoas de diferentes grupos étnicos."
+    },
+    {
+      "id": "hist25",
+      "type": "fill-gap",
+      "question": "A União Ibérica durou de _____ a 1640.",
+      "options": [
+        "1580",
+        "1570"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "1580",
+      "explicacao": "A União Ibérica durou de 1580 a 1640, período em que Portugal e Espanha ficaram sob o mesmo rei.",
+      "dica": "Durou 60 anos."
+    },
+    {
+      "id": "hist26",
+      "type": "multiple-choice",
+      "question": "O que causou o fim do Ciclo do Açúcar?",
+      "options": [
+        "Apenas o fim da União Ibérica",
+        "Apenas a expulsão dos holandeses",
+        "Fim da União Ibérica, expulsão dos holandeses e concorrência das Antilhas",
+        "Apenas a descoberta do ouro"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Fim da União Ibérica, expulsão dos holandeses e concorrência das Antilhas",
+      "explicacao": "O fim do Ciclo do Açúcar teve várias causas: fim da União Ibérica (1640), expulsão dos holandeses (1654) e concorrência do açúcar das Antilhas.",
+      "dica": "Foram múltiplos fatores que se combinaram."
+    },
+    {
+      "id": "hist27",
+      "type": "fill-gap",
+      "question": "O Tratado de Tordesilhas foi assinado em _____, antes mesmo da descoberta do Brasil.",
+      "options": [
+        "1494",
+        "1500"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "1494",
+      "explicacao": "O Tratado de Tordesilhas foi assinado em 1494, seis anos antes da descoberta do Brasil.",
+      "dica": "Foi no século XV."
+    },
+    {
+      "id": "hist28",
+      "type": "multiple-choice",
+      "question": "Segundo o Tratado de Tordesilhas, as terras a leste da Ilha de Cabo Verde pertenceriam a:",
+      "options": [
+        "Espanha",
+        "Portugal",
+        "França",
+        "Holanda"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Portugal",
+      "explicacao": "Pelo Tratado de Tordesilhas, as terras a leste da Ilha de Cabo Verde pertenceriam a Portugal, e as a oeste à Espanha.",
+      "dica": "Portugal ficou com as terras orientais."
+    },
+    {
+      "id": "hist29",
+      "type": "fill-gap",
+      "question": "A União Ibérica fez com que o Tratado de Tordesilhas _____ valor.",
+      "options": [
+        "perdesse",
+        "ganhasse"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "perdesse",
+      "explicacao": "Durante a União Ibérica, o Tratado de Tordesilhas perdeu valor porque Portugal e Espanha ficaram sob o mesmo rei.",
+      "dica": "Não fazia sentido dividir terras do mesmo reino."
+    },
+    {
+      "id": "hist30",
+      "type": "multiple-choice",
+      "question": "São Paulo de Piratininga foi fundada em:",
+      "options": [
+        "25 de janeiro de 1554",
+        "25 de janeiro de 1565",
+        "1º de março de 1565",
+        "22 de abril de 1500"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "25 de janeiro de 1554",
+      "explicacao": "São Paulo de Piratininga foi fundada em 25 de janeiro de 1554 por religiosos e se tornou ponto de partida das expedições bandeirantes.",
+      "dica": "Foi fundada por jesuítas."
+    },
+    {
+      "id": "hist31",
+      "type": "fill-gap",
+      "question": "Os bandeirantes eram principalmente _____, uma mistura de branco com indígena.",
+      "options": [
+        "mamelucos",
+        "cafuzos"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "mamelucos",
+      "explicacao": "Os bandeirantes eram principalmente mamelucos, resultado da mistura entre brancos e indígenas.",
+      "dica": "Era um tipo específico de mestiçagem."
+    },
+    {
+      "id": "hist32",
+      "type": "multiple-choice",
+      "question": "Quais eram os dois objetivos principais dos bandeirantes?",
+      "options": [
+        "Evangelizar indígenas e encontrar especiarias",
+        "Capturar indígenas para escravização e buscar metais preciosos",
+        "Fundar cidades e criar rotas comerciais",
+        "Expulsar invasores e defender o território"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Capturar indígenas para escravização e buscar metais preciosos",
+      "explicacao": "Os bandeirantes tinham dois objetivos principais: capturar indígenas para escravização e buscar metais preciosos como ouro e prata.",
+      "dica": "Eram expedições com fins econômicos."
+    },
+    {
+      "id": "hist33",
+      "type": "fill-gap",
+      "question": "As expedições _____ eram de caráter oficial, organizadas pelo governo.",
+      "options": [
+        "Entradas",
+        "Bandeiras"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Entradas",
+      "explicacao": "As Entradas eram expedições de caráter oficial, organizadas pelo governo, enquanto as Bandeiras eram de iniciativa particular.",
+      "dica": "Tinham apoio governamental."
+    },
+    {
+      "id": "hist34",
+      "type": "multiple-choice",
+      "question": "Qual equipamento de proteção os bandeirantes usavam feito de couro cru acolchoado?",
+      "options": [
+        "Elmo",
+        "Gibão de armas",
+        "Escudo",
+        "Armadura"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Gibão de armas",
+      "explicacao": "Os bandeirantes usavam gibão de armas, uma couraça de couro cru acolchoado para proteção.",
+      "dica": "Era uma proteção corporal específica."
+    },
+    {
+      "id": "hist35",
+      "type": "fill-gap",
+      "question": "Para peneirar ouro, os bandeirantes usavam peneiras de pele de _____ ou capivara.",
+      "options": [
+        "veado",
+        "boi"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "veado",
+      "explicacao": "Os bandeirantes usavam peneiras de pele de veado ou capivara para garimpar ouro.",
+      "dica": "Era um animal nativo da região."
+    },
+    {
+      "id": "hist36",
+      "type": "multiple-choice",
+      "question": "Em situações de emergência, os bandeirantes chegavam a comer:",
+      "options": [
+        "Apenas frutas",
+        "Apenas peixes",
+        "Carne de cobra, lagartos, sapos e sangue de animais",
+        "Apenas mel e pinhão"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Carne de cobra, lagartos, sapos e sangue de animais",
+      "explicacao": "Em situações extremas, os bandeirantes chegavam a comer carne de cobra, lagartos, sapos e até sangue de animais.",
+      "dica": "Eram alimentos de sobrevivência extrema."
+    },
+    {
+      "id": "hist37",
+      "type": "fill-gap",
+      "question": "A principal consequência territorial das Bandeiras foi a _____ Brasileira.",
+      "options": [
+        "Expansão Territorial",
+        "Delimitação Territorial"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Expansão Territorial",
+      "explicacao": "A principal consequência das Bandeiras foi a Expansão Territorial ou Interiorização Brasileira, ultrapassando os limites do Tratado de Tordesilhas.",
+      "dica": "O Brasil ficou maior do que estava previsto."
+    },
+    {
+      "id": "hist38",
+      "type": "multiple-choice",
+      "question": "Quais cidades de Minas Gerais se formaram a partir de acampamentos permanentes dos bandeirantes?",
+      "options": [
+        "Belo Horizonte, Uberlândia e Juiz de Fora",
+        "Ouro Preto, São João Del Rey e Mariana",
+        "Diamantina, Barbacena e Varginha",
+        "Poços de Caldas, Lavras e Itajubá"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Ouro Preto, São João Del Rey e Mariana",
+      "explicacao": "Ouro Preto, São João Del Rey e Mariana são exemplos de cidades que se formaram a partir de acampamentos permanentes dos bandeirantes.",
+      "dica": "Eram cidades da região aurífera."
+    },
+    {
+      "id": "hist39",
+      "type": "fill-gap",
+      "question": "O método usado pelos bandeirantes para capturar indígenas incluía uso de _____ e perseguição.",
+      "options": [
+        "violência",
+        "negociação"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "violência",
+      "explicacao": "Os bandeirantes usavam violência e perseguição para capturar indígenas, destruindo aldeias e separando famílias.",
+      "dica": "Não era um processo pacífico."
+    },
+    {
+      "id": "hist40",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: O Brasil diminuiu seu território devido às expedições bandeirantes.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Falso",
+      "explicacao": "Falso. O Brasil aumentou consideravelmente seu território devido às expedições bandeirantes, que ultrapassaram os limites do Tratado de Tordesilhas.",
+      "dica": "As bandeiras levaram à expansão territorial."
+    },
+    {
+      "id": "hist41",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: Durante a União Ibérica, o Tratado de Tordesilhas ainda tinha valor.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Falso",
+      "explicacao": "Falso. Durante a União Ibérica, o Tratado de Tordesilhas perdeu valor porque Portugal e Espanha ficaram sob o mesmo rei.",
+      "dica": "Não fazia sentido dividir terras do mesmo reino."
+    },
+    {
+      "id": "hist42",
+      "type": "multiple-choice",
+      "question": "A Fortaleza de Santa Cruz foi construída com que objetivo?",
+      "options": [
+        "Para dar confiança aos moradores",
+        "Para proteger a cidade dos invasores",
+        "Para armazenar mercadorias",
+        "Para servir de residência ao governador"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Para proteger a cidade dos invasores",
+      "explicacao": "A Fortaleza de Santa Cruz foi construída para proteger a cidade do Rio de Janeiro dos invasores.",
+      "dica": "Era uma estrutura defensiva."
+    },
+    {
+      "id": "hist43",
+      "type": "fill-gap",
+      "question": "A cidade do Rio de Janeiro foi transferida do Morro da Urca para o Morro do _____ para melhor defesa.",
+      "options": [
+        "Castelo",
+        "Pão de Açúcar"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Castelo",
+      "explicacao": "O Terceiro Governador-Geral transferiu a cidade para o Morro do Castelo porque era possível construir uma fortaleza e avistar inimigos de longe.",
+      "dica": "O nome do morro sugere uma construção defensiva."
+    },
+    {
+      "id": "hist44",
+      "type": "multiple-choice",
+      "question": "Quanto tempo durava a viagem dos navios negreiros da África ao Rio de Janeiro?",
+      "options": [
+        "15 dias",
+        "30 dias",
+        "50 dias",
+        "100 dias"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "50 dias",
+      "explicacao": "A viagem dos navios negreiros da África ao Rio de Janeiro durava cerca de 50 dias, bem mais longa que a viagem para Recife.",
+      "dica": "Era bem mais longa que a viagem para Recife."
+    },
+    {
+      "id": "hist45",
+      "type": "fill-gap",
+      "question": "No meio da pirâmide social açucareira estavam os trabalhadores _____, como feitores e capitães do mato.",
+      "options": [
+        "livres",
+        "escravos"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "livres",
+      "explicacao": "No meio da pirâmide social estavam os trabalhadores livres, incluindo feitores, capitães do mato e pequenos comerciantes.",
+      "dica": "Não eram escravos, mas também não eram proprietários."
+    },
+    {
+      "id": "hist46",
+      "type": "multiple-choice",
+      "question": "Além das danças e práticas religiosas, que outras formas de resistência escrava existiam?",
+      "options": [
+        "Apenas fugas individuais",
+        "Fugas individuais e coletivas, formação de quilombos",
+        "Apenas manifestações culturais",
+        "Apenas revoltas armadas"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Fugas individuais e coletivas, formação de quilombos",
+      "explicacao": "A resistência escrava incluía manifestações culturais, fugas individuais e coletivas, e a formação de quilombos.",
+      "dica": "Havia várias formas de resistência."
+    },
+    {
+      "id": "hist47",
+      "type": "fill-gap",
+      "question": "Durante o governo de Maurício de Nassau foi criado o primeiro _____ Astronômico e Meteorológico da América.",
+      "options": [
+        "Observatório",
+        "Laboratório"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Observatório",
+      "explicacao": "Durante o governo de Maurício de Nassau foi criado o primeiro Observatório Astronômico e Meteorológico da América.",
+      "dica": "Era para estudar os astros e o clima."
+    },
+    {
+      "id": "hist48",
+      "type": "multiple-choice",
+      "question": "Pieter Post foi responsável por qual aspecto do Brasil Holandês?",
+      "options": [
+        "Pintura de paisagens",
+        "Caracterização do povo",
+        "Urbanização de Recife",
+        "Estudos da flora e fauna"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Urbanização de Recife",
+      "explicacao": "Pieter Post foi responsável pela urbanização de Recife durante o período holandês.",
+      "dica": "Ele trabalhava com planejamento urbano."
+    },
+    {
+      "id": "hist49",
+      "type": "fill-gap",
+      "question": "Os holandeses perderam o monopólio do açúcar brasileiro porque criaram produção açucareira nas _____.",
+      "options": [
+        "Antilhas",
+        "Filipinas"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Antilhas",
+      "explicacao": "Após serem expulsos do Brasil em 1654, os holandeses foram para as Antilhas e criaram concorrência ao açúcar brasileiro.",
+      "dica": "São ilhas no Caribe."
+    },
+    {
+      "id": "hist50",
+      "type": "multiple-choice",
+      "question": "A morte de qual rei português em 1578 causou a União Ibérica?",
+      "options": [
+        "D. Manuel I",
+        "D. João III",
+        "D. Sebastião",
+        "D. José I"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "D. Sebastião",
+      "explicacao": "A morte de D. Sebastião em 1578, sem herdeiros, causou uma crise sucessória que levou à União Ibérica.",
+      "dica": "Ele morreu jovem e sem filhos."
+    },
+    {
+      "id": "hist51",
+      "type": "fill-gap",
+      "question": "Os bandeirantes geralmente andavam _____, exceto os chefes que usavam botas.",
+      "options": [
+        "descalços",
+        "de sandálias"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "descalços",
+      "explicacao": "Os bandeirantes geralmente andavam descalços; apenas os chefes usavam botas e chapéus de aba larga.",
+      "dica": "Era uma forma de se adaptar ao terreno."
+    },
+    {
+      "id": "hist52",
+      "type": "multiple-choice",
+      "question": "Que tipo de alimentos os bandeirantes conseguiam da natureza durante as expedições?",
+      "options": [
+        "Apenas carne de caça",
+        "Peixes dos rios, caça, frutas silvestres, mel, pinhão e palmito",
+        "Apenas frutas",
+        "Apenas mel e pinhão"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Peixes dos rios, caça, frutas silvestres, mel, pinhão e palmito",
+      "explicacao": "Os bandeirantes obtinham da natureza peixes dos rios, caça, frutas silvestres, mel, pinhão e palmito.",
+      "dica": "Aproveitavam diversos recursos naturais."
+    },
+    {
+      "id": "hist53",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: Os bandeirantes ficaram conhecidos por participar das expedições chamadas Bandeiras.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Verdadeiro",
+      "explicacao": "Verdadeiro. Os bandeirantes eram homens que participavam das expedições chamadas Bandeiras.",
+      "dica": "O nome vem das expedições que realizavam."
+    },
+    {
+      "id": "hist54",
+      "type": "fill-gap",
+      "question": "O processo de ultrapassar os limites do Tratado de Tordesilhas é chamado de Expansão Territorial ou _____ Brasileira.",
+      "options": [
+        "Interiorização",
+        "Colonização"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Interiorização",
+      "explicacao": "O processo é chamado de Expansão Territorial ou Interiorização Brasileira, pois levou à ocupação do interior do território.",
+      "dica": "Refere-se ao movimento para dentro do continente."
+    },
+    {
+      "id": "hist55",
+      "type": "multiple-choice",
+      "question": "A primeira invasão holandesa na Bahia durou:",
+      "options": [
+        "1 ano",
+        "2 anos",
+        "5 anos",
+        "10 anos"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "1 ano",
+      "explicacao": "A primeira invasão holandesa na Bahia durou apenas 1 ano (1624-1625), pois os holandeses foram rapidamente expulsos.",
+      "dica": "Foi muito mais curta que a segunda invasão."
+    },
+    {
+      "id": "hist56",
+      "type": "fill-gap",
+      "question": "O território dominado pelos holandeses na segunda invasão ia do _____ até Sergipe.",
+      "options": [
+        "Maranhão",
+        "Ceará"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Maranhão",
+      "explicacao": "Durante a segunda invasão holandesa, o território dominado ia do Maranhão até Sergipe, abrangendo todo o litoral nordestino.",
+      "dica": "Era um território muito extenso."
+    },
+    {
+      "id": "hist57",
+      "type": "multiple-choice",
+      "question": "Qual foi uma das principais contribuições culturais do período holandês?",
+      "options": [
+        "Introdução do café",
+        "Primeira Missão Artística do Brasil",
+        "Criação da primeira universidade",
+        "Introdução da imprensa"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Primeira Missão Artística do Brasil",
+      "explicacao": "Uma das principais contribuições foi a Primeira Missão Artística do Brasil, com artistas holandeses documentando o país.",
+      "dica": "Trouxe artistas que retrataram o Brasil."
+    },
+    {
+      "id": "hist58",
+      "type": "fill-gap",
+      "question": "Durante o governo de Maurício de Nassau, Recife teve construção de prédios, fortificações, pontes, ruas, jardins e _____.",
+      "options": [
+        "canais",
+        "aquedutos"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "canais",
+      "explicacao": "Durante o governo de Maurício de Nassau, Recife teve transformações urbanas incluindo construção de canais, além de prédios, fortificações, pontes, ruas e jardins.",
+      "dica": "Era típico da arquitetura holandesa."
+    },
+    {
+      "id": "hist59",
+      "type": "multiple-choice",
+      "question": "A Capela nos engenhos servia como:",
+      "options": [
+        "Depósito de açúcar",
+        "Residência dos feitores",
+        "Centro das festividades e cerimônias religiosas",
+        "Local de trabalho dos escravos"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Centro das festividades e cerimônias religiosas",
+      "explicacao": "A Capela era o centro das festividades e cerimônias religiosas nos engenhos coloniais.",
+      "dica": "Era o local das atividades religiosas."
+    },
+    {
+      "id": "hist60",
+      "type": "fill-gap",
+      "question": "A razão da transferência da cidade do Rio de Janeiro para o Morro do Castelo foi porque era possível construir uma fortaleza e _____ inimigos de longe.",
+      "options": [
+        "avistar",
+        "atacar"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "avistar",
+      "explicacao": "A cidade foi transferida para o Morro do Castelo porque de lá era possível construir uma fortaleza e avistar inimigos de longe, oferecendo melhor defesa.",
+      "dica": "Era uma vantagem estratégica defensiva."
+    },
+    {
+      "id": "hist61",
+      "type": "multiple-choice",
+      "question": "Quais eram os três objetivos principais das Grandes Navegações?",
+      "options": [
+        "Evangelizar, conquistar e colonizar",
+        "Comprar especiarias, conquistar territórios e obter matérias-primas",
+        "Descobrir terras, fundar cidades e estabelecer comércio",
+        "Buscar ouro, encontrar especiarias e converter indígenas"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Comprar especiarias, conquistar territórios e obter matérias-primas",
+      "explicacao": "Os três objetivos principais das Grandes Navegações eram: comprar especiarias nas Índias, conquistar novos territórios e obter matérias-primas, ouro e pedras preciosas.",
+      "dica": "Eram objetivos econômicos e territoriais."
+    },
+    {
+      "id": "hist62",
+      "type": "fill-gap",
+      "question": "As especiarias eram produtos utilizados como tempero, _____ de alimentos ou remédio.",
+      "options": [
+        "conservantes",
+        "corantes"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "conservantes",
+      "explicacao": "As especiarias eram utilizadas como tempero, conservantes de alimentos ou remédio, sendo muito valiosas na Europa.",
+      "dica": "Ajudavam a preservar os alimentos."
+    },
+    {
+      "id": "hist63",
+      "type": "multiple-choice",
+      "question": "Quais eram algumas das principais especiarias procuradas pelos navegadores?",
+      "options": [
+        "Açúcar, café, cacau e algodão",
+        "Pimenta, gengibre, noz moscada, canela e cravo",
+        "Pau-brasil, ouro, prata e diamante",
+        "Milho, batata, tomate e feijão"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Pimenta, gengibre, noz moscada, canela e cravo",
+      "explicacao": "As principais especiarias procuradas eram pimenta, gengibre, noz moscada, canela e cravo, muito valorizadas na Europa.",
+      "dica": "São produtos aromáticos usados para temperar."
+    },
+    {
+      "id": "hist64",
+      "type": "fill-gap",
+      "question": "As _____ eram embarcações rápidas e seguras utilizadas nas navegações.",
+      "options": [
+        "caravelas",
+        "naus"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "caravelas",
+      "explicacao": "As caravelas eram embarcações rápidas e seguras utilizadas pelos portugueses nas Grandes Navegações.",
+      "dica": "Nome específico das embarcações portuguesas."
+    },
+    {
+      "id": "hist65",
+      "type": "multiple-choice",
+      "question": "Qual era a função do astrolábio nas navegações?",
+      "options": [
+        "Indicar a direção",
+        "Orientação astronômica",
+        "Medir a velocidade",
+        "Comunicar com outros navios"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Orientação astronômica",
+      "explicacao": "O astrolábio era um instrumento de orientação astronômica usado pelos navegadores.",
+      "dica": "Usava os astros para navegação."
+    },
+    {
+      "id": "hist66",
+      "type": "fill-gap",
+      "question": "O Brasil foi descoberto em _____ de abril de 1500 por Pedro Álvares Cabral.",
+      "options": [
+        "22",
+        "21"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "22",
+      "explicacao": "O Brasil foi descoberto em 22 de abril de 1500 por Pedro Álvares Cabral.",
+      "dica": "É uma data muito importante da história do Brasil."
+    },
+    {
+      "id": "hist67",
+      "type": "multiple-choice",
+      "question": "Qual era o objetivo original de Pedro Álvares Cabral ao descobrir o Brasil?",
+      "options": [
+        "Descobrir novas terras",
+        "Chegar às Índias para buscar especiarias",
+        "Fundar uma colônia",
+        "Buscar ouro"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Chegar às Índias para buscar especiarias",
+      "explicacao": "O objetivo original de Cabral era chegar às Índias para buscar especiarias, descobrindo o Brasil por acaso ao desviar da rota.",
+      "dica": "A descoberta foi acidental."
+    },
+    {
+      "id": "hist68",
+      "type": "fill-gap",
+      "question": "Os povos originários do Brasil viviam da caça e pesca, e andavam _____.",
+      "options": [
+        "nus",
+        "vestidos"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "nus",
+      "explicacao": "Os povos indígenas que habitavam o Brasil viviam da caça e pesca, e andavam nus, o que causou estranheza aos portugueses.",
+      "dica": "Era um costume cultural dos indígenas."
+    },
+    {
+      "id": "hist69",
+      "type": "multiple-choice",
+      "question": "Como foi o primeiro contato entre portugueses e indígenas em 1500?",
+      "options": [
+        "Harmônico e pacífico",
+        "Violento e conflituoso",
+        "De muita estranheza",
+        "Comercial"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "De muita estranheza",
+      "explicacao": "O primeiro contato foi de muita estranheza para ambos os lados, pois eram sociedades completamente diferentes.",
+      "dica": "Eram culturas muito distintas se encontrando."
+    },
+    {
+      "id": "hist70",
+      "type": "fill-gap",
+      "question": "A primeira expedição exploradora após o descobrimento foi comandada por _____ em 1501.",
+      "options": [
+        "Gaspar de Lemos",
+        "Gonçalo Coelho"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Gaspar de Lemos",
+      "explicacao": "A primeira expedição exploradora (1501) foi comandada por Gaspar de Lemos, acompanhada por Américo Vespúcio.",
+      "dica": "Foi logo após o descobrimento."
+    },
+    {
+      "id": "hist71",
+      "type": "multiple-choice",
+      "question": "Qual era o objetivo das expedições exploradoras?",
+      "options": [
+        "Proteger o litoral de invasores",
+        "Explorar a costa, nomear acidentes geográficos e elaborar mapa",
+        "Estabelecer colônias",
+        "Evangelizar os indígenas"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Explorar a costa, nomear acidentes geográficos e elaborar mapa",
+      "explicacao": "As expedições exploradoras tinham como objetivo explorar a costa brasileira, nomear acidentes geográficos e elaborar mapas.",
+      "dica": "Era para conhecer o território descoberto."
+    },
+    {
+      "id": "hist72",
+      "type": "fill-gap",
+      "question": "A segunda expedição exploradora foi comandada por _____ em 1503.",
+      "options": [
+        "Gonçalo Coelho",
+        "Gaspar de Lemos"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Gonçalo Coelho",
+      "explicacao": "A segunda expedição exploradora (1503) foi comandada por Gonçalo Coelho com objetivo de localizar pontos com maior quantidade de pau-brasil.",
+      "dica": "Focou na exploração do pau-brasil."
+    },
+    {
+      "id": "hist73",
+      "type": "multiple-choice",
+      "question": "Qual era o objetivo das Expedições Guarda-Costas de 1516?",
+      "options": [
+        "Explorar o interior",
+        "Proteger o litoral brasileiro de invasores",
+        "Buscar ouro",
+        "Catequizar indígenas"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Proteger o litoral brasileiro de invasores",
+      "explicacao": "As Expedições Guarda-Costas tinham como objetivo proteger o litoral brasileiro de invasores como franceses, holandeses e ingleses.",
+      "dica": "Era uma função defensiva."
+    },
+    {
+      "id": "hist74",
+      "type": "fill-gap",
+      "question": "O pau-brasil era uma madeira _____ usada para construção e extração de corante.",
+      "options": [
+        "avermelhada",
+        "amarelada"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "avermelhada",
+      "explicacao": "O pau-brasil era uma madeira avermelhada, dura e resistente, usada para construção, móveis e extração de corante vermelho.",
+      "dica": "A cor está no nome da árvore."
+    },
+    {
+      "id": "hist75",
+      "type": "multiple-choice",
+      "question": "Quem realizava o trabalho de extração do pau-brasil?",
+      "options": [
+        "Escravos africanos",
+        "Colonos portugueses",
+        "Povos originários (indígenas)",
+        "Trabalhadores europeus"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Povos originários (indígenas)",
+      "explicacao": "O trabalho de extração do pau-brasil era realizado pelos povos originários (indígenas) através do sistema de escambo.",
+      "dica": "Era antes da chegada dos africanos."
+    },
+    {
+      "id": "hist76",
+      "type": "fill-gap",
+      "question": "O _____ era o sistema de troca onde os índios recebiam objetos em troca do trabalho.",
+      "options": [
+        "escambo",
+        "comércio"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "escambo",
+      "explicacao": "O escambo era o sistema de troca onde os índios recebiam objetos (enfeites, roupas, instrumentos de metal) em troca do trabalho de extrair pau-brasil.",
+      "dica": "Era uma troca direta sem uso de moeda."
+    },
+    {
+      "id": "hist77",
+      "type": "multiple-choice",
+      "question": "O que eram as feitorias?",
+      "options": [
+        "Fábricas de açúcar",
+        "Locais onde europeus moravam durante o abastecimento dos navios",
+        "Fortalezas militares",
+        "Mercados de escravos"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Locais onde europeus moravam durante o abastecimento dos navios",
+      "explicacao": "As feitorias eram locais onde os europeus moravam durante o abastecimento dos navios, processo que durava cerca de 2 meses.",
+      "dica": "Era moradia temporária dos portugueses."
+    },
+    {
+      "id": "hist78",
+      "type": "fill-gap",
+      "question": "O primeiro nome dado ao território brasileiro foi Terra de _____ Cruz.",
+      "options": [
+        "Vera",
+        "Santa"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Vera",
+      "explicacao": "O primeiro nome foi Terra de Vera Cruz, devido às várias palmeiras perto do litoral, depois mudado para outros nomes até chegar a Brasil.",
+      "dica": "Foi o nome inicial."
+    },
+    {
+      "id": "hist79",
+      "type": "multiple-choice",
+      "question": "Qual foi a sequência correta dos nomes do território brasileiro?",
+      "options": [
+        "Brasil, Terra de Vera Cruz, Ilha de Vera Cruz, Terra de Santa Cruz",
+        "Terra de Vera Cruz, Ilha de Vera Cruz, Brasil, Terra de Santa Cruz",
+        "Terra de Vera Cruz, Ilha de Vera Cruz, Terra de Santa Cruz, Brasil",
+        "Ilha de Vera Cruz, Terra de Vera Cruz, Terra de Santa Cruz, Brasil"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Terra de Vera Cruz, Ilha de Vera Cruz, Terra de Santa Cruz, Brasil",
+      "explicacao": "A sequência foi: 1) Terra de Vera Cruz, 2) Ilha de Vera Cruz (pensaram que era uma ilha), 3) Terra de Santa Cruz (perceberam que eram terras grandes), 4) Brasil (pelo pau-brasil).",
+      "dica": "Brasil foi o último nome."
+    },
+    {
+      "id": "hist80",
+      "type": "fill-gap",
+      "question": "O Sistema de Capitanias Hereditárias foi criado entre _____ e 1536.",
+      "options": [
+        "1534",
+        "1530"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "1534",
+      "explicacao": "O Sistema de Capitanias Hereditárias foi criado entre 1534 e 1536, dividindo o Brasil em 15 lotes de terras.",
+      "dica": "Foi na década de 1530."
+    },
+    {
+      "id": "hist81",
+      "type": "multiple-choice",
+      "question": "Quantas capitanias hereditárias foram criadas?",
+      "options": [
+        "12",
+        "15",
+        "20",
+        "25"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "15",
+      "explicacao": "Foram criadas 15 capitanias hereditárias, dividindo o território brasileiro em lotes que eram doados a nobres ricos portugueses.",
+      "dica": "Era um número específico de divisões."
+    },
+    {
+      "id": "hist82",
+      "type": "fill-gap",
+      "question": "Os _____ eram as pessoas que recebiam as capitanias hereditárias.",
+      "options": [
+        "donatários",
+        "governadores"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "donatários",
+      "explicacao": "Os donatários eram os nobres ricos de Portugal que recebiam as capitanias hereditárias, passando-as de pai para filho.",
+      "dica": "Nome específico dos responsáveis pelas capitanias."
+    },
+    {
+      "id": "hist83",
+      "type": "multiple-choice",
+      "question": "Quais eram os documentos que regulamentavam as capitanias hereditárias?",
+      "options": [
+        "Carta Régia e Alvará",
+        "Carta de Doação e Forais",
+        "Decreto Real e Portaria",
+        "Carta Patente e Regimento"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Carta de Doação e Forais",
+      "explicacao": "Os documentos eram a Carta de Doação e os Forais, que estabeleciam os direitos e deveres dos donatários.",
+      "dica": "Eram dois tipos de documentos específicos."
+    },
+    {
+      "id": "hist84",
+      "type": "fill-gap",
+      "question": "Um dos objetivos das capitanias era _____ as terras contra invasores.",
+      "options": [
+        "proteger",
+        "explorar"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "proteger",
+      "explicacao": "Os objetivos das capitanias incluíam proteger as terras contra invasores, encontrar nova fonte de renda e promover a colonização.",
+      "dica": "Era uma função defensiva."
+    },
+    {
+      "id": "hist85",
+      "type": "multiple-choice",
+      "question": "Quais foram as duas capitanias que prosperaram?",
+      "options": [
+        "Bahia e Rio de Janeiro",
+        "Pernambuco e São Vicente",
+        "Maranhão e Pará",
+        "Minas Gerais e Goiás"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Pernambuco e São Vicente",
+      "explicacao": "Apenas as capitanias de Pernambuco e São Vicente prosperaram devido às condições favoráveis para o cultivo da cana-de-açúcar.",
+      "dica": "Apenas duas das 15 tiveram sucesso."
+    },
+    {
+      "id": "hist86",
+      "type": "fill-gap",
+      "question": "As capitanias de Pernambuco e São Vicente prosperaram devido às condições favoráveis para cultivo de _____.",
+      "options": [
+        "cana-de-açúcar",
+        "café"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "cana-de-açúcar",
+      "explicacao": "Essas capitanias tinham clima e solo favoráveis para o cultivo da cana-de-açúcar, principal produto colonial.",
+      "dica": "Principal produto agrícola do período."
+    },
+    {
+      "id": "hist87",
+      "type": "multiple-choice",
+      "question": "Quais eram os principais motivos do fracasso das outras capitanias?",
+      "options": [
+        "Falta de mão de obra apenas",
+        "Desinteresse dos donatários, ataques indígenas e distância de Portugal",
+        "Apenas problemas climáticos",
+        "Falta de recursos naturais"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Desinteresse dos donatários, ataques indígenas e distância de Portugal",
+      "explicacao": "O fracasso se deveu ao desinteresse ou falta de recursos dos donatários, ataques de indígenas e a grande distância de Portugal.",
+      "dica": "Foram múltiplos fatores combinados."
+    },
+    {
+      "id": "hist88",
+      "type": "fill-gap",
+      "question": "O donatário da Capitania de São Vicente foi _____.",
+      "options": [
+        "Martim Afonso de Sousa",
+        "Duarte Coelho"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Martim Afonso de Sousa",
+      "explicacao": "Martim Afonso de Sousa foi o donatário da Capitania de São Vicente, onde se estabeleceu a primeira vila do Brasil e se iniciou o plantio da cana-de-açúcar.",
+      "dica": "Nome importante da colonização de São Paulo."
+    },
+    {
+      "id": "hist89",
+      "type": "multiple-choice",
+      "question": "Qual foi a importância da Capitania de São Vicente?",
+      "options": [
+        "Foi a maior capitania",
+        "Primeira vila do Brasil e início do cultivo da cana",
+        "Capital da colônia",
+        "Centro de extração de ouro"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Primeira vila do Brasil e início do cultivo da cana",
+      "explicacao": "São Vicente foi importante por ser a primeira vila do Brasil e local onde se iniciou o plantio da cana-de-açúcar.",
+      "dica": "Foi pioneira em vários aspectos."
+    },
+    {
+      "id": "hist90",
+      "type": "fill-gap",
+      "question": "O Sistema de Governo-Geral foi criado em _____ devido ao fracasso das capitanias.",
+      "options": [
+        "1548",
+        "1550"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "1548",
+      "explicacao": "O Sistema de Governo-Geral foi criado em 1548 pelo rei D. João III devido ao fracasso das Capitanias Hereditárias.",
+      "dica": "Foi na década de 1540."
+    },
+    {
+      "id": "hist91",
+      "type": "multiple-choice",
+      "question": "Qual rei português criou o Sistema de Governo-Geral?",
+      "options": [
+        "D. Manuel I",
+        "D. João III",
+        "D. Sebastião",
+        "D. José I"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "D. João III",
+      "explicacao": "O rei D. João III de Portugal criou o Sistema de Governo-Geral em 1548 para centralizar a administração colonial.",
+      "dica": "Foi o terceiro rei com esse nome."
+    },
+    {
+      "id": "hist92",
+      "type": "fill-gap",
+      "question": "O objetivo do Governo-Geral era _____ a administração e acabar com a desorganização.",
+      "options": [
+        "centralizar",
+        "descentralizar"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "centralizar",
+      "explicacao": "O objetivo era centralizar a administração colonial e acabar com a desorganização causada pelo fracasso das capitanias.",
+      "dica": "Concentrar o poder em uma única autoridade."
+    },
+    {
+      "id": "hist93",
+      "type": "multiple-choice",
+      "question": "Quais eram as quatro funções principais do Governo-Geral?",
+      "options": [
+        "Comercializar, evangelizar, colonizar, administrar",
+        "Defender território, buscar metais preciosos, apoiar Igreja Católica, lutar contra indígenas",
+        "Explorar, conquistar, povoar, governar",
+        "Proteger, produzir, exportar, importar"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Defender território, buscar metais preciosos, apoiar Igreja Católica, lutar contra indígenas",
+      "explicacao": "As funções eram: defender o território, incentivar busca por metais preciosos, apoiar a Igreja Católica e lutar contra a resistência indígena.",
+      "dica": "Eram funções militares, econômicas e religiosas."
+    },
+    {
+      "id": "hist94",
+      "type": "fill-gap",
+      "question": "O _____ era responsável pela defesa do litoral.",
+      "options": [
+        "Capitão-Mor",
+        "Ouvidor-Mor"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Capitão-Mor",
+      "explicacao": "O Capitão-Mor era responsável pela defesa do litoral, sendo um dos auxiliares do Governador-Geral.",
+      "dica": "Função militar de defesa."
+    },
+    {
+      "id": "hist95",
+      "type": "multiple-choice",
+      "question": "Qual auxiliar do Governador-Geral cuidava dos negócios da justiça?",
+      "options": [
+        "Capitão-Mor",
+        "Ouvidor-Mor",
+        "Provedor-Mor",
+        "Escrivão-Mor"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Ouvidor-Mor",
+      "explicacao": "O Ouvidor-Mor era responsável pelos negócios da justiça na administração colonial.",
+      "dica": "Relacionado ao sistema judiciário."
+    },
+    {
+      "id": "hist96",
+      "type": "fill-gap",
+      "question": "O _____ cuidava dos assuntos financeiros e impostos.",
+      "options": [
+        "Provedor-Mor",
+        "Capitão-Mor"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Provedor-Mor",
+      "explicacao": "O Provedor-Mor era responsável pelos assuntos financeiros e impostos da colônia.",
+      "dica": "Relacionado às finanças."
+    },
+    {
+      "id": "hist97",
+      "type": "multiple-choice",
+      "question": "Qual foi a principal realização do primeiro governador-geral Tomé de Sousa?",
+      "options": [
+        "Fundou o Rio de Janeiro",
+        "Fundou Salvador",
+        "Expulsou os franceses",
+        "Criou o Colégio São Paulo"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Fundou Salvador",
+      "explicacao": "Tomé de Sousa (1549-1553) fundou a cidade de Salvador, primeira capital do Brasil, além de desenvolver agricultura e pecuária.",
+      "dica": "Primeira capital colonial."
+    },
+    {
+      "id": "hist98",
+      "type": "fill-gap",
+      "question": "O segundo governador-geral _____ veio com padres jesuítas para catequizar os indígenas.",
+      "options": [
+        "Duarte da Costa",
+        "Mem de Sá"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Duarte da Costa",
+      "explicacao": "Duarte da Costa (1553-1558) trouxe padres jesuítas como José de Anchieta e Manuel de Nóbrega, e fundou o Colégio São Paulo.",
+      "dica": "Foi o segundo governador-geral."
+    },
+    {
+      "id": "hist99",
+      "type": "multiple-choice",
+      "question": "Quais foram os famosos jesuítas que chegaram com Duarte da Costa?",
+      "options": [
+        "José de Anchieta e Manuel de Nóbrega",
+        "Manuel da Nóbrega e António Vieira",
+        "José de Anchieta e Fernão Cardim",
+        "António Vieira e Luís da Grã"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "José de Anchieta e Manuel de Nóbrega",
+      "explicacao": "José de Anchieta e Manuel de Nóbrega foram os famosos padres jesuítas que vieram catequizar os povos originários.",
+      "dica": "Dois nomes muito importantes da evangelização."
+    },
+    {
+      "id": "hist100",
+      "type": "fill-gap",
+      "question": "O terceiro governador-geral _____ enfrentou as invasões francesas no Rio de Janeiro.",
+      "options": [
+        "Mem de Sá",
+        "Tomé de Sousa"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Mem de Sá",
+      "explicacao": "Mem de Sá (1558-1572) enfrentou e expulsou os franceses do Rio de Janeiro, e seu sobrinho Estácio de Sá fundou a cidade.",
+      "dica": "Foi o terceiro e último dos primeiros governadores."
+    },
+    {
+      "id": "hist101",
+      "type": "multiple-choice",
+      "question": "Quem fundou a França Antártica na Baía de Guanabara?",
+      "options": [
+        "Jean de Léry",
+        "Nicolau Durand Villegagnon",
+        "André Thevet",
+        "Jacques Cartier"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Nicolau Durand Villegagnon",
+      "explicacao": "Nicolau Durand Villegagnon foi o fundador da França Antártica na Baía de Guanabara (1555-1560).",
+      "dica": "Nome francês relacionado ao Rio de Janeiro."
+    },
+    {
+      "id": "hist102",
+      "type": "fill-gap",
+      "question": "A França Antártica existiu de 1555 a _____.",
+      "options": [
+        "1560",
+        "1567"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "1560",
+      "explicacao": "A França Antártica existiu de 1555 a 1560, sendo depois definitivamente eliminada em 1567 com a morte de Estácio de Sá.",
+      "dica": "Durou apenas 5 anos oficialmente."
+    },
+    {
+      "id": "hist103",
+      "type": "multiple-choice",
+      "question": "Quais foram os motivos que levaram os franceses a criar a França Antártica?",
+      "options": [
+        "Apenas busca por ouro",
+        "Movimentos religiosos na Europa, Atlântico como rota comercial, disputas religiosas",
+        "Apenas rivalidade com Portugal",
+        "Somente questões territoriais"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Movimentos religiosos na Europa, Atlântico como rota comercial, disputas religiosas",
+      "explicacao": "Os motivos incluíam movimentos de reformas religiosas na Europa, uso do Atlântico como rota comercial e disputas entre protestantismo e Igreja Católica.",
+      "dica": "Eram questões religiosas e comerciais da época."
+    },
+    {
+      "id": "hist104",
+      "type": "fill-gap",
+      "question": "Os indígenas _____ formaram a Confederação dos Tamoios para ajudar os franceses.",
+      "options": [
+        "Tamoios",
+        "Tupinambás"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Tamoios",
+      "explicacao": "Os indígenas Tamoios se aliaram aos franceses e formaram a Confederação dos Tamoios para resistir aos portugueses.",
+      "dica": "Nome da tribo que aparece na confederação."
+    },
+    {
+      "id": "hist105",
+      "type": "multiple-choice",
+      "question": "Onde foi construída a base militar de Estácio de Sá no Rio de Janeiro?",
+      "options": [
+        "Fortaleza de Santa Cruz",
+        "Fortaleza de São João",
+        "Forte de Copacabana",
+        "Castelo de São Jorge"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Fortaleza de São João",
+      "explicacao": "A Fortaleza de São João foi a base militar construída por Estácio de Sá no Morro Cara de Cão (atual Morro da Urca).",
+      "dica": "Nome religioso da fortificação."
+    },
+    {
+      "id": "hist106",
+      "type": "fill-gap",
+      "question": "A batalha final contra os franceses ocorreu em 20 de _____ de 1567.",
+      "options": [
+        "janeiro",
+        "março"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "janeiro",
+      "explicacao": "A batalha final ocorreu em 20 de janeiro de 1567, quando Estácio de Sá foi atingido por uma flecha e morreu, mas os franceses foram definitivamente expulsos.",
+      "dica": "Mesmo mês do aniversário antigo da cidade."
+    },
+    {
+      "id": "hist107",
+      "type": "multiple-choice",
+      "question": "Quais são as duas datas importantes relacionadas ao Rio de Janeiro?",
+      "options": [
+        "1º de março (fundação) e 22 de abril (descobrimento)",
+        "1º de março (aniversário oficial) e 20 de janeiro (São Sebastião)",
+        "20 de janeiro (fundação) e 1º de março (batalha final)",
+        "22 de abril (fundação) e 20 de janeiro (expulsão dos franceses)"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "1º de março (aniversário oficial) e 20 de janeiro (São Sebastião)",
+      "explicacao": "1º de março é o aniversário oficial da cidade (fundação) e 20 de janeiro é o Dia de São Sebastião (era o aniversário até 1956).",
+      "dica": "Uma é a fundação e outra é o santo padroeiro."
+    },
+    {
+      "id": "hist108",
+      "type": "fill-gap",
+      "question": "O centro do Rio de Janeiro se desenvolveu ao redor do _____.",
+      "options": [
+        "porto",
+        "mercado"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "porto",
+      "explicacao": "O centro da cidade se desenvolveu ao redor do porto devido à importância do comércio e entrada/saída de pessoas.",
+      "dica": "Local de chegada dos navios."
+    },
+    {
+      "id": "hist109",
+      "type": "multiple-choice",
+      "question": "No século XVII, a cidade do Rio de Janeiro foi dividida em:",
+      "options": [
+        "Bairros comerciais",
+        "Grandes engenhos de açúcar",
+        "Distritos administrativos",
+        "Zonas militares"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Grandes engenhos de açúcar",
+      "explicacao": "No século XVII, a cidade foi dividida em grandes engenhos de açúcar, cujos nomes originaram vários bairros atuais.",
+      "dica": "Relacionado à economia açucareira."
+    },
+    {
+      "id": "hist110",
+      "type": "fill-gap",
+      "question": "Os bairros Engenho de Dentro, Engenho Novo e Engenho de Jacarepaguá têm nomes originados dos antigos _____.",
+      "options": [
+        "engenhos",
+        "portos"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "engenhos",
+      "explicacao": "Estes bairros têm nomes que se originaram dos grandes engenhos de açúcar que existiam na região no século XVII.",
+      "dica": "O nome já diz a origem."
+    },
+    {
+      "id": "hist111",
+      "type": "multiple-choice",
+      "question": "Onde ficava o Porto do Valongo?",
+      "options": [
+        "Atual Praça XV",
+        "Atual Praça Mauá",
+        "Atual Central do Brasil",
+        "Atual Cais do Porto"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Atual Praça Mauá",
+      "explicacao": "O Porto do Valongo, importante local histórico, ficava na atual Praça Mauá.",
+      "dica": "É uma praça importante no centro do Rio."
+    },
+    {
+      "id": "hist112",
+      "type": "fill-gap",
+      "question": "Os povos originários usavam a técnica da _____ para fazer agricultura, queimando a mata.",
+      "options": [
+        "roça de coivara",
+        "irrigação"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "roça de coivara",
+      "explicacao": "A roça de coivara era a técnica agrícola indígena de queimar a mata para preparar o terreno para o plantio.",
+      "dica": "Nome específico da técnica indígena."
+    },
+    {
+      "id": "hist113",
+      "type": "multiple-choice",
+      "question": "Como é vista atualmente a técnica da roça de coivara?",
+      "options": [
+        "Como sustentável e adequada",
+        "Como prejudicial ao meio ambiente",
+        "Como a melhor técnica agrícola",
+        "Como técnica moderna"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Como prejudicial ao meio ambiente",
+      "explicacao": "Atualmente a roça de coivara é reconhecida como prejudicial ao meio ambiente, existindo métodos mais adequados para agricultura sustentável.",
+      "dica": "A visão moderna sobre queimadas mudou."
+    },
+    {
+      "id": "hist114",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: As grandes navegações foram criadas para descobrir terras e buscar especiarias.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Verdadeiro",
+      "explicacao": "Verdadeiro. As grandes navegações tinham como objetivos descobrir novas terras e buscar especiarias nas Índias.",
+      "dica": "Eram os dois objetivos principais."
+    },
+    {
+      "id": "hist115",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: A descoberta do Brasil foi planejada pelos portugueses.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Falso",
+      "explicacao": "Falso. A descoberta do Brasil foi por acaso, pois Pedro Álvares Cabral estava indo em direção às Índias.",
+      "dica": "Foi um desvio de rota não planejado."
+    },
+    {
+      "id": "hist116",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: Astrolábio, bússola e caravelas eram todos meios de orientação.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Falso",
+      "explicacao": "Falso. Astrolábio e bússola eram instrumentos de orientação, mas caravelas eram embarcações (meios de transporte).",
+      "dica": "Uma das três não é instrumento de orientação."
+    },
+    {
+      "id": "hist117",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: O Sistema de Capitanias Hereditárias deu ótimos resultados.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Falso",
+      "explicacao": "Falso. O sistema fracassou na maioria dos casos, sendo que apenas 2 das 15 capitanias prosperaram (São Vicente e Pernambuco).",
+      "dica": "A maioria fracassou."
+    },
+    {
+      "id": "hist118",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: São Vicente e Pernambuco prosperaram devido ao cultivo da cana-de-açúcar.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Verdadeiro",
+      "explicacao": "Verdadeiro. Essas duas capitanias prosperaram devido às condições favoráveis de clima e solo para o cultivo da cana-de-açúcar.",
+      "dica": "Tinham condições ideais para o açúcar."
+    },
+    {
+      "id": "hist119",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: A França Antártica foi fundada depois da cidade do Rio de Janeiro.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Falso",
+      "explicacao": "Falso. A França Antártica foi fundada em 1555, dez anos antes da fundação da cidade do Rio de Janeiro em 1565.",
+      "dica": "A invasão francesa veio primeiro."
+    },
+    {
+      "id": "hist120",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: Os franceses foram expulsos definitivamente em 1560.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Falso",
+      "explicacao": "Falso. Os franceses foram expulsos definitivamente em 1567, na batalha final onde morreu Estácio de Sá.",
+      "dica": "Foi alguns anos depois do fim oficial da França Antártica."
+    },
+    {
+      "id": "hist121",
+      "type": "multiple-choice",
+      "question": "Qual era a principal característica do Pacto Colonial?",
+      "options": [
+        "Brasil podia comercializar livremente com qualquer país",
+        "Brasil fornecia matérias-primas para Portugal e comprava produtos manufaturados",
+        "Portugal fornecia matérias-primas para o Brasil",
+        "Brasil tinha autonomia comercial total"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Brasil fornecia matérias-primas para Portugal e comprava produtos manufaturados",
+      "explicacao": "O Pacto Colonial estabelecia que o Brasil fornecia matérias-primas para Portugal e era obrigado a comprar produtos manufaturados da metrópole.",
+      "dica": "Era um sistema de dependência econômica."
+    },
+    {
+      "id": "hist122",
+      "type": "fill-gap",
+      "question": "O objetivo principal do sistema colonial português era a _____ territorial e extração de riquezas.",
+      "options": [
+        "exploração",
+        "proteção"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "exploração",
+      "explicacao": "O sistema colonial português tinha como objetivo principal a exploração territorial e a extração de riquezas do Brasil.",
+      "dica": "Era uma colonização de exploração, não de povoamento."
+    },
+    {
+      "id": "hist123",
+      "type": "multiple-choice",
+      "question": "O território brasileiro foi inicialmente dividido em quantos lotes de terra?",
+      "options": [
+        "Dez",
+        "Doze",
+        "Quinze",
+        "Vinte"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Quinze",
+      "explicacao": "O território brasileiro foi dividido em quinze lotes de terra, as capitanias hereditárias, distribuídas entre donatários.",
+      "dica": "Mesmo número das capitanias hereditárias."
+    },
+    {
+      "id": "hist124",
+      "type": "fill-gap",
+      "question": "Um dos objetivos das capitanias hereditárias era evitar _____ estrangeiras.",
+      "options": [
+        "invasões",
+        "alianças"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "invasões",
+      "explicacao": "As capitanias hereditárias tinham como objetivo evitar invasões estrangeiras e proteger os territórios contra ameaças externas.",
+      "dica": "Era uma função defensiva do território."
+    },
+    {
+      "id": "hist125",
+      "type": "multiple-choice",
+      "question": "Quais eram os principais problemas identificados no sistema de capitanias hereditárias?",
+      "options": [
+        "Apenas falta de recursos dos donatários",
+        "Falta de recursos dos donatários, dificuldades de comunicação e resistência indígena",
+        "Apenas resistência indígena",
+        "Somente problemas climáticos"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Falta de recursos dos donatários, dificuldades de comunicação e resistência indígena",
+      "explicacao": "Os principais problemas eram: falta de recursos dos donatários, dificuldades de comunicação e resistência indígena.",
+      "dica": "Foram múltiplos fatores que causaram problemas."
+    },
+    {
+      "id": "hist126",
+      "type": "fill-gap",
+      "question": "O _____ era o administrador principal do sistema de Governo-Geral.",
+      "options": [
+        "Governador-Geral",
+        "Capitão-Donatário"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Governador-Geral",
+      "explicacao": "O Governador-Geral era o administrador principal do sistema, responsável por centralizar o poder e melhorar a administração das capitanias.",
+      "dica": "Era o cargo mais alto da administração colonial."
+    },
+    {
+      "id": "hist127",
+      "type": "multiple-choice",
+      "question": "Qual era o objetivo principal do sistema de Governo-Geral?",
+      "options": [
+        "Descentralizar o poder",
+        "Centralizar poder e melhorar administração das capitanias",
+        "Abolir as capitanias",
+        "Criar novas capitanias"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Centralizar poder e melhorar administração das capitanias",
+      "explicacao": "O objetivo era centralizar o poder e melhorar a administração das capitanias que estavam enfrentando problemas.",
+      "dica": "Era para resolver os problemas das capitanias."
+    },
+    {
+      "id": "hist128",
+      "type": "fill-gap",
+      "question": "Os três funcionários principais do Governo-Geral eram: Governador, _____ e Provedor-mor.",
+      "options": [
+        "Ouvidor-Geral",
+        "Capitão-Mor"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Ouvidor-Geral",
+      "explicacao": "Os três funcionários principais eram: Governador (governo geral), Ouvidor-Geral (justiça) e Provedor-mor (fazenda).",
+      "dica": "Responsável pela área da justiça."
+    },
+    {
+      "id": "hist129",
+      "type": "multiple-choice",
+      "question": "Qual governador-geral foi o primeiro e fundou Salvador?",
+      "options": [
+        "Duarte da Costa",
+        "Tomé de Sousa",
+        "Mem de Sá",
+        "Martim Afonso de Sousa"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Tomé de Sousa",
+      "explicacao": "Tomé de Sousa (1549-1553) foi o primeiro governador-geral do Brasil e fundou Salvador, a primeira capital.",
+      "dica": "Foi o pioneiro do sistema de governo-geral."
+    },
+    {
+      "id": "hist130",
+      "type": "fill-gap",
+      "question": "Duarte da Costa enfrentou _____ com os jesuítas durante seu governo.",
+      "options": [
+        "conflitos",
+        "alianças"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "conflitos",
+      "explicacao": "Duarte da Costa (1553-1558) enfrentou conflitos com os jesuítas e teve diversos problemas administrativos.",
+      "dica": "Teve um governo problemático."
+    },
+    {
+      "id": "hist131",
+      "type": "multiple-choice",
+      "question": "Qual governador-geral teve o governo mais longo e eficiente?",
+      "options": [
+        "Tomé de Sousa",
+        "Duarte da Costa",
+        "Mem de Sá",
+        "Gaspar de Sousa"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Mem de Sá",
+      "explicacao": "Mem de Sá (1558-1572) teve o governo mais longo e eficiente, consolidando o sistema de governo-geral e enfrentando a resistência indígena.",
+      "dica": "Governou por mais tempo que os outros."
+    },
+    {
+      "id": "hist132",
+      "type": "fill-gap",
+      "question": "O objetivo das capitanias era _____ e defender o território brasileiro.",
+      "options": [
+        "ocupar",
+        "abandonar"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "ocupar",
+      "explicacao": "O objetivo das capitanias era ocupar e defender o território brasileiro, garantindo a posse portuguesa das terras.",
+      "dica": "Era para estabelecer presença portuguesa."
+    },
+    {
+      "id": "hist133",
+      "type": "multiple-choice",
+      "question": "Qual era a característica das capitanias em relação à sucessão?",
+      "options": [
+        "Eram temporárias",
+        "Eram hereditárias, mas com obrigações específicas",
+        "Eram vitalícias apenas",
+        "Eram sorteadas"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Eram hereditárias, mas com obrigações específicas",
+      "explicacao": "As capitanias eram hereditárias (passavam de pai para filho), mas os donatários tinham obrigações específicas a cumprir.",
+      "dica": "Tinham direitos e deveres definidos."
+    },
+    {
+      "id": "hist134",
+      "type": "fill-gap",
+      "question": "A mão de obra do sistema colonial era principalmente _____ (africana e indígena).",
+      "options": [
+        "escrava",
+        "livre"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "escrava",
+      "explicacao": "A mão de obra do sistema colonial era principalmente escrava, utilizando africanos e indígenas.",
+      "dica": "Era trabalho forçado."
+    },
+    {
+      "id": "hist135",
+      "type": "multiple-choice",
+      "question": "Quais eram as principais atividades econômicas da colônia?",
+      "options": [
+        "Apenas agricultura",
+        "Agricultura (cana-de-açúcar), extração de pau-brasil e pecuária",
+        "Apenas extração mineral",
+        "Somente comércio"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Agricultura (cana-de-açúcar), extração de pau-brasil e pecuária",
+      "explicacao": "As principais atividades econômicas eram: agricultura (cana-de-açúcar), extração de pau-brasil e pecuária.",
+      "dica": "Eram várias atividades complementares."
+    },
+    {
+      "id": "hist136",
+      "type": "fill-gap",
+      "question": "A hierarquia social colonial era baseada na origem, _____ e condição social.",
+      "options": [
+        "cor",
+        "profissão"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "cor",
+      "explicacao": "A estrutura social era baseada na origem, cor e condição social, criando uma sociedade altamente hierarquizada.",
+      "dica": "A cor da pele determinava posição social."
+    },
+    {
+      "id": "hist137",
+      "type": "multiple-choice",
+      "question": "Quais eram os principais grupos da estrutura social colonial?",
+      "options": [
+        "Apenas senhores e escravos",
+        "Senhores, homens livres pobres e escravos",
+        "Somente homens livres",
+        "Apenas escravos e libertos"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Senhores, homens livres pobres e escravos",
+      "explicacao": "A estrutura social incluía: senhores (no topo), homens livres pobres (no meio) e escravos (na base).",
+      "dica": "Era uma pirâmide social com três grupos principais."
+    },
+    {
+      "id": "hist138",
+      "type": "fill-gap",
+      "question": "A mobilidade social na colônia era _____, mas possível.",
+      "options": [
+        "limitada",
+        "ampla"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "limitada",
+      "explicacao": "A mobilidade social era limitada, mas possível, especialmente através de casamento, riqueza ou serviços prestados.",
+      "dica": "Não era fácil, mas podia acontecer."
+    },
+    {
+      "id": "hist139",
+      "type": "multiple-choice",
+      "question": "Qual era o principal produto de exportação da economia colonial?",
+      "options": [
+        "Pau-brasil",
+        "Cana-de-açúcar",
+        "Ouro",
+        "Café"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Cana-de-açúcar",
+      "explicacao": "A cana-de-açúcar era o principal produto de exportação da economia colonial, gerando grandes lucros para Portugal.",
+      "dica": "Foi o produto que dominou a economia por séculos."
+    },
+    {
+      "id": "hist140",
+      "type": "fill-gap",
+      "question": "O _____ foi a primeira atividade econômica desenvolvida no Brasil.",
+      "options": [
+        "pau-brasil",
+        "açúcar"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "pau-brasil",
+      "explicacao": "O pau-brasil foi a primeira atividade econômica desenvolvida no Brasil, antes mesmo da agricultura da cana-de-açúcar.",
+      "dica": "Deu nome ao país."
+    },
+    {
+      "id": "hist141",
+      "type": "multiple-choice",
+      "question": "Qual atividade econômica foi desenvolvida posteriormente na colônia?",
+      "options": [
+        "Pau-brasil",
+        "Cana-de-açúcar",
+        "Mineração",
+        "Pecuária"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Mineração",
+      "explicacao": "A mineração foi desenvolvida posteriormente, principalmente a partir do século XVIII com a descoberta do ouro em Minas Gerais.",
+      "dica": "Veio depois das outras atividades principais."
+    },
+    {
+      "id": "hist142",
+      "type": "fill-gap",
+      "question": "O sistema econômico colonial era baseado em _____ (grandes propriedades rurais).",
+      "options": [
+        "latifúndio",
+        "minifúndio"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "latifúndio",
+      "explicacao": "O sistema econômico colonial era baseado em latifúndios, grandes propriedades rurais concentradas nas mãos de poucos proprietários.",
+      "dica": "Propriedades de grande extensão."
+    },
+    {
+      "id": "hist143",
+      "type": "multiple-choice",
+      "question": "Qual característica define a especialização produtiva colonial?",
+      "options": [
+        "Policultura",
+        "Monocultura",
+        "Agricultura diversificada",
+        "Produção mista"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Monocultura",
+      "explicacao": "A monocultura caracterizava o sistema colonial, com especialização em poucos produtos para exportação.",
+      "dica": "Cultivo de um único produto principal."
+    },
+    {
+      "id": "hist144",
+      "type": "fill-gap",
+      "question": "A produção colonial era voltada para o mercado _____.",
+      "options": [
+        "europeu",
+        "americano"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "europeu",
+      "explicacao": "A produção colonial era voltada para o mercado europeu, seguindo a lógica do sistema mercantilista.",
+      "dica": "Era para atender à metrópole e Europa."
+    },
+    {
+      "id": "hist145",
+      "type": "multiple-choice",
+      "question": "O que significa 'Plantation' no sistema colonial?",
+      "options": [
+        "Sistema de divisão territorial",
+        "Sistema de produção agrícola",
+        "Relação de dependência econômica",
+        "Centralização administrativa"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Sistema de produção agrícola",
+      "explicacao": "Plantation era o sistema de produção agrícola caracterizado por latifúndios, monocultura e mão de obra escrava.",
+      "dica": "Sistema específico de produção agrícola."
+    },
+    {
+      "id": "hist146",
+      "type": "fill-gap",
+      "question": "Os portugueses chegaram ao Brasil em _____.",
+      "options": [
+        "1500",
+        "1492"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "1500",
+      "explicacao": "Os portugueses chegaram ao Brasil em 1500 com a expedição de Pedro Álvares Cabral.",
+      "dica": "Marco inicial da presença portuguesa."
+    },
+    {
+      "id": "hist147",
+      "type": "multiple-choice",
+      "question": "Em que ano começaram as expedições colonizadoras?",
+      "options": [
+        "1500",
+        "1530",
+        "1534",
+        "1549"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "1530",
+      "explicacao": "As expedições colonizadoras começaram em 1530, marcando o início efetivo da colonização portuguesa.",
+      "dica": "Foi 30 anos após o descobrimento."
+    },
+    {
+      "id": "hist148",
+      "type": "fill-gap",
+      "question": "As Capitanias Hereditárias foram criadas em _____.",
+      "options": [
+        "1534",
+        "1549"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "1534",
+      "explicacao": "As Capitanias Hereditárias foram criadas em 1534 como primeiro sistema administrativo do Brasil colonial.",
+      "dica": "Antecedeu o sistema de governo-geral."
+    },
+    {
+      "id": "hist149",
+      "type": "multiple-choice",
+      "question": "Em que ano foi instituído o Governo-Geral?",
+      "options": [
+        "1534",
+        "1549",
+        "1558",
+        "1763"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "1549",
+      "explicacao": "O Governo-Geral foi instituído em 1549 com Tomé de Sousa como primeiro governador-geral.",
+      "dica": "Foi na década de 1540."
+    },
+    {
+      "id": "hist150",
+      "type": "fill-gap",
+      "question": "A capital foi transferida para o Rio de Janeiro em _____.",
+      "options": [
+        "1763",
+        "1808"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "1763",
+      "explicacao": "A transferência da capital de Salvador para o Rio de Janeiro ocorreu em 1763, devido à importância econômica da região.",
+      "dica": "Foi no século XVIII."
+    },
+    {
+      "id": "hist151",
+      "type": "multiple-choice",
+      "question": "Por que houve a mudança do sistema de capitanias para governo-geral?",
+      "options": [
+        "As capitanias eram muito exitosas",
+        "Para descentralizar o poder",
+        "Devido aos problemas e fracassos do sistema de capitanias",
+        "Por pressão dos donatários"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Devido aos problemas e fracassos do sistema de capitanias",
+      "explicacao": "A mudança ocorreu devido aos problemas e fracassos do sistema de capitanias, que não conseguia administrar eficientemente a colônia.",
+      "dica": "O sistema anterior não estava funcionando."
+    },
+    {
+      "id": "hist152",
+      "type": "fill-gap",
+      "question": "O sistema econômico colonial funcionava através da relação de _____ econômica com Portugal.",
+      "options": [
+        "dependência",
+        "independência"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "dependência",
+      "explicacao": "O sistema funcionava através da relação de dependência econômica, onde o Brasil era subordinado aos interesses de Portugal.",
+      "dica": "Era uma relação desigual."
+    },
+    {
+      "id": "hist153",
+      "type": "multiple-choice",
+      "question": "Qual grupo estava no topo da estrutura social colonial?",
+      "options": [
+        "Homens livres pobres",
+        "Escravos",
+        "Senhores",
+        "Funcionários públicos"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Senhores",
+      "explicacao": "Os senhores (donos de terras e escravos) estavam no topo da hierarquia social colonial.",
+      "dica": "Eram os proprietários de grandes fazendas."
+    },
+    {
+      "id": "hist154",
+      "type": "fill-gap",
+      "question": "Para entender o período colonial, é importante estabelecer _____ entre sistema político, econômico e social.",
+      "options": [
+        "conexões",
+        "separações"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "conexões",
+      "explicacao": "É fundamental estabelecer conexões entre sistema político, econômico e social para compreender a complexidade do período colonial.",
+      "dica": "Tudo estava interligado no sistema colonial."
+    },
+    {
+      "id": "hist155",
+      "type": "multiple-choice",
+      "question": "Qual é uma estratégia importante para estudar o período colonial?",
+      "options": [
+        "Apenas memorizar datas",
+        "Identificar causas e consequências das mudanças administrativas",
+        "Focar apenas em um aspecto",
+        "Ignorar as relações entre eventos"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Identificar causas e consequências das mudanças administrativas",
+      "explicacao": "É importante identificar causas e consequências das mudanças administrativas para entender a evolução do sistema colonial.",
+      "dica": "Entender o porquê das mudanças."
+    }
+  ]
+}

@@ -31,6 +31,12 @@ export default function Home() {
       icon: "/vercel.svg",
       color: "rgba(255, 130, 193, 0.1)"
     },
+    {
+      id: "historia",
+      title: "📜 História",
+      icon: "/globe.svg",
+      color: "rgba(255, 165, 0, 0.1)"
+    },
   ];
 
   const container = {
