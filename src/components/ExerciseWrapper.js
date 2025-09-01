@@ -6,6 +6,7 @@ import ProgressBar from './ProgressBar';
 import Button from './Button';
 import MultipleChoiceExercise from './MultipleChoiceExercise';
 import FillGapExercise from './FillGapExercise';
+import TrueFalseExercise from './TrueFalseExercise';
 import { useSounds } from '../hooks/useSounds';
 
 export default function ExerciseWrapper({ exercises }) {
@@ -116,8 +117,29 @@ export default function ExerciseWrapper({ exercises }) {
             explicacao={currentExercise.explicacao}
             resposta_correta={currentExercise.resposta_correta}
           />
+        ) : currentExercise.type === 'true-false' ? (
+          <TrueFalseExercise
+            question={currentExercise.question}
+            options={currentExercise.options}
+            correctIndex={currentExercise.correctIndex}
+            onComplete={handleExerciseComplete}
+            dica={currentExercise.dica}
+            explicacao={currentExercise.explicacao}
+            resposta_correta={currentExercise.resposta_correta}
+          />
         ) : (
-          <div>Tipo de exercício não suportado</div>
+          <div className="duolingo-card text-center p-8">
+            <h2 className="text-xl font-semibold mb-4">Tipo de exercício não suportado</h2>
+            <p className="text-[var(--text-secondary)] mb-6">
+              Este tipo de exercício ainda não está implementado.
+            </p>
+            <Button 
+              onClick={() => handleExerciseComplete(false)}
+              className="w-full"
+            >
+              Pular para o próximo
+            </Button>
+          </div>
         )}
       </motion.div>
       
