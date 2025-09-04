@@ -1,0 +1,1470 @@
+{
+  "nome": "Cambridge English YLE Starters - Revisão Completa",
+  "materia": "Inglês",
+  "ano_letivo": "Cambridge English YLE Starters (Pre A1)",
+  "data": "2025-09-04",
+  "title": "Preparação Completa para Cambridge English YLE Starters",
+  "description": "Lista abrangente com mais de 100 exercícios cobrindo todos os tópicos necessários para o exame Cambridge English YLE Starters (Pre A1). Inclui vocabulário, gramática, animais, família, cores, números, partes do corpo e muito mais.",
+  "exercises": [
+    {
+      "id": "start1",
+      "type": "multiple-choice",
+      "question": "What color is the sun?",
+      "options": [
+        "blue",
+        "yellow",
+        "green",
+        "red"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "yellow",
+      "explicacao": "The sun is yellow. O sol é amarelo.",
+      "dica": "Think about what you see in the sky during the day."
+    },
+    {
+      "id": "start2",
+      "type": "multiple-choice",
+      "question": "How many legs does a cat have?",
+      "options": [
+        "two",
+        "three",
+        "four",
+        "five"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "four",
+      "explicacao": "A cat has four legs. Um gato tem quatro pernas.",
+      "dica": "Count the legs of animals you see every day."
+    },
+    {
+      "id": "start3",
+      "type": "multiple-choice",
+      "question": "My mother's mother is my _______.",
+      "options": [
+        "sister",
+        "aunt",
+        "grandmother",
+        "cousin"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "grandmother",
+      "explicacao": "Your mother's mother is your grandmother. A mãe da sua mãe é sua avó.",
+      "dica": "Think about family relationships."
+    },
+    {
+      "id": "start4",
+      "type": "multiple-choice",
+      "question": "I brush my _______ every morning.",
+      "options": [
+        "teeth",
+        "hair",
+        "hands",
+        "feet"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "teeth",
+      "explicacao": "We brush our teeth every morning. Escovamos os dentes toda manhã.",
+      "dica": "What do you clean in your mouth?"
+    },
+    {
+      "id": "start5",
+      "type": "multiple-choice",
+      "question": "What do you use to write?",
+      "options": [
+        "fork",
+        "pencil",
+        "cup",
+        "shoe"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "pencil",
+      "explicacao": "We use a pencil to write. Usamos um lápis para escrever.",
+      "dica": "What school supply helps you write?"
+    },
+    {
+      "id": "start6",
+      "type": "true-false",
+      "question": "True or False: A dog is an animal.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "True",
+      "explicacao": "True. A dog is an animal. Verdadeiro. Um cachorro é um animal.",
+      "dica": "Think about what category dogs belong to."
+    },
+    {
+      "id": "start7",
+      "type": "multiple-choice",
+      "question": "What number comes after five?",
+      "options": [
+        "four",
+        "six",
+        "three",
+        "seven"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "six",
+      "explicacao": "Six comes after five. Seis vem depois de cinco.",
+      "dica": "Count: 1, 2, 3, 4, 5, ?"
+    },
+    {
+      "id": "start8",
+      "type": "multiple-choice",
+      "question": "Where do you sleep?",
+      "options": [
+        "kitchen",
+        "bathroom",
+        "bedroom",
+        "garden"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "bedroom",
+      "explicacao": "We sleep in the bedroom. Dormimos no quarto.",
+      "dica": "Which room in the house has a bed?"
+    },
+    {
+      "id": "start9",
+      "type": "multiple-choice",
+      "question": "What do we use to eat soup?",
+      "options": [
+        "fork",
+        "knife",
+        "spoon",
+        "plate"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "spoon",
+      "explicacao": "We use a spoon to eat soup. Usamos uma colher para comer sopa.",
+      "dica": "What utensil is best for liquid food?"
+    },
+    {
+      "id": "start10",
+      "type": "true-false",
+      "question": "True or False: Fish can swim.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "True",
+      "explicacao": "True. Fish can swim. Verdadeiro. Peixes podem nadar.",
+      "dica": "Think about where fish live."
+    },
+    {
+      "id": "start11",
+      "type": "multiple-choice",
+      "question": "What color do you get when you mix red and yellow?",
+      "options": [
+        "purple",
+        "orange",
+        "green",
+        "blue"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "orange",
+      "explicacao": "Red and yellow make orange. Vermelho e amarelo fazem laranja.",
+      "dica": "Think about mixing colors like paint."
+    },
+    {
+      "id": "start12",
+      "type": "multiple-choice",
+      "question": "My father's son is my _______.",
+      "options": [
+        "uncle",
+        "cousin",
+        "brother",
+        "grandfather"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "brother",
+      "explicacao": "Your father's son is your brother. O filho do seu pai é seu irmão.",
+      "dica": "Think about family members who share the same parents."
+    },
+    {
+      "id": "start13",
+      "type": "multiple-choice",
+      "question": "We use our _______ to see.",
+      "options": [
+        "ears",
+        "nose",
+        "eyes",
+        "mouth"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "eyes",
+      "explicacao": "We use our eyes to see. Usamos nossos olhos para ver.",
+      "dica": "What part of your face helps you look at things?"
+    },
+    {
+      "id": "start14",
+      "type": "multiple-choice",
+      "question": "What do you wear on your feet?",
+      "options": [
+        "hat",
+        "gloves",
+        "shoes",
+        "shirt"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "shoes",
+      "explicacao": "We wear shoes on our feet. Usamos sapatos nos pés.",
+      "dica": "What protects your feet when you walk outside?"
+    },
+    {
+      "id": "start15",
+      "type": "true-false",
+      "question": "True or False: Elephants are small animals.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "False",
+      "explicacao": "False. Elephants are big animals. Falso. Elefantes são animais grandes.",
+      "dica": "Think about the size of elephants compared to other animals."
+    },
+    {
+      "id": "start16",
+      "type": "multiple-choice",
+      "question": "What number is between three and five?",
+      "options": [
+        "two",
+        "four",
+        "six",
+        "one"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "four",
+      "explicacao": "Four is between three and five. Quatro está entre três e cinco.",
+      "dica": "Count: 3, ?, 5"
+    },
+    {
+      "id": "start17",
+      "type": "multiple-choice",
+      "question": "Where do you cook food?",
+      "options": [
+        "bedroom",
+        "bathroom",
+        "kitchen",
+        "living room"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "kitchen",
+      "explicacao": "We cook food in the kitchen. Cozinhamos na cozinha.",
+      "dica": "Which room has a stove and refrigerator?"
+    },
+    {
+      "id": "start18",
+      "type": "multiple-choice",
+      "question": "What do we drink when we are thirsty?",
+      "options": [
+        "bread",
+        "water",
+        "chair",
+        "book"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "water",
+      "explicacao": "We drink water when we are thirsty. Bebemos água quando temos sede.",
+      "dica": "What liquid is most important for our body?"
+    },
+    {
+      "id": "start19",
+      "type": "multiple-choice",
+      "question": "A baby cat is called a _______.",
+      "options": [
+        "puppy",
+        "kitten",
+        "calf",
+        "chick"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "kitten",
+      "explicacao": "A baby cat is called a kitten. Um gato bebê é chamado de gatinho.",
+      "dica": "What do you call young animals?"
+    },
+    {
+      "id": "start20",
+      "type": "true-false",
+      "question": "True or False: We use our nose to smell.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "True",
+      "explicacao": "True. We use our nose to smell. Verdadeiro. Usamos o nariz para cheirar.",
+      "dica": "Think about the five senses."
+    },
+    {
+      "id": "start21",
+      "type": "multiple-choice",
+      "question": "What color is grass?",
+      "options": [
+        "red",
+        "blue",
+        "green",
+        "yellow"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "green",
+      "explicacao": "Grass is green. A grama é verde.",
+      "dica": "Look outside at the plants in a park or garden."
+    },
+    {
+      "id": "start22",
+      "type": "multiple-choice",
+      "question": "How many fingers do you have on one hand?",
+      "options": [
+        "four",
+        "five",
+        "six",
+        "three"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "five",
+      "explicacao": "You have five fingers on one hand. Você tem cinco dedos em uma mão.",
+      "dica": "Count the fingers on your hand right now."
+    },
+    {
+      "id": "start23",
+      "type": "multiple-choice",
+      "question": "My mother's husband is my _______.",
+      "options": [
+        "brother",
+        "father",
+        "uncle",
+        "son"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "father",
+      "explicacao": "Your mother's husband is your father. O marido da sua mãe é seu pai.",
+      "dica": "Think about family relationships."
+    },
+    {
+      "id": "start24",
+      "type": "multiple-choice",
+      "question": "What do you do with a book?",
+      "options": [
+        "eat",
+        "read",
+        "wear",
+        "drink"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "read",
+      "explicacao": "You read a book. Você lê um livro.",
+      "dica": "What do you do with your eyes when you look at text?"
+    },
+    {
+      "id": "start25",
+      "type": "true-false",
+      "question": "True or False: Birds can fly.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "True",
+      "explicacao": "True. Most birds can fly. Verdadeiro. A maioria dos pássaros pode voar.",
+      "dica": "Think about how birds move in the sky."
+    },
+    {
+      "id": "start26",
+      "type": "multiple-choice",
+      "question": "What comes before the number eight?",
+      "options": [
+        "nine",
+        "seven",
+        "six",
+        "ten"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "seven",
+      "explicacao": "Seven comes before eight. Sete vem antes de oito.",
+      "dica": "Count backwards from eight."
+    },
+    {
+      "id": "start27",
+      "type": "multiple-choice",
+      "question": "Where do you wash your hands?",
+      "options": [
+        "bedroom",
+        "bathroom",
+        "kitchen",
+        "garden"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "bathroom",
+      "explicacao": "You wash your hands in the bathroom. Você lava as mãos no banheiro.",
+      "dica": "Which room has a sink and soap?"
+    },
+    {
+      "id": "start28",
+      "type": "multiple-choice",
+      "question": "What fruit is red and round?",
+      "options": [
+        "banana",
+        "apple",
+        "orange",
+        "grape"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "apple",
+      "explicacao": "An apple is red and round. Uma maçã é vermelha e redonda.",
+      "dica": "Think about fruits you see in the grocery store."
+    },
+    {
+      "id": "start29",
+      "type": "multiple-choice",
+      "question": "What sound does a cow make?",
+      "options": [
+        "meow",
+        "woof",
+        "moo",
+        "chirp"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "moo",
+      "explicacao": "A cow says 'moo'. Uma vaca faz 'muu'.",
+      "dica": "Think about farm animals and their sounds."
+    },
+    {
+      "id": "start30",
+      "type": "true-false",
+      "question": "True or False: Ice is hot.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "False",
+      "explicacao": "False. Ice is cold, not hot. Falso. Gelo é frio, não quente.",
+      "dica": "Think about what ice feels like when you touch it."
+    },
+    {
+      "id": "start31",
+      "type": "multiple-choice",
+      "question": "We use our _______ to hear.",
+      "options": [
+        "eyes",
+        "nose",
+        "ears",
+        "mouth"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "ears",
+      "explicacao": "We use our ears to hear. Usamos nossas orelhas para ouvir.",
+      "dica": "What part of your head helps you listen to music?"
+    },
+    {
+      "id": "start32",
+      "type": "multiple-choice",
+      "question": "What do you wear when it's cold?",
+      "options": [
+        "shorts",
+        "coat",
+        "sandals",
+        "swimsuit"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "coat",
+      "explicacao": "You wear a coat when it's cold. Você usa um casaco quando está frio.",
+      "dica": "What keeps you warm in winter?"
+    },
+    {
+      "id": "start33",
+      "type": "multiple-choice",
+      "question": "What animal gives us milk?",
+      "options": [
+        "dog",
+        "cow",
+        "cat",
+        "bird"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "cow",
+      "explicacao": "A cow gives us milk. Uma vaca nos dá leite.",
+      "dica": "Think about farm animals and what they produce."
+    },
+    {
+      "id": "start34",
+      "type": "multiple-choice",
+      "question": "What do we call the meal we eat in the morning?",
+      "options": [
+        "lunch",
+        "dinner",
+        "breakfast",
+        "snack"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "breakfast",
+      "explicacao": "The meal we eat in the morning is breakfast. A refeição que comemos de manhã é o café da manhã.",
+      "dica": "What is the first meal of the day?"
+    },
+    {
+      "id": "start35",
+      "type": "true-false",
+      "question": "True or False: The moon comes out at night.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "True",
+      "explicacao": "True. The moon comes out at night. Verdadeiro. A lua aparece à noite.",
+      "dica": "When do you usually see the moon in the sky?"
+    },
+    {
+      "id": "start36",
+      "type": "multiple-choice",
+      "question": "How many days are there in a week?",
+      "options": [
+        "five",
+        "six",
+        "seven",
+        "eight"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "seven",
+      "explicacao": "There are seven days in a week. Há sete dias em uma semana.",
+      "dica": "Count: Monday, Tuesday, Wednesday..."
+    },
+    {
+      "id": "start37",
+      "type": "multiple-choice",
+      "question": "What room do you take a bath in?",
+      "options": [
+        "kitchen",
+        "bedroom",
+        "bathroom",
+        "living room"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "bathroom",
+      "explicacao": "You take a bath in the bathroom. Você toma banho no banheiro.",
+      "dica": "Which room has a bathtub or shower?"
+    },
+    {
+      "id": "start38",
+      "type": "multiple-choice",
+      "question": "What vegetable is orange?",
+      "options": [
+        "lettuce",
+        "carrot",
+        "broccoli",
+        "potato"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "carrot",
+      "explicacao": "A carrot is orange. Uma cenoura é laranja.",
+      "dica": "Think about vegetables and their colors."
+    },
+    {
+      "id": "start39",
+      "type": "multiple-choice",
+      "question": "What do you use to cut paper?",
+      "options": [
+        "spoon",
+        "scissors",
+        "cup",
+        "pillow"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "scissors",
+      "explicacao": "You use scissors to cut paper. Você usa tesoura para cortar papel.",
+      "dica": "What tool has two sharp blades?"
+    },
+    {
+      "id": "start40",
+      "type": "true-false",
+      "question": "True or False: Rabbits have long ears.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "True",
+      "explicacao": "True. Rabbits have long ears. Verdadeiro. Coelhos têm orelhas compridas.",
+      "dica": "Think about what rabbits look like."
+    },
+    {
+      "id": "start41",
+      "type": "multiple-choice",
+      "question": "What color do you get when you mix blue and yellow?",
+      "options": [
+        "purple",
+        "orange",
+        "green",
+        "pink"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "green",
+      "explicacao": "Blue and yellow make green. Azul e amarelo fazem verde.",
+      "dica": "Think about mixing paint colors."
+    },
+    {
+      "id": "start42",
+      "type": "multiple-choice",
+      "question": "A baby dog is called a _______.",
+      "options": [
+        "kitten",
+        "puppy",
+        "calf",
+        "lamb"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "puppy",
+      "explicacao": "A baby dog is called a puppy. Um cachorro bebê é chamado de filhote.",
+      "dica": "What do you call young dogs?"
+    },
+    {
+      "id": "start43",
+      "type": "multiple-choice",
+      "question": "We use our _______ to walk.",
+      "options": [
+        "arms",
+        "eyes",
+        "legs",
+        "ears"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "legs",
+      "explicacao": "We use our legs to walk. Usamos nossas pernas para caminhar.",
+      "dica": "What part of your body touches the ground when you walk?"
+    },
+    {
+      "id": "start44",
+      "type": "multiple-choice",
+      "question": "What do you sleep on?",
+      "options": [
+        "chair",
+        "table",
+        "bed",
+        "floor"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "bed",
+      "explicacao": "You sleep on a bed. Você dorme na cama.",
+      "dica": "What furniture is in your bedroom for sleeping?"
+    },
+    {
+      "id": "start45",
+      "type": "multiple-choice",
+      "question": "What season comes after winter?",
+      "options": [
+        "summer",
+        "autumn",
+        "spring",
+        "winter"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "spring",
+      "explicacao": "Spring comes after winter. A primavera vem depois do inverno.",
+      "dica": "Think about the order of the four seasons."
+    },
+    {
+      "id": "start46",
+      "type": "true-false",
+      "question": "True or False: A bicycle has three wheels.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "False",
+      "explicacao": "False. A bicycle has two wheels. Falso. Uma bicicleta tem duas rodas.",
+      "dica": "Count the wheels on a bicycle."
+    },
+    {
+      "id": "start47",
+      "type": "multiple-choice",
+      "question": "What number comes after ten?",
+      "options": [
+        "nine",
+        "eleven",
+        "twelve",
+        "eight"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "eleven",
+      "explicacao": "Eleven comes after ten. Onze vem depois de dez.",
+      "dica": "Count: 8, 9, 10, ?"
+    },
+    {
+      "id": "start48",
+      "type": "multiple-choice",
+      "question": "What do you put on bread to make a sandwich?",
+      "options": [
+        "water",
+        "butter",
+        "soap",
+        "paper"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "butter",
+      "explicacao": "You put butter on bread to make a sandwich. Você põe manteiga no pão para fazer um sanduíche.",
+      "dica": "What spread makes bread taste good?"
+    },
+    {
+      "id": "start49",
+      "type": "multiple-choice",
+      "question": "Where do fish live?",
+      "options": [
+        "trees",
+        "sky",
+        "water",
+        "caves"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "water",
+      "explicacao": "Fish live in water. Peixes vivem na água.",
+      "dica": "Think about the habitat of fish."
+    },
+    {
+      "id": "start50",
+      "type": "multiple-choice",
+      "question": "What do you use to clean your teeth?",
+      "options": [
+        "toothbrush",
+        "spoon",
+        "pencil",
+        "key"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "toothbrush",
+      "explicacao": "You use a toothbrush to clean your teeth. Você usa uma escova de dentes para limpar os dentes.",
+      "dica": "What tool helps you brush your teeth every morning?"
+    },
+    {
+      "id": "start51",
+      "type": "true-false",
+      "question": "True or False: Apples grow on trees.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "True",
+      "explicacao": "True. Apples grow on trees. Verdadeiro. Maçãs crescem em árvores.",
+      "dica": "Think about where fruits come from."
+    },
+    {
+      "id": "start52",
+      "type": "multiple-choice",
+      "question": "My brother's daughter is my _______.",
+      "options": [
+        "sister",
+        "niece",
+        "aunt",
+        "mother"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "niece",
+      "explicacao": "Your brother's daughter is your niece. A filha do seu irmão é sua sobrinha.",
+      "dica": "Think about extended family relationships."
+    },
+    {
+      "id": "start53",
+      "type": "multiple-choice",
+      "question": "What do you wear on your head?",
+      "options": [
+        "shoes",
+        "hat",
+        "gloves",
+        "socks"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "hat",
+      "explicacao": "You wear a hat on your head. Você usa um chapéu na cabeça.",
+      "dica": "What protects your head from sun or cold?"
+    },
+    {
+      "id": "start54",
+      "type": "multiple-choice",
+      "question": "What animal says 'oink'?",
+      "options": [
+        "cow",
+        "pig",
+        "horse",
+        "sheep"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "pig",
+      "explicacao": "A pig says 'oink'. Um porco faz 'oinc'.",
+      "dica": "Think about farm animal sounds."
+    },
+    {
+      "id": "start55",
+      "type": "multiple-choice",
+      "question": "What do you do when you are hungry?",
+      "options": [
+        "sleep",
+        "eat",
+        "run",
+        "sing"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "eat",
+      "explicacao": "When you are hungry, you eat. Quando você está com fome, você come.",
+      "dica": "What do you do to satisfy hunger?"
+    },
+    {
+      "id": "start56",
+      "type": "true-false",
+      "question": "True or False: The sky is blue during the day.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "True",
+      "explicacao": "True. The sky is blue during the day. Verdadeiro. O céu é azul durante o dia.",
+      "dica": "Look up at the sky on a sunny day."
+    },
+    {
+      "id": "start57",
+      "type": "multiple-choice",
+      "question": "How many months are there in a year?",
+      "options": [
+        "ten",
+        "eleven",
+        "twelve",
+        "thirteen"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "twelve",
+      "explicacao": "There are twelve months in a year. Há doze meses em um ano.",
+      "dica": "Count: January, February, March... to December."
+    },
+    {
+      "id": "start58",
+      "type": "multiple-choice",
+      "question": "What do you sit on?",
+      "options": [
+        "wall",
+        "chair",
+        "ceiling",
+        "window"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "chair",
+      "explicacao": "You sit on a chair. Você senta em uma cadeira.",
+      "dica": "What furniture is made for sitting?"
+    },
+    {
+      "id": "start59",
+      "type": "multiple-choice",
+      "question": "What fruit is yellow and long?",
+      "options": [
+        "apple",
+        "orange",
+        "banana",
+        "grape"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "banana",
+      "explicacao": "A banana is yellow and long. Uma banana é amarela e comprida.",
+      "dica": "Think about the shape and color of different fruits."
+    },
+    {
+      "id": "start60",
+      "type": "multiple-choice",
+      "question": "What do you use to open a door?",
+      "options": [
+        "key",
+        "fork",
+        "brush",
+        "cup"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "key",
+      "explicacao": "You use a key to open a door. Você usa uma chave para abrir uma porta.",
+      "dica": "What small metal object unlocks doors?"
+    },
+    {
+      "id": "start61",
+      "type": "true-false",
+      "question": "True or False: Penguins can swim.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "True",
+      "explicacao": "True. Penguins can swim very well. Verdadeiro. Pinguins podem nadar muito bem.",
+      "dica": "Think about where penguins live and how they move."
+    },
+    {
+      "id": "start62",
+      "type": "multiple-choice",
+      "question": "We smell with our _______.",
+      "options": [
+        "eyes",
+        "ears",
+        "nose",
+        "mouth"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "nose",
+      "explicacao": "We smell with our nose. Cheiramos com o nariz.",
+      "dica": "What part of your face is in the middle?"
+    },
+    {
+      "id": "start63",
+      "type": "multiple-choice",
+      "question": "What do you do at school?",
+      "options": [
+        "cook",
+        "learn",
+        "sleep",
+        "drive"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "learn",
+      "explicacao": "You learn at school. Você aprende na escola.",
+      "dica": "What is the main purpose of going to school?"
+    },
+    {
+      "id": "start64",
+      "type": "multiple-choice",
+      "question": "What animal has black and white stripes?",
+      "options": [
+        "lion",
+        "elephant",
+        "zebra",
+        "giraffe"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "zebra",
+      "explicacao": "A zebra has black and white stripes. Uma zebra tem listras pretas e brancas.",
+      "dica": "Think about African animals with patterns."
+    },
+    {
+      "id": "start65",
+      "type": "multiple-choice",
+      "question": "What do you drink from?",
+      "options": [
+        "plate",
+        "cup",
+        "fork",
+        "knife"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "cup",
+      "explicacao": "You drink from a cup. Você bebe de um copo.",
+      "dica": "What container holds liquids for drinking?"
+    },
+    {
+      "id": "start66",
+      "type": "true-false",
+      "question": "True or False: Snow is white.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "True",
+      "explicacao": "True. Snow is white. Verdadeiro. A neve é branca.",
+      "dica": "Think about what snow looks like in winter."
+    },
+    {
+      "id": "start67",
+      "type": "multiple-choice",
+      "question": "What number comes before twenty?",
+      "options": [
+        "eighteen",
+        "nineteen",
+        "twenty-one",
+        "seventeen"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "nineteen",
+      "explicacao": "Nineteen comes before twenty. Dezenove vem antes de vinte.",
+      "dica": "Count up to twenty: 17, 18, 19, ?"
+    },
+    {
+      "id": "start68",
+      "type": "multiple-choice",
+      "question": "Where do you watch TV?",
+      "options": [
+        "bathroom",
+        "kitchen",
+        "living room",
+        "garage"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "living room",
+      "explicacao": "You usually watch TV in the living room. Você geralmente assiste TV na sala de estar.",
+      "dica": "Which room is designed for relaxation and entertainment?"
+    },
+    {
+      "id": "start69",
+      "type": "multiple-choice",
+      "question": "What do bees make?",
+      "options": [
+        "milk",
+        "honey",
+        "bread",
+        "juice"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "honey",
+      "explicacao": "Bees make honey. As abelhas fazem mel.",
+      "dica": "What sweet substance do bees produce?"
+    },
+    {
+      "id": "start70",
+      "type": "multiple-choice",
+      "question": "What do you use to write on a blackboard?",
+      "options": [
+        "pen",
+        "chalk",
+        "spoon",
+        "brush"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "chalk",
+      "explicacao": "You use chalk to write on a blackboard. Você usa giz para escrever no quadro negro.",
+      "dica": "What white stick is used for writing on dark boards?"
+    },
+    {
+      "id": "start71",
+      "type": "true-false",
+      "question": "True or False: Lions live in the jungle.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "True",
+      "explicacao": "True. Lions can live in jungles and savannas. Verdadeiro. Leões podem viver em selvas e savanas.",
+      "dica": "Think about where big cats live in nature."
+    },
+    {
+      "id": "start72",
+      "type": "multiple-choice",
+      "question": "My sister's son is my _______.",
+      "options": [
+        "cousin",
+        "nephew",
+        "uncle",
+        "brother"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "nephew",
+      "explicacao": "Your sister's son is your nephew. O filho da sua irmã é seu sobrinho.",
+      "dica": "Think about family relationships."
+    },
+    {
+      "id": "start73",
+      "type": "multiple-choice",
+      "question": "What do you put your food on when you eat?",
+      "options": [
+        "cup",
+        "plate",
+        "spoon",
+        "napkin"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "plate",
+      "explicacao": "You put your food on a plate when you eat. Você põe sua comida em um prato quando come.",
+      "dica": "What flat, round dish holds your meal?"
+    },
+    {
+      "id": "start74",
+      "type": "multiple-choice",
+      "question": "What animal is the king of the jungle?",
+      "options": [
+        "elephant",
+        "tiger",
+        "lion",
+        "monkey"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "lion",
+      "explicacao": "The lion is called the king of the jungle. O leão é chamado de rei da selva.",
+      "dica": "Which big cat is known as the king?"
+    },
+    {
+      "id": "start75",
+      "type": "multiple-choice",
+      "question": "What do you do when you are tired?",
+      "options": [
+        "eat",
+        "sleep",
+        "run",
+        "dance"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "sleep",
+      "explicacao": "When you are tired, you sleep. Quando você está cansado, você dorme.",
+      "dica": "What do you do to rest and recover energy?"
+    },
+    {
+      "id": "start76",
+      "type": "true-false",
+      "question": "True or False: Flowers need water to grow.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "True",
+      "explicacao": "True. Flowers need water to grow. Verdadeiro. Flores precisam de água para crescer.",
+      "dica": "Think about what plants need to survive."
+    },
+    {
+      "id": "start77",
+      "type": "multiple-choice",
+      "question": "How many wheels does a car have?",
+      "options": [
+        "two",
+        "three",
+        "four",
+        "five"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "four",
+      "explicacao": "A car has four wheels. Um carro tem quatro rodas.",
+      "dica": "Count the wheels on a typical car."
+    },
+    {
+      "id": "start78",
+      "type": "multiple-choice",
+      "question": "What do you put on your hands when it's cold?",
+      "options": [
+        "shoes",
+        "hat",
+        "gloves",
+        "shirt"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "gloves",
+      "explicacao": "You put gloves on your hands when it's cold. Você põe luvas nas mãos quando está frio.",
+      "dica": "What keeps your hands warm in winter?"
+    },
+    {
+      "id": "start79",
+      "type": "multiple-choice",
+      "question": "What vegetable makes you cry when you cut it?",
+      "options": [
+        "carrot",
+        "onion",
+        "potato",
+        "tomato"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "onion",
+      "explicacao": "An onion makes you cry when you cut it. Uma cebola faz você chorar quando você a corta.",
+      "dica": "Which vegetable has a strong smell that affects your eyes?"
+    },
+    {
+      "id": "start80",
+      "type": "multiple-choice",
+      "question": "What do you use to clean the floor?",
+      "options": [
+        "toothbrush",
+        "mop",
+        "spoon",
+        "pencil"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "mop",
+      "explicacao": "You use a mop to clean the floor. Você usa um esfregão para limpar o chão.",
+      "dica": "What cleaning tool has strings or cloth at the end?"
+    },
+    {
+      "id": "start81",
+      "type": "true-false",
+      "question": "True or False: Cats like to climb trees.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "True",
+      "explicacao": "True. Cats like to climb trees. Verdadeiro. Gatos gostam de subir em árvores.",
+      "dica": "Think about cat behavior and their abilities."
+    },
+    {
+      "id": "start82",
+      "type": "multiple-choice",
+      "question": "What is the opposite of hot?",
+      "options": [
+        "warm",
+        "cold",
+        "big",
+        "fast"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "cold",
+      "explicacao": "The opposite of hot is cold. O oposto de quente é frio.",
+      "dica": "Think about temperature opposites."
+    },
+    {
+      "id": "start83",
+      "type": "multiple-choice",
+      "question": "What do you call the hair on a lion's head?",
+      "options": [
+        "fur",
+        "mane",
+        "tail",
+        "paw"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "mane",
+      "explicacao": "The hair on a lion's head is called a mane. O cabelo na cabeça de um leão é chamado de juba.",
+      "dica": "Male lions have this special feature around their heads."
+    },
+    {
+      "id": "start84",
+      "type": "multiple-choice",
+      "question": "What do you do with soap?",
+      "options": [
+        "eat",
+        "drink",
+        "wash",
+        "wear"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "wash",
+      "explicacao": "You wash with soap. Você lava com sabão.",
+      "dica": "What do you do to clean yourself?"
+    },
+    {
+      "id": "start85",
+      "type": "multiple-choice",
+      "question": "What day comes after Monday?",
+      "options": [
+        "Sunday",
+        "Tuesday",
+        "Wednesday",
+        "Friday"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Tuesday",
+      "explicacao": "Tuesday comes after Monday. Terça-feira vem depois de segunda-feira.",
+      "dica": "Think about the order of days in the week."
+    },
+    {
+      "id": "start86",
+      "type": "true-false",
+      "question": "True or False: Spiders have eight legs.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "True",
+      "explicacao": "True. Spiders have eight legs. Verdadeiro. Aranhas têm oito pernas.",
+      "dica": "Count the legs on a spider."
+    },
+    {
+      "id": "start87",
+      "type": "multiple-choice",
+      "question": "What do you put in your mouth to clean your teeth?",
+      "options": [
+        "soap",
+        "toothpaste",
+        "food",
+        "water"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "toothpaste",
+      "explicacao": "You put toothpaste in your mouth to clean your teeth. Você põe pasta de dente na boca para limpar os dentes.",
+      "dica": "What comes out of a tube and goes on your toothbrush?"
+    },
+    {
+      "id": "start88",
+      "type": "multiple-choice",
+      "question": "Where do you find books?",
+      "options": [
+        "refrigerator",
+        "library",
+        "bathroom",
+        "garage"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "library",
+      "explicacao": "You find books in a library. Você encontra livros em uma biblioteca.",
+      "dica": "Where do people go to read and borrow books?"
+    },
+    {
+      "id": "start89",
+      "type": "multiple-choice",
+      "question": "What animal hops and has long ears?",
+      "options": [
+        "dog",
+        "cat",
+        "rabbit",
+        "bird"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "rabbit",
+      "explicacao": "A rabbit hops and has long ears. Um coelho pula e tem orelhas compridas.",
+      "dica": "Think about animals that move by jumping."
+    },
+    {
+      "id": "start90",
+      "type": "multiple-choice",
+      "question": "What do you wear to see better?",
+      "options": [
+        "hat",
+        "glasses",
+        "gloves",
+        "shoes"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "glasses",
+      "explicacao": "You wear glasses to see better. Você usa óculos para ver melhor.",
+      "dica": "What goes on your nose and helps your eyes?"
+    },
+    {
+      "id": "start91",
+      "type": "true-false",
+      "question": "True or False: Frogs can jump.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "True",
+      "explicacao": "True. Frogs can jump very well. Verdadeiro. Sapos podem pular muito bem.",
+      "dica": "Think about how frogs move from place to place."
+    },
+    {
+      "id": "start92",
+      "type": "multiple-choice",
+      "question": "What is the opposite of big?",
+      "options": [
+        "small",
+        "tall",
+        "fast",
+        "cold"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "small",
+      "explicacao": "The opposite of big is small. O oposto de grande é pequeno.",
+      "dica": "Think about size opposites."
+    },
+    {
+      "id": "start93",
+      "type": "multiple-choice",
+      "question": "What do you call your father's father?",
+      "options": [
+        "uncle",
+        "brother",
+        "grandfather",
+        "cousin"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "grandfather",
+      "explicacao": "Your father's father is your grandfather. O pai do seu pai é seu avô.",
+      "dica": "Think about family relationships going back generations."
+    },
+    {
+      "id": "start94",
+      "type": "multiple-choice",
+      "question": "What do you use to eat spaghetti?",
+      "options": [
+        "spoon",
+        "fork",
+        "knife",
+        "cup"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "fork",
+      "explicacao": "You use a fork to eat spaghetti. Você usa um garfo para comer espaguete.",
+      "dica": "What utensil has points to pick up long noodles?"
+    },
+    {
+      "id": "start95",
+      "type": "multiple-choice",
+      "question": "What time do you usually eat lunch?",
+      "options": [
+        "morning",
+        "noon",
+        "night",
+        "midnight"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "noon",
+      "explicacao": "You usually eat lunch at noon. Você geralmente almoça ao meio-dia.",
+      "dica": "When is the middle meal of the day?"
+    },
+    {
+      "id": "start96",
+      "type": "true-false",
+      "question": "True or False: Bears sleep in winter.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "True",
+      "explicacao": "True. Many bears hibernate (sleep) in winter. Verdadeiro. Muitos ursos hibernam (dormem) no inverno.",
+      "dica": "Think about what some animals do during cold months."
+    },
+    {
+      "id": "start97",
+      "type": "multiple-choice",
+      "question": "What do you call frozen water?",
+      "options": [
+        "steam",
+        "ice",
+        "milk",
+        "juice"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "ice",
+      "explicacao": "Frozen water is called ice. Água congelada é chamada de gelo.",
+      "dica": "What do you put in drinks to make them cold?"
+    },
+    {
+      "id": "start98",
+      "type": "multiple-choice",
+      "question": "What do you use to play music?",
+      "options": [
+        "book",
+        "radio",
+        "shoe",
+        "plate"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "radio",
+      "explicacao": "You use a radio to play music. Você usa um rádio para tocar música.",
+      "dica": "What electronic device plays songs and music?"
+    },
+    {
+      "id": "start99",
+      "type": "multiple-choice",
+      "question": "What animal gives us wool?",
+      "options": [
+        "cow",
+        "pig",
+        "sheep",
+        "horse"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "sheep",
+      "explicacao": "Sheep give us wool. Ovelhas nos dão lã.",
+      "dica": "Which farm animal has fluffy hair that can be made into clothing?"
+    },
+    {
+      "id": "start100",
+      "type": "true-false",
+      "question": "True or False: You should wash your hands before eating.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "True",
+      "explicacao": "True. You should wash your hands before eating. Verdadeiro. Você deve lavar as mãos antes de comer.",
+      "dica": "Think about good hygiene habits."
+    }
+  ]
+}
