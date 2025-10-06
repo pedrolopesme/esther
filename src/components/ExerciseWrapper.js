@@ -8,6 +8,7 @@ import MultipleChoiceExercise from './MultipleChoiceExercise';
 import FillGapExercise from './FillGapExercise';
 import TrueFalseExercise from './TrueFalseExercise';
 import { useSounds } from '../hooks/useSounds';
+import { addPoints, subPoints } from '../utils/points';
 
 export default function ExerciseWrapper({ exercises }) {
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
@@ -27,6 +28,9 @@ export default function ExerciseWrapper({ exercises }) {
   const handleExerciseComplete = (isCorrect) => {
     if (isCorrect) {
       setScore(score + 1);
+      addPoints(10);
+    } else {
+      subPoints(5);
     }
     
     if (currentExerciseIndex < totalExercises - 1) {

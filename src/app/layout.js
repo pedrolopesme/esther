@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
+import ScoreBadge from "../components/ScoreBadge";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -27,9 +28,11 @@ export default function RootLayout({ children }) {
           <div className="app-logo">Esther</div>
           <nav className="app-nav">
             <Link href="/" className="app-nav-item">Início</Link>
-            <Link href="/materias/matematica" className="app-nav-item">Matemática</Link>
             <Link href="#" className="app-nav-item">Ajuda</Link>
           </nav>
+          <div className="ml-auto">
+            <ScoreBadge />
+          </div>
         </header>
         
         <main className="flex-grow">
