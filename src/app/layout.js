@@ -25,11 +25,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
         <header className="app-header">
-          <div className="app-logo">Esther</div>
-          <nav className="app-nav">
-            <Link href="/" className="app-nav-item">Início</Link>
-            <Link href="#" className="app-nav-item">Ajuda</Link>
-          </nav>
+          <Link href="/" className="app-logo">Esther</Link>
           <div className="ml-auto">
             <ScoreBadge />
           </div>
