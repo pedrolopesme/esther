@@ -1,0 +1,499 @@
+{
+  "nome": "Exercícios - Mineração e Vida nas Minas Gerais",
+  "materia": "História",
+  "ano_letivo": "3º ano do Ensino Fundamental",
+  "data": "2025-10-06",
+  "title": "História - Mineração e Vida nas Minas Gerais",
+  "description": "Lista com 35 exercícios de história cobrindo o Ciclo do Ouro, impostos coloniais, trabalho nas minas, desenvolvimento urbano, arte barroca e revoltas coloniais. Exercícios baseados no material das Unidades 7 e 8.",
+  "exercises": [
+    {
+      "id": "min1",
+      "type": "multiple-choice",
+      "question": "Em que ano foi oficialmente descoberto ouro no interior do Brasil?",
+      "options": [
+        "1500",
+        "1690",
+        "1719",
+        "1750"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "1690",
+      "explicacao": "Em 1690, quase 200 anos após a chegada dos portugueses, a Coroa Portuguesa recebeu a notícia oficial de que havia sido descoberta grande quantidade de ouro no interior do Brasil.",
+      "dica": "Foi quase 200 anos depois da chegada dos portugueses."
+    },
+    {
+      "id": "min2",
+      "type": "fill-gap",
+      "question": "Os Bandeirantes descobriram as primeiras jazidas de ouro e diamantes nas terras do atual estado de _____.",
+      "options": [
+        "Minas Gerais",
+        "São Paulo"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Minas Gerais",
+      "explicacao": "Os Bandeirantes localizaram as primeiras jazidas de ouro e, mais tarde, de diamantes nas terras do atual estado de Minas Gerais.",
+      "dica": "O nome do estado já sugere a atividade mineradora."
+    },
+    {
+      "id": "min3",
+      "type": "multiple-choice",
+      "question": "Qual era o imposto mais famoso cobrado nas regiões das minas?",
+      "options": [
+        "Décima",
+        "Quinto",
+        "Sexto",
+        "Dízimo"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Quinto",
+      "explicacao": "O imposto mais famoso nas regiões das minas era o Quinto, que instituía que um quinto de todo o ouro que circulava na colônia deveria ir diretamente para Portugal.",
+      "dica": "Era a quinta parte do ouro produzido."
+    },
+    {
+      "id": "min4",
+      "type": "fill-gap",
+      "question": "O _____ era uma imagem religiosa com compartimentos internos usada para esconder ouro e burlar impostos.",
+      "options": [
+        "Santo do Pau Oco",
+        "Relicário"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Santo do Pau Oco",
+      "explicacao": "Os santos do pau oco eram imagens religiosas com compartimentos internos que serviam para esconder o ouro e evitar o pagamento do Quinto.",
+      "dica": "Combinava religião com contrabando."
+    },
+    {
+      "id": "min5",
+      "type": "multiple-choice",
+      "question": "Em que ano Portugal criou as Casas de Fundição?",
+      "options": [
+        "1690",
+        "1719",
+        "1750",
+        "1789"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "1719",
+      "explicacao": "Portugal criou as Casas de Fundição em 1719 para evitar o contrabando. O ouro passou a ser derretido e transformado em barras com selo real.",
+      "dica": "Foi criada para combater o contrabando."
+    },
+    {
+      "id": "min6",
+      "type": "fill-gap",
+      "question": "A _____ era a cobrança dos impostos atrasados sobre toda a população quando o Quinto não atingia o valor esperado.",
+      "options": [
+        "Derrama",
+        "Décima"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Derrama",
+      "explicacao": "A Derrama era a cobrança sobre toda a população local quando o Quinto não atingisse a cota de 100 arrobas anuais, causando profundo descontentamento.",
+      "dica": "Era a cobrança dos impostos atrasados."
+    },
+    {
+      "id": "min7",
+      "type": "multiple-choice",
+      "question": "Qual era a cota anual de ouro estabelecida por Portugal em 1750?",
+      "options": [
+        "50 arrobas",
+        "100 arrobas",
+        "150 arrobas",
+        "200 arrobas"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "100 arrobas",
+      "explicacao": "Em 1750, o governo português estabeleceu uma cota fixa anual de 100 arrobas para ser arrecadada como forma de imposto Quinto.",
+      "dica": "Era um número redondo de arrobas."
+    },
+    {
+      "id": "min8",
+      "type": "fill-gap",
+      "question": "A principal mão de obra utilizada nas regiões mineradoras era de escravos _____.",
+      "options": [
+        "africanos",
+        "indígenas"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "africanos",
+      "explicacao": "A sociedade mineradora era diversificada, mas a principal mão de obra utilizada continuava sendo a de escravos africanos.",
+      "dica": "Mesmo tipo de mão de obra do ciclo do açúcar."
+    },
+    {
+      "id": "min9",
+      "type": "multiple-choice",
+      "question": "Quais atividades os escravos desenvolviam nas cidades mineradoras além da extração?",
+      "options": [
+        "Apenas trabalho nas minas",
+        "Vendedores ambulantes, carregadores e artesãos",
+        "Apenas agricultura",
+        "Somente trabalho doméstico"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Vendedores ambulantes, carregadores e artesãos",
+      "explicacao": "Além de trabalharem na extração de minerais, os escravos desenvolviam várias atividades econômicas nas cidades, como vendedores ambulantes, carregadores de mercadorias e artesãos.",
+      "dica": "Eram atividades urbanas diversificadas."
+    },
+    {
+      "id": "min10",
+      "type": "fill-gap",
+      "question": "Vila Rica é o nome antigo da atual cidade de _____.",
+      "options": [
+        "Ouro Preto",
+        "Mariana"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Ouro Preto",
+      "explicacao": "Vila Rica, atual Ouro Preto, foi uma das cidades que mais se desenvolveram durante o período do ouro.",
+      "dica": "O nome sugere a riqueza da região."
+    },
+    {
+      "id": "min11",
+      "type": "multiple-choice",
+      "question": "Que tipo de construções surgiram nas cidades mineradoras devido ao desenvolvimento?",
+      "options": [
+        "Apenas casas simples",
+        "Teatros, escolas, igrejas e órgãos públicos",
+        "Somente fortalezas",
+        "Apenas engenhos"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Teatros, escolas, igrejas e órgãos públicos",
+      "explicacao": "Com o desenvolvimento das cidades auríferas, foram criados teatros, escolas, igrejas e órgãos públicos, dinamizando a vida urbana.",
+      "dica": "Eram estruturas urbanas complexas."
+    },
+    {
+      "id": "min12",
+      "type": "fill-gap",
+      "question": "As moradias no início da colonização de Minas Gerais eram _____ e provisórias.",
+      "options": [
+        "simples",
+        "luxuosas"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "simples",
+      "explicacao": "No início da colonização de Minas Gerais, as moradias tinham um estilo simples e rústico, e muitas eram provisórias.",
+      "dica": "Refletiam a natureza temporária da busca por ouro."
+    },
+    {
+      "id": "min13",
+      "type": "multiple-choice",
+      "question": "O que eram os sobrados nas regiões mineradoras?",
+      "options": [
+        "Igrejas grandes",
+        "Casas de dois andares símbolo de riqueza",
+        "Fortificações militares",
+        "Armazéns de ouro"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Casas de dois andares símbolo de riqueza",
+      "explicacao": "Os sobrados eram moradias tradicionais de dois andares que ficaram conhecidos como símbolo da riqueza da sociedade mineira.",
+      "dica": "Eram casas de famílias ricas."
+    },
+    {
+      "id": "min14",
+      "type": "fill-gap",
+      "question": "Os estilos artísticos _____ e Rococó influenciaram a arquitetura das igrejas mineiras.",
+      "options": [
+        "Barroco",
+        "Gótico"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Barroco",
+      "explicacao": "A maior parte das igrejas sofreu influência do Barroco e Rococó europeu, estilos caracterizados pelo uso de linhas curvas e riqueza de ornamentos.",
+      "dica": "Era um estilo artístico muito ornamentado."
+    },
+    {
+      "id": "min15",
+      "type": "multiple-choice",
+      "question": "Quem foi Aleijadinho?",
+      "options": [
+        "Um governador de Minas Gerais",
+        "Um importante artista brasileiro escultor e arquiteto",
+        "Um líder de revolta colonial",
+        "Um bandeirante descobridor de ouro"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Um importante artista brasileiro escultor e arquiteto",
+      "explicacao": "Antônio Francisco Lisboa, o Aleijadinho, foi um dos mais importantes artistas brasileiros, escultor e arquiteto nascido em Minas Gerais.",
+      "dica": "Foi o maior artista do período colonial."
+    },
+    {
+      "id": "min16",
+      "type": "fill-gap",
+      "question": "Aleijadinho trabalhava principalmente com madeira e _____, uma matéria-prima brasileira.",
+      "options": [
+        "pedra sabão",
+        "mármore"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "pedra sabão",
+      "explicacao": "As obras de Aleijadinho eram feitas de madeira e pedra sabão, uma matéria-prima brasileira.",
+      "dica": "Era uma pedra típica da região."
+    },
+    {
+      "id": "min17",
+      "type": "multiple-choice",
+      "question": "Qual era a temática principal das obras de Aleijadinho?",
+      "options": [
+        "Cenas históricas",
+        "Temas ligados à existência de Jesus",
+        "Paisagens naturais",
+        "Retratos de nobres"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Temas ligados à existência de Jesus",
+      "explicacao": "Como era muito religioso, a temática das obras de Aleijadinho eram quase sempre ligadas à existência de Jesus.",
+      "dica": "Refletia sua religiosidade."
+    },
+    {
+      "id": "min18",
+      "type": "fill-gap",
+      "question": "A _____ foi considerada uma das maiores realizações de Aleijadinho.",
+      "options": [
+        "Igreja de São Francisco de Assis",
+        "Catedral da Sé"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Igreja de São Francisco de Assis",
+      "explicacao": "A Igreja de São Francisco de Assis foi considerada uma das maiores realizações de Aleijadinho, onde ele esculpiu, talhou e ornamentou a parte interna.",
+      "dica": "Nome de um santo franciscano."
+    },
+    {
+      "id": "min19",
+      "type": "multiple-choice",
+      "question": "Quem foi Manuel da Costa Ataíde?",
+      "options": [
+        "Um escultor",
+        "Um importante pintor que trabalhou com Aleijadinho",
+        "Um governador",
+        "Um líder de revolta"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Um importante pintor que trabalhou com Aleijadinho",
+      "explicacao": "Manuel da Costa Ataíde, ou Mestre Ataíde, foi um importante pintor que teve destaque na arte brasileira e trabalhou pintando esculturas de Aleijadinho.",
+      "dica": "Complementava o trabalho de Aleijadinho."
+    },
+    {
+      "id": "min20",
+      "type": "fill-gap",
+      "question": "A Revolta de Vila Rica ocorreu em Minas Gerais em _____.",
+      "options": [
+        "1720",
+        "1789"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "1720",
+      "explicacao": "A Revolta de Vila Rica ocorreu em 1720, demonstrando a insatisfação com a cobrança de impostos da Coroa Portuguesa sobre o ouro.",
+      "dica": "Foi anterior à Inconfidência Mineira."
+    },
+    {
+      "id": "min21",
+      "type": "multiple-choice",
+      "question": "Qual foi o principal motivo da Revolta de Vila Rica?",
+      "options": [
+        "Busca de independência",
+        "Insatisfação com a cobrança do Quinto",
+        "Defesa dos indígenas",
+        "Questões religiosas"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Insatisfação com a cobrança do Quinto",
+      "explicacao": "A Revolta de Vila Rica foi uma demonstração da insatisfação com a cobrança de impostos, especialmente o Quinto, pois a exploração do ouro estava se esgotando.",
+      "dica": "Estava relacionada aos impostos sobre o ouro."
+    },
+    {
+      "id": "min22",
+      "type": "fill-gap",
+      "question": "O líder da Revolta de Vila Rica, _____, foi enforcado e esquartejado.",
+      "options": [
+        "Filipe dos Santos",
+        "Tiradentes"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Filipe dos Santos",
+      "explicacao": "Filipe dos Santos foi o líder da Revolta de Vila Rica e foi duramente punido, sendo enforcado e esquartejado pelo governo português.",
+      "dica": "Não foi Tiradentes, que liderou outro movimento."
+    },
+    {
+      "id": "min23",
+      "type": "multiple-choice",
+      "question": "Em que ano ocorreu a Inconfidência Mineira?",
+      "options": [
+        "1720",
+        "1750",
+        "1789",
+        "1792"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "1789",
+      "explicacao": "A Inconfidência Mineira foi planejada em 1789, quando um grupo de pessoas preocupadas com a Derrama planejou proclamar uma República independente.",
+      "dica": "Mesmo ano da Revolução Francesa."
+    },
+    {
+      "id": "min24",
+      "type": "fill-gap",
+      "question": "Os inconfidentes queriam se separar de Portugal e formar uma _____.",
+      "options": [
+        "República",
+        "Monarquia"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "República",
+      "explicacao": "Além da liberdade, os revoltosos queriam a formação de uma República, onde a população escolheria seu representante por voto.",
+      "dica": "Sistema onde o povo escolhe seus governantes."
+    },
+    {
+      "id": "min25",
+      "type": "multiple-choice",
+      "question": "O que significa o Regime Republicano?",
+      "options": [
+        "Governo de um rei hereditário",
+        "Forma de governo em que a população escolhe votando no seu representante",
+        "Governo controlado pela Igreja",
+        "Sistema de capitanias"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Forma de governo em que a população escolhe votando no seu representante",
+      "explicacao": "O regime republicano é uma forma de governo em que a população escolhe, votando no seu representante, diferente da monarquia hereditária.",
+      "dica": "O povo vota para escolher o presidente."
+    },
+    {
+      "id": "min26",
+      "type": "fill-gap",
+      "question": "O plano da Inconfidência Mineira não foi executado porque um dos participantes _____ o movimento.",
+      "options": [
+        "traiu",
+        "liderou"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "traiu",
+      "explicacao": "O plano não chegou a ser executado pois um dos participantes traiu os inconfidentes, contando as intenções do grupo para o governo português.",
+      "dica": "Houve uma delação."
+    },
+    {
+      "id": "min27",
+      "type": "multiple-choice",
+      "question": "Quem foi Tiradentes?",
+      "options": [
+        "Governador de Minas Gerais",
+        "Joaquim José da Silva Xavier, líder da Inconfidência Mineira",
+        "Artista barroco",
+        "Descobridor do ouro"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Joaquim José da Silva Xavier, líder da Inconfidência Mineira",
+      "explicacao": "Joaquim José da Silva Xavier, conhecido como Tiradentes, foi apontado como o principal líder da Inconfidência Mineira e condenado à morte.",
+      "dica": "Seu apelido vinha de sua profissão."
+    },
+    {
+      "id": "min28",
+      "type": "fill-gap",
+      "question": "Tiradentes foi _____ e esquartejado como punição.",
+      "options": [
+        "enforcado",
+        "fuzilado"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "enforcado",
+      "explicacao": "Tiradentes, condenado à morte, foi enforcado e esquartejado como forma de punição exemplar.",
+      "dica": "Era uma forma de execução comum na época."
+    },
+    {
+      "id": "min29",
+      "type": "multiple-choice",
+      "question": "O que era a Derrama?",
+      "options": [
+        "Um tipo de imposto sobre mercadorias",
+        "Cobrança de impostos atrasados entrando nas casas e retirando objetos de valor",
+        "Sistema de fundição do ouro",
+        "Taxa sobre escravos"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Cobrança de impostos atrasados entrando nas casas e retirando objetos de valor",
+      "explicacao": "A Derrama era a cobrança de impostos atrasados onde soldados da Coroa entravam nas casas dos mineiros e retiravam todos os objetos de valor até completar a dívida.",
+      "dica": "Era uma cobrança muito temida e violenta."
+    },
+    {
+      "id": "min30",
+      "type": "fill-gap",
+      "question": "As revoltas coloniais durante o Ciclo do Ouro estavam relacionadas ao descontentamento com a cobrança de _____.",
+      "options": [
+        "impostos",
+        "escravos"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "impostos",
+      "explicacao": "As principais revoltas coloniais do período estavam relacionadas ao descontentamento da população com a cobrança de impostos que Portugal fazia sobre o ouro.",
+      "dica": "Era o principal motivo de insatisfação."
+    },
+    {
+      "id": "min31",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: A exploração de minas de ouro dependia de poucos investimentos em mão de obra.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Falso",
+      "explicacao": "Falso. A exploração de minas de ouro dependia de grandes investimentos em mão de obra, principalmente escrava.",
+      "dica": "Era necessário muito trabalho para extrair o ouro."
+    },
+    {
+      "id": "min32",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: Portugal não se importou com o ouro encontrado no Brasil.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Falso",
+      "explicacao": "Falso. Portugal se importou muito com o ouro encontrado e criou diversos mecanismos para se apoderar dessa riqueza, reforçando o Pacto Colonial.",
+      "dica": "Portugal criou vários impostos sobre o ouro."
+    },
+    {
+      "id": "min33",
+      "type": "multiple-choice",
+      "question": "Por que Portugal cobrava o Quinto do ouro produzido no Brasil?",
+      "options": [
+        "Para investir no próprio Brasil",
+        "Para garantir os lucros da Coroa Portuguesa e enriquecer Portugal",
+        "Para pagar os escravos",
+        "Para construir igrejas"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Para garantir os lucros da Coroa Portuguesa e enriquecer Portugal",
+      "explicacao": "Portugal cobrava o Quinto para garantir seus lucros e enriquecer a metrópole, seguindo a lógica do Pacto Colonial de exploração da colônia.",
+      "dica": "Era para beneficiar Portugal, não o Brasil."
+    },
+    {
+      "id": "min34",
+      "type": "fill-gap",
+      "question": "A frase 'O ouro deixou buracos no Brasil, e riquezas em Portugal' significa que o ouro enriqueceu _____ e empobreceu o Brasil.",
+      "options": [
+        "Portugal",
+        "Espanha"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Portugal",
+      "explicacao": "A frase significa que a exploração do ouro deixou apenas os buracos das minas no Brasil, enquanto toda a riqueza foi para Portugal.",
+      "dica": "Resume o sistema de exploração colonial."
+    },
+    {
+      "id": "min35",
+      "type": "multiple-choice",
+      "question": "Qual característica importante da sociedade mineira está refletida nas obras de Aleijadinho e Mestre Ataíde?",
+      "options": [
+        "O comércio",
+        "A religiosidade",
+        "A agricultura",
+        "A mineração"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "A religiosidade",
+      "explicacao": "As obras de Aleijadinho e Mestre Ataíde demonstram o caráter religioso importante da sociedade mineira, com temáticas ligadas ao cristianismo.",
+      "dica": "Suas obras eram principalmente religiosas."
+    }
+  ]
+}
