@@ -9,7 +9,8 @@ import { getAvailableExerciseLists } from '../../../utils/exerciseLoader';
 export default function InglesPage() {
   const [exerciseLists, setExerciseLists] = useState([]);
   const [filterYear, setFilterYear] = useState('');
-  const [filterDate, setFilterDate] = useState('');
+  const [filterDateFrom, setFilterDateFrom] = useState('');
+  const [filterDateTo, setFilterDateTo] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   
@@ -49,8 +50,10 @@ export default function InglesPage() {
   const uniqueYears = Array.from(new Set(exerciseLists.map(l => l.ano_letivo).filter(Boolean)));
   const filteredLists = exerciseLists.filter((l) => {
     const matchesYear = filterYear ? l.ano_letivo === filterYear : true;
-    const matchesDate = filterDate ? (new Date(l.date).toISOString().slice(0,10) === filterDate) : true;
-    return matchesYear && matchesDate;
+    const listDate = l.date ? new Date(l.date).toISOString().slice(0,10) : '';
+    const matchesFrom = filterDateFrom ? (listDate >= filterDateFrom) : true;
+    const matchesTo = filterDateTo ? (listDate <= filterDateTo) : true;
+    return matchesYear && matchesFrom && matchesTo;
   });
 
   return (
@@ -85,15 +88,15 @@ export default function InglesPage() {
           Listas de Exercícios
         </motion.h2>
 
-        {/* Filtros rápidos */}
-        <div className="duolingo-card p-4 mb-6">
-          <div className="flex flex-col md:flex-row gap-4 items-start md:items-end">
+        {/* Filtros rápidos (compactos) */}
+        <div className="duolingo-card p-3 mb-5">
+          <div className="flex flex-wrap items-end gap-3">
             <div className="flex flex-col">
-              <label className="text-sm font-semibold mb-1">Ano da lista</label>
+              <label className="text-xs font-semibold mb-1">Ano da lista</label>
               <select
                 value={filterYear}
                 onChange={(e) => setFilterYear(e.target.value)}
-                className="border rounded-lg px-3 py-2 text-[var(--text-primary)]"
+                className="border rounded-md px-2 py-1 text-sm text-[var(--text-primary)]"
               >
                 <option value="">Todos</option>
                 {uniqueYears.map((y) => (
@@ -102,17 +105,26 @@ export default function InglesPage() {
               </select>
             </div>
             <div className="flex flex-col">
-              <label className="text-sm font-semibold mb-1">Data do exercício</label>
+              <label className="text-xs font-semibold mb-1">De</label>
               <input
                 type="date"
-                value={filterDate}
-                onChange={(e) => setFilterDate(e.target.value)}
-                className="border rounded-lg px-3 py-2 text-[var(--text-primary)]"
+                value={filterDateFrom}
+                onChange={(e) => setFilterDateFrom(e.target.value)}
+                className="border rounded-md px-2 py-1 text-sm text-[var(--text-primary)]"
+              />
+            </div>
+            <div className="flex flex-col">
+              <label className="text-xs font-semibold mb-1">Até</label>
+              <input
+                type="date"
+                value={filterDateTo}
+                onChange={(e) => setFilterDateTo(e.target.value)}
+                className="border rounded-md px-2 py-1 text-sm text-[var(--text-primary)]"
               />
             </div>
             <button
-              onClick={() => { setFilterYear(''); setFilterDate(''); }}
-              className="duolingo-button secondary"
+              onClick={() => { setFilterYear(''); setFilterDateFrom(''); setFilterDateTo(''); }}
+              className="text-[var(--blue)] hover:underline font-medium text-sm"
             >
               Limpar filtros
             </button>
