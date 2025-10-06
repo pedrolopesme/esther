@@ -40,8 +40,12 @@ export default function ScoreBadge() {
     >
       <span className="text-xl">🏆</span>
       <span className="text-sm font-semibold text-[var(--text-primary)]">Pontos</span>
-      <span className="text-base font-bold text-[var(--blue)]">{points}</span>
+      <span
+        className="text-base font-extrabold text-white"
+        style={{ textShadow: '0 1px 1px rgba(0,0,0,0.25)' }}
+      >
+        {points}
+      </span>
     </div>
   );
 }
-
