@@ -117,11 +117,21 @@ export default function ExerciseWrapper({ exercises }) {
                       <td className="p-2 align-top max-w-[320px]">
                         <div className="truncate" title={wa.question}>{wa.question}</div>
                       </td>
-                      <td className="p-2 align-top text-red-700">
-                        <span className="inline-block bg-[rgba(255,75,75,0.12)] px-2 py-0.5 rounded-md">{String(wa.selected)}</span>
+                      <td className="p-2 align-top">
+                        <span
+                          className="inline-block px-2 py-0.5 rounded-md text-white"
+                          style={{ backgroundColor: '#dc2626' }}
+                        >
+                          {String(wa.selected)}
+                        </span>
                       </td>
-                      <td className="p-2 align-top text-green-800">
-                        <span className="inline-block bg-[rgba(88,204,2,0.12)] px-2 py-0.5 rounded-md">{String(wa.correct)}</span>
+                      <td className="p-2 align-top">
+                        <span
+                          className="inline-block px-2 py-0.5 rounded-md text-white"
+                          style={{ backgroundColor: '#16a34a' }}
+                        >
+                          {String(wa.correct)}
+                        </span>
                       </td>
                     </tr>
                   ))}
