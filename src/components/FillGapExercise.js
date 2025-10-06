@@ -45,7 +45,13 @@ export default function FillGapExercise({
       }
       setTimeout(() => {
         if (onComplete) {
-          onComplete(isCorrect);
+          onComplete(isCorrect, {
+            question,
+            selectedIndex,
+            selectedValue: options[selectedIndex],
+            correctIndex,
+            correctValue: options[correctIndex],
+          });
         }
       }, 2500);
     }

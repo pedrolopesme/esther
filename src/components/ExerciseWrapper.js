@@ -15,6 +15,7 @@ export default function ExerciseWrapper({ exercises }) {
   const [progress, setProgress] = useState(0);
   const [completed, setCompleted] = useState(false);
   const [score, setScore] = useState(0);
+  const [wrongAnswers, setWrongAnswers] = useState([]);
   const { playCompletedSound } = useSounds();
 
   const currentExercise = exercises[currentExerciseIndex];
@@ -25,12 +26,23 @@ export default function ExerciseWrapper({ exercises }) {
     setProgress((currentExerciseIndex / totalExercises) * 100);
   }, [currentExerciseIndex, totalExercises]);
 
-  const handleExerciseComplete = (isCorrect) => {
+  const handleExerciseComplete = (isCorrect, details) => {
     if (isCorrect) {
       setScore(score + 1);
       addPoints(10);
     } else {
       subPoints(5);
+      if (details) {
+        setWrongAnswers((prev) => [
+          ...prev,
+          {
+            index: currentExerciseIndex,
+            question: details.question,
+            selected: details.selectedValue,
+            correct: details.correctValue,
+          },
+        ]);
+      }
     }
     
     if (currentExerciseIndex < totalExercises - 1) {
@@ -52,6 +64,7 @@ export default function ExerciseWrapper({ exercises }) {
     setProgress(0);
     setCompleted(false);
     setScore(0);
+    setWrongAnswers([]);
   };
 
   if (completed) {
@@ -83,6 +96,39 @@ export default function ExerciseWrapper({ exercises }) {
                   : "Continue praticando! Você vai melhorar."}
             </p>
           </div>
+
+          {/* Tabela de erros compacta */}
+          {wrongAnswers.length > 0 && (
+            <div className="text-left overflow-x-auto">
+              <h3 className="text-lg font-bold mb-2">Erros cometidos</h3>
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="bg-[rgba(28,176,246,0.1)]">
+                    <th className="p-2 text-left">#</th>
+                    <th className="p-2 text-left">Pergunta</th>
+                    <th className="p-2 text-left">Sua resposta</th>
+                    <th className="p-2 text-left">Correta</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {wrongAnswers.map((wa, idx) => (
+                    <tr key={idx} className="border-t border-[var(--border-light)]">
+                      <td className="p-2 align-top whitespace-nowrap">{wa.index + 1}</td>
+                      <td className="p-2 align-top max-w-[320px]">
+                        <div className="truncate" title={wa.question}>{wa.question}</div>
+                      </td>
+                      <td className="p-2 align-top text-red-700">
+                        <span className="inline-block bg-[rgba(255,75,75,0.12)] px-2 py-0.5 rounded-md">{String(wa.selected)}</span>
+                      </td>
+                      <td className="p-2 align-top text-green-800">
+                        <span className="inline-block bg-[rgba(88,204,2,0.12)] px-2 py-0.5 rounded-md">{String(wa.correct)}</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
           
           <Button onClick={handleReset}>Tentar Novamente</Button>
         </motion.div>

@@ -49,7 +49,13 @@ export default function TrueFalseExercise({
       // Wait a bit before calling onComplete to let user see feedback
       setTimeout(() => {
         if (onComplete) {
-          onComplete(isCorrect);
+          onComplete(isCorrect, {
+            question,
+            selectedIndex,
+            selectedValue: options[selectedIndex],
+            correctIndex,
+            correctValue: options[correctIndex],
+          });
         }
       }, 2500);
     }
