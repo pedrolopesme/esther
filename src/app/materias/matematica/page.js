@@ -8,6 +8,8 @@ import { getAvailableExerciseLists } from '../../../utils/exerciseLoader';
 
 export default function MatematicaPage() {
   const [exerciseLists, setExerciseLists] = useState([]);
+  const [filterYear, setFilterYear] = useState('');
+  const [filterDate, setFilterDate] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   
@@ -44,6 +46,13 @@ export default function MatematicaPage() {
     show: { y: 0, opacity: 1 }
   };
 
+  const uniqueYears = Array.from(new Set(exerciseLists.map(l => l.ano_letivo).filter(Boolean)));
+  const filteredLists = exerciseLists.filter((l) => {
+    const matchesYear = filterYear ? l.ano_letivo === filterYear : true;
+    const matchesDate = filterDate ? (new Date(l.date).toISOString().slice(0,10) === filterDate) : true;
+    return matchesYear && matchesDate;
+  });
+
   return (
     <div className="flex flex-col items-center min-h-screen p-6">
       <motion.header 
@@ -76,6 +85,40 @@ export default function MatematicaPage() {
           Listas de Exercícios
         </motion.h2>
 
+        {/* Filtros rápidos */}
+        <div className="duolingo-card p-4 mb-6">
+          <div className="flex flex-col md:flex-row gap-4 items-start md:items-end">
+            <div className="flex flex-col">
+              <label className="text-sm font-semibold mb-1">Ano da lista</label>
+              <select
+                value={filterYear}
+                onChange={(e) => setFilterYear(e.target.value)}
+                className="border rounded-lg px-3 py-2 text-[var(--text-primary)]"
+              >
+                <option value="">Todos</option>
+                {uniqueYears.map((y) => (
+                  <option key={y} value={y}>{y}</option>
+                ))}
+              </select>
+            </div>
+            <div className="flex flex-col">
+              <label className="text-sm font-semibold mb-1">Data do exercício</label>
+              <input
+                type="date"
+                value={filterDate}
+                onChange={(e) => setFilterDate(e.target.value)}
+                className="border rounded-lg px-3 py-2 text-[var(--text-primary)]"
+              />
+            </div>
+            <button
+              onClick={() => { setFilterYear(''); setFilterDate(''); }}
+              className="duolingo-button secondary"
+            >
+              Limpar filtros
+            </button>
+          </div>
+        </div>
+
         {isLoading && (
           <div className="flex justify-center p-12">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--primary)]"></div>
@@ -94,13 +137,19 @@ export default function MatematicaPage() {
           </div>
         )}
 
+        {!isLoading && !error && filteredLists.length === 0 && exerciseLists.length > 0 && (
+          <div className="p-4 rounded-lg bg-[rgba(255,200,0,0.1)] mb-4">
+            <p>Nenhum item corresponde aos filtros selecionados.</p>
+          </div>
+        )}
+
         <motion.div 
           className="space-y-4"
           variants={container}
           initial="hidden"
           animate="show"
         >
-          {exerciseLists.map((list, index) => (
+          {filteredLists.map((list, index) => (
             <motion.div key={list.id} variants={item} custom={index}>
               <Link 
                 href={`/materias/matematica/${list.id}`}
