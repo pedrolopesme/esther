@@ -2,9 +2,32 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 export default function Home() {
+  const [latestLists, setLatestLists] = useState([]);
+  const [isLoadingLatest, setIsLoadingLatest] = useState(true);
+  const [latestError, setLatestError] = useState(null);
+
+  useEffect(() => {
+    async function fetchLatest() {
+      try {
+        setIsLoadingLatest(true);
+        const res = await fetch("/api/latest-exercise-lists");
+        if (!res.ok) throw new Error(`Falha ao buscar últimas listas: ${res.status}`);
+        const data = await res.json();
+        setLatestLists(data);
+        setLatestError(null);
+      } catch (e) {
+        console.error(e);
+        setLatestError("Não foi possível carregar as últimas listas.");
+      } finally {
+        setIsLoadingLatest(false);
+      }
+    }
+    fetchLatest();
+  }, []);
   // Lista de matérias disponíveis
   const subjects = [
     {
@@ -114,6 +137,50 @@ export default function Home() {
           ))}
         </motion.div>
       </div>
+
+      {/* Últimas listas de exercícios */}
+      <motion.div
+        className="w-full max-w-4xl mt-12"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        <h2 className="text-2xl font-bold mb-4 text-[var(--text-primary)]">📋 Últimas listas de exercícios</h2>
+
+        {isLoadingLatest && (
+          <div className="flex justify-center p-6">
+            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-[var(--primary)]"></div>
+          </div>
+        )}
+
+        {latestError && (
+          <div className="p-4 rounded-lg bg-red-100 text-red-800">
+            {latestError}
+          </div>
+        )}
+
+        {!isLoadingLatest && !latestError && (
+          <div className="space-y-3">
+            {latestLists.map((item) => (
+              <Link key={`${item.subject}-${item.id}`} href={`/materias/${item.subject}/${item.id}`} className="block">
+                <div className="duolingo-card p-4 hover:shadow-md transition-shadow border-l-4 border-[var(--blue)]">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-lg font-semibold text-[var(--text-primary)]">{item.title}</h3>
+                      <div className="flex flex-wrap gap-2 mt-1 text-sm text-[var(--text-secondary)]">
+                        <span className="inline-block bg-[rgba(88,204,2,0.1)] px-2 py-0.5 rounded-full">{item.materia}</span>
+                        <span className="inline-block bg-[rgba(255,200,0,0.1)] px-2 py-0.5 rounded-full">{new Date(item.date).toLocaleDateString('pt-BR')}</span>
+                        <span className="inline-block bg-[rgba(28,176,246,0.1)] px-2 py-0.5 rounded-full">{item.questionCount} questões</span>
+                      </div>
+                    </div>
+                    <span className="text-[var(--blue)]">Ver →</span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
+      </motion.div>
     </div>
   );
 }
