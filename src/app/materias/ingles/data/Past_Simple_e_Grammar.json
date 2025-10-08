@@ -1,0 +1,544 @@
+{
+  "nome": "Exercícios de Inglês - Past Simple e Grammar",
+  "materia": "Inglês",
+  "ano_letivo": "3º ano do Ensino Fundamental",
+  "data": "2025-10-08",
+  "title": "English - Past Simple, Irregular Verbs, Have to/Has to",
+  "description": "Lista com 40 exercícios de inglês cobrindo Past Simple (verbos regulares e irregulares), formas afirmativa, negativa e interrogativa, have to/has to, adjetivos comparativos e pronomes possessivos. Exercícios baseados nas Unidades 4-8.",
+  "exercises": [
+    {
+      "id": "eng1",
+      "type": "fill-gap",
+      "question": "Complete with the PAST SIMPLE: I _____ my pencil case in my bag. (To find)",
+      "options": [
+        "found",
+        "finded"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "found",
+      "explicacao": "'To find' é um verbo irregular e sua forma no passado é 'found'.",
+      "dica": "É um verbo irregular, não adiciona -ed."
+    },
+    {
+      "id": "eng2",
+      "type": "fill-gap",
+      "question": "Complete with the PAST SIMPLE: My friend _____ his rubber. (To lose)",
+      "options": [
+        "lost",
+        "losed"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "lost",
+      "explicacao": "'To lose' é um verbo irregular e sua forma no passado é 'lost'.",
+      "dica": "É um verbo irregular."
+    },
+    {
+      "id": "eng3",
+      "type": "fill-gap",
+      "question": "Complete with the PAST SIMPLE: My grandma _____ a new pair of shoes. (To buy)",
+      "options": [
+        "bought",
+        "buyed"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "bought",
+      "explicacao": "'To buy' é um verbo irregular e sua forma no passado é 'bought'.",
+      "dica": "É um verbo irregular."
+    },
+    {
+      "id": "eng4",
+      "type": "fill-gap",
+      "question": "Complete with the PAST SIMPLE: She _____ to visit me after school. (To come)",
+      "options": [
+        "came",
+        "comed"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "came",
+      "explicacao": "'To come' é um verbo irregular e sua forma no passado é 'came'.",
+      "dica": "É um verbo irregular."
+    },
+    {
+      "id": "eng5",
+      "type": "fill-gap",
+      "question": "Complete with the PAST SIMPLE: She _____ a beautiful butterfly. (To draw)",
+      "options": [
+        "drew",
+        "drawed"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "drew",
+      "explicacao": "'To draw' é um verbo irregular e sua forma no passado é 'drew'.",
+      "dica": "É um verbo irregular."
+    },
+    {
+      "id": "eng6",
+      "type": "fill-gap",
+      "question": "Complete with the PAST SIMPLE: You _____ a lot of cool photos. (To take)",
+      "options": [
+        "took",
+        "taked"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "took",
+      "explicacao": "'To take' é um verbo irregular e sua forma no passado é 'took'.",
+      "dica": "É um verbo irregular."
+    },
+    {
+      "id": "eng7",
+      "type": "fill-gap",
+      "question": "Complete with the PAST SIMPLE: They _____ on the floor to play board games. (To sit)",
+      "options": [
+        "sat",
+        "sitted"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "sat",
+      "explicacao": "'To sit' é um verbo irregular e sua forma no passado é 'sat'.",
+      "dica": "É um verbo irregular."
+    },
+    {
+      "id": "eng8",
+      "type": "multiple-choice",
+      "question": "Qual auxiliar usamos para formar perguntas no Past Simple?",
+      "options": [
+        "DO",
+        "DID",
+        "DOES",
+        "DONE"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "DID",
+      "explicacao": "DID é o auxiliar usado para formar perguntas no Past Simple, seguido do verbo no infinitivo.",
+      "dica": "É a forma passada do auxiliar DO."
+    },
+    {
+      "id": "eng9",
+      "type": "multiple-choice",
+      "question": "Qual é a forma negativa contraída de 'did not'?",
+      "options": [
+        "don't",
+        "doesn't",
+        "didn't",
+        "hadn't"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "didn't",
+      "explicacao": "'Didn't' é a forma contraída de 'did not', usada no Past Simple negativo.",
+      "dica": "É a contração de 'did not'."
+    },
+    {
+      "id": "eng10",
+      "type": "fill-gap",
+      "question": "Complete with the PAST SIMPLE: I _____ to talk to John. (To need)",
+      "options": [
+        "needed",
+        "need"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "needed",
+      "explicacao": "'To need' é um verbo regular, então adicionamos -ed: needed.",
+      "dica": "É um verbo regular, adiciona -ed."
+    },
+    {
+      "id": "eng11",
+      "type": "fill-gap",
+      "question": "Complete with the PAST SIMPLE: My sister _____ me with my homework yesterday. (To help)",
+      "options": [
+        "helped",
+        "help"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "helped",
+      "explicacao": "'To help' é um verbo regular, então adicionamos -ed: helped.",
+      "dica": "É um verbo regular."
+    },
+    {
+      "id": "eng12",
+      "type": "fill-gap",
+      "question": "Complete with the PAST SIMPLE: Grandma _____ chicken for lunch. (To fry)",
+      "options": [
+        "fried",
+        "fryed"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "fried",
+      "explicacao": "Quando o verbo termina em consoante + y, trocamos o y por i e adicionamos -ed: fry → fried.",
+      "dica": "Verbo termina em consoante + y."
+    },
+    {
+      "id": "eng13",
+      "type": "fill-gap",
+      "question": "Complete with the PAST SIMPLE: They _____ the dishes after dinner. (To wash)",
+      "options": [
+        "washed",
+        "wash"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "washed",
+      "explicacao": "'To wash' é um verbo regular, então adicionamos -ed: washed.",
+      "dica": "É um verbo regular."
+    },
+    {
+      "id": "eng14",
+      "type": "fill-gap",
+      "question": "Complete with the PAST SIMPLE: I _____ your new T-shirt. (To like)",
+      "options": [
+        "liked",
+        "like"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "liked",
+      "explicacao": "Quando o verbo termina em -e, adicionamos apenas -d: like → liked.",
+      "dica": "Verbo termina em -e, adiciona só -d."
+    },
+    {
+      "id": "eng15",
+      "type": "multiple-choice",
+      "question": "Qual é a estrutura correta da forma interrogativa do Past Simple?",
+      "options": [
+        "Subject + did + verb infinitive",
+        "Did + subject + verb infinitive",
+        "Did + verb past + subject",
+        "Subject + verb past + did"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Did + subject + verb infinitive",
+      "explicacao": "A estrutura correta é: DID + subject + VERB IN THE BARE INFINITIVE + complement + ?",
+      "dica": "O auxiliar DID vem primeiro."
+    },
+    {
+      "id": "eng16",
+      "type": "multiple-choice",
+      "question": "Qual é a estrutura correta da forma negativa do Past Simple?",
+      "options": [
+        "Subject + didn't + verb past",
+        "Subject + didn't + verb infinitive",
+        "Subject + don't + verb infinitive",
+        "Didn't + subject + verb infinitive"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Subject + didn't + verb infinitive",
+      "explicacao": "A estrutura correta é: subject + DIDN'T + VERB IN THE BARE INFINITIVE + complement.",
+      "dica": "Depois do didn't, o verbo fica no infinitivo."
+    },
+    {
+      "id": "eng17",
+      "type": "fill-gap",
+      "question": "Transform to NEGATIVE: He boiled the vegetables. → He _____ the vegetables.",
+      "options": [
+        "didn't boil",
+        "didn't boiled"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "didn't boil",
+      "explicacao": "Na forma negativa, usamos didn't + verbo no infinitivo (sem -ed).",
+      "dica": "Didn't + infinitivo (sem -ed)."
+    },
+    {
+      "id": "eng18",
+      "type": "fill-gap",
+      "question": "Transform to INTERROGATIVE: He boiled the vegetables. → _____ he _____ the vegetables?",
+      "options": [
+        "Did / boil",
+        "Did / boiled"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Did / boil",
+      "explicacao": "Na forma interrogativa, usamos Did + subject + verbo no infinitivo.",
+      "dica": "Did + infinitivo (sem -ed)."
+    },
+    {
+      "id": "eng19",
+      "type": "fill-gap",
+      "question": "Complete with the PAST SIMPLE: We _____ to the museum last month. (To go)",
+      "options": [
+        "went",
+        "goed"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "went",
+      "explicacao": "'To go' é um verbo irregular e sua forma no passado é 'went'.",
+      "dica": "É um verbo irregular muito comum."
+    },
+    {
+      "id": "eng20",
+      "type": "fill-gap",
+      "question": "Complete with the PAST SIMPLE: We _____ pasta yesterday. (To eat)",
+      "options": [
+        "ate",
+        "eated"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "ate",
+      "explicacao": "'To eat' é um verbo irregular e sua forma no passado é 'ate'.",
+      "dica": "É um verbo irregular."
+    },
+    {
+      "id": "eng21",
+      "type": "fill-gap",
+      "question": "Complete with the PAST SIMPLE: They _____ a coffee for my grandma. (To make)",
+      "options": [
+        "made",
+        "maked"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "made",
+      "explicacao": "'To make' é um verbo irregular e sua forma no passado é 'made'.",
+      "dica": "É um verbo irregular."
+    },
+    {
+      "id": "eng22",
+      "type": "fill-gap",
+      "question": "Complete with the PAST SIMPLE: He _____ a pencil in his pencil case. (To have)",
+      "options": [
+        "had",
+        "haved"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "had",
+      "explicacao": "'To have' é um verbo irregular e sua forma no passado é 'had'.",
+      "dica": "É um verbo irregular muito usado."
+    },
+    {
+      "id": "eng23",
+      "type": "multiple-choice",
+      "question": "Qual expressão de tempo NÃO é usada com Past Simple?",
+      "options": [
+        "Yesterday",
+        "Last year",
+        "Tomorrow",
+        "Two years ago"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Tomorrow",
+      "explicacao": "'Tomorrow' (amanhã) indica futuro, não passado. Past Simple usa expressões como yesterday, last year, ago.",
+      "dica": "Past Simple é para ações passadas."
+    },
+    {
+      "id": "eng24",
+      "type": "fill-gap",
+      "question": "Complete with HAVE TO or HAS TO: I _____ clean my bedroom before going out.",
+      "options": [
+        "have to",
+        "has to"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "have to",
+      "explicacao": "Usamos 'have to' com I, you, we e they.",
+      "dica": "I sempre usa 'have to'."
+    },
+    {
+      "id": "eng25",
+      "type": "fill-gap",
+      "question": "Complete with HAVE TO or HAS TO: She _____ make her bed before going to school.",
+      "options": [
+        "has to",
+        "have to"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "has to",
+      "explicacao": "Usamos 'has to' com he, she e it.",
+      "dica": "She sempre usa 'has to'."
+    },
+    {
+      "id": "eng26",
+      "type": "fill-gap",
+      "question": "Complete with HAVE TO or HAS TO: You _____ do your homework!",
+      "options": [
+        "have to",
+        "has to"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "have to",
+      "explicacao": "Usamos 'have to' com I, you, we e they.",
+      "dica": "You sempre usa 'have to'."
+    },
+    {
+      "id": "eng27",
+      "type": "fill-gap",
+      "question": "Complete with HAVE TO or HAS TO: He _____ wash the plates after dinner.",
+      "options": [
+        "has to",
+        "have to"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "has to",
+      "explicacao": "Usamos 'has to' com he, she e it.",
+      "dica": "He sempre usa 'has to'."
+    },
+    {
+      "id": "eng28",
+      "type": "fill-gap",
+      "question": "Complete with HAVE TO or HAS TO: They _____ arrive on time.",
+      "options": [
+        "have to",
+        "has to"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "have to",
+      "explicacao": "Usamos 'have to' com I, you, we e they.",
+      "dica": "They sempre usa 'have to'."
+    },
+    {
+      "id": "eng29",
+      "type": "fill-gap",
+      "question": "Complete with HAVE TO or HAS TO: We _____ study for the test.",
+      "options": [
+        "have to",
+        "has to"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "have to",
+      "explicacao": "Usamos 'have to' com I, you, we e they.",
+      "dica": "We sempre usa 'have to'."
+    },
+    {
+      "id": "eng30",
+      "type": "true-false",
+      "question": "True or False: O verbo 'to be' no passado (was/were) usa o auxiliar DID nas formas negativa e interrogativa.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "False",
+      "explicacao": "False. O verbo 'to be' NÃO usa o auxiliar DID. Usamos: Was he hungry? / He wasn't hungry.",
+      "dica": "To be é especial, não precisa de auxiliar."
+    },
+    {
+      "id": "eng31",
+      "type": "fill-gap",
+      "question": "Complete with the COMPARATIVE form: Mark is _____ than Philippe. (tall)",
+      "options": [
+        "taller",
+        "more tall"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "taller",
+      "explicacao": "Adjetivos curtos (1 sílaba) formam o comparativo com -er: tall → taller.",
+      "dica": "Adjetivos curtos usam -er."
+    },
+    {
+      "id": "eng32",
+      "type": "fill-gap",
+      "question": "Complete with the COMPARATIVE form: Planes are _____ than trains. (fast)",
+      "options": [
+        "faster",
+        "more fast"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "faster",
+      "explicacao": "Adjetivos curtos (1 sílaba) formam o comparativo com -er: fast → faster.",
+      "dica": "Adjetivos curtos usam -er."
+    },
+    {
+      "id": "eng33",
+      "type": "fill-gap",
+      "question": "Complete with the COMPARATIVE form: My friend is _____ than you. (happy)",
+      "options": [
+        "happier",
+        "more happy"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "happier",
+      "explicacao": "Adjetivos terminados em -y trocam o y por i e adicionam -er: happy → happier.",
+      "dica": "Adjetivos com -y trocam por -ier."
+    },
+    {
+      "id": "eng34",
+      "type": "fill-gap",
+      "question": "Complete with the COMPARATIVE form: Juice is _____ than water. (good)",
+      "options": [
+        "better",
+        "gooder"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "better",
+      "explicacao": "'Good' é irregular no comparativo: good → better.",
+      "dica": "Good tem forma irregular."
+    },
+    {
+      "id": "eng35",
+      "type": "fill-gap",
+      "question": "Complete with the POSSESSIVE PRONOUN: This book is _____. (you)",
+      "options": [
+        "yours",
+        "your"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "yours",
+      "explicacao": "O pronome possessivo de 'you' é 'yours'. (This book is yours = Este livro é seu)",
+      "dica": "Pronomes possessivos substituem o substantivo."
+    },
+    {
+      "id": "eng36",
+      "type": "fill-gap",
+      "question": "Complete with the POSSESSIVE PRONOUN: The ball is _____. (I)",
+      "options": [
+        "mine",
+        "my"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "mine",
+      "explicacao": "O pronome possessivo de 'I' é 'mine'. (The ball is mine = A bola é minha)",
+      "dica": "Mine = meu/minha (sem substantivo)."
+    },
+    {
+      "id": "eng37",
+      "type": "fill-gap",
+      "question": "Complete with the POSSESSIVE ADJECTIVE: This is _____ book. (I)",
+      "options": [
+        "my",
+        "mine"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "my",
+      "explicacao": "O adjetivo possessivo de 'I' é 'my' e sempre vem antes de um substantivo.",
+      "dica": "Adjetivos possessivos vêm ANTES do substantivo."
+    },
+    {
+      "id": "eng38",
+      "type": "fill-gap",
+      "question": "Complete with the POSSESSIVE ADJECTIVE: Where is _____ friend? (you)",
+      "options": [
+        "your",
+        "yours"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "your",
+      "explicacao": "O adjetivo possessivo de 'you' é 'your' e sempre vem antes de um substantivo.",
+      "dica": "Your vem antes do substantivo."
+    },
+    {
+      "id": "eng39",
+      "type": "multiple-choice",
+      "question": "Qual é o passado irregular de 'drink'?",
+      "options": [
+        "drinked",
+        "drunk",
+        "drank",
+        "drunked"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "drank",
+      "explicacao": "O passado de 'drink' é 'drank' (verbo irregular).",
+      "dica": "É diferente do particípio 'drunk'."
+    },
+    {
+      "id": "eng40",
+      "type": "multiple-choice",
+      "question": "Qual é o passado irregular de 'be' para I/he/she/it?",
+      "options": [
+        "were",
+        "was",
+        "been",
+        "being"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "was",
+      "explicacao": "O passado de 'be' para I/he/she/it é 'was'. Para you/we/they é 'were'.",
+      "dica": "Was para singular (I, he, she, it)."
+    }
+  ]
+}
