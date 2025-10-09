@@ -1,0 +1,499 @@
+{
+  "nome": "Exercícios de Ciências - Observando os Animais, Habitat e Classificação",
+  "materia": "Ciências",
+  "ano_letivo": "3º ano do Ensino Fundamental",
+  "data": "2025-10-09",
+  "title": "Ciências - Animais, Habitat, Locomoção, Alimentação e Reprodução",
+  "description": "Lista com 35 exercícios de ciências cobrindo habitat dos animais, animais domésticos e silvestres, classificação, locomoção, alimentação, reprodução e desenvolvimento dos animais. Exercícios baseados na Unidade 2 - Vida e Evolução.",
+  "exercises": [
+    {
+      "id": "cie1",
+      "type": "multiple-choice",
+      "question": "O que é HABITAT?",
+      "options": [
+        "O alimento de um animal",
+        "O local em que determinada espécie vive e se desenvolve",
+        "A forma como o animal se locomove",
+        "O tipo de respiração do animal"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "O local em que determinada espécie vive e se desenvolve",
+      "explicacao": "O conceito de HABITAT é definido como o local em que determinada espécie vive e se desenvolve. Podemos dizer que é a casa de um ser vivo.",
+      "dica": "É onde o animal vive, sua 'casa'."
+    },
+    {
+      "id": "cie2",
+      "type": "fill-gap",
+      "question": "A estrela-do-mar vive em água _____, enquanto o boto-cor-de-rosa vive em rios.",
+      "options": [
+        "salgada",
+        "doce"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "salgada",
+      "explicacao": "A estrela-do-mar vive em água salgada (ambiente marinho), enquanto o boto-cor-de-rosa vive em rios de água doce.",
+      "dica": "A estrela-do-mar vive no mar."
+    },
+    {
+      "id": "cie3",
+      "type": "multiple-choice",
+      "question": "Qual é a diferença entre habitats naturais e habitats artificiais?",
+      "options": [
+        "Habitats naturais são construídos pelo homem",
+        "Habitats naturais são criados pela própria natureza, sem interferência do homem",
+        "Não há diferença entre eles",
+        "Habitats artificiais são mais importantes"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Habitats naturais são criados pela própria natureza, sem interferência do homem",
+      "explicacao": "Os HABITATS NATURAIS são aqueles criados pela própria natureza, sem interferência do homem. Já os HABITATS ARTIFICIAIS são aqueles que são construídos pelo homem.",
+      "dica": "Natural = sem interferência humana."
+    },
+    {
+      "id": "cie4",
+      "type": "fill-gap",
+      "question": "Os zoológicos são exemplos de habitats _____.",
+      "options": [
+        "artificiais",
+        "naturais"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "artificiais",
+      "explicacao": "Um exemplo clássico de habitats artificiais são os zoológicos, construídos pelo homem para abrigar animais.",
+      "dica": "São construídos pelo ser humano."
+    },
+    {
+      "id": "cie5",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: Se removidas de seu habitat, as espécies geralmente morrem em virtude da dificuldade de estabelecer-se em uma nova casa.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Verdadeiro",
+      "explicacao": "Verdadeiro. Em seu habitat, a espécie encontra condições determinantes para a sua sobrevivência. Se removidas, em geral, as espécies morrem em virtude da dificuldade de estabelecer-se em uma nova casa.",
+      "dica": "Os animais dependem de seu ambiente natural."
+    },
+    {
+      "id": "cie6",
+      "type": "multiple-choice",
+      "question": "Quais animais são considerados ANIMAIS DOMÉSTICOS?",
+      "options": [
+        "Onça, lobo-guará e tuiuiú",
+        "Boi, cavalo, galinha e pato",
+        "Gambá, preguiça e papagaio",
+        "Jacaré, coruja e lagarto"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Boi, cavalo, galinha e pato",
+      "explicacao": "Animais como boi, cavalo, galinha e pato foram sendo domesticados e passaram a ser conhecidos como ANIMAIS DOMÉSTICOS.",
+      "dica": "São animais criados em fazendas e casas."
+    },
+    {
+      "id": "cie7",
+      "type": "fill-gap",
+      "question": "Acredita-se que os cães surgiram da domesticação de certos tipos de _____.",
+      "options": [
+        "lobos",
+        "raposas"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "lobos",
+      "explicacao": "Acredita-se que os cães, hoje considerados grandes amigos do ser humano, surgiram da domesticação de certos tipos de lobos.",
+      "dica": "Animal selvagem parecido com o cão."
+    },
+    {
+      "id": "cie8",
+      "type": "multiple-choice",
+      "question": "O que são ANIMAIS SILVESTRES?",
+      "options": [
+        "Animais criados em casas",
+        "Animais que vivem em seu ambiente natural, como florestas e matas",
+        "Animais domesticados",
+        "Animais extintos"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Animais que vivem em seu ambiente natural, como florestas e matas",
+      "explicacao": "A maioria dos animais que permanece vivendo em seu ambiente natural, como florestas e matas são chamados ANIMAIS SILVESTRES ou SELVAGENS.",
+      "dica": "Vivem livremente na natureza."
+    },
+    {
+      "id": "cie9",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: É permitido criar animais silvestres em residências no Brasil.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Falso",
+      "explicacao": "Falso. Vários animais silvestres podem ser vistos em zoológicos, mas são proibidos pelas leis brasileiras de serem criados em residências.",
+      "dica": "A lei brasileira protege os animais silvestres."
+    },
+    {
+      "id": "cie10",
+      "type": "fill-gap",
+      "question": "O IBAMA é o Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais _____, que controla e fiscaliza o meio ambiente.",
+      "options": [
+        "Renováveis",
+        "Não Renováveis"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Renováveis",
+      "explicacao": "O IBAMA é o Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis, que controla e fiscaliza o meio ambiente.",
+      "dica": "Recursos que podem se renovar."
+    },
+    {
+      "id": "cie11",
+      "type": "multiple-choice",
+      "question": "Por que a LOCOMOÇÃO é importante para os animais?",
+      "options": [
+        "Apenas para fugir de predadores",
+        "Para buscar alimento, migrar, buscar parceiros para reprodução",
+        "Apenas para brincar",
+        "Não é importante"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Para buscar alimento, migrar, buscar parceiros para reprodução",
+      "explicacao": "A LOCOMOÇÃO é importante para a sobrevivência de muitas espécies, pois através dela os seres conseguem buscar o seu alimento, migrar para um outro território que ofereça recursos importantes à vida, buscar parceiros para se reproduzir etc.",
+      "dica": "Ajuda na sobrevivência de várias formas."
+    },
+    {
+      "id": "cie12",
+      "type": "fill-gap",
+      "question": "As asas servem para o _____.",
+      "options": [
+        "voo",
+        "nado"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "voo",
+      "explicacao": "As asas servem para o voo. Elas estão presentes na maior parte dos insetos, nas aves e também nos morcegos.",
+      "dica": "Permitem que o animal voe."
+    },
+    {
+      "id": "cie13",
+      "type": "multiple-choice",
+      "question": "Qual estrutura os peixes utilizam para se locomover?",
+      "options": [
+        "Patas",
+        "Asas",
+        "Nadadeiras",
+        "Caudas apenas"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Nadadeiras",
+      "explicacao": "Através das nadadeiras, os animais podem nadar num ambiente aquático. Estão presentes nos peixes, nas tartarugas, golfinhos e baleias.",
+      "dica": "Estrutura para nadar."
+    },
+    {
+      "id": "cie14",
+      "type": "fill-gap",
+      "question": "Animais que utilizam apenas 2 membros inferiores para a locomoção são chamados _____.",
+      "options": [
+        "bípedes",
+        "quadrúpedes"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "bípedes",
+      "explicacao": "Alguns animais são BÍPEDES, pois utilizam apenas 2 membros inferiores para a locomoção, enquanto os QUADRÚPEDES utilizam as 4 patas.",
+      "dica": "Bi = dois."
+    },
+    {
+      "id": "cie15",
+      "type": "multiple-choice",
+      "question": "Como as serpentes e minhocas se locomovem?",
+      "options": [
+        "Usando patas",
+        "Voando",
+        "Rastejando-se sobre o solo, usando todo o corpo",
+        "Nadando apenas"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Rastejando-se sobre o solo, usando todo o corpo",
+      "explicacao": "As serpentes e as minhocas não apresentam estruturas de locomoção. Utilizam todo o corpo para se locomover, rastejando-se sobre o solo.",
+      "dica": "Movem-se sem pernas."
+    },
+    {
+      "id": "cie16",
+      "type": "fill-gap",
+      "question": "Os animais HERBÍVOROS alimentam-se exclusivamente de _____.",
+      "options": [
+        "plantas",
+        "outros animais"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "plantas",
+      "explicacao": "Os animais HERBÍVOROS alimentam-se exclusivamente de plantas. Exemplos: coelho, boi, veado.",
+      "dica": "Comem vegetais."
+    },
+    {
+      "id": "cie17",
+      "type": "multiple-choice",
+      "question": "O que são animais CARNÍVOROS?",
+      "options": [
+        "Animais que comem plantas",
+        "Animais que se alimentam de outros animais",
+        "Animais que comem de tudo",
+        "Animais que não se alimentam"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Animais que se alimentam de outros animais",
+      "explicacao": "Os animais CARNÍVOROS alimentam-se de outros animais. Exemplos: lobo, crocodilo, cobra.",
+      "dica": "Carne = comem carne."
+    },
+    {
+      "id": "cie18",
+      "type": "fill-gap",
+      "question": "Os animais ONÍVOROS alimentam-se de animais e de _____.",
+      "options": [
+        "vegetais",
+        "pedras"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "vegetais",
+      "explicacao": "Os animais ONÍVOROS alimentam-se de animais e de vegetais. Exemplos: urso, homem, porco.",
+      "dica": "Comem de tudo."
+    },
+    {
+      "id": "cie19",
+      "type": "multiple-choice",
+      "question": "Qual é um exemplo de animal GENERALISTA?",
+      "options": [
+        "Urso panda",
+        "Barata",
+        "Coala",
+        "Borboleta específica"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Barata",
+      "explicacao": "Os ANIMAIS GENERALISTAS são pouco específicos, apresentando os mais variados hábitos alimentares e habitat. As baratas são um exemplo, pois se alimentam de diversos tipos de alimentos.",
+      "dica": "Come de tudo e vive em vários lugares."
+    },
+    {
+      "id": "cie20",
+      "type": "fill-gap",
+      "question": "O urso panda é um animal _____, vivendo apenas em determinado habitat e possuindo uma dieta extremamente específica.",
+      "options": [
+        "especialista",
+        "generalista"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "especialista",
+      "explicacao": "Os ANIMAIS ESPECIALISTAS são muito exigentes. O urso panda é um exemplo, vivendo em florestas de coníferas e alimentando-se principalmente de bambu.",
+      "dica": "É muito exigente com comida e habitat."
+    },
+    {
+      "id": "cie21",
+      "type": "multiple-choice",
+      "question": "Os dentes caninos dos carnívoros servem para:",
+      "options": [
+        "Triturar plantas",
+        "Rasgar os alimentos",
+        "Apenas mastigar",
+        "Cortar vegetais"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Rasgar os alimentos",
+      "explicacao": "Os carnívoros possuem dentes caninos desenvolvidos que servem para rasgar os alimentos (carne).",
+      "dica": "São dentes pontiagudos."
+    },
+    {
+      "id": "cie22",
+      "type": "fill-gap",
+      "question": "Os herbívoros não possuem os dentes _____.",
+      "options": [
+        "caninos",
+        "incisivos"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "caninos",
+      "explicacao": "Animais herbívoros possuem dentição incompleta, ou seja, não possuem os dentes caninos.",
+      "dica": "São os dentes pontiagudos."
+    },
+    {
+      "id": "cie23",
+      "type": "multiple-choice",
+      "question": "O que é REPRODUÇÃO?",
+      "options": [
+        "A forma de se alimentar",
+        "Uma característica dos seres vivos que permite dar origem a novos indivíduos",
+        "A forma de se locomover",
+        "O tipo de habitat"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Uma característica dos seres vivos que permite dar origem a novos indivíduos",
+      "explicacao": "A REPRODUÇÃO é uma característica própria dos seres vivos. Os animais são capazes de se reproduzir, ou seja, podem dar origem a novos indivíduos de sua espécie.",
+      "dica": "Gerar filhotes."
+    },
+    {
+      "id": "cie24",
+      "type": "fill-gap",
+      "question": "O CICLO DA VIDA inclui: nascer, crescer, _____ e morrer.",
+      "options": [
+        "reproduzir",
+        "voar"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "reproduzir",
+      "explicacao": "Os animais nascem, crescem, podem se reproduzir e morrem. Essa sequência é chamada de CICLO DA VIDA ou CICLO VITAL.",
+      "dica": "Gerar descendentes."
+    },
+    {
+      "id": "cie25",
+      "type": "multiple-choice",
+      "question": "O que é GESTAÇÃO?",
+      "options": [
+        "O tempo em que os filhotes se desenvolvem dentro do organismo materno",
+        "O nascimento do filhote",
+        "A alimentação do filhote",
+        "O crescimento do filhote"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "O tempo em que os filhotes se desenvolvem dentro do organismo materno",
+      "explicacao": "Chamamos de GESTAÇÃO o tempo em que os filhotes se desenvolvem dentro do organismo materno. Durante esse período, o filhote recebe abrigo e todos os nutrientes necessários.",
+      "dica": "Desenvolvimento na barriga da mãe."
+    },
+    {
+      "id": "cie26",
+      "type": "fill-gap",
+      "question": "Animais que nascem de ovos são chamados _____.",
+      "options": [
+        "ovíparos",
+        "vivíparos"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "ovíparos",
+      "explicacao": "Existem animais que são OVÍPAROS quando nascem de ovos e outros que são VIVÍPAROS quando nascem da barriga da mãe.",
+      "dica": "Ovo = nascem de ovos."
+    },
+    {
+      "id": "cie27",
+      "type": "multiple-choice",
+      "question": "O que é METAMORFOSE?",
+      "options": [
+        "O tipo de alimentação",
+        "A transformação que alguns filhotes sofrem durante seu desenvolvimento",
+        "O habitat do animal",
+        "A forma de locomoção"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "A transformação que alguns filhotes sofrem durante seu desenvolvimento",
+      "explicacao": "Alguns filhotes não são parecidos com os adultos ao nascer. Durante o desenvolvimento, esses filhotes se modificam bastante. Essa transformação é chamada de METAMORFOSE.",
+      "dica": "Mudança de forma durante o crescimento."
+    },
+    {
+      "id": "cie28",
+      "type": "fill-gap",
+      "question": "A borboleta passa por metamorfose: ovo, lagarta, _____ e adulto.",
+      "options": [
+        "pupa",
+        "girino"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "pupa",
+      "explicacao": "A metamorfose da borboleta inclui as fases: ovos, lagarta, pupa e adulto.",
+      "dica": "Casulo da borboleta."
+    },
+    {
+      "id": "cie29",
+      "type": "multiple-choice",
+      "question": "Qual é o tempo de gestação de um cachorro?",
+      "options": [
+        "30-40 dias",
+        "58-63 dias",
+        "112-114 dias",
+        "270-290 dias"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "58-63 dias",
+      "explicacao": "O tempo de gestação de um cachorro é de 58-63 dias, aproximadamente 2 meses.",
+      "dica": "É cerca de 2 meses."
+    },
+    {
+      "id": "cie30",
+      "type": "fill-gap",
+      "question": "A RESPIRAÇÃO é um processo através do qual os seres vivos captam o gás _____.",
+      "options": [
+        "oxigênio",
+        "carbônico"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "oxigênio",
+      "explicacao": "A RESPIRAÇÃO é um processo muito importante, através do qual os seres vivos captam o gás oxigênio (O2), tão importante para a produção de energia pelo corpo e manutenção da vida.",
+      "dica": "Gás essencial para a vida."
+    },
+    {
+      "id": "cie31",
+      "type": "multiple-choice",
+      "question": "Qual tipo de respiração ocorre através da pele?",
+      "options": [
+        "Pulmonar",
+        "Branquial",
+        "Cutânea",
+        "Traqueal"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Cutânea",
+      "explicacao": "A respiração cutânea ocorre através da PELE. Os animais com esse tipo de respiração apresentam a pele contendo muitos vasos sanguíneos, como as minhocas e os sapos adultos.",
+      "dica": "Cutis = pele."
+    },
+    {
+      "id": "cie32",
+      "type": "fill-gap",
+      "question": "Os peixes respiram através das _____.",
+      "options": [
+        "brânquias",
+        "pulmões"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "brânquias",
+      "explicacao": "Na respiração branquial, presente na maior parte dos animais aquáticos, as trocas gasosas ocorrem nas BRÂNQUIAS. É a respiração dos peixes, dos crustáceos e de outras espécies aquáticas.",
+      "dica": "Órgão respiratório dos peixes."
+    },
+    {
+      "id": "cie33",
+      "type": "multiple-choice",
+      "question": "Onde ocorrem as trocas gasosas na respiração pulmonar?",
+      "options": [
+        "Na pele",
+        "Nas brânquias",
+        "Nos alvéolos pulmonares",
+        "No coração"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Nos alvéolos pulmonares",
+      "explicacao": "A respiração pulmonar ocorre na maioria dos animais terrestres. Dentro dos pulmões existem os ALVÉOLOS PULMONARES, onde ocorrem as trocas gasosas.",
+      "dica": "Estruturas dentro dos pulmões."
+    },
+    {
+      "id": "cie34",
+      "type": "fill-gap",
+      "question": "Os animais que possuem crânio e coluna vertebral são chamados _____.",
+      "options": [
+        "vertebrados",
+        "invertebrados"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "vertebrados",
+      "explicacao": "Os animais que possuem CRÂNIO e COLUNA VERTEBRAL são chamados de VERTEBRADOS, e aqueles que não possuem são chamados de INVERTEBRADOS.",
+      "dica": "Possuem vértebras."
+    },
+    {
+      "id": "cie35",
+      "type": "multiple-choice",
+      "question": "O que é EXOESQUELETO?",
+      "options": [
+        "Esqueleto interno",
+        "Esqueleto por fora do corpo",
+        "Ausência de esqueleto",
+        "Esqueleto de ossos"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Esqueleto por fora do corpo",
+      "explicacao": "Alguns animais invertebrados apresentam um esqueleto por fora do corpo, denominado EXOESQUELETO, formado por outras substâncias que não são ossos, como o siri e o besouro.",
+      "dica": "Exo = externo, por fora."
+    }
+  ]
+}
