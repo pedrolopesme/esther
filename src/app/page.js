@@ -60,6 +60,12 @@ export default function Home() {
       icon: "/globe.svg",
       color: "rgba(255, 165, 0, 0.1)"
     },
+    {
+      id: "ciencias",
+      title: "🔬 Ciências",
+      icon: "/globe.svg",
+      color: "rgba(144, 238, 144, 0.15)"
+    },
   ];
 
   const container = {

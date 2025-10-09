@@ -1,0 +1,41 @@
+{
+  "nome": "Ciências - Revisão Básica",
+  "materia": "Ciências",
+  "ano_letivo": "3º ano do Ensino Fundamental",
+  "data": "2025-09-10",
+  "title": "Ciências - Revisão de Conceitos Básicos",
+  "description": "Lista introdutória com exercícios sobre seres vivos, estados físicos da água e partes das plantas.",
+  "exercises": [
+    {
+      "id": "cien1",
+      "type": "multiple-choice",
+      "question": "Qual é o estado físico da água no gelo?",
+      "options": ["Líquido", "Sólido", "Gasoso", "Plasma"],
+      "correctIndex": 1,
+      "resposta_correta": "Sólido",
+      "explicacao": "O gelo é a água em estado sólido.",
+      "dica": "Pense na água quando está muito fria no freezer."
+    },
+    {
+      "id": "cien2",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: Todas as plantas fazem fotossíntese.",
+      "options": ["Verdadeiro", "Falso"],
+      "correctIndex": 0,
+      "resposta_correta": "Verdadeiro",
+      "explicacao": "A grande maioria das plantas realiza fotossíntese para produzir seu alimento.",
+      "dica": "Lembre-se que as plantas precisam de luz solar."
+    },
+    {
+      "id": "cien3",
+      "type": "fill-gap",
+      "question": "A parte da planta que absorve água e sais minerais do solo é a _____.",
+      "options": ["raiz", "flor"],
+      "correctIndex": 0,
+      "resposta_correta": "raiz",
+      "explicacao": "As raízes absorvem água e sais minerais, que são levados até o caule e folhas.",
+      "dica": "Fica normalmente embaixo da terra."
+    }
+  ]
+}
+
