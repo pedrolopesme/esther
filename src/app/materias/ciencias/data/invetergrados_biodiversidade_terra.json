@@ -1,0 +1,639 @@
+{
+  "nome": "Exercícios de Ciências - Vertebrados, Biodiversidade e Planeta Terra",
+  "materia": "Ciências",
+  "ano_letivo": "3º ano do Ensino Fundamental",
+  "data": "2025-10-08",
+  "title": "Ciências - Animais Vertebrados, Biodiversidade, Planeta Terra e Solo",
+  "description": "Lista com 45 exercícios de ciências cobrindo grupos de vertebrados (peixes, répteis, anfíbios, aves e mamíferos), biodiversidade e preservação, planeta Terra (esfericidade, movimentos, fases da Lua, constelações) e solo. Exercícios baseados na Unidade 2.",
+  "exercises": [
+    {
+      "id": "cie1",
+      "type": "multiple-choice",
+      "question": "Como os peixes respiram?",
+      "options": [
+        "Por meio de pulmões",
+        "Por meio de brânquias",
+        "Por meio da pele",
+        "Por meio de traqueias"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Por meio de brânquias",
+      "explicacao": "Os peixes respiram embaixo d'água por meio das brânquias, que permitem a troca de gases no ambiente aquático.",
+      "dica": "É o órgão respiratório adaptado para a água."
+    },
+    {
+      "id": "cie2",
+      "type": "fill-gap",
+      "question": "Os peixes se locomovem por meio das _____ no ambiente aquático.",
+      "options": [
+        "nadadeiras",
+        "patas"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "nadadeiras",
+      "explicacao": "Os peixes movimentam-se por meio de nadadeiras, que são adaptações para a natação.",
+      "dica": "São estruturas que ajudam na natação."
+    },
+    {
+      "id": "cie3",
+      "type": "multiple-choice",
+      "question": "Qual é a diferença entre peixes marinhos e peixes dulcícolas?",
+      "options": [
+        "Marinhos vivem em água doce e dulcícolas em água salgada",
+        "Marinhos vivem em água salgada e dulcícolas em água doce",
+        "Não há diferença",
+        "Marinhos são maiores que dulcícolas"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Marinhos vivem em água salgada e dulcícolas em água doce",
+      "explicacao": "Peixes marinhos são encontrados nos mares e oceanos (água salgada), enquanto os peixes dulcícolas são encontrados em lagos, rios e lagoas (água doce).",
+      "dica": "Dulcícola significa 'água doce'."
+    },
+    {
+      "id": "cie4",
+      "type": "fill-gap",
+      "question": "O corpo dos peixes geralmente é coberto de _____.",
+      "options": [
+        "escamas",
+        "pelos"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "escamas",
+      "explicacao": "Os peixes, em geral, têm o corpo coberto de escamas que recobrem a pele e protegem o corpo do animal.",
+      "dica": "São estruturas que protegem o corpo."
+    },
+    {
+      "id": "cie5",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: Os peixes têm orelhas visíveis como os humanos.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Falso",
+      "explicacao": "Falso. Os peixes têm um órgão considerado ouvido interno que, mesmo não sendo visível, permite-lhes perceber os sons e vibrações produzidas na água.",
+      "dica": "Os peixes ouvem de forma diferente."
+    },
+    {
+      "id": "cie6",
+      "type": "multiple-choice",
+      "question": "Qual é a principal característica da pele dos répteis?",
+      "options": [
+        "Pele fina e úmida",
+        "Pele grossa e impermeável com escamas",
+        "Pele com pelos",
+        "Pele com penas"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Pele grossa e impermeável com escamas",
+      "explicacao": "Os répteis apresentam pele grossa e impermeável com escamas, o que evita a perda exagerada de água pelo organismo.",
+      "dica": "Ajuda a evitar perda de água."
+    },
+    {
+      "id": "cie7",
+      "type": "fill-gap",
+      "question": "Os répteis apresentam exclusivamente respiração _____.",
+      "options": [
+        "pulmonar",
+        "branquial"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "pulmonar",
+      "explicacao": "São animais que apresentam exclusivamente respiração pulmonar, respirando ar atmosférico.",
+      "dica": "Respiram por pulmões."
+    },
+    {
+      "id": "cie8",
+      "type": "multiple-choice",
+      "question": "Por que os répteis precisam se expor ao Sol?",
+      "options": [
+        "Para dormir",
+        "Para aquecer o corpo, pois dependem de fontes externas de calor",
+        "Para se alimentar",
+        "Para respirar melhor"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Para aquecer o corpo, pois dependem de fontes externas de calor",
+      "explicacao": "Os répteis dependem de fontes externas de calor. Para aquecerem o corpo, precisam expor-se ao Sol, e para resfriar, precisam esconder-se dele.",
+      "dica": "A temperatura corporal varia com o ambiente."
+    },
+    {
+      "id": "cie9",
+      "type": "fill-gap",
+      "question": "A maioria dos répteis é _____, ou seja, seus filhotes nascem de ovos.",
+      "options": [
+        "ovípara",
+        "vivípara"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "ovípara",
+      "explicacao": "A maioria dos répteis é ovípara, botando ovos com casca que protegem o embrião.",
+      "dica": "Nascem de ovos."
+    },
+    {
+      "id": "cie10",
+      "type": "multiple-choice",
+      "question": "Qual é a principal diferença entre crocodilo e jacaré?",
+      "options": [
+        "O tamanho",
+        "Quando o crocodilo está com a boca fechada, alguns dentes podem ser vistos",
+        "A cor",
+        "O habitat"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Quando o crocodilo está com a boca fechada, alguns dentes podem ser vistos",
+      "explicacao": "Uma das diferenças é que quando o crocodilo está com a boca fechada, alguns dentes podem ser vistos, o que não é possível no jacaré. Além disso, o crocodilo tem mandíbula em formato 'V' e o jacaré em formato 'U'.",
+      "dica": "Observe a boca fechada."
+    },
+    {
+      "id": "cie11",
+      "type": "fill-gap",
+      "question": "Os anfíbios possuem pele _____, sem escamas.",
+      "options": [
+        "fina e úmida",
+        "grossa e seca"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "fina e úmida",
+      "explicacao": "Ao contrário dos répteis, os anfíbios possuem o corpo bem lisinho, com pele fina e úmida, sem escamas.",
+      "dica": "A pele é úmida."
+    },
+    {
+      "id": "cie12",
+      "type": "multiple-choice",
+      "question": "O que significa a palavra ANFÍBIO?",
+      "options": [
+        "Uma forma de vida",
+        "Duas formas de vida",
+        "Três formas de vida",
+        "Sem forma de vida"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Duas formas de vida",
+      "explicacao": "A palavra ANFÍBIO significa 2 formas de vidas, pois esses animais nascem no ambiente aquático e, na fase adulta, passam a viver no ambiente terrestre.",
+      "dica": "Anfíbio = duas vidas."
+    },
+    {
+      "id": "cie13",
+      "type": "fill-gap",
+      "question": "Os filhotes dos anfíbios são chamados de _____.",
+      "options": [
+        "girinos",
+        "larvas"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "girinos",
+      "explicacao": "As larvas, isto é, os filhotes dos anfíbios, são chamados de girinos. Possuem brânquias e são capazes de nadar.",
+      "dica": "Nome específico dos filhotes."
+    },
+    {
+      "id": "cie14",
+      "type": "multiple-choice",
+      "question": "O que é METAMORFOSE nos anfíbios?",
+      "options": [
+        "A forma de se alimentar",
+        "As mudanças que transformam o girino em sapo adulto",
+        "O tipo de respiração",
+        "A forma de reprodução"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "As mudanças que transformam o girino em sapo adulto",
+      "explicacao": "Metamorfose é um fenômeno da natureza onde o girino passa por mudanças: a cauda e as brânquias vão desaparecendo, e as patas e os pulmões começam a se desenvolver.",
+      "dica": "É a transformação do girino."
+    },
+    {
+      "id": "cie15",
+      "type": "fill-gap",
+      "question": "Os girinos possuem _____ e são capazes de nadar como os peixes.",
+      "options": [
+        "brânquias",
+        "pulmões"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "brânquias",
+      "explicacao": "Os girinos possuem brânquias e são capazes de nadar, tal como os peixes. Com o tempo, desenvolvem pulmões.",
+      "dica": "Respiram na água como peixes."
+    },
+    {
+      "id": "cie16",
+      "type": "multiple-choice",
+      "question": "Qual é a característica exclusiva das aves?",
+      "options": [
+        "Ter asas",
+        "Ter penas feitas de queratina",
+        "Voar",
+        "Botar ovos"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Ter penas feitas de queratina",
+      "explicacao": "As aves se destacam pela presença de suas penas, feitas de queratina, uma característica exclusiva desse grupo.",
+      "dica": "Só as aves têm penas."
+    },
+    {
+      "id": "cie17",
+      "type": "fill-gap",
+      "question": "A temperatura corporal das aves é _____, não varia com o ambiente.",
+      "options": [
+        "constante",
+        "variável"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "constante",
+      "explicacao": "O organismo das aves produz calor, logo a temperatura é constante, ou seja, não varia com o ambiente.",
+      "dica": "Mantêm temperatura estável."
+    },
+    {
+      "id": "cie18",
+      "type": "multiple-choice",
+      "question": "Qual NÃO é uma adaptação das aves ao voo?",
+      "options": [
+        "Presença de penas",
+        "Ossos pneumáticos (leves e porosos)",
+        "Músculos peitorais desenvolvidos",
+        "Pele grossa com escamas"
+      ],
+      "correctIndex": 3,
+      "resposta_correta": "Pele grossa com escamas",
+      "explicacao": "Pele grossa com escamas é característica dos répteis. As adaptações das aves ao voo incluem: penas, asas, músculos peitorais desenvolvidos e ossos pneumáticos.",
+      "dica": "Escamas não ajudam no voo."
+    },
+    {
+      "id": "cie19",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: Todas as aves voam.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Falso",
+      "explicacao": "Falso. Muitas espécies apresentam a capacidade de voo, mas nem todas voam, havendo espécies nadadoras (pinguim) e corredoras (avestruz, ema).",
+      "dica": "Pense no avestruz e no pinguim."
+    },
+    {
+      "id": "cie20",
+      "type": "fill-gap",
+      "question": "Os mamíferos recebem esse nome porque são animais que _____ enquanto filhotes.",
+      "options": [
+        "mamam",
+        "voam"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "mamam",
+      "explicacao": "Os mamíferos são animais vertebrados que mamam quando filhotes, alimentando-se do leite materno.",
+      "dica": "Alimentam-se de leite."
+    },
+    {
+      "id": "cie21",
+      "type": "multiple-choice",
+      "question": "Qual é a principal característica da pele dos mamíferos?",
+      "options": [
+        "Coberta de escamas",
+        "Coberta de penas",
+        "Coberta de pelos",
+        "Lisa e úmida"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Coberta de pelos",
+      "explicacao": "A maior parte dos mamíferos possui o corpo coberto de pelos.",
+      "dica": "Pense em cães e gatos."
+    },
+    {
+      "id": "cie22",
+      "type": "fill-gap",
+      "question": "Os mamíferos que crescem dentro da barriga de suas mães são chamados _____.",
+      "options": [
+        "vivíparos",
+        "ovíparos"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "vivíparos",
+      "explicacao": "Os que crescem dentro da barriga de suas mães são chamados vivíparos, ao contrário dos ovíparos que nascem de ovos.",
+      "dica": "Nascem da barriga da mãe."
+    },
+    {
+      "id": "cie23",
+      "type": "multiple-choice",
+      "question": "O que é o marsúpio?",
+      "options": [
+        "Um tipo de alimento",
+        "Uma bolsa de pele onde os filhotes completam seu desenvolvimento",
+        "Um órgão respiratório",
+        "Um tipo de pelo"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Uma bolsa de pele onde os filhotes completam seu desenvolvimento",
+      "explicacao": "O marsúpio é uma bolsa de pele, localizada na região abdominal das fêmeas, onde os filhotes completam seu desenvolvimento após o nascimento.",
+      "dica": "Cangurus têm marsúpio."
+    },
+    {
+      "id": "cie24",
+      "type": "fill-gap",
+      "question": "São exemplos de marsupiais: o canguru, o gambá, a cuíca e o _____.",
+      "options": [
+        "coala",
+        "cachorro"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "coala",
+      "explicacao": "São exemplos de marsupiais: o canguru, o gambá, a cuíca e o coala, todos possuem marsúpio.",
+      "dica": "Animal australiano que come eucalipto."
+    },
+    {
+      "id": "cie25",
+      "type": "multiple-choice",
+      "question": "O que significa BIODIVERSIDADE?",
+      "options": [
+        "Variedade de plantas apenas",
+        "Variedade de vidas",
+        "Variedade de animais apenas",
+        "Variedade de rochas"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Variedade de vidas",
+      "explicacao": "A palavra BIODIVERSIDADE significa variedade de vidas, correspondendo à variedade de espécies de seres vivos que habitam um ecossistema.",
+      "dica": "Bio = vida, diversidade = variedade."
+    },
+    {
+      "id": "cie26",
+      "type": "fill-gap",
+      "question": "Um ecossistema é formado pelos fatores bióticos (seres vivos) e fatores _____ (não vivos).",
+      "options": [
+        "abióticos",
+        "antibióticos"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "abióticos",
+      "explicacao": "Um ecossistema é formado pelos fatores bióticos (seres vivos) e fatores abióticos (não bióticos), como chuva, vento, umidade do ar, solo.",
+      "dica": "A = sem, não vivos."
+    },
+    {
+      "id": "cie27",
+      "type": "multiple-choice",
+      "question": "Quais são exemplos de fatores abióticos?",
+      "options": [
+        "Plantas e animais",
+        "Chuva, vento, umidade do ar e solo",
+        "Apenas água",
+        "Apenas ar"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Chuva, vento, umidade do ar e solo",
+      "explicacao": "Fatores abióticos são os que não possuem vida, como a chuva, o vento, a umidade do ar, o solo, etc.",
+      "dica": "São elementos sem vida."
+    },
+    {
+      "id": "cie28",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: O Brasil possui a maior biodiversidade do mundo.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Verdadeiro",
+      "explicacao": "Verdadeiro. O Brasil possui a maior biodiversidade do mundo, com espécies de animais que não são encontrados em nenhum outro lugar do planeta.",
+      "dica": "O Brasil é muito rico em biodiversidade."
+    },
+    {
+      "id": "cie29",
+      "type": "multiple-choice",
+      "question": "Quais são as principais causas da extinção de animais?",
+      "options": [
+        "Apenas a caça",
+        "Desmatamento, caça e pesca indiscriminada",
+        "Apenas o clima",
+        "Apenas a poluição"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Desmatamento, caça e pesca indiscriminada",
+      "explicacao": "Entre as causas da extinção estão o desmatamento (que diminui recursos como alimento e moradia) e a caça e pesca indiscriminada.",
+      "dica": "São várias ações humanas."
+    },
+    {
+      "id": "cie30",
+      "type": "fill-gap",
+      "question": "O planeta Terra surgiu há cerca de _____ bilhões de anos atrás.",
+      "options": [
+        "4,5",
+        "2,5"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "4,5",
+      "explicacao": "O planeta Terra surgiu há cerca de 4,5 bilhões de anos atrás e tem formato esférico.",
+      "dica": "É um número entre 4 e 5."
+    },
+    {
+      "id": "cie31",
+      "type": "multiple-choice",
+      "question": "Por que a Terra também é chamada de Planeta Azul?",
+      "options": [
+        "Por causa do céu",
+        "Por causa da atmosfera",
+        "Porque a maior parte de sua superfície é composta por água",
+        "Por causa das nuvens"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Porque a maior parte de sua superfície é composta por água",
+      "explicacao": "A Terra é chamada de Planeta Azul porque a maior parte de sua superfície é composta por água.",
+      "dica": "Água em grande quantidade."
+    },
+    {
+      "id": "cie32",
+      "type": "fill-gap",
+      "question": "O planeta Terra é o _____ planeta mais próximo do Sol.",
+      "options": [
+        "3º",
+        "4º"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "3º",
+      "explicacao": "O planeta Terra é o 3º planeta mais próximo do Sol e o maior entre os rochosos.",
+      "dica": "Mercúrio, Vênus e depois a Terra."
+    },
+    {
+      "id": "cie33",
+      "type": "multiple-choice",
+      "question": "Quais são os planetas rochosos?",
+      "options": [
+        "Júpiter, Saturno, Urano e Netuno",
+        "Mercúrio, Vênus, Terra e Marte",
+        "Todos os planetas são rochosos",
+        "Apenas Terra e Marte"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Mercúrio, Vênus, Terra e Marte",
+      "explicacao": "Os planetas rochosos são: Mercúrio, Vênus, Terra e Marte. Os gasosos são: Júpiter, Saturno, Urano e Netuno.",
+      "dica": "São os quatro primeiros planetas."
+    },
+    {
+      "id": "cie34",
+      "type": "fill-gap",
+      "question": "O globo terrestre nos possibilita compreender o eixo de _____ graus de inclinação da Terra.",
+      "options": [
+        "23",
+        "45"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "23",
+      "explicacao": "O globo terrestre nos possibilita compreender o eixo de 23º de inclinação do planeta Terra, que influencia diversos fenômenos.",
+      "dica": "É um número próximo de 20."
+    },
+    {
+      "id": "cie35",
+      "type": "multiple-choice",
+      "question": "O que é a atmosfera terrestre?",
+      "options": [
+        "A camada de água",
+        "Uma camada de gases que envolve a Terra",
+        "A superfície rochosa",
+        "O núcleo da Terra"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Uma camada de gases que envolve a Terra",
+      "explicacao": "Composta por gases, a atmosfera da Terra é uma camada de suma importância para a vida, mantendo o oxigênio próximo à superfície.",
+      "dica": "É uma camada gasosa."
+    },
+    {
+      "id": "cie36",
+      "type": "fill-gap",
+      "question": "A formação de dias e noites é consequência do movimento de _____.",
+      "options": [
+        "Rotação",
+        "Translação"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Rotação",
+      "explicacao": "A formação de dias e noites é consequência da curvatura e do movimento de Rotação, onde regiões do planeta são iluminadas enquanto outras não.",
+      "dica": "Terra girando sobre si mesma."
+    },
+    {
+      "id": "cie37",
+      "type": "multiple-choice",
+      "question": "O que é o movimento de Translação?",
+      "options": [
+        "Terra girando sobre si mesma",
+        "Terra girando ao redor do Sol",
+        "Lua girando ao redor da Terra",
+        "Sol girando ao redor da Terra"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Terra girando ao redor da Terra",
+      "explicacao": "A Terra gira ao redor do Sol, realizando o Movimento de Translação, que junto com o eixo inclinado permite a formação das estações do ano.",
+      "dica": "Terra ao redor do Sol."
+    },
+    {
+      "id": "cie38",
+      "type": "fill-gap",
+      "question": "Enquanto no Hemisfério Sul é verão, no Hemisfério Norte é _____.",
+      "options": [
+        "inverno",
+        "primavera"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "inverno",
+      "explicacao": "Os raios solares se distribuem de forma diferente nos Hemisférios Norte e Sul, causando estações do ano opostas. Quando é verão no Sul, é inverno no Norte.",
+      "dica": "São estações opostas."
+    },
+    {
+      "id": "cie39",
+      "type": "multiple-choice",
+      "question": "Por que não conseguimos ver as estrelas durante o dia?",
+      "options": [
+        "Porque elas somem",
+        "Porque a intensa luminosidade do Sol impede-nos de visualizá-las",
+        "Porque elas dormem",
+        "Porque não há estrelas de dia"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Porque a intensa luminosidade do Sol impede-nos de visualizá-las",
+      "explicacao": "As estrelas estão no céu durante todo o tempo. Porém, a intensa luminosidade do Sol, ao incidir na atmosfera, impede-nos de visualizar o brilho das demais estrelas.",
+      "dica": "O Sol ofusca as outras estrelas."
+    },
+    {
+      "id": "cie40",
+      "type": "fill-gap",
+      "question": "O Sol é um astro _____, ou seja, ele emite luz própria.",
+      "options": [
+        "luminoso",
+        "iluminado"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "luminoso",
+      "explicacao": "O Sol é um astro luminoso, ou seja, ele emite luz própria, diferente da Lua que é um astro iluminado.",
+      "dica": "Produz sua própria luz."
+    },
+    {
+      "id": "cie41",
+      "type": "multiple-choice",
+      "question": "Quantas fases tem a Lua?",
+      "options": [
+        "Duas",
+        "Três",
+        "Quatro",
+        "Cinco"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Quatro",
+      "explicacao": "A Lua tem quatro fases: Nova, Crescente, Cheia e Minguante. O ciclo completo dura cerca de 28 dias.",
+      "dica": "Conta quantas fases você conhece."
+    },
+    {
+      "id": "cie42",
+      "type": "fill-gap",
+      "question": "Na fase _____, não conseguimos ver a Lua pois sua face iluminada está voltada para o Sol.",
+      "options": [
+        "Nova",
+        "Cheia"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Nova",
+      "explicacao": "Na Lua nova, não conseguimos vê-la pois sua face iluminada está voltada para o Sol e a face sombreada está voltada para a Terra.",
+      "dica": "É quando ela 'desaparece' do céu."
+    },
+    {
+      "id": "cie43",
+      "type": "multiple-choice",
+      "question": "O que é uma constelação?",
+      "options": [
+        "Um planeta",
+        "Um agrupamento de estrelas que formam figuras imaginárias",
+        "Uma galáxia",
+        "Um satélite"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Um agrupamento de estrelas que formam figuras imaginárias",
+      "explicacao": "Constelação é um agrupamento de estrelas que povos passados imaginavam formar imagens reais no céu, como animais e objetos.",
+      "dica": "Grupos de estrelas formando figuras."
+    },
+    {
+      "id": "cie44",
+      "type": "fill-gap",
+      "question": "O _____ é a camada superficial do planeta, composta de material orgânico e inorgânico.",
+      "options": [
+        "solo",
+        "ar"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "solo",
+      "explicacao": "O solo é a camada superficial do planeta, composta de material orgânico e inorgânico proveniente da decomposição de animais e vegetais.",
+      "dica": "É onde as plantas se fixam."
+    },
+    {
+      "id": "cie45",
+      "type": "multiple-choice",
+      "question": "Qual tipo de solo é rico em areia e permeável?",
+      "options": [
+        "Solo humífero",
+        "Solo arenoso",
+        "Solo argiloso",
+        "Solo calcário"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Solo arenoso",
+      "explicacao": "O solo arenoso é rico em areia, e entre os grãos existem espaços onde a água e o ar se infiltram, sendo um solo permeável.",
+      "dica": ""
+    }
+    ]
+}
