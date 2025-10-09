@@ -1,0 +1,566 @@
+{
+  "nome": "Exercícios de Ciências - Sentidos da Audição e Visão, Som e Luz",
+  "materia": "Ciências",
+  "ano_letivo": "3º ano do Ensino Fundamental",
+  "data": "2025-10-09",
+  "title": "Ciências - Audição, Visão, Som e Propriedades da Luz",
+  "description": "Lista com 40 exercícios de ciências cobrindo o sentido da audição (anatomia das orelhas, doenças, surdez, saúde auditiva), som e suas propriedades, sentido da visão (anatomia dos olhos, problemas de visão, saúde visual) e luz (meios opaco, translúcido, transparente e espelhado). Exercícios baseados na Unidade 1 - Matéria e Energia.",
+  "exercises": [
+    {
+      "id": "cie1",
+      "type": "multiple-choice",
+      "question": "O que nos permite ouvir os sons?",
+      "options": [
+        "O nariz",
+        "As orelhas",
+        "Os olhos",
+        "A boca"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "As orelhas",
+      "explicacao": "O conjunto de estruturas que nos permite ouvir compõe o SENTIDO DA AUDIÇÃO. Com as ORELHAS, somos capazes de perceber os sons presentes no ambiente.",
+      "dica": "Antigamente chamadas de ouvidos."
+    },
+    {
+      "id": "cie2",
+      "type": "fill-gap",
+      "question": "Cada orelha é dividida em _____ partes.",
+      "options": [
+        "três",
+        "duas"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "três",
+      "explicacao": "Cada orelha é dividida em três partes: orelha externa, orelha média e orelha interna.",
+      "dica": "Externa, média e interna."
+    },
+    {
+      "id": "cie3",
+      "type": "multiple-choice",
+      "question": "Qual é a parte da orelha onde fica o lóbulo?",
+      "options": [
+        "Orelha interna",
+        "Orelha média",
+        "Orelha externa",
+        "Tuba auditiva"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Orelha externa",
+      "explicacao": "A orelha externa, também chamada de pavilhão auricular, é o local onde fica o lóbulo da orelha, local onde costumamos colocar brincos.",
+      "dica": "É a parte que vemos por fora."
+    },
+    {
+      "id": "cie4",
+      "type": "fill-gap",
+      "question": "O _____ é uma fina película que separa a orelha externa da interna e vibra quando ouvimos um som.",
+      "options": [
+        "tímpano",
+        "lóbulo"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "tímpano",
+      "explicacao": "Na orelha média se localiza o tímpano, uma fina película que separa a orelha externa da interna. Esta película vibra quando ouvimos um som.",
+      "dica": "Funciona como uma membrana que vibra."
+    },
+    {
+      "id": "cie5",
+      "type": "multiple-choice",
+      "question": "O que é OTITE?",
+      "options": [
+        "Uma inflamação na orelha",
+        "Uma inflamação no olho",
+        "Uma inflamação no nariz",
+        "Uma inflamação na garganta"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Uma inflamação na orelha",
+      "explicacao": "Otite é uma inflamação na orelha externa, média ou interna, causando incômodo e dor.",
+      "dica": "Causa dor de ouvido."
+    },
+    {
+      "id": "cie6",
+      "type": "fill-gap",
+      "question": "A _____ é uma inflamação do labirinto, presente na orelha interna, causando sensação de tontura.",
+      "options": [
+        "labirintite",
+        "otite"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "labirintite",
+      "explicacao": "Labirintite é uma inflamação do labirinto, presente na orelha interna, causando sensação de tontura.",
+      "dica": "Causa tontura e enjoo."
+    },
+    {
+      "id": "cie7",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: As orelhas são importantes apenas para a audição.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Falso",
+      "explicacao": "Falso. Nossas orelhas, além de serem fundamentais para a audição, também desempenham um papel super importante para o equilíbrio do corpo.",
+      "dica": "Elas também ajudam no equilíbrio."
+    },
+    {
+      "id": "cie8",
+      "type": "multiple-choice",
+      "question": "Qual é a diferença entre SURDO e DEFICIÊNCIA AUDITIVA?",
+      "options": [
+        "Não há diferença",
+        "Surdo nasce sem audição ou a perde antes da linguagem oral; deficiente auditivo nasce ouvindo e perde depois",
+        "Surdo pode ouvir um pouco",
+        "Deficiente auditivo nunca ouviu"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Surdo nasce sem audição ou a perde antes da linguagem oral; deficiente auditivo nasce ouvindo e perde depois",
+      "explicacao": "O indivíduo SURDO já nasce sem a audição ou desenvolve a surdez antes do contato com a linguagem oral. A DEFICIÊNCIA AUDITIVA é quando a pessoa nasceu ouvindo e perdeu a audição ao longo da vida.",
+      "dica": "A diferença está em quando perdeu a audição."
+    },
+    {
+      "id": "cie9",
+      "type": "fill-gap",
+      "question": "Para se comunicar, os deficientes auditivos podem usar a Língua Brasileira de Sinais, conhecida como _____.",
+      "options": [
+        "LIBRAS",
+        "BRAILLE"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "LIBRAS",
+      "explicacao": "Para que se comuniquem, os deficientes auditivos podem utilizar um aparelho auditivo ou conversar através da Língua Brasileira de Sinais (LIBRAS).",
+      "dica": "É a língua de sinais brasileira."
+    },
+    {
+      "id": "cie10",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: Todo surdo é mudo.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Falso",
+      "explicacao": "Falso. Nem todo surdo é mudo. Quando a perda da audição ocorre depois do aprendizado da fala, o indivíduo mantém a capacidade da fala.",
+      "dica": "Surdez não significa mudez."
+    },
+    {
+      "id": "cie11",
+      "type": "multiple-choice",
+      "question": "Por que NÃO devemos usar cotonete profundamente no ouvido?",
+      "options": [
+        "Porque não limpa",
+        "Porque podemos nos machucar e perder a audição",
+        "Porque é caro",
+        "Porque não é eficiente"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Porque podemos nos machucar e perder a audição",
+      "explicacao": "Ao colocarmos o cotonete profundamente no ouvido corremos o risco de nos machucar e consequentemente perder a audição.",
+      "dica": "Pode causar lesões."
+    },
+    {
+      "id": "cie12",
+      "type": "fill-gap",
+      "question": "A _____ do ouvido é uma substância que protege contra microorganismos e insetos.",
+      "options": [
+        "cera",
+        "água"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "cera",
+      "explicacao": "A cera é uma substância que protege nossos ouvidos contra microorganismos, insetos ou partículas que podem causar alguma infecção. Ter cera no ouvido é normal.",
+      "dica": "É uma proteção natural."
+    },
+    {
+      "id": "cie13",
+      "type": "multiple-choice",
+      "question": "Qual cuidado devemos ter com sons altos?",
+      "options": [
+        "Ouvir o máximo possível",
+        "Evitar ambientes fechados com sons altos e usar protetores auriculares",
+        "Não há problema com sons altos",
+        "Usar fones sempre no máximo"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Evitar ambientes fechados com sons altos e usar protetores auriculares",
+      "explicacao": "O excesso de ruído pode causar lesões no ouvido e perda auditiva. Devemos evitar ambientes fechados com sons altos e utilizar protetores auriculares em ambientes barulhentos.",
+      "dica": "Sons muito altos fazem mal."
+    },
+    {
+      "id": "cie14",
+      "type": "fill-gap",
+      "question": "O médico especialista responsável pela saúde dos ouvidos, nariz e garganta é o _____.",
+      "options": [
+        "Otorrinolaringologista",
+        "Oftalmologista"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Otorrinolaringologista",
+      "explicacao": "O Otorrinolaringologista é o médico responsável e especialista nas áreas da face, nariz, ouvidos e garganta.",
+      "dica": "Especialista em ouvido, nariz e garganta."
+    },
+    {
+      "id": "cie15",
+      "type": "multiple-choice",
+      "question": "O que é SOM?",
+      "options": [
+        "O resultado de uma vibração",
+        "Apenas música",
+        "Apenas barulho",
+        "Algo que vemos"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "O resultado de uma vibração",
+      "explicacao": "O SOM é o resultado de uma vibração. Não vemos essa vibração, mas percebemos através do sentido da audição.",
+      "dica": "Vem de vibrações."
+    },
+    {
+      "id": "cie16",
+      "type": "fill-gap",
+      "question": "Os sons se propagam através de _____ que chegam até nossas orelhas.",
+      "options": [
+        "ondas sonoras",
+        "ondas de luz"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "ondas sonoras",
+      "explicacao": "Os sons se propagam através de ondas sonoras, que 'passeiam' pelo ar e chegam até nossas orelhas e, então, são enviadas para o cérebro.",
+      "dica": "Viajam pelo ar até nós."
+    },
+    {
+      "id": "cie17",
+      "type": "multiple-choice",
+      "question": "O que é INTENSIDADE do som?",
+      "options": [
+        "A cor do som",
+        "O volume do som: fraco ou forte",
+        "O tamanho do som",
+        "A velocidade do som"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "O volume do som: fraco ou forte",
+      "explicacao": "A INTENSIDADE está relacionada ao volume de cada som: fraco ou forte. Por exemplo, o som de uma explosão é forte para quem está próximo, mas fraco para quem está distante.",
+      "dica": "Está relacionado ao volume."
+    },
+    {
+      "id": "cie18",
+      "type": "fill-gap",
+      "question": "A _____ está relacionada aos sons graves e agudos.",
+      "options": [
+        "frequência",
+        "intensidade"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "frequência",
+      "explicacao": "A FREQUÊNCIA está relacionada aos sons graves e agudos. Por exemplo: Homens, geralmente, têm voz mais grave que as mulheres.",
+      "dica": "Grave ou agudo."
+    },
+    {
+      "id": "cie19",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: Diferentes materiais produzem sons diferentes.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Verdadeiro",
+      "explicacao": "Verdadeiro. Diferentes materiais produzem diferentes sons. O tipo de material influencia muito no som produzido. Por exemplo, uma colher de madeira e uma de metal produzem sons diferentes.",
+      "dica": "O material faz diferença no som."
+    },
+    {
+      "id": "cie20",
+      "type": "multiple-choice",
+      "question": "Qual sentido nos permite enxergar cores, objetos e o meio ambiente?",
+      "options": [
+        "Audição",
+        "Visão",
+        "Tato",
+        "Olfato"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Visão",
+      "explicacao": "A visão é um dos cinco sentidos do corpo humano, que permite enxergarmos cores, objetos e todo o meio ambiente.",
+      "dica": "Usamos os olhos."
+    },
+    {
+      "id": "cie21",
+      "type": "fill-gap",
+      "question": "A _____ pode aumentar ou diminuir de tamanho de acordo com a incidência da luz.",
+      "options": [
+        "pupila",
+        "íris"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "pupila",
+      "explicacao": "Para conseguir enxergar, a luz passa pela PUPILA, que pode aumentar (dilatar) ou diminuir de tamanho, de acordo com a incidência da luz.",
+      "dica": "É a parte preta do olho."
+    },
+    {
+      "id": "cie22",
+      "type": "multiple-choice",
+      "question": "Qual é a sequência correta para a formação da imagem no olho?",
+      "options": [
+        "Pupila → Retina → Nervo Óptico → Cérebro",
+        "Cérebro → Retina → Pupila",
+        "Retina → Pupila → Cérebro",
+        "Nervo Óptico → Pupila → Retina"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Pupila → Retina → Nervo Óptico → Cérebro",
+      "explicacao": "A luz passa pela PUPILA, chega até a RETINA, depois passa pelo NERVO ÓPTICO, sendo levada para o CÉREBRO, onde a imagem será interpretada.",
+      "dica": "Começa pela entrada de luz."
+    },
+    {
+      "id": "cie23",
+      "type": "fill-gap",
+      "question": "_____, MIOPIA e HIPERMETROPIA são problemas de visão comuns.",
+      "options": [
+        "Astigmatismo",
+        "Otite"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Astigmatismo",
+      "explicacao": "Alguns problemas de visão comuns são ASTIGMATISMO, MIOPIA e HIPERMETROPIA, que ocorrem quando há alguma alteração na estrutura do olho.",
+      "dica": "É um problema de visão."
+    },
+    {
+      "id": "cie24",
+      "type": "multiple-choice",
+      "question": "Por que NÃO devemos coçar os olhos?",
+      "options": [
+        "Porque não faz diferença",
+        "Porque pode provocar irritação e levar bactérias causando conjuntivite",
+        "Porque é feio",
+        "Porque não resolve nada"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Porque pode provocar irritação e levar bactérias causando conjuntivite",
+      "explicacao": "O ato de coçar pode provocar irritação e até ocasionar lesões nos olhos. Mãos sujas podem levar bactérias e causar conjuntivite.",
+      "dica": "Pode causar infecções."
+    },
+    {
+      "id": "cie25",
+      "type": "fill-gap",
+      "question": "O uso excessivo de aparelhos eletrônicos pode causar _____ ocular e dores de cabeça.",
+      "options": [
+        "ressecamento",
+        "aumento"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "ressecamento",
+      "explicacao": "Estudos demonstram que o uso excessivo de aparelhos eletrônicos pode causar ressecamento ocular, dores de cabeça e sensação de cansaço.",
+      "dica": "Os olhos ficam secos."
+    },
+    {
+      "id": "cie26",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: O uso de cigarro está associado a problemas de visão.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Verdadeiro",
+      "explicacao": "Verdadeiro. Estudos demonstram que o uso de cigarro está associado a alguns problemas de visão.",
+      "dica": "Cigarro faz mal para os olhos também."
+    },
+    {
+      "id": "cie27",
+      "type": "multiple-choice",
+      "question": "Qual médico é especializado na saúde dos olhos?",
+      "options": [
+        "Otorrinolaringologista",
+        "Oftalmologista",
+        "Pediatra",
+        "Cardiologista"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Oftalmologista",
+      "explicacao": "O OFTALMOLOGISTA é o médico especializado na saúde dos olhos. É recomendado que façamos consultas regulares para avaliar a saúde ocular.",
+      "dica": "Especialista em olhos."
+    },
+    {
+      "id": "cie28",
+      "type": "fill-gap",
+      "question": "O teste do _____ é um exame oftalmológico comum nos primeiros anos de vida.",
+      "options": [
+        "olhinho",
+        "ouvidinho"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "olhinho",
+      "explicacao": "Nos primeiros anos de vida, são frequentes as visitas ao oftalmologista, sendo comum a realização de exames como o teste do olhinho.",
+      "dica": "Teste feito em bebês."
+    },
+    {
+      "id": "cie29",
+      "type": "multiple-choice",
+      "question": "Quais sintomas podem indicar problemas de visão?",
+      "options": [
+        "Apenas dor de cabeça",
+        "Vermelhidão, coceira excessiva, visão turva e olhos secos",
+        "Apenas vermelhidão",
+        "Nenhum sintoma"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Vermelhidão, coceira excessiva, visão turva e olhos secos",
+      "explicacao": "É importante ficar atento a sinais como vermelhidão, coceira excessiva, visão turva, olhos secos e dores de cabeça, pois podem indicar alguma alteração na visão.",
+      "dica": "Vários sinais juntos."
+    },
+    {
+      "id": "cie30",
+      "type": "fill-gap",
+      "question": "_____ e conjuntivite são exemplos de infecções que podem afetar os olhos.",
+      "options": [
+        "Terçol",
+        "Otite"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Terçol",
+      "explicacao": "Estar atento às consultas pode evitar irritações, doenças e infecções como terçol e conjuntivite.",
+      "dica": "É uma bolinha no olho."
+    },
+    {
+      "id": "cie31",
+      "type": "multiple-choice",
+      "question": "O que acontece quando a luz incide sobre um meio OPACO?",
+      "options": [
+        "A luz passa completamente",
+        "A luz não será transmitida, mas absorvida",
+        "A luz é refletida como em espelho",
+        "A luz passa parcialmente"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "A luz não será transmitida, mas absorvida",
+      "explicacao": "Meio opaco: ao incidir sobre um objeto opaco, a luz não será transmitida, mas absorvida. Não passará pela superfície. É o que ocorre com portas de madeira e paredes.",
+      "dica": "A luz é bloqueada."
+    },
+    {
+      "id": "cie32",
+      "type": "fill-gap",
+      "question": "Em um meio _____, a luz passará parcialmente, pois parte é absorvida.",
+      "options": [
+        "translúcido",
+        "transparente"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "translúcido",
+      "explicacao": "Meio translúcido: ao incidir sobre objetos translúcidos, a luz passará parcialmente, pois parte é absorvida. Uma imagem poderá ser vista embaçada, como em vidros jateados.",
+      "dica": "Deixa passar luz, mas embaça."
+    },
+    {
+      "id": "cie33",
+      "type": "multiple-choice",
+      "question": "Qual é um exemplo de meio TRANSPARENTE?",
+      "options": [
+        "Parede de madeira",
+        "Vidro jateado",
+        "Vidro transparente de janela",
+        "Espelho"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Vidro transparente de janela",
+      "explicacao": "Meio transparente: a luz não será absorvida nem refletida, transpassando para o outro lado. É o que ocorre com vidros transparentes presentes na maior parte das janelas e aquários.",
+      "dica": "Podemos ver através dele."
+    },
+    {
+      "id": "cie34",
+      "type": "fill-gap",
+      "question": "Em um meio _____, a luz é refletida e não transpassa pela superfície.",
+      "options": [
+        "espelhado",
+        "opaco"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "espelhado",
+      "explicacao": "Meio espelhado: ao incidir sobre um objeto, a luz é refletida e não transpassa pela superfície. É o que ocorre em espelhos.",
+      "dica": "Reflete a imagem."
+    },
+    {
+      "id": "cie35",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: A sombra é formada quando a luz incide sobre um corpo opaco.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Verdadeiro",
+      "explicacao": "Verdadeiro. Quando a luz incide sobre um corpo opaco ela não o ultrapassa. Esse fenômeno permite a formação de sombras, pois esses objetos funcionam como obstáculo para a passagem da luz.",
+      "dica": "Corpos opacos bloqueiam a luz."
+    },
+    {
+      "id": "cie36",
+      "type": "multiple-choice",
+      "question": "A sombra pode variar de acordo com o quê?",
+      "options": [
+        "Apenas a cor do objeto",
+        "A posição e distância da fonte de luz",
+        "Apenas o tamanho do objeto",
+        "O clima"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "A posição e distância da fonte de luz",
+      "explicacao": "A sombra pode variar de acordo com a posição e distância da fonte de luz em relação ao objeto.",
+      "dica": "Depende de onde está a luz."
+    },
+    {
+      "id": "cie37",
+      "type": "fill-gap",
+      "question": "Um aquário é feito de material _____, permitindo ver os peixes dentro dele.",
+      "options": [
+        "transparente",
+        "opaco"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "transparente",
+      "explicacao": "Aquários são feitos de vidro transparente, permitindo que a luz passe completamente e possamos ver os peixes claramente.",
+      "dica": "Conseguimos ver através dele."
+    },
+    {
+      "id": "cie38",
+      "type": "multiple-choice",
+      "question": "Qual objeto abaixo é translúcido?",
+      "options": [
+        "Espelho",
+        "Parede de tijolo",
+        "Vidro fosco ou jateado",
+        "Vidro transparente"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Vidro fosco ou jateado",
+      "explicacao": "O vidro fosco ou jateado é translúcido, pois permite a passagem parcial de luz, criando uma imagem embaçada.",
+      "dica": "Deixa passar luz mas não vemos nitidamente."
+    },
+    {
+      "id": "cie39",
+      "type": "fill-gap",
+      "question": "Para que possamos enxergar, é fundamental que o ambiente esteja _____.",
+      "options": [
+        "iluminado",
+        "escuro"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "iluminado",
+      "explicacao": "Para conseguir enxergar é fundamental que, além das estruturas oculares, o ambiente esteja iluminado, permitindo a passagem de luz pela pupila.",
+      "dica": "Precisamos de luz para ver."
+    },
+    {
+      "id": "cie40",
+      "type": "multiple-choice",
+      "question": "Qual das alternativas contém apenas objetos transparentes?",
+      "options": [
+        "Caderno e mochila",
+        "Espelho e garrafa térmica",
+        "Copo de vidro e lâmpada",
+        "Parede e porta"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Copo de vidro e lâmpada",
+      "explicacao": "Copo de vidro (quando vazio ou com líquido transparente) e lâmpada são objetos transparentes, permitindo a passagem completa da luz.",
+      "dica": "A luz passa através deles."
+    }
+  ]
+}
