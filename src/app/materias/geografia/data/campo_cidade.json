@@ -1,0 +1,530 @@
+{
+  "nome": "Exercícios de Geografia - Campo e Cidade, Cultura, Recursos Naturais e Indústria",
+  "materia": "Geografia",
+  "ano_letivo": "3º ano do Ensino Fundamental",
+  "data": "2025-10-09",
+  "title": "Geografia - Setores Econômicos, Diversidade Cultural, Recursos Naturais e Indústria",
+  "description": "Lista com 50 exercícios de geografia cobrindo indústria, comércio e serviços, integração campo-cidade, diversidade cultural, comunidades tradicionais, recursos naturais (renováveis e não renováveis) e tipos de indústrias. Exercícios baseados nas Unidades 2, 3 e 4.",
+  "exercises": [
+    {
+      "id": "geo1",
+      "type": "multiple-choice",
+      "question": "Qual setor econômico é responsável pela retirada da matéria-prima da natureza?",
+      "options": [
+        "Setor Primário",
+        "Setor Secundário",
+        "Setor Terciário",
+        "Setor Quaternário"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Setor Primário",
+      "explicacao": "O Setor Primário é responsável pela retirada da matéria-prima da natureza, incluindo atividades como agropecuária, pecuária e extrativismo.",
+      "dica": "É o primeiro setor, que tira recursos da natureza."
+    },
+    {
+      "id": "geo2",
+      "type": "fill-gap",
+      "question": "O Setor _____ é responsável pela transformação da matéria-prima em produto.",
+      "options": ["Secundário", "Primário"],
+      "correctIndex": 0,
+      "resposta_correta": "Secundário",
+      "explicacao": "O Setor Secundário é responsável pela transformação da matéria-prima em produto, incluindo indústria e construção civil.",
+      "dica": "É o segundo setor, transforma matéria-prima."
+    },
+    {
+      "id": "geo3",
+      "type": "multiple-choice",
+      "question": "Quais atividades fazem parte do Setor Terciário?",
+      "options": [
+        "Agricultura e pecuária",
+        "Indústria e construção civil",
+        "Comércio e serviços",
+        "Extrativismo mineral"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Comércio e serviços",
+      "explicacao": "O Setor Terciário é responsável pela venda e distribuição dos produtos, incluindo comércio e serviços.",
+      "dica": "Terceiro setor, vende e presta serviços."
+    },
+    {
+      "id": "geo4",
+      "type": "fill-gap",
+      "question": "A atividade industrial necessita de grande _____ para se desenvolver.",
+      "options": ["infraestrutura", "população"],
+      "correctIndex": 0,
+      "resposta_correta": "infraestrutura",
+      "explicacao": "A atividade industrial necessita de uma grande infraestrutura para se desenvolver, incluindo transporte, energia e comunicação.",
+      "dica": "Estrutura básica necessária."
+    },
+    {
+      "id": "geo5",
+      "type": "multiple-choice",
+      "question": "O que é a Indústria de Transformação?",
+      "options": [
+        "Indústria que apenas comercializa produtos",
+        "Indústria que transforma matéria-prima em produto intermediário ou final",
+        "Indústria que extrai recursos naturais",
+        "Indústria que presta serviços"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Indústria que transforma matéria-prima em produto intermediário ou final",
+      "explicacao": "A Indústria de Transformação transforma matéria-prima em um produto intermediário ou final. As refinarias de petróleo são um exemplo.",
+      "dica": "Transforma algo em outra coisa."
+    },
+    {
+      "id": "geo6",
+      "type": "fill-gap",
+      "question": "O setor que emprega a maior parte das pessoas é o Setor _____.",
+      "options": ["Terciário", "Primário"],
+      "correctIndex": 0,
+      "resposta_correta": "Terciário",
+      "explicacao": "As atividades do Setor Terciário são as que empregam a maior parte das pessoas e são também as mais diversificadas.",
+      "dica": "Comércio e serviços empregam muita gente."
+    },
+    {
+      "id": "geo7",
+      "type": "multiple-choice",
+      "question": "Quais são exemplos de profissões do Setor Terciário?",
+      "options": [
+        "Agricultor e pecuarista",
+        "Operário de fábrica e construtor",
+        "Professor, médico, policial e garçom",
+        "Minerador e lenhador"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Professor, médico, policial e garçom",
+      "explicacao": "Exemplos de atividades do setor terciário incluem: turismo, serviços bancários, restaurantes, hospitais, escolas, entre outros. Profissões como professor, médico, policial e garçom fazem parte desse setor.",
+      "dica": "São profissões de serviços."
+    },
+    {
+      "id": "geo8",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: O campo e a cidade são independentes um do outro.",
+      "options": ["Verdadeiro", "Falso"],
+      "correctIndex": 1,
+      "resposta_correta": "Falso",
+      "explicacao": "Falso. As atividades do espaço urbano e as atividades do espaço rural dependem umas das outras. Essa integração demonstra a relação entre os espaços do campo e da cidade.",
+      "dica": "Eles se ajudam mutuamente."
+    },
+    {
+      "id": "geo9",
+      "type": "fill-gap",
+      "question": "O campo é responsável pelo fornecimento de _____ e matérias-primas para a cidade.",
+      "options": ["alimentos", "máquinas"],
+      "correctIndex": 0,
+      "resposta_correta": "alimentos",
+      "explicacao": "O campo é responsável pelo fornecimento de alimentos e matérias-primas para a cidade.",
+      "dica": "O campo produz comida."
+    },
+    {
+      "id": "geo10",
+      "type": "multiple-choice",
+      "question": "O que a cidade oferece ao campo?",
+      "options": [
+        "Apenas alimentos",
+        "Máquinas, tecnologias, produtos eletrônicos e conhecimento científico",
+        "Apenas água",
+        "Apenas animais"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Máquinas, tecnologias, produtos eletrônicos e conhecimento científico",
+      "explicacao": "A cidade oferece ao campo máquinas, tecnologias desenvolvidas em centros de pesquisa, produtos eletrônicos, como telefones e computadores, além de conhecimento científico.",
+      "dica": "A cidade oferece tecnologia."
+    },
+    {
+      "id": "geo11",
+      "type": "multiple-choice",
+      "question": "O que é CULTURA?",
+      "options": [
+        "Apenas a comida de um povo",
+        "Os costumes de um povo no modo de vestir, alimentação, datas comemorativas, religião e arte",
+        "Apenas as festas",
+        "Apenas a arquitetura"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Os costumes de um povo no modo de vestir, alimentação, datas comemorativas, religião e arte",
+      "explicacao": "A cultura pode ser representada através dos costumes de um povo, seja no modo de vestir, na alimentação, nas datas comemorativas, nas manifestações religiosas, na arte, na arquitetura, entre outros.",
+      "dica": "São os costumes de um povo."
+    },
+    {
+      "id": "geo12",
+      "type": "fill-gap",
+      "question": "_____ Cultural significa que existem muitas culturas diferentes no mundo.",
+      "options": ["Diversidade", "Unidade"],
+      "correctIndex": 0,
+      "resposta_correta": "Diversidade",
+      "explicacao": "DIVERSIDADE CULTURAL significa que existem muitas culturas diferentes no mundo. Essas culturas, que pertencem a diferentes povos, estão em relação.",
+      "dica": "Variedade de culturas."
+    },
+    {
+      "id": "geo13",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: É fácil conviver com pessoas que pensam ou agem de modo diferente do nosso.",
+      "options": ["Verdadeiro", "Falso"],
+      "correctIndex": 1,
+      "resposta_correta": "Falso",
+      "explicacao": "Falso. Quando temos que conviver com pessoas que pensam ou agem de modo diferente do nosso, essa relação se torna mais difícil, exigindo compreensão, entendimento e respeito às diferenças.",
+      "dica": "Exige esforço para respeitar diferenças."
+    },
+    {
+      "id": "geo14",
+      "type": "multiple-choice",
+      "question": "Quais são exemplos de manifestações culturais brasileiras?",
+      "options": [
+        "Apenas o futebol",
+        "Carnaval, Frevo, Festa de São João e Bumba meu boi",
+        "Apenas a feijoada",
+        "Apenas o Halloween"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Carnaval, Frevo, Festa de São João e Bumba meu boi",
+      "explicacao": "O Brasil possui uma cultura rica e diversificada, com manifestações como Carnaval, Frevo, Festa de São João, Bumba meu boi, entre outras.",
+      "dica": "São festas e celebrações brasileiras."
+    },
+    {
+      "id": "geo15",
+      "type": "fill-gap",
+      "question": "Nossa culinária apresenta influências indígenas, africanas, europeias e _____.",
+      "options": ["asiáticas", "australianas"],
+      "correctIndex": 0,
+      "resposta_correta": "asiáticas",
+      "explicacao": "Nossa culinária apresenta uma diversidade de influências: indígenas, africanas, europeias e asiáticas.",
+      "dica": "Temos influência de vários continentes."
+    },
+    {
+      "id": "geo16",
+      "type": "multiple-choice",
+      "question": "O que aconteceu com os Povos Originários quando os portugueses chegaram ao Brasil?",
+      "options": [
+        "Foram respeitados",
+        "Foram dominados, escravizados e tiveram suas terras tomadas",
+        "Foram ignorados",
+        "Foram premiados"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Foram dominados, escravizados e tiveram suas terras tomadas",
+      "explicacao": "Os Povos Originários que já habitavam as terras brasileiras foram dominados pelos colonizadores portugueses que impuseram seus hábitos de vida, escravizando-os, tomando as suas terras, causando muitos e trágicos conflitos.",
+      "dica": "Foram maltratados pelos colonizadores."
+    },
+    {
+      "id": "geo17",
+      "type": "fill-gap",
+      "question": "Apenas em _____, a Legislação Brasileira passou a garantir aos povos Originários o direito às terras.",
+      "options": ["1988", "1500"],
+      "correctIndex": 0,
+      "resposta_correta": "1988",
+      "explicacao": "Apenas em 1988, a Legislação Brasileira passou a garantir aos povos Originários o direito às terras que lhes foram tomadas a partir da colonização.",
+      "dica": "Foi na Constituição de 1988."
+    },
+    {
+      "id": "geo18",
+      "type": "multiple-choice",
+      "question": "O que são QUILOMBOS?",
+      "options": [
+        "Fábricas antigas",
+        "Terras ocupadas, doadas ou compradas por escravos e ex-escravos",
+        "Plantações de café",
+        "Casas de portugueses"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Terras ocupadas, doadas ou compradas por escravos e ex-escravos",
+      "explicacao": "Os QUILOMBOS foram terras ocupadas, doadas ou compradas por escravos e ex-escravos que desejavam desenvolver suas atividades de forma livre.",
+      "dica": "Local de resistência dos escravos."
+    },
+    {
+      "id": "geo19",
+      "type": "fill-gap",
+      "question": "Os _____ são povos que vivem nos quilombos e preservam suas tradições culturais.",
+      "options": ["quilombolas", "imigrantes"],
+      "correctIndex": 0,
+      "resposta_correta": "quilombolas",
+      "explicacao": "Os QUILOMBOLAS são povos que vivem nos quilombos, preservam suas tradições culturais e reforçam o simbolismo da luta contra a escravidão.",
+      "dica": "Descendentes de escravos africanos."
+    },
+    {
+      "id": "geo20",
+      "type": "multiple-choice",
+      "question": "Qual é a principal atividade dos SERINGUEIROS?",
+      "options": ["Pesca", "Extração do látex", "Agricultura", "Mineração"],
+      "correctIndex": 1,
+      "resposta_correta": "Extração do látex",
+      "explicacao": "O extrativismo do látex é a prática que garante sustento para a comunidade dos SERINGUEIROS. A manutenção dos seringais exige preservação da vegetação.",
+      "dica": "Trabalham com a seringueira."
+    },
+    {
+      "id": "geo21",
+      "type": "fill-gap",
+      "question": "As comunidades _____ são formadas por descendentes de indígenas e portugueses.",
+      "options": ["Caiçaras", "Quilombolas"],
+      "correctIndex": 0,
+      "resposta_correta": "Caiçaras",
+      "explicacao": "As COMUNIDADES CAIÇARAS são formadas por descendentes de indígenas e de portugueses. A pesca artesanal é a principal atividade desses grupos.",
+      "dica": "Vivem no litoral e pescam."
+    },
+    {
+      "id": "geo22",
+      "type": "multiple-choice",
+      "question": "Qual é a principal atividade das comunidades Caiçaras?",
+      "options": ["Agricultura", "Pesca artesanal", "Pecuária", "Comércio"],
+      "correctIndex": 1,
+      "resposta_correta": "Pesca artesanal",
+      "explicacao": "A pesca artesanal é a principal atividade dos grupos Caiçaras que estão distribuídos ao longo do litoral do Rio de Janeiro, São Paulo, Paraná e Santa Catarina.",
+      "dica": "Pescam de forma tradicional."
+    },
+    {
+      "id": "geo23",
+      "type": "fill-gap",
+      "question": "Os CASTANHEIROS vivem principalmente da coleta da _____.",
+      "options": ["castanha-do-pará", "banana"],
+      "correctIndex": 0,
+      "resposta_correta": "castanha-do-pará",
+      "explicacao": "Os CASTANHEIROS vivem principalmente da coleta da castanha-do-pará, semente que está dentro do fruto da castanheira, chamado de ouriço.",
+      "dica": "Coletam um fruto típico da Amazônia."
+    },
+    {
+      "id": "geo24",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: A preservação das atividades dos castanheiros depende da existência da floresta.",
+      "options": ["Verdadeiro", "Falso"],
+      "correctIndex": 0,
+      "resposta_correta": "Verdadeiro",
+      "explicacao": "Verdadeiro. A preservação da atividade dos castanheiros depende da existência da floresta, na qual a árvore de onde coletam o fruto cresce naturalmente.",
+      "dica": "Sem floresta, não há castanha."
+    },
+    {
+      "id": "geo25",
+      "type": "multiple-choice",
+      "question": "O que são Centros de Tradições Gaúchas?",
+      "options": [
+        "Escolas de samba",
+        "Locais que preservam e divulgam a cultura gaúcha",
+        "Fábricas",
+        "Hospitais"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Locais que preservam e divulgam a cultura gaúcha",
+      "explicacao": "Os alemães que mudaram para Estados brasileiros contribuíram por espalhar seus costumes por diversas regiões pelo país, através dos Centros de Tradições Gaúchas.",
+      "dica": "Divulgam cultura do Sul."
+    },
+    {
+      "id": "geo26",
+      "type": "fill-gap",
+      "question": "A Feira de São Cristóvão é um centro de tradições _____.",
+      "options": ["Nordestinas", "Sulistas"],
+      "correctIndex": 0,
+      "resposta_correta": "Nordestinas",
+      "explicacao": "Os nordestinos que se mudaram para o Rio de Janeiro contribuíram para o desenvolvimento do CENTRO DE TRADIÇÕES NORDESTINAS, no bairro de São Cristóvão.",
+      "dica": "Cultura do Nordeste no Rio."
+    },
+    {
+      "id": "geo27",
+      "type": "multiple-choice",
+      "question": "O que significa dizer que o Brasil é uma sociedade MISCIGENADA?",
+      "options": [
+        "Que tem apenas uma cultura",
+        "Que é formada pela mistura de diferentes povos e culturas",
+        "Que rejeita outras culturas",
+        "Que não tem cultura própria"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Que é formada pela mistura de diferentes povos e culturas",
+      "explicacao": "A diversidade cultural em nosso país permitiu a formação de uma sociedade MISCIGENADA e culturalmente muito rica.",
+      "dica": "Mistura de várias culturas."
+    },
+    {
+      "id": "geo28",
+      "type": "multiple-choice",
+      "question": "O que é RECURSO NATURAL?",
+      "options": [
+        "Apenas a água",
+        "Qualquer elemento disponível na natureza que possa ser explorado e transformado em produtos",
+        "Apenas o petróleo",
+        "Apenas as plantas"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Qualquer elemento disponível na natureza que possa ser explorado e transformado em produtos",
+      "explicacao": "Qualquer elemento disponível na natureza que possa ser explorado pelos seres humanos e transformado em produtos é chamado de RECURSO NATURAL.",
+      "dica": "São recursos que vêm da natureza."
+    },
+    {
+      "id": "geo29",
+      "type": "fill-gap",
+      "question": "Os recursos naturais são classificados em renováveis e não _____.",
+      "options": ["renováveis", "naturais"],
+      "correctIndex": 0,
+      "resposta_correta": "renováveis",
+      "explicacao": "Os recursos naturais são classificados em RENOVÁVEIS e NÃO RENOVÁVEIS.",
+      "dica": "Dois tipos de recursos."
+    },
+    {
+      "id": "geo30",
+      "type": "multiple-choice",
+      "question": "O que são recursos RENOVÁVEIS?",
+      "options": [
+        "Recursos que se esgotam rapidamente",
+        "Recursos que não se esgotam ou se renovam de forma natural ou pela ação humana",
+        "Apenas o petróleo",
+        "Apenas minerais"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Recursos que não se esgotam ou se renovam de forma natural ou pela ação humana",
+      "explicacao": "Os recursos renováveis são aqueles que não se esgotam ou se renovam, de forma natural ou pela ação humana.",
+      "dica": "Podem ser repostos."
+    },
+    {
+      "id": "geo31",
+      "type": "fill-gap",
+      "question": "O cultivo de plantas, a água, o ar, o solo e a luz solar são exemplos de recursos _____.",
+      "options": ["renováveis", "não renováveis"],
+      "correctIndex": 0,
+      "resposta_correta": "renováveis",
+      "explicacao": "O cultivo de plantas, a água, o ar, o solo e a luz solar são exemplos de RECURSOS RENOVÁVEIS.",
+      "dica": "São recursos que se renovam."
+    },
+    {
+      "id": "geo32",
+      "type": "multiple-choice",
+      "question": "Quais são exemplos de recursos NÃO RENOVÁVEIS?",
+      "options": [
+        "Água e ar",
+        "Petróleo, gás natural, carvão mineral e minério de ferro",
+        "Plantas e animais",
+        "Luz solar e vento"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Petróleo, gás natural, carvão mineral e minério de ferro",
+      "explicacao": "São exemplos de recursos NÃO RENOVÁVEIS: o petróleo, o gás natural, o carvão mineral, o minério de ferro e o ouro.",
+      "dica": "São recursos fósseis e minerais."
+    },
+    {
+      "id": "geo33",
+      "type": "fill-gap",
+      "question": "Os recursos não renováveis podem levar _____ de anos para serem recuperados.",
+      "options": ["milhões", "dias"],
+      "correctIndex": 0,
+      "resposta_correta": "milhões",
+      "explicacao": "Os recursos não renováveis são aqueles que não se renovam na natureza ou podem levar milhões de anos para serem recuperados.",
+      "dica": "Leva muito tempo para se formar."
+    },
+    {
+      "id": "geo34",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: Os recursos renováveis nunca sofrem com o mal uso ou poluição.",
+      "options": ["Verdadeiro", "Falso"],
+      "correctIndex": 1,
+      "resposta_correta": "Falso",
+      "explicacao": "Falso. Os RECURSOS RENOVÁVEIS também podem sofrer com o mal uso, a poluição ou o excesso de consumo. A água, por exemplo, sofre com o desperdício e a poluição.",
+      "dica": "Podem ser prejudicados."
+    },
+    {
+      "id": "geo35",
+      "type": "multiple-choice",
+      "question": "Antes da indústria, como era feita a produção?",
+      "options": [
+        "Por máquinas",
+        "De forma artesanal",
+        "Por robôs",
+        "Por computadores"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "De forma artesanal",
+      "explicacao": "Antes do surgimento da indústria, o modo de produzir era artesanal. O artesão era responsável por fazer todas as etapas do processo produtivo.",
+      "dica": "Feito à mão pelo artesão."
+    },
+    {
+      "id": "geo36",
+      "type": "fill-gap",
+      "question": "A produção artesanal é feita à _____, de acordo com técnicas tradicionais.",
+      "options": ["mão", "máquina"],
+      "correctIndex": 0,
+      "resposta_correta": "mão",
+      "explicacao": "O artesanato é uma produção feita à mão, de acordo com técnicas tradicionais, no qual o artesão realiza todas as etapas.",
+      "dica": "Sem uso de máquinas."
+    },
+    {
+      "id": "geo37",
+      "type": "multiple-choice",
+      "question": "O que a MAQUINOFATURA permitiu?",
+      "options": [
+        "Produzir menos",
+        "Produzir maior quantidade de produtos em menos tempo",
+        "Acabar com os empregos",
+        "Piorar a qualidade"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Produzir maior quantidade de produtos em menos tempo",
+      "explicacao": "O uso das máquinas operadas por pessoas possibilitou produzir maior quantidade de produtos em menos tempo (larga escala).",
+      "dica": "Aumentou a produção."
+    },
+    {
+      "id": "geo38",
+      "type": "fill-gap",
+      "question": "As indústrias de _____ são responsáveis pela produção de matérias-primas para outras indústrias.",
+      "options": ["base", "consumo"],
+      "correctIndex": 0,
+      "resposta_correta": "base",
+      "explicacao": "As indústrias de bens de produção, bens de capital ou indústrias de base são responsáveis pela produção de matérias-primas e produtos semi-acabados para o abastecimento de outras indústrias.",
+      "dica": "São a base para outras indústrias."
+    },
+    {
+      "id": "geo39",
+      "type": "multiple-choice",
+      "question": "Quais são exemplos de indústrias de base?",
+      "options": [
+        "Fábricas de roupas e alimentos",
+        "Siderúrgicas, metalúrgicas e petroquímicas",
+        "Padarias e restaurantes",
+        "Lojas de departamento"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Siderúrgicas, metalúrgicas e petroquímicas",
+      "explicacao": "Exemplos de indústrias de base são: siderúrgicas, metalúrgicas, petroquímicas e energéticas.",
+      "dica": "Trabalham com metais e energia."
+    },
+    {
+      "id": "geo40",
+      "type": "fill-gap",
+      "question": "As indústrias _____ produzem máquinas e equipamentos para outras indústrias.",
+      "options": ["intermediárias", "de consumo"],
+      "correctIndex": 0,
+      "resposta_correta": "intermediárias",
+      "explicacao": "As indústrias intermediárias são as indústrias que produzem máquinas e equipamentos para outras indústrias. Exemplo: indústria mecânica e de equipamentos.",
+      "dica": "Ficam no meio da cadeia produtiva."
+    },
+    {
+      "id": "geo41",
+      "type": "multiple-choice",
+      "question": "O que são indústrias de bens de consumo?",
+      "options": [
+        "Indústrias que produzem máquinas",
+        "Indústrias que produzem bens diretamente para o consumidor final",
+        "Indústrias que extraem petróleo",
+        "Indústrias que geram energia"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Indústrias que produzem bens diretamente para o consumidor final",
+      "explicacao": "São indústrias que produzem bens diretamente para o consumidor final, podendo ser DURÁVEIS (automóveis, eletrodomésticos) ou NÃO DURÁVEIS (alimentos, bebidas, remédios, roupas).",
+      "dica": "Produtos para nós usarmos."
+    },
+    {
+      "id": "geo42",
+      "type": "fill-gap",
+      "question": "Automóveis e eletrodomésticos são bens de consumo _____.",
+      "options": ["duráveis", "não duráveis"],
+      "correctIndex": 0,
+      "resposta_correta": "duráveis",
+      "explicacao": "Os bens de consumo podem ser DURÁVEIS (automóveis, eletrodomésticos) ou NÃO DURÁVEIS (alimentos, bebidas, remédios, roupas).",
+      "dica": "Duram muito tempo."
+    },
+    {
+      "id": "geo43",
+      "type": "multiple-choice",
+      "question": "Alimentos e bebidas são exemplos de bens de consumo:",
+      "options": ["Duráveis", "Não duráveis", "Intermediários", "De base"],
+      "correctIndex": 1,
+      "resposta_correta": "Não duráveis",
+      "explicacao": "Alimentos, bebidas, remédios e roupas são exemplos de bens de consumo NÃO DURÁVEIS.",
+      "dica": "São consumidos rapidamente."
+    }
+  ]
+}

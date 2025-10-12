@@ -1,0 +1,320 @@
+{
+  "nome": "Exercícios de Geografia - Campo e Cidade, Cultura, Recursos Naturais e Indústria",
+  "materia": "Geografia",
+  "ano_letivo": "3º ano do Ensino Fundamental",
+  "data": "2025-10-09",
+  "title": "Geografia - Setores Econômicos, Diversidade Cultural, Recursos Naturais e Indústria",
+  "description": "Lista com 31 exercícios de geografia cobrindo indústria, comércio e serviços, integração campo-cidade, diversidade cultural, comunidades tradicionais, recursos naturais (renováveis e não renováveis) e tipos de indústrias. Exercícios baseados nas Unidades 2, 3 e 4.",
+  "exercises": [
+    {
+      "id": "geo1",
+      "type": "multiple-choice",
+      "question": "Qual setor econômico é responsável pela retirada da matéria-prima da natureza?",
+      "options": ["Setor Primário", "Setor Secundário", "Setor Terciário", "Setor Quaternário"],
+      "correctIndex": 0,
+      "resposta_correta": "Setor Primário",
+      "explicacao": "O Setor Primário é responsável pela retirada da matéria-prima da natureza, incluindo atividades como agropecuária, pecuária e extrativismo.",
+      "dica": "É o primeiro setor, que tira recursos da natureza."
+    },
+    {
+      "id": "geo2",
+      "type": "fill-gap",
+      "question": "O Setor _____ é responsável pela transformação da matéria-prima em produto.",
+      "options": ["Secundário", "Primário"],
+      "correctIndex": 0,
+      "resposta_correta": "Secundário",
+      "explicacao": "O Setor Secundário é responsável pela transformação da matéria-prima em produto, incluindo indústria e construção civil.",
+      "dica": "É o segundo setor, transforma matéria-prima."
+    },
+    {
+      "id": "geo3",
+      "type": "multiple-choice",
+      "question": "Quais atividades fazem parte do Setor Terciário?",
+      "options": ["Agricultura e pecuária", "Indústria e construção civil", "Comércio e serviços", "Extrativismo mineral"],
+      "correctIndex": 2,
+      "resposta_correta": "Comércio e serviços",
+      "explicacao": "O Setor Terciário é responsável pela venda e distribuição dos produtos, incluindo comércio e serviços.",
+      "dica": "Terceiro setor, vende e presta serviços."
+    },
+    {
+      "id": "geo4",
+      "type": "fill-gap",
+      "question": "A atividade industrial necessita de grande _____ para se desenvolver.",
+      "options": ["infraestrutura", "população"],
+      "correctIndex": 0,
+      "resposta_correta": "infraestrutura",
+      "explicacao": "A atividade industrial necessita de uma grande infraestrutura para se desenvolver, incluindo transporte, energia e comunicação.",
+      "dica": "Estrutura básica necessária."
+    },
+    {
+      "id": "geo5",
+      "type": "multiple-choice",
+      "question": "O que é a Indústria de Transformação?",
+      "options": ["Indústria que apenas comercializa produtos", "Indústria que transforma matéria-prima em produto intermediário ou final", "Indústria que extrai recursos naturais", "Indústria que presta serviços"],
+      "correctIndex": 1,
+      "resposta_correta": "Indústria que transforma matéria-prima em produto intermediário ou final",
+      "explicacao": "A Indústria de Transformação transforma matéria-prima em um produto intermediário ou final. As refinarias de petróleo são um exemplo.",
+      "dica": "Transforma algo em outra coisa."
+    },
+    {
+      "id": "geo6",
+      "type": "fill-gap",
+      "question": "O setor que emprega a maior parte das pessoas é o Setor _____.",
+      "options": ["Terciário", "Primário"],
+      "correctIndex": 0,
+      "resposta_correta": "Terciário",
+      "explicacao": "As atividades do Setor Terciário são as que empregam a maior parte das pessoas e são também as mais diversificadas.",
+      "dica": "Comércio e serviços empregam muita gente."
+    },
+    {
+      "id": "geo7",
+      "type": "multiple-choice",
+      "question": "Quais são exemplos de profissões do Setor Terciário?",
+      "options": ["Agricultor e pecuarista", "Operário de fábrica e construtor", "Professor, médico, policial e garçom", "Minerador e lenhador"],
+      "correctIndex": 2,
+      "resposta_correta": "Professor, médico, policial e garçom",
+      "explicacao": "Exemplos de atividades do setor terciário incluem: turismo, serviços bancários, restaurantes, hospitais, escolas, entre outros.",
+      "dica": "São profissões de serviços."
+    },
+    {
+      "id": "geo8",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: O campo e a cidade são independentes um do outro.",
+      "options": ["Verdadeiro", "Falso"],
+      "correctIndex": 1,
+      "resposta_correta": "Falso",
+      "explicacao": "As atividades do espaço urbano e rural dependem umas das outras, mostrando a integração entre campo e cidade.",
+      "dica": "Eles se complementam."
+    },
+    {
+      "id": "geo9",
+      "type": "fill-gap",
+      "question": "O campo é responsável pelo fornecimento de _____ e matérias-primas para a cidade.",
+      "options": ["alimentos", "máquinas"],
+      "correctIndex": 0,
+      "resposta_correta": "alimentos",
+      "explicacao": "O campo fornece alimentos e matérias-primas para a cidade.",
+      "dica": "É o setor que produz comida."
+    },
+    {
+      "id": "geo10",
+      "type": "multiple-choice",
+      "question": "O que a cidade oferece ao campo?",
+      "options": ["Apenas alimentos", "Máquinas, tecnologias, produtos eletrônicos e conhecimento científico", "Apenas água", "Apenas animais"],
+      "correctIndex": 1,
+      "resposta_correta": "Máquinas, tecnologias, produtos eletrônicos e conhecimento científico",
+      "explicacao": "A cidade oferece ao campo máquinas, tecnologias e conhecimento científico, modernizando o espaço rural.",
+      "dica": "O campo recebe tecnologia das cidades."
+    },
+    {
+      "id": "geo11",
+      "type": "multiple-choice",
+      "question": "O que é CULTURA?",
+      "options": ["Apenas a comida de um povo", "Os costumes de um povo no modo de vestir, alimentação, datas comemorativas, religião e arte", "Apenas as festas", "Apenas a arquitetura"],
+      "correctIndex": 1,
+      "resposta_correta": "Os costumes de um povo no modo de vestir, alimentação, datas comemorativas, religião e arte",
+      "explicacao": "Cultura é o conjunto de costumes e expressões de um povo, como vestimentas, arte, religião e alimentação.",
+      "dica": "É tudo o que define um povo."
+    },
+    {
+      "id": "geo12",
+      "type": "fill-gap",
+      "question": "_____ Cultural significa que existem muitas culturas diferentes no mundo.",
+      "options": ["Diversidade", "Unidade"],
+      "correctIndex": 0,
+      "resposta_correta": "Diversidade",
+      "explicacao": "Diversidade Cultural significa a existência de muitas culturas diferentes convivendo e se relacionando.",
+      "dica": "Representa a variedade cultural."
+    },
+    {
+      "id": "geo13",
+      "type": "true-false",
+      "question": "É fácil conviver com pessoas que pensam diferente de nós.",
+      "options": ["Verdadeiro", "Falso"],
+      "correctIndex": 1,
+      "resposta_correta": "Falso",
+      "explicacao": "Conviver com pessoas diferentes exige respeito e compreensão às diferenças culturais.",
+      "dica": "Requer empatia e respeito."
+    },
+    {
+      "id": "geo14",
+      "type": "multiple-choice",
+      "question": "Quais são exemplos de manifestações culturais brasileiras?",
+      "options": ["Futebol", "Carnaval, Frevo, Festa de São João e Bumba meu boi", "Halloween", "Páscoa"],
+      "correctIndex": 1,
+      "resposta_correta": "Carnaval, Frevo, Festa de São João e Bumba meu boi",
+      "explicacao": "O Brasil tem diversas manifestações culturais populares e regionais.",
+      "dica": "São festas tradicionais do país."
+    },
+    {
+      "id": "geo15",
+      "type": "fill-gap",
+      "question": "Nossa culinária apresenta influências indígenas, africanas, europeias e _____.",
+      "options": ["asiáticas", "australianas"],
+      "correctIndex": 0,
+      "resposta_correta": "asiáticas",
+      "explicacao": "A culinária brasileira tem influências de vários povos, incluindo os asiáticos.",
+      "dica": "Inclui culinária oriental."
+    },
+    {
+      "id": "geo16",
+      "type": "multiple-choice",
+      "question": "O que aconteceu com os Povos Originários após a chegada dos portugueses?",
+      "options": ["Foram respeitados", "Foram escravizados e tiveram suas terras tomadas", "Foram ignorados", "Foram premiados"],
+      "correctIndex": 1,
+      "resposta_correta": "Foram escravizados e tiveram suas terras tomadas",
+      "explicacao": "Os povos originários foram dominados, escravizados e perderam suas terras para os colonizadores.",
+      "dica": "Sofreram com a colonização."
+    },
+    {
+      "id": "geo17",
+      "type": "fill-gap",
+      "question": "Apenas em _____, a legislação garantiu aos povos originários o direito às terras.",
+      "options": ["1988", "1500"],
+      "correctIndex": 0,
+      "resposta_correta": "1988",
+      "explicacao": "A Constituição de 1988 reconheceu os direitos das terras indígenas.",
+      "dica": "Ano da Constituição cidadã."
+    },
+    {
+      "id": "geo18",
+      "type": "multiple-choice",
+      "question": "O que são QUILOMBOS?",
+      "options": ["Fábricas antigas", "Terras de escravos e ex-escravos", "Plantações", "Casas antigas"],
+      "correctIndex": 1,
+      "resposta_correta": "Terras de escravos e ex-escravos",
+      "explicacao": "Os quilombos foram formados por escravos fugidos ou libertos que queriam viver livremente.",
+      "dica": "Símbolo de resistência."
+    },
+    {
+      "id": "geo19",
+      "type": "fill-gap",
+      "question": "Os _____ são povos que vivem nos quilombos e preservam suas tradições culturais.",
+      "options": ["quilombolas", "indígenas"],
+      "correctIndex": 0,
+      "resposta_correta": "quilombolas",
+      "explicacao": "Os quilombolas preservam tradições culturais africanas e a luta contra o racismo.",
+      "dica": "Descendentes de africanos."
+    },
+    {
+      "id": "geo20",
+      "type": "multiple-choice",
+      "question": "Qual é a principal atividade dos seringueiros?",
+      "options": ["Pesca", "Extração do látex", "Mineração", "Agricultura"],
+      "correctIndex": 1,
+      "resposta_correta": "Extração do látex",
+      "explicacao": "O extrativismo do látex sustenta os seringueiros e exige preservação da floresta.",
+      "dica": "Extraem borracha das árvores."
+    },
+    {
+      "id": "geo21",
+      "type": "fill-gap",
+      "question": "As comunidades _____ são formadas por descendentes de indígenas e portugueses.",
+      "options": ["Caiçaras", "Quilombolas"],
+      "correctIndex": 0,
+      "resposta_correta": "Caiçaras",
+      "explicacao": "Os caiçaras vivem no litoral e têm na pesca artesanal sua principal atividade.",
+      "dica": "Vivem no litoral."
+    },
+    {
+      "id": "geo22",
+      "type": "multiple-choice",
+      "question": "Qual é a principal atividade das comunidades caiçaras?",
+      "options": ["Pecuária", "Pesca artesanal", "Mineração", "Comércio"],
+      "correctIndex": 1,
+      "resposta_correta": "Pesca artesanal",
+      "explicacao": "Os caiçaras praticam pesca artesanal e preservam tradições culturais e ambientais.",
+      "dica": "Vivem da pesca."
+    },
+    {
+      "id": "geo23",
+      "type": "fill-gap",
+      "question": "Os castanheiros vivem principalmente da coleta da _____.",
+      "options": ["castanha-do-pará", "manga"],
+      "correctIndex": 0,
+      "resposta_correta": "castanha-do-pará",
+      "explicacao": "Os castanheiros vivem da coleta da castanha-do-pará, típica da Amazônia.",
+      "dica": "Fruto amazônico."
+    },
+    {
+      "id": "geo24",
+      "type": "true-false",
+      "question": "A preservação da atividade dos castanheiros depende da floresta.",
+      "options": ["Verdadeiro", "Falso"],
+      "correctIndex": 0,
+      "resposta_correta": "Verdadeiro",
+      "explicacao": "Sem floresta, os castanheiros não têm onde coletar os frutos.",
+      "dica": "Floresta é essencial."
+    },
+    {
+      "id": "geo25",
+      "type": "multiple-choice",
+      "question": "O que são Centros de Tradições Gaúchas?",
+      "options": ["Clubes de futebol", "Locais que preservam a cultura gaúcha", "Fábricas", "Praças públicas"],
+      "correctIndex": 1,
+      "resposta_correta": "Locais que preservam a cultura gaúcha",
+      "explicacao": "Os CTGs mantêm viva a cultura tradicional do sul do Brasil.",
+      "dica": "Promovem cultura do RS."
+    },
+    {
+      "id": "geo26",
+      "type": "fill-gap",
+      "question": "A Feira de São Cristóvão é um centro de tradições _____.",
+      "options": ["Nordestinas", "Gaúchas"],
+      "correctIndex": 0,
+      "resposta_correta": "Nordestinas",
+      "explicacao": "A Feira de São Cristóvão, no RJ, reúne cultura, comida e música do Nordeste.",
+      "dica": "Cultura nordestina no Rio."
+    },
+    {
+      "id": "geo27",
+      "type": "multiple-choice",
+      "question": "O que significa dizer que o Brasil é uma sociedade miscigenada?",
+      "options": ["Sem cultura", "Mistura de diferentes povos e culturas", "Formada só por europeus", "Sem diversidade"],
+      "correctIndex": 1,
+      "resposta_correta": "Mistura de diferentes povos e culturas",
+      "explicacao": "O Brasil é formado pela mistura de povos indígenas, africanos, europeus e asiáticos.",
+      "dica": "Várias origens culturais."
+    },
+    {
+      "id": "geo28",
+      "type": "multiple-choice",
+      "question": "O que é recurso natural?",
+      "options": ["Qualquer elemento da natureza usado pelo ser humano", "Somente minérios", "Apenas água e solo", "Apenas petróleo"],
+      "correctIndex": 0,
+      "resposta_correta": "Qualquer elemento da natureza usado pelo ser humano",
+      "explicacao": "Recursos naturais são elementos da natureza utilizados nas atividades humanas.",
+      "dica": "Vêm da natureza."
+    },
+    {
+      "id": "geo29",
+      "type": "fill-gap",
+      "question": "Os recursos naturais podem ser renováveis ou não _____.",
+      "options": ["renováveis", "naturais"],
+      "correctIndex": 0,
+      "resposta_correta": "renováveis",
+      "explicacao": "Os recursos podem se regenerar ou não, dependendo do tipo.",
+      "dica": "Dois tipos principais."
+    },
+    {
+      "id": "geo30",
+      "type": "multiple-choice",
+      "question": "O que são recursos renováveis?",
+      "options": ["Que se regeneram naturalmente", "Que acabam rápido", "Que vêm do petróleo", "Somente vegetais"],
+      "correctIndex": 0,
+      "resposta_correta": "Que se regeneram naturalmente",
+      "explicacao": "São recursos que se renovam, como a água, o solo e a luz solar.",
+      "dica": "Podem se recompor."
+    },
+    {
+      "id": "geo31",
+      "type": "fill-gap",
+      "question": "O cultivo de plantas e a luz solar são exemplos de recursos _____.",
+      "options": ["renováveis", "não renováveis"],
+      "correctIndex": 0,
+      "resposta_correta": "renováveis",
+      "explicacao": "Ambos se renovam naturalmente com o tempo.",
+      "dica": "Se regeneram."
+    }
+  ]
+}
