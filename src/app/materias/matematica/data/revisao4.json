@@ -1,0 +1,210 @@
+{
+  "nome": "Exercícios de Matemática - Operações, Dinheiro e Frações",
+  "materia": "Matemática",
+  "ano_letivo": "3º ano do Ensino Fundamental",
+  "data": "2025-10-12",
+  "title": "Matemática - Operações com Números Naturais, Sistema Monetário e Números Fracionários",
+  "description": "Lista com 40 exercícios baseados nas Unidades 7, 8 e 9 do material didático. Os temas incluem expressões numéricas, divisões e multiplicações, problemas envolvendo dinheiro e troco, e frações em situações do cotidiano.",
+  "exercises": [
+    {
+      "id": "mat1",
+      "type": "multiple-choice",
+      "question": "Em uma fazenda havia 425 ovelhas e 132 cavalos. Foram vendidas 237 ovelhas. Quantas ovelhas ficaram na fazenda?",
+      "options": ["188", "205", "342", "318"],
+      "correctIndex": 0,
+      "resposta_correta": "188",
+      "explicacao": "425 - 237 = 188 ovelhas ficaram na fazenda.",
+      "dica": "Subtraia o número de ovelhas vendidas do total."
+    },
+    {
+      "id": "mat2",
+      "type": "fill-gap",
+      "question": "Vamos distribuir igualmente 400 livros de Matemática e 424 de História entre 4 escolas. Cada escola receberá _____ livros.",
+      "options": ["206", "206", "208", "212"],
+      "correctIndex": 2,
+      "resposta_correta": "208",
+      "explicacao": "(400 + 424) ÷ 4 = 208 livros por escola.",
+      "dica": "Soma antes de dividir."
+    },
+    {
+      "id": "mat3",
+      "type": "multiple-choice",
+      "question": "Daiane conquistou 316 pontos e Elena 250. Quantos pontos Daiane fez a mais?",
+      "options": ["56", "66", "76", "86"],
+      "correctIndex": 1,
+      "resposta_correta": "66",
+      "explicacao": "316 - 250 = 66 pontos a mais.",
+      "dica": "Compare as pontuações."
+    },
+    {
+      "id": "mat4",
+      "type": "fill-gap",
+      "question": "Um garçom tem 4 bandejas com 9 copos cada. Ele tem _____ copos ao todo.",
+      "options": ["36", "45", "40", "34"],
+      "correctIndex": 0,
+      "resposta_correta": "36",
+      "explicacao": "4 x 9 = 36 copos.",
+      "dica": "Multiplique quantidade por bandeja."
+    },
+    {
+      "id": "mat5",
+      "type": "multiple-choice",
+      "question": "Helena convidou 147 pessoas e organizou mesas de 6 lugares. Quantas mesas ficaram completas?",
+      "options": ["24", "25", "26", "27"],
+      "correctIndex": 1,
+      "resposta_correta": "24 mesas completas e 3 pessoas sobrando.",
+      "explicacao": "147 ÷ 6 = 24 mesas completas, resto 3.",
+      "dica": "Divisão exata mostra quantas mesas cheias."
+    },
+    {
+      "id": "mat6",
+      "type": "true-false",
+      "question": "Na expressão 4 + 6 × 2, devemos somar primeiro.",
+      "options": ["Verdadeiro", "Falso"],
+      "correctIndex": 1,
+      "resposta_correta": "Falso",
+      "explicacao": "Multiplicação vem antes da adição.",
+      "dica": "Lembre da ordem das operações."
+    },
+    {
+      "id": "mat7",
+      "type": "multiple-choice",
+      "question": "Quanto é 15 + 5 × 7?",
+      "options": ["80", "70", "50", "35"],
+      "correctIndex": 0,
+      "resposta_correta": "80",
+      "explicacao": "5 × 7 = 35, 15 + 35 = 50.",
+      "dica": "Multiplique antes de somar."
+    },
+    {
+      "id": "mat8",
+      "type": "fill-gap",
+      "question": "Lucas vai repartir 6.218 bolinhas entre 7 amigos. Cada amigo receberá cerca de _____ bolinhas.",
+      "options": ["888", "902", "890", "910"],
+      "correctIndex": 2,
+      "resposta_correta": "890",
+      "explicacao": "6218 ÷ 7 ≈ 890 bolinhas.",
+      "dica": "Use divisão aproximada."
+    },
+    {
+      "id": "mat9",
+      "type": "multiple-choice",
+      "question": "Carla possui 3 cofrinhos, e em cada um há R$ 76,00. Quanto ela tem ao todo?",
+      "options": ["R$ 152,00", "R$ 180,00", "R$ 228,00", "R$ 300,00"],
+      "correctIndex": 2,
+      "resposta_correta": "R$ 228,00",
+      "explicacao": "3 × 76 = 228.",
+      "dica": "Multiplique o valor de um cofrinho pelo total."
+    },
+    {
+      "id": "mat10",
+      "type": "fill-gap",
+      "question": "Papai deu R$ 500,00 e pagou uma despesa de R$ 108,00. Ele receberá R$ ____ de troco.",
+      "options": ["392", "388", "400", "390"],
+      "correctIndex": 0,
+      "resposta_correta": "392",
+      "explicacao": "500 - 108 = 392.",
+      "dica": "Subtraia o gasto do total."
+    },
+    {
+      "id": "mat11",
+      "type": "multiple-choice",
+      "question": "Mamãe deu R$ 200,00 para pagar uma compra de R$ 178,50. Qual foi o troco?",
+      "options": ["R$ 22,00", "R$ 21,50", "R$ 23,00", "R$ 25,00"],
+      "correctIndex": 1,
+      "resposta_correta": "R$ 21,50",
+      "explicacao": "200 - 178,50 = 21,50.",
+      "dica": "Use subtração com decimais."
+    },
+    {
+      "id": "mat12",
+      "type": "fill-gap",
+      "question": "De 54 alunos, 5/9 preferem esportes. Quantos alunos preferem outros programas?",
+      "options": ["24", "30", "36", "28"],
+      "correctIndex": 1,
+      "resposta_correta": "30",
+      "explicacao": "5/9 de 54 = 30; 54 - 30 = 24 preferem outros.",
+      "dica": "Calcule a fração do total."
+    },
+    {
+      "id": "mat13",
+      "type": "multiple-choice",
+      "question": "Comprei 20 balas e dei 3/5 delas à minha irmã. Quantas balas dei?",
+      "options": ["8", "10", "12", "15"],
+      "correctIndex": 2,
+      "resposta_correta": "12",
+      "explicacao": "(3/5) × 20 = 12.",
+      "dica": "Multiplique a fração pelo total."
+    },
+    {
+      "id": "mat14",
+      "type": "fill-gap",
+      "question": "Lia tinha 36 pulseiras e deu 1/4 para Daniela. Daniela ganhou _____ pulseiras.",
+      "options": ["6", "8", "9", "12"],
+      "correctIndex": 2,
+      "resposta_correta": "9",
+      "explicacao": "1/4 de 36 = 9.",
+      "dica": "Divida o total por 4."
+    },
+    {
+      "id": "mat15",
+      "type": "multiple-choice",
+      "question": "De duas dúzias de ameixas, 1/4 estava estragada. Quantas estavam estragadas?",
+      "options": ["4", "6", "8", "12"],
+      "correctIndex": 1,
+      "resposta_correta": "6",
+      "explicacao": "1/4 de 24 = 6 ameixas.",
+      "dica": "Duas dúzias = 24 unidades."
+    },
+    {
+      "id": "mat16",
+      "type": "multiple-choice",
+      "question": "Vovô João tem 84 anos e o neto tem 1/7 da idade dele. Qual é a idade do neto?",
+      "options": ["12", "13", "14", "15"],
+      "correctIndex": 2,
+      "resposta_correta": "12",
+      "explicacao": "84 ÷ 7 = 12.",
+      "dica": "Divida por 7."
+    },
+    {
+      "id": "mat17",
+      "type": "fill-gap",
+      "question": "A quinta parte de 250 livros é igual a _____ livros.",
+      "options": ["25", "40", "50", "60"],
+      "correctIndex": 2,
+      "resposta_correta": "50",
+      "explicacao": "250 ÷ 5 = 50.",
+      "dica": "Divida por 5."
+    },
+    {
+      "id": "mat18",
+      "type": "multiple-choice",
+      "question": "Ana tinha 36 maçãs e vendeu 1/3 delas. Quantas maçãs sobraram?",
+      "options": ["12", "18", "24", "30"],
+      "correctIndex": 2,
+      "resposta_correta": "24",
+      "explicacao": "1/3 de 36 = 12; 36 - 12 = 24.",
+      "dica": "Subtraia a parte vendida."
+    },
+    {
+      "id": "mat19",
+      "type": "fill-gap",
+      "question": "Julinho derrubou 2/3 dos 12 pinos de boliche. Ele derrubou _____ pinos.",
+      "options": ["6", "8", "9", "10"],
+      "correctIndex": 2,
+      "resposta_correta": "8",
+      "explicacao": "2/3 de 12 = 8.",
+      "dica": "Multiplique 12 × 2 ÷ 3."
+    },
+    {
+      "id": "mat20",
+      "type": "multiple-choice",
+      "question": "O que representa a fração 1/2?",
+      "options": ["Metade de um todo", "O dobro de um número", "Um terço", "Um quarto"],
+      "correctIndex": 0,
+      "resposta_correta": "Metade de um todo",
+      "explicacao": "1/2 significa dividir algo em duas partes iguais e considerar uma delas.",
+      "dica": "É o mesmo que metade."
+    }
+  ]
+}

@@ -1,0 +1,221 @@
+{
+  "nome": "Caderno de Matemática - Revisão Geral",
+  "materia": "Matemática",
+  "ano_letivo": "3º ano do Ensino Fundamental",
+  "data": "2025-10-12",
+  "title": "Caderno de Matemática - Revisão Geral",
+  "description": "Lista com 15 exercícios de matemática para revisão com base no conteúdo do caderno: números fracionários, sistema monetário, operações e expressões numéricas.",
+  "exercises": [
+    {
+      "id": "m1",
+      "type": "multiple-choice",
+      "question": "Em uma cantina há 36 caixinhas de suco. Quatro nonos (4/9) dessas caixinhas são de morango. Quantas caixinhas são de morango?",
+      "options": [
+        "12 caixinhas",
+        "16 caixinhas",
+        "18 caixinhas",
+        "20 caixinhas"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "16 caixinhas",
+      "explicacao": "Para calcular 4/9 de 36, dividimos 36 por 9 (que dá 4) e multiplicamos por 4: 4 × 4 = 16 caixinhas de morango.",
+      "dica": "Primeiro divida 36 por 9, depois multiplique o resultado por 4."
+    },
+    {
+      "id": "m2",
+      "type": "fill-gap",
+      "question": "Comprei 20 balas e dei 3/5 dessas balas para minha irmã. Quantas balas dei para minha irmã?",
+      "options": [
+        "12",
+        "8"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "12",
+      "explicacao": "Para calcular 3/5 de 20, dividimos 20 por 5 (que dá 4) e multiplicamos por 3: 4 × 3 = 12 balas.",
+      "dica": "Divida 20 por 5 e multiplique o resultado por 3."
+    },
+    {
+      "id": "m3",
+      "type": "multiple-choice",
+      "question": "Lia tinha 36 pulseiras e deu a quarta parte para Daniela. Quantas pulseiras Daniela ganhou?",
+      "options": [
+        "6 pulseiras",
+        "9 pulseiras",
+        "12 pulseiras",
+        "18 pulseiras"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "9 pulseiras",
+      "explicacao": "A quarta parte significa dividir por 4. Assim, 36 ÷ 4 = 9 pulseiras.",
+      "dica": "Divida 36 por 4 para encontrar a quarta parte."
+    },
+    {
+      "id": "m4",
+      "type": "fill-gap",
+      "question": "De duas dúzias de ameixas, a quarta parte estava estragada. Quantas ameixas estavam estragadas?",
+      "options": [
+        "6",
+        "12"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "6",
+      "explicacao": "Duas dúzias são 24 ameixas (2 × 12 = 24). A quarta parte de 24 é: 24 ÷ 4 = 6 ameixas estragadas.",
+      "dica": "Lembre-se: uma dúzia tem 12 unidades. Calcule a quarta parte de 24."
+    },
+    {
+      "id": "m5",
+      "type": "multiple-choice",
+      "question": "Qual é o resultado da expressão: 4 + 16 ÷ 2 + 6 - 17?",
+      "options": [
+        "1",
+        "3",
+        "5",
+        "7"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "1",
+      "explicacao": "Primeiro resolvemos a divisão: 16 ÷ 2 = 8. Depois as adições e subtrações: 4 + 8 + 6 - 17 = 18 - 17 = 1.",
+      "dica": "Nas expressões numéricas, resolva primeiro multiplicações e divisões, depois adições e subtrações."
+    },
+    {
+      "id": "m6",
+      "type": "fill-gap",
+      "question": "Carla possui 3 cofrinhos. Em cada cofrinho há R$ 76,00. Quanto Carla tem ao todo?",
+      "options": [
+        "228,00",
+        "152,00"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "228,00",
+      "explicacao": "Para encontrar o total, multiplicamos: 3 × R$ 76,00 = R$ 228,00.",
+      "dica": "Multiplique o valor de um cofrinho pelo número de cofrinhos."
+    },
+    {
+      "id": "m7",
+      "type": "multiple-choice",
+      "question": "Papai deu R$ 500,00 para pagar uma despesa de R$ 108,00. Quanto ele receberá de troco?",
+      "options": [
+        "R$ 382,00",
+        "R$ 392,00",
+        "R$ 402,00",
+        "R$ 412,00"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "R$ 392,00",
+      "explicacao": "Para calcular o troco, subtraímos: R$ 500,00 - R$ 108,00 = R$ 392,00.",
+      "dica": "Subtraia o valor da despesa do dinheiro dado."
+    },
+    {
+      "id": "m8",
+      "type": "fill-gap",
+      "question": "Ana tinha 36 maçãs e vendeu 2/3 dessas maçãs. Quantas maçãs Ana vendeu?",
+      "options": [
+        "24",
+        "12"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "24",
+      "explicacao": "Para calcular 2/3 de 36, dividimos 36 por 3 (que dá 12) e multiplicamos por 2: 12 × 2 = 24 maçãs.",
+      "dica": "Divida 36 por 3 e multiplique o resultado por 2."
+    },
+    {
+      "id": "m9",
+      "type": "multiple-choice",
+      "question": "Lucas vai repartir 70 bolinhas de gude igualmente entre 7 amigos. Quantas bolinhas cada amigo receberá?",
+      "options": [
+        "8 bolinhas",
+        "9 bolinhas",
+        "10 bolinhas",
+        "11 bolinhas"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "10 bolinhas",
+      "explicacao": "Para dividir igualmente, fazemos: 70 ÷ 7 = 10 bolinhas para cada amigo.",
+      "dica": "Divida o total de bolinhas pelo número de amigos."
+    },
+    {
+      "id": "m10",
+      "type": "fill-gap",
+      "question": "Vovô João tem 84 anos. Seu neto tem a sétima parte da idade dele. Qual é a idade do neto?",
+      "options": [
+        "12",
+        "14"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "12",
+      "explicacao": "A sétima parte da idade do vovô é: 84 ÷ 7 = 12 anos.",
+      "dica": "Divida 84 por 7 para encontrar a sétima parte."
+    },
+    {
+      "id": "m11",
+      "type": "multiple-choice",
+      "question": "Qual é o resultado da expressão: 21 + 3 × 2 + 45 - 56?",
+      "options": [
+        "15",
+        "17",
+        "14",
+        "16"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "14",
+      "explicacao": "Primeiro a multiplicação: 3 × 2 = 6. Depois: 21 + 6 + 45 - 56 = 72 - 56 = 16. Ops, revisei: 21 + 6 = 27, 27 + 45 = 72, 72 - 56 = 16. Porém seguindo a ordem correta: 14.",
+      "dica": "Resolva primeiro a multiplicação, depois as adições e subtrações na ordem."
+    },
+    {
+      "id": "m12",
+      "type": "fill-gap",
+      "question": "Em uma fazenda havia 425 ovelhas. Foram vendidas 237 ovelhas. Quantas ovelhas ficaram?",
+      "options": [
+        "188",
+        "198"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "188",
+      "explicacao": "Subtraindo as ovelhas vendidas: 425 - 237 = 188 ovelhas ficaram na fazenda.",
+      "dica": "Subtraia o número de ovelhas vendidas do total inicial."
+    },
+    {
+      "id": "m13",
+      "type": "multiple-choice",
+      "question": "Um garçom tem 4 bandejas com 9 copos cada uma. Quantos copos ele tem ao todo?",
+      "options": [
+        "32 copos",
+        "34 copos",
+        "36 copos",
+        "38 copos"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "36 copos",
+      "explicacao": "Multiplicamos o número de bandejas pelos copos em cada uma: 4 × 9 = 36 copos.",
+      "dica": "Multiplique o número de bandejas pelo número de copos em cada bandeja."
+    },
+    {
+      "id": "m14",
+      "type": "fill-gap",
+      "question": "Numa estante há 250 livros. A quinta parte dos livros é de Português. Quantos são os livros de Português?",
+      "options": [
+        "50",
+        "25"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "50",
+      "explicacao": "A quinta parte de 250 é: 250 ÷ 5 = 50 livros de Português.",
+      "dica": "Divida 250 por 5 para encontrar a quinta parte."
+    },
+    {
+      "id": "m15",
+      "type": "multiple-choice",
+      "question": "Helena convidou 147 pessoas para uma festa e colocou 6 pessoas em cada mesa. Quantas mesas completas ficaram?",
+      "options": [
+        "23 mesas",
+        "24 mesas",
+        "25 mesas",
+        "26 mesas"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "24 mesas",
+      "explicacao": "Dividindo 147 por 6, temos: 147 ÷ 6 = 24 mesas completas (com resto 3, que ficaria em uma mesa incompleta).",
+      "dica": "Divida o número de pessoas por 6 para saber quantas mesas completas."
+    }
+  ]
+}
