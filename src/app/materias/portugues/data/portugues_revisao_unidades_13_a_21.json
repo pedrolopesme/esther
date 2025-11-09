@@ -1,0 +1,624 @@
+{
+    "nome": "Revisão Português Prova - Unidades 13 a 21",
+    "materia": "Português",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "data": "2025-05-12",
+    "title": "Revisão de Português para a Prova - Unidades 13 a 21",
+    "description": "Atividades elaboradas a partir do conteúdo de tmp/portugues.pdf, contemplando ortografia, acentuação, advérbios e revisão verbal.",
+    "exercises": [
+        {
+            "id": "pr1",
+            "type": "fill-gap",
+            "question": "A palavra 'carro' aparece no exercício sobre r/rr da Unidade 21. Como devemos completar 'ca__o'?",
+            "options": [
+                "r",
+                "rr"
+            ],
+            "correctIndex": 1,
+            "resposta_correta": "rr",
+            "explicacao": "Entre vogais, o som forte deve ser representado com rr, formando 'carro'.",
+            "dica": "Lembre que o single r entre vogais tem som fraco, como em 'caro'."
+        },
+        {
+            "id": "pr2",
+            "type": "multiple-choice",
+            "question": "No trecho \"Desejo saber o ____ da sua ansiedade\", qual forma de 'por que' completa a frase?",
+            "options": [
+                "por que",
+                "por quê",
+                "porque",
+                "porquê"
+            ],
+            "correctIndex": 3,
+            "resposta_correta": "porquê",
+            "explicacao": "Quando funciona como substantivo, a expressão leva artigo e é escrita junta com acento: 'o porquê'.",
+            "dica": "Veja se há um determinante (o, um, este) antes da palavra."
+        },
+        {
+            "id": "pr3",
+            "type": "multiple-choice",
+            "question": "Escolha a grafia correta para completar 'nece__ário' no exercício sobre s, ss, sc, sç ou xc.",
+            "options": [
+                "nesessário",
+                "necessário",
+                "necésario",
+                "neceçário"
+            ],
+            "correctIndex": 1,
+            "resposta_correta": "necessário",
+            "explicacao": "Usamos ss após o prefixo 'ne-' para formar 'necessário'.",
+            "dica": "Observe palavras da mesma família como 'necessidade'."
+        },
+        {
+            "id": "pr4",
+            "type": "multiple-choice",
+            "question": "Qual das palavras listadas no exercício sobre cedilha recebe o sinal?",
+            "options": [
+                "alcance",
+                "solução",
+                "capoeira",
+                "decente"
+            ],
+            "correctIndex": 1,
+            "resposta_correta": "solução",
+            "explicacao": "Usamos cedilha antes de a, o, u para manter o som /s/, formando 'solução'.",
+            "dica": "Leia em voz alta e veja se o som permanece suave."
+        },
+        {
+            "id": "pr5",
+            "type": "multiple-choice",
+            "question": "Assinale a frase em que a palavra COMPRIMENTO está empregada de acordo com o material.",
+            "options": [
+                "Recebi o comprimento da diretora ao chegar.",
+                "Medi o comprimento da calça para fazer a barra.",
+                "Dei um comprimento aos meus avós na festa.",
+                "O carteiro trouxe um comprimento especial."
+            ],
+            "correctIndex": 1,
+            "resposta_correta": "Medi o comprimento da calça para fazer a barra.",
+            "explicacao": "COMPRIMENTO refere-se à medida ou extensão; as demais frases pedem CUMPRIMENTO.",
+            "dica": "Sempre pergunte: estou falando de medida ou de saudação?"
+        },
+        {
+            "id": "pr6",
+            "type": "multiple-choice",
+            "question": "Qual das palavras abaixo é proparoxítona e deve ser acentuada, conforme o lembrete da Unidade 21?",
+            "options": [
+                "papel",
+                "lâmpada",
+                "tambor",
+                "avó"
+            ],
+            "correctIndex": 1,
+            "resposta_correta": "lâmpada",
+            "explicacao": "Toda proparoxítona (com a sílaba tônica na antepenúltima) recebe acento, como em 'lâmpada'.",
+            "dica": "Conte as sílabas da direita para a esquerda para localizar a tônica."
+        },
+        {
+            "id": "pr7",
+            "type": "multiple-choice",
+            "question": "No trecho \"Que menino sensível\", qual sinal de pontuação final transmite a entonação indicada no exercício?",
+            "options": [
+                "?",
+                "!",
+                ".",
+                "..."
+            ],
+            "correctIndex": 1,
+            "resposta_correta": "!",
+            "explicacao": "A frase é exclamativa e pede ponto de exclamação para mostrar admiração.",
+            "dica": "Identifique se a frase expressa emoção ou apenas pergunta."
+        },
+        {
+            "id": "pr8",
+            "type": "multiple-choice",
+            "question": "Complete a frase do exercício sobre DESCRIÇÃO e DISCRIÇÃO: \"Esta é a ____ do meu peixe: grande, cinza e pesado.\"",
+            "options": [
+                "descrição",
+                "discrição",
+                "descrever",
+                "discrever"
+            ],
+            "correctIndex": 0,
+            "resposta_correta": "descrição",
+            "explicacao": "Quando listamos características, usamos 'descrição'; 'discrição' está ligada a agir com reserva.",
+            "dica": "Pense se a palavra transmite ideia de relatar ou de ser discreto."
+        },
+        {
+            "id": "pr9",
+            "type": "multiple-choice",
+            "question": "De acordo com o quadro de coletivos, 'acervo' corresponde a:",
+            "options": [
+                "conjunto de obras de arte",
+                "muitas uvas",
+                "grande quantidade de ovelhas",
+                "formação de soldados"
+            ],
+            "correctIndex": 0,
+            "resposta_correta": "conjunto de obras de arte",
+            "explicacao": "O material relaciona acervo a coleções de obras, documentos ou artefatos.",
+            "dica": "Associe a palavra ao ambiente de museus e bibliotecas."
+        },
+        {
+            "id": "pr10",
+            "type": "multiple-choice",
+            "question": "No relato sobre a pescaria, qual verbo descreve o peixe saindo à tona depois do esforço?",
+            "options": [
+                "emergir",
+                "imergir",
+                "submergir",
+                "mergulhar"
+            ],
+            "correctIndex": 0,
+            "resposta_correta": "emergir",
+            "explicacao": "Emergir significa sair ou vir à tona; imergir indica entrar na água.",
+            "dica": "Lembre do prefixo e- indicando movimento para fora."
+        },
+        {
+            "id": "pr11",
+            "type": "multiple-choice",
+            "question": "A palavra 'amanhã' na frase \"Amanhã eu volto pra tentar pescar de novo\" é um advérbio de:",
+            "options": [
+                "tempo",
+                "modo",
+                "lugar",
+                "negação"
+            ],
+            "correctIndex": 0,
+            "resposta_correta": "tempo",
+            "explicacao": "O advérbio indica quando a ação acontecerá, portanto classifica-se como advérbio de tempo.",
+            "dica": "Pergunte-se \"quando?\" em relação ao verbo."
+        },
+        {
+            "id": "pr12",
+            "type": "fill-gap",
+            "question": "Complete a palavra com lh ou li: \"O ____ é um animal de orelhas compridas.\"",
+            "options": [
+                "coelio",
+                "coelho"
+            ],
+            "correctIndex": 1,
+            "resposta_correta": "coelho",
+            "explicacao": "A combinação correta é 'lh', formando coelho, conforme o exercício da Unidade 19.",
+            "dica": "Compare com outras palavras terminadas em -elho, como espelho."
+        },
+        {
+            "id": "pr13",
+            "type": "multiple-choice",
+            "question": "Complete a frase do quadro verbal: \"Ontem nós ____ pipoca.\"",
+            "options": [
+                "comemos",
+                "comíamos",
+                "comeremos",
+                "comeis"
+            ],
+            "correctIndex": 0,
+            "resposta_correta": "comemos",
+            "explicacao": "No pretérito perfeito, a 1ª pessoa do plural do verbo comer é 'comemos'.",
+            "dica": "Observe o modelo fornecido no quadro (andar/comer/dividir)."
+        },
+        {
+            "id": "pr14",
+            "type": "multiple-choice",
+            "question": "Segundo a Loja do Verbo, ao colocar etiqueta de valor nos produtos precisamos:",
+            "options": [
+                "apressar os clientes",
+                "apreçar as mercadorias",
+                "apressar as mercadorias",
+                "apreçar os clientes"
+            ],
+            "correctIndex": 1,
+            "resposta_correta": "apreçar as mercadorias",
+            "explicacao": "APREÇAR significa atribuir preço; APRESSAR indica pressa.",
+            "dica": "Repare no cedilha indicando relação com preço."
+        },
+        {
+            "id": "pr15",
+            "type": "multiple-choice",
+            "question": "Na pergunta \"Você não compra mais livros ____?\", qual forma usar?",
+            "options": [
+                "porque",
+                "porquê",
+                "por que",
+                "por quê"
+            ],
+            "correctIndex": 3,
+            "resposta_correta": "por quê",
+            "explicacao": "Quando 'por que' encerra a pergunta e está antes da interrogação, recebe acento: 'por quê?'.",
+            "dica": "Veja se a expressão está isolada no fim da frase interrogativa."
+        },
+        {
+            "id": "pr16",
+            "type": "multiple-choice",
+            "question": "Complete a frase do texto sobre animais silvestres: '_____ manter animais silvestres em cativeiro é proibido por lei.'",
+            "options": [
+                "Por que",
+                "Por quê",
+                "Porque",
+                "Porquê"
+            ],
+            "correctIndex": 2,
+            "resposta_correta": "Porque",
+            "explicacao": "A frase apresenta uma causa já conhecida, por isso usamos 'porque' junto e sem acento.",
+            "dica": "Se puder trocar por 'pois', use 'porque'."
+        },
+        {
+            "id": "pr17",
+            "type": "multiple-choice",
+            "question": "No exercício sobre s/ss/sc/sç/xc, como completamos 'expre__ão'?",
+            "options": [
+                "expreção",
+                "expressão",
+                "expresão",
+                "expreçáo"
+            ],
+            "correctIndex": 1,
+            "resposta_correta": "expressão",
+            "explicacao": "O som forte de /s/ entre vogais é representado por 'ss', formando 'expressão'.",
+            "dica": "Compare com 'expresso' para lembrar do 'ss'."
+        },
+        {
+            "id": "pr18",
+            "type": "multiple-choice",
+            "question": "Ainda nesse exercício, qual é a grafia correta de 'disciplina'?",
+            "options": [
+                "disciplina",
+                "discilina",
+                "dixciplina",
+                "discílina"
+            ],
+            "correctIndex": 0,
+            "resposta_correta": "disciplina",
+            "explicacao": "A palavra mantém o grupo 'sc' para reproduzir o som /s/ seguido de consoante.",
+            "dica": "Lembre da palavra 'disciplinar' com as mesmas letras."
+        },
+        {
+            "id": "pr19",
+            "type": "multiple-choice",
+            "question": "Entre as palavras que podem receber cedilha, qual forma correta de 'participacao'?",
+            "options": [
+                "particiçao",
+                "participaçao",
+                "participação",
+                "participassão"
+            ],
+            "correctIndex": 2,
+            "resposta_correta": "participação",
+            "explicacao": "Usamos cedilha antes de 'a' para manter o som de /s/ em 'participação'.",
+            "dica": "Leia mentalmente 'par-ti-ci-pa-ção' e perceba o som suave do 'c'."
+        },
+        {
+            "id": "pr20",
+            "type": "multiple-choice",
+            "question": "No quadro de aumentativos e diminutivos, qual é o aumentativo de 'casa'?",
+            "options": [
+                "casinha",
+                "casarão",
+                "casebre",
+                "casinhao"
+            ],
+            "correctIndex": 1,
+            "resposta_correta": "casarão",
+            "explicacao": "O exercício apresenta 'casa' → 'casinha' (diminutivo) e 'casarão' (aumentativo).",
+            "dica": "Observe que o sufixo '-rão' indica algo grande ou grandioso."
+        },
+        {
+            "id": "pr21",
+            "type": "multiple-choice",
+            "question": "No trecho sobre a princesa Lia, o pronome 'ela' substitui qual termo?",
+            "options": [
+                "a colherzinha",
+                "a lama",
+                "a princesa",
+                "a sacola"
+            ],
+            "correctIndex": 2,
+            "resposta_correta": "a princesa",
+            "explicacao": "O texto diz que a princesa Lia começou a cavar; logo, 'ela' retoma a própria princesa.",
+            "dica": "Substitua o pronome por cada opção e veja qual mantém o sentido."
+        },
+        {
+            "id": "pr22",
+            "type": "multiple-choice",
+            "question": "De acordo com o quadro de coletivos, 'banda' indica:",
+            "options": [
+                "muitas uvas",
+                "conjunto de músicos",
+                "grande quantidade de ovelhas",
+                "coleção de livros"
+            ],
+            "correctIndex": 1,
+            "resposta_correta": "conjunto de músicos",
+            "explicacao": "O quadro associa 'banda' ao coletivo de músicos tocando juntos.",
+            "dica": "Pense na banda da escola ou na fanfarra, formada por vários músicos."
+        },
+        {
+            "id": "pr23",
+            "type": "multiple-choice",
+            "question": "No exercício com terminações em ões/ães/ás, qual plural correto de 'alemão'?",
+            "options": [
+                "alemãos",
+                "alemões",
+                "alemães",
+                "alemaes"
+            ],
+            "correctIndex": 2,
+            "resposta_correta": "alemães",
+            "explicacao": "A palavra termina em -ão e, conforme a lista, forma o plural em -ães: alemães.",
+            "dica": "Comparar com 'cidadão' → 'cidadãos' ajuda a perceber mudanças possíveis."
+        },
+        {
+            "id": "pr24",
+            "type": "multiple-choice",
+            "question": "Usando o adjetivo 'alto', como fica o comparativo de superioridade para Felipe?",
+            "options": [
+                "Felipe é tão alto quanto José.",
+                "Felipe é mais alto que José.",
+                "Felipe é menos alto que José.",
+                "Felipe é alto igual José."
+            ],
+            "correctIndex": 1,
+            "resposta_correta": "Felipe é mais alto que José.",
+            "explicacao": "O exercício solicita o comparativo de superioridade, construído com 'mais ... que'.",
+            "dica": "Lembre: igualdade usa 'tão ... quanto' e inferioridade 'menos ... que'."
+        },
+        {
+            "id": "pr25",
+            "type": "multiple-choice",
+            "question": "No quadro de sinônimos, qual palavra corresponde a 'Freguês'?",
+            "options": [
+                "Ajuda",
+                "Cliente",
+                "Recordar",
+                "Longo"
+            ],
+            "correctIndex": 1,
+            "resposta_correta": "Cliente",
+            "explicacao": "O exercício liga 'Freguês' ao sinônimo 'cliente', pessoa que compra com frequência.",
+            "dica": "Pense no freguês da padaria, sempre atendido como cliente."
+        },
+        {
+            "id": "pr26",
+            "type": "multiple-choice",
+            "question": "Na frase 'O rapaz veio de lá e falou lentamente sobre a pescaria', 'lentamente' é advérbio de:",
+            "options": [
+                "tempo",
+                "modo",
+                "lugar",
+                "negação"
+            ],
+            "correctIndex": 1,
+            "resposta_correta": "modo",
+            "explicacao": "O termo indica a maneira como ele falou, classificando-se como advérbio de modo.",
+            "dica": "Pergunte 'como?' em relação ao verbo para localizar advérbios de modo."
+        },
+        {
+            "id": "pr27",
+            "type": "multiple-choice",
+            "question": "Em 'Eu sempre quis sair com minha mãe para pescar', 'sempre' é advérbio de:",
+            "options": [
+                "modo",
+                "intensidade",
+                "tempo",
+                "afirmação"
+            ],
+            "correctIndex": 2,
+            "resposta_correta": "tempo",
+            "explicacao": "'Sempre' informa a frequência com que a ação ocorre, caracterizando advérbio de tempo.",
+            "dica": "Advérbios de tempo respondem a 'quando?' ou 'com que frequência?'."
+        },
+        {
+            "id": "pr28",
+            "type": "fill-gap",
+            "question": "Complete com n ou m: ca__peão.",
+            "options": [
+                "n",
+                "m"
+            ],
+            "correctIndex": 1,
+            "resposta_correta": "m",
+            "explicacao": "Antes de 'p' usamos 'm', formando 'campeão'.",
+            "dica": "Regra: antes de P e B escrevemos M."
+        },
+        {
+            "id": "pr29",
+            "type": "fill-gap",
+            "question": "Complete com n ou m: a__biguidade.",
+            "options": [
+                "n",
+                "m"
+            ],
+            "correctIndex": 1,
+            "resposta_correta": "m",
+            "explicacao": "Na palavra 'ambiguidade', o 'm' aparece antes da consoante 'b'.",
+            "dica": "Observe que o som nasal vem antes da letra B."
+        },
+        {
+            "id": "pr30",
+            "type": "fill-gap",
+            "question": "Complete com h quando necessário: __onesto.",
+            "options": [
+                "h",
+                "(sem letra)"
+            ],
+            "correctIndex": 0,
+            "resposta_correta": "honesto",
+            "explicacao": "A lista sobre qualidades dos avôs mostra que 'honesto' começa com h mudo.",
+            "dica": "Mesmo sem som, o h inicial deve aparecer em palavras como 'honra' e 'honesto'."
+        },
+        {
+            "id": "pr31",
+            "type": "fill-gap",
+            "question": "Ainda nesse quadro, complete: __ospitaleiro.",
+            "options": [
+                "h",
+                "(sem letra)"
+            ],
+            "correctIndex": 0,
+            "resposta_correta": "hospitaleiro",
+            "explicacao": "'Hospitaleiro' mantém o h inicial conforme indicado na lista de qualidades.",
+            "dica": "Lembre de 'hospital', que também começa com h."
+        },
+        {
+            "id": "pr32",
+            "type": "fill-gap",
+            "question": "Complete com lh ou li: famí__a.",
+            "options": [
+                "lh",
+                "li"
+            ],
+            "correctIndex": 1,
+            "resposta_correta": "família",
+            "explicacao": "A palavra 'família' usa 'li' antes da vogal final, como mostrado na lista Brasí-lia/família.",
+            "dica": "Veja que o som é de L simples, não de LH como em 'filho'."
+        },
+        {
+            "id": "pr33",
+            "type": "fill-gap",
+            "question": "Complete com lh ou li: sanda__a.",
+            "options": [
+                "lh",
+                "li"
+            ],
+            "correctIndex": 0,
+            "resposta_correta": "sandália",
+            "explicacao": "'Sandália' apresenta o som 'lh' antes do 'a' final, seguindo o exercício de lh/li.",
+            "dica": "Compare com 'toalha' para lembrar do 'lh'."
+        },
+        {
+            "id": "pr34",
+            "type": "multiple-choice",
+            "question": "No quadro do verbo comer, complete: 'Ontem ele ____ macarrão.'",
+            "options": [
+                "come",
+                "comeu",
+                "comerá",
+                "comiam"
+            ],
+            "correctIndex": 1,
+            "resposta_correta": "comeu",
+            "explicacao": "No pretérito perfeito, a 3ª pessoa do singular do verbo comer é 'comeu'.",
+            "dica": "Observe o exemplo 'Ontem eu comi uma banana' para seguir o modelo."
+        },
+        {
+            "id": "pr35",
+            "type": "multiple-choice",
+            "question": "Complete a transformação pedida: 'Hoje eu costuro. Ontem eu ____.'",
+            "options": [
+                "costuro",
+                "costurei",
+                "costurou",
+                "costurava"
+            ],
+            "correctIndex": 1,
+            "resposta_correta": "costurei",
+            "explicacao": "O exercício mostra que devemos levar o verbo para o pretérito perfeito: costurei.",
+            "dica": "Troque a terminação -o do presente por -ei para a 1ª pessoa do singular."
+        },
+        {
+            "id": "pr36",
+            "type": "multiple-choice",
+            "question": "Seguindo o mesmo modelo, complete: 'Hoje eu leio. Ontem eu ____.'",
+            "options": [
+                "leio",
+                "lia",
+                "li",
+                "lerei"
+            ],
+            "correctIndex": 2,
+            "resposta_correta": "li",
+            "explicacao": "O pretérito perfeito de 'ler' na 1ª pessoa é 'li'.",
+            "dica": "Esse verbo é irregular e reduz a palavra a duas letras no passado: li."
+        },
+        {
+            "id": "pr37",
+            "type": "multiple-choice",
+            "question": "No diálogo da Loja do Verbo, qual forma completa 'Tenho que ____ o passo para não me atrasar.'?",
+            "options": [
+                "apreçar",
+                "apressar",
+                "apresar",
+                "apresçar"
+            ],
+            "correctIndex": 1,
+            "resposta_correta": "apressar",
+            "explicacao": "'Apressar' significa dar pressa; é o verbo usado por Maribel no exemplo.",
+            "dica": "Associe 'preço' à palavra com cedilha: 'apreçar'; 'pressa' mantém duas letras s."
+        },
+        {
+            "id": "pr38",
+            "type": "multiple-choice",
+            "question": "Ainda na Loja do Verbo, complete: 'O mercado ____ os produtos novos.'",
+            "options": [
+                "apressou",
+                "apreçou",
+                "apresou",
+                "apreçõu"
+            ],
+            "correctIndex": 1,
+            "resposta_correta": "apreçou",
+            "explicacao": "Quando colocamos preço em algo, usamos o verbo 'apreçar' → 'apreçou' no passado.",
+            "dica": "Repare no cedilha mantendo o som de /s/ antes da vogal 'o'."
+        },
+        {
+            "id": "pr39",
+            "type": "multiple-choice",
+            "question": "No exercício sobre grupos de palavras corretas, qual alternativa está toda certa?",
+            "options": [
+                "jipe - carruagem - girassol",
+                "jipe - cariagem - girasol",
+                "jipe - carruajem - girassol",
+                "jype - carruagem - girasol"
+            ],
+            "correctIndex": 0,
+            "resposta_correta": "jipe - carruagem - girassol",
+            "explicacao": "O material destaca esse trio como grafia correta; as demais apresentam letras trocadas.",
+            "dica": "Preste atenção às combinações 'rr' e 'ss' nas palavras maiores."
+        },
+        {
+            "id": "pr40",
+            "type": "multiple-choice",
+            "question": "Ao adicionar cedilha apenas quando necessário, como fica 'calca'?",
+            "options": [
+                "calca",
+                "calça",
+                "caça",
+                "calçá"
+            ],
+            "correctIndex": 1,
+            "resposta_correta": "calça",
+            "explicacao": "O exercício da Unidade 13 mostra que 'calça' precisa da cedilha para manter o som de /s/ antes do 'a'.",
+            "dica": "Pense na pronúncia: sem cedilha, leríamos 'cal-ka'."
+        },
+        {
+            "id": "pr41",
+            "type": "multiple-choice",
+            "question": "Complete com mas ou mais: 'Mariana é a aluna ____ dedicada da turma.'",
+            "options": [
+                "mas",
+                "mais",
+                "maiz",
+                "más"
+            ],
+            "correctIndex": 1,
+            "resposta_correta": "mais",
+            "explicacao": "Estamos indicando intensidade/comparação, portanto usamos 'mais'.",
+            "dica": "Se puder trocar por 'porém', use 'mas'; se indicar quantidade, use 'mais'."
+        },
+        {
+            "id": "pr42",
+            "type": "multiple-choice",
+            "question": "Ainda na mesma lista: 'Você está doente, ____ não pode faltar aula.'",
+            "options": [
+                "mas",
+                "mais",
+                "maç",
+                "masse"
+            ],
+            "correctIndex": 0,
+            "resposta_correta": "mas",
+            "explicacao": "Aqui há oposição entre estar doente e precisar ir à aula, exigindo a conjunção adversativa 'mas'.",
+            "dica": "Troque mentalmente por 'porém' para confirmar o uso de 'mas'."
+        }
+    ]
+}
