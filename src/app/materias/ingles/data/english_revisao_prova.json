@@ -1,0 +1,684 @@
+{
+  "nome": "Revisão de Prova - Inglês",
+  "materia": "Inglês",
+  "ano_letivo": "3º ano do Ensino Fundamental",
+  "data": "2025-11-16",
+  "title": "Revisão de Prova - Inglês - Past Simple, Have to/Has to, Comparatives e Superlatives",
+  "description": "Lista com 45 exercícios de revisão para prova, cobrindo Past Simple (verbos regulares e irregulares), Have to/Has to, Comparatives e Superlatives, baseados no material de revisão.",
+  "exercises": [
+    {
+      "id": "rev1",
+      "type": "fill-gap",
+      "question": "I _________ late for school yesterday. (to be)",
+      "options": [
+        "was",
+        "were",
+        "am",
+        "is"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "was",
+      "explicacao": "No passado simples, para 'I' usamos 'was'. I was late for school yesterday.",
+      "dica": "Lembre-se: I was, you were, he/she/it was, we/they were."
+    },
+    {
+      "id": "rev2",
+      "type": "fill-gap",
+      "question": "She _________ meat and vegetables last week. (to eat)",
+      "options": [
+        "eat",
+        "ate",
+        "eated",
+        "eating"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "ate",
+      "explicacao": "O verbo 'to eat' é irregular no passado: eat → ate.",
+      "dica": "Verbos irregulares têm formas especiais no passado."
+    },
+    {
+      "id": "rev3",
+      "type": "fill-gap",
+      "question": "We _________ to the beach yesterday. (to go)",
+      "options": [
+        "go",
+        "went",
+        "goed",
+        "going"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "went",
+      "explicacao": "O verbo 'to go' é irregular no passado: go → went.",
+      "dica": "Go no passado é 'went', não 'goed'."
+    },
+    {
+      "id": "rev4",
+      "type": "fill-gap",
+      "question": "He _________ an orange juice this morning. (to drink)",
+      "options": [
+        "drink",
+        "drank",
+        "drinked",
+        "drinking"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "drank",
+      "explicacao": "O verbo 'to drink' é irregular no passado: drink → drank.",
+      "dica": "Drink no passado é 'drank'."
+    },
+    {
+      "id": "rev5",
+      "type": "fill-gap",
+      "question": "My sister _________ a chocolate cake last weekend. (to make)",
+      "options": [
+        "make",
+        "made",
+        "maked",
+        "making"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "made",
+      "explicacao": "O verbo 'to make' é irregular no passado: make → made.",
+      "dica": "Make no passado é 'made'."
+    },
+    {
+      "id": "rev6",
+      "type": "multiple-choice",
+      "question": "Did she eat meat and vegetables last week?",
+      "options": [
+        "Yes, she did",
+        "No, she didn't",
+        "Yes, she ate",
+        "No, she doesn't"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Yes, she did",
+      "explicacao": "Para perguntas com DID, usamos respostas curtas: Yes, she did / No, she didn't.",
+      "dica": "Respostas curtas usam o auxiliar DID."
+    },
+    {
+      "id": "rev7",
+      "type": "fill-gap",
+      "question": "She _________ eat meat and vegetables last week. (negative)",
+      "options": [
+        "didn't",
+        "don't",
+        "doesn't",
+        "wasn't"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "didn't",
+      "explicacao": "Na forma negativa do passado, usamos DIDN'T + verbo no infinitivo.",
+      "dica": "DIDN'T é usado para negar ações no passado."
+    },
+    {
+      "id": "rev8",
+      "type": "true-false",
+      "question": "True or False: O verbo 'to be' no passado (was/were) usa o auxiliar DID nas formas negativa e interrogativa.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "False",
+      "explicacao": "False. O verbo 'to be' NÃO usa o auxiliar DID. Usamos: Was he hungry? / He wasn't hungry.",
+      "dica": "To be é especial, não precisa de auxiliar."
+    },
+    {
+      "id": "rev9",
+      "type": "fill-gap",
+      "question": "Was he hungry?",
+      "options": [
+        "Yes, he was",
+        "Yes, he did",
+        "No, he wasn't",
+        "No, he didn't"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Yes, he was",
+      "explicacao": "Para perguntas com WAS/WERE, usamos respostas curtas com was/were: Yes, he was / No, he wasn't.",
+      "dica": "To be não usa DID nas respostas."
+    },
+    {
+      "id": "rev10",
+      "type": "fill-gap",
+      "question": "Suzy _________ dinner last night. (to cook)",
+      "options": [
+        "cook",
+        "cooked",
+        "cooking",
+        "cooks"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "cooked",
+      "explicacao": "Para verbos regulares, adicionamos -ED ao infinitivo: cook → cooked.",
+      "dica": "Verbos regulares terminam em -ED no passado."
+    },
+    {
+      "id": "rev11",
+      "type": "fill-gap",
+      "question": "You _________ your friend yesterday. (to call)",
+      "options": [
+        "call",
+        "called",
+        "calling",
+        "calls"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "called",
+      "explicacao": "Para verbos regulares terminados em -e, adicionamos apenas -d: call → called.",
+      "dica": "Verbos terminados em -e só recebem -d."
+    },
+    {
+      "id": "rev12",
+      "type": "fill-gap",
+      "question": "I _________ the water to make tea. (to boil)",
+      "options": [
+        "boil",
+        "boiled",
+        "boiling",
+        "boils"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "boiled",
+      "explicacao": "Para verbos regulares terminados em -e, adicionamos apenas -d: boil → boiled.",
+      "dica": "Verbos terminados em -e só recebem -d."
+    },
+    {
+      "id": "rev13",
+      "type": "fill-gap",
+      "question": "My mom _________ me prepare dinner. (to help)",
+      "options": [
+        "help",
+        "helped",
+        "helping",
+        "helps"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "helped",
+      "explicacao": "Para verbos regulares, adicionamos -ED: help → helped.",
+      "dica": "Help é um verbo regular."
+    },
+    {
+      "id": "rev14",
+      "type": "fill-gap",
+      "question": "My father _________ drinking coffee. (to stop)",
+      "options": [
+        "stop",
+        "stopped",
+        "stoping",
+        "stops"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "stopped",
+      "explicacao": "Para verbos de uma sílaba terminados em consoante-vogal-consoante, dobramos a consoante final: stop → stopped.",
+      "dica": "Stop termina em consoante-vogal-consoante, então dobramos o 'p'."
+    },
+    {
+      "id": "rev15",
+      "type": "multiple-choice",
+      "question": "Did I boil the water?",
+      "options": [
+        "Yes, I did",
+        "No, I didn't",
+        "Yes, I boiled",
+        "No, I don't"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Yes, I did",
+      "explicacao": "Para perguntas com DID, usamos respostas curtas: Yes, I did / No, I didn't.",
+      "dica": "Respostas curtas usam o auxiliar DID."
+    },
+    {
+      "id": "rev16",
+      "type": "fill-gap",
+      "question": "I _________ boil the water. (negative)",
+      "options": [
+        "didn't",
+        "don't",
+        "doesn't",
+        "wasn't"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "didn't",
+      "explicacao": "Na forma negativa do passado, usamos DIDN'T + verbo no infinitivo.",
+      "dica": "DIDN'T é usado para negar ações no passado."
+    },
+    {
+      "id": "rev17",
+      "type": "multiple-choice",
+      "question": "Which expression is used for past tense?",
+      "options": [
+        "Tomorrow",
+        "Yesterday",
+        "Next week",
+        "Now"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Yesterday",
+      "explicacao": "Yesterday (ontem) é uma expressão de tempo usada com o passado simples.",
+      "dica": "Yesterday significa 'ontem', que é passado."
+    },
+    {
+      "id": "rev18",
+      "type": "multiple-choice",
+      "question": "Which expression is NOT used for past tense?",
+      "options": [
+        "Last month",
+        "Last year",
+        "A month ago",
+        "Next Sunday"
+      ],
+      "correctIndex": 3,
+      "resposta_correta": "Next Sunday",
+      "explicacao": "Next Sunday (próximo domingo) é futuro, não passado. As outras opções são expressões de passado.",
+      "dica": "Next significa 'próximo', que é futuro."
+    },
+    {
+      "id": "rev19",
+      "type": "fill-gap",
+      "question": "My friend _________ his rubber. (to lose)",
+      "options": [
+        "lose",
+        "lost",
+        "losed",
+        "losing"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "lost",
+      "explicacao": "O verbo 'to lose' é irregular no passado: lose → lost.",
+      "dica": "Lose no passado é 'lost'."
+    },
+    {
+      "id": "rev20",
+      "type": "fill-gap",
+      "question": "My grandma _________ a new pair of shoes. (to buy)",
+      "options": [
+        "buy",
+        "bought",
+        "buyed",
+        "buying"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "bought",
+      "explicacao": "O verbo 'to buy' é irregular no passado: buy → bought.",
+      "dica": "Buy no passado é 'bought'."
+    },
+    {
+      "id": "rev21",
+      "type": "fill-gap",
+      "question": "She _________ to visit me after school. (to come)",
+      "options": [
+        "come",
+        "came",
+        "comed",
+        "coming"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "came",
+      "explicacao": "O verbo 'to come' é irregular no passado: come → came.",
+      "dica": "Come no passado é 'came'."
+    },
+    {
+      "id": "rev22",
+      "type": "fill-gap",
+      "question": "You _________ a beautiful butterfly. (to draw)",
+      "options": [
+        "draw",
+        "drew",
+        "drawed",
+        "drawing"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "drew",
+      "explicacao": "O verbo 'to draw' é irregular no passado: draw → drew.",
+      "dica": "Draw no passado é 'drew'."
+    },
+    {
+      "id": "rev23",
+      "type": "fill-gap",
+      "question": "We _________ a lot of cool photos. (to take)",
+      "options": [
+        "take",
+        "took",
+        "taked",
+        "taking"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "took",
+      "explicacao": "O verbo 'to take' é irregular no passado: take → took.",
+      "dica": "Take no passado é 'took'."
+    },
+    {
+      "id": "rev24",
+      "type": "fill-gap",
+      "question": "They _________ on the floor to play board games. (to sit)",
+      "options": [
+        "sit",
+        "sat",
+        "sited",
+        "sitting"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "sat",
+      "explicacao": "O verbo 'to sit' é irregular no passado: sit → sat.",
+      "dica": "Sit no passado é 'sat'."
+    },
+    {
+      "id": "rev25",
+      "type": "fill-gap",
+      "question": "I _________ to clean my bedroom before going to my friend's house. (have to)",
+      "options": [
+        "has to",
+        "have to",
+        "had to",
+        "having to"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "have to",
+      "explicacao": "Para I, you, we, they usamos 'have to'. Para he, she, it usamos 'has to'.",
+      "dica": "Have to é usado para I, you, we, they."
+    },
+    {
+      "id": "rev26",
+      "type": "fill-gap",
+      "question": "He _________ wash the plates after dinner. (have to)",
+      "options": [
+        "has to",
+        "have to",
+        "had to",
+        "having to"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "has to",
+      "explicacao": "Para he, she, it usamos 'has to'. Para I, you, we, they usamos 'have to'.",
+      "dica": "Has to é usado para he, she, it."
+    },
+    {
+      "id": "rev27",
+      "type": "fill-gap",
+      "question": "She _________ make her bed before going to school. (have to)",
+      "options": [
+        "has to",
+        "have to",
+        "had to",
+        "having to"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "has to",
+      "explicacao": "Para he, she, it usamos 'has to'.",
+      "dica": "She é terceira pessoa do singular, então usa 'has to'."
+    },
+    {
+      "id": "rev28",
+      "type": "fill-gap",
+      "question": "I _________ have to wear glasses. (negative)",
+      "options": [
+        "don't",
+        "doesn't",
+        "didn't",
+        "wasn't"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "don't",
+      "explicacao": "Na forma negativa, usamos don't have to (para I, you, we, they) ou doesn't have to (para he, she, it).",
+      "dica": "Don't have to é usado para I, you, we, they."
+    },
+    {
+      "id": "rev29",
+      "type": "fill-gap",
+      "question": "She _________ have to read the book again. (negative)",
+      "options": [
+        "don't",
+        "doesn't",
+        "didn't",
+        "wasn't"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "doesn't",
+      "explicacao": "Na forma negativa, para he, she, it usamos 'doesn't have to'.",
+      "dica": "Doesn't have to é usado para he, she, it."
+    },
+    {
+      "id": "rev30",
+      "type": "multiple-choice",
+      "question": "This place is too _________. We must not be here alone.",
+      "options": [
+        "easy",
+        "difficult",
+        "dangerous",
+        "boring"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "dangerous",
+      "explicacao": "Dangerous significa perigoso. Se não podemos estar sozinhos, o lugar é perigoso.",
+      "dica": "Pense em um lugar onde não é seguro estar sozinho."
+    },
+    {
+      "id": "rev31",
+      "type": "multiple-choice",
+      "question": "The Maths test was too _________. I didn't get a good grade.",
+      "options": [
+        "easy",
+        "difficult",
+        "exciting",
+        "boring"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "difficult",
+      "explicacao": "Difficult significa difícil. Se não conseguiu uma boa nota, o teste era difícil.",
+      "dica": "Se não conseguiu boa nota, o teste era difícil."
+    },
+    {
+      "id": "rev32",
+      "type": "multiple-choice",
+      "question": "I don't like this song. It's very _________.",
+      "options": [
+        "exciting",
+        "boring",
+        "difficult",
+        "dangerous"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "boring",
+      "explicacao": "Boring significa chato/entediante. Se não gosta da música, ela é chata.",
+      "dica": "Se não gosta, é porque é chato."
+    },
+    {
+      "id": "rev33",
+      "type": "multiple-choice",
+      "question": "I'm _________ of snakes. I really don't like them.",
+      "options": [
+        "afraid",
+        "exciting",
+        "easy",
+        "dangerous"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "afraid",
+      "explicacao": "Afraid significa com medo. Se não gosta de cobras, tem medo delas.",
+      "dica": "Afraid significa 'com medo'."
+    },
+    {
+      "id": "rev34",
+      "type": "multiple-choice",
+      "question": "The football game was very _________. We had a lot of fun.",
+      "options": [
+        "boring",
+        "difficult",
+        "exciting",
+        "dangerous"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "exciting",
+      "explicacao": "Exciting significa empolgante. Se se divertiram muito, o jogo foi empolgante.",
+      "dica": "Se teve muita diversão, foi empolgante."
+    },
+    {
+      "id": "rev35",
+      "type": "multiple-choice",
+      "question": "I got a 100 in my English test. The test was very _________.",
+      "options": [
+        "difficult",
+        "easy",
+        "dangerous",
+        "boring"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "easy",
+      "explicacao": "Easy significa fácil. Se tirou 100, o teste foi fácil.",
+      "dica": "Se tirou nota máxima, o teste foi fácil."
+    },
+    {
+      "id": "rev36",
+      "type": "fill-gap",
+      "question": "Helen is _________ intelligent than Bob. (comparative)",
+      "options": [
+        "more",
+        "most",
+        "much",
+        "very"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "more",
+      "explicacao": "Para adjetivos longos, usamos MORE + adjetivo + THAN no comparativo.",
+      "dica": "Adjetivos longos usam 'more' no comparativo."
+    },
+    {
+      "id": "rev37",
+      "type": "fill-gap",
+      "question": "Janet is _________ beautiful than Rose. (comparative)",
+      "options": [
+        "more",
+        "most",
+        "much",
+        "very"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "more",
+      "explicacao": "Beautiful é um adjetivo longo, então usamos MORE + beautiful + THAN.",
+      "dica": "Beautiful é longo, então usa 'more'."
+    },
+    {
+      "id": "rev38",
+      "type": "fill-gap",
+      "question": "He is _________ polite than his sister. (comparative)",
+      "options": [
+        "more",
+        "most",
+        "much",
+        "very"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "more",
+      "explicacao": "Polite é um adjetivo longo, então usamos MORE + polite + THAN.",
+      "dica": "Polite é longo, então usa 'more'."
+    },
+    {
+      "id": "rev39",
+      "type": "fill-gap",
+      "question": "Tigers are _________ exciting animals. (superlative)",
+      "options": [
+        "more",
+        "the most",
+        "most",
+        "very"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "the most",
+      "explicacao": "Para adjetivos longos no superlativo, usamos THE MOST + adjetivo.",
+      "dica": "Superlativo de adjetivos longos usa 'the most'."
+    },
+    {
+      "id": "rev40",
+      "type": "fill-gap",
+      "question": "The exercise 2 is _________ difficult of all. (superlative)",
+      "options": [
+        "more",
+        "the most",
+        "most",
+        "very"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "the most",
+      "explicacao": "Para adjetivos longos no superlativo, usamos THE MOST + adjetivo.",
+      "dica": "Superlativo usa 'the most' para adjetivos longos."
+    },
+    {
+      "id": "rev41",
+      "type": "fill-gap",
+      "question": "She is _________ happy girl I know. (superlative)",
+      "options": [
+        "more",
+        "the most",
+        "most",
+        "very"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "the most",
+      "explicacao": "Happy é um adjetivo longo no superlativo, então usamos THE MOST + happy.",
+      "dica": "Superlativo usa 'the most'."
+    },
+    {
+      "id": "rev42",
+      "type": "fill-gap",
+      "question": "Math is _________ difficult subject there is. (superlative)",
+      "options": [
+        "more",
+        "the most",
+        "most",
+        "very"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "the most",
+      "explicacao": "Para adjetivos longos no superlativo, usamos THE MOST + adjetivo.",
+      "dica": "Superlativo usa 'the most'."
+    },
+    {
+      "id": "rev43",
+      "type": "fill-gap",
+      "question": "Portuguese is _________ difficult than English. (comparative)",
+      "options": [
+        "more",
+        "most",
+        "the most",
+        "very"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "more",
+      "explicacao": "Para adjetivos longos no comparativo, usamos MORE + adjetivo + THAN.",
+      "dica": "Comparativo usa 'more' para adjetivos longos."
+    },
+    {
+      "id": "rev44",
+      "type": "fill-gap",
+      "question": "Pizza is _________ delicious than hamburger. (comparative)",
+      "options": [
+        "more",
+        "most",
+        "the most",
+        "very"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "more",
+      "explicacao": "Delicious é um adjetivo longo, então usamos MORE + delicious + THAN no comparativo.",
+      "dica": "Comparativo usa 'more' para adjetivos longos."
+    },
+    {
+      "id": "rev45",
+      "type": "fill-gap",
+      "question": "My grandpa is _________ generous than my uncle. (comparative)",
+      "options": [
+        "more",
+        "most",
+        "the most",
+        "very"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "more",
+      "explicacao": "Generous é um adjetivo longo, então usamos MORE + generous + THAN no comparativo.",
+      "dica": "Comparativo usa 'more' para adjetivos longos."
+    }
+  ]
+}
+
