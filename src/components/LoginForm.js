@@ -31,13 +31,26 @@ export default function LoginForm() {
 
     try {
       if (mode === "login") {
-        const { error: loginError } = await supabase.auth.signInWithPassword({
+        const { error: loginError, data: loginData } = await supabase.auth.signInWithPassword({
           email,
           password,
         });
         if (loginError) throw loginError;
         setSuccess("Você entrou! Redirecionando...");
-        router.push("/");
+
+        // Redirect by role
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("role")
+          .eq("id", loginData.user.id)
+          .single();
+        if (profile?.role === "admin") {
+          router.push("/admin");
+        } else if (profile?.role === "parent") {
+          router.push("/responsavel");
+        } else {
+          router.push("/");
+        }
       } else {
         const { error: signUpError } = await supabase.auth.signUp({
           email,
