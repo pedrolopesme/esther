@@ -127,7 +127,7 @@ export default function ParentDashboard() {
     try {
       const { data: { session } } = await supabase.auth.getSession();
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/register-child`,
+        `${process.env.NEXT_PUBLIC_SUPABASE_URL || "https://vwmiicxxzgbaixeyppdp.supabase.co"}/functions/v1/register-child`,
         {
           method: "POST",
           headers: {
@@ -251,7 +251,7 @@ export default function ParentDashboard() {
                 required
                 minLength={6}
               />
-              <Button variant="candy" className="w-full" disabled={isRegistering}>
+              <Button type="submit" variant="candy" className="w-full" disabled={isRegistering}>
                 {isRegistering ? "Cadastrando..." : "Cadastrar"}
               </Button>
             </form>

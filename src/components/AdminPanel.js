@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { AnimatePresence } from "framer-motion";
-import { Trash2, Eye, EyeOff, ArrowLeft, Upload } from "lucide-react";
+import { Trash2, Eye, EyeOff, ArrowLeft, Upload, Play } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 import { getSupabaseBrowserClient } from "../utils/supabase";
 import UploadWizard from "./UploadWizard";
+import ExerciseDrawer from "./ExerciseDrawer";
 
 const SUBJECTS = [
   { id: "matematica", nome: "Matemática", emoji: "🔢" },
@@ -25,6 +26,7 @@ export default function AdminPanel() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showUploadWizard, setShowUploadWizard] = useState(false);
+  const [testingList, setTestingList] = useState(null);
   const supabase = getSupabaseBrowserClient();
 
   // Proteção: só admin pode acessar
@@ -128,7 +130,7 @@ export default function AdminPanel() {
       </div>
 
       {error && (
-        <div className="mb-6 rounded-2xl bg-candy-soft px-4 py-3 text-sm font-semibold text-[#a62f5f]">
+        <div className="mb-6 rounded-2xl bg-[#FFE3F0] px-4 py-3 text-sm font-semibold text-[#a62f5f]">
           Erro: {error}
         </div>
       )}
@@ -181,7 +183,7 @@ export default function AdminPanel() {
                     lists.map((list) => (
                       <tr key={list.id} className="hover:bg-white/30 transition">
                         <td className="px-4 py-3">
-                          <span className="inline-block rounded-full bg-lilac/10 px-2.5 py-1 text-xs font-bold text-lilac">
+                          <span className="inline-block rounded-full bg-[#EEE6FF] px-2.5 py-1 text-xs font-bold text-[#A370FF]">
                             {SUBJECTS.find((s) => s.id === list.subject)?.emoji} {list.subject}
                           </span>
                         </td>
@@ -212,13 +214,23 @@ export default function AdminPanel() {
                           </button>
                         </td>
                         <td className="px-4 py-3 text-center">
-                          <button
-                            onClick={() => handleDelete(list)}
-                            className="press rounded-full bg-white/70 p-1.5 shadow-sm hover:text-candy"
-                            title="Deletar"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </button>
+                          <div className="flex items-center justify-center gap-1">
+                            <button
+                              onClick={() => setTestingList(list)}
+                              disabled={!Array.isArray(list.exercises) || list.exercises.length === 0}
+                              className="press rounded-full bg-white/70 p-1.5 shadow-sm hover:text-mint disabled:opacity-30 disabled:cursor-not-allowed transition"
+                              title="Testar lista"
+                            >
+                              <Play className="h-4 w-4" />
+                            </button>
+                            <button
+                              onClick={() => handleDelete(list)}
+                              className="press rounded-full bg-white/70 p-1.5 shadow-sm hover:text-candy"
+                              title="Deletar"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))
@@ -236,6 +248,16 @@ export default function AdminPanel() {
           <UploadWizard
             onClose={() => setShowUploadWizard(false)}
             onSaved={() => loadLists()}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Exercise Preview Drawer */}
+      <AnimatePresence>
+        {testingList && (
+          <ExerciseDrawer
+            list={testingList}
+            onClose={() => setTestingList(null)}
           />
         )}
       </AnimatePresence>

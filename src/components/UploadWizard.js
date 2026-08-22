@@ -185,7 +185,6 @@ export default function UploadWizard({ onClose, onSaved }) {
         materia: SUBJECTS.find((s) => s.id === formData.subject)?.name || formData.subject,
         ano_letivo: formData.ano_letivo,
         exercise_date: formData.exercise_date,
-        question_count: rawExercises.length,
         exercises: rawExercises,
         published: false,
       };
