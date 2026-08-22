@@ -13,7 +13,7 @@ const AVATARS = ["🐣", "🐥", "🦄", "🐰", "🦊", "🐼", "🐸", "🦋",
 
 export default function HeaderUser() {
   const router = useRouter();
-  const { isAuthenticated, user, profile, isLoading, supabase, isAdmin, isParent } = useAuth();
+  const { isAuthenticated, user, profile, child, isChild, isLoading, supabase, isAdmin, isParent } = useAuth();
   const [points, setPoints] = useState(0);
   const [pop, setPop] = useState(false);
   const [open, setOpen] = useState(false);
@@ -52,21 +52,27 @@ export default function HeaderUser() {
   }
 
   // ── Logged in: avatar + name + stars ──
-  const name = profile?.display_name || user?.email?.split("@")[0] || "Estudante";
+  const name = isChild
+    ? child?.display_name || "Estudante"
+    : profile?.display_name || user?.email?.split("@")[0] || "Estudante";
   const level = Math.floor(points / PER_LEVEL) + 1;
   const inLevel = points % PER_LEVEL;
   const pct = (inLevel / PER_LEVEL) * 100;
   const avatar = AVATARS[Math.min(level - 1, AVATARS.length - 1)];
 
   async function handleLogout() {
+    if (isChild) {
+      localStorage.removeItem("esther_child");
+      window.location.reload();
+      return;
+    }
     await supabase?.auth?.signOut();
     router.push("/");
   }
 
   return (
     <div className="flex items-center gap-2 sm:gap-3">
-      {/* Admin link */}
-      {isAdmin && (
+      {!isChild && isAdmin && (
         <Link
           href="/admin"
           className="press hidden items-center gap-1.5 rounded-full bg-lilac/15 px-2.5 py-1.5 text-xs font-bold text-lilac shadow-sm hover:bg-lilac/25 sm:flex"
@@ -76,9 +82,7 @@ export default function HeaderUser() {
           Admin
         </Link>
       )}
-
-      {/* Parent dashboard link */}
-      {isParent && (
+      {!isChild && isParent && (
         <Link
           href="/responsavel"
           className="press hidden items-center gap-1.5 rounded-full bg-candy/15 px-2.5 py-1.5 text-xs font-bold text-candy shadow-sm hover:bg-candy/25 sm:flex"
@@ -88,7 +92,6 @@ export default function HeaderUser() {
           Filhos
         </Link>
       )}
-
       {/* Avatar + name with hover dropdown */}
       <div
         className="relative"
@@ -124,6 +127,7 @@ export default function HeaderUser() {
               : "pointer-events-none -translate-y-1 opacity-0",
           )}
         >
+          {!isChild && (
           <Link
             href="/perfil"
             className="flex items-center gap-2.5 px-4 py-2.5 text-sm font-semibold text-ink transition hover:bg-lilac/10"
@@ -131,6 +135,7 @@ export default function HeaderUser() {
             <User className="h-4 w-4 text-lilac" />
             Perfil
           </Link>
+          )}
           <button
             onClick={handleLogout}
             className="flex w-full items-center gap-2.5 px-4 py-2.5 text-sm font-semibold text-ink transition hover:bg-candy/10"

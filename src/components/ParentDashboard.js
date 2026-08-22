@@ -74,20 +74,22 @@ export default function ParentDashboard() {
     if (!authLoading && !isParent) router.push("/");
   }, [authLoading, isParent, router]);
 
-  // Load linked children
+  // Load children
   const loadChildren = useCallback(async () => {
     if (!supabase || !user) return;
     setIsLoadingChildren(true);
     const { data, error } = await supabase
-      .from("parent_children")
-      .select("child_id, profiles!parent_children_child_id_fkey(display_name)")
-      .eq("parent_id", user.id);
+      .from("children")
+      .select("id, display_name, username")
+      .eq("parent_id", user.id)
+      .order("created_at", { ascending: true });
 
     if (!error && data) {
       setChildren(
         data.map((row) => ({
-          id: row.child_id,
-          name: row.profiles?.display_name ?? "Estudante",
+          id: row.id,
+          name: row.display_name,
+          username: row.username,
         }))
       );
     }
@@ -108,7 +110,7 @@ export default function ParentDashboard() {
     supabase
       .from("access_logs")
       .select("path, accessed_at")
-      .eq("user_id", selectedChild.id)
+      .eq("child_id", selectedChild.id)
       .order("accessed_at", { ascending: false })
       .limit(200)
       .then(({ data, error }) => {
@@ -125,27 +127,16 @@ export default function ParentDashboard() {
     setIsRegistering(true);
 
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SUPABASE_URL || "https://vwmiicxxzgbaixeyppdp.supabase.co"}/functions/v1/register-child`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${session.access_token}`,
-          },
-          body: JSON.stringify({
-            display_name: childName.trim(),
-            username: childUsername.trim(),
-            password: childPassword,
-          }),
-        }
-      );
-      const result = await res.json();
-      if (!result.ok) {
-        setRegisterError(result.error);
+      const { data, error } = await supabase.rpc("register_child", {
+        p_display_name: childName.trim(),
+        p_username: childUsername.trim(),
+        p_password: childPassword,
+      });
+      if (error) throw error;
+      if (!data.ok) {
+        setRegisterError(data.error);
       } else {
-        setRegisterSuccess(`${result.display_name} cadastrado(a)! Usuário: ${result.username}`);
+        setRegisterSuccess(`${data.display_name} cadastrado(a)! Usuário: ${data.username}`);
         setChildName("");
         setChildUsername("");
         setChildPassword("");
@@ -158,14 +149,14 @@ export default function ParentDashboard() {
     }
   }
 
-  // Unlink a child
+  // Remove a child
   async function handleUnlink(childId) {
     if (!user) return;
     await supabase
-      .from("parent_children")
+      .from("children")
       .delete()
-      .eq("parent_id", user.id)
-      .eq("child_id", childId);
+      .eq("id", childId)
+      .eq("parent_id", user.id);
     if (selectedChild?.id === childId) setSelectedChild(null);
     loadChildren();
   }

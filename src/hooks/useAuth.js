@@ -3,13 +3,34 @@
 import { createContext, useContext, useEffect, useState, useCallback } from "react";
 import { getSupabaseBrowserClient } from "../utils/supabase";
 
+const CHILD_KEY = "esther_child";
+
+function loadChild() {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem(CHILD_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [session, setSession] = useState(null);
   const [profile, setProfile] = useState(null);
+  const [child, setChild] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const supabase = getSupabaseBrowserClient();
+
+  // Load child from localStorage on mount
+  useEffect(() => {
+    setChild(loadChild());
+    const onStorage = () => setChild(loadChild());
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
 
   const refresh = useCallback(async () => {
     if (!supabase) {
@@ -60,8 +81,10 @@ export function AuthProvider({ children }) {
     isAdmin: profile?.role === "admin",
     isStudent: profile?.role === "student",
     isParent: profile?.role === "parent",
+    child,
+    isChild: !!child,
     isLoading,
-    isAuthenticated: !!session?.user,
+    isAuthenticated: !!session?.user || !!child,
     supabase,
     refresh,
   };

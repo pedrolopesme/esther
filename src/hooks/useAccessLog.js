@@ -18,6 +18,21 @@ export function useAccessLog() {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
 
+    // Check for child session first
+    if (typeof window !== "undefined") {
+      try {
+        const raw = localStorage.getItem("esther_child");
+        if (raw) {
+          const child = JSON.parse(raw);
+          if (child?.id) {
+            loggedRef.current = pathname;
+            supabase.from("access_logs").insert({ child_id: child.id, path: pathname }).then(() => {});
+            return;
+          }
+        }
+      } catch { /* ignore */ }
+    }
+
     supabase.auth.getSession().then(({ data }) => {
       const userId = data.session?.user?.id;
       if (!userId) return;

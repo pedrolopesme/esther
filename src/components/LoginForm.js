@@ -31,14 +31,35 @@ export default function LoginForm() {
 
     try {
       if (mode === "login") {
-        const loginEmail = email.includes("@") ? email : `${email.trim().toLowerCase()}@esther.internal`;
+        // Child login: username without @ → child_login RPC
+        if (!email.includes("@")) {
+          const { data: childData, error: childError } = await supabase.rpc("child_login", {
+            p_username: email.trim().toLowerCase(),
+            p_password: password,
+          });
+          if (childError) throw childError;
+          if (!childData.ok) {
+            setError(childData.error);
+            setIsSubmitting(false);
+            return;
+          }
+          localStorage.setItem("esther_child", JSON.stringify({
+            id: childData.child_id,
+            display_name: childData.display_name,
+            parent_id: childData.parent_id,
+          }));
+          router.push("/");
+          return;
+        }
+
+        // Parent/admin login via Supabase Auth
         const { error: loginError, data: loginData } = await supabase.auth.signInWithPassword({
-          email: loginEmail,
+          email,
           password,
         });
+        if (loginError) throw loginError;
         setSuccess("Você entrou! Redirecionando...");
 
-        // Redirect by role
         const { data: profile } = await supabase
           .from("profiles")
           .select("role")
