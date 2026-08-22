@@ -2,6 +2,7 @@ import { Fredoka } from "next/font/google";
 import Link from "next/link";
 import { Sparkles, Heart } from "lucide-react";
 import HeaderUser from "../components/HeaderUser";
+import AccessLogProvider from "../components/AccessLogProvider";
 import "./globals.css";
 
 const fredoka = Fredoka({
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt-BR">
       <body className={`${fredoka.variable} antialiased flex flex-col min-h-screen`}>
+        <AccessLogProvider />
         {/* Floating glass pill header */}
         <header className="sticky top-0 z-50 px-3 pt-3 sm:px-6 sm:pt-5">
           <div className="glass mx-auto flex w-full items-center gap-3 rounded-full px-4 py-2.5 shadow-[0_10px_30px_-12px_rgba(163,112,255,0.5)] sm:px-6 sm:py-3">

@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Star, LogIn, LogOut, Settings, Users } from "lucide-react";
+import { Star, LogIn, LogOut, Settings, Users, User, ChevronDown } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 import { POINTS_EVENT, getPoints } from "../utils/points";
 import { cn } from "../utils/cn";
@@ -16,6 +16,8 @@ export default function HeaderUser() {
   const { isAuthenticated, user, profile, isLoading, supabase, isAdmin, isParent } = useAuth();
   const [points, setPoints] = useState(0);
   const [pop, setPop] = useState(false);
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef(null);
 
   useEffect(() => {
     setPoints(getPoints());
@@ -31,6 +33,16 @@ export default function HeaderUser() {
       window.removeEventListener("storage", handleUpdate);
     };
   }, []);
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    if (!open) return;
+    function handleClick(e) {
+      if (menuRef.current && !menuRef.current.contains(e.target)) setOpen(false);
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [open]);
 
   // Loading skeleton
   if (isLoading) {
@@ -88,18 +100,53 @@ export default function HeaderUser() {
         </Link>
       )}
 
-      {/* Avatar + name pill → links to profile */}
-      <Link
-        href="/perfil"
-        className="press flex items-center gap-2 rounded-full bg-white/70 py-1 pl-1 pr-3 shadow-sm ring-1 ring-white hover:ring-lilac/40 sm:pr-4"
-      >
-        <span className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-sky-soft to-lilac-soft text-base shadow ring-2 ring-white sm:h-9 sm:w-9 sm:text-lg">
-          {avatar}
-        </span>
-        <span className="max-w-[5rem] truncate text-sm font-bold text-ink sm:max-w-[8rem]">
-          {name}
-        </span>
-      </Link>
+      {/* Avatar + name dropdown */}
+      <div className="relative" ref={menuRef}>
+        <button
+          onClick={() => setOpen((v) => !v)}
+          className={cn(
+            "press flex items-center gap-1.5 rounded-full bg-white/70 py-1 pl-1 pr-2 shadow-sm ring-1 ring-white transition sm:pr-2.5",
+            open ? "ring-lilac/40" : "hover:ring-lilac/40",
+          )}
+        >
+          <span className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-sky-soft to-lilac-soft text-base shadow ring-2 ring-white sm:h-9 sm:w-9 sm:text-lg">
+            {avatar}
+          </span>
+          <span className="max-w-[5rem] truncate text-sm font-bold text-ink sm:max-w-[8rem]">
+            {name}
+          </span>
+          <ChevronDown
+            className={cn(
+              "h-3.5 w-3.5 text-ink-soft transition-transform",
+              open && "rotate-180",
+            )}
+          />
+        </button>
+
+        {/* Dropdown menu */}
+        {open && (
+          <div className="absolute right-0 top-full z-50 mt-2 w-44 overflow-hidden rounded-2xl bg-white/95 shadow-xl ring-1 ring-lilac/10 backdrop-blur">
+            <Link
+              href="/perfil"
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-2.5 px-4 py-2.5 text-sm font-semibold text-ink transition hover:bg-lilac/10"
+            >
+              <User className="h-4 w-4 text-lilac" />
+              Perfil
+            </Link>
+            <button
+              onClick={() => {
+                setOpen(false);
+                handleLogout();
+              }}
+              className="flex w-full items-center gap-2.5 px-4 py-2.5 text-sm font-semibold text-ink transition hover:bg-candy/10"
+            >
+              <LogOut className="h-4 w-4 text-candy" />
+              Sair
+            </button>
+          </div>
+        )}
+      </div>
 
       {/* Stars */}
       <div
@@ -112,15 +159,6 @@ export default function HeaderUser() {
         <Star className="h-3.5 w-3.5 fill-sun text-sun anim-bob" strokeWidth={2} />
         <span className="font-display text-xs font-bold text-ink">{points}</span>
       </div>
-
-      {/* Logout */}
-      <button
-        onClick={handleLogout}
-        className="press rounded-full bg-white/60 p-1.5 text-ink-soft shadow-sm hover:text-candy"
-        title="Sair"
-      >
-        <LogOut className="h-4 w-4" />
-      </button>
     </div>
   );
 }
