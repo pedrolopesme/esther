@@ -1,0 +1,256 @@
+{
+  "nome": "Exercícios de Ciências - Matéria e Energia: Propriedades, Estados Físicos e Transformações",
+  "materia": "Ciências",
+  "ano_letivo": "4º ano do Ensino Fundamental",
+  "data": "2026-08-22",
+  "title": "Ciências - Massa, Volume, Estados Físicos e Mudanças de Estado da Matéria",
+  "description": "Lista com 18 exercícios de ciências cobrindo propriedades dos materiais (massa e volume), estados físicos (sólido, líquido e gasoso), transformações físicas e químicas, e mudanças de estado (fusão, solidificação, vaporização, condensação). Exercícios baseados na Unidade 1 - Matéria e Energia.",
+  "exercises": [
+    {
+      "id": "mat1",
+      "type": "fill-gap",
+      "question": "Complete: A matéria tem _____ e ocupa lugar no espaço.",
+      "options": [
+        "massa",
+        "volume"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "massa",
+      "explicacao": "A matéria tem duas características principais: possui massa (quantidade de matéria) e ocupa lugar no espaço (volume). A palavra 'massa' completa a primeira característica.",
+      "dica": "É a quantidade de matéria, medida em gramas ou quilogramas."
+    },
+    {
+      "id": "mat2",
+      "type": "multiple-choice",
+      "question": "Qual instrumento é usado para medir a massa?",
+      "options": [
+        "Régua",
+        "Balança",
+        "Termômetro",
+        "Copo medidor"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Balança",
+      "explicacao": "A balança é o instrumento que mede a massa de um corpo. A unidade padrão de massa no Sistema Internacional (SI) é o quilograma (kg), mas também usamos o grama (g).",
+      "dica": "É o instrumento que aparece na consulta do pediatra para pesar o bebê."
+    },
+    {
+      "id": "mat3",
+      "type": "fill-gap",
+      "question": "A unidade de 300 g é usada para medir a massa de um(a) _____.",
+      "options": [
+        "pacote pequeno",
+        "criança"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "pacote pequeno",
+      "explicacao": "300 g (gramas) é uma quantidade pequena, adequada para medir alimentos em porções como um pacote de biscoito. A massa de uma criança é medida em quilogramas (kg), como 30 kg.",
+      "dica": "Gramas são para coisas leves; quilogramas são para coisas mais pesadas."
+    },
+    {
+      "id": "mat4",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: Duas garrafas com formatos diferentes podem ter o mesmo volume de 1 litro.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Verdadeiro",
+      "explicacao": "Verdadeiro. O volume é o espaço ocupado ou a capacidade do recipiente. O formato pode mudar, mas a quantidade de líquido (1 litro) pode ser a mesma. Uma garrafa alta e fina e uma caixa mais baixa podem guardar exatamente 1 litro.",
+      "dica": "O formato não muda a quantidade de líquido que cabe dentro."
+    },
+    {
+      "id": "mat5",
+      "type": "fill-gap",
+      "question": "A neve está no estado _____.",
+      "options": [
+        "sólido",
+        "líquido"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "sólido",
+      "explicacao": "A neve é água congelada, portanto está no estado sólido. Os sólidos apresentam forma definida, não importa o formato do recipiente onde estão.",
+      "dica": "A neve mantém sua forma, assim como o gelo."
+    },
+    {
+      "id": "mat6",
+      "type": "multiple-choice",
+      "question": "Qual desses materiais NÃO tem forma própria?",
+      "options": [
+        "Lápis",
+        "Água",
+        "Prato",
+        "Pedra"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Água",
+      "explicacao": "A água está no estado líquido e os líquidos não têm forma própria: eles assumem a forma do recipiente que os contém. Lápis, prato e pedra são sólidos e mantêm sua forma.",
+      "dica": "O que escorre e toma a forma do copo ou da jarra?"
+    },
+    {
+      "id": "mat7",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: Quando o suco passa do copo para uma jarra, seu formato muda, mas o volume permanece o mesmo.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Verdadeiro",
+      "explicacao": "Verdadeiro. Os líquidos tomam a forma do recipiente (então o formato muda), mas mantêm o volume constante. A quantidade de suco continua a mesma.",
+      "dica": "Líquidos têm volume constante, mas forma variável."
+    },
+    {
+      "id": "mat8",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: A fumaça é matéria, pois ocupa espaço e tem massa.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Verdadeiro",
+      "explicacao": "Verdadeiro. A fumaça contém partículas e gases que ocupam espaço e têm massa, mesmo sendo difícil segurá-la com a mão. A matéria é tudo que tem massa e ocupa lugar no espaço.",
+      "dica": "Mesmo o que não conseguimos segurar pode ser matéria."
+    },
+    {
+      "id": "mat9",
+      "type": "fill-gap",
+      "question": "Cortar uma folha de papel é uma transformação _____, pois o material continua sendo papel.",
+      "options": [
+        "física",
+        "química"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "física",
+      "explicacao": "Cortar uma folha é uma transformação física, pois muda apenas o tamanho e a forma, mas o material (papel) continua sendo o mesmo. Não se forma uma nova substância.",
+      "dica": "A substância continuou sendo a mesma? Se sim, a transformação é física."
+    },
+    {
+      "id": "mat10",
+      "type": "fill-gap",
+      "question": "Queimar papel é uma transformação _____, pois forma novas substâncias como cinzas e gases.",
+      "options": [
+        "química",
+        "física"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "química",
+      "explicacao": "Queimar papel é uma transformação química, pois produz novas substâncias (cinzas e gases) que são diferentes do papel original. Não é possível simplesmente voltar a ser a folha original.",
+      "dica": "Apareceram cinzas e fumaça? Então é transformação química."
+    },
+    {
+      "id": "mat11",
+      "type": "fill-gap",
+      "question": "O gelo derretendo sofre _____, que é a mudança do estado sólido para o líquido.",
+      "options": [
+        "fusão",
+        "solidificação"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "fusão",
+      "explicacao": "Fusão é a mudança do estado sólido para o líquido. É o que ocorre quando o gelo, a manteiga ou o chocolate derretem. Solidificação é o contrário: líquido para sólido.",
+      "dica": "Derreter = fundir. Pense em 'fondue' de chocolate: ele derrete!"
+    },
+    {
+      "id": "mat12",
+      "type": "multiple-choice",
+      "question": "Uma roupa molhada secando no varal passa por qual processo?",
+      "options": [
+        "Ebulição",
+        "Evaporação",
+        "Fusão",
+        "Condensação"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Evaporação",
+      "explicacao": "A roupa seca por evaporação, que é a vaporização lenta que ocorre em temperatura ambiente, sem formação de bolhas. A água passa do estado líquido para o gasoso lentamente.",
+      "dica": "É uma vaporização lenta, sem bolhas, na temperatura do ambiente."
+    },
+    {
+      "id": "mat13",
+      "type": "multiple-choice",
+      "question": "A água fervendo em uma panela com formação de bolhas passa por qual tipo de vaporização?",
+      "options": [
+        "Evaporação",
+        "Ebulição",
+        "Solidificação",
+        "Sublimação"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Ebulição",
+      "explicacao": "A ebulição é a vaporização rápida, com formação de bolhas em todo o líquido. Quando colocamos água para ferver no preparo do café ou chá, a água entra em ebulição.",
+      "dica": "Bolhas subindo na panela = ebulição."
+    },
+    {
+      "id": "mat14",
+      "type": "fill-gap",
+      "question": "Quando o vapor de água da atmosfera esfria e forma gotículas, ocorre o processo chamado _____.",
+      "options": [
+        "condensação",
+        "evaporação"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "condensação",
+      "explicacao": "Condensação é a mudança do estado gasoso para o líquido. É o que ocorre quando o vapor de água da atmosfera condensa formando as nuvens, compostas por gotículas de água no estado líquido.",
+      "dica": "O vapor vira gotinhas; pense no copo gelado que 'sua'."
+    },
+    {
+      "id": "mat15",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: As gotículas que aparecem na parte fria de um copo vêm do vapor de água do ar que se condensa ao tocar a superfície gelada.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 0,
+      "resposta_correta": "Verdadeiro",
+      "explicacao": "Verdadeiro. O vapor de água presente no ar esfria ao tocar a superfície fria do copo e sofre condensação, formando gotículas de água líquida. A água não atravessou o copo; ela veio do ar.",
+      "dica": "A água veio do ar, não de dentro do copo."
+    },
+    {
+      "id": "mat16",
+      "type": "true-false",
+      "question": "Verdadeiro ou Falso: Quando colocamos a mesma quantidade de água em um copo baixo e em um copo alto, o volume da água muda porque o formato é diferente.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctIndex": 1,
+      "resposta_correta": "Falso",
+      "explicacao": "Falso. A forma da água muda para se adaptar ao formato de cada copo, mas o volume (a quantidade de água) permanece o mesmo, desde que não seja derramada. O formato não altera o volume.",
+      "dica": "Líquidos mudam de forma, mas a quantidade continua a mesma."
+    },
+    {
+      "id": "mat17",
+      "type": "multiple-choice",
+      "question": "Qual afirmação explica corretamente a diferença entre massa e volume?",
+      "options": [
+        "Massa e volume são a mesma coisa: ambos medem o tamanho do objeto",
+        "A bola de boliche é maior que a de futebol porque sua massa é maior",
+        "Massa é a quantidade de matéria, e volume é o espaço ocupado; um objeto pode ter mais massa sem ter mais volume",
+        "Volume sempre aumenta quando a massa aumenta"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "Massa é a quantidade de matéria, e volume é o espaço ocupado; um objeto pode ter mais massa sem ter mais volume",
+      "explicacao": "Massa e volume são propriedades diferentes. Massa é a quantidade de matéria (medida em g ou kg). Volume é o espaço ocupado (medido em L ou m³). Uma bola de boliche pode ter mais massa, mas a de futebol pode ter mais volume (ocupar mais espaço).",
+      "dica": "Pense: um tijolo tem muita massa, mas uma almofada grande pode ter mais volume."
+    },
+    {
+      "id": "mat18",
+      "type": "multiple-choice",
+      "question": "O que explica o orvalho (gotinhas de água) que aparece na grama em manhãs frias, mesmo sem ter chovido?",
+      "options": [
+        "A grama transpira água durante a noite",
+        "Choveu de madrugada sem ninguém perceber",
+        "O vapor de água do ar sofre condensação ao encontrar superfícies frias, formando gotículas",
+        "A água nasce do solo durante a noite"
+      ],
+      "correctIndex": 2,
+      "resposta_correta": "O vapor de água do ar sofre condensação ao encontrar superfícies frias, formando gotículas",
+      "explicacao": "O orvalho se forma quando o vapor de água presente no ar encontra superfícies frias (como a grama) durante a madrugada. O resfriamento provoca a condensação do vapor, formando gotículas de água líquida. É uma transformação física, pois a água continua sendo água.",
+      "dica": "Vapor de água + superfície fria = gotinhas. É a mesma ideia do copo gelado."
+    }
+  ]
+}

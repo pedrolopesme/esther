@@ -3,10 +3,11 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { Plus, Edit, Trash2, Eye, EyeOff, ArrowLeft } from "lucide-react";
+import { AnimatePresence } from "framer-motion";
+import { Trash2, Eye, EyeOff, ArrowLeft, Upload } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 import { getSupabaseBrowserClient } from "../utils/supabase";
+import UploadWizard from "./UploadWizard";
 
 const SUBJECTS = [
   { id: "matematica", nome: "Matemática", emoji: "🔢" },
@@ -19,53 +20,43 @@ const SUBJECTS = [
 
 export default function AdminPanel() {
   const router = useRouter();
-  const { isAdmin, isLoading: authLoading, user } = useAuth();
+  const { isAdmin, isLoading: authLoading } = useAuth();
   const [lists, setLists] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showForm, setShowForm] = useState(false);
-  const [editingList, setEditingList] = useState(null);
-  const [formData, setFormData] = useState({
-    subject: "matematica",
-    slug: "",
-    title: "",
-    description: "",
-  });
-  const [isSaving, setIsSaving] = useState(false);
+  const [showUploadWizard, setShowUploadWizard] = useState(false);
   const supabase = getSupabaseBrowserClient();
 
   // Proteção: só admin pode acessar
   useEffect(() => {
     if (!authLoading && !isAdmin) {
-      // Redirecionar para home se não for admin
       router.push("/");
     }
-  }, [isAdmin, authLoading]);
+  }, [isAdmin, authLoading, router]);
 
-  // Carregar listas de exercícios
-  useEffect(() => {
-    if (!isAdmin) return;
+  async function loadLists() {
+    if (!supabase) return;
+    try {
+      setIsLoading(true);
+      const { data, error: fetchError } = await supabase
+        .from("exercise_lists")
+        .select("*")
+        .order("exercise_date", { ascending: false });
 
-    async function loadLists() {
-      try {
-        setIsLoading(true);
-        const { data, error: fetchError } = await supabase
-          .from("exercise_lists")
-          .select("*")
-          .order("exercise_date", { ascending: false });
-
-        if (fetchError) throw fetchError;
-        setLists(data || []);
-        setError(null);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setIsLoading(false);
-      }
+      if (fetchError) throw fetchError;
+      setLists(data || []);
+      setError(null);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
     }
+  }
 
-    loadLists();
-  }, [isAdmin, supabase]);
+  useEffect(() => {
+    if (isAdmin) loadLists();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAdmin]);
 
   async function handleTogglePublish(list) {
     try {
@@ -101,47 +92,6 @@ export default function AdminPanel() {
     }
   }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    setIsSaving(true);
-
-    try {
-      if (editingList) {
-        // Atualizar
-        const { error: updateError } = await supabase
-          .from("exercise_lists")
-          .update({
-            title: formData.title,
-            description: formData.description,
-            updated_at: new Date().toISOString(),
-          })
-          .eq("id", editingList.id);
-
-        if (updateError) throw updateError;
-
-        setLists((prev) =>
-          prev.map((l) =>
-            l.id === editingList.id
-              ? { ...l, title: formData.title, description: formData.description }
-              : l
-          )
-        );
-        alert("Lista atualizada!");
-      } else {
-        // Criar nova (interface simplificada)
-        alert("Para criar novas listas, use a migração de dados ou a API.");
-      }
-
-      setShowForm(false);
-      setEditingList(null);
-      setFormData({ subject: "matematica", slug: "", title: "", description: "" });
-    } catch (err) {
-      alert("Erro ao salvar: " + err.message);
-    } finally {
-      setIsSaving(false);
-    }
-  }
-
   if (authLoading) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center text-ink-soft">
@@ -163,9 +113,18 @@ export default function AdminPanel() {
         <ArrowLeft className="h-4 w-4" /> Voltar
       </Link>
 
-      <div className="mb-8">
-        <h1 className="font-display text-4xl font-bold text-ink">⚙️ Painel Administrativo</h1>
-        <p className="mt-2 text-ink-soft">Gerencie listas de exercícios e publicações</p>
+      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h1 className="font-display text-4xl font-bold text-ink">⚙️ Painel Administrativo</h1>
+          <p className="mt-2 text-ink-soft">Gerencie listas de exercícios e publicações</p>
+        </div>
+        <button
+          onClick={() => setShowUploadWizard(true)}
+          className="press inline-flex items-center gap-2 rounded-2xl bg-gradient-to-b from-[#B48CFF] to-[#9257FF] px-5 py-3 text-sm font-bold text-white shadow-[0_6px_0_#7A3FE0] active:translate-y-1.5 active:shadow-none"
+        >
+          <Upload className="h-5 w-5" />
+          Importar JSON
+        </button>
       </div>
 
       {error && (
@@ -179,11 +138,7 @@ export default function AdminPanel() {
           Carregando listas...
         </div>
       ) : (
-        <motion.div
-          className="space-y-6"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-        >
+        <div className="space-y-6">
           {/* Resumo por matéria */}
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
             {SUBJECTS.map((subject) => {
@@ -219,7 +174,7 @@ export default function AdminPanel() {
                   {lists.length === 0 ? (
                     <tr>
                       <td colSpan="6" className="px-4 py-6 text-center text-ink-soft">
-                        Nenhuma lista de exercícios
+                        Nenhuma lista de exercícios. Importe um JSON para começar!
                       </td>
                     </tr>
                   ) : (
@@ -227,12 +182,12 @@ export default function AdminPanel() {
                       <tr key={list.id} className="hover:bg-white/30 transition">
                         <td className="px-4 py-3">
                           <span className="inline-block rounded-full bg-lilac/10 px-2.5 py-1 text-xs font-bold text-lilac">
-                            {list.subject}
+                            {SUBJECTS.find((s) => s.id === list.subject)?.emoji} {list.subject}
                           </span>
                         </td>
-                        <td className="px-4 py-3 font-semibold text-ink">{list.title}</td>
+                        <td className="px-4 py-3 font-semibold text-ink max-w-xs truncate">{list.title}</td>
                         <td className="px-4 py-3 text-ink-soft">
-                          {new Date(list.exercise_date).toLocaleDateString("pt-BR")}
+                          {new Date(list.exercise_date + "T12:00:00").toLocaleDateString("pt-BR")}
                         </td>
                         <td className="px-4 py-3 text-center text-ink font-bold">
                           {list.question_count || 0}
@@ -257,31 +212,13 @@ export default function AdminPanel() {
                           </button>
                         </td>
                         <td className="px-4 py-3 text-center">
-                          <div className="flex items-center justify-center gap-1">
-                            <button
-                              onClick={() => {
-                                setEditingList(list);
-                                setFormData({
-                                  subject: list.subject,
-                                  slug: list.slug,
-                                  title: list.title,
-                                  description: list.description || "",
-                                });
-                                setShowForm(true);
-                              }}
-                              className="press rounded-full bg-white/70 p-1.5 shadow-sm hover:text-sky"
-                              title="Editar"
-                            >
-                              <Edit className="h-4 w-4" />
-                            </button>
-                            <button
-                              onClick={() => handleDelete(list)}
-                              className="press rounded-full bg-white/70 p-1.5 shadow-sm hover:text-candy"
-                              title="Deletar"
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </button>
-                          </div>
+                          <button
+                            onClick={() => handleDelete(list)}
+                            className="press rounded-full bg-white/70 p-1.5 shadow-sm hover:text-candy"
+                            title="Deletar"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </button>
                         </td>
                       </tr>
                     ))
@@ -290,63 +227,18 @@ export default function AdminPanel() {
               </table>
             </div>
           </div>
-
-          {/* Formulário de edição */}
-          {showForm && (
-            <motion.div
-              className="clay p-6"
-              initial={{ y: 10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-            >
-              <h2 className="mb-4 font-display text-xl font-bold text-ink">
-                {editingList ? "✏️ Editar lista" : "➕ Nova lista"}
-              </h2>
-              <form className="space-y-4" onSubmit={handleSubmit}>
-                <div>
-                  <label className="block text-sm font-bold text-ink">Título</label>
-                  <input
-                    type="text"
-                    className="w-full rounded-xl border-2 border-lilac/15 bg-white/80 px-4 py-2 text-ink outline-none focus:border-lilac"
-                    value={formData.title}
-                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-ink">Descrição</label>
-                  <textarea
-                    className="w-full rounded-xl border-2 border-lilac/15 bg-white/80 px-4 py-2 text-ink outline-none focus:border-lilac"
-                    rows="3"
-                    value={formData.description}
-                    onChange={(e) =>
-                      setFormData({ ...formData, description: e.target.value })
-                    }
-                  />
-                </div>
-                <div className="flex gap-3">
-                  <button
-                    type="submit"
-                    className="press flex-1 rounded-xl bg-lilac px-4 py-2 font-bold text-white shadow-md disabled:opacity-60"
-                    disabled={isSaving}
-                  >
-                    {isSaving ? "Salvando..." : "Salvar"}
-                  </button>
-                  <button
-                    type="button"
-                    className="press rounded-xl bg-white/70 px-4 py-2 font-bold text-ink shadow-md"
-                    onClick={() => {
-                      setShowForm(false);
-                      setEditingList(null);
-                    }}
-                  >
-                    Cancelar
-                  </button>
-                </div>
-              </form>
-            </motion.div>
-          )}
-        </motion.div>
+        </div>
       )}
+
+      {/* Upload Wizard Modal */}
+      <AnimatePresence>
+        {showUploadWizard && (
+          <UploadWizard
+            onClose={() => setShowUploadWizard(false)}
+            onSaved={() => loadLists()}
+          />
+        )}
+      </AnimatePresence>
     </main>
   );
 }

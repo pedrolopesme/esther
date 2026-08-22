@@ -104,7 +104,7 @@ export default function ExerciseListClient({ subject, listId: listIdProp }) {
         </div>
       </motion.div>
 
-      <ExerciseWrapper exercises={exerciseData.exercises} />
+      <ExerciseWrapper exercises={exerciseData.exercises} subject={subject} slug={listId} title={exerciseData.title || exerciseData.nome || listId} />
     </div>
   );
 }

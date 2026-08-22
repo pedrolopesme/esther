@@ -11,6 +11,7 @@ import FillGapExercise from "./FillGapExercise";
 import TrueFalseExercise from "./TrueFalseExercise";
 import { useSounds } from "../hooks/useSounds";
 import { addPoints, subPoints } from "../utils/points";
+import { useExerciseTracker } from "../hooks/useExerciseTracker";
 
 function celebrate() {
   const colors = ["#FF70A6", "#A370FF", "#FFD166", "#06D6A0", "#4CC9F0", "#FF9770"];
@@ -29,7 +30,8 @@ function celebrate() {
   fire(0.1, { spread: 120, startVelocity: 45 });
 }
 
-export default function ExerciseWrapper({ exercises }) {
+export default function ExerciseWrapper({ exercises, subject, slug, title }) {
+  const tracker = useExerciseTracker({ subject, slug, title, total: exercises.length });
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const [completed, setCompleted] = useState(false);
@@ -70,6 +72,14 @@ export default function ExerciseWrapper({ exercises }) {
       }
     }
 
+    // Record answer for session tracking
+    tracker.recordAnswer(isCorrect, {
+      id: currentExercise?.id,
+      question: details?.question || currentExercise?.question || "",
+      selectedValue: isCorrect ? undefined : details?.selectedValue,
+      correctValue: isCorrect ? undefined : details?.correctValue,
+    });
+
     if (currentExerciseIndex < totalExercises - 1) {
       setTimeout(() => {
         setCurrentExerciseIndex(currentExerciseIndex + 1);
@@ -78,6 +88,8 @@ export default function ExerciseWrapper({ exercises }) {
       setCompleted(true);
       setProgress(100);
       playCompletedSound();
+      const netPoints = (score + (isCorrect ? 1 : 0)) * 10;
+      tracker.finish(netPoints).catch(() => {});
     }
   };
 
