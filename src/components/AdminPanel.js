@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { LogIn, LogOut, Pencil, Plus, RefreshCw, Save, Trash2, X } from "lucide-react";
 import { SUBJECTS } from "../utils/subjects";
 import { getSupabaseBrowserClient } from "../utils/supabase";
