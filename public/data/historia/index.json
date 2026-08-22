@@ -1,0 +1,20 @@
+[
+  {
+    "id": "mineracao_vida_minas_gerais",
+    "title": "História - Mineração e Vida nas Minas Gerais",
+    "description": "Lista com 35 exercícios de história cobrindo o Ciclo do Ouro, impostos coloniais, trabalho nas minas, desenvolvimento urbano, arte barroca e revoltas coloniais. Exercícios baseados no material das Unidades 7 e 8.",
+    "date": "2025-10-06",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "História",
+    "questionCount": 35
+  },
+  {
+    "id": "historia_revisao_prova",
+    "title": "História - Revisão para Prova",
+    "description": "Lista extensa com 150+ exercícios de história cobrindo Grandes Navegações, Descobrimento do Brasil, Sistema Colonial, Capitanias Hereditárias, Governo-Geral, Fundação do Rio de Janeiro, Ciclo da Cana-de-Açúcar, Entradas e Bandeiras. Exercícios baseados no material de revisão completo das Unidades 2, 3, 4, 5 e 6.",
+    "date": "2025-09-01",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "História",
+    "questionCount": 155
+  }
+]

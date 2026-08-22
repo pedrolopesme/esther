@@ -1,0 +1,102 @@
+[
+  {
+    "id": "english_revisao_prova",
+    "title": "Revisão de Prova - Inglês - Past Simple, Have to/Has to, Comparatives e Superlatives",
+    "description": "Lista com 45 exercícios de revisão para prova, cobrindo Past Simple (verbos regulares e irregulares), Have to/Has to, Comparatives e Superlatives, baseados no material de revisão.",
+    "date": "2025-11-16",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Inglês",
+    "questionCount": 45,
+    "subject": "ingles"
+  },
+  {
+    "id": "revisao3",
+    "title": "Caderno de Matemática - Revisão Geral",
+    "description": "Lista com 15 exercícios de matemática para revisão com base no conteúdo do caderno: números fracionários, sistema monetário, operações e expressões numéricas.",
+    "date": "2025-10-12",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Matemática",
+    "questionCount": 15,
+    "subject": "matematica"
+  },
+  {
+    "id": "revisao4",
+    "title": "Matemática - Operações com Números Naturais, Sistema Monetário e Números Fracionários",
+    "description": "Lista com 40 exercícios baseados nas Unidades 7, 8 e 9 do material didático. Os temas incluem expressões numéricas, divisões e multiplicações, problemas envolvendo dinheiro e troco, e frações em situações do cotidiano.",
+    "date": "2025-10-12",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Matemática",
+    "questionCount": 20,
+    "subject": "matematica"
+  },
+  {
+    "id": "animais_habitat",
+    "title": "Ciências - Animais, Habitat, Locomoção, Alimentação e Reprodução",
+    "description": "Lista com 35 exercícios de ciências cobrindo habitat dos animais, animais domésticos e silvestres, classificação, locomoção, alimentação, reprodução e desenvolvimento dos animais. Exercícios baseados na Unidade 2 - Vida e Evolução.",
+    "date": "2025-10-09",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Ciências",
+    "questionCount": 35,
+    "subject": "ciencias"
+  },
+  {
+    "id": "sentidos",
+    "title": "Ciências - Audição, Visão, Som e Propriedades da Luz",
+    "description": "Lista com 40 exercícios de ciências cobrindo o sentido da audição (anatomia das orelhas, doenças, surdez, saúde auditiva), som e suas propriedades, sentido da visão (anatomia dos olhos, problemas de visão, saúde visual) e luz (meios opaco, translúcido, transparente e espelhado). Exercícios baseados na Unidade 1 - Matéria e Energia.",
+    "date": "2025-10-09",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Ciências",
+    "questionCount": 40,
+    "subject": "ciencias"
+  },
+  {
+    "id": "campo_cidade",
+    "title": "Geografia - Setores Econômicos, Diversidade Cultural, Recursos Naturais e Indústria",
+    "description": "Lista com 50 exercícios de geografia cobrindo indústria, comércio e serviços, integração campo-cidade, diversidade cultural, comunidades tradicionais, recursos naturais (renováveis e não renováveis) e tipos de indústrias. Exercícios baseados nas Unidades 2, 3 e 4.",
+    "date": "2025-10-09",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Geografia",
+    "questionCount": 43,
+    "subject": "geografia"
+  },
+  {
+    "id": "campo_cidade2",
+    "title": "Geografia - Setores Econômicos, Diversidade Cultural, Recursos Naturais e Indústria",
+    "description": "Lista com 31 exercícios de geografia cobrindo indústria, comércio e serviços, integração campo-cidade, diversidade cultural, comunidades tradicionais, recursos naturais (renováveis e não renováveis) e tipos de indústrias. Exercícios baseados nas Unidades 2, 3 e 4.",
+    "date": "2025-10-09",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Geografia",
+    "questionCount": 31,
+    "subject": "geografia"
+  },
+  {
+    "id": "invetergrados_biodiversidade_terra",
+    "title": "Ciências - Animais Vertebrados, Biodiversidade, Planeta Terra e Solo",
+    "description": "Lista com 45 exercícios de ciências cobrindo grupos de vertebrados (peixes, répteis, anfíbios, aves e mamíferos), biodiversidade e preservação, planeta Terra (esfericidade, movimentos, fases da Lua, constelações) e solo. Exercícios baseados na Unidade 2.",
+    "date": "2025-10-08",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Ciências",
+    "questionCount": 45,
+    "subject": "ciencias"
+  },
+  {
+    "id": "Past_Simple_e_Grammar",
+    "title": "English - Past Simple, Irregular Verbs, Have to/Has to",
+    "description": "Lista com 40 exercícios de inglês cobrindo Past Simple (verbos regulares e irregulares), formas afirmativa, negativa e interrogativa, have to/has to, adjetivos comparativos e pronomes possessivos. Exercícios baseados nas Unidades 4-8.",
+    "date": "2025-10-08",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Inglês",
+    "questionCount": 40,
+    "subject": "ingles"
+  },
+  {
+    "id": "mineracao_vida_minas_gerais",
+    "title": "História - Mineração e Vida nas Minas Gerais",
+    "description": "Lista com 35 exercícios de história cobrindo o Ciclo do Ouro, impostos coloniais, trabalho nas minas, desenvolvimento urbano, arte barroca e revoltas coloniais. Exercícios baseados no material das Unidades 7 e 8.",
+    "date": "2025-10-06",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "História",
+    "questionCount": 35,
+    "subject": "historia"
+  }
+]

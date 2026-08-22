@@ -1,0 +1,29 @@
+[
+  {
+    "id": "animais_habitat",
+    "title": "Ciências - Animais, Habitat, Locomoção, Alimentação e Reprodução",
+    "description": "Lista com 35 exercícios de ciências cobrindo habitat dos animais, animais domésticos e silvestres, classificação, locomoção, alimentação, reprodução e desenvolvimento dos animais. Exercícios baseados na Unidade 2 - Vida e Evolução.",
+    "date": "2025-10-09",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Ciências",
+    "questionCount": 35
+  },
+  {
+    "id": "sentidos",
+    "title": "Ciências - Audição, Visão, Som e Propriedades da Luz",
+    "description": "Lista com 40 exercícios de ciências cobrindo o sentido da audição (anatomia das orelhas, doenças, surdez, saúde auditiva), som e suas propriedades, sentido da visão (anatomia dos olhos, problemas de visão, saúde visual) e luz (meios opaco, translúcido, transparente e espelhado). Exercícios baseados na Unidade 1 - Matéria e Energia.",
+    "date": "2025-10-09",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Ciências",
+    "questionCount": 40
+  },
+  {
+    "id": "invetergrados_biodiversidade_terra",
+    "title": "Ciências - Animais Vertebrados, Biodiversidade, Planeta Terra e Solo",
+    "description": "Lista com 45 exercícios de ciências cobrindo grupos de vertebrados (peixes, répteis, anfíbios, aves e mamíferos), biodiversidade e preservação, planeta Terra (esfericidade, movimentos, fases da Lua, constelações) e solo. Exercícios baseados na Unidade 2.",
+    "date": "2025-10-08",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Ciências",
+    "questionCount": 45
+  }
+]

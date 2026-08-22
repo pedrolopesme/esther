@@ -1,0 +1,92 @@
+[
+  {
+    "id": "english_revisao_prova",
+    "title": "Revisão de Prova - Inglês - Past Simple, Have to/Has to, Comparatives e Superlatives",
+    "description": "Lista com 45 exercícios de revisão para prova, cobrindo Past Simple (verbos regulares e irregulares), Have to/Has to, Comparatives e Superlatives, baseados no material de revisão.",
+    "date": "2025-11-16",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Inglês",
+    "questionCount": 45
+  },
+  {
+    "id": "Past_Simple_e_Grammar",
+    "title": "English - Past Simple, Irregular Verbs, Have to/Has to",
+    "description": "Lista com 40 exercícios de inglês cobrindo Past Simple (verbos regulares e irregulares), formas afirmativa, negativa e interrogativa, have to/has to, adjetivos comparativos e pronomes possessivos. Exercícios baseados nas Unidades 4-8.",
+    "date": "2025-10-08",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Inglês",
+    "questionCount": 40
+  },
+  {
+    "id": "ingles_cambridge_yle_starters",
+    "title": "Preparação Completa para Cambridge English YLE Starters",
+    "description": "Lista abrangente com mais de 100 exercícios cobrindo todos os tópicos necessários para o exame Cambridge English YLE Starters (Pre A1). Inclui vocabulário, gramática, animais, família, cores, números, partes do corpo e muito mais.",
+    "date": "2025-09-06",
+    "ano_letivo": "Cambridge English YLE Starters (Pre A1)",
+    "materia": "Inglês",
+    "questionCount": 100
+  },
+  {
+    "id": "ingles_revisao_completa",
+    "title": "🇺🇸 Inglês - Revisão Completa 🌟",
+    "description": "Lista extensa com 105 exercícios de inglês baseados no material de revisão, cobrindo clima, verbo 'to be', 'there was/were', comparativos, superlativos, pronomes possessivos, present simple, present continuous e leitura de textos.",
+    "date": "2025-08-24",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Inglês",
+    "questionCount": 105
+  },
+  {
+    "id": "revisao3",
+    "title": "Exercícios de Inglês para Iniciantes",
+    "description": "Lista com 30 exercícios de inglês baseados no nível Pre A1 Starters, focando em vocabulário, gramática e habilidades básicas.",
+    "date": "2025-05-14",
+    "ano_letivo": "1º ao 3º ano do Ensino Fundamental",
+    "materia": "Inglês",
+    "questionCount": 30
+  },
+  {
+    "id": "ingles_revisao_2",
+    "title": "Exercícios de Revisão de Inglês - Conteúdo Completo",
+    "description": "Lista com 35 novos exercícios variados para prática e revisão dos conteúdos de inglês para o 3º ano do Ensino Fundamental.",
+    "date": "2025-05-06",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Inglês",
+    "questionCount": 35
+  },
+  {
+    "id": "ingles_revisao_3",
+    "title": "Exercícios de Inglês - Possessivos, Demonstrativos, Have/Has e Question Words",
+    "description": "Lista com 30 exercícios focados em possessivos, this/that/these/those, have/has/haven't/hasn't, preposições e question words (what/where/when/who).",
+    "date": "2025-05-06",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Inglês",
+    "questionCount": 29
+  },
+  {
+    "id": "ingles_revisao",
+    "title": "Revisão de Inglês - Unidades 1, 2 e 3",
+    "description": "Lista com 30 exercícios variados para revisão da matéria de prova.",
+    "date": "2025-05-05",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Inglês",
+    "questionCount": 30
+  },
+  {
+    "id": "apostila_ingles_exercicios_reais",
+    "title": "Revisão de Inglês - Unidades 1, 2 e 3",
+    "description": "Lista com 30 exercícios variados com base no conteúdo da apostila de inglês até a página 47.",
+    "date": "2025-05-04",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Inglês",
+    "questionCount": 30
+  },
+  {
+    "id": "ingles_revisao_exercicios_unicos",
+    "title": "Revisão de Inglês - Pupils Book Unidades 1 a 3",
+    "description": "Lista com 30 exercícios variados com base no conteúdo do PDF de revisão de inglês.",
+    "date": "2025-05-04",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Inglês",
+    "questionCount": 14
+  }
+]

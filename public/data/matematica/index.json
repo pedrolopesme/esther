@@ -1,0 +1,92 @@
+[
+  {
+    "id": "revisao3",
+    "title": "Caderno de Matemática - Revisão Geral",
+    "description": "Lista com 15 exercícios de matemática para revisão com base no conteúdo do caderno: números fracionários, sistema monetário, operações e expressões numéricas.",
+    "date": "2025-10-12",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Matemática",
+    "questionCount": 15
+  },
+  {
+    "id": "revisao4",
+    "title": "Matemática - Operações com Números Naturais, Sistema Monetário e Números Fracionários",
+    "description": "Lista com 40 exercícios baseados nas Unidades 7, 8 e 9 do material didático. Os temas incluem expressões numéricas, divisões e multiplicações, problemas envolvendo dinheiro e troco, e frações em situações do cotidiano.",
+    "date": "2025-10-12",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Matemática",
+    "questionCount": 20
+  },
+  {
+    "id": "revisao_numeros_fracionarios",
+    "title": "Exercícios de Números Fracionários",
+    "description": "Lista com exercícios de matemática baseada em materiais de revisão - números fracionários, sistema de numeração decimal, números naturais, números ordinais, numeração romana e problemas aplicados.",
+    "date": "2025-08-31",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Matemática",
+    "questionCount": 70
+  },
+  {
+    "id": "revisao",
+    "title": "Exercícios de Revisão Geral",
+    "description": "Lista com 30 exercícios de matemática para revisão geral dos conteúdos estudados.",
+    "date": "2025-05-10",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Matemática",
+    "questionCount": 30
+  },
+  {
+    "id": "revisao2",
+    "title": "Exercícios Intermediários de Matemática",
+    "description": "Lista com 30 exercícios de matemática com desafios intermediários para revisão dos conteúdos.",
+    "date": "2025-05-08",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Matemática",
+    "questionCount": 30
+  },
+  {
+    "id": "revisao_unidade_3a_6",
+    "title": "Lista de Revisão de Matemática",
+    "description": "Lista com 35 exercícios de matemática para revisão com base nos conteúdos estudados.",
+    "date": "2025-05-05",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Matemática",
+    "questionCount": 35
+  },
+  {
+    "id": "caderno_matematica_maio_2025",
+    "title": "Caderno de Matemática Maio",
+    "description": "Lista com 12 exercícios de matemática para revisão com base no conteúdo do caderno.",
+    "date": "2025-05-04",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Matemática",
+    "questionCount": 12
+  },
+  {
+    "id": "livro_unidade_3_4_5",
+    "title": "Exercícios de Matemática - Unidades 3, 4 e 5",
+    "description": "Lista com 25 exercícios de matemática com base no conteúdo das unidades 3, 4 e 5 do livro.",
+    "date": "2025-05-04",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Matemática",
+    "questionCount": 25
+  },
+  {
+    "id": "livro_unidade_6",
+    "title": "Sistema de Numeração Decimal",
+    "description": "Lista com 25 exercícios de matemática baseados no conteúdo da unidade 6 sobre Sistema de Numeração Decimal.",
+    "date": "2025-05-04",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Matemática",
+    "questionCount": 25
+  },
+  {
+    "id": "matematica_basica_completa_pokemon",
+    "title": "Matemática com Pokémon",
+    "description": "Exercícios interativos com personagens Pokémon para trabalhar adição, multiplicação, números ordinais, números romanos e sistema decimal.",
+    "date": "2025-04-22",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Matemática",
+    "questionCount": 23
+  }
+]

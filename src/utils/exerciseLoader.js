@@ -19,7 +19,7 @@ export function useExerciseData(subject, listId) {
         setIsLoading(true);
         
         // Constrói o caminho do arquivo JSON
-        const response = await fetch(`/api/exercises?subject=${subject}&listId=${listId}`);
+        const response = await fetch(`/data/${subject}/${listId}.json`);
         
         if (!response.ok) {
           throw new Error(`Falha ao carregar exercícios: ${response.status}`);
@@ -51,7 +51,7 @@ export function useExerciseData(subject, listId) {
  */
 export async function getAvailableExerciseLists(subject) {
   try {
-    const response = await fetch(`/api/exercise-lists?subject=${subject}`);
+    const response = await fetch(`/data/${subject}/index.json`);
     
     if (!response.ok) {
       throw new Error(`Falha ao carregar listas: ${response.status}`);

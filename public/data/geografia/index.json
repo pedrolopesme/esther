@@ -1,0 +1,29 @@
+[
+  {
+    "id": "campo_cidade",
+    "title": "Geografia - Setores Econômicos, Diversidade Cultural, Recursos Naturais e Indústria",
+    "description": "Lista com 50 exercícios de geografia cobrindo indústria, comércio e serviços, integração campo-cidade, diversidade cultural, comunidades tradicionais, recursos naturais (renováveis e não renováveis) e tipos de indústrias. Exercícios baseados nas Unidades 2, 3 e 4.",
+    "date": "2025-10-09",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Geografia",
+    "questionCount": 43
+  },
+  {
+    "id": "campo_cidade2",
+    "title": "Geografia - Setores Econômicos, Diversidade Cultural, Recursos Naturais e Indústria",
+    "description": "Lista com 31 exercícios de geografia cobrindo indústria, comércio e serviços, integração campo-cidade, diversidade cultural, comunidades tradicionais, recursos naturais (renováveis e não renováveis) e tipos de indústrias. Exercícios baseados nas Unidades 2, 3 e 4.",
+    "date": "2025-10-09",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Geografia",
+    "questionCount": 31
+  },
+  {
+    "id": "geografia_revisao_prova",
+    "title": "Geografia - Revisão para Prova",
+    "description": "Lista extensa com 45 exercícios de geografia baseados no material de revisão, cobrindo orientação espacial, atividades econômicas, formação socioespacial e diversidade cultural do Brasil.",
+    "date": "2025-08-24",
+    "ano_letivo": "3º ano do Ensino Fundamental",
+    "materia": "Geografia",
+    "questionCount": 70
+  }
+]
