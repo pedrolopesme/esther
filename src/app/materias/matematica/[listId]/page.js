@@ -1,3 +1,4 @@
+import RequireAuth from "../../../../components/RequireAuth";
 import ExerciseListClient from '../../../../components/ExerciseListClient';
 import { generateStaticParamsForSubject } from '../../../../utils/staticParams';
 

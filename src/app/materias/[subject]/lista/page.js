@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import RequireAuth from "../../../../components/RequireAuth";
 import QueryExerciseListClient from "../../../../components/QueryExerciseListClient";
 import { SUBJECTS } from "../../../../utils/subjects";
 
@@ -9,7 +10,9 @@ export function generateStaticParams() {
 export default function SubjectExercisePage({ params }) {
   return (
     <Suspense fallback={<div className="flex min-h-[60vh] items-center justify-center text-ink-soft">Carregando exercícios...</div>}>
-      <QueryExerciseListClient subject={params.subject} />
+      <RequireAuth>
+        <QueryExerciseListClient subject={params.subject} />
+      </RequireAuth>
     </Suspense>
   );
 }

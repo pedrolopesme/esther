@@ -2,6 +2,7 @@ import { Fredoka } from "next/font/google";
 import Link from "next/link";
 import { Sparkles, Heart } from "lucide-react";
 import PlayerBadge from "../components/ui/PlayerBadge";
+import AuthNav from "../components/AuthNav";
 import "./globals.css";
 
 const fredoka = Fredoka({
@@ -32,7 +33,8 @@ export default function RootLayout({ children }) {
               <span className="text-gradient">Esther</span>
             </Link>
 
-            <div className="ml-auto">
+            <div className="ml-auto flex items-center gap-2">
+              <AuthNav />
               <PlayerBadge />
             </div>
           </div>
