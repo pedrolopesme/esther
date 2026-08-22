@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
       <body className={`${fredoka.variable} antialiased flex flex-col min-h-screen`}>
         {/* Floating glass pill header */}
         <header className="sticky top-0 z-50 px-3 pt-3 sm:px-6 sm:pt-5">
-          <div className="glass mx-auto flex max-w-5xl items-center gap-3 rounded-full px-4 py-2.5 shadow-[0_10px_30px_-12px_rgba(163,112,255,0.5)] sm:px-6 sm:py-3">
+          <div className="glass mx-auto flex w-full items-center gap-3 rounded-full px-4 py-2.5 shadow-[0_10px_30px_-12px_rgba(163,112,255,0.5)] sm:px-6 sm:py-3">
             <Link
               href="/"
               className="press flex items-center gap-2 font-display text-xl font-bold text-ink hover:-translate-y-0.5 sm:text-2xl"
