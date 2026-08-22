@@ -7,7 +7,7 @@ run: build
 	npm run start
 
 build-prod:
-	BASE_PATH=/esther npm run build
+	NEXT_PUBLIC_BASE_PATH=/esther npm run build
 
 test:
 	npm run lint

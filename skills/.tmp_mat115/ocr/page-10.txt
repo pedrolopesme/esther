@@ -1,0 +1,26 @@
+E | Critérios de Divisibilidade - PA o IDA.
+ty Existem algumas regras que permitem vetficar se um número é divisível por outro sem :
+o efetuar a divisão. Essas regras chamam-se CRITÉRIOS DE DIVISIBILIDADE,
+"a “Um número é divisível por 2 ' Um número é divisível por 9
+A quando ele é par, ou seja, o | quando as somas dos valores |
+Ro algarismo da unidade simples é 0, ' absolutos de seus algarismos é
+o  2,4,60U8, | ' múltiplo de 9, |
+S | |]
+e] 105 não é divisível por 2, porque | | 105 não é divisível por 9, porgue
+o * nãoépar. | | 1+5 =6, não é múltiplo de 9. |
+a | Um número é divisível por 3. | Um número é divisível por 10 | |
+- quando as somas dos valores |, | quando o algarismo da unidade
+E) absolutos de seus algarismos é | ' simples for O.
+— múltiplo de 3. | |
+| | 105 não é divisível por 10, ;
+À | 105 é divisível por 3, porque | | porque o algarismo da unidade |
+a | 1+5=6, é múltiplo de 3. | | simples não é O. |
+4 !
+x | Um número é divisível por 5 | ES A “4 :
+| quando o algarismo da unidade | ia Pira PNR E
+E) | simples for O ou 5. | a! Sd Ea
+| 105 é divisível por 5, porque o | = o E
+g) | algarismo da unidade simples é | e RS DD. |
+; o A“ ano- Anual (D Casa Aula Dataiá j ipi |
+é t
+DE ps a DR O AD O SA E a a SS Ga DEI cn

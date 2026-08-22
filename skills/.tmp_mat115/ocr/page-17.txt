@@ -1,0 +1,30 @@
+| K:
+| Matemática Unidade 6 - Mínimo Múltiplo Comum j p Ms À
+; ? S ; y "à E ” M E
+j à Outra situação: RR
+ago encontravam-se dois sapos irmãos de nomes Rapid e Lentid. O Rapid apenas + Da
+dá saltos de 5 unidades e o Lentid apenas dá saltos de 3 unidades, (O Rapid passava nas vitó- | o |
+E ' FA > j , é é o é K
+à Has-Pegias múltiplos de 5 e o Lentid passava nas vitórias-régias múltiplos de 3.) ; A — RR
+Um dia os irmãos ficam intrigados ao pensarem no seguinte problema: Se as vitórias-ré- | É er q
+gias estivessem alinhadas, qual seria a primeira em que os dois parariam juntos?” | so. E 4
+Muito curiosos, decidiram experimentar: E! E rita
+| 8. em ty ri
+16: REA A SE Lo SR 115 OS | ao óõí“
+Então os dois irmãos encontrar-se-iam no número 15. 4 antas a
+Verifica-se assim que o menor múltiplo comum entre 3e 5 é 15. EE ps
+| Representamos: MMC (3,5) = 15 | E — Em
+| DT NT TT TD TITO SAS Se | te a
+e Vejamos mais um exemplo, mas agora envolvendo três valores: E e al
+| Três vendedores visitam uma cidade regularmente, um deles de 5 em 5 dias, o outro de 8 -— Ee
+em 8 dias e o terceiro de 10 em 10 dias. | E: É = as Emo
+Hoje almoçaram juntos naquela cidade. Daqui a quantos dias voltarão a se encontrar | WE d E od
+nessa cidade? 21 €m “e
+Vamos escrever os múltiplos de 5, 8e 10 e verificar dg [7 . e S | =; . Ê Hi a a
+qual é o menor dos múltiplos comuns, obtendo assim a e vd . ; y à ê | O
+nossa resposta. ee ã BRs
+M(5) = (0, 5, 10, 15, 20, 25, 30, 35, 40,45...) ,. E = “E E
+M(8) = 10,8, 16, 24, 32,40,48,..) caos ” A
+M(10) = 0, 10, 20, 30,40, 50...) 28 Ros
+| Assim podemos dizer que ao fim de 40 dias os três vendedores voltam a almoçar juntos. | O um: E” a
+cão 4º ano «Anual (O Casa (BD aula Dates, a, e q o » ;

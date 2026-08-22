@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef } from "react";
+import { assetPath } from '../utils/assetPath';
 
 export function useSounds() {
   const correctSoundRef = useRef(null);
@@ -9,9 +10,9 @@ export function useSounds() {
   
   useEffect(() => {
     // Initialize audio objects only on client-side
-    correctSoundRef.current = new Audio("/duolingo-correct.mp3");
-    wrongSoundRef.current = new Audio("/duolingo-wrong.mp3");
-    completedSoundRef.current = new Audio("/duolingo-completed-lesson.mp3");
+    correctSoundRef.current = new Audio(assetPath("/duolingo-correct.mp3"));
+    wrongSoundRef.current = new Audio(assetPath("/duolingo-wrong.mp3"));
+    completedSoundRef.current = new Audio(assetPath("/duolingo-completed-lesson.mp3"));
     
     // Preload sounds
     correctSoundRef.current.load();

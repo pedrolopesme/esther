@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { assetPath } from '../utils/assetPath';
 import { motion } from "framer-motion";
 
 export default function Home() {
@@ -131,7 +132,7 @@ export default function Home() {
                 style={{ backgroundColor: subject.color }}
               >
                 <Image
-                  src={subject.icon}
+                  src={assetPath(subject.icon)}
                   alt={`Ícone de ${subject.title}`}
                   width={64}
                   height={64}
