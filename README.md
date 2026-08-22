@@ -32,6 +32,14 @@ A Esther é uma plataforma de exercícios escolares para crianças do Ensino Fun
 
 ![Exercício interativo de Matemática](docs/screenshots/exercicio.webp)
 
+## 📘 Guias do projeto
+
+- [AGENTS.md](AGENTS.md) — contexto técnico, regras de contribuição, comandos e checklist de validação
+- [DESIGN.md](DESIGN.md) — direção visual Kawaii Premium, tokens de cor, tipografia, componentes e estados de interação
+
+Consulte esses dois arquivos antes de alterar a arquitetura ou a experiência visual da Esther.
+
+
 ## 🚀 Rodando localmente
 
 ### Pré-requisitos
@@ -119,6 +127,8 @@ Ao adicionar ou alterar uma lista, atualize também o `index.json` da matéria e
 │   ├── hooks/                # comportamentos reutilizáveis
 │   └── utils/                # carregamento de dados e assets
 ├── docs/screenshots/         # screenshots usadas nesta documentação
+├── AGENTS.md                 # guia técnico para agentes e contribuidores
+├── DESIGN.md                 # guia do design system e da experiência visual
 ├── .github/workflows/        # deploy automático no GitHub Pages
 ├── Makefile
 └── next.config.mjs
