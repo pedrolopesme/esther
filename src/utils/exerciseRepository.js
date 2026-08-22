@@ -17,6 +17,7 @@ function normalizeList(row) {
 
 export async function getLatestExerciseLists(limit = 10) {
   const supabase = getSupabaseBrowserClient();
+  if (!supabase) return [];
   const { data, error } = await supabase
     .from("exercise_lists")
     .select(LIST_SUMMARY_COLUMNS)
@@ -31,6 +32,7 @@ export async function getLatestExerciseLists(limit = 10) {
 
 export async function getAvailableExerciseLists(subject) {
   const supabase = getSupabaseBrowserClient();
+  if (!supabase) return [];
   const { data, error } = await supabase
     .from("exercise_lists")
     .select(LIST_SUMMARY_COLUMNS)
@@ -45,6 +47,7 @@ export async function getAvailableExerciseLists(subject) {
 
 export async function getExerciseData(subject, slug) {
   const supabase = getSupabaseBrowserClient();
+  if (!supabase) return null;
   const { data, error } = await supabase
     .from("exercise_lists")
     .select(LIST_DETAIL_COLUMNS)

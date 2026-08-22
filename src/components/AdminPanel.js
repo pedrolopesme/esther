@@ -320,6 +320,10 @@ export default function AdminPanel() {
   const supabase = useMemo(() => getSupabaseBrowserClient(), []);
 
   useEffect(() => {
+    if (!supabase) {
+      setIsReady(true);
+      return;
+    }
     let mounted = true;
     supabase.auth.getSession().then(({ data }) => {
       if (!mounted) return;
@@ -385,6 +389,7 @@ export default function AdminPanel() {
   }
 
   if (!isReady) return <div className="flex min-h-[60vh] items-center justify-center text-ink-soft">Carregando painel...</div>;
+  if (!supabase) return <div className="mx-auto max-w-md px-4 pb-16 pt-12"><div className="clay bg-candy-soft p-6 text-center"><div className="mb-2 text-4xl">⚙️</div><h1 className="font-display text-xl font-bold text-[#a62f5f]">Supabase não configurado</h1><p className="mt-2 text-sm text-ink-soft">As variáveis de ambiente do Supabase não foram definidas. Configure NEXT_PUBLIC_SUPABASE_URL e NEXT_PUBLIC_SUPABASE_ANON_KEY.</p></div></div>;
   if (!session) return <LoginForm onLogin={handleLogin} isSubmitting={isSubmitting} error={error} />;
   if (!isAdmin) return <div className="mx-auto max-w-md px-4 pb-16 pt-12"><div className="clay bg-candy-soft p-6 text-center"><div className="mb-2 text-4xl">🔒</div><h1 className="font-display text-xl font-bold text-[#a62f5f]">Acesso restrito</h1><p className="mt-2 text-sm text-ink-soft">{error ?? "Verificando permissões..."}</p><button className="press mt-5 rounded-2xl bg-white px-4 py-2 font-bold text-ink shadow-sm" onClick={handleLogout}>Sair</button></div></div>;
   return <AdminWorkspace user={session.user} onLogout={handleLogout} />;
