@@ -62,10 +62,12 @@ export default function ParentDashboard() {
   const [accessLogs, setAccessLogs] = useState([]);
   const [isLoadingChildren, setIsLoadingChildren] = useState(true);
   const [isLoadingLogs, setIsLoadingLogs] = useState(false);
-  const [linkEmail, setLinkEmail] = useState("");
-  const [linkError, setLinkError] = useState(null);
-  const [linkSuccess, setLinkSuccess] = useState(null);
-  const [isLinking, setIsLinking] = useState(false);
+  const [childName, setChildName] = useState("");
+  const [childUsername, setChildUsername] = useState("");
+  const [childPassword, setChildPassword] = useState("");
+  const [registerError, setRegisterError] = useState(null);
+  const [registerSuccess, setRegisterSuccess] = useState(null);
+  const [isRegistering, setIsRegistering] = useState(false);
 
   // Redirect non-parents
   useEffect(() => {
@@ -115,29 +117,44 @@ export default function ParentDashboard() {
       });
   }, [selectedChild, supabase]);
 
-  // Link a child by email
-  async function handleLinkChild(e) {
+  // Register a new child
+  async function handleRegisterChild(e) {
     e.preventDefault();
-    setLinkError(null);
-    setLinkSuccess(null);
-    setIsLinking(true);
+    setRegisterError(null);
+    setRegisterSuccess(null);
+    setIsRegistering(true);
 
     try {
-      const { data, error } = await supabase.rpc("link_child", {
-        child_email: linkEmail.trim().toLowerCase(),
-      });
-      if (error) throw error;
-      if (!data.ok) {
-        setLinkError(data.error);
+      const { data: { session } } = await supabase.auth.getSession();
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/register-child`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${session.access_token}`,
+          },
+          body: JSON.stringify({
+            display_name: childName.trim(),
+            username: childUsername.trim(),
+            password: childPassword,
+          }),
+        }
+      );
+      const result = await res.json();
+      if (!result.ok) {
+        setRegisterError(result.error);
       } else {
-        setLinkSuccess(`${data.display_name} vinculado(a) com sucesso!`);
-        setLinkEmail("");
+        setRegisterSuccess(`${result.display_name} cadastrado(a)! Usuário: ${result.username}`);
+        setChildName("");
+        setChildUsername("");
+        setChildPassword("");
         loadChildren();
       }
     } catch (err) {
-      setLinkError(err.message || "Erro ao vincular filho.");
+      setRegisterError(err.message || "Erro ao cadastrar filho.");
     } finally {
-      setIsLinking(false);
+      setIsRegistering(false);
     }
   }
 
@@ -199,32 +216,53 @@ export default function ParentDashboard() {
       <div className="grid gap-6 lg:grid-cols-[320px_1fr]">
         {/* Left: children list + link form */}
         <div className="space-y-5">
-          {/* Link form */}
+          {/* Register form */}
           <Card className="p-5">
             <h2 className="mb-3 flex items-center gap-2 font-display text-lg font-bold text-ink">
-              <UserPlus className="h-5 w-5 text-candy" strokeWidth={2.5} /> Vincular filho
+              <UserPlus className="h-5 w-5 text-candy" strokeWidth={2.5} /> Cadastrar filho
             </h2>
-            <form onSubmit={handleLinkChild} className="space-y-3">
+            <form onSubmit={handleRegisterChild} className="space-y-3">
               <input
                 className={inputClass}
-                type="email"
-                placeholder="E-mail do estudante"
-                value={linkEmail}
-                onChange={(e) => setLinkEmail(e.target.value)}
+                type="text"
+                placeholder="Nome da criança"
+                value={childName}
+                onChange={(e) => setChildName(e.target.value)}
                 required
               />
-              <Button variant="candy" className="w-full" disabled={isLinking}>
-                {isLinking ? "Vinculando..." : "Vincular"}
+              <input
+                className={inputClass}
+                type="text"
+                placeholder="Usuário para login"
+                value={childUsername}
+                onChange={(e) => setChildUsername(e.target.value)}
+                required
+                minLength={3}
+                maxLength={30}
+                pattern="[a-zA-Z0-9_]+"
+                title="Apenas letras, números e _"
+              />
+              <input
+                className={inputClass}
+                type="password"
+                placeholder="Senha"
+                value={childPassword}
+                onChange={(e) => setChildPassword(e.target.value)}
+                required
+                minLength={6}
+              />
+              <Button variant="candy" className="w-full" disabled={isRegistering}>
+                {isRegistering ? "Cadastrando..." : "Cadastrar"}
               </Button>
             </form>
-            {linkError && (
+            {registerError && (
               <p className="mt-2 rounded-xl bg-candy-soft px-3 py-2 text-xs font-semibold text-[#a62f5f]">
-                {linkError}
+                {registerError}
               </p>
             )}
-            {linkSuccess && (
+            {registerSuccess && (
               <p className="mt-2 rounded-xl bg-mint-soft px-3 py-2 text-xs font-semibold text-[#05795b]">
-                {linkSuccess}
+                {registerSuccess}
               </p>
             )}
           </Card>
@@ -240,7 +278,7 @@ export default function ParentDashboard() {
               </div>
             ) : children.length === 0 ? (
               <p className="py-4 text-center text-sm text-ink-soft">
-                Nenhum filho vinculado ainda. Use o formulário acima para vincular pelo e-mail.
+                Nenhum filho cadastrado ainda. Use o formulário acima para cadastrar.
               </p>
             ) : (
               <ul className="space-y-2">

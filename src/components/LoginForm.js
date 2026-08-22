@@ -31,11 +31,11 @@ export default function LoginForm() {
 
     try {
       if (mode === "login") {
+        const loginEmail = email.includes("@") ? email : `${email.trim().toLowerCase()}@esther.internal`;
         const { error: loginError, data: loginData } = await supabase.auth.signInWithPassword({
-          email,
+          email: loginEmail,
           password,
         });
-        if (loginError) throw loginError;
         setSuccess("Você entrou! Redirecionando...");
 
         // Redirect by role
@@ -145,11 +145,12 @@ export default function LoginForm() {
           )}
 
           <label className="block">
-            <span className="mb-1.5 block text-sm font-semibold text-ink">E-mail</span>
+            <span className="mb-1.5 block text-sm font-semibold text-ink">E-mail ou usuário</span>
             <input
               className={inputClass}
-              type="email"
+              type="text"
               autoComplete="email"
+              placeholder={mode === "login" ? "seuemail@exemplo.com ou seuusuario" : "seuemail@exemplo.com"}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
