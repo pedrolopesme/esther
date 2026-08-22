@@ -1,15 +1,12 @@
 "use client";
 
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useEffect } from "react";
 import { useAuth } from "./useAuth";
+import { logChildEvent } from "../utils/childEvents";
 
 /**
  * Tracks exercise session metrics and persists to Supabase on completion.
- *
- * Usage:
- *   const tracker = useExerciseTracker({ subject, slug, title, total });
- *   tracker.recordAnswer(isCorrect, details);
- *   await tracker.finish(pointsEarned);
+ * Also logs structured events: 'exercise_started' and 'exercise_completed'.
  */
 export function useExerciseTracker({ subject, slug, title, total }) {
   const { user, child, supabase } = useAuth();
@@ -18,6 +15,22 @@ export function useExerciseTracker({ subject, slug, title, total }) {
   const wrong = useRef(0);
   const wrongDetails = useRef([]);
   const saved = useRef(false);
+  const startedEventLogged = useRef(false);
+
+  // Log exercise_started event on mount if child is present
+  useEffect(() => {
+    if (child?.id && !startedEventLogged.current && subject && slug) {
+      startedEventLogged.current = true;
+      logChildEvent({
+        childId: child.id,
+        eventType: "exercise_started",
+        subject,
+        listSlug: slug,
+        listTitle: title,
+        metadata: { totalQuestions: total },
+      });
+    }
+  }, [child?.id, subject, slug, title, total]);
 
   const recordAnswer = useCallback(
     (isCorrect, details) => {
@@ -64,6 +77,25 @@ export function useExerciseTracker({ subject, slug, title, total }) {
           completed_at: now,
           duration_seconds: duration,
         });
+
+        // Log structured exercise_completed event
+        if (child?.id) {
+          logChildEvent({
+            childId: child.id,
+            eventType: "exercise_completed",
+            subject,
+            listSlug: slug,
+            listTitle: title,
+            metadata: {
+              totalQuestions: total,
+              correctCount: correct.current,
+              wrongCount: wrong.current,
+              durationSeconds: duration,
+              scorePct: total > 0 ? Math.round((correct.current / total) * 100) : 0,
+              pointsEarned,
+            },
+          });
+        }
       } catch (err) {
         console.error("Failed to save exercise session:", err);
       }

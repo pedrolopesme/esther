@@ -1,12 +1,9 @@
 "use client";
 
-import { useAccessLog } from "../hooks/useAccessLog";
-
 /**
- * Client component that logs page visits for authenticated students.
- * Mount once in the layout; it reads the current pathname automatically.
+ * AccessLogProvider no longer logs raw granular path clicks,
+ * as activity is now tracked via structured events ('login', 'exercise_started', 'exercise_completed').
  */
 export default function AccessLogProvider() {
-  useAccessLog();
   return null;
 }

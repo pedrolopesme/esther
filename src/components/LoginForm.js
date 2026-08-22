@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { LogIn, UserPlus, Sparkles, ArrowLeft } from "lucide-react";
 import { getSupabaseBrowserClient } from "../utils/supabase";
+import { logChildEvent } from "../utils/childEvents";
 
 const inputClass =
   "w-full rounded-2xl border-2 border-lilac/15 bg-white/80 px-4 py-3 text-sm text-ink outline-none transition focus:border-lilac focus:ring-4 focus:ring-lilac/10";
@@ -48,6 +49,10 @@ export default function LoginForm() {
             display_name: childData.display_name,
             parent_id: childData.parent_id,
           }));
+          logChildEvent({
+            childId: childData.child_id,
+            eventType: "login",
+          });
           router.push("/");
           return;
         }
