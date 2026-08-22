@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Star, LogIn, LogOut, Settings, Users, User, ChevronDown } from "lucide-react";
@@ -17,7 +17,6 @@ export default function HeaderUser() {
   const [points, setPoints] = useState(0);
   const [pop, setPop] = useState(false);
   const [open, setOpen] = useState(false);
-  const menuRef = useRef(null);
 
   useEffect(() => {
     setPoints(getPoints());
@@ -33,16 +32,6 @@ export default function HeaderUser() {
       window.removeEventListener("storage", handleUpdate);
     };
   }, []);
-
-  // Close dropdown on outside click
-  useEffect(() => {
-    if (!open) return;
-    function handleClick(e) {
-      if (menuRef.current && !menuRef.current.contains(e.target)) setOpen(false);
-    }
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
-  }, [open]);
 
   // Loading skeleton
   if (isLoading) {
@@ -100,12 +89,15 @@ export default function HeaderUser() {
         </Link>
       )}
 
-      {/* Avatar + name dropdown */}
-      <div className="relative" ref={menuRef}>
-        <button
-          onClick={() => setOpen((v) => !v)}
+      {/* Avatar + name with hover dropdown */}
+      <div
+        className="relative"
+        onMouseEnter={() => setOpen(true)}
+        onMouseLeave={() => setOpen(false)}
+      >
+        <div
           className={cn(
-            "press flex items-center gap-1.5 rounded-full bg-white/70 py-1 pl-1 pr-2 shadow-sm ring-1 ring-white transition sm:pr-2.5",
+            "flex cursor-pointer items-center gap-1.5 rounded-full bg-white/70 py-1 pl-1 pr-2 shadow-sm ring-1 ring-white transition sm:pr-2.5",
             open ? "ring-lilac/40" : "hover:ring-lilac/40",
           )}
         >
@@ -121,31 +113,32 @@ export default function HeaderUser() {
               open && "rotate-180",
             )}
           />
-        </button>
+        </div>
 
         {/* Dropdown menu */}
-        {open && (
-          <div className="absolute right-0 top-full z-50 mt-2 w-44 overflow-hidden rounded-2xl bg-white/95 shadow-xl ring-1 ring-lilac/10 backdrop-blur">
-            <Link
-              href="/perfil"
-              onClick={() => setOpen(false)}
-              className="flex items-center gap-2.5 px-4 py-2.5 text-sm font-semibold text-ink transition hover:bg-lilac/10"
-            >
-              <User className="h-4 w-4 text-lilac" />
-              Perfil
-            </Link>
-            <button
-              onClick={() => {
-                setOpen(false);
-                handleLogout();
-              }}
-              className="flex w-full items-center gap-2.5 px-4 py-2.5 text-sm font-semibold text-ink transition hover:bg-candy/10"
-            >
-              <LogOut className="h-4 w-4 text-candy" />
-              Sair
-            </button>
-          </div>
-        )}
+        <div
+          className={cn(
+            "absolute right-0 top-full z-50 mt-1 w-44 overflow-hidden rounded-2xl bg-white/95 shadow-xl ring-1 ring-lilac/10 backdrop-blur transition-all duration-150",
+            open
+              ? "pointer-events-auto translate-y-0 opacity-100"
+              : "pointer-events-none -translate-y-1 opacity-0",
+          )}
+        >
+          <Link
+            href="/perfil"
+            className="flex items-center gap-2.5 px-4 py-2.5 text-sm font-semibold text-ink transition hover:bg-lilac/10"
+          >
+            <User className="h-4 w-4 text-lilac" />
+            Perfil
+          </Link>
+          <button
+            onClick={handleLogout}
+            className="flex w-full items-center gap-2.5 px-4 py-2.5 text-sm font-semibold text-ink transition hover:bg-candy/10"
+          >
+            <LogOut className="h-4 w-4 text-candy" />
+            Sair
+          </button>
+        </div>
       </div>
 
       {/* Stars */}

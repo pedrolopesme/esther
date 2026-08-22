@@ -2,6 +2,7 @@ import { Fredoka } from "next/font/google";
 import Link from "next/link";
 import { Sparkles, Heart } from "lucide-react";
 import HeaderUser from "../components/HeaderUser";
+import { AuthProvider } from "../hooks/useAuth";
 import AccessLogProvider from "../components/AccessLogProvider";
 import "./globals.css";
 
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt-BR">
       <body className={`${fredoka.variable} antialiased flex flex-col min-h-screen`}>
+        <AuthProvider>
         <AccessLogProvider />
         {/* Floating glass pill header */}
         <header className="sticky top-0 z-50 px-3 pt-3 sm:px-6 sm:pt-5">
@@ -56,6 +58,7 @@ export default function RootLayout({ children }) {
             </p>
           </div>
         </footer>
+        </AuthProvider>
       </body>
     </html>
   );

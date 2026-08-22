@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { createContext, useContext, useEffect, useState, useCallback } from "react";
 import { getSupabaseBrowserClient } from "../utils/supabase";
 
-export function useAuth() {
+const AuthContext = createContext(null);
+
+export function AuthProvider({ children }) {
   const [session, setSession] = useState(null);
   const [profile, setProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -50,7 +52,7 @@ export function useAuth() {
     return () => listener.subscription.unsubscribe();
   }, [refresh, supabase]);
 
-  return {
+  const value = {
     session,
     user: session?.user ?? null,
     profile,
@@ -63,4 +65,12 @@ export function useAuth() {
     supabase,
     refresh,
   };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
+export function useAuth() {
+  const ctx = useContext(AuthContext);
+  if (!ctx) throw new Error("useAuth must be used within AuthProvider");
+  return ctx;
 }
