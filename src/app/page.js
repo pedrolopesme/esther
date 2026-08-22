@@ -1,10 +1,29 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { assetPath } from '../utils/assetPath';
 import { motion } from "framer-motion";
+import { Sparkles, CalendarDays, ListChecks, ArrowRight, Wand2 } from "lucide-react";
+import { assetPath } from "../utils/assetPath";
+import { SUBJECTS, getSubject } from "../utils/subjects";
+import SubjectCard from "../components/SubjectCard";
+import Badge from "../components/ui/Badge";
+import Sticker from "../components/ui/Sticker";
+
+const gridVariants = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+};
+
+const listVariants = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.06 } },
+};
+
+const rowVariants = {
+  hidden: { x: -16, opacity: 0 },
+  show: { x: 0, opacity: 1, transition: { type: "spring", stiffness: 260, damping: 22 } },
+};
 
 export default function Home() {
   const [latestLists, setLatestLists] = useState([]);
@@ -29,165 +48,135 @@ export default function Home() {
     }
     fetchLatest();
   }, []);
-  // Lista de matérias disponíveis
-  const subjects = [
-    {
-      id: "matematica",
-      title: "🔢 Matemática",
-      icon: "/globe.svg",
-      color: "rgba(255, 105, 180, 0.1)"
-    },
-    {
-      id: "portugues", 
-      title: "📚 Português",
-      icon: "/file.svg",
-      color: "rgba(255, 20, 147, 0.1)"
-    },
-    {
-      id: "ingles",
-      title: "🇺🇸 Inglês",
-      icon: "/window.svg",
-      color: "rgba(218, 112, 214, 0.1)"
-    },
-    {
-      id: "geografia",
-      title: "🌍 Geografia",
-      icon: "/vercel.svg",
-      color: "rgba(255, 130, 193, 0.1)"
-    },
-    {
-      id: "historia",
-      title: "📜 História",
-      icon: "/globe.svg",
-      color: "rgba(255, 165, 0, 0.1)"
-    },
-    {
-      id: "ciencias",
-      title: "🔬 Ciências",
-      icon: "/globe.svg",
-      color: "rgba(144, 238, 144, 0.15)"
-    },
-  ];
-
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const item = {
-    hidden: { y: 20, opacity: 0 },
-    show: { y: 0, opacity: 1 }
-  };
 
   return (
-    <div className="flex flex-col items-center py-12 px-6">
-      <motion.div
-        className="mb-8"
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <h1 className="text-5xl font-bold text-center bg-gradient-to-r from-[var(--primary)] via-[var(--secondary)] to-[var(--purple)] text-transparent bg-clip-text">
-          ✨ Vamos estudar juntas! ✨
-        </h1>
-      </motion.div>
+    <div className="mx-auto max-w-5xl px-4 pb-16 pt-8 sm:pt-12">
+      {/* ---------- Hero ---------- */}
+      <section className="relative mb-14 text-center">
+        <Sticker className="left-2 top-0 text-4xl sm:left-10" anim="float">⭐</Sticker>
+        <Sticker className="right-2 top-4 text-4xl sm:right-12" anim="float-slow">🌈</Sticker>
+        <Sticker className="left-8 bottom-0 text-3xl" anim="wiggle">☁️</Sticker>
+        <Sticker className="right-10 bottom-2 text-3xl" anim="bob">✏️</Sticker>
 
-      <motion.div
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className="max-w-2xl mx-auto mb-12 text-center"
-      >
-        <p className="text-xl text-[var(--text-secondary)]">
-          🌟 Hora de se preparar para as provas! Aqui você vai aprender de um jeito super divertido e colorido! 🌈
-        </p>
-      </motion.div>
-
-      <div className="flex flex-col items-center w-full max-w-4xl">
-        <motion.h2 
-          className="text-2xl font-bold mb-8 text-[var(--text-primary)]"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 200, damping: 18 }}
         >
-          💖 Escolha sua matéria favorita 💖
+          <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-1.5 text-sm font-semibold text-lilac shadow-sm backdrop-blur">
+            <Wand2 className="h-4 w-4" strokeWidth={2.5} /> Aventura de estudos
+          </span>
+          <h1 className="font-display text-4xl font-bold leading-tight sm:text-6xl">
+            <span className="text-gradient">Vamos estudar juntas!</span>
+            <span className="ml-2 inline-block anim-wiggle">✨</span>
+          </h1>
+          <p className="mx-auto mt-4 max-w-xl text-lg text-ink-soft">
+            🌟 Escolha uma matéria, resolva desafios super divertidos e colecione
+            estrelinhas para subir de nível! 🚀
+          </p>
+        </motion.div>
+      </section>
+
+      {/* ---------- Subject grid ---------- */}
+      <section className="mb-16">
+        <motion.h2
+          className="mb-6 flex items-center justify-center gap-2 font-display text-2xl font-bold text-ink"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+        >
+          <span className="anim-bob">💖</span> Escolha sua matéria favorita
+          <span className="anim-bob">💖</span>
         </motion.h2>
 
-        <motion.div 
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full"
-          variants={container}
+        <motion.div
+          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          variants={gridVariants}
           initial="hidden"
           animate="show"
         >
-          {subjects.map((subject, index) => (
-            <motion.div key={subject.id} variants={item} custom={index}>
-              <Link 
-                href={`/materias/${subject.id}`} 
-                className="duolingo-subject-card"
-                style={{ backgroundColor: subject.color }}
-              >
-                <Image
-                  src={assetPath(subject.icon)}
-                  alt={`Ícone de ${subject.title}`}
-                  width={64}
-                  height={64}
-                  className="duolingo-subject-icon"
-                />
-                <h3 className="duolingo-subject-title">{subject.title}</h3>
-              </Link>
-            </motion.div>
+          {SUBJECTS.map((subject) => (
+            <SubjectCard key={subject.id} subject={subject} />
           ))}
         </motion.div>
-      </div>
+      </section>
 
-      {/* Últimas listas de exercícios */}
-      <motion.div
-        className="w-full max-w-4xl mt-12"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
-        <h2 className="text-2xl font-bold mb-4 text-[var(--text-primary)]">📋 Últimas listas de exercícios</h2>
+      {/* ---------- Latest lists ---------- */}
+      <section>
+        <motion.h2
+          className="mb-6 flex items-center gap-2 font-display text-2xl font-bold text-ink"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <span className="grid h-9 w-9 place-items-center rounded-2xl bg-gradient-to-br from-sky to-lilac text-white shadow-md">
+            <Sparkles className="h-5 w-5" strokeWidth={2.5} />
+          </span>
+          Novidades fresquinhas
+        </motion.h2>
 
         {isLoadingLatest && (
-          <div className="flex justify-center p-6">
-            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-[var(--primary)]"></div>
+          <div className="flex justify-center p-10">
+            <span className="h-12 w-12 animate-spin rounded-full border-4 border-lilac/25 border-t-lilac" />
           </div>
         )}
 
         {latestError && (
-          <div className="p-4 rounded-lg bg-red-100 text-red-800">
+          <div className="clay-sm bg-candy-soft p-4 text-center font-semibold text-[#a62f5f]">
             {latestError}
           </div>
         )}
 
         {!isLoadingLatest && !latestError && (
-          <div className="space-y-3">
-            {latestLists.map((item) => (
-              <Link key={`${item.subject}-${item.id}`} href={`/materias/${item.subject}/${item.id}`} className="block">
-                <div className="duolingo-card p-4 hover:shadow-md transition-shadow border-l-4 border-[var(--blue)]">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h3 className="text-lg font-semibold text-[var(--text-primary)]">{item.title}</h3>
-                      <div className="flex flex-wrap gap-2 mt-1 text-sm text-[var(--text-secondary)]">
-                        <span className="inline-block bg-[rgba(88,204,2,0.1)] px-2 py-0.5 rounded-full">{item.materia}</span>
-                        <span className="inline-block bg-[rgba(255,200,0,0.1)] px-2 py-0.5 rounded-full">{new Date(item.date).toLocaleDateString('pt-BR')}</span>
-                        <span className="inline-block bg-[rgba(28,176,246,0.1)] px-2 py-0.5 rounded-full">{item.questionCount} questões</span>
+          <motion.div
+            className="grid gap-3"
+            variants={listVariants}
+            initial="hidden"
+            animate="show"
+          >
+            {latestLists.map((item) => {
+              const subject = getSubject(item.subject);
+              const Icon = subject?.icon ?? ListChecks;
+              return (
+                <motion.div key={`${item.subject}-${item.id}`} variants={rowVariants}>
+                  <Link
+                    href={`/materias/${item.subject}/${item.id}`}
+                    className="clay group flex items-center gap-4 p-4 transition-transform duration-200 hover:-translate-y-1"
+                  >
+                    <span
+                      className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl text-white shadow-md"
+                      style={{ backgroundColor: subject?.hex ?? "#A370FF" }}
+                    >
+                      <Icon className="h-7 w-7" strokeWidth={2.2} />
+                    </span>
+
+                    <div className="min-w-0 flex-1">
+                      <h3 className="truncate font-display text-base font-bold text-ink sm:text-lg">
+                        {item.title}
+                      </h3>
+                      <div className="mt-1.5 flex flex-wrap items-center gap-2">
+                        <Badge tone={subject?.color ?? "lilac"}>{item.materia}</Badge>
+                        <Badge tone="sky" icon={CalendarDays}>
+                          {new Date(item.date).toLocaleDateString("pt-BR")}
+                        </Badge>
+                        <Badge tone="mint" icon={ListChecks}>
+                          {item.questionCount} questões
+                        </Badge>
                       </div>
                     </div>
-                    <span className="text-[var(--blue)]">Ver →</span>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+
+                    <span
+                      className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white shadow transition-transform duration-200 group-hover:translate-x-1"
+                      style={{ color: subject?.hex ?? "#A370FF" }}
+                    >
+                      <ArrowRight className="h-5 w-5" strokeWidth={2.5} />
+                    </span>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </motion.div>
         )}
-      </motion.div>
+      </section>
     </div>
   );
 }

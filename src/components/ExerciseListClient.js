@@ -1,35 +1,52 @@
 "use client";
 
-import { useParams } from 'next/navigation';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import ExerciseWrapper from './ExerciseWrapper';
-import { useExerciseData } from '../utils/exerciseLoader';
+import { useParams } from "next/navigation";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { ArrowLeft, CalendarDays, GraduationCap, BookMarked, ListChecks } from "lucide-react";
+import ExerciseWrapper from "./ExerciseWrapper";
+import { useExerciseData } from "../utils/exerciseLoader";
+import { getSubject } from "../utils/subjects";
+import { cn } from "../utils/cn";
+import Badge from "./ui/Badge";
+import Sticker from "./ui/Sticker";
+
+function BackLink({ subject, label = "Voltar" }) {
+  return (
+    <Link
+      href={`/materias/${subject}`}
+      className="press mb-5 inline-flex items-center gap-1.5 rounded-full bg-white/70 px-4 py-2 text-sm font-semibold text-ink shadow-sm backdrop-blur hover:-translate-x-0.5 hover:text-lilac"
+    >
+      <ArrowLeft className="h-4 w-4" strokeWidth={2.5} /> {label}
+    </Link>
+  );
+}
 
 export default function ExerciseListClient({ subject }) {
   const params = useParams();
   const listId = params.listId;
+  const theme = getSubject(subject);
+  const Icon = theme?.icon ?? BookMarked;
 
   const { exerciseData, isLoading, error } = useExerciseData(subject, listId);
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen p-6">
-        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[var(--primary)]"></div>
-        <p className="mt-4 text-[var(--text-secondary)]">Carregando exercícios...</p>
+      <div className="flex min-h-[60vh] flex-col items-center justify-center p-6">
+        <span className="h-16 w-16 animate-spin rounded-full border-4 border-lilac/25 border-t-lilac" />
+        <p className="mt-4 font-display font-semibold text-ink-soft">Carregando exercícios... 🎈</p>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="flex flex-col items-center min-h-screen p-6">
-        <div className="p-6 rounded-lg bg-red-100 text-red-800 max-w-4xl w-full">
-          <h2 className="text-xl font-bold mb-2">Erro ao carregar exercícios</h2>
-          <p>{error}</p>
-          <Link href={`/materias/${subject}`} className="mt-4 inline-block text-[var(--blue)] hover:underline">
-            ← Voltar para a lista de exercícios
-          </Link>
+      <div className="mx-auto max-w-3xl px-4 pt-6">
+        <BackLink subject={subject} label="Voltar para a lista" />
+        <div className="clay bg-candy-soft p-6 text-center">
+          <div className="mb-2 text-4xl">😢</div>
+          <h2 className="font-display text-xl font-bold text-[#a62f5f]">Erro ao carregar exercícios</h2>
+          <p className="mt-1 text-ink-soft">{error}</p>
         </div>
       </div>
     );
@@ -37,66 +54,57 @@ export default function ExerciseListClient({ subject }) {
 
   if (!exerciseData) {
     return (
-      <div className="flex flex-col items-center min-h-screen p-6">
-        <div className="p-6 rounded-lg bg-[rgba(28,176,246,0.1)] max-w-4xl w-full">
-          <h2 className="text-xl font-bold mb-2">Lista de exercícios não encontrada</h2>
-          <p>A lista de exercícios que você procura não existe ou foi removida.</p>
-          <Link href={`/materias/${subject}`} className="mt-4 inline-block text-[var(--blue)] hover:underline">
-            ← Voltar para a lista de exercícios
-          </Link>
+      <div className="mx-auto max-w-3xl px-4 pt-6">
+        <BackLink subject={subject} label="Voltar para a lista" />
+        <div className="clay bg-sky-soft p-6 text-center">
+          <div className="mb-2 text-4xl">🔍</div>
+          <h2 className="font-display text-xl font-bold text-[#1e7fa6]">Lista não encontrada</h2>
+          <p className="mt-1 text-ink-soft">A lista que você procura não existe ou foi removida.</p>
         </div>
       </div>
     );
   }
 
-  const formattedDate = exerciseData.data ? new Date(exerciseData.data).toLocaleDateString('pt-BR') : '';
+  const formattedDate = exerciseData.data ? new Date(exerciseData.data).toLocaleDateString("pt-BR") : "";
+  const count = Array.isArray(exerciseData.exercises) ? exerciseData.exercises.length : 0;
 
   return (
-    <div className="flex flex-col items-center min-h-screen p-6">
-      <motion.header 
-        className="flex items-center justify-between w-full py-4 mb-8"
-        initial={{ y: -30, opacity: 0 }}
+    <div className="mx-auto max-w-3xl px-4 pb-16 pt-6">
+      <BackLink subject={subject} />
+
+      {/* Meta hero */}
+      <motion.div
+        className={cn("clay relative mb-8 overflow-hidden bg-gradient-to-br p-6 text-white sm:p-8", theme?.gradient)}
+        initial={{ y: -18, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.4 }}
+        transition={{ type: "spring", stiffness: 220, damping: 20 }}
       >
-        <Link href={`/materias/${subject}`} className="text-[var(--text-primary)] hover:underline">
-          ← Voltar
-        </Link>
-        <h1 className="text-3xl font-bold text-center text-[var(--text-primary)]">
-          {exerciseData.title}
-        </h1>
-        <div className="w-20"></div>
-      </motion.header>
-
-      <motion.main 
-        className="w-full max-w-4xl"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
-        <motion.div 
-          className="mb-8 duolingo-card p-6"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-        >
-          <h2 className="text-xl font-bold mb-2">{exerciseData.nome}</h2>
-          <p className="text-[var(--text-secondary)] mb-2">{exerciseData.description}</p>
-          <div className="flex flex-wrap gap-4 mt-4 text-sm">
-            <div className="bg-[rgba(88,204,2,0.1)] px-3 py-1 rounded-full">
-              <span className="font-medium">{exerciseData.materia}</span>
-            </div>
-            <div className="bg-[rgba(28,176,246,0.1)] px-3 py-1 rounded-full">
-              <span className="font-medium">{exerciseData.ano_letivo}</span>
-            </div>
-            <div className="bg-[rgba(255,200,0,0.1)] px-3 py-1 rounded-full">
-              <span className="font-medium">Data: {formattedDate}</span>
-            </div>
+        <div className="bg-dots absolute inset-0 opacity-30" />
+        <Sticker className="right-4 top-3 text-4xl" anim="float">{theme?.emoji}</Sticker>
+        <div className="relative flex items-start gap-4">
+          <span className="grid h-14 w-14 shrink-0 place-items-center rounded-3xl border-4 border-white/80 bg-white/95 shadow-lg">
+            <Icon className="h-7 w-7" strokeWidth={2.3} style={{ color: theme?.hex }} />
+          </span>
+          <div className="min-w-0">
+            <h1 className="font-display text-2xl font-bold drop-shadow-sm sm:text-3xl">{exerciseData.title}</h1>
+            {exerciseData.description && (
+              <p className="mt-1 text-white/90">{exerciseData.description}</p>
+            )}
           </div>
-        </motion.div>
+        </div>
+        <div className="relative mt-5 flex flex-wrap gap-2">
+          <Badge tone="neutral" icon={BookMarked} className="bg-white/90">{exerciseData.materia}</Badge>
+          {exerciseData.ano_letivo && (
+            <Badge tone="neutral" icon={GraduationCap} className="bg-white/90">{exerciseData.ano_letivo}</Badge>
+          )}
+          {formattedDate && (
+            <Badge tone="neutral" icon={CalendarDays} className="bg-white/90">{formattedDate}</Badge>
+          )}
+          <Badge tone="neutral" icon={ListChecks} className="bg-white/90">{count} questões</Badge>
+        </div>
+      </motion.div>
 
-        <ExerciseWrapper exercises={exerciseData.exercises} />
-      </motion.main>
+      <ExerciseWrapper exercises={exerciseData.exercises} />
     </div>
   );
 }
