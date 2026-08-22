@@ -122,7 +122,7 @@ export default function AdminPanel() {
         </div>
         <button
           onClick={() => setShowUploadWizard(true)}
-          className="press inline-flex items-center gap-2 rounded-2xl bg-gradient-to-b from-[#B48CFF] to-[#9257FF] px-5 py-3 text-sm font-bold text-white shadow-[0_6px_0_#7A3FE0] active:translate-y-1.5 active:shadow-none"
+          className="press cursor-pointer inline-flex items-center gap-2 rounded-2xl bg-gradient-to-b from-[#B48CFF] to-[#9257FF] px-5 py-3 text-sm font-bold text-white shadow-[0_6px_0_#7A3FE0] active:translate-y-1.5 active:shadow-none"
         >
           <Upload className="h-5 w-5" />
           Importar JSON
@@ -197,7 +197,7 @@ export default function AdminPanel() {
                         <td className="px-4 py-3 text-center">
                           <button
                             onClick={() => handleTogglePublish(list)}
-                            className="press inline-flex items-center justify-center gap-1 rounded-full bg-white/70 px-2 py-1 text-xs font-bold shadow-sm hover:text-lilac"
+                            className="press cursor-pointer inline-flex items-center justify-center gap-1 rounded-full bg-white/70 px-2 py-1 text-xs font-bold shadow-sm hover:text-lilac"
                             title={list.published ? "Despublicar" : "Publicar"}
                           >
                             {list.published ? (
@@ -218,14 +218,14 @@ export default function AdminPanel() {
                             <button
                               onClick={() => setTestingList(list)}
                               disabled={!Array.isArray(list.exercises) || list.exercises.length === 0}
-                              className="press rounded-full bg-white/70 p-1.5 shadow-sm hover:text-mint disabled:opacity-30 disabled:cursor-not-allowed transition"
+                              className="press cursor-pointer rounded-full bg-white/70 p-1.5 shadow-sm hover:text-mint disabled:opacity-30 disabled:cursor-not-allowed transition"
                               title="Testar lista"
                             >
                               <Play className="h-4 w-4" />
                             </button>
                             <button
                               onClick={() => handleDelete(list)}
-                              className="press rounded-full bg-white/70 p-1.5 shadow-sm hover:text-candy"
+                              className="press cursor-pointer rounded-full bg-white/70 p-1.5 shadow-sm hover:text-candy"
                               title="Deletar"
                             >
                               <Trash2 className="h-4 w-4" />
