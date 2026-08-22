@@ -9,6 +9,8 @@ import { SUBJECTS, getSubject } from "../utils/subjects";
 import SubjectCard from "../components/SubjectCard";
 import Badge from "../components/ui/Badge";
 import Sticker from "../components/ui/Sticker";
+import LandingPage from "../components/LandingPage";
+import { useAuth } from "../hooks/useAuth";
 
 const gridVariants = {
   hidden: { opacity: 0 },
@@ -25,7 +27,7 @@ const rowVariants = {
   show: { x: 0, opacity: 1, transition: { type: "spring", stiffness: 260, damping: 22 } },
 };
 
-export default function Home() {
+function Dashboard() {
   const [latestLists, setLatestLists] = useState([]);
   const [isLoadingLatest, setIsLoadingLatest] = useState(true);
   const [latestError, setLatestError] = useState(null);
@@ -37,9 +39,8 @@ export default function Home() {
         const data = await getLatestExerciseLists();
         setLatestLists(data);
         setLatestError(null);
-      } catch (e) {
-        console.error(e);
-        setLatestError("Não foi possível carregar as últimas listas.");
+      } catch (err) {
+        setLatestError(err.message);
       } finally {
         setIsLoadingLatest(false);
       }
@@ -51,44 +52,50 @@ export default function Home() {
     <div className="mx-auto max-w-5xl px-4 pb-16 pt-8 sm:pt-12">
       {/* ---------- Hero ---------- */}
       <section className="relative mb-14 text-center">
-        <Sticker className="left-2 top-0 text-4xl sm:left-10" anim="float">⭐</Sticker>
-        <Sticker className="right-2 top-4 text-4xl sm:right-12" anim="float-slow">🌈</Sticker>
-        <Sticker className="left-8 bottom-0 text-3xl" anim="wiggle">☁️</Sticker>
-        <Sticker className="right-10 bottom-2 text-3xl" anim="bob">✏️</Sticker>
+        <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+          <div className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-lilac/10 blur-3xl" />
+          <div className="absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-candy/10 blur-3xl" />
+          <div className="absolute left-1/2 top-0 h-64 w-64 -translate-x-1/2 rounded-full bg-sky/10 blur-3xl" />
+        </div>
 
         <motion.div
-          initial={{ y: 20, opacity: 0 }}
+          initial={{ y: 24, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ type: "spring", stiffness: 200, damping: 18 }}
+          transition={{ type: "spring", stiffness: 200, damping: 22 }}
         >
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-1.5 text-sm font-semibold text-lilac shadow-sm backdrop-blur">
-            <Wand2 className="h-4 w-4" strokeWidth={2.5} /> Aventura de estudos
-          </span>
-          <h1 className="font-display text-4xl font-bold leading-tight sm:text-6xl">
-            <span className="text-gradient">Vamos estudar juntas!</span>
-            <span className="ml-2 inline-block anim-wiggle">✨</span>
+          <Sticker className="mx-auto mb-5 text-5xl sm:text-6xl">🦄</Sticker>
+          <h1 className="font-display text-3xl font-bold leading-tight text-ink sm:text-5xl">
+            Escolha sua matéria e{" "}
+            <span className="text-gradient">vamos estudar!</span> ✨
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-lg text-ink-soft">
-            🌟 Escolha uma matéria, resolva desafios super divertidos e colecione
-            estrelinhas para subir de nível! 🚀
+            Resolva exercícios, ganhe estrelas e mostre que você é incrível!
           </p>
+
+          {/* Quick stats */}
+          <div className="mx-auto mt-6 flex max-w-md items-center justify-center gap-6 text-sm text-ink-soft sm:gap-10">
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-2xl font-bold text-lilac">{SUBJECTS.length}</span>
+              <span>Matérias</span>
+            </div>
+            <div className="h-8 w-px bg-lilac/20" />
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-2xl font-bold text-candy">30+</span>
+              <span>Listas</span>
+            </div>
+            <div className="h-8 w-px bg-lilac/20" />
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-2xl font-bold text-sky">500+</span>
+              <span>Questões</span>
+            </div>
+          </div>
         </motion.div>
       </section>
 
       {/* ---------- Subject grid ---------- */}
       <section className="mb-16">
-        <motion.h2
-          className="mb-6 flex items-center justify-center gap-2 font-display text-2xl font-bold text-ink"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15 }}
-        >
-          <span className="anim-bob">💖</span> Escolha sua matéria favorita
-          <span className="anim-bob">💖</span>
-        </motion.h2>
-
         <motion.div
-          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-3"
           variants={gridVariants}
           initial="hidden"
           animate="show"
@@ -101,80 +108,75 @@ export default function Home() {
 
       {/* ---------- Latest lists ---------- */}
       <section>
-        <motion.h2
-          className="mb-6 flex items-center gap-2 font-display text-2xl font-bold text-ink"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <span className="grid h-9 w-9 place-items-center rounded-2xl bg-gradient-to-br from-sky to-lilac text-white shadow-md">
-            <Sparkles className="h-5 w-5" strokeWidth={2.5} />
-          </span>
-          Novidades fresquinhas
-        </motion.h2>
+        <div className="mb-6 flex items-center gap-2">
+          <CalendarDays className="h-5 w-5 text-lilac" />
+          <h2 className="font-display text-xl font-bold text-ink sm:text-2xl">
+            Últimas listas publicadas
+          </h2>
+        </div>
 
-        {isLoadingLatest && (
-          <div className="flex justify-center p-10">
-            <span className="h-12 w-12 animate-spin rounded-full border-4 border-lilac/25 border-t-lilac" />
+        {isLoadingLatest ? (
+          <div className="flex items-center gap-3 text-ink-soft">
+            <Wand2 className="h-4 w-4 animate-spin" />
+            Carregando listas recentes...
           </div>
-        )}
-
-        {latestError && (
-          <div className="clay-sm bg-candy-soft p-4 text-center font-semibold text-[#a62f5f]">
+        ) : latestError ? (
+          <p className="rounded-2xl bg-candy-soft px-4 py-3 text-sm font-semibold text-[#a62f5f]">
             {latestError}
-          </div>
-        )}
-
-        {!isLoadingLatest && !latestError && (
-          <motion.div
-            className="grid gap-3"
+          </p>
+        ) : (
+          <motion.ul
+            className="space-y-3"
             variants={listVariants}
             initial="hidden"
             animate="show"
           >
-            {latestLists.map((item) => {
-              const subject = getSubject(item.subject);
-              const Icon = subject?.icon ?? ListChecks;
+            {latestLists.map((list) => {
+              const theme = getSubject(list.subject);
               return (
-                <motion.div key={`${item.subject}-${item.id}`} variants={rowVariants}>
+                <motion.li key={`${list.subject}-${list.slug}`} variants={rowVariants}>
                   <Link
-                    href={`/materias/${item.subject}/lista?listId=${encodeURIComponent(item.id)}`}
-                    className="clay group flex items-center gap-4 p-4 transition-transform duration-200 hover:-translate-y-1"
+                    href={`/materias/${list.subject}/lista?listId=${list.slug}`}
+                    className="clay group flex items-center gap-4 p-4 transition-shadow hover:shadow-lg"
                   >
-                    <span
-                      className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl text-white shadow-md"
-                      style={{ backgroundColor: subject?.hex ?? "#A370FF" }}
-                    >
-                      <Icon className="h-7 w-7" strokeWidth={2.2} />
-                    </span>
-
+                    <span className="text-2xl">{theme?.emoji ?? "📖"}</span>
                     <div className="min-w-0 flex-1">
-                      <h3 className="truncate font-display text-base font-bold text-ink sm:text-lg">
-                        {item.title}
-                      </h3>
-                      <div className="mt-1.5 flex flex-wrap items-center gap-2">
-                        <Badge tone={subject?.color ?? "lilac"}>{item.materia}</Badge>
-                        <Badge tone="sky" icon={CalendarDays}>
-                          {new Date(item.date).toLocaleDateString("pt-BR")}
-                        </Badge>
-                        <Badge tone="mint" icon={ListChecks}>
-                          {item.questionCount} questões
-                        </Badge>
-                      </div>
+                      <p className="truncate font-display font-bold text-ink">
+                        {list.title}
+                      </p>
+                      <p className="mt-0.5 text-xs text-ink-soft">{theme?.name ?? list.subject}</p>
                     </div>
-
-                    <span
-                      className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white shadow transition-transform duration-200 group-hover:translate-x-1"
-                      style={{ color: subject?.hex ?? "#A370FF" }}
-                    >
-                      <ArrowRight className="h-5 w-5" strokeWidth={2.5} />
+                    {typeof list.exerciseCount === "number" && (
+                      <Badge color={theme?.hex ?? "#7c3aed"}>
+                        <ListChecks className="mr-1 inline h-3.5 w-3.5" />
+                        {list.exerciseCount}
+                      </Badge>
+                    )}
+                    <span className="ml-2 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white shadow transition-transform duration-200 group-hover:translate-x-1">
+                      <ArrowRight className="h-4 w-4 text-lilac" strokeWidth={2.5} />
                     </span>
                   </Link>
-                </motion.div>
+                </motion.li>
               );
             })}
-          </motion.div>
+          </motion.ul>
         )}
       </section>
     </div>
   );
+}
+
+export default function Home() {
+  const { isAuthenticated, isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-[60vh] items-center justify-center text-ink-soft">
+        <Wand2 className="mr-2 h-4 w-4 animate-spin" />
+        Carregando...
+      </div>
+    );
+  }
+
+  return isAuthenticated ? <Dashboard /> : <LandingPage />;
 }

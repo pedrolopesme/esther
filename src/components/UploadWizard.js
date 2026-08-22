@@ -23,6 +23,34 @@ const EXERCISE_TYPES = {
   "true-false": "Verdadeiro ou falso",
 };
 
+const SUBJECT_BG = {
+  matematica: "bg-[#FFE3F0] ring-2 ring-[#FF70A6]",
+  portugues: "bg-[#EEE6FF] ring-2 ring-[#A370FF]",
+  ingles: "bg-[#E1F6FD] ring-2 ring-[#4CC9F0]",
+  geografia: "bg-[#DBF9F1] ring-2 ring-[#06D6A0]",
+  historia: "bg-[#FFF3D6] ring-2 ring-[#FFD166]",
+  ciencias: "bg-[#FFE9E0] ring-2 ring-[#FF9770]",
+};
+
+const SUBJECT_ICON_BG = {
+  matematica: "bg-[#FFE3F0]",
+  portugues: "bg-[#EEE6FF]",
+  ingles: "bg-[#E1F6FD]",
+  geografia: "bg-[#DBF9F1]",
+  historia: "bg-[#FFF3D6]",
+  ciencias: "bg-[#FFE9E0]",
+  default: "bg-[#EEE6FF]",
+};
+
+const SUBJECT_BADGE = {
+  matematica: "bg-[#FFE3F0] text-[#FF70A6]",
+  portugues: "bg-[#EEE6FF] text-[#A370FF]",
+  ingles: "bg-[#E1F6FD] text-[#4CC9F0]",
+  geografia: "bg-[#DBF9F1] text-[#06D6A0]",
+  historia: "bg-[#FFF3D6] text-[#E8A81E]",
+  ciencias: "bg-[#FFE9E0] text-[#FF9770]",
+};
+
 function buildSlug(title) {
   return title
     .toLowerCase()
@@ -110,7 +138,6 @@ export default function UploadWizard({ onClose, onSaved }) {
 
         setRawExercises(exercises);
 
-        // Auto-fill metadata from JSON
         const title = json.title || json.nome || file.name.replace(/\.json$/, "");
         const description = json.description || "";
         const materia = json.materia || "";
@@ -254,10 +281,7 @@ export default function UploadWizard({ onClose, onSaved }) {
                 transition={{ duration: 0.2 }}
               >
                 <div
-                  className={cn(
-                    "flex cursor-pointer flex-col items-center gap-4 rounded-2xl border-3 border-dashed p-10 text-center transition-all",
-                    "border-lilac/30 bg-lilac/5 hover:border-lilac/60 hover:bg-lilac/10",
-                  )}
+                  className="flex cursor-pointer flex-col items-center gap-4 rounded-2xl border-3 border-dashed border-lilac/30 bg-lilac/5 p-10 text-center transition-all hover:border-lilac/60 hover:bg-lilac/10"
                   onDragOver={(e) => e.preventDefault()}
                   onDrop={handleDrop}
                   onClick={() => fileRef.current?.click()}
@@ -287,11 +311,11 @@ export default function UploadWizard({ onClose, onSaved }) {
 
                 {jsonError && (
                   <motion.div
-                    className="mt-4 flex items-start gap-3 rounded-xl bg-candy/10 p-4"
+                    className="mt-4 flex items-start gap-3 rounded-xl bg-[#FFE3F0] p-4"
                     initial={{ y: 5, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                   >
-                    <AlertCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-candy" />
+                    <AlertCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#FF70A6]" />
                     <p className="text-sm font-semibold text-[#a62f5f]">{jsonError}</p>
                   </motion.div>
                 )}
@@ -333,8 +357,8 @@ export default function UploadWizard({ onClose, onSaved }) {
                 className="space-y-5"
               >
                 {/* Stats pill */}
-                <div className="flex items-center gap-3 rounded-xl bg-lilac/10 p-3">
-                  <Sparkles className="h-5 w-5 text-lilac" />
+                <div className="flex items-center gap-3 rounded-xl bg-[#EEE6FF] p-3">
+                  <Sparkles className="h-5 w-5 text-[#A370FF]" />
                   <span className="text-sm font-bold text-ink">
                     {stats.total} exercício{stats.total !== 1 && "s"} detectado{stats.total !== 1 && "s"}
                   </span>
@@ -359,13 +383,11 @@ export default function UploadWizard({ onClose, onSaved }) {
                       <button
                         key={s.id}
                         type="button"
-                        onClick={() =>
-                          setFormData({ ...formData, subject: s.id })
-                        }
+                        onClick={() => setFormData({ ...formData, subject: s.id })}
                         className={cn(
                           "flex flex-col items-center gap-1 rounded-xl p-2 text-center transition-all",
                           formData.subject === s.id
-                            ? `bg-${s.color}/20 ring-2 ring-${s.color}`
+                            ? SUBJECT_BG[s.id]
                             : "bg-white/60 hover:bg-white/80",
                         )}
                       >
@@ -386,9 +408,7 @@ export default function UploadWizard({ onClose, onSaved }) {
                     type="text"
                     className="w-full rounded-xl border-2 border-lilac/15 bg-white/80 px-4 py-2.5 text-ink outline-none focus:border-lilac transition"
                     value={formData.title}
-                    onChange={(e) =>
-                      setFormData({ ...formData, title: e.target.value })
-                    }
+                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                     required
                   />
                 </div>
@@ -405,17 +425,13 @@ export default function UploadWizard({ onClose, onSaved }) {
                       type="text"
                       className="flex-1 rounded-xl border-2 border-lilac/15 bg-white/80 px-4 py-2.5 text-ink outline-none focus:border-lilac transition font-mono text-sm"
                       value={formData.slug}
-                      onChange={(e) =>
-                        setFormData({ ...formData, slug: e.target.value })
-                      }
+                      onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
                       required
                     />
                     <button
                       type="button"
-                      className="rounded-lg bg-lilac/10 px-2 py-1.5 text-xs font-bold text-lilac hover:bg-lilac/20 transition"
-                      onClick={() =>
-                        setFormData({ ...formData, slug: buildSlug(formData.title) })
-                      }
+                      className="rounded-lg bg-[#EEE6FF] px-2 py-1.5 text-xs font-bold text-[#A370FF] hover:bg-[#DDD0FF] transition"
+                      onClick={() => setFormData({ ...formData, slug: buildSlug(formData.title) })}
                       title="Gerar slug a partir do título"
                     >
                       Auto
@@ -431,9 +447,7 @@ export default function UploadWizard({ onClose, onSaved }) {
                     className="w-full rounded-xl border-2 border-lilac/15 bg-white/80 px-4 py-2.5 text-ink outline-none focus:border-lilac transition resize-none"
                     rows="3"
                     value={formData.description}
-                    onChange={(e) =>
-                      setFormData({ ...formData, description: e.target.value })
-                    }
+                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   />
                 </div>
 
@@ -446,9 +460,7 @@ export default function UploadWizard({ onClose, onSaved }) {
                       type="date"
                       className="w-full rounded-xl border-2 border-lilac/15 bg-white/80 px-4 py-2.5 text-ink outline-none focus:border-lilac transition"
                       value={formData.exercise_date}
-                      onChange={(e) =>
-                        setFormData({ ...formData, exercise_date: e.target.value })
-                      }
+                      onChange={(e) => setFormData({ ...formData, exercise_date: e.target.value })}
                     />
                   </div>
                   <div>
@@ -459,9 +471,7 @@ export default function UploadWizard({ onClose, onSaved }) {
                       type="text"
                       className="w-full rounded-xl border-2 border-lilac/15 bg-white/80 px-4 py-2.5 text-ink outline-none focus:border-lilac transition"
                       value={formData.ano_letivo}
-                      onChange={(e) =>
-                        setFormData({ ...formData, ano_letivo: e.target.value })
-                      }
+                      onChange={(e) => setFormData({ ...formData, ano_letivo: e.target.value })}
                     />
                   </div>
                 </div>
@@ -484,7 +494,7 @@ export default function UploadWizard({ onClose, onSaved }) {
                     <div
                       className={cn(
                         "flex h-14 w-14 items-center justify-center rounded-2xl text-3xl",
-                        `bg-${subjectInfo?.color || "lilac"}/15`,
+                        SUBJECT_ICON_BG[formData.subject] || SUBJECT_ICON_BG.default,
                       )}
                     >
                       {subjectInfo?.emoji || "📝"}
@@ -497,17 +507,22 @@ export default function UploadWizard({ onClose, onSaved }) {
                         {formData.description}
                       </p>
                       <div className="mt-3 flex flex-wrap gap-2">
-                        <span className="rounded-full bg-lilac/10 px-2.5 py-0.5 text-xs font-bold text-lilac">
+                        <span
+                          className={cn(
+                            "rounded-full px-2.5 py-0.5 text-xs font-bold",
+                            SUBJECT_BADGE[formData.subject] || "bg-[#EEE6FF] text-[#A370FF]",
+                          )}
+                        >
                           {subjectInfo?.name}
                         </span>
-                        <span className="rounded-full bg-sky/10 px-2.5 py-0.5 text-xs font-bold text-sky">
+                        <span className="rounded-full bg-[#E1F6FD] px-2.5 py-0.5 text-xs font-bold text-[#4CC9F0]">
                           {formData.ano_letivo}
                         </span>
-                        <span className="rounded-full bg-mint/10 px-2.5 py-0.5 text-xs font-bold text-mint">
+                        <span className="rounded-full bg-[#DBF9F1] px-2.5 py-0.5 text-xs font-bold text-[#06D6A0]">
                           {stats.total} questões
                         </span>
-                        <span className="rounded-full bg-sun/10 px-2.5 py-0.5 text-xs font-bold text-sun">
-                          {new Date(formData.exercise_date).toLocaleDateString("pt-BR")}
+                        <span className="rounded-full bg-[#FFF3D6] px-2.5 py-0.5 text-xs font-bold text-[#E8A81E]">
+                          {new Date(formData.exercise_date + "T12:00:00").toLocaleDateString("pt-BR")}
                         </span>
                       </div>
                     </div>
@@ -528,7 +543,7 @@ export default function UploadWizard({ onClose, onSaved }) {
                         key={ex.id || i}
                         className="flex items-start gap-3 rounded-lg bg-white/70 p-3"
                       >
-                        <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-lilac/15 text-xs font-bold text-lilac">
+                        <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[#EEE6FF] text-xs font-bold text-[#A370FF]">
                           {i + 1}
                         </span>
                         <div className="min-w-0 flex-1">
@@ -542,7 +557,7 @@ export default function UploadWizard({ onClose, onSaved }) {
                                 className={cn(
                                   "rounded-md px-1.5 py-0.5 text-[10px] font-bold",
                                   j === ex.correctIndex
-                                    ? "bg-mint/20 text-emerald-700"
+                                    ? "bg-[#DBF9F1] text-emerald-700"
                                     : "bg-ink/5 text-ink-soft",
                                 )}
                               >
@@ -559,7 +574,7 @@ export default function UploadWizard({ onClose, onSaved }) {
                   </div>
                 </div>
 
-                <div className="rounded-xl bg-sun/10 p-4">
+                <div className="rounded-xl bg-[#FFF3D6] p-4">
                   <p className="text-sm font-semibold text-amber-800">
                     ⚠️ A lista será salva como <strong>não publicada</strong>.
                     Você pode publicá-la depois pelo painel.
@@ -567,8 +582,8 @@ export default function UploadWizard({ onClose, onSaved }) {
                 </div>
 
                 {saveError && (
-                  <div className="flex items-start gap-3 rounded-xl bg-candy/10 p-4">
-                    <AlertCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-candy" />
+                  <div className="flex items-start gap-3 rounded-xl bg-[#FFE3F0] p-4">
+                    <AlertCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#FF70A6]" />
                     <p className="text-sm font-semibold text-[#a62f5f]">{saveError}</p>
                   </div>
                 )}
@@ -578,7 +593,7 @@ export default function UploadWizard({ onClose, onSaved }) {
         </div>
 
         {/* Footer */}
-        <div className="sticky bottom-0 flex items-center justify-between gap-3 border-t border-lilac/10 bg-cream/80 backdrop-blur-sm p-4">
+        <div className="sticky bottom-0 flex items-center justify-between gap-3 border-t border-lilac/10 bg-[#FFF7FC]/80 backdrop-blur-sm p-4">
           {step > 0 ? (
             <button
               type="button"
