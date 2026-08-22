@@ -15,7 +15,7 @@ export default function Home() {
     async function fetchLatest() {
       try {
         setIsLoadingLatest(true);
-        const res = await fetch("/data/latest.json");
+        const res = await fetch(assetPath("/data/latest.json"));
         if (!res.ok) throw new Error(`Falha ao buscar últimas listas: ${res.status}`);
         const data = await res.json();
         setLatestLists(data);
