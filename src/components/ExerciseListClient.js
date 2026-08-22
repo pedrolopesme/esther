@@ -22,9 +22,9 @@ function BackLink({ subject, label = "Voltar" }) {
   );
 }
 
-export default function ExerciseListClient({ subject }) {
+export default function ExerciseListClient({ subject, listId: listIdProp }) {
   const params = useParams();
-  const listId = params.listId;
+  const listId = listIdProp || params.listId;
   const theme = getSubject(subject);
   const Icon = theme?.icon ?? BookMarked;
 

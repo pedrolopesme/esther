@@ -1,66 +1,48 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { assetPath } from './assetPath';
+import { useState, useEffect } from "react";
+import { getAvailableExerciseLists, getExerciseData } from "./exerciseRepository";
 
-/**
- * Hook para carregar dados de exercícios do diretório de dados
- * @param {string} subject - Nome da matéria (ex: "matematica")
- * @param {string} listId - ID da lista de exercícios (ex: "adicao")
- * @returns {Object} Objeto contendo dados de exercício e status de carregamento
- */
 export function useExerciseData(subject, listId) {
   const [exerciseData, setExerciseData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    let cancelled = false;
+
     async function loadExerciseData() {
       try {
         setIsLoading(true);
-        
-        // Constrói o caminho do arquivo JSON
-        const response = await fetch(assetPath(`/data/${subject}/${listId}.json`));
-        
-        if (!response.ok) {
-          throw new Error(`Falha ao carregar exercícios: ${response.status}`);
+        const data = await getExerciseData(subject, listId);
+        if (!cancelled) {
+          setExerciseData(data);
+          setError(null);
         }
-        
-        const data = await response.json();
-        setExerciseData(data);
-        setError(null);
       } catch (err) {
         console.error("Erro ao carregar exercícios:", err);
-        setError("Não foi possível carregar os exercícios. Por favor, tente novamente.");
+        if (!cancelled) {
+          setExerciseData(null);
+          setError("Não foi possível carregar os exercícios. Por favor, tente novamente.");
+        }
       } finally {
-        setIsLoading(false);
+        if (!cancelled) setIsLoading(false);
       }
     }
 
     if (subject && listId) {
       loadExerciseData();
+    } else {
+      setExerciseData(null);
+      setIsLoading(false);
     }
+
+    return () => {
+      cancelled = true;
+    };
   }, [subject, listId]);
 
   return { exerciseData, isLoading, error };
 }
 
-/**
- * Função para carregar todas as listas de exercícios disponíveis para uma matéria
- * @param {string} subject - Nome da matéria (ex: "matematica")
- * @returns {Promise<Array>} Lista de exercícios disponíveis
- */
-export async function getAvailableExerciseLists(subject) {
-  try {
-    const response = await fetch(assetPath(`/data/${subject}/index.json`));
-    
-    if (!response.ok) {
-      throw new Error(`Falha ao carregar listas: ${response.status}`);
-    }
-    
-    return await response.json();
-  } catch (err) {
-    console.error("Erro ao carregar listas de exercícios:", err);
-    return [];
-  }
-}
+export { getAvailableExerciseLists };

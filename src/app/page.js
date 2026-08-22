@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Sparkles, CalendarDays, ListChecks, ArrowRight, Wand2 } from "lucide-react";
-import { assetPath } from "../utils/assetPath";
+import { getLatestExerciseLists } from "../utils/exerciseRepository";
 import { SUBJECTS, getSubject } from "../utils/subjects";
 import SubjectCard from "../components/SubjectCard";
 import Badge from "../components/ui/Badge";
@@ -34,9 +34,7 @@ export default function Home() {
     async function fetchLatest() {
       try {
         setIsLoadingLatest(true);
-        const res = await fetch(assetPath("/data/latest.json"));
-        if (!res.ok) throw new Error(`Falha ao buscar últimas listas: ${res.status}`);
-        const data = await res.json();
+        const data = await getLatestExerciseLists();
         setLatestLists(data);
         setLatestError(null);
       } catch (e) {
@@ -139,7 +137,7 @@ export default function Home() {
               return (
                 <motion.div key={`${item.subject}-${item.id}`} variants={rowVariants}>
                   <Link
-                    href={`/materias/${item.subject}/${item.id}`}
+                    href={`/materias/${item.subject}/lista?listId=${encodeURIComponent(item.id)}`}
                     className="clay group flex items-center gap-4 p-4 transition-transform duration-200 hover:-translate-y-1"
                   >
                     <span

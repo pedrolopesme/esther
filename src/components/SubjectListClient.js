@@ -170,7 +170,7 @@ export default function SubjectListClient({ subjectId }) {
         {filteredLists.map((list) => (
           <motion.div key={list.id} variants={cardVariants}>
             <Link
-              href={`/materias/${subjectId}/${list.id}`}
+              href={`/materias/${subjectId}/lista?listId=${encodeURIComponent(list.id)}`}
               className="clay group block p-5 transition-transform duration-200 hover:-translate-y-1.5 hover:rotate-[0.4deg]"
             >
               <div className="flex items-start gap-4">

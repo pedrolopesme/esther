@@ -81,29 +81,28 @@ make build-prod
 
 ## 🧩 Como os dados funcionam
 
-Os exercícios ficam em arquivos JSON dentro de `public/data/`. Cada matéria possui um `index.json` com o catálogo de listas, e `public/data/latest.json` alimenta a seção de listas recentes da página inicial.
+As listas de exercícios ficam no Supabase, na tabela `public.exercise_lists`. A SPA consulta diretamente o banco com a chave pública e só recebe listas com `published = true`. O catálogo por matéria, as novidades da página inicial e o conteúdo das listas usam a mesma fonte de dados.
 
-Exemplo de lista:
+O schema e as políticas de segurança ficam versionados em `supabase/migrations/`. A carga inicial das listas que antes estavam em `public/data/` já foi realizada no projeto Supabase configurado para a Esther.
 
-```json
-{
-  "title": "Título da lista",
-  "description": "Uma revisão rápida e divertida.",
-  "materia": "Matemática",
-  "ano_letivo": "3º ano do Ensino Fundamental",
-  "data": "2025-10-12",
-  "exercises": [
-    {
-      "type": "multiple-choice",
-      "question": "Quanto é 2 + 2?",
-      "options": ["3", "4", "5"],
-      "correctIndex": 1
-    }
-  ]
-}
+### Configuração local
+
+Copie `.env.example` para `.env.local` e preencha as credenciais públicas do projeto:
+
+```bash
+cp .env.example .env.local
 ```
 
-Ao adicionar ou alterar uma lista, atualize também o `index.json` da matéria e o `latest.json` quando necessário.
+Variáveis necessárias:
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` (ou uma chave `sb_publishable_...`)
+
+### Painel administrativo
+
+Acesse `/admin` e entre com uma conta criada no Supabase Auth. A primeira conta autenticada pode reivindicar a administração quando ainda não existe nenhum registro em `admin_users`; as contas seguintes precisam ser adicionadas como administradoras pelo banco.
+
+O painel permite criar, editar, publicar, despublicar e excluir listas. O campo de exercícios aceita um array JSON usando os tipos `multiple-choice`, `fill-gap` e `true-false`, com `options` e `correctIndex`.
 
 ## 🛠️ Tecnologias
 
@@ -111,7 +110,7 @@ Ao adicionar ou alterar uma lista, atualize também o `index.json` da matéria e
 - [React 19](https://react.dev/)
 - [Tailwind CSS 4](https://tailwindcss.com/)
 - [Framer Motion](https://motion.dev/)
-- JSON para armazenamento das listas
+- Supabase (Postgres, Auth e Row Level Security)
 - GitHub Actions + GitHub Pages para publicação
 
 ## 📦 Estrutura principal
@@ -119,7 +118,7 @@ Ao adicionar ou alterar uma lista, atualize também o `index.json` da matéria e
 ```text
 .
 ├── public/
-│   ├── data/                 # listas e catálogos JSON
+│   ├── data/                 # dados legados usados apenas para a carga inicial
 │   └── *.mp3                # sons de feedback
 ├── src/
 │   ├── app/                  # páginas e rotas do Next.js
@@ -142,7 +141,7 @@ Cada push na branch `main` dispara o workflow de deploy:
 2. O Next.js gera o export estático em `out/`.
 3. O artefato é publicado no GitHub Pages.
 
-O projeto usa `NEXT_PUBLIC_BASE_PATH=/esther` no build de produção para que imagens, sons, dados JSON e scripts funcionem no endereço do projeto:
+O workflow usa `NEXT_PUBLIC_BASE_PATH=/esther` e injeta as variáveis públicas do Supabase durante o build. Cadastre `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_ANON_KEY` como **Actions variables** no repositório do GitHub antes do primeiro deploy:
 
 ```text
 https://pedrolopesme.github.io/esther/
