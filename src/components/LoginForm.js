@@ -18,6 +18,7 @@ export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
+  const [role, setRole] = useState("student");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -42,7 +43,7 @@ export default function LoginForm() {
           email,
           password,
           options: {
-            data: { display_name: displayName || email.split("@")[0] },
+            data: { display_name: displayName || email.split("@")[0], role },
           },
         });
         if (signUpError) throw signUpError;
@@ -86,16 +87,48 @@ export default function LoginForm() {
 
         <form className="space-y-4" onSubmit={handleSubmit}>
           {mode === "register" && (
-            <label className="block">
-              <span className="mb-1.5 block text-sm font-semibold text-ink">Seu nome ou apelido</span>
-              <input
-                className={inputClass}
-                type="text"
-                placeholder="Ex: Esther"
-                value={displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
-              />
-            </label>
+            <>
+              <label className="block">
+                <span className="mb-1.5 block text-sm font-semibold text-ink">Seu nome ou apelido</span>
+                <input
+                  className={inputClass}
+                  type="text"
+                  placeholder="Ex: Esther"
+                  value={displayName}
+                  onChange={(e) => setDisplayName(e.target.value)}
+                />
+              </label>
+
+              <div>
+                <span className="mb-2 block text-sm font-semibold text-ink">Quem é você?</span>
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setRole("student")}
+                    className={`press flex flex-col items-center gap-1 rounded-2xl border-2 px-4 py-3 text-center transition ${
+                      role === "student"
+                        ? "border-lilac bg-lilac-soft text-[#5B2FB0] shadow-[0_4px_0_rgba(163,112,255,0.4)]"
+                        : "border-lilac/15 bg-white/80 text-ink-soft hover:border-lilac/40"
+                    }`}
+                  >
+                    <span className="text-2xl">🎒</span>
+                    <span className="text-sm font-bold">Estudante</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setRole("parent")}
+                    className={`press flex flex-col items-center gap-1 rounded-2xl border-2 px-4 py-3 text-center transition ${
+                      role === "parent"
+                        ? "border-candy bg-candy-soft text-[#a62f5f] shadow-[0_4px_0_rgba(255,112,166,0.4)]"
+                        : "border-lilac/15 bg-white/80 text-ink-soft hover:border-candy/40"
+                    }`}
+                  >
+                    <span className="text-2xl">👨‍👩‍👧</span>
+                    <span className="text-sm font-bold">Responsável</span>
+                  </button>
+                </div>
+              </div>
+            </>
           )}
 
           <label className="block">

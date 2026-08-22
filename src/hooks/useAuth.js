@@ -57,6 +57,7 @@ export function useAuth() {
     role: profile?.role ?? null,
     isAdmin: profile?.role === "admin",
     isStudent: profile?.role === "student",
+    isParent: profile?.role === "parent",
     isLoading,
     isAuthenticated: !!session?.user,
     supabase,

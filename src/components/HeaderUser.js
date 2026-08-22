@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Star, LogIn, LogOut, Settings } from "lucide-react";
+import { Star, LogIn, LogOut, Settings, Users } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 import { POINTS_EVENT, getPoints } from "../utils/points";
 import { cn } from "../utils/cn";
@@ -13,7 +13,7 @@ const AVATARS = ["🐣", "🐥", "🦄", "🐰", "🦊", "🐼", "🐸", "🦋",
 
 export default function HeaderUser() {
   const router = useRouter();
-  const { isAuthenticated, user, profile, isLoading, supabase, isAdmin } = useAuth();
+  const { isAuthenticated, user, profile, isLoading, supabase, isAdmin, isParent } = useAuth();
   const [points, setPoints] = useState(0);
   const [pop, setPop] = useState(false);
 
@@ -76,15 +76,30 @@ export default function HeaderUser() {
         </Link>
       )}
 
-      {/* Avatar + name pill */}
-      <div className="flex items-center gap-2 rounded-full bg-white/70 py-1 pl-1 pr-3 shadow-sm ring-1 ring-white sm:pr-4">
+      {/* Parent dashboard link */}
+      {isParent && (
+        <Link
+          href="/responsavel"
+          className="press hidden items-center gap-1.5 rounded-full bg-candy/15 px-2.5 py-1.5 text-xs font-bold text-candy shadow-sm hover:bg-candy/25 sm:flex"
+          title="Painel do responsável"
+        >
+          <Users className="h-3.5 w-3.5" />
+          Filhos
+        </Link>
+      )}
+
+      {/* Avatar + name pill → links to profile */}
+      <Link
+        href="/perfil"
+        className="press flex items-center gap-2 rounded-full bg-white/70 py-1 pl-1 pr-3 shadow-sm ring-1 ring-white hover:ring-lilac/40 sm:pr-4"
+      >
         <span className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-sky-soft to-lilac-soft text-base shadow ring-2 ring-white sm:h-9 sm:w-9 sm:text-lg">
           {avatar}
         </span>
         <span className="max-w-[5rem] truncate text-sm font-bold text-ink sm:max-w-[8rem]">
           {name}
         </span>
-      </div>
+      </Link>
 
       {/* Stars */}
       <div
