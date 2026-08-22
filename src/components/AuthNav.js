@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { LogIn, LogOut, User, Settings } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 
 export default function AuthNav() {
+  const router = useRouter();
   const { isAuthenticated, user, profile, isLoading, supabase, isAdmin } = useAuth();
 
   if (isLoading) {
@@ -27,7 +29,7 @@ export default function AuthNav() {
 
   async function handleLogout() {
     await supabase?.auth?.signOut();
-    window.location.reload();
+    router.push("/");
   }
 
   return (

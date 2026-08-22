@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { LogIn, UserPlus, Sparkles, ArrowLeft } from "lucide-react";
@@ -12,6 +12,7 @@ const inputClass =
 
 export default function LoginForm() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const supabase = getSupabaseBrowserClient();
   const [mode, setMode] = useState(searchParams.get("tab") === "register" ? "register" : "login");
   const [email, setEmail] = useState("");
@@ -35,7 +36,7 @@ export default function LoginForm() {
         });
         if (loginError) throw loginError;
         setSuccess("Você entrou! Redirecionando...");
-        window.location.href = "/";
+        router.push("/");
       } else {
         const { error: signUpError } = await supabase.auth.signUp({
           email,

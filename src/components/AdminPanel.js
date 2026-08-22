@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Plus, Edit, Trash2, Eye, EyeOff, ArrowLeft } from "lucide-react";
@@ -17,6 +18,7 @@ const SUBJECTS = [
 ];
 
 export default function AdminPanel() {
+  const router = useRouter();
   const { isAdmin, isLoading: authLoading, user } = useAuth();
   const [lists, setLists] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -36,7 +38,7 @@ export default function AdminPanel() {
   useEffect(() => {
     if (!authLoading && !isAdmin) {
       // Redirecionar para home se não for admin
-      window.location.href = "/";
+      router.push("/");
     }
   }, [isAdmin, authLoading]);
 
