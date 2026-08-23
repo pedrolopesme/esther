@@ -30,6 +30,24 @@ export function GameDrawer({ game, onClose, rawHtml = null }) {
   const [isLoadingHtml, setIsLoadingHtml] = useState(!rawHtml);
   const [fetchError, setFetchError] = useState(null);
 
+  // Lock background scroll and prevent arrow/space key scroll while drawer is open
+  useEffect(() => {
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (e) => {
+      if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space", " "].includes(e.key)) {
+        e.preventDefault();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown, { passive: false });
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   // Fetch HTML text when URL is provided
   useEffect(() => {
     let active = true;
@@ -90,7 +108,6 @@ export function GameDrawer({ game, onClose, rawHtml = null }) {
   function handleRestart() {
     setCompletedData(null);
     if (iframeRef.current) {
-      // Re-trigger srcdoc
       const current = htmlDoc;
       iframeRef.current.srcdoc = "";
       setTimeout(() => {
@@ -259,6 +276,24 @@ export function GameViewerModal({ game, onClose, onGameCompleted }) {
 
   const subjectObj = getSubject(game?.subject_id);
 
+  // Lock background scroll and prevent directional key scroll while game modal is active
+  useEffect(() => {
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (e) => {
+      if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space", " "].includes(e.key)) {
+        e.preventDefault();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown, { passive: false });
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   // Fetch HTML text directly to guarantee browser parses as full HTML document
   useEffect(() => {
     let active = true;
@@ -335,12 +370,6 @@ export function GameViewerModal({ game, onClose, onGameCompleted }) {
 
   if (!game) return null;
 
-  const scorePct = completedPayload
-    ? completedPayload.maxScore > 0
-      ? Math.round((completedPayload.score / completedPayload.maxScore) * 100)
-      : 100
-    : 0;
-
   return (
     <motion.div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-2 sm:p-4"
@@ -413,7 +442,6 @@ export function GameViewerModal({ game, onClose, onGameCompleted }) {
           </div>
         </div>
 
-        {/* Completion Celebration Overlay Banner */}
         {/* Outcome Banner (Win vs Game Over) */}
         {completedPayload && (() => {
           const rawScore = Number(completedPayload.score) || 0;
