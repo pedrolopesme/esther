@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
-import { X, RotateCcw, Sparkles, Award, Star, Maximize2, Minimize2, Gamepad2, Trophy, Clock } from "lucide-react";
+import { X, RotateCcw, Sparkles, Award, Star, Maximize2, Minimize2, Gamepad2, Trophy, Clock, AlertCircle } from "lucide-react";
 import confetti from "canvas-confetti";
 import { recordGameCompletion } from "../utils/gameRepository";
 import { getSubject } from "../utils/subjects";
@@ -26,17 +26,50 @@ function celebrateGame() {
 export function GameDrawer({ game, onClose, rawHtml = null }) {
   const iframeRef = useRef(null);
   const [completedData, setCompletedData] = useState(null);
-  const [blobUrl, setBlobUrl] = useState(null);
+  const [htmlDoc, setHtmlDoc] = useState(rawHtml || "");
+  const [isLoadingHtml, setIsLoadingHtml] = useState(!rawHtml);
+  const [fetchError, setFetchError] = useState(null);
 
+  // Fetch HTML text when URL is provided
   useEffect(() => {
-    if (rawHtml) {
-      const blob = new Blob([rawHtml], { type: "text/html" });
-      const url = URL.createObjectURL(blob);
-      setBlobUrl(url);
-      return () => URL.revokeObjectURL(url);
-    }
-  }, [rawHtml]);
+    let active = true;
 
+    if (rawHtml) {
+      setHtmlDoc(rawHtml);
+      setIsLoadingHtml(false);
+      setFetchError(null);
+      return;
+    }
+
+    if (game?.file_url) {
+      setIsLoadingHtml(true);
+      setFetchError(null);
+      fetch(game.file_url)
+        .then((res) => {
+          if (!res.ok) throw new Error(`Falha ao carregar arquivo (${res.status})`);
+          return res.text();
+        })
+        .then((text) => {
+          if (active) {
+            setHtmlDoc(text);
+            setIsLoadingHtml(false);
+          }
+        })
+        .catch((err) => {
+          if (active) {
+            console.error("Erro ao carregar HTML do jogo:", err);
+            setFetchError(err.message);
+            setIsLoadingHtml(false);
+          }
+        });
+    }
+
+    return () => {
+      active = false;
+    };
+  }, [game?.file_url, rawHtml]);
+
+  // Listen for postMessage from game iframe
   useEffect(() => {
     function handleMessage(event) {
       if (event.data?.type === "GAME_COMPLETED") {
@@ -52,13 +85,17 @@ export function GameDrawer({ game, onClose, rawHtml = null }) {
 
   if (!game && !rawHtml) return null;
 
-  const targetUrl = blobUrl || game?.file_url;
   const subjectObj = getSubject(game?.subject_id);
 
   function handleRestart() {
     setCompletedData(null);
     if (iframeRef.current) {
-      iframeRef.current.src = targetUrl;
+      // Re-trigger srcdoc
+      const current = htmlDoc;
+      iframeRef.current.srcdoc = "";
+      setTimeout(() => {
+        if (iframeRef.current) iframeRef.current.srcdoc = current;
+      }, 50);
     }
   }
 
@@ -154,26 +191,33 @@ export function GameDrawer({ game, onClose, rawHtml = null }) {
         {/* Iframe Viewport Container */}
         <div className="flex-1 overflow-hidden p-3 sm:p-5 flex flex-col justify-center items-center bg-black/40">
           <div className="relative w-full aspect-video max-h-[80vh] rounded-2xl overflow-hidden shadow-2xl border border-slate-700/60 bg-slate-950">
-            {targetUrl ? (
+            {isLoadingHtml ? (
+              <div className="flex h-full flex-col items-center justify-center gap-3 text-slate-400 text-sm">
+                <span className="h-8 w-8 animate-spin rounded-full border-2 border-indigo-500/30 border-t-indigo-500" />
+                <span>Carregando e renderizando o jogo...</span>
+              </div>
+            ) : fetchError ? (
+              <div className="flex h-full flex-col items-center justify-center gap-2 p-6 text-center text-rose-300 text-sm">
+                <AlertCircle className="h-8 w-8 text-rose-500" />
+                <p className="font-bold">Erro ao carregar o arquivo do jogo</p>
+                <p className="text-xs text-rose-400">{fetchError}</p>
+              </div>
+            ) : (
               <iframe
                 ref={iframeRef}
-                src={targetUrl}
+                srcDoc={htmlDoc}
                 title={game?.title || "Jogo Educativo"}
                 className="w-full h-full border-0"
                 sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals"
                 loading="eager"
               />
-            ) : (
-              <div className="flex h-full items-center justify-center text-slate-500 text-sm">
-                Carregando arquivo do jogo...
-              </div>
             )}
           </div>
         </div>
 
         {/* Footer info */}
         <div className="border-t border-slate-800 bg-slate-900/90 px-5 py-3 text-xs text-slate-400 flex items-center justify-between">
-          <span>Sandbox ativado &middot; Eventos postMessage rastreados</span>
+          <span>Sandbox seguro &middot; Renderizado via HTML compilado</span>
           <span className="font-mono text-[11px] text-slate-500">
             {game?.file_name || "index.html"}
           </span>
@@ -190,9 +234,44 @@ export function GameViewerModal({ game, onClose, onGameCompleted }) {
   const iframeRef = useRef(null);
   const [completedPayload, setCompletedPayload] = useState(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [htmlDoc, setHtmlDoc] = useState("");
+  const [isLoadingHtml, setIsLoadingHtml] = useState(true);
+  const [fetchError, setFetchError] = useState(null);
   const containerRef = useRef(null);
 
   const subjectObj = getSubject(game?.subject_id);
+
+  // Fetch HTML text directly to guarantee browser parses as full HTML document
+  useEffect(() => {
+    let active = true;
+
+    if (game?.file_url) {
+      setIsLoadingHtml(true);
+      setFetchError(null);
+      fetch(game.file_url)
+        .then((res) => {
+          if (!res.ok) throw new Error(`Falha ao carregar arquivo (${res.status})`);
+          return res.text();
+        })
+        .then((text) => {
+          if (active) {
+            setHtmlDoc(text);
+            setIsLoadingHtml(false);
+          }
+        })
+        .catch((err) => {
+          if (active) {
+            console.error("Erro ao carregar HTML do jogo:", err);
+            setFetchError(err.message);
+            setIsLoadingHtml(false);
+          }
+        });
+    }
+
+    return () => {
+      active = false;
+    };
+  }, [game?.file_url]);
 
   // Listen for postMessage from child iframe
   useEffect(() => {
@@ -217,8 +296,12 @@ export function GameViewerModal({ game, onClose, onGameCompleted }) {
 
   function handleRestart() {
     setCompletedPayload(null);
-    if (iframeRef.current && game?.file_url) {
-      iframeRef.current.src = game.file_url;
+    if (iframeRef.current && htmlDoc) {
+      const current = htmlDoc;
+      iframeRef.current.srcdoc = "";
+      setTimeout(() => {
+        if (iframeRef.current) iframeRef.current.srcdoc = current;
+      }, 50);
     }
   }
 
@@ -345,16 +428,29 @@ export function GameViewerModal({ game, onClose, onGameCompleted }) {
           </motion.div>
         )}
 
-        {/* Game iframe */}
+        {/* Game iframe rendered with srcDoc */}
         <div className="relative flex-1 w-full h-full bg-black">
-          <iframe
-            ref={iframeRef}
-            src={game.file_url}
-            title={game.title}
-            className="w-full h-full border-0"
-            sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals"
-            loading="eager"
-          />
+          {isLoadingHtml ? (
+            <div className="flex h-full flex-col items-center justify-center gap-3 text-slate-400 text-sm">
+              <span className="h-9 w-9 animate-spin rounded-full border-3 border-indigo-500/30 border-t-indigo-500" />
+              <span>Carregando o jogo...</span>
+            </div>
+          ) : fetchError ? (
+            <div className="flex h-full flex-col items-center justify-center gap-2 p-6 text-center text-rose-300 text-sm">
+              <AlertCircle className="h-8 w-8 text-rose-500" />
+              <p className="font-bold">Erro ao carregar o minijogo</p>
+              <p className="text-xs text-rose-400">{fetchError}</p>
+            </div>
+          ) : (
+            <iframe
+              ref={iframeRef}
+              srcDoc={htmlDoc}
+              title={game.title}
+              className="w-full h-full border-0"
+              sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals"
+              loading="eager"
+            />
+          )}
         </div>
       </motion.div>
     </motion.div>
