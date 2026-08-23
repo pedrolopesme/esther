@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Upload,
@@ -115,6 +115,10 @@ export default function UploadWizard({ onClose, onSaved }) {
   const [isSaving, setIsSaving] = useState(false);
   const [saveError, setSaveError] = useState(null);
 
+  // Drag and drop state
+  const [isDragActive, setIsDragActive] = useState(false);
+  const dragCounterRef = useRef(0);
+
   // Quick subject creation
   const [showQuickCreateSubject, setShowQuickCreateSubject] = useState(false);
   const [newSubjectName, setNewSubjectName] = useState("");
@@ -133,9 +137,15 @@ export default function UploadWizard({ onClose, onSaved }) {
     loadSubjects();
   }, []);
 
-  function handleFile(file) {
+  const handleFile = useCallback((file) => {
     setJsonError(null);
     if (!file) return;
+
+    // Check extension or type
+    if (!file.name.toLowerCase().endsWith(".json") && file.type !== "application/json") {
+      setJsonError("Por favor, selecione ou arraste um arquivo com extensão .json");
+      return;
+    }
 
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -176,13 +186,59 @@ export default function UploadWizard({ onClose, onSaved }) {
       }
     };
     reader.readAsText(file);
-  }
+  }, [subjects]);
 
-  function handleDrop(e) {
+  // Window-level and modal-level drag event listeners
+  const handleDragEnter = (e) => {
     e.preventDefault();
-    const file = e.dataTransfer.files[0];
-    if (file) handleFile(file);
-  }
+    e.stopPropagation();
+    dragCounterRef.current += 1;
+    if (e.dataTransfer?.items && e.dataTransfer.items.length > 0) {
+      setIsDragActive(true);
+    }
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dragCounterRef.current -= 1;
+    if (dragCounterRef.current <= 0) {
+      dragCounterRef.current = 0;
+      setIsDragActive(false);
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.dataTransfer.dropEffect = "copy";
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dragCounterRef.current = 0;
+    setIsDragActive(false);
+
+    if (e.dataTransfer?.files && e.dataTransfer.files.length > 0) {
+      const file = e.dataTransfer.files[0];
+      handleFile(file);
+      e.dataTransfer.clearData();
+    }
+  };
+
+  // Prevent browser from navigating or opening dropped file accidentally
+  useEffect(() => {
+    const preventDefaults = (e) => {
+      e.preventDefault();
+    };
+    window.addEventListener("dragover", preventDefaults, false);
+    window.addEventListener("drop", preventDefaults, false);
+    return () => {
+      window.removeEventListener("dragover", preventDefaults, false);
+      window.removeEventListener("drop", preventDefaults, false);
+    };
+  }, []);
 
   async function handleQuickCreateSubject() {
     if (!newSubjectName.trim()) return;
@@ -268,9 +324,16 @@ export default function UploadWizard({ onClose, onSaved }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={onClose}
+      onDragEnter={handleDragEnter}
+      onDragLeave={handleDragLeave}
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
     >
       <motion.div
-        className="clay relative w-full max-w-2xl max-h-[90vh] overflow-y-auto p-0"
+        className={cn(
+          "clay relative w-full max-w-2xl max-h-[90vh] overflow-y-auto p-0 transition-all duration-200",
+          isDragActive && step === 0 && "ring-4 ring-lilac scale-[1.01] shadow-2xl"
+        )}
         initial={{ scale: 0.9, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.9, y: 20 }}
@@ -335,20 +398,30 @@ export default function UploadWizard({ onClose, onSaved }) {
                 transition={{ duration: 0.2 }}
               >
                 <div
-                  className="flex cursor-pointer flex-col items-center gap-4 rounded-2xl border-3 border-dashed border-lilac/30 bg-lilac/5 p-10 text-center transition-all hover:border-lilac/60 hover:bg-lilac/10"
-                  onDragOver={(e) => e.preventDefault()}
+                  className={cn(
+                    "flex cursor-pointer flex-col items-center gap-4 rounded-3xl border-3 border-dashed p-10 text-center transition-all duration-200",
+                    isDragActive
+                      ? "border-lilac bg-lilac/20 scale-[1.02] shadow-xl ring-4 ring-lilac/30"
+                      : "border-lilac/30 bg-lilac/5 hover:border-lilac/60 hover:bg-lilac/10"
+                  )}
+                  onDragEnter={handleDragEnter}
+                  onDragLeave={handleDragLeave}
+                  onDragOver={handleDragOver}
                   onDrop={handleDrop}
                   onClick={() => fileRef.current?.click()}
                 >
-                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-lilac/15">
-                    <FileJson className="h-8 w-8 text-lilac" />
+                  <div className={cn(
+                    "flex h-16 w-16 items-center justify-center rounded-2xl transition-transform duration-200",
+                    isDragActive ? "bg-lilac text-white scale-110 shadow-lg" : "bg-lilac/15 text-lilac"
+                  )}>
+                    <FileJson className="h-8 w-8" />
                   </div>
                   <div>
                     <p className="font-display text-lg font-bold text-ink">
-                      Arraste o arquivo JSON aqui
+                      {isDragActive ? "Solte o arquivo JSON aqui!" : "Arraste o arquivo JSON aqui"}
                     </p>
                     <p className="mt-1 text-sm text-ink-soft">
-                      ou clique para selecionar do computador
+                      {isDragActive ? "Solte para importar os exercícios" : "ou clique para selecionar do computador"}
                     </p>
                   </div>
                   <span className="rounded-full bg-lilac/15 px-3 py-1 text-xs font-bold text-lilac">
@@ -357,9 +430,13 @@ export default function UploadWizard({ onClose, onSaved }) {
                   <input
                     ref={fileRef}
                     type="file"
-                    accept=".json"
+                    accept=".json,application/json"
                     className="hidden"
-                    onChange={(e) => handleFile(e.target.files[0])}
+                    onChange={(e) => {
+                      if (e.target.files && e.target.files[0]) {
+                        handleFile(e.target.files[0]);
+                      }
+                    }}
                   />
                 </div>
 

@@ -111,6 +111,10 @@ export default function AdminPanel() {
   });
   const materialFileInputRef = useRef(null);
 
+  // Material Drag and Drop State
+  const [isMaterialDragActive, setIsMaterialDragActive] = useState(false);
+  const materialDragCounterRef = useRef(0);
+
   const supabase = getSupabaseBrowserClient();
 
   // Auth protection
@@ -119,6 +123,17 @@ export default function AdminPanel() {
       router.push("/");
     }
   }, [isAdmin, authLoading, router]);
+
+  // Prevent browser default behavior on drop outside targets
+  useEffect(() => {
+    const preventDefault = (e) => e.preventDefault();
+    window.addEventListener("dragover", preventDefault, false);
+    window.addEventListener("drop", preventDefault, false);
+    return () => {
+      window.removeEventListener("dragover", preventDefault, false);
+      window.removeEventListener("drop", preventDefault, false);
+    };
+  }, []);
 
   const loadData = useCallback(async () => {
     if (!supabase) return;
@@ -334,6 +349,66 @@ export default function AdminPanel() {
   }
 
   // ==================== MATERIAL ACTIONS ====================
+  function handleSelectMaterialFile(file) {
+    if (!file) return;
+    setSelectedFile(file);
+
+    // Auto-fill title from filename if title empty or default
+    if (!materialForm.title || materialForm.title === "Novo Material") {
+      setMaterialForm((prev) => ({
+        ...prev,
+        title: formatTitleFromFileName(file.name),
+      }));
+    }
+
+    // Auto-suggest category based on detected media type
+    const detected = detectMediaType(file.type, file.name);
+    if (detected === "video") {
+      setMaterialForm((prev) => ({ ...prev, category: "video" }));
+    } else if (detected === "audio") {
+      setMaterialForm((prev) => ({ ...prev, category: "audio" }));
+    } else if (detected === "image") {
+      setMaterialForm((prev) => ({ ...prev, category: "imagem" }));
+    }
+  }
+
+  const handleMaterialDragEnter = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    materialDragCounterRef.current += 1;
+    if (e.dataTransfer?.items && e.dataTransfer.items.length > 0) {
+      setIsMaterialDragActive(true);
+    }
+  };
+
+  const handleMaterialDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    materialDragCounterRef.current -= 1;
+    if (materialDragCounterRef.current <= 0) {
+      materialDragCounterRef.current = 0;
+      setIsMaterialDragActive(false);
+    }
+  };
+
+  const handleMaterialDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.dataTransfer.dropEffect = "copy";
+  };
+
+  const handleMaterialDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    materialDragCounterRef.current = 0;
+    setIsMaterialDragActive(false);
+
+    if (e.dataTransfer?.files && e.dataTransfer.files.length > 0) {
+      handleSelectMaterialFile(e.dataTransfer.files[0]);
+      e.dataTransfer.clearData();
+    }
+  };
+
   function handleOpenCreateMaterial() {
     setEditingMaterial(null);
     setSelectedFile(null);
@@ -1118,18 +1193,24 @@ export default function AdminPanel() {
                     />
                   </div>
 
-                  {/* File Upload Box */}
+                  {/* File Upload Box with full Drag and Drop */}
                   <div>
                     <label className="mb-1 block text-xs font-bold text-ink uppercase tracking-wider">
                       {editingMaterial ? "Substituir Arquivo (Opcional)" : "Arquivo de Mídia"}
                     </label>
 
                     <div
+                      onDragEnter={handleMaterialDragEnter}
+                      onDragLeave={handleMaterialDragLeave}
+                      onDragOver={handleMaterialDragOver}
+                      onDrop={handleMaterialDrop}
                       onClick={() => materialFileInputRef.current?.click()}
                       className={cn(
-                        "flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed p-6 text-center transition",
-                        selectedFile
-                          ? "border-emerald-400 bg-emerald-50/50"
+                        "flex cursor-pointer flex-col items-center justify-center rounded-3xl border-3 border-dashed p-8 text-center transition-all duration-200",
+                        isMaterialDragActive
+                          ? "border-sky bg-sky/20 scale-[1.02] shadow-xl ring-4 ring-sky/30"
+                          : selectedFile
+                          ? "border-emerald-400 bg-emerald-50/50 shadow-sm"
                           : "border-lilac/25 bg-lilac/5 hover:border-lilac/50 hover:bg-lilac/10"
                       )}
                     >
@@ -1140,38 +1221,19 @@ export default function AdminPanel() {
                         className="hidden"
                         onChange={(e) => {
                           if (e.target.files && e.target.files[0]) {
-                            const file = e.target.files[0];
-                            setSelectedFile(file);
-
-                            // Auto-fill title from filename if title empty or default
-                            if (!materialForm.title || materialForm.title === "Novo Material") {
-                              setMaterialForm((prev) => ({
-                                ...prev,
-                                title: formatTitleFromFileName(file.name),
-                              }));
-                            }
-
-                            // Auto-suggest category based on detected media type
-                            const detected = detectMediaType(file.type, file.name);
-                            if (detected === "video") {
-                              setMaterialForm((prev) => ({ ...prev, category: "video" }));
-                            } else if (detected === "audio") {
-                              setMaterialForm((prev) => ({ ...prev, category: "audio" }));
-                            } else if (detected === "image") {
-                              setMaterialForm((prev) => ({ ...prev, category: "imagem" }));
-                            }
+                            handleSelectMaterialFile(e.target.files[0]);
                           }
                         }}
                       />
 
                       {selectedFile ? (
                         <div className="flex items-center gap-3 text-emerald-800">
-                          <Check className="h-6 w-6 text-emerald-600" />
+                          <Check className="h-7 w-7 text-emerald-600 shrink-0" />
                           <div className="text-left">
-                            <p className="text-xs font-bold">{selectedFile.name}</p>
-                            <p className="text-[11px] text-emerald-600">
+                            <p className="text-sm font-bold">{selectedFile.name}</p>
+                            <p className="text-xs text-emerald-600">
                               {formatFileSize(selectedFile.size)} &middot; Tipo detectado:{" "}
-                              <strong>{detectMediaType(selectedFile.type, selectedFile.name)}</strong>
+                              <strong className="capitalize">{detectMediaType(selectedFile.type, selectedFile.name)}</strong>
                             </p>
                           </div>
                         </div>
@@ -1182,16 +1244,27 @@ export default function AdminPanel() {
                             <span className="font-mono text-lilac">{editingMaterial.file_name}</span> (
                             {formatFileSize(editingMaterial.file_size)})
                           </p>
-                          <p className="mt-1 text-[11px]">Clique para selecionar outro arquivo se desejar substituir.</p>
+                          <p className="mt-1 text-[11px]">
+                            {isMaterialDragActive
+                              ? "Solte o arquivo para substituir!"
+                              : "Arraste um novo arquivo ou clique para substituir."}
+                          </p>
                         </div>
                       ) : (
                         <div>
-                          <FileUp className="mx-auto mb-2 h-8 w-8 text-lilac" />
-                          <p className="text-xs font-bold text-ink">
-                            Clique ou arraste um Vídeo, Áudio, Imagem (PNG/JPG) ou PDF
+                          <div className={cn(
+                            "mx-auto mb-3 grid h-14 w-14 place-items-center rounded-2xl transition-transform duration-200",
+                            isMaterialDragActive ? "bg-sky text-white scale-110 shadow-lg" : "bg-lilac/15 text-lilac"
+                          )}>
+                            <FileUp className="h-7 w-7" />
+                          </div>
+                          <p className="text-sm font-bold text-ink">
+                            {isMaterialDragActive
+                              ? "Solte o arquivo de mídia aqui!"
+                              : "Clique ou arraste um Vídeo, Áudio, Imagem (PNG/JPG) ou PDF"}
                           </p>
-                          <p className="mt-1 text-[11px] text-ink-soft">
-                            Vídeos (MP4, WebM), Áudios (MP3, WAV), Imagens (PNG, JPG), PDFs (Até 200MB)
+                          <p className="mt-1 text-xs text-ink-soft">
+                            MP4, WebM, MP3, WAV, PNG, JPG, PDF (Até 200MB)
                           </p>
                         </div>
                       )}
