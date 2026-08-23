@@ -59,6 +59,7 @@ export default function HeaderUser() {
   const inLevel = points % PER_LEVEL;
   const pct = (inLevel / PER_LEVEL) * 100;
   const roleLabel = isChild ? "Criança" : isAdmin ? "Admin" : isParent ? "Responsável" : "Estudante";
+  const avatar = isChild ? "🐣" : AVATARS[Math.min(level - 1, AVATARS.length - 1)];
   const roleColor = isChild ? "bg-mint-soft text-[#05795b]" : isAdmin ? "bg-lilac/20 text-lilac" : isParent ? "bg-candy/20 text-candy" : "bg-sky-soft text-sky";
 
   async function handleLogout() {
