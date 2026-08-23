@@ -161,32 +161,50 @@ export function GameDrawer({ game, onClose, rawHtml = null }) {
         </div>
 
         {/* Completion Notification Banner */}
-        {completedData && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex items-center justify-between gap-3 border-b border-emerald-500/30 bg-emerald-950/80 px-5 py-3 text-xs"
-          >
-            <div className="flex items-center gap-2 text-emerald-300 font-semibold">
-              <Trophy className="h-4 w-4 text-emerald-400 shrink-0" />
-              <span>
-                PostMessage recebido! Pontuação:{" "}
-                <strong>
-                  {completedData.score} / {completedData.maxScore || game?.max_score || 100}
-                </strong>
-                {completedData.timeSpentSeconds && (
-                  <span> ({completedData.timeSpentSeconds}s gastos)</span>
-                )}
-              </span>
-            </div>
-            <button
-              onClick={handleRestart}
-              className="font-bold text-emerald-400 hover:underline"
+        {completedData && (() => {
+          const rawScore = Number(completedData.score) || 0;
+          const maxScore = Number(completedData.maxScore) || game?.max_score || 100;
+          const safeScore = Math.max(0, rawScore);
+          const pct = maxScore > 0 ? Math.max(0, Math.round((safeScore / maxScore) * 100)) : 0;
+          const isVictory = rawScore > 0 && pct >= 50;
+
+          return (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className={cn(
+                "flex items-center justify-between gap-3 border-b px-5 py-3 text-xs transition-colors",
+                isVictory
+                  ? "border-emerald-500/30 bg-emerald-950/90 text-emerald-300"
+                  : "border-amber-500/30 bg-amber-950/90 text-amber-200"
+              )}
             >
-              Jogar de novo
-            </button>
-          </motion.div>
-        )}
+              <div className="flex items-center gap-2 font-semibold">
+                {isVictory ? (
+                  <Trophy className="h-4 w-4 shrink-0 text-emerald-400" />
+                ) : (
+                  <span className="text-base">💪</span>
+                )}
+                <span>
+                  {isVictory ? "Partida concluída!" : "Fim de jogo / Tente novamente!"}{" "}
+                  Pontuação: <strong>{rawScore} / {maxScore} ({pct}%)</strong>
+                  {completedData.timeSpentSeconds !== undefined && (
+                    <span> &middot; {completedData.timeSpentSeconds}s gastos</span>
+                  )}
+                </span>
+              </div>
+              <button
+                onClick={handleRestart}
+                className={cn(
+                  "font-bold hover:underline",
+                  isVictory ? "text-emerald-400" : "text-amber-300"
+                )}
+              >
+                Jogar de novo
+              </button>
+            </motion.div>
+          );
+        })()}
 
         {/* Iframe Viewport Container */}
         <div className="flex-1 overflow-hidden p-3 sm:p-5 flex flex-col justify-center items-center bg-black/40">
@@ -278,9 +296,15 @@ export function GameViewerModal({ game, onClose, onGameCompleted }) {
     async function handleGameMessage(event) {
       if (event.data?.type === "GAME_COMPLETED") {
         const payload = event.data.payload || {};
-        console.log("🎮 Aluno concluiu o jogo:", payload);
+        const rawScore = Number(payload.score) || 0;
+        const maxScore = Number(payload.maxScore) || game?.max_score || 100;
+        const isVictory = rawScore > 0 && (maxScore > 0 ? (rawScore / maxScore) >= 0.5 : true);
+
+        console.log("🎮 Aluno finalizou o jogo:", payload, { isVictory });
         setCompletedPayload(payload);
-        celebrateGame();
+        if (isVictory) {
+          celebrateGame();
+        }
 
         // Persist to Supabase and award stars
         if (game) {
@@ -390,43 +414,81 @@ export function GameViewerModal({ game, onClose, onGameCompleted }) {
         </div>
 
         {/* Completion Celebration Overlay Banner */}
-        {completedPayload && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="border-b border-emerald-500/30 bg-gradient-to-r from-emerald-950 via-slate-900 to-emerald-950 px-6 py-3 flex flex-wrap items-center justify-between gap-3 text-xs"
-          >
-            <div className="flex items-center gap-3">
-              <div className="grid h-8 w-8 place-items-center rounded-full bg-emerald-500/20 text-emerald-400 text-lg">
-                🏆
-              </div>
-              <div>
-                <p className="font-display text-sm font-bold text-emerald-300">
-                  Parabéns! Você concluiu o jogo com sucesso!
-                </p>
-                <p className="text-slate-300">
-                  Pontuação: <strong>{completedPayload.score}</strong> / {completedPayload.maxScore || game.max_score} ({scorePct}%)
-                  {completedPayload.timeSpentSeconds && (
-                    <span> &middot; Tempo: {completedPayload.timeSpentSeconds} segundos</span>
-                  )}
-                </p>
-              </div>
-            </div>
+        {/* Outcome Banner (Win vs Game Over) */}
+        {completedPayload && (() => {
+          const rawScore = Number(completedPayload.score) || 0;
+          const maxScore = Number(completedPayload.maxScore) || game.max_score || 100;
+          const safeScore = Math.max(0, rawScore);
+          const pct = maxScore > 0 ? Math.max(0, Math.round((safeScore / maxScore) * 100)) : 0;
+          const isVictory = rawScore > 0 && pct >= 50;
+          const starsAwarded = isVictory ? Math.max(1, Math.round(pct / 10)) : 0;
 
-            <div className="flex items-center gap-2">
-              <span className="rounded-full bg-sun/20 px-3 py-1 text-xs font-extrabold text-[#ffd166] flex items-center gap-1">
-                <Star className="h-3.5 w-3.5 fill-current" />
-                +{Math.max(1, Math.round(scorePct / 10))} Estrelas ganhas!
-              </span>
-              <button
-                onClick={handleRestart}
-                className="press rounded-xl bg-emerald-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-sm hover:bg-emerald-500"
-              >
-                Jogar Novamente
-              </button>
-            </div>
-          </motion.div>
-        )}
+          return (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className={cn(
+                "border-b px-6 py-3 flex flex-wrap items-center justify-between gap-3 text-xs transition-colors",
+                isVictory
+                  ? "border-emerald-500/30 bg-gradient-to-r from-emerald-950 via-slate-900 to-emerald-950"
+                  : "border-rose-500/30 bg-gradient-to-r from-rose-950 via-slate-900 to-rose-950"
+              )}
+            >
+              <div className="flex items-center gap-3">
+                <div
+                  className={cn(
+                    "grid h-9 w-9 place-items-center rounded-full text-lg",
+                    isVictory
+                      ? "bg-emerald-500/20 text-emerald-400"
+                      : "bg-rose-500/20 text-rose-400"
+                  )}
+                >
+                  {isVictory ? "🏆" : "💥"}
+                </div>
+                <div>
+                  <p
+                    className={cn(
+                      "font-display text-sm font-bold",
+                      isVictory ? "text-emerald-300" : "text-rose-300"
+                    )}
+                  >
+                    {isVictory
+                      ? "Parabéns! Você concluiu o minijogo com sucesso!"
+                      : "Fim de jogo! Não desista, tente novamente!"}
+                  </p>
+                  <p className="text-slate-300">
+                    Pontuação final: <strong>{rawScore}</strong> / {maxScore} ({pct}%)
+                    {completedPayload.timeSpentSeconds !== undefined && (
+                      <span> &middot; Tempo: {completedPayload.timeSpentSeconds}s</span>
+                    )}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                {starsAwarded > 0 ? (
+                  <span className="rounded-full bg-sun/20 px-3 py-1 text-xs font-extrabold text-[#ffd166] flex items-center gap-1 border border-sun/30">
+                    <Star className="h-3.5 w-3.5 fill-current" />
+                    +{starsAwarded} Estrelas ganhas!
+                  </span>
+                ) : (
+                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-slate-300">
+                    Tente fazer mais pontos para ganhar estrelas!
+                  </span>
+                )}
+                <button
+                  onClick={handleRestart}
+                  className={cn(
+                    "press rounded-xl px-3.5 py-1.5 text-xs font-bold text-white shadow-sm transition",
+                    isVictory ? "bg-emerald-600 hover:bg-emerald-500" : "bg-rose-600 hover:bg-rose-500"
+                  )}
+                >
+                  Jogar Novamente
+                </button>
+              </div>
+            </motion.div>
+          );
+        })()}
 
         {/* Game iframe rendered with srcDoc */}
         <div className="relative flex-1 w-full h-full bg-black">

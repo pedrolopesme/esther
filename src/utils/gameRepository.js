@@ -360,9 +360,11 @@ export async function recordGameCompletion(game, payload = {}) {
       .eq("id", game.id)
       .then(() => {});
 
-    // 3. Award Stars / Points to student based on score percentage
-    const starsEarned = Math.max(1, Math.round(scorePct / 10)); // e.g. 80% = 8 stars
-    addPoints(starsEarned);
+    // 3. Award Stars / Points to student based on score percentage (only on positive score)
+    const starsEarned = score > 0 ? Math.max(1, Math.round(scorePct / 10)) : 0;
+    if (starsEarned > 0) {
+      addPoints(starsEarned);
+    }
 
     // 4. Log child event for parents timeline
     if (childId) {
