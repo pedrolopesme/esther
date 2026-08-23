@@ -30,10 +30,18 @@ import {
   UserX,
   Target,
   Flame,
+  FolderDown,
+  Eye,
+  Download,
+  FileText,
+  Video,
+  Music,
+  Image as ImageIcon,
 } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 import { getSupabaseBrowserClient } from "../utils/supabase";
 import { getSubject } from "../utils/subjects";
+import { formatFileSize, getCategoryInfo } from "../utils/materialRepository";
 import { cn } from "../utils/cn";
 import Badge from "./ui/Badge";
 import Button from "./ui/Button";
@@ -86,6 +94,8 @@ export default function ParentDashboard() {
   const [children, setChildren] = useState([]);
   const [events, setEvents] = useState([]);
   const [sessions, setSessions] = useState([]);
+  const [materialAccesses, setMaterialAccesses] = useState([]);
+  const [materials, setMaterials] = useState([]);
   const [isLoadingChildren, setIsLoadingChildren] = useState(true);
   const [isLoadingData, setIsLoadingData] = useState(false);
 
@@ -95,7 +105,7 @@ export default function ParentDashboard() {
   // Top navigation view mode: "dashboard" | "children"
   const [currentView, setCurrentView] = useState("dashboard");
 
-  // Dashboard inner tabs: "performance" | "errors" | "timeline"
+  // Dashboard inner tabs: "performance" | "materials" | "errors" | "timeline"
   const [activeTab, setActiveTab] = useState("performance");
 
   // Form states for registering children
@@ -139,12 +149,12 @@ export default function ParentDashboard() {
     loadChildren();
   }, [loadChildren]);
 
-  // Load all events and sessions for this parent's children
+  // Load all events, sessions, material accesses and materials for this parent's children
   const loadParentData = useCallback(async () => {
     if (!supabase || !user) return;
     setIsLoadingData(true);
 
-    const [eventsRes, sessionsRes] = await Promise.all([
+    const [eventsRes, sessionsRes, accessesRes, materialsRes] = await Promise.all([
       supabase
         .from("child_events")
         .select("*")
@@ -155,6 +165,14 @@ export default function ParentDashboard() {
         .select("*")
         .order("completed_at", { ascending: false })
         .limit(200),
+      supabase
+        .from("material_accesses")
+        .select("*")
+        .order("created_at", { ascending: false })
+        .limit(200),
+      supabase
+        .from("materials")
+        .select("id, title, description, subject_id, ano_letivo, file_url, file_name, file_size, file_type, media_type, category"),
     ]);
 
     if (!eventsRes.error && eventsRes.data) {
@@ -163,6 +181,13 @@ export default function ParentDashboard() {
     if (!sessionsRes.error && sessionsRes.data) {
       setSessions(sessionsRes.data);
     }
+    if (!accessesRes.error && accessesRes.data) {
+      setMaterialAccesses(accessesRes.data);
+    }
+    if (!materialsRes.error && materialsRes.data) {
+      setMaterials(materialsRes.data);
+    }
+
     setIsLoadingData(false);
   }, [supabase, user]);
 
@@ -207,7 +232,9 @@ export default function ParentDashboard() {
       if (!data.ok) {
         setRegisterError(data.error);
       } else {
-        setRegisterSuccess(`✨ ${data.display_name} cadastrado(a) com sucesso! Usuário: ${data.username}`);
+        setRegisterSuccess(
+          `✨ ${data.display_name} cadastrado(a) com sucesso! Usuário: ${data.username}`
+        );
         setChildName("");
         setChildUsername("");
         setChildPassword("");
@@ -230,6 +257,15 @@ export default function ParentDashboard() {
     return map;
   }, [children]);
 
+  // Map of material_id to material data
+  const materialMap = useMemo(() => {
+    const map = {};
+    for (const m of materials) {
+      map[m.id] = m;
+    }
+    return map;
+  }, [materials]);
+
   // Filtered data based on selected child filter
   const filteredSessions = useMemo(() => {
     if (selectedChildId === "all") return sessions;
@@ -241,6 +277,11 @@ export default function ParentDashboard() {
     return events.filter((e) => e.child_id === selectedChildId);
   }, [events, selectedChildId]);
 
+  const filteredMaterialAccesses = useMemo(() => {
+    if (selectedChildId === "all") return materialAccesses;
+    return materialAccesses.filter((a) => a.child_id === selectedChildId);
+  }, [materialAccesses, selectedChildId]);
+
   // Aggregated metrics
   const totalCompleted = filteredSessions.length;
   const totalCorrect = filteredSessions.reduce((acc, s) => acc + (s.correct_count || 0), 0);
@@ -248,6 +289,7 @@ export default function ParentDashboard() {
   const totalQuestions = totalCorrect + totalWrong;
   const accuracyRate = totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0;
   const totalPoints = filteredSessions.reduce((acc, s) => acc + (s.points_earned || 0), 0);
+  const totalMaterialsViewed = new Set(filteredMaterialAccesses.map((a) => `${a.child_id}_${a.material_id}`)).size;
 
   // Group performance by subject
   const subjectStats = useMemo(() => {
@@ -307,6 +349,46 @@ export default function ParentDashboard() {
     return list;
   }, [filteredSessions, childMap]);
 
+  // Grouped material accesses report
+  const materialReport = useMemo(() => {
+    const map = {};
+    for (const acc of filteredMaterialAccesses) {
+      const key = `${acc.child_id}_${acc.material_id}`;
+      const mat = materialMap[acc.material_id];
+      if (!map[key]) {
+        map[key] = {
+          childId: acc.child_id,
+          childName: childMap[acc.child_id] || "Estudante",
+          materialId: acc.material_id,
+          title: mat?.title || "Material de Apoio",
+          subjectId: mat?.subject_id || "geral",
+          category: mat?.category || "apostila",
+          mediaType: mat?.media_type || "document",
+          fileSize: mat?.file_size || 0,
+          viewed: false,
+          downloaded: false,
+          viewCount: 0,
+          downloadCount: 0,
+          lastAccess: acc.created_at,
+        };
+      }
+      if (acc.action === "view") {
+        map[key].viewed = true;
+        map[key].viewCount += 1;
+      }
+      if (acc.action === "download") {
+        map[key].downloaded = true;
+        map[key].downloadCount += 1;
+      }
+      if (new Date(acc.created_at) > new Date(map[key].lastAccess)) {
+        map[key].lastAccess = acc.created_at;
+      }
+    }
+    return Object.values(map).sort(
+      (a, b) => new Date(b.lastAccess) - new Date(a.lastAccess)
+    );
+  }, [filteredMaterialAccesses, childMap, materialMap]);
+
   const eventDayGroups = useMemo(() => groupByDay(filteredEvents), [filteredEvents]);
 
   if (authLoading) {
@@ -317,126 +399,97 @@ export default function ParentDashboard() {
     );
   }
 
-  if (!isParent) return null;
-
-  const activeChildrenCount = children.filter((c) => c.active).length;
+  if (!isParent) {
+    return null;
+  }
 
   return (
-    <main className="mx-auto max-w-6xl flex-1 px-4 pb-20 pt-6">
-      {/* Top Header Bar */}
-      <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-        <Link
-          href="/"
-          className="press inline-flex items-center gap-1.5 rounded-full bg-white/70 px-4 py-2 text-sm font-semibold text-ink shadow-sm backdrop-blur hover:-translate-x-0.5 hover:text-candy"
-        >
-          <ArrowLeft className="h-4 w-4" strokeWidth={2.5} /> Voltar ao Início
-        </Link>
+    <div className="mx-auto max-w-6xl px-4 pb-20 pt-8 sm:pt-12">
+      {/* Top Header */}
+      <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+        <div>
+          <div className="mb-2 flex items-center gap-2">
+            <Link
+              href="/"
+              className="press inline-flex items-center gap-1 rounded-full bg-white/70 px-3 py-1 text-xs font-bold text-ink shadow-sm hover:text-candy"
+            >
+              <ArrowLeft className="h-3.5 w-3.5" /> Início
+            </Link>
+            <Badge tone="candy">Área dos Pais</Badge>
+          </div>
+          <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">
+            Painel do Responsável 👨‍👩‍👧
+          </h1>
+          <p className="mt-1 text-xs text-ink-soft sm:text-sm">
+            Acompanhe a evolução, resoluções, acertos e materiais consumidos pelos seus filhos.
+          </p>
+        </div>
 
-        {/* View mode switcher */}
-        <div className="flex rounded-full bg-white/80 p-1.5 shadow-sm ring-1 ring-black/5">
-          <button
+        {/* View Switcher Top Button */}
+        <div className="flex gap-2">
+          <Button
+            variant={currentView === "dashboard" ? "candy" : "ghost"}
+            size="md"
             onClick={() => setCurrentView("dashboard")}
-            className={cn(
-              "press flex items-center gap-2 rounded-full px-5 py-2 text-xs font-bold transition sm:text-sm",
-              currentView === "dashboard"
-                ? "bg-candy text-white shadow-md"
-                : "text-ink-soft hover:text-ink"
-            )}
           >
-            <BarChart3 className="h-4 w-4" /> Visão Geral & Estudos
-          </button>
-          <button
+            <span className="flex items-center gap-1.5">
+              <BarChart3 className="h-4 w-4" />
+              Desempenho
+            </span>
+          </Button>
+          <Button
+            variant={currentView === "children" ? "lilac" : "ghost"}
+            size="md"
             onClick={() => setCurrentView("children")}
-            className={cn(
-              "press flex items-center gap-2 rounded-full px-5 py-2 text-xs font-bold transition sm:text-sm",
-              currentView === "children"
-                ? "bg-candy text-white shadow-md"
-                : "text-ink-soft hover:text-ink"
-            )}
           >
-            <Settings className="h-4 w-4" /> Gerenciar Filhos ({children.length})
-          </button>
+            <span className="flex items-center gap-1.5">
+              <Baby className="h-4 w-4" />
+              Gerenciar Filhos ({children.length})
+            </span>
+          </Button>
         </div>
       </div>
 
-      {/* Main Glass Header */}
-      <motion.div
-        className="clay relative mb-8 overflow-hidden bg-gradient-to-br from-candy to-lilac p-6 text-white sm:p-8"
-        initial={{ y: -18, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 220, damping: 20 }}
-      >
-        <div className="bg-dots absolute inset-0 opacity-30" />
-        <div className="relative flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <span className="grid h-16 w-16 shrink-0 place-items-center rounded-3xl border-4 border-white/80 bg-white/95 shadow-lg">
-              <Users className="h-8 w-8 text-candy" strokeWidth={2.3} />
-            </span>
-            <div>
-              <h1 className="font-display text-3xl font-bold drop-shadow-sm sm:text-4xl">
-                Painel do Responsável
-              </h1>
-              <p className="text-white/90">
-                Acompanhamento completo de evolução, acertos, erros e frequência
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 rounded-2xl bg-white/20 px-4 py-2.5 backdrop-blur">
-            <Baby className="h-5 w-5 text-white" />
-            <span className="text-sm font-bold">
-              {activeChildrenCount} {activeChildrenCount === 1 ? "filho ativo" : "filhos ativos"}
-            </span>
-          </div>
-        </div>
-      </motion.div>
-
-      {/* VIEW 1: DASHBOARD DE DADOS */}
+      {/* VIEW 1: DASHBOARD DE DESEMPENHO */}
       {currentView === "dashboard" && (
-        <div className="space-y-6">
-          {/* Filter Bar: All or specific child */}
-          <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-white/80 p-3 shadow-sm ring-1 ring-black/5">
-            <div className="flex items-center gap-2 text-xs font-bold text-ink-soft sm:text-sm">
-              <Filter className="h-4 w-4 text-candy" /> Filtrar por Estudante:
-            </div>
-
-            <div className="flex flex-wrap gap-1.5">
+        <div className="space-y-8">
+          {/* Child Selector Pills */}
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-xs font-bold text-ink-soft">Filtrar por estudante:</span>
+            <button
+              onClick={() => setSelectedChildId("all")}
+              className={cn(
+                "press rounded-full px-3.5 py-1.5 text-xs font-bold transition",
+                selectedChildId === "all"
+                  ? "bg-candy text-white shadow-md"
+                  : "bg-white/80 text-ink hover:bg-white"
+              )}
+            >
+              Todos os Filhos ({children.length})
+            </button>
+            {children.map((child) => (
               <button
-                onClick={() => setSelectedChildId("all")}
+                key={child.id}
+                onClick={() => setSelectedChildId(child.id)}
                 className={cn(
-                  "press rounded-full px-3.5 py-1.5 text-xs font-bold transition",
-                  selectedChildId === "all"
-                    ? "bg-candy text-white shadow-sm"
-                    : "bg-white/80 text-ink-soft hover:bg-candy-soft hover:text-ink"
+                  "press flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold transition",
+                  selectedChildId === child.id
+                    ? "bg-candy text-white shadow-md"
+                    : "bg-white/80 text-ink hover:bg-white",
+                  !child.active && "opacity-60 line-through"
                 )}
               >
-                🌟 Todos os Filhos ({children.length})
+                <span>{child.active ? "🐣" : "💤"}</span>
+                <span>{child.name}</span>
               </button>
-
-              {children.map((child) => (
-                <button
-                  key={child.id}
-                  onClick={() => setSelectedChildId(child.id)}
-                  className={cn(
-                    "press flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold transition",
-                    selectedChildId === child.id
-                      ? "bg-candy text-white shadow-sm"
-                      : "bg-white/80 text-ink-soft hover:bg-candy-soft hover:text-ink"
-                  )}
-                >
-                  <span>🧒</span>
-                  <span>{child.name}</span>
-                  {!child.active && <span className="text-[10px] text-candy">(desativado)</span>}
-                </button>
-              ))}
-            </div>
+            ))}
           </div>
 
           {/* Quick Metrics Cards */}
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             <Card className="flex flex-col items-center justify-center p-5 text-center">
               <div className="mb-2 grid h-10 w-10 place-items-center rounded-2xl bg-lilac/10 text-lilac">
-                <BookOpen className="h-5 w-5" strokeWidth={2.5} />
+                <Award className="h-5 w-5" strokeWidth={2.5} />
               </div>
               <span className="text-xs font-bold text-ink-soft">Listas Concluídas</span>
               <p className="mt-1 font-display text-3xl font-bold text-lilac sm:text-4xl">
@@ -448,7 +501,7 @@ export default function ParentDashboard() {
               <div className="mb-2 grid h-10 w-10 place-items-center rounded-2xl bg-mint/10 text-mint">
                 <Target className="h-5 w-5" strokeWidth={2.5} />
               </div>
-              <span className="text-xs font-bold text-ink-soft">Aproveitamento Geral</span>
+              <span className="text-xs font-bold text-ink-soft">Taxa de Acerto</span>
               <p className="mt-1 font-display text-3xl font-bold text-mint sm:text-4xl">
                 {accuracyRate}%
               </p>
@@ -456,11 +509,11 @@ export default function ParentDashboard() {
 
             <Card className="flex flex-col items-center justify-center p-5 text-center">
               <div className="mb-2 grid h-10 w-10 place-items-center rounded-2xl bg-sky/10 text-sky">
-                <CheckCircle2 className="h-5 w-5" strokeWidth={2.5} />
+                <FolderDown className="h-5 w-5" strokeWidth={2.5} />
               </div>
-              <span className="text-xs font-bold text-ink-soft">Volume de Acertos</span>
+              <span className="text-xs font-bold text-ink-soft">Materiais Acessados</span>
               <p className="mt-1 font-display text-3xl font-bold text-sky sm:text-4xl">
-                {totalCorrect}
+                {totalMaterialsViewed}
               </p>
             </Card>
 
@@ -476,11 +529,11 @@ export default function ParentDashboard() {
           </div>
 
           {/* Nav Tabs within Dashboard */}
-          <div className="flex rounded-2xl bg-white/80 p-1.5 shadow-sm ring-1 ring-black/5">
+          <div className="flex flex-wrap rounded-2xl bg-white/80 p-1.5 shadow-sm ring-1 ring-black/5">
             <button
               onClick={() => setActiveTab("performance")}
               className={cn(
-                "press flex flex-1 items-center justify-center gap-2 rounded-xl py-3 text-xs font-bold transition sm:text-sm",
+                "press flex flex-1 min-w-[140px] items-center justify-center gap-2 rounded-xl py-3 text-xs font-bold transition sm:text-sm",
                 activeTab === "performance"
                   ? "bg-candy text-white shadow-md"
                   : "text-ink-soft hover:text-ink"
@@ -489,9 +542,20 @@ export default function ParentDashboard() {
               <BarChart3 className="h-4 w-4" /> Desempenho & Matérias
             </button>
             <button
+              onClick={() => setActiveTab("materials")}
+              className={cn(
+                "press flex flex-1 min-w-[140px] items-center justify-center gap-2 rounded-xl py-3 text-xs font-bold transition sm:text-sm",
+                activeTab === "materials"
+                  ? "bg-candy text-white shadow-md"
+                  : "text-ink-soft hover:text-ink"
+              )}
+            >
+              <FolderDown className="h-4 w-4" /> Materiais de Apoio ({materialReport.length})
+            </button>
+            <button
               onClick={() => setActiveTab("errors")}
               className={cn(
-                "press flex flex-1 items-center justify-center gap-2 rounded-xl py-3 text-xs font-bold transition sm:text-sm",
+                "press flex flex-1 min-w-[140px] items-center justify-center gap-2 rounded-xl py-3 text-xs font-bold transition sm:text-sm",
                 activeTab === "errors"
                   ? "bg-candy text-white shadow-md"
                   : "text-ink-soft hover:text-ink"
@@ -502,13 +566,13 @@ export default function ParentDashboard() {
             <button
               onClick={() => setActiveTab("timeline")}
               className={cn(
-                "press flex flex-1 items-center justify-center gap-2 rounded-xl py-3 text-xs font-bold transition sm:text-sm",
+                "press flex flex-1 min-w-[140px] items-center justify-center gap-2 rounded-xl py-3 text-xs font-bold transition sm:text-sm",
                 activeTab === "timeline"
                   ? "bg-candy text-white shadow-md"
                   : "text-ink-soft hover:text-ink"
               )}
             >
-              <Activity className="h-4 w-4" /> Linha do Tempo de Eventos
+              <Activity className="h-4 w-4" /> Linha do Tempo
             </button>
           </div>
 
@@ -600,21 +664,17 @@ export default function ParentDashboard() {
                     ) : (
                       <div className="space-y-4">
                         {subjectStats.map((sub) => (
-                          <div
-                            key={sub.subjectId}
-                            className="rounded-2xl bg-white/70 p-4 shadow-sm ring-1 ring-black/5"
-                          >
-                            <div className="mb-2 flex items-center justify-between">
-                              <div className="flex items-center gap-2.5">
-                                <span className="text-xl">{sub.emoji}</span>
-                                <span className="font-display font-bold text-ink">{sub.name}</span>
-                              </div>
-                              <span className="font-display text-sm font-bold text-ink">
-                                {sub.rate}% de acerto
+                          <div key={sub.subjectId} className="space-y-1.5">
+                            <div className="flex items-center justify-between text-xs font-bold">
+                              <span className="flex items-center gap-1.5 text-ink">
+                                <span>{sub.emoji}</span>
+                                <span>{sub.name}</span>
+                              </span>
+                              <span className="text-ink-soft">
+                                {sub.correctCount}/{sub.total} ({sub.rate}%)
                               </span>
                             </div>
-
-                            <div className="h-3 w-full overflow-hidden rounded-full bg-black/5 shadow-inner">
+                            <div className="h-3.5 w-full overflow-hidden rounded-full bg-black/5 p-0.5">
                               <div
                                 className="h-full rounded-full transition-all duration-500"
                                 style={{
@@ -622,16 +682,6 @@ export default function ParentDashboard() {
                                   backgroundColor: sub.hex,
                                 }}
                               />
-                            </div>
-
-                            <div className="mt-2 flex justify-between text-xs text-ink-soft">
-                              <span>
-                                {sub.completedCount}{" "}
-                                {sub.completedCount === 1 ? "lista finalizada" : "listas finalizadas"}
-                              </span>
-                              <span>
-                                {sub.correctCount} acertos · {sub.wrongCount} erros
-                              </span>
                             </div>
                           </div>
                         ))}
@@ -641,7 +691,101 @@ export default function ParentDashboard() {
                 </div>
               )}
 
-              {/* TAB 2: PONTOS DE ATENÇÃO (ERROS) */}
+              {/* TAB 2: MATERIAIS DE APOIO ACESSADOS */}
+              {activeTab === "materials" && (
+                <Card className="p-6">
+                  <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
+                    <div>
+                      <h3 className="flex items-center gap-2 font-display text-lg font-bold text-ink">
+                        <FolderDown className="h-5 w-5 text-sky" strokeWidth={2.5} />
+                        Materiais de Estudo Acessados pelos Filhos
+                      </h3>
+                      <p className="text-xs text-ink-soft sm:text-sm">
+                        Vídeos, áudios, imagens e PDFs visualizados ou baixados para estudo.
+                      </p>
+                    </div>
+
+                    <Badge tone="sky">
+                      {materialReport.length}{" "}
+                      {materialReport.length === 1 ? "material consumido" : "materiais consumidos"}
+                    </Badge>
+                  </div>
+
+                  {materialReport.length === 0 ? (
+                    <div className="py-12 text-center">
+                      <div className="mb-2 text-4xl">📂</div>
+                      <p className="font-display text-lg font-bold text-ink">
+                        Nenhum material de apoio acessado ainda.
+                      </p>
+                      <p className="mt-1 text-xs text-ink-soft">
+                        Quando as crianças abrirem ou baixarem vídeos, PDFs ou áudios nas matérias,
+                        o histórico aparecerá detalhado aqui.
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      {materialReport.map((item, idx) => {
+                        const theme = getSubject(item.subjectId);
+                        const catInfo = getCategoryInfo(item.category);
+
+                        return (
+                          <div
+                            key={idx}
+                            className="flex flex-col justify-between rounded-2xl border-2 border-sky/15 bg-white/90 p-4 shadow-sm"
+                          >
+                            <div>
+                              <div className="mb-2 flex flex-wrap items-center justify-between gap-1">
+                                <div className="flex items-center gap-1.5">
+                                  <span>{theme?.emoji || "📖"}</span>
+                                  <span className="font-display text-xs font-bold text-ink">
+                                    {theme?.name || item.subjectId}
+                                  </span>
+                                  <span className="text-[11px] font-bold text-candy">
+                                    ({item.childName})
+                                  </span>
+                                </div>
+                                <span className="text-[10px] text-ink-soft">
+                                  {formatDateTime(item.lastAccess)}
+                                </span>
+                              </div>
+
+                              <div className="flex items-start gap-2 mb-3">
+                                <span className="text-xl mt-0.5">{catInfo.emoji}</span>
+                                <div className="min-w-0 flex-1">
+                                  <p className="text-sm font-bold text-ink truncate">
+                                    {item.title}
+                                  </p>
+                                  <span className="text-xs text-ink-soft capitalize">
+                                    {item.mediaType} &middot; {catInfo.label}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Status markers */}
+                            <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-lilac/10 text-xs">
+                              {item.viewed && (
+                                <span className="inline-flex items-center gap-1 rounded-full bg-mint-soft px-2.5 py-0.5 text-xs font-bold text-[#05795b]">
+                                  <Eye className="h-3.5 w-3.5" />
+                                  Visualizado ({item.viewCount}x)
+                                </span>
+                              )}
+                              {item.downloaded && (
+                                <span className="inline-flex items-center gap-1 rounded-full bg-sky-soft px-2.5 py-0.5 text-xs font-bold text-[#1a8bb0]">
+                                  <Download className="h-3.5 w-3.5" />
+                                  Baixado ({item.downloadCount}x)
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </Card>
+              )}
+
+              {/* TAB 3: PONTOS DE ATENÇÃO (ERROS) */}
               {activeTab === "errors" && (
                 <Card className="p-6">
                   <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
@@ -724,15 +868,12 @@ export default function ParentDashboard() {
                 </Card>
               )}
 
-              {/* TAB 3: LINHA DO TEMPO */}
+              {/* TAB 4: LINHA DO TEMPO */}
               {activeTab === "timeline" && (
-                <div className="space-y-4">
+                <div className="space-y-6">
                   {events.length === 0 ? (
-                    <Card className="py-12 text-center">
-                      <div className="mb-2 text-4xl">📭</div>
-                      <p className="font-display font-semibold text-ink-soft">
-                        Nenhum evento registrado ainda.
-                      </p>
+                    <Card className="p-8 text-center text-ink-soft">
+                      Nenhuma atividade registrada até o momento.
                     </Card>
                   ) : (
                     eventDayGroups.map(([dayKey, dayEvents]) => (
@@ -758,6 +899,9 @@ export default function ParentDashboard() {
                               const isLogin = ev.event_type === "login";
                               const isStart = ev.event_type === "exercise_started";
                               const isComplete = ev.event_type === "exercise_completed";
+                              const isMatView = ev.event_type === "material_viewed";
+                              const isMatDownload = ev.event_type === "material_downloaded";
+
                               const theme = getSubject(ev.subject);
                               const cName = childMap[ev.child_id] || "Estudante";
 
@@ -768,12 +912,16 @@ export default function ParentDashboard() {
                                       "mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-2xl shadow-inner",
                                       isLogin && "bg-sky-soft text-sky",
                                       isStart && "bg-sun-soft text-[#c79114]",
-                                      isComplete && "bg-mint-soft text-[#078d6d]"
+                                      isComplete && "bg-mint-soft text-[#078d6d]",
+                                      isMatView && "bg-lilac-soft text-lilac",
+                                      isMatDownload && "bg-sky-soft text-[#1a8bb0]"
                                     )}
                                   >
                                     {isLogin && <LogIn className="h-4 w-4" strokeWidth={2.5} />}
                                     {isStart && <PlayCircle className="h-4 w-4" strokeWidth={2.5} />}
                                     {isComplete && <Award className="h-4 w-4" strokeWidth={2.5} />}
+                                    {isMatView && <Eye className="h-4 w-4" strokeWidth={2.5} />}
+                                    {isMatDownload && <Download className="h-4 w-4" strokeWidth={2.5} />}
                                   </span>
 
                                   <div className="min-w-0 flex-1">
@@ -783,6 +931,8 @@ export default function ParentDashboard() {
                                         {isLogin && "entrou na plataforma"}
                                         {isStart && `iniciou lista de ${theme?.name || ev.subject || "exercícios"}`}
                                         {isComplete && `concluiu lista de ${theme?.name || ev.subject || "exercícios"}`}
+                                        {isMatView && `visualizou material de ${theme?.name || ev.subject || "apoio"}`}
+                                        {isMatDownload && `baixou material de ${theme?.name || ev.subject || "apoio"}`}
                                       </p>
                                       <span className="text-xs text-ink-soft">
                                         {new Date(ev.created_at).toLocaleTimeString("pt-BR", {
@@ -795,6 +945,12 @@ export default function ParentDashboard() {
                                     {(isStart || isComplete) && (
                                       <p className="mt-0.5 text-xs font-semibold text-ink-soft">
                                         {theme?.emoji} {ev.list_title || ev.list_slug}
+                                      </p>
+                                    )}
+
+                                    {(isMatView || isMatDownload) && (
+                                      <p className="mt-0.5 text-xs font-semibold text-ink-soft">
+                                        📄 {ev.list_title || ev.metadata?.fileName || "Material de estudo"}
                                       </p>
                                     )}
 
@@ -841,148 +997,143 @@ export default function ParentDashboard() {
               <Baby className="h-5 w-5 text-lilac" strokeWidth={2.5} /> Filhos Cadastrados
             </h2>
             <p className="mb-6 text-xs text-ink-soft sm:text-sm">
-              Gerencie as contas de acesso dos seus filhos. Em vez de excluir, você pode desativar o acesso mantendo todo o histórico intacto.
+              Gerencie quem pode acessar a Esther e resolva exercícios com pontuação individual.
             </p>
 
             {isLoadingChildren ? (
-              <div className="flex justify-center py-8">
-                <span className="h-10 w-10 animate-spin rounded-full border-3 border-lilac/25 border-t-lilac" />
-              </div>
+              <div className="py-8 text-center text-sm text-ink-soft">Carregando filhos...</div>
             ) : children.length === 0 ? (
-              <div className="rounded-2xl bg-sky-soft p-8 text-center">
-                <div className="mb-2 text-4xl">🧒</div>
-                <p className="font-display font-bold text-ink">Nenhum filho cadastrado ainda.</p>
+              <div className="rounded-2xl border-2 border-dashed border-lilac/25 p-8 text-center">
+                <p className="font-display text-base font-bold text-ink">Nenhum filho cadastrado ainda</p>
                 <p className="mt-1 text-xs text-ink-soft">
-                  Preencha o formulário ao lado para adicionar o primeiro filho.
+                  Cadastre seu primeiro filho usando o formulário ao lado para começar!
                 </p>
               </div>
             ) : (
-              <div className="space-y-3">
+              <ul className="divide-y divide-lilac/10">
                 {children.map((child) => (
-                  <div
-                    key={child.id}
-                    className={cn(
-                      "flex flex-wrap items-center justify-between gap-3 rounded-2xl border-2 p-4 transition",
-                      child.active
-                        ? "border-lilac/15 bg-white/90 shadow-sm"
-                        : "border-black/5 bg-gray-50/80 opacity-75"
-                    )}
-                  >
+                  <li key={child.id} className="flex items-center justify-between py-4">
                     <div className="flex items-center gap-3">
-                      <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-candy-soft to-lilac-soft text-2xl shadow ring-2 ring-white">
-                        {child.active ? "🧒" : "💤"}
+                      <span className="grid h-11 w-11 place-items-center rounded-2xl bg-lilac/15 text-2xl">
+                        {child.active ? "🐣" : "💤"}
                       </span>
                       <div>
                         <div className="flex items-center gap-2">
-                          <h3 className="font-display text-base font-bold text-ink">
-                            {child.name}
-                          </h3>
-                          {child.active ? (
-                            <Badge tone="mint">Ativo</Badge>
-                          ) : (
-                            <Badge tone="neutral">Desativado</Badge>
-                          )}
+                          <p className="font-display font-bold text-ink">{child.name}</p>
+                          <span
+                            className={cn(
+                              "rounded-full px-2 py-0.5 text-[10px] font-bold",
+                              child.active
+                                ? "bg-mint-soft text-[#05795b]"
+                                : "bg-black/10 text-ink-soft"
+                            )}
+                          >
+                            {child.active ? "Ativo" : "Desativado"}
+                          </span>
                         </div>
                         <p className="text-xs text-ink-soft">
-                          Usuário: <span className="font-bold text-ink">@{child.username}</span>
+                          Usuário de acesso: <span className="font-bold text-lilac">{child.username}</span>
                         </p>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2">
-                      <Button
-                        type="button"
-                        variant={child.active ? "candy" : "mint"}
-                        size="sm"
-                        onClick={() => handleToggleChildActive(child)}
-                        className="flex items-center gap-1.5"
-                      >
-                        {child.active ? (
-                          <>
-                            <UserX className="h-4 w-4" /> Desativar Acesso
-                          </>
-                        ) : (
-                          <>
-                            <UserCheck className="h-4 w-4" /> Reativar Acesso
-                          </>
-                        )}
-                      </Button>
-                    </div>
-                  </div>
+                    <button
+                      onClick={() => handleToggleChildActive(child)}
+                      className={cn(
+                        "press flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold transition",
+                        child.active
+                          ? "bg-candy-soft text-[#a62f5f] hover:bg-candy hover:text-white"
+                          : "bg-mint-soft text-[#05795b] hover:bg-mint hover:text-white"
+                      )}
+                      title={child.active ? "Desativar conta do filho" : "Reativar conta do filho"}
+                    >
+                      {child.active ? (
+                        <>
+                          <UserX className="h-3.5 w-3.5" />
+                          <span>Desativar</span>
+                        </>
+                      ) : (
+                        <>
+                          <UserCheck className="h-3.5 w-3.5" />
+                          <span>Ativar</span>
+                        </>
+                      )}
+                    </button>
+                  </li>
                 ))}
-              </div>
+              </ul>
             )}
           </Card>
 
-          {/* Form to Add a New Child */}
-          <Card className="h-fit p-6">
-            <h2 className="mb-2 flex items-center gap-2 font-display text-lg font-bold text-ink">
-              <UserPlus className="h-5 w-5 text-candy" strokeWidth={2.5} /> Adicionar Novo Filho
+          {/* Form to Add New Child */}
+          <Card className="p-6">
+            <h2 className="mb-2 flex items-center gap-2 font-display text-xl font-bold text-ink">
+              <UserPlus className="h-5 w-5 text-candy" strokeWidth={2.5} /> Adicionar Filho
             </h2>
-            <p className="mb-4 text-xs text-ink-soft">
-              Crie o login simples que a criança usará para estudar.
+            <p className="mb-6 text-xs text-ink-soft">
+              Crie uma conta para seu filho acessar com facilidade.
             </p>
 
-            <form onSubmit={handleRegisterChild} className="space-y-3.5">
+            {registerSuccess && (
+              <div className="mb-4 rounded-2xl bg-mint-soft p-3 text-xs font-bold text-[#05795b]">
+                {registerSuccess}
+              </div>
+            )}
+            {registerError && (
+              <div className="mb-4 rounded-2xl bg-candy-soft p-3 text-xs font-bold text-[#a62f5f]">
+                {registerError}
+              </div>
+            )}
+
+            <form onSubmit={handleRegisterChild} className="space-y-4">
               <div>
                 <label className="mb-1 block text-xs font-bold text-ink">Nome da Criança</label>
                 <input
-                  className={inputClass}
                   type="text"
-                  placeholder="Ex: Esther"
+                  required
+                  placeholder="ex: Esther"
                   value={childName}
                   onChange={(e) => setChildName(e.target.value)}
-                  required
+                  className={inputClass}
                 />
               </div>
 
               <div>
-                <label className="mb-1 block text-xs font-bold text-ink">Nome de Usuário (login)</label>
+                <label className="mb-1 block text-xs font-bold text-ink">Usuário (login)</label>
                 <input
-                  className={inputClass}
                   type="text"
-                  placeholder="Ex: esther (sem espaços)"
-                  value={childUsername}
-                  onChange={(e) => setChildUsername(e.target.value)}
                   required
-                  minLength={3}
-                  maxLength={30}
-                  pattern="[a-zA-Z0-9_]+"
-                  title="Apenas letras, números e _"
+                  placeholder="ex: esther"
+                  value={childUsername}
+                  onChange={(e) => setChildUsername(e.target.value.toLowerCase().replace(/\s+/g, ""))}
+                  className={inputClass}
                 />
               </div>
 
               <div>
-                <label className="mb-1 block text-xs font-bold text-ink">Senha</label>
+                <label className="mb-1 block text-xs font-bold text-ink">Senha de Acesso</label>
                 <input
-                  className={inputClass}
                   type="password"
-                  placeholder="Mínimo 6 dígitos"
+                  required
+                  placeholder="ex: 123456"
                   value={childPassword}
                   onChange={(e) => setChildPassword(e.target.value)}
-                  required
-                  minLength={6}
+                  className={inputClass}
                 />
               </div>
 
-              <Button type="submit" variant="candy" className="w-full" disabled={isRegistering}>
+              <Button
+                type="submit"
+                variant="candy"
+                className="w-full"
+                disabled={isRegistering}
+              >
                 {isRegistering ? "Cadastrando..." : "Cadastrar Filho"}
               </Button>
             </form>
-
-            {registerError && (
-              <p className="mt-3 rounded-xl bg-candy-soft px-3 py-2 text-xs font-semibold text-[#a62f5f]">
-                {registerError}
-              </p>
-            )}
-            {registerSuccess && (
-              <p className="mt-3 rounded-xl bg-mint-soft px-3 py-2 text-xs font-semibold text-[#05795b]">
-                {registerSuccess}
-              </p>
-            )}
           </Card>
         </div>
       )}
-    </main>
+    </div>
   );
 }

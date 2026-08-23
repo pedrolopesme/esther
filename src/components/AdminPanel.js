@@ -23,7 +23,9 @@ import {
   ToggleRight,
   FolderDown,
   FileText,
-  FileSpreadsheet,
+  Video,
+  Music,
+  Image as ImageIcon,
   Download,
   ExternalLink,
   Filter,
@@ -49,10 +51,13 @@ import {
   deleteMaterial,
   togglePublishMaterial,
   formatFileSize,
+  formatTitleFromFileName,
+  detectMediaType,
   getCategoryInfo,
 } from "../utils/materialRepository";
 import UploadWizard from "./UploadWizard";
 import ExerciseDrawer from "./ExerciseDrawer";
+import MaterialViewerModal from "./MaterialViewerModal";
 import Button from "./ui/Button";
 import Card from "./ui/Card";
 import Badge from "./ui/Badge";
@@ -90,6 +95,7 @@ export default function AdminPanel() {
   // Material management state
   const [isCreatingMaterial, setIsCreatingMaterial] = useState(false);
   const [editingMaterial, setEditingMaterial] = useState(null);
+  const [previewingMaterial, setPreviewingMaterial] = useState(null);
   const [materialFilterSubject, setMaterialFilterSubject] = useState("");
   const [materialFilterCategory, setMaterialFilterCategory] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
@@ -369,7 +375,7 @@ export default function AdminPanel() {
       }
 
       if (!editingMaterial && !selectedFile) {
-        throw new Error("Por favor, selecione um arquivo (PDF, imagem, etc.) para fazer o upload.");
+        throw new Error("Por favor, selecione um arquivo (Vídeo, Áudio, Imagem ou PDF) para fazer o upload.");
       }
 
       let fileInfo = null;
@@ -396,6 +402,7 @@ export default function AdminPanel() {
           payload.file_name = fileInfo.fileName;
           payload.file_size = fileInfo.fileSize;
           payload.file_type = fileInfo.fileType;
+          payload.media_type = fileInfo.mediaType;
         }
 
         await updateMaterial(editingMaterial.id, payload);
@@ -412,6 +419,7 @@ export default function AdminPanel() {
           file_name: fileInfo.fileName,
           file_size: fileInfo.fileSize,
           file_type: fileInfo.fileType,
+          media_type: fileInfo.mediaType,
         });
       }
 
@@ -448,6 +456,20 @@ export default function AdminPanel() {
     }
   }
 
+  function getMediaIcon(mediaType) {
+    switch (mediaType) {
+      case "video":
+        return <Video className="h-4 w-4 text-[#A370FF]" />;
+      case "audio":
+        return <Music className="h-4 w-4 text-[#4CC9F0]" />;
+      case "image":
+        return <ImageIcon className="h-4 w-4 text-[#FF70A6]" />;
+      case "document":
+      default:
+        return <FileText className="h-4 w-4 text-[#06D6A0]" />;
+    }
+  }
+
   // Filtered materials
   const filteredMaterials = materials.filter((m) => {
     const matchSubj = materialFilterSubject ? m.subject_id === materialFilterSubject : true;
@@ -481,7 +503,7 @@ export default function AdminPanel() {
         <div>
           <h1 className="font-display text-4xl font-bold text-ink">⚙️ Painel Administrativo</h1>
           <p className="mt-2 text-ink-soft">
-            Gerencie listas de exercícios, matérias e materiais de apoio
+            Gerencie listas de exercícios, matérias e materiais de apoio (vídeos, áudios, imagens, PDFs)
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
@@ -988,7 +1010,7 @@ export default function AdminPanel() {
                   <h3 className="font-display text-xl font-bold text-ink">
                     {editingMaterial
                       ? `✏️ Editar Material: ${editingMaterial.title}`
-                      : "📂 Novo Material de Apoio (PDF / Imagem / Documento)"}
+                      : "📂 Novo Material de Apoio (Vídeo, Áudio, Imagem ou PDF)"}
                   </h3>
                   <button
                     onClick={() => {
@@ -1012,11 +1034,11 @@ export default function AdminPanel() {
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
                       <label className="mb-1 block text-xs font-bold text-ink uppercase tracking-wider">
-                        Título do Material
+                        Título do Material (Auto-gerado do arquivo ou personalizado)
                       </label>
                       <input
                         type="text"
-                        placeholder="ex: Apostila Unidade 3 - Números Fracionários"
+                        placeholder="ex: Vídeo Explicativo - Sistema Solar"
                         value={materialForm.title}
                         onChange={(e) =>
                           setMaterialForm({ ...materialForm, title: e.target.value })
@@ -1049,7 +1071,7 @@ export default function AdminPanel() {
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
                       <label className="mb-1 block text-xs font-bold text-ink uppercase tracking-wider">
-                        Categoria
+                        Categoria do Material
                       </label>
                       <select
                         value={materialForm.category}
@@ -1083,11 +1105,11 @@ export default function AdminPanel() {
 
                   <div>
                     <label className="mb-1 block text-xs font-bold text-ink uppercase tracking-wider">
-                      Descrição / Tópicos Abordados
+                      Descrição / Instruções
                     </label>
                     <textarea
                       rows={2}
-                      placeholder="Breve descrição ou instruções sobre o material..."
+                      placeholder="Breve descrição sobre o conteúdo do vídeo, áudio, imagem ou apostila..."
                       value={materialForm.description}
                       onChange={(e) =>
                         setMaterialForm({ ...materialForm, description: e.target.value })
@@ -1099,7 +1121,7 @@ export default function AdminPanel() {
                   {/* File Upload Box */}
                   <div>
                     <label className="mb-1 block text-xs font-bold text-ink uppercase tracking-wider">
-                      {editingMaterial ? "Substituir Arquivo (Opcional)" : "Arquivo para Upload"}
+                      {editingMaterial ? "Substituir Arquivo (Opcional)" : "Arquivo de Mídia"}
                     </label>
 
                     <div
@@ -1114,16 +1136,29 @@ export default function AdminPanel() {
                       <input
                         ref={materialFileInputRef}
                         type="file"
-                        accept=".pdf,.png,.jpg,.jpeg,.webp,.doc,.docx,.ppt,.pptx,.txt"
+                        accept=".mp4,.webm,.ogg,.mov,.mp3,.wav,.m4a,.png,.jpg,.jpeg,.webp,.gif,.svg,.pdf,.doc,.docx,.ppt,.pptx,.txt"
                         className="hidden"
                         onChange={(e) => {
                           if (e.target.files && e.target.files[0]) {
-                            setSelectedFile(e.target.files[0]);
-                            if (!materialForm.title) {
-                              setMaterialForm({
-                                ...materialForm,
-                                title: e.target.files[0].name.replace(/\.[^/.]+$/, ""),
-                              });
+                            const file = e.target.files[0];
+                            setSelectedFile(file);
+
+                            // Auto-fill title from filename if title empty or default
+                            if (!materialForm.title || materialForm.title === "Novo Material") {
+                              setMaterialForm((prev) => ({
+                                ...prev,
+                                title: formatTitleFromFileName(file.name),
+                              }));
+                            }
+
+                            // Auto-suggest category based on detected media type
+                            const detected = detectMediaType(file.type, file.name);
+                            if (detected === "video") {
+                              setMaterialForm((prev) => ({ ...prev, category: "video" }));
+                            } else if (detected === "audio") {
+                              setMaterialForm((prev) => ({ ...prev, category: "audio" }));
+                            } else if (detected === "image") {
+                              setMaterialForm((prev) => ({ ...prev, category: "imagem" }));
                             }
                           }
                         }}
@@ -1135,7 +1170,8 @@ export default function AdminPanel() {
                           <div className="text-left">
                             <p className="text-xs font-bold">{selectedFile.name}</p>
                             <p className="text-[11px] text-emerald-600">
-                              {formatFileSize(selectedFile.size)} &middot; Pronto para upload
+                              {formatFileSize(selectedFile.size)} &middot; Tipo detectado:{" "}
+                              <strong>{detectMediaType(selectedFile.type, selectedFile.name)}</strong>
                             </p>
                           </div>
                         </div>
@@ -1152,10 +1188,10 @@ export default function AdminPanel() {
                         <div>
                           <FileUp className="mx-auto mb-2 h-8 w-8 text-lilac" />
                           <p className="text-xs font-bold text-ink">
-                            Clique ou arraste um arquivo PDF, Imagem ou Documento
+                            Clique ou arraste um Vídeo, Áudio, Imagem (PNG/JPG) ou PDF
                           </p>
                           <p className="mt-1 text-[11px] text-ink-soft">
-                            PDF, JPEG, PNG, DOCX, PPTX (Máx. 50MB)
+                            Vídeos (MP4, WebM), Áudios (MP3, WAV), Imagens (PNG, JPG), PDFs (Até 200MB)
                           </p>
                         </div>
                       )}
@@ -1174,7 +1210,7 @@ export default function AdminPanel() {
                       {materialForm.published ? (
                         <>
                           <ToggleRight className="h-5 w-5 text-emerald-600" />
-                          <span className="text-emerald-700">Material publicado</span>
+                          <span className="text-emerald-700">Material publicado para a criança</span>
                         </>
                       ) : (
                         <>
@@ -1206,7 +1242,7 @@ export default function AdminPanel() {
                     >
                       <span className="flex items-center gap-1.5">
                         <Check className="h-4 w-4" />
-                        {isUploadingMaterial ? "Enviando arquivo..." : "Salvar Material"}
+                        {isUploadingMaterial ? "Enviando arquivo para o Storage..." : "Salvar Material"}
                       </span>
                     </Button>
                   </div>
@@ -1271,7 +1307,7 @@ export default function AdminPanel() {
                   <tr>
                     <th className="px-4 py-3 text-left font-bold text-ink">Material</th>
                     <th className="px-4 py-3 text-left font-bold text-ink">Matéria</th>
-                    <th className="px-4 py-3 text-left font-bold text-ink">Categoria</th>
+                    <th className="px-4 py-3 text-left font-bold text-ink">Tipo</th>
                     <th className="px-4 py-3 text-center font-bold text-ink">Tamanho</th>
                     <th className="px-4 py-3 text-center font-bold text-ink">Status</th>
                     <th className="px-4 py-3 text-center font-bold text-ink">Ações</th>
@@ -1285,7 +1321,7 @@ export default function AdminPanel() {
                           <FolderDown className="h-8 w-8 text-lilac/40" />
                           <p className="font-semibold">Nenhum material de apoio cadastrado.</p>
                           <p className="text-xs">
-                            Clique em <strong>Novo Material</strong> para fazer upload de apostilas, PDFs ou imagens.
+                            Clique em <strong>Novo Material</strong> para fazer upload de vídeos, áudios, imagens ou PDFs.
                           </p>
                         </div>
                       </td>
@@ -1294,12 +1330,17 @@ export default function AdminPanel() {
                     filteredMaterials.map((mat) => {
                       const subjectObj = subjects.find((s) => s.id === mat.subject_id);
                       const catInfo = getCategoryInfo(mat.category);
+                      const mediaType =
+                        mat.media_type || detectMediaType(mat.file_type, mat.file_name);
 
                       return (
                         <tr key={mat.id} className="hover:bg-white/30 transition">
                           <td className="px-4 py-3">
                             <div className="min-w-0 max-w-xs sm:max-w-md">
-                              <p className="font-bold text-ink truncate">{mat.title}</p>
+                              <div className="flex items-center gap-1.5">
+                                {getMediaIcon(mediaType)}
+                                <p className="font-bold text-ink truncate">{mat.title}</p>
+                              </div>
                               <div className="mt-0.5 flex items-center gap-2 text-xs text-ink-soft">
                                 <span className="font-mono text-[11px] truncate">{mat.file_name}</span>
                                 {mat.ano_letivo && (
@@ -1352,6 +1393,13 @@ export default function AdminPanel() {
 
                           <td className="px-4 py-3 text-center">
                             <div className="flex items-center justify-center gap-1.5">
+                              <button
+                                onClick={() => setPreviewingMaterial(mat)}
+                                className="press cursor-pointer rounded-full bg-white/80 p-1.5 text-ink-soft shadow-sm hover:text-mint"
+                                title="Visualizar / Reproduzir Player"
+                              >
+                                <Play className="h-4 w-4" />
+                              </button>
                               {mat.file_url && (
                                 <a
                                   href={mat.file_url}
@@ -1359,7 +1407,7 @@ export default function AdminPanel() {
                                   rel="noopener noreferrer"
                                   download={mat.file_name}
                                   className="press cursor-pointer rounded-full bg-white/80 p-1.5 text-ink-soft shadow-sm hover:text-sky"
-                                  title="Baixar / Abrir Arquivo"
+                                  title="Baixar Arquivo"
                                 >
                                   <Download className="h-4 w-4" />
                                 </a>
@@ -1407,6 +1455,16 @@ export default function AdminPanel() {
           <ExerciseDrawer
             list={testingList}
             onClose={() => setTestingList(null)}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Material Viewer Modal for Admin Preview */}
+      <AnimatePresence>
+        {previewingMaterial && (
+          <MaterialViewerModal
+            material={previewingMaterial}
+            onClose={() => setPreviewingMaterial(null)}
           />
         )}
       </AnimatePresence>

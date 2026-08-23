@@ -1,13 +1,17 @@
 import { getSupabaseBrowserClient } from "./supabase";
+import { logChildEvent } from "./childEvents";
 
 export const MATERIAL_CATEGORIES = [
-  { id: "apostila", label: "Apostila", emoji: "📖" },
-  { id: "resumo", label: "Resumo / Guia", emoji: "📝" },
-  { id: "livro", label: "Livro Didático", emoji: "📚" },
-  { id: "caderno", label: "Caderno / Anotações", emoji: "📓" },
-  { id: "exercicios", label: "Lista de Exercícios PDF", emoji: "📋" },
-  { id: "prova", label: "Simulado / Prova", emoji: "🎯" },
-  { id: "outro", label: "Outro Material", emoji: "📁" },
+  { id: "apostila", label: "Apostila", emoji: "📖", defaultMedia: "document" },
+  { id: "resumo", label: "Resumo / Guia", emoji: "📝", defaultMedia: "document" },
+  { id: "video", label: "Vídeo Explicativo", emoji: "🎬", defaultMedia: "video" },
+  { id: "audio", label: "Áudio / Podcast", emoji: "🎧", defaultMedia: "audio" },
+  { id: "imagem", label: "Imagem / Infográfico", emoji: "🖼️", defaultMedia: "image" },
+  { id: "livro", label: "Livro Didático", emoji: "📚", defaultMedia: "document" },
+  { id: "caderno", label: "Caderno / Anotações", emoji: "📓", defaultMedia: "document" },
+  { id: "exercicios", label: "Lista de Exercícios PDF", emoji: "📋", defaultMedia: "document" },
+  { id: "prova", label: "Simulado / Prova", emoji: "🎯", defaultMedia: "document" },
+  { id: "outro", label: "Outro Material", emoji: "📁", defaultMedia: "other" },
 ];
 
 export function getCategoryInfo(categoryId) {
@@ -15,7 +19,24 @@ export function getCategoryInfo(categoryId) {
     id: categoryId,
     label: categoryId,
     emoji: "📄",
+    defaultMedia: "document",
   };
+}
+
+export function detectMediaType(fileType = "", fileName = "") {
+  const ft = fileType.toLowerCase();
+  const ext = fileName.split(".").pop()?.toLowerCase() || "";
+
+  if (ft.startsWith("video/") || ["mp4", "webm", "ogg", "mov", "m4v"].includes(ext)) {
+    return "video";
+  }
+  if (ft.startsWith("audio/") || ["mp3", "wav", "ogg", "m4a", "aac", "weba"].includes(ext)) {
+    return "audio";
+  }
+  if (ft.startsWith("image/") || ["png", "jpg", "jpeg", "webp", "gif", "svg"].includes(ext)) {
+    return "image";
+  }
+  return "document";
 }
 
 export function formatFileSize(bytes) {
@@ -26,7 +47,23 @@ export function formatFileSize(bytes) {
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(1))} ${sizes[i]}`;
 }
 
-export async function getMaterials({ subjectId, category, publishedOnly = false } = {}) {
+export function formatTitleFromFileName(fileName = "") {
+  if (!fileName) return "";
+  // Remove extension
+  const withoutExt = fileName.replace(/\.[^/.]+$/, "");
+  // Replace underscores and hyphens with spaces
+  const withSpaces = withoutExt.replace(/[_-]+/g, " ").trim();
+  // Capitalize words nicely
+  return withSpaces
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
+/**
+ * Fetch materials with optional subject/category filtering and child/user access status
+ */
+export async function getMaterials({ subjectId, category, publishedOnly = false, childId = null } = {}) {
   const supabase = getSupabaseBrowserClient();
   if (!supabase) return [];
 
@@ -42,6 +79,7 @@ export async function getMaterials({ subjectId, category, publishedOnly = false 
       file_name,
       file_size,
       file_type,
+      media_type,
       category,
       published,
       download_count,
@@ -66,9 +104,55 @@ export async function getMaterials({ subjectId, category, publishedOnly = false 
     throw error;
   }
 
-  return data || [];
+  const materialsList = data || [];
+
+  // If childId is provided or active child in localStorage, attach access status
+  let effectiveChildId = childId;
+  if (!effectiveChildId && typeof window !== "undefined") {
+    try {
+      const stored = localStorage.getItem("esther_child");
+      if (stored) {
+        effectiveChildId = JSON.parse(stored)?.id;
+      }
+    } catch {}
+  }
+
+  if (effectiveChildId && materialsList.length > 0) {
+    try {
+      const { data: accesses } = await supabase
+        .from("material_accesses")
+        .select("material_id, action, created_at")
+        .eq("child_id", effectiveChildId);
+
+      const accessMap = {};
+      (accesses || []).forEach((acc) => {
+        if (!accessMap[acc.material_id]) {
+          accessMap[acc.material_id] = { viewed: false, downloaded: false, lastAccessed: acc.created_at };
+        }
+        if (acc.action === "view") accessMap[acc.material_id].viewed = true;
+        if (acc.action === "download") accessMap[acc.material_id].downloaded = true;
+      });
+
+      return materialsList.map((m) => ({
+        ...m,
+        media_type: m.media_type || detectMediaType(m.file_type, m.file_name),
+        accessStatus: accessMap[m.id] || { viewed: false, downloaded: false, lastAccessed: null },
+      }));
+    } catch (e) {
+      console.warn("Não foi possível carregar status de acesso do material:", e);
+    }
+  }
+
+  return materialsList.map((m) => ({
+    ...m,
+    media_type: m.media_type || detectMediaType(m.file_type, m.file_name),
+    accessStatus: { viewed: false, downloaded: false, lastAccessed: null },
+  }));
 }
 
+/**
+ * Upload material file to Supabase storage bucket
+ */
 export async function uploadMaterialFile(file, { subjectId = "geral" } = {}) {
   const supabase = getSupabaseBrowserClient();
   if (!supabase) throw new Error("Supabase não inicializado.");
@@ -80,7 +164,7 @@ export async function uploadMaterialFile(file, { subjectId = "geral" } = {}) {
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/[^a-z0-9]+/g, "_")
-    .slice(0, 50);
+    .slice(0, 60);
 
   const filePath = `${subjectId}/${Date.now()}_${cleanBaseName}.${fileExt}`;
 
@@ -100,18 +184,23 @@ export async function uploadMaterialFile(file, { subjectId = "geral" } = {}) {
     .from("study-materials")
     .getPublicUrl(uploadData.path);
 
+  const mediaType = detectMediaType(file.type, file.name);
+
   return {
     fileUrl: publicUrlData.publicUrl,
     filePath: uploadData.path,
     fileName: file.name,
     fileSize: file.size,
     fileType: file.type || "application/octet-stream",
+    mediaType,
   };
 }
 
 export async function createMaterial(payload) {
   const supabase = getSupabaseBrowserClient();
   if (!supabase) throw new Error("Supabase não inicializado.");
+
+  const mediaType = payload.media_type || detectMediaType(payload.file_type, payload.file_name);
 
   const { data, error } = await supabase
     .from("materials")
@@ -124,6 +213,7 @@ export async function createMaterial(payload) {
       file_name: payload.file_name,
       file_size: payload.file_size || 0,
       file_type: payload.file_type || "application/pdf",
+      media_type: mediaType,
       category: payload.category || "apostila",
       published: payload.published ?? true,
     })
@@ -142,17 +232,27 @@ export async function updateMaterial(id, payload) {
   const supabase = getSupabaseBrowserClient();
   if (!supabase) throw new Error("Supabase não inicializado.");
 
+  const updateFields = {
+    title: payload.title?.trim(),
+    description: payload.description?.trim(),
+    subject_id: payload.subject_id,
+    ano_letivo: payload.ano_letivo,
+    category: payload.category,
+    published: payload.published,
+    updated_at: new Date().toISOString(),
+  };
+
+  if (payload.file_url) {
+    updateFields.file_url = payload.file_url;
+    updateFields.file_name = payload.file_name;
+    updateFields.file_size = payload.file_size;
+    updateFields.file_type = payload.file_type;
+    updateFields.media_type = payload.media_type || detectMediaType(payload.file_type, payload.file_name);
+  }
+
   const { data, error } = await supabase
     .from("materials")
-    .update({
-      title: payload.title?.trim(),
-      description: payload.description?.trim(),
-      subject_id: payload.subject_id,
-      ano_letivo: payload.ano_letivo,
-      category: payload.category,
-      published: payload.published,
-      updated_at: new Date().toISOString(),
-    })
+    .update(updateFields)
     .eq("id", id)
     .select()
     .single();
@@ -169,7 +269,6 @@ export async function deleteMaterial(material) {
   const supabase = getSupabaseBrowserClient();
   if (!supabase) throw new Error("Supabase não inicializado.");
 
-  // Delete DB record
   const { error: dbError } = await supabase
     .from("materials")
     .delete()
@@ -177,7 +276,6 @@ export async function deleteMaterial(material) {
 
   if (dbError) throw dbError;
 
-  // Try to remove from storage if file_url belongs to study-materials
   try {
     if (material.file_url && material.file_url.includes("/study-materials/")) {
       const parts = material.file_url.split("/study-materials/");
@@ -205,4 +303,71 @@ export async function togglePublishMaterial(id, currentPublished) {
 
   if (error) throw error;
   return data;
+}
+
+/**
+ * Record material view or download event for child & parents
+ */
+export async function trackMaterialAccess(material, action = "view") {
+  if (typeof window === "undefined" || !material?.id) return;
+
+  const supabase = getSupabaseBrowserClient();
+  if (!supabase) return;
+
+  try {
+    let childId = null;
+    let userId = null;
+
+    try {
+      const stored = localStorage.getItem("esther_child");
+      if (stored) {
+        childId = JSON.parse(stored)?.id;
+      }
+    } catch {}
+
+    const { data: sessionData } = await supabase.auth.getSession();
+    if (sessionData?.session?.user) {
+      userId = sessionData.session.user.id;
+    }
+
+    // 1. Insert in material_accesses table
+    await supabase.from("material_accesses").insert({
+      material_id: material.id,
+      child_id: childId,
+      user_id: userId,
+      action: action, // 'view' | 'download'
+    });
+
+    // 2. Increment download_count if action is download
+    if (action === "download") {
+      await supabase.rpc("increment_download_count", { m_id: material.id }).catch(() => {
+        // Fallback update
+        supabase
+          .from("materials")
+          .update({ download_count: (material.download_count || 0) + 1 })
+          .eq("id", material.id)
+          .then(() => {});
+      });
+    }
+
+    // 3. Log structured child_event if a child is active
+    if (childId) {
+      const eventType = action === "download" ? "material_downloaded" : "material_viewed";
+      await logChildEvent({
+        childId,
+        eventType,
+        subject: material.subject_id,
+        listTitle: material.title,
+        metadata: {
+          materialId: material.id,
+          fileName: material.file_name,
+          mediaType: material.media_type || detectMediaType(material.file_type, material.file_name),
+          category: material.category,
+          action,
+        },
+      });
+    }
+  } catch (err) {
+    console.error("Erro ao registrar acesso ao material:", err);
+  }
 }
