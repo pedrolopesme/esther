@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ChevronRight, ListChecks, FolderDown } from "lucide-react";
+import { ChevronRight, ListChecks, FolderDown, AlertTriangle } from "lucide-react";
 import { cn } from "../utils/cn";
 
 const cardVariants = {
@@ -14,7 +14,7 @@ const cardVariants = {
  * Compact & cheerful Kawaii Subject Card for the student dashboard.
  * Designed to fit comfortably in responsive 2, 3 or 4 columns without overwhelming the page.
  */
-export default function SubjectCard({ subject, listCount, materialCount }) {
+export default function SubjectCard({ subject, listCount, materialCount, unseenMaterialCount = 0 }) {
   const Icon = subject.icon;
 
   return (
@@ -63,8 +63,8 @@ export default function SubjectCard({ subject, listCount, materialCount }) {
             )}
           </div>
 
-          {/* Counts badges */}
-          <div className="mt-4 flex flex-wrap items-center gap-1.5 pt-3 border-t border-lilac/10 text-[11px] font-bold text-ink-soft">
+          {/* Counts and unseen material alert */}
+          <div className="mt-4 flex flex-wrap items-center gap-1.5 border-t border-lilac/10 pt-3 text-[11px] font-bold text-ink-soft">
             {typeof listCount === "number" && (
               <span className="inline-flex items-center gap-1 rounded-full bg-lilac/10 px-2 py-0.5 text-lilac">
                 <ListChecks className="h-3 w-3" />
@@ -75,6 +75,15 @@ export default function SubjectCard({ subject, listCount, materialCount }) {
               <span className="inline-flex items-center gap-1 rounded-full bg-sky/10 px-2 py-0.5 text-sky">
                 <FolderDown className="h-3 w-3" />
                 {materialCount} materiais
+              </span>
+            )}
+            {unseenMaterialCount > 0 && (
+              <span
+                className="inline-flex items-center gap-1 rounded-full bg-candy-soft px-2 py-0.5 text-[#a62f5f]"
+                title={`${unseenMaterialCount} material(is) ainda não visto(s) nesta matéria`}
+              >
+                <AlertTriangle className="h-3 w-3" />
+                {unseenMaterialCount} novo{unseenMaterialCount !== 1 ? "s" : ""}
               </span>
             )}
           </div>

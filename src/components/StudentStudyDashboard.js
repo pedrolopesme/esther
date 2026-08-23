@@ -64,6 +64,7 @@ export default function StudentStudyDashboard() {
   const { user, child } = useAuth();
   const [subjects, setSubjects] = useState(STATIC_SUBJECTS.map(resolveSubject));
   const [latestLists, setLatestLists] = useState([]);
+  const [allMaterials, setAllMaterials] = useState([]);
   const [latestMaterials, setLatestMaterials] = useState([]);
   const [studyOverview, setStudyOverview] = useState({
     recentSessions: [],
@@ -90,6 +91,7 @@ export default function StudentStudyDashboard() {
 
       setSubjects(dbSubjects);
       setLatestLists(lists);
+      setAllMaterials(mats);
       setLatestMaterials(mats.slice(0, 6));
       setStudyOverview(overview);
       setError(null);
@@ -118,16 +120,18 @@ export default function StudentStudyDashboard() {
         return <FileText className="h-4 w-4 text-[#06D6A0]" />;
     }
   }
-
-  // Count exercises & materials per subject
+  // Counts use the full published material catalog, while the home feed only shows recent materials.
   const subjectStatsMap = {};
   for (const s of subjects) {
+    const subjectMaterials = allMaterials.filter((m) => m.subject_id === s.id);
     subjectStatsMap[s.id] = {
       lists: latestLists.filter((l) => l.subject === s.id).length,
-      materials: latestMaterials.filter((m) => m.subject_id === s.id).length,
+      materials: subjectMaterials.length,
+      unseenMaterials: subjectMaterials.filter(
+        (m) => !m.accessStatus?.viewed && !m.accessStatus?.downloaded
+      ).length,
     };
   }
-
   return (
     <div className="mx-auto max-w-5xl px-4 pb-20 pt-6 sm:pt-10 space-y-10">
       {/* ---------- Hero Greeting & Quick Stats ---------- */}
@@ -318,6 +322,7 @@ export default function StudentStudyDashboard() {
                 subject={subject}
                 listCount={subjectStatsMap[subject.id]?.lists ?? 0}
                 materialCount={subjectStatsMap[subject.id]?.materials ?? 0}
+                unseenMaterialCount={subjectStatsMap[subject.id]?.unseenMaterials ?? 0}
               />
             ))}
           </motion.div>
