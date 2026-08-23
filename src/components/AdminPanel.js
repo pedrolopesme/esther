@@ -1,65 +1,112 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { AnimatePresence } from "framer-motion";
-import { Trash2, Eye, EyeOff, ArrowLeft, Upload, Play } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  Trash2,
+  Eye,
+  EyeOff,
+  ArrowLeft,
+  Upload,
+  Play,
+  BookOpen,
+  ListChecks,
+  Plus,
+  Edit2,
+  Check,
+  X,
+  Palette,
+  Sparkles,
+  ToggleLeft,
+  ToggleRight,
+} from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 import { getSupabaseBrowserClient } from "../utils/supabase";
+import {
+  SUBJECTS as STATIC_SUBJECTS,
+  COLOR_PRESETS,
+  ICON_MAP,
+  getSubjectsFromDB,
+  resolveSubject,
+} from "../utils/subjects";
 import UploadWizard from "./UploadWizard";
 import ExerciseDrawer from "./ExerciseDrawer";
-
-const SUBJECTS = [
-  { id: "matematica", nome: "Matemática", emoji: "🔢" },
-  { id: "portugues", nome: "Português", emoji: "📚" },
-  { id: "ingles", nome: "Inglês", emoji: "🗣️" },
-  { id: "geografia", nome: "Geografia", emoji: "🗺️" },
-  { id: "historia", nome: "História", emoji: "📜" },
-  { id: "ciencias", nome: "Ciências", emoji: "🔬" },
-];
+import Button from "./ui/Button";
+import Card from "./ui/Card";
+import Badge from "./ui/Badge";
+import { cn } from "../utils/cn";
 
 export default function AdminPanel() {
   const router = useRouter();
   const { isAdmin, isLoading: authLoading } = useAuth();
+  const [activeTab, setActiveTab] = useState("lists"); // 'lists' | 'subjects'
+
+  // Lists state
   const [lists, setLists] = useState([]);
+  const [subjects, setSubjects] = useState(STATIC_SUBJECTS);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showUploadWizard, setShowUploadWizard] = useState(false);
   const [testingList, setTestingList] = useState(null);
+
+  // Subject management state
+  const [editingSubject, setEditingSubject] = useState(null);
+  const [isCreatingSubject, setIsCreatingSubject] = useState(false);
+  const [subjectForm, setSubjectForm] = useState({
+    id: "",
+    name: "",
+    emoji: "📚",
+    color: "lilac",
+    tag: "",
+    iconName: "BookOpenText",
+    active: true,
+  });
+  const [isSavingSubject, setIsSavingSubject] = useState(false);
+  const [subjectError, setSubjectError] = useState(null);
+
   const supabase = getSupabaseBrowserClient();
 
-  // Proteção: só admin pode acessar
+  // Auth protection
   useEffect(() => {
     if (!authLoading && !isAdmin) {
       router.push("/");
     }
   }, [isAdmin, authLoading, router]);
 
-  async function loadLists() {
+  const loadData = useCallback(async () => {
     if (!supabase) return;
     try {
       setIsLoading(true);
-      const { data, error: fetchError } = await supabase
-        .from("exercise_lists")
-        .select("*")
-        .order("exercise_date", { ascending: false });
 
-      if (fetchError) throw fetchError;
-      setLists(data || []);
+      // Load subjects and lists concurrently
+      const [subjectsData, listsRes] = await Promise.all([
+        getSubjectsFromDB(true), // include inactive
+        supabase
+          .from("exercise_lists")
+          .select("*")
+          .order("exercise_date", { ascending: false }),
+      ]);
+
+      if (listsRes.error) throw listsRes.error;
+
+      setSubjects(subjectsData);
+      setLists(listsRes.data || []);
       setError(null);
     } catch (err) {
+      console.error("Erro ao carregar dados do admin:", err);
       setError(err.message);
     } finally {
       setIsLoading(false);
     }
-  }
+  }, [supabase]);
 
   useEffect(() => {
-    if (isAdmin) loadLists();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAdmin]);
+    if (isAdmin) loadData();
+  }, [isAdmin, loadData]);
 
+  // List Actions
   async function handleTogglePublish(list) {
     try {
       const { error: updateError } = await supabase
@@ -94,6 +141,151 @@ export default function AdminPanel() {
     }
   }
 
+  // Subject Actions
+  function handleOpenCreateSubject() {
+    setEditingSubject(null);
+    setSubjectForm({
+      id: "",
+      name: "",
+      emoji: "📚",
+      color: "lilac",
+      tag: "Estudo & prática",
+      iconName: "BookOpenText",
+      active: true,
+    });
+    setSubjectError(null);
+    setIsCreatingSubject(true);
+  }
+
+  function handleOpenEditSubject(subj) {
+    setIsCreatingSubject(false);
+    setEditingSubject(subj);
+    setSubjectForm({
+      id: subj.id,
+      name: subj.name,
+      emoji: subj.emoji || "📚",
+      color: subj.color || "lilac",
+      tag: subj.tag || "",
+      iconName: subj.iconName || "BookOpenText",
+      active: subj.active ?? true,
+    });
+    setSubjectError(null);
+  }
+
+  async function handleSaveSubject(e) {
+    e.preventDefault();
+    if (!supabase) return;
+    setIsSavingSubject(true);
+    setSubjectError(null);
+
+    try {
+      const cleanId = subjectForm.id
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "_")
+        .replace(/^_|_$/g, "")
+        .slice(0, 50);
+
+      if (!cleanId) {
+        throw new Error("O identificador da matéria é obrigatório.");
+      }
+      if (!subjectForm.name.trim()) {
+        throw new Error("O nome da matéria é obrigatório.");
+      }
+
+      const preset = COLOR_PRESETS.find((p) => p.color === subjectForm.color) ?? COLOR_PRESETS[1];
+
+      const payload = {
+        id: cleanId,
+        name: subjectForm.name.trim(),
+        emoji: subjectForm.emoji.trim() || "📚",
+        icon: subjectForm.iconName,
+        color: preset.color,
+        hex: preset.hex,
+        gradient: preset.gradient,
+        soft: preset.soft,
+        tag: subjectForm.tag.trim(),
+        active: subjectForm.active,
+      };
+
+      if (editingSubject) {
+        // Update
+        const { error: updateError } = await supabase
+          .from("subjects")
+          .update(payload)
+          .eq("id", editingSubject.id);
+
+        if (updateError) throw updateError;
+      } else {
+        // Insert
+        payload.order_index = subjects.length + 1;
+        const { error: insertError } = await supabase
+          .from("subjects")
+          .insert(payload);
+
+        if (insertError) {
+          if (insertError.code === "23505") {
+            throw new Error("Já existe uma matéria com este identificador.");
+          }
+          throw insertError;
+        }
+      }
+
+      setIsCreatingSubject(false);
+      setEditingSubject(null);
+      await loadData();
+    } catch (err) {
+      setSubjectError(err.message);
+    } finally {
+      setIsSavingSubject(false);
+    }
+  }
+
+  async function handleToggleSubjectActive(subj) {
+    if (!supabase) return;
+    try {
+      const nextActive = !subj.active;
+      const { error: updateError } = await supabase
+        .from("subjects")
+        .update({ active: nextActive })
+        .eq("id", subj.id);
+
+      if (updateError) throw updateError;
+
+      setSubjects((prev) =>
+        prev.map((s) => (s.id === subj.id ? { ...s, active: nextActive } : s))
+      );
+    } catch (err) {
+      alert("Erro ao alterar status da matéria: " + err.message);
+    }
+  }
+
+  async function handleDeleteSubject(subj) {
+    const associatedLists = lists.filter((l) => l.subject === subj.id);
+    if (associatedLists.length > 0) {
+      alert(
+        `Não é possível excluir a matéria "${subj.name}" pois existem ${associatedLists.length} lista(s) de exercícios associadas a ela. Você pode desativá-la.`
+      );
+      return;
+    }
+
+    if (!confirm(`Tem certeza que deseja excluir a matéria "${subj.name}"?`)) return;
+
+    try {
+      const { error: delError } = await supabase
+        .from("subjects")
+        .delete()
+        .eq("id", subj.id);
+
+      if (delError) throw delError;
+
+      setSubjects((prev) => prev.filter((s) => s.id !== subj.id));
+    } catch (err) {
+      alert("Erro ao excluir matéria: " + err.message);
+    }
+  }
+
   if (authLoading) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center text-ink-soft">
@@ -115,17 +307,59 @@ export default function AdminPanel() {
         <ArrowLeft className="h-4 w-4" /> Voltar
       </Link>
 
+      {/* Header */}
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="font-display text-4xl font-bold text-ink">⚙️ Painel Administrativo</h1>
-          <p className="mt-2 text-ink-soft">Gerencie listas de exercícios e publicações</p>
+          <p className="mt-2 text-ink-soft">
+            Gerencie matérias escolares, listas de exercícios e publicações
+          </p>
         </div>
+        <div className="flex flex-wrap items-center gap-3">
+          {activeTab === "subjects" && (
+            <button
+              onClick={handleOpenCreateSubject}
+              className="press cursor-pointer inline-flex items-center gap-2 rounded-2xl bg-gradient-to-b from-[#3FE3B8] to-[#06C994] px-5 py-3 text-sm font-bold text-white shadow-[0_6px_0_#05A87C] active:translate-y-1.5 active:shadow-none"
+            >
+              <Plus className="h-5 w-5" />
+              Nova Matéria
+            </button>
+          )}
+          <button
+            onClick={() => setShowUploadWizard(true)}
+            className="press cursor-pointer inline-flex items-center gap-2 rounded-2xl bg-gradient-to-b from-[#B48CFF] to-[#9257FF] px-5 py-3 text-sm font-bold text-white shadow-[0_6px_0_#7A3FE0] active:translate-y-1.5 active:shadow-none"
+          >
+            <Upload className="h-5 w-5" />
+            Importar JSON
+          </button>
+        </div>
+      </div>
+
+      {/* Navigation Tabs */}
+      <div className="mb-6 flex gap-2 border-b border-lilac/15 pb-4">
         <button
-          onClick={() => setShowUploadWizard(true)}
-          className="press cursor-pointer inline-flex items-center gap-2 rounded-2xl bg-gradient-to-b from-[#B48CFF] to-[#9257FF] px-5 py-3 text-sm font-bold text-white shadow-[0_6px_0_#7A3FE0] active:translate-y-1.5 active:shadow-none"
+          onClick={() => setActiveTab("lists")}
+          className={cn(
+            "press cursor-pointer flex items-center gap-2 rounded-2xl px-5 py-2.5 font-display text-sm font-bold transition",
+            activeTab === "lists"
+              ? "bg-lilac text-white shadow-md"
+              : "bg-white/70 text-ink hover:bg-white"
+          )}
         >
-          <Upload className="h-5 w-5" />
-          Importar JSON
+          <ListChecks className="h-4 w-4" />
+          Listas de Exercícios ({lists.length})
+        </button>
+        <button
+          onClick={() => setActiveTab("subjects")}
+          className={cn(
+            "press cursor-pointer flex items-center gap-2 rounded-2xl px-5 py-2.5 font-display text-sm font-bold transition",
+            activeTab === "subjects"
+              ? "bg-lilac text-white shadow-md"
+              : "bg-white/70 text-ink hover:bg-white"
+          )}
+        >
+          <BookOpen className="h-4 w-4" />
+          Gestão de Matérias ({subjects.length})
         </button>
       </div>
 
@@ -137,28 +371,31 @@ export default function AdminPanel() {
 
       {isLoading ? (
         <div className="flex items-center justify-center py-12 text-ink-soft">
-          Carregando listas...
+          Carregando dados...
         </div>
-      ) : (
+      ) : activeTab === "lists" ? (
+        /* ==================== TAB 1: LISTS ==================== */
         <div className="space-y-6">
-          {/* Resumo por matéria */}
+          {/* Summary by subject */}
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-            {SUBJECTS.map((subject) => {
-              const count = lists.filter((l) => l.subject === subject.id).length;
-              return (
-                <div
-                  key={subject.id}
-                  className="clay flex flex-col items-center gap-2 p-4 text-center"
-                >
-                  <span className="text-3xl">{subject.emoji}</span>
-                  <span className="text-sm font-bold text-ink">{subject.nome}</span>
-                  <span className="text-2xl font-bold text-lilac">{count}</span>
-                </div>
-              );
-            })}
+            {subjects
+              .filter((s) => s.active)
+              .map((subject) => {
+                const count = lists.filter((l) => l.subject === subject.id).length;
+                return (
+                  <div
+                    key={subject.id}
+                    className="clay flex flex-col items-center gap-2 p-4 text-center"
+                  >
+                    <span className="text-3xl">{subject.emoji}</span>
+                    <span className="text-sm font-bold text-ink">{subject.name}</span>
+                    <span className="text-2xl font-bold text-lilac">{count}</span>
+                  </div>
+                );
+              })}
           </div>
 
-          {/* Tabela de listas */}
+          {/* Exercise Lists Table */}
           <div className="clay overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
@@ -180,64 +417,366 @@ export default function AdminPanel() {
                       </td>
                     </tr>
                   ) : (
-                    lists.map((list) => (
-                      <tr key={list.id} className="hover:bg-white/30 transition">
-                        <td className="px-4 py-3">
-                          <span className="inline-block rounded-full bg-[#EEE6FF] px-2.5 py-1 text-xs font-bold text-[#A370FF]">
-                            {SUBJECTS.find((s) => s.id === list.subject)?.emoji} {list.subject}
-                          </span>
-                        </td>
-                        <td className="px-4 py-3 font-semibold text-ink max-w-xs truncate">{list.title}</td>
-                        <td className="px-4 py-3 text-ink-soft">
-                          {new Date(list.exercise_date + "T12:00:00").toLocaleDateString("pt-BR")}
-                        </td>
-                        <td className="px-4 py-3 text-center text-ink font-bold">
-                          {list.question_count || 0}
-                        </td>
-                        <td className="px-4 py-3 text-center">
-                          <button
-                            onClick={() => handleTogglePublish(list)}
-                            className="press cursor-pointer inline-flex items-center justify-center gap-1 rounded-full bg-white/70 px-2 py-1 text-xs font-bold shadow-sm hover:text-lilac"
-                            title={list.published ? "Despublicar" : "Publicar"}
-                          >
-                            {list.published ? (
-                              <>
-                                <Eye className="h-4 w-4" />
-                                <span className="hidden sm:inline">Sim</span>
-                              </>
-                            ) : (
-                              <>
-                                <EyeOff className="h-4 w-4" />
-                                <span className="hidden sm:inline">Não</span>
-                              </>
-                            )}
-                          </button>
-                        </td>
-                        <td className="px-4 py-3 text-center">
-                          <div className="flex items-center justify-center gap-1">
+                    lists.map((list) => {
+                      const subjectObj = subjects.find((s) => s.id === list.subject);
+                      return (
+                        <tr key={list.id} className="hover:bg-white/30 transition">
+                          <td className="px-4 py-3">
+                            <span className="inline-flex items-center gap-1 rounded-full bg-[#EEE6FF] px-2.5 py-1 text-xs font-bold text-[#A370FF]">
+                              <span>{subjectObj?.emoji || "📖"}</span>
+                              <span>{subjectObj?.name || list.subject}</span>
+                            </span>
+                          </td>
+                          <td className="px-4 py-3 font-semibold text-ink max-w-xs truncate">
+                            {list.title}
+                          </td>
+                          <td className="px-4 py-3 text-ink-soft">
+                            {new Date(list.exercise_date + "T12:00:00").toLocaleDateString("pt-BR")}
+                          </td>
+                          <td className="px-4 py-3 text-center text-ink font-bold">
+                            {list.question_count || 0}
+                          </td>
+                          <td className="px-4 py-3 text-center">
                             <button
-                              onClick={() => setTestingList(list)}
-                              disabled={!Array.isArray(list.exercises) || list.exercises.length === 0}
-                              className="press cursor-pointer rounded-full bg-white/70 p-1.5 shadow-sm hover:text-mint disabled:opacity-30 disabled:cursor-not-allowed transition"
-                              title="Testar lista"
+                              onClick={() => handleTogglePublish(list)}
+                              className="press cursor-pointer inline-flex items-center justify-center gap-1 rounded-full bg-white/70 px-2.5 py-1 text-xs font-bold shadow-sm hover:text-lilac"
+                              title={list.published ? "Despublicar" : "Publicar"}
                             >
-                              <Play className="h-4 w-4" />
+                              {list.published ? (
+                                <>
+                                  <Eye className="h-4 w-4 text-emerald-600" />
+                                  <span className="text-emerald-700">Sim</span>
+                                </>
+                              ) : (
+                                <>
+                                  <EyeOff className="h-4 w-4 text-rose-500" />
+                                  <span className="text-rose-600">Não</span>
+                                </>
+                              )}
                             </button>
-                            <button
-                              onClick={() => handleDelete(list)}
-                              className="press cursor-pointer rounded-full bg-white/70 p-1.5 shadow-sm hover:text-candy"
-                              title="Deletar"
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))
+                          </td>
+                          <td className="px-4 py-3 text-center">
+                            <div className="flex items-center justify-center gap-1">
+                              <button
+                                onClick={() => setTestingList(list)}
+                                disabled={!Array.isArray(list.exercises) || list.exercises.length === 0}
+                                className="press cursor-pointer rounded-full bg-white/70 p-1.5 shadow-sm hover:text-mint disabled:opacity-30 disabled:cursor-not-allowed transition"
+                                title="Testar lista"
+                              >
+                                <Play className="h-4 w-4" />
+                              </button>
+                              <button
+                                onClick={() => handleDelete(list)}
+                                className="press cursor-pointer rounded-full bg-white/70 p-1.5 shadow-sm hover:text-candy"
+                                title="Deletar"
+                              >
+                                <Trash2 className="h-4 w-4" />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })
                   )}
                 </tbody>
               </table>
             </div>
+          </div>
+        </div>
+      ) : (
+        /* ==================== TAB 2: SUBJECTS ==================== */
+        <div className="space-y-6">
+          {/* Modal / Form for Subject Create/Edit */}
+          <AnimatePresence>
+            {(isCreatingSubject || editingSubject) && (
+              <motion.div
+                initial={{ opacity: 0, y: -16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                className="clay bg-white/95 p-6 shadow-xl"
+              >
+                <div className="mb-4 flex items-center justify-between border-b border-lilac/15 pb-3">
+                  <h3 className="font-display text-xl font-bold text-ink">
+                    {editingSubject ? `✏️ Editar Matéria: ${editingSubject.name}` : "✨ Nova Matéria"}
+                  </h3>
+                  <button
+                    onClick={() => {
+                      setIsCreatingSubject(false);
+                      setEditingSubject(null);
+                    }}
+                    className="press rounded-full bg-white p-1.5 text-ink-soft hover:text-candy shadow-sm"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                </div>
+
+                {subjectError && (
+                  <div className="mb-4 rounded-xl bg-[#FFE3F0] p-3 text-sm font-semibold text-[#a62f5f]">
+                    {subjectError}
+                  </div>
+                )}
+
+                <form onSubmit={handleSaveSubject} className="space-y-4">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div>
+                      <label className="mb-1 block text-xs font-bold text-ink uppercase tracking-wider">
+                        Identificador (Slug)
+                      </label>
+                      <input
+                        type="text"
+                        disabled={!!editingSubject}
+                        placeholder="ex: robotica, artes, ingles"
+                        value={subjectForm.id}
+                        onChange={(e) =>
+                          setSubjectForm({
+                            ...subjectForm,
+                            id: e.target.value.toLowerCase().replace(/\s+/g, "_"),
+                          })
+                        }
+                        className="w-full rounded-2xl border-2 border-lilac/15 bg-white/90 px-4 py-2.5 text-sm font-semibold text-ink outline-none focus:border-lilac disabled:opacity-60"
+                        required
+                      />
+                      <span className="mt-1 block text-[11px] text-ink-soft">
+                        Usado na URL (ex: /materias/{subjectForm.id || "nome"})
+                      </span>
+                    </div>
+
+                    <div>
+                      <label className="mb-1 block text-xs font-bold text-ink uppercase tracking-wider">
+                        Nome de Exibição
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="ex: Robótica Educacional"
+                        value={subjectForm.name}
+                        onChange={(e) =>
+                          setSubjectForm({ ...subjectForm, name: e.target.value })
+                        }
+                        className="w-full rounded-2xl border-2 border-lilac/15 bg-white/90 px-4 py-2.5 text-sm font-semibold text-ink outline-none focus:border-lilac"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                    <div>
+                      <label className="mb-1 block text-xs font-bold text-ink uppercase tracking-wider">
+                        Emoji
+                      </label>
+                      <input
+                        type="text"
+                        value={subjectForm.emoji}
+                        onChange={(e) =>
+                          setSubjectForm({ ...subjectForm, emoji: e.target.value })
+                        }
+                        className="w-full rounded-2xl border-2 border-lilac/15 bg-white/90 px-4 py-2.5 text-center text-lg font-bold text-ink outline-none focus:border-lilac"
+                        maxLength={4}
+                      />
+                    </div>
+
+                    <div>
+                      <label className="mb-1 block text-xs font-bold text-ink uppercase tracking-wider">
+                        Ícone
+                      </label>
+                      <select
+                        value={subjectForm.iconName}
+                        onChange={(e) =>
+                          setSubjectForm({ ...subjectForm, iconName: e.target.value })
+                        }
+                        className="w-full rounded-2xl border-2 border-lilac/15 bg-white/90 px-4 py-2.5 text-sm font-semibold text-ink outline-none focus:border-lilac"
+                      >
+                        {Object.keys(ICON_MAP).map((iconKey) => (
+                          <option key={iconKey} value={iconKey}>
+                            {iconKey}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="mb-1 block text-xs font-bold text-ink uppercase tracking-wider">
+                        Tag / Subtítulo
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="ex: Tecnologia & Código"
+                        value={subjectForm.tag}
+                        onChange={(e) =>
+                          setSubjectForm({ ...subjectForm, tag: e.target.value })
+                        }
+                        className="w-full rounded-2xl border-2 border-lilac/15 bg-white/90 px-4 py-2.5 text-sm font-semibold text-ink outline-none focus:border-lilac"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Color Palette Selector */}
+                  <div>
+                    <label className="mb-2 block text-xs font-bold text-ink uppercase tracking-wider">
+                      Identidade Visual / Cor
+                    </label>
+                    <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
+                      {COLOR_PRESETS.map((preset) => (
+                        <button
+                          key={preset.color}
+                          type="button"
+                          onClick={() =>
+                            setSubjectForm({ ...subjectForm, color: preset.color })
+                          }
+                          className={cn(
+                            "press flex items-center justify-center gap-2 rounded-xl p-2.5 text-xs font-bold transition",
+                            preset.bg,
+                            subjectForm.color === preset.color
+                              ? "ring-4 ring-offset-2 ring-lilac"
+                              : "opacity-80 hover:opacity-100"
+                          )}
+                        >
+                          <span
+                            className="h-3.5 w-3.5 rounded-full shadow-inner"
+                            style={{ backgroundColor: preset.hex }}
+                          />
+                          <span className="capitalize text-ink">{preset.color}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Active Toggle */}
+                  <div className="flex items-center gap-3 pt-2">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setSubjectForm({ ...subjectForm, active: !subjectForm.active })
+                      }
+                      className="press flex items-center gap-2 rounded-xl bg-white/80 px-3 py-1.5 text-xs font-bold text-ink shadow-sm"
+                    >
+                      {subjectForm.active ? (
+                        <>
+                          <ToggleRight className="h-5 w-5 text-emerald-600" />
+                          <span className="text-emerald-700">Matéria Ativa no site</span>
+                        </>
+                      ) : (
+                        <>
+                          <ToggleLeft className="h-5 w-5 text-ink-soft" />
+                          <span className="text-ink-soft">Matéria Oculta (Inativa)</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  {/* Submit buttons */}
+                  <div className="flex justify-end gap-3 pt-3">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsCreatingSubject(false);
+                        setEditingSubject(null);
+                      }}
+                      className="press rounded-2xl bg-white/80 px-4 py-2.5 text-sm font-bold text-ink shadow-sm hover:bg-white"
+                    >
+                      Cancelar
+                    </button>
+                    <Button
+                      type="submit"
+                      variant="lilac"
+                      size="md"
+                      disabled={isSavingSubject}
+                    >
+                      <span className="flex items-center gap-1.5">
+                        <Check className="h-4 w-4" />
+                        {isSavingSubject ? "Salvando..." : "Salvar Matéria"}
+                      </span>
+                    </Button>
+                  </div>
+                </form>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Subjects Grid */}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {subjects.map((subj) => {
+              const listCount = lists.filter((l) => l.subject === subj.id).length;
+              const IconComp = subj.icon || BookOpen;
+
+              return (
+                <div
+                  key={subj.id}
+                  className={cn(
+                    "clay group relative flex flex-col justify-between p-5 transition hover:shadow-lg",
+                    !subj.active && "opacity-60 bg-gray-50/50"
+                  )}
+                >
+                  <div>
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-center gap-3">
+                        <div
+                          className="flex h-12 w-12 items-center justify-center rounded-2xl text-2xl shadow-sm"
+                          style={{ backgroundColor: `${subj.hex}25` }}
+                        >
+                          {subj.emoji}
+                        </div>
+                        <div>
+                          <h4 className="font-display text-lg font-bold text-ink">
+                            {subj.name}
+                          </h4>
+                          <span className="font-mono text-xs text-ink-soft">/{subj.id}</span>
+                        </div>
+                      </div>
+
+                      <span
+                        className={cn(
+                          "rounded-full px-2.5 py-0.5 text-[11px] font-bold",
+                          subj.active
+                            ? "bg-emerald-100 text-emerald-800"
+                            : "bg-gray-200 text-gray-700"
+                        )}
+                      >
+                        {subj.active ? "Ativa" : "Oculta"}
+                      </span>
+                    </div>
+
+                    {subj.tag && (
+                      <p className="mt-3 text-xs font-semibold text-ink-soft italic">
+                        &ldquo;{subj.tag}&rdquo;
+                      </p>
+                    )}
+
+                    <div className="mt-4 flex items-center gap-2">
+                      <span className="rounded-full bg-lilac/10 px-2.5 py-1 text-xs font-bold text-lilac">
+                        {listCount} lista{listCount !== 1 ? "s" : ""} cadastrada{listCount !== 1 ? "s" : ""}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="mt-5 flex items-center justify-between border-t border-lilac/10 pt-3">
+                    <button
+                      onClick={() => handleToggleSubjectActive(subj)}
+                      className="press cursor-pointer text-xs font-bold text-ink-soft hover:text-lilac"
+                    >
+                      {subj.active ? "Desativar" : "Ativar"}
+                    </button>
+
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        onClick={() => handleOpenEditSubject(subj)}
+                        className="press cursor-pointer rounded-full bg-white/80 p-1.5 text-ink-soft shadow-sm hover:text-sky"
+                        title="Editar Matéria"
+                      >
+                        <Edit2 className="h-4 w-4" />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteSubject(subj)}
+                        className="press cursor-pointer rounded-full bg-white/80 p-1.5 text-ink-soft shadow-sm hover:text-candy"
+                        title="Excluir Matéria"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
@@ -247,7 +786,7 @@ export default function AdminPanel() {
         {showUploadWizard && (
           <UploadWizard
             onClose={() => setShowUploadWizard(false)}
-            onSaved={() => loadLists()}
+            onSaved={() => loadData()}
           />
         )}
       </AnimatePresence>

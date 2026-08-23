@@ -5,7 +5,12 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Sparkles, CalendarDays, ListChecks, ArrowRight, Wand2 } from "lucide-react";
 import { getLatestExerciseLists } from "../utils/exerciseRepository";
-import { SUBJECTS, getSubject } from "../utils/subjects";
+import {
+  SUBJECTS as STATIC_SUBJECTS,
+  getSubjectsFromDB,
+  getSubject,
+  resolveSubject,
+} from "../utils/subjects";
 import SubjectCard from "../components/SubjectCard";
 import Badge from "../components/ui/Badge";
 import Sticker from "../components/ui/Sticker";
@@ -28,15 +33,20 @@ const rowVariants = {
 };
 
 function Dashboard() {
+  const [subjects, setSubjects] = useState(STATIC_SUBJECTS.map(resolveSubject));
   const [latestLists, setLatestLists] = useState([]);
   const [isLoadingLatest, setIsLoadingLatest] = useState(true);
   const [latestError, setLatestError] = useState(null);
 
   useEffect(() => {
-    async function fetchLatest() {
+    async function fetchData() {
       try {
         setIsLoadingLatest(true);
-        const data = await getLatestExerciseLists();
+        const [dbSubjects, data] = await Promise.all([
+          getSubjectsFromDB(false),
+          getLatestExerciseLists(),
+        ]);
+        setSubjects(dbSubjects);
         setLatestLists(data);
         setLatestError(null);
       } catch (err) {
@@ -45,7 +55,7 @@ function Dashboard() {
         setIsLoadingLatest(false);
       }
     }
-    fetchLatest();
+    fetchData();
   }, []);
 
   return (
@@ -75,7 +85,7 @@ function Dashboard() {
           {/* Quick stats */}
           <div className="mx-auto mt-6 flex max-w-md items-center justify-center gap-6 text-sm text-ink-soft sm:gap-10">
             <div className="flex flex-col items-center gap-1">
-              <span className="text-2xl font-bold text-lilac">{SUBJECTS.length}</span>
+              <span className="text-2xl font-bold text-lilac">{subjects.length}</span>
               <span>Matérias</span>
             </div>
             <div className="h-8 w-px bg-lilac/20" />
@@ -100,7 +110,7 @@ function Dashboard() {
           initial="hidden"
           animate="show"
         >
-          {SUBJECTS.map((subject) => (
+          {subjects.map((subject) => (
             <SubjectCard key={subject.id} subject={subject} />
           ))}
         </motion.div>
@@ -132,7 +142,11 @@ function Dashboard() {
             animate="show"
           >
             {latestLists.map((list) => {
-              const theme = getSubject(list.subject);
+              const theme =
+                subjects.find((s) => s.id === list.subject) ||
+                getSubject(list.subject) ||
+                resolveSubject({ id: list.subject, name: list.materia || list.subject });
+
               return (
                 <motion.li key={`${list.subject}-${list.slug}`} variants={rowVariants}>
                   <Link
@@ -146,10 +160,10 @@ function Dashboard() {
                       </p>
                       <p className="mt-0.5 text-xs text-ink-soft">{theme?.name ?? list.subject}</p>
                     </div>
-                    {typeof list.exerciseCount === "number" && (
+                    {typeof list.questionCount === "number" && (
                       <Badge color={theme?.hex ?? "#7c3aed"}>
                         <ListChecks className="mr-1 inline h-3.5 w-3.5" />
-                        {list.exerciseCount}
+                        {list.questionCount}
                       </Badge>
                     )}
                     <span className="ml-2 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white shadow transition-transform duration-200 group-hover:translate-x-1">
@@ -171,9 +185,11 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <div className="flex min-h-[60vh] items-center justify-center text-ink-soft">
-        <Wand2 className="mr-2 h-4 w-4 animate-spin" />
-        Carregando...
+      <div className="flex min-h-[70vh] items-center justify-center">
+        <div className="flex flex-col items-center gap-3 text-ink-soft">
+          <span className="h-10 w-10 animate-spin rounded-full border-4 border-lilac/30 border-t-lilac" />
+          <span className="text-sm font-semibold">Carregando...</span>
+        </div>
       </div>
     );
   }

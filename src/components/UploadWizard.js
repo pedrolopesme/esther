@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Upload,
@@ -11,9 +11,16 @@ import {
   AlertCircle,
   Sparkles,
   Eye,
+  Plus,
 } from "lucide-react";
 import { cn } from "../utils/cn";
-import { SUBJECTS } from "../utils/subjects";
+import {
+  SUBJECTS as STATIC_SUBJECTS,
+  COLOR_PRESETS,
+  getSubjectsFromDB,
+  findOrCreateSubject,
+  resolveSubject,
+} from "../utils/subjects";
 import { getSupabaseBrowserClient } from "../utils/supabase";
 import Button from "./ui/Button";
 
@@ -21,34 +28,6 @@ const EXERCISE_TYPES = {
   "multiple-choice": "Múltipla escolha",
   "fill-gap": "Preencher lacuna",
   "true-false": "Verdadeiro ou falso",
-};
-
-const SUBJECT_BG = {
-  matematica: "bg-[#FFE3F0] ring-2 ring-[#FF70A6]",
-  portugues: "bg-[#EEE6FF] ring-2 ring-[#A370FF]",
-  ingles: "bg-[#E1F6FD] ring-2 ring-[#4CC9F0]",
-  geografia: "bg-[#DBF9F1] ring-2 ring-[#06D6A0]",
-  historia: "bg-[#FFF3D6] ring-2 ring-[#FFD166]",
-  ciencias: "bg-[#FFE9E0] ring-2 ring-[#FF9770]",
-};
-
-const SUBJECT_ICON_BG = {
-  matematica: "bg-[#FFE3F0]",
-  portugues: "bg-[#EEE6FF]",
-  ingles: "bg-[#E1F6FD]",
-  geografia: "bg-[#DBF9F1]",
-  historia: "bg-[#FFF3D6]",
-  ciencias: "bg-[#FFE9E0]",
-  default: "bg-[#EEE6FF]",
-};
-
-const SUBJECT_BADGE = {
-  matematica: "bg-[#FFE3F0] text-[#FF70A6]",
-  portugues: "bg-[#EEE6FF] text-[#A370FF]",
-  ingles: "bg-[#E1F6FD] text-[#4CC9F0]",
-  geografia: "bg-[#DBF9F1] text-[#06D6A0]",
-  historia: "bg-[#FFF3D6] text-[#E8A81E]",
-  ciencias: "bg-[#FFE9E0] text-[#FF9770]",
 };
 
 function buildSlug(title) {
@@ -61,9 +40,21 @@ function buildSlug(title) {
     .slice(0, 80);
 }
 
-function detectSubject(materia) {
-  if (!materia) return null;
-  const lower = materia.toLowerCase();
+function detectSubjectSlug(materia, availableSubjects = []) {
+  if (!materia) return availableSubjects[0]?.id || "matematica";
+  const lower = materia.toLowerCase().trim();
+
+  // Try direct match against available subjects
+  const exact = availableSubjects.find(
+    (s) => s.id === lower || s.name.toLowerCase() === lower
+  );
+  if (exact) return exact.id;
+
+  const partial = availableSubjects.find(
+    (s) => s.name.toLowerCase().includes(lower) || lower.includes(s.id)
+  );
+  if (partial) return partial.id;
+
   const map = {
     matem: "matematica",
     portug: "portugues",
@@ -75,9 +66,13 @@ function detectSubject(materia) {
     cienc: "ciencias",
   };
   for (const [key, val] of Object.entries(map)) {
-    if (lower.includes(key)) return val;
+    if (lower.includes(key)) {
+      const match = availableSubjects.find((s) => s.id === val);
+      if (match) return match.id;
+    }
   }
-  return null;
+
+  return buildSlug(materia) || availableSubjects[0]?.id || "matematica";
 }
 
 function validateExercises(exercises) {
@@ -105,6 +100,7 @@ function validateExercises(exercises) {
 
 export default function UploadWizard({ onClose, onSaved }) {
   const [step, setStep] = useState(0);
+  const [subjects, setSubjects] = useState(STATIC_SUBJECTS);
   const [jsonError, setJsonError] = useState(null);
   const [rawExercises, setRawExercises] = useState([]);
   const [formData, setFormData] = useState({
@@ -118,8 +114,24 @@ export default function UploadWizard({ onClose, onSaved }) {
   const [stats, setStats] = useState({ total: 0, types: {} });
   const [isSaving, setIsSaving] = useState(false);
   const [saveError, setSaveError] = useState(null);
+
+  // Quick subject creation
+  const [showQuickCreateSubject, setShowQuickCreateSubject] = useState(false);
+  const [newSubjectName, setNewSubjectName] = useState("");
+  const [newSubjectEmoji, setNewSubjectEmoji] = useState("📚");
+  const [newSubjectColor, setNewSubjectColor] = useState("lilac");
+  const [isCreatingSubject, setIsCreatingSubject] = useState(false);
+
   const fileRef = useRef(null);
   const supabase = getSupabaseBrowserClient();
+
+  useEffect(() => {
+    async function loadSubjects() {
+      const data = await getSubjectsFromDB(false);
+      setSubjects(data);
+    }
+    loadSubjects();
+  }, []);
 
   function handleFile(file) {
     setJsonError(null);
@@ -141,7 +153,7 @@ export default function UploadWizard({ onClose, onSaved }) {
         const title = json.title || json.nome || file.name.replace(/\.json$/, "");
         const description = json.description || "";
         const materia = json.materia || "";
-        const detectedSubject = detectSubject(materia) || "matematica";
+        const detectedSubj = detectSubjectSlug(materia, subjects);
         const date = json.data || json.date || new Date().toISOString().slice(0, 10);
 
         const typeCounts = {};
@@ -152,7 +164,7 @@ export default function UploadWizard({ onClose, onSaved }) {
         setFormData({
           title,
           description,
-          subject: detectedSubject,
+          subject: detectedSubj,
           slug: buildSlug(title),
           ano_letivo: json.ano_letivo || "3º ano do Ensino Fundamental",
           exercise_date: date,
@@ -172,17 +184,57 @@ export default function UploadWizard({ onClose, onSaved }) {
     if (file) handleFile(file);
   }
 
+  async function handleQuickCreateSubject() {
+    if (!newSubjectName.trim()) return;
+    setIsCreatingSubject(true);
+    try {
+      const created = await findOrCreateSubject({
+        id: buildSlug(newSubjectName),
+        name: newSubjectName.trim(),
+        emoji: newSubjectEmoji.trim() || "📚",
+        color: newSubjectColor,
+        tag: "Estudo & prática",
+      });
+
+      if (created) {
+        setSubjects((prev) => {
+          const exists = prev.some((s) => s.id === created.id);
+          return exists ? prev : [...prev, created];
+        });
+        setFormData((prev) => ({ ...prev, subject: created.id }));
+        setShowQuickCreateSubject(false);
+        setNewSubjectName("");
+      }
+    } catch (err) {
+      alert("Erro ao criar matéria: " + err.message);
+    } finally {
+      setIsCreatingSubject(false);
+    }
+  }
+
   async function handleSave() {
     setIsSaving(true);
     setSaveError(null);
 
     try {
+      const chosenSubject = subjects.find((s) => s.id === formData.subject);
+
+      // Ensure subject exists in database before saving list
+      if (!chosenSubject) {
+        await findOrCreateSubject({
+          id: formData.subject,
+          name: formData.subject,
+          emoji: "📚",
+          color: "lilac",
+        });
+      }
+
       const row = {
         title: formData.title,
         description: formData.description,
         subject: formData.subject,
         slug: formData.slug || buildSlug(formData.title),
-        materia: SUBJECTS.find((s) => s.id === formData.subject)?.name || formData.subject,
+        materia: chosenSubject?.name || formData.subject,
         ano_letivo: formData.ano_letivo,
         exercise_date: formData.exercise_date,
         exercises: rawExercises,
@@ -204,7 +256,10 @@ export default function UploadWizard({ onClose, onSaved }) {
     }
   }
 
-  const subjectInfo = SUBJECTS.find((s) => s.id === formData.subject);
+  const subjectInfo =
+    subjects.find((s) => s.id === formData.subject) ||
+    STATIC_SUBJECTS.find((s) => s.id === formData.subject) ||
+    resolveSubject({ id: formData.subject, name: formData.subject });
 
   return (
     <motion.div
@@ -233,7 +288,7 @@ export default function UploadWizard({ onClose, onSaved }) {
               </h2>
               <p className="text-sm text-white/80">
                 {step === 0 && "Envie o arquivo JSON"}
-                {step === 1 && "Confira os detalhes"}
+                {step === 1 && "Confira os detalhes e matéria"}
                 {step === 2 && "Revise e salve"}
               </p>
             </div>
@@ -248,7 +303,7 @@ export default function UploadWizard({ onClose, onSaved }) {
                     "flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold transition-all",
                     i < step && "bg-white text-lilac",
                     i === step && "bg-white text-lilac ring-2 ring-white/50",
-                    i > step && "bg-white/25 text-white/60",
+                    i > step && "bg-white/25 text-white/60"
                   )}
                 >
                   {i < step ? <Check className="h-3.5 w-3.5" /> : i + 1}
@@ -256,7 +311,7 @@ export default function UploadWizard({ onClose, onSaved }) {
                 <span
                   className={cn(
                     "text-xs font-semibold",
-                    i <= step ? "text-white" : "text-white/50",
+                    i <= step ? "text-white" : "text-white/50"
                   )}
                 >
                   {label}
@@ -325,9 +380,9 @@ export default function UploadWizard({ onClose, onSaved }) {
 {`{
   "title": "Nome da lista",
   "description": "Descrição curta",
-  "materia": "Matemática",
-  "ano_letivo": "3º ano do Ensino Fundamental",
-  "data": "2025-10-12",
+  "materia": "Ciências",
+  "ano_letivo": "4º ano do Ensino Fundamental",
+  "data": "2026-08-22",
   "exercises": [
     {
       "id": "q1",
@@ -373,27 +428,92 @@ export default function UploadWizard({ onClose, onSaved }) {
                   </div>
                 </div>
 
+                {/* Subject Selector */}
                 <div>
-                  <label className="mb-1.5 block text-sm font-bold text-ink">
-                    Matéria
-                  </label>
-                  <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
-                    {SUBJECTS.map((s) => (
+                  <div className="mb-1.5 flex items-center justify-between">
+                    <label className="text-sm font-bold text-ink">
+                      Matéria Associada
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => setShowQuickCreateSubject(!showQuickCreateSubject)}
+                      className="press cursor-pointer flex items-center gap-1 text-xs font-bold text-lilac hover:underline"
+                    >
+                      <Plus className="h-3.5 w-3.5" />
+                      {showQuickCreateSubject ? "Fechar nova matéria" : "Criar nova matéria"}
+                    </button>
+                  </div>
+
+                  {/* Quick create inline form */}
+                  {showQuickCreateSubject && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      className="mb-3 rounded-2xl bg-lilac/10 p-3.5 border border-lilac/20"
+                    >
+                      <p className="mb-2 text-xs font-bold text-ink">
+                        Adicionar nova matéria rapidamente:
+                      </p>
+                      <div className="flex flex-wrap gap-2 items-center">
+                        <input
+                          type="text"
+                          placeholder="Nome da matéria (ex: Robótica)"
+                          value={newSubjectName}
+                          onChange={(e) => setNewSubjectName(e.target.value)}
+                          className="flex-1 min-w-[160px] rounded-xl border border-lilac/20 bg-white px-3 py-1.5 text-xs font-semibold text-ink outline-none focus:border-lilac"
+                        />
+                        <input
+                          type="text"
+                          value={newSubjectEmoji}
+                          onChange={(e) => setNewSubjectEmoji(e.target.value)}
+                          className="w-12 rounded-xl border border-lilac/20 bg-white px-2 py-1.5 text-center text-xs font-bold text-ink outline-none"
+                          title="Emoji"
+                          maxLength={3}
+                        />
+                        <select
+                          value={newSubjectColor}
+                          onChange={(e) => setNewSubjectColor(e.target.value)}
+                          className="rounded-xl border border-lilac/20 bg-white px-2 py-1.5 text-xs font-semibold text-ink outline-none"
+                        >
+                          {COLOR_PRESETS.map((p) => (
+                            <option key={p.color} value={p.color}>
+                              {p.color}
+                            </option>
+                          ))}
+                        </select>
+                        <Button
+                          type="button"
+                          variant="lilac"
+                          size="sm"
+                          onClick={handleQuickCreateSubject}
+                          disabled={isCreatingSubject || !newSubjectName.trim()}
+                        >
+                          Criar e Selecionar
+                        </Button>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
+                    {subjects.map((s) => (
                       <button
                         key={s.id}
                         type="button"
                         onClick={() => setFormData({ ...formData, subject: s.id })}
                         className={cn(
-                          "flex flex-col items-center gap-1 rounded-xl p-2 text-center transition-all",
+                          "press cursor-pointer flex items-center gap-2 rounded-xl p-2.5 text-left transition-all",
                           formData.subject === s.id
-                            ? SUBJECT_BG[s.id]
-                            : "bg-white/60 hover:bg-white/80",
+                            ? "bg-white ring-2 ring-lilac shadow-md"
+                            : "bg-white/60 hover:bg-white/90 shadow-sm"
                         )}
                       >
                         <span className="text-xl">{s.emoji}</span>
-                        <span className="text-[10px] font-bold text-ink">
-                          {s.name.split(" ")[0]}
-                        </span>
+                        <div className="min-w-0 flex-1">
+                          <p className="truncate text-xs font-bold text-ink">{s.name}</p>
+                          <span className="text-[10px] text-ink-soft block font-mono">
+                            /{s.id}
+                          </span>
+                        </div>
                       </button>
                     ))}
                   </div>
@@ -401,7 +521,7 @@ export default function UploadWizard({ onClose, onSaved }) {
 
                 <div>
                   <label className="mb-1.5 block text-sm font-bold text-ink">
-                    Título
+                    Título da Lista
                   </label>
                   <input
                     type="text"
@@ -429,8 +549,10 @@ export default function UploadWizard({ onClose, onSaved }) {
                     />
                     <button
                       type="button"
-                      className="rounded-lg bg-[#EEE6FF] px-2 py-1.5 text-xs font-bold text-[#A370FF] hover:bg-[#DDD0FF] transition"
-                      onClick={() => setFormData({ ...formData, slug: buildSlug(formData.title) })}
+                      className="press cursor-pointer rounded-lg bg-[#EEE6FF] px-2.5 py-2 text-xs font-bold text-[#A370FF] hover:bg-[#DDD0FF] transition"
+                      onClick={() =>
+                        setFormData({ ...formData, slug: buildSlug(formData.title) })
+                      }
                       title="Gerar slug a partir do título"
                     >
                       Auto
@@ -446,7 +568,9 @@ export default function UploadWizard({ onClose, onSaved }) {
                     className="w-full rounded-xl border-2 border-lilac/15 bg-white/80 px-4 py-2.5 text-ink outline-none focus:border-lilac transition resize-none"
                     rows="3"
                     value={formData.description}
-                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, description: e.target.value })
+                    }
                   />
                 </div>
 
@@ -459,7 +583,9 @@ export default function UploadWizard({ onClose, onSaved }) {
                       type="date"
                       className="w-full rounded-xl border-2 border-lilac/15 bg-white/80 px-4 py-2.5 text-ink outline-none focus:border-lilac transition"
                       value={formData.exercise_date}
-                      onChange={(e) => setFormData({ ...formData, exercise_date: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, exercise_date: e.target.value })
+                      }
                     />
                   </div>
                   <div>
@@ -470,7 +596,9 @@ export default function UploadWizard({ onClose, onSaved }) {
                       type="text"
                       className="w-full rounded-xl border-2 border-lilac/15 bg-white/80 px-4 py-2.5 text-ink outline-none focus:border-lilac transition"
                       value={formData.ano_letivo}
-                      onChange={(e) => setFormData({ ...formData, ano_letivo: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, ano_letivo: e.target.value })
+                      }
                     />
                   </div>
                 </div>
@@ -491,10 +619,8 @@ export default function UploadWizard({ onClose, onSaved }) {
                 <div className="rounded-xl bg-gradient-to-br from-white/80 to-white/40 p-5">
                   <div className="flex items-start gap-4">
                     <div
-                      className={cn(
-                        "flex h-14 w-14 items-center justify-center rounded-2xl text-3xl",
-                        SUBJECT_ICON_BG[formData.subject] || SUBJECT_ICON_BG.default,
-                      )}
+                      className="flex h-14 w-14 items-center justify-center rounded-2xl text-3xl shadow-sm"
+                      style={{ backgroundColor: `${subjectInfo?.hex || "#A370FF"}25` }}
                     >
                       {subjectInfo?.emoji || "📝"}
                     </div>
@@ -507,10 +633,11 @@ export default function UploadWizard({ onClose, onSaved }) {
                       </p>
                       <div className="mt-3 flex flex-wrap gap-2">
                         <span
-                          className={cn(
-                            "rounded-full px-2.5 py-0.5 text-xs font-bold",
-                            SUBJECT_BADGE[formData.subject] || "bg-[#EEE6FF] text-[#A370FF]",
-                          )}
+                          className="rounded-full px-2.5 py-0.5 text-xs font-bold"
+                          style={{
+                            backgroundColor: `${subjectInfo?.hex || "#A370FF"}20`,
+                            color: subjectInfo?.hex || "#A370FF",
+                          }}
                         >
                           {subjectInfo?.name}
                         </span>
@@ -557,7 +684,7 @@ export default function UploadWizard({ onClose, onSaved }) {
                                   "rounded-md px-1.5 py-0.5 text-[10px] font-bold",
                                   j === ex.correctIndex
                                     ? "bg-[#DBF9F1] text-emerald-700"
-                                    : "bg-ink/5 text-ink-soft",
+                                    : "bg-ink/5 text-ink-soft"
                                 )}
                               >
                                 {opt}
@@ -575,8 +702,9 @@ export default function UploadWizard({ onClose, onSaved }) {
 
                 <div className="rounded-xl bg-[#FFF3D6] p-4">
                   <p className="text-sm font-semibold text-amber-800">
-                    ⚠️ A lista será salva como <strong>não publicada</strong>.
-                    Você pode publicá-la depois pelo painel.
+                    ⚠️ A lista será salva associada à matéria{" "}
+                    <strong>{subjectInfo?.name}</strong> como{" "}
+                    <strong>não publicada</strong>. Você poderá publicá-la no painel.
                   </p>
                 </div>
 
@@ -597,7 +725,7 @@ export default function UploadWizard({ onClose, onSaved }) {
             <button
               type="button"
               onClick={() => setStep(step - 1)}
-              className="press flex items-center gap-1.5 rounded-xl bg-white/70 px-4 py-2.5 text-sm font-bold text-ink shadow-sm hover:bg-white transition"
+              className="press cursor-pointer flex items-center gap-1.5 rounded-xl bg-white/70 px-4 py-2.5 text-sm font-bold text-ink shadow-sm hover:bg-white transition"
             >
               <ChevronLeft className="h-4 w-4" />
               Voltar
@@ -606,7 +734,7 @@ export default function UploadWizard({ onClose, onSaved }) {
             <button
               type="button"
               onClick={onClose}
-              className="press rounded-xl bg-white/70 px-4 py-2.5 text-sm font-bold text-ink shadow-sm hover:bg-white transition"
+              className="press cursor-pointer rounded-xl bg-white/70 px-4 py-2.5 text-sm font-bold text-ink shadow-sm hover:bg-white transition"
             >
               Cancelar
             </button>

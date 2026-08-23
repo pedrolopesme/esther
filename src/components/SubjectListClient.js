@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowLeft, Filter, X, CalendarDays, GraduationCap, ChevronRight, ListChecks } from "lucide-react";
 import { getAvailableExerciseLists } from "../utils/exerciseLoader";
-import { getSubject } from "../utils/subjects";
+import { getSubject, getSubjectsFromDB, resolveSubject } from "../utils/subjects";
 import { cn } from "../utils/cn";
 import Badge from "./ui/Badge";
 import Sticker from "./ui/Sticker";
@@ -21,9 +21,9 @@ const cardVariants = {
 };
 
 export default function SubjectListClient({ subjectId }) {
-  const subject = getSubject(subjectId);
-  const Icon = subject?.icon ?? ListChecks;
-
+  const [subject, setSubject] = useState(
+    getSubject(subjectId) || resolveSubject({ id: subjectId, name: subjectId })
+  );
   const [exerciseLists, setExerciseLists] = useState([]);
   const [filterYear, setFilterYear] = useState("");
   const [filterDateFrom, setFilterDateFrom] = useState("");
@@ -32,10 +32,17 @@ export default function SubjectListClient({ subjectId }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    async function loadExerciseLists() {
+    async function loadData() {
       try {
         setIsLoading(true);
-        const lists = await getAvailableExerciseLists(subjectId);
+        const [dbSubjects, lists] = await Promise.all([
+          getSubjectsFromDB(true),
+          getAvailableExerciseLists(subjectId),
+        ]);
+
+        const matched = dbSubjects.find((s) => s.id === subjectId);
+        if (matched) setSubject(matched);
+
         setExerciseLists(lists);
         setError(null);
       } catch (err) {
@@ -45,8 +52,10 @@ export default function SubjectListClient({ subjectId }) {
         setIsLoading(false);
       }
     }
-    loadExerciseLists();
+    loadData();
   }, [subjectId]);
+
+  const Icon = subject?.icon ?? ListChecks;
 
   const uniqueYears = Array.from(new Set(exerciseLists.map((l) => l.ano_letivo).filter(Boolean)));
   const filteredLists = exerciseLists.filter((l) => {
@@ -96,115 +105,151 @@ export default function SubjectListClient({ subjectId }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
       >
-        <div className="flex flex-wrap items-end gap-3">
-          <span className="mr-1 inline-flex items-center gap-1.5 font-display text-sm font-bold text-ink">
-            <Filter className="h-4 w-4 text-lilac" strokeWidth={2.5} /> Filtros
-          </span>
-          <label className="flex flex-col text-xs font-semibold text-ink-soft">
-            Ano da lista
-            <select
-              value={filterYear}
-              onChange={(e) => setFilterYear(e.target.value)}
-              className="mt-1 rounded-xl border-2 border-lilac/20 bg-white px-3 py-2 text-sm font-medium text-ink outline-none focus:border-lilac/50"
-            >
-              <option value="">Todos</option>
-              {uniqueYears.map((y) => (
-                <option key={y} value={y}>{y}</option>
-              ))}
-            </select>
-          </label>
-          <label className="flex flex-col text-xs font-semibold text-ink-soft">
-            De
-            <input
-              type="date"
-              value={filterDateFrom}
-              onChange={(e) => setFilterDateFrom(e.target.value)}
-              className="mt-1 rounded-xl border-2 border-lilac/20 bg-white px-3 py-2 text-sm font-medium text-ink outline-none focus:border-lilac/50"
-            />
-          </label>
-          <label className="flex flex-col text-xs font-semibold text-ink-soft">
-            Até
-            <input
-              type="date"
-              value={filterDateTo}
-              onChange={(e) => setFilterDateTo(e.target.value)}
-              className="mt-1 rounded-xl border-2 border-lilac/20 bg-white px-3 py-2 text-sm font-medium text-ink outline-none focus:border-lilac/50"
-            />
-          </label>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-2 text-sm font-bold text-ink">
+            <Filter className="h-4 w-4 text-lilac" />
+            <span>Filtrar</span>
+          </div>
           {hasFilters && (
             <button
               onClick={() => { setFilterYear(""); setFilterDateFrom(""); setFilterDateTo(""); }}
               className="press inline-flex items-center gap-1 rounded-full bg-candy-soft px-3 py-2 text-sm font-bold text-[#b03b6e] hover:-translate-y-0.5"
             >
-              <X className="h-4 w-4" strokeWidth={2.5} /> Limpar
+              <X className="h-3.5 w-3.5" /> Limpar filtros
             </button>
           )}
         </div>
-      </motion.div>
 
-      {/* States */}
-      {isLoading && (
-        <div className="flex justify-center p-12">
-          <span className="h-12 w-12 animate-spin rounded-full border-4 border-lilac/25 border-t-lilac" />
-        </div>
-      )}
-
-      {error && (
-        <div className="clay-sm bg-candy-soft p-4 text-center font-semibold text-[#a62f5f]">{error}</div>
-      )}
-
-      {!isLoading && !error && exerciseLists.length === 0 && (
-        <div className="clay-sm bg-sky-soft p-6 text-center font-semibold text-[#1e7fa6]">
-          Nenhuma lista de exercícios disponível no momento. 🐣
-        </div>
-      )}
-
-      {!isLoading && !error && filteredLists.length === 0 && exerciseLists.length > 0 && (
-        <div className="clay-sm bg-sun-soft p-6 text-center font-semibold text-[#9c7415]">
-          Nenhum item corresponde aos filtros. 🔍
-        </div>
-      )}
-
-      {/* List */}
-      <motion.div className="grid gap-4" variants={listVariants} initial="hidden" animate="show">
-        {filteredLists.map((list) => (
-          <motion.div key={list.id} variants={cardVariants}>
-            <Link
-              href={`/materias/${subjectId}/lista?listId=${encodeURIComponent(list.id)}`}
-              className="clay group block p-5 transition-transform duration-200 hover:-translate-y-1.5 hover:rotate-[0.4deg]"
+        <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
+          {/* Year */}
+          <div>
+            <label className="mb-1 block text-xs font-semibold text-ink-soft">Ano letivo</label>
+            <select
+              value={filterYear}
+              onChange={(e) => setFilterYear(e.target.value)}
+              className="w-full rounded-xl border border-lilac/20 bg-white px-3 py-2 text-sm font-medium text-ink outline-none focus:border-lilac"
             >
-              <div className="flex items-start gap-4">
-                <span
-                  className="mt-0.5 grid h-12 w-12 shrink-0 place-items-center rounded-2xl text-white shadow-md"
-                  style={{ backgroundColor: subject?.hex }}
-                >
-                  <Icon className="h-6 w-6" strokeWidth={2.3} />
-                </span>
-                <div className="min-w-0 flex-1">
-                  <h3 className="font-display text-lg font-bold text-ink sm:text-xl">{list.title}</h3>
-                  {list.description && (
-                    <p className="mt-1 line-clamp-2 text-sm text-ink-soft">{list.description}</p>
-                  )}
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {list.ano_letivo && (
-                      <Badge tone={subject?.color ?? "lilac"} icon={GraduationCap}>{list.ano_letivo}</Badge>
-                    )}
-                    <Badge tone="sky" icon={CalendarDays}>
-                      {new Date(list.date).toLocaleDateString("pt-BR")}
-                    </Badge>
-                  </div>
-                </div>
-                <span
-                  className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white shadow transition-transform duration-200 group-hover:translate-x-1"
-                  style={{ color: subject?.hex }}
-                >
-                  <ChevronRight className="h-5 w-5" strokeWidth={2.5} />
-                </span>
-              </div>
-            </Link>
-          </motion.div>
-        ))}
+              <option value="">Todos os anos</option>
+              {uniqueYears.map((yr) => (
+                <option key={yr} value={yr}>{yr}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Date from */}
+          <div>
+            <label className="mb-1 block text-xs font-semibold text-ink-soft">Data inicial</label>
+            <input
+              type="date"
+              value={filterDateFrom}
+              onChange={(e) => setFilterDateFrom(e.target.value)}
+              className="w-full rounded-xl border border-lilac/20 bg-white px-3 py-2 text-sm font-medium text-ink outline-none focus:border-lilac"
+            />
+          </div>
+
+          {/* Date to */}
+          <div>
+            <label className="mb-1 block text-xs font-semibold text-ink-soft">Data final</label>
+            <input
+              type="date"
+              value={filterDateTo}
+              onChange={(e) => setFilterDateTo(e.target.value)}
+              className="w-full rounded-xl border border-lilac/20 bg-white px-3 py-2 text-sm font-medium text-ink outline-none focus:border-lilac"
+            />
+          </div>
+        </div>
       </motion.div>
+
+      {/* List count */}
+      <div className="mb-4 flex items-center justify-between text-sm text-ink-soft">
+        <span>
+          {filteredLists.length} {filteredLists.length === 1 ? "lista encontrada" : "listas encontradas"}
+        </span>
+      </div>
+
+      {/* Lists */}
+      {isLoading ? (
+        <div className="clay flex min-h-60 items-center justify-center p-8 text-center text-ink-soft">
+          <span className="animate-pulse">Carregando listas...</span>
+        </div>
+      ) : error ? (
+        <div className="clay bg-candy-soft p-6 text-center text-sm font-semibold text-[#a62f5f]">
+          {error}
+        </div>
+      ) : filteredLists.length === 0 ? (
+        <div className="clay p-10 text-center">
+          <div className="mb-2 text-4xl">🔍</div>
+          <p className="font-display text-lg font-bold text-ink">Nenhuma lista encontrada</p>
+          <p className="mt-1 text-sm text-ink-soft">
+            {hasFilters
+              ? "Tente ajustar os filtros de ano ou data acima."
+              : "Ainda não há exercícios publicados para esta matéria."}
+          </p>
+        </div>
+      ) : (
+        <motion.div
+          className="space-y-4"
+          variants={listVariants}
+          initial="hidden"
+          animate="show"
+        >
+          {filteredLists.map((list) => {
+            const dateStr = list.date
+              ? new Date(list.date + "T12:00:00").toLocaleDateString("pt-BR")
+              : "";
+            return (
+              <motion.div key={list.id} variants={cardVariants}>
+                <Link
+                  href={`/materias/${subjectId}/lista?listId=${list.id}`}
+                  className="clay group relative block p-6 transition-all hover:-translate-y-1 hover:shadow-xl"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="min-w-0 flex-1">
+                      <div className="mb-2 flex flex-wrap items-center gap-2">
+                        {list.ano_letivo && (
+                          <Badge variant="soft" color={subject?.hex}>
+                            <GraduationCap className="mr-1 inline h-3.5 w-3.5" />
+                            {list.ano_letivo}
+                          </Badge>
+                        )}
+                        {dateStr && (
+                          <Badge variant="subtle">
+                            <CalendarDays className="mr-1 inline h-3.5 w-3.5" />
+                            {dateStr}
+                          </Badge>
+                        )}
+                        {typeof list.questionCount === "number" && (
+                          <Badge color={subject?.hex}>
+                            <ListChecks className="mr-1 inline h-3.5 w-3.5" />
+                            {list.questionCount} {list.questionCount === 1 ? "questão" : "questões"}
+                          </Badge>
+                        )}
+                      </div>
+
+                      <h2 className="font-display text-xl font-bold text-ink group-hover:text-lilac transition-colors">
+                        {list.title}
+                      </h2>
+
+                      {list.description && (
+                        <p className="mt-2 text-sm text-ink-soft line-clamp-2">
+                          {list.description}
+                        </p>
+                      )}
+                    </div>
+
+                    <span
+                      className="mt-1 grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-white shadow-md transition-transform duration-200 group-hover:translate-x-1"
+                      style={{ color: subject?.hex }}
+                    >
+                      <ChevronRight className="h-5 w-5" strokeWidth={2.5} />
+                    </span>
+                  </div>
+                </Link>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+      )}
     </div>
   );
 }
