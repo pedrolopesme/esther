@@ -58,7 +58,8 @@ export default function HeaderUser() {
   const level = Math.floor(points / PER_LEVEL) + 1;
   const inLevel = points % PER_LEVEL;
   const pct = (inLevel / PER_LEVEL) * 100;
-  const avatar = AVATARS[Math.min(level - 1, AVATARS.length - 1)];
+  const roleLabel = isChild ? "Criança" : isAdmin ? "Admin" : isParent ? "Responsável" : "Estudante";
+  const roleColor = isChild ? "bg-mint-soft text-[#05795b]" : isAdmin ? "bg-lilac/20 text-lilac" : isParent ? "bg-candy/20 text-candy" : "bg-sky-soft text-sky";
 
   async function handleLogout() {
     if (isChild) {
@@ -107,8 +108,11 @@ export default function HeaderUser() {
           <span className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-sky-soft to-lilac-soft text-base shadow ring-2 ring-white sm:h-9 sm:w-9 sm:text-lg">
             {avatar}
           </span>
-          <span className="max-w-[5rem] truncate text-sm font-bold text-ink sm:max-w-[8rem]">
-            {name}
+          <span className="flex items-center gap-1 max-w-[7rem] sm:max-w-[10rem]">
+            <span className="truncate text-sm font-bold text-ink">{name}</span>
+            <span className={cn("shrink-0 rounded-full px-1.5 py-0.5 text-[10px] font-bold leading-none", roleColor)}>
+              {roleLabel}
+            </span>
           </span>
           <ChevronDown
             className={cn(
