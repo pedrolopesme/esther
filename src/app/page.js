@@ -1,11 +1,12 @@
 "use client";
 
 import StudentStudyDashboard from "../components/StudentStudyDashboard";
+import ParentDashboard from "../components/ParentDashboard";
 import LandingPage from "../components/LandingPage";
 import { useAuth } from "../hooks/useAuth";
 
 export default function Home() {
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isParent, isLoading } = useAuth();
 
   if (isLoading) {
     return (
@@ -17,6 +18,8 @@ export default function Home() {
       </div>
     );
   }
+
+  if (isParent) return <ParentDashboard />;
 
   return isAuthenticated ? <StudentStudyDashboard /> : <LandingPage />;
 }
