@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
@@ -21,6 +21,15 @@ import {
   Sparkles,
   ToggleLeft,
   ToggleRight,
+  FolderDown,
+  FileText,
+  FileSpreadsheet,
+  Download,
+  ExternalLink,
+  Filter,
+  FileUp,
+  GraduationCap,
+  Layers,
 } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 import { getSupabaseBrowserClient } from "../utils/supabase";
@@ -31,6 +40,17 @@ import {
   getSubjectsFromDB,
   resolveSubject,
 } from "../utils/subjects";
+import {
+  MATERIAL_CATEGORIES,
+  getMaterials,
+  uploadMaterialFile,
+  createMaterial,
+  updateMaterial,
+  deleteMaterial,
+  togglePublishMaterial,
+  formatFileSize,
+  getCategoryInfo,
+} from "../utils/materialRepository";
 import UploadWizard from "./UploadWizard";
 import ExerciseDrawer from "./ExerciseDrawer";
 import Button from "./ui/Button";
@@ -41,11 +61,12 @@ import { cn } from "../utils/cn";
 export default function AdminPanel() {
   const router = useRouter();
   const { isAdmin, isLoading: authLoading } = useAuth();
-  const [activeTab, setActiveTab] = useState("lists"); // 'lists' | 'subjects'
+  const [activeTab, setActiveTab] = useState("lists"); // 'lists' | 'subjects' | 'materials'
 
   // Lists state
   const [lists, setLists] = useState([]);
   const [subjects, setSubjects] = useState(STATIC_SUBJECTS);
+  const [materials, setMaterials] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showUploadWizard, setShowUploadWizard] = useState(false);
@@ -66,6 +87,24 @@ export default function AdminPanel() {
   const [isSavingSubject, setIsSavingSubject] = useState(false);
   const [subjectError, setSubjectError] = useState(null);
 
+  // Material management state
+  const [isCreatingMaterial, setIsCreatingMaterial] = useState(false);
+  const [editingMaterial, setEditingMaterial] = useState(null);
+  const [materialFilterSubject, setMaterialFilterSubject] = useState("");
+  const [materialFilterCategory, setMaterialFilterCategory] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [isUploadingMaterial, setIsUploadingMaterial] = useState(false);
+  const [materialError, setMaterialError] = useState(null);
+  const [materialForm, setMaterialForm] = useState({
+    title: "",
+    description: "",
+    subject_id: "matematica",
+    ano_letivo: "3º ano do Ensino Fundamental",
+    category: "apostila",
+    published: true,
+  });
+  const materialFileInputRef = useRef(null);
+
   const supabase = getSupabaseBrowserClient();
 
   // Auth protection
@@ -80,19 +119,21 @@ export default function AdminPanel() {
     try {
       setIsLoading(true);
 
-      // Load subjects and lists concurrently
-      const [subjectsData, listsRes] = await Promise.all([
+      // Load subjects, lists, and materials concurrently
+      const [subjectsData, listsRes, materialsData] = await Promise.all([
         getSubjectsFromDB(true), // include inactive
         supabase
           .from("exercise_lists")
           .select("*")
           .order("exercise_date", { ascending: false }),
+        getMaterials(),
       ]);
 
       if (listsRes.error) throw listsRes.error;
 
       setSubjects(subjectsData);
       setLists(listsRes.data || []);
+      setMaterials(materialsData || []);
       setError(null);
     } catch (err) {
       console.error("Erro ao carregar dados do admin:", err);
@@ -106,7 +147,7 @@ export default function AdminPanel() {
     if (isAdmin) loadData();
   }, [isAdmin, loadData]);
 
-  // List Actions
+  // ==================== LIST ACTIONS ====================
   async function handleTogglePublish(list) {
     try {
       const { error: updateError } = await supabase
@@ -141,7 +182,7 @@ export default function AdminPanel() {
     }
   }
 
-  // Subject Actions
+  // ==================== SUBJECT ACTIONS ====================
   function handleOpenCreateSubject() {
     setEditingSubject(null);
     setSubjectForm({
@@ -210,7 +251,6 @@ export default function AdminPanel() {
       };
 
       if (editingSubject) {
-        // Update
         const { error: updateError } = await supabase
           .from("subjects")
           .update(payload)
@@ -218,7 +258,6 @@ export default function AdminPanel() {
 
         if (updateError) throw updateError;
       } else {
-        // Insert
         payload.order_index = subjects.length + 1;
         const { error: insertError } = await supabase
           .from("subjects")
@@ -263,9 +302,11 @@ export default function AdminPanel() {
 
   async function handleDeleteSubject(subj) {
     const associatedLists = lists.filter((l) => l.subject === subj.id);
-    if (associatedLists.length > 0) {
+    const associatedMaterials = materials.filter((m) => m.subject_id === subj.id);
+
+    if (associatedLists.length > 0 || associatedMaterials.length > 0) {
       alert(
-        `Não é possível excluir a matéria "${subj.name}" pois existem ${associatedLists.length} lista(s) de exercícios associadas a ela. Você pode desativá-la.`
+        `Não é possível excluir "${subj.name}" pois existem ${associatedLists.length} lista(s) e ${associatedMaterials.length} material(is) associados. Você pode desativá-la.`
       );
       return;
     }
@@ -285,6 +326,134 @@ export default function AdminPanel() {
       alert("Erro ao excluir matéria: " + err.message);
     }
   }
+
+  // ==================== MATERIAL ACTIONS ====================
+  function handleOpenCreateMaterial() {
+    setEditingMaterial(null);
+    setSelectedFile(null);
+    setMaterialForm({
+      title: "",
+      description: "",
+      subject_id: subjects[0]?.id || "matematica",
+      ano_letivo: "3º ano do Ensino Fundamental",
+      category: "apostila",
+      published: true,
+    });
+    setMaterialError(null);
+    setIsCreatingMaterial(true);
+  }
+
+  function handleOpenEditMaterial(mat) {
+    setIsCreatingMaterial(false);
+    setSelectedFile(null);
+    setEditingMaterial(mat);
+    setMaterialForm({
+      title: mat.title,
+      description: mat.description || "",
+      subject_id: mat.subject_id,
+      ano_letivo: mat.ano_letivo || "3º ano do Ensino Fundamental",
+      category: mat.category || "apostila",
+      published: mat.published ?? true,
+    });
+    setMaterialError(null);
+  }
+
+  async function handleSaveMaterial(e) {
+    e.preventDefault();
+    setIsUploadingMaterial(true);
+    setMaterialError(null);
+
+    try {
+      if (!materialForm.title.trim()) {
+        throw new Error("O título do material é obrigatório.");
+      }
+
+      if (!editingMaterial && !selectedFile) {
+        throw new Error("Por favor, selecione um arquivo (PDF, imagem, etc.) para fazer o upload.");
+      }
+
+      let fileInfo = null;
+
+      if (selectedFile) {
+        fileInfo = await uploadMaterialFile(selectedFile, {
+          subjectId: materialForm.subject_id,
+        });
+      }
+
+      if (editingMaterial) {
+        // Update
+        const payload = {
+          title: materialForm.title,
+          description: materialForm.description,
+          subject_id: materialForm.subject_id,
+          ano_letivo: materialForm.ano_letivo,
+          category: materialForm.category,
+          published: materialForm.published,
+        };
+
+        if (fileInfo) {
+          payload.file_url = fileInfo.fileUrl;
+          payload.file_name = fileInfo.fileName;
+          payload.file_size = fileInfo.fileSize;
+          payload.file_type = fileInfo.fileType;
+        }
+
+        await updateMaterial(editingMaterial.id, payload);
+      } else {
+        // Create
+        await createMaterial({
+          title: materialForm.title,
+          description: materialForm.description,
+          subject_id: materialForm.subject_id,
+          ano_letivo: materialForm.ano_letivo,
+          category: materialForm.category,
+          published: materialForm.published,
+          file_url: fileInfo.fileUrl,
+          file_name: fileInfo.fileName,
+          file_size: fileInfo.fileSize,
+          file_type: fileInfo.fileType,
+        });
+      }
+
+      setIsCreatingMaterial(false);
+      setEditingMaterial(null);
+      setSelectedFile(null);
+      await loadData();
+    } catch (err) {
+      console.error("Erro ao salvar material:", err);
+      setMaterialError(err.message);
+    } finally {
+      setIsUploadingMaterial(false);
+    }
+  }
+
+  async function handleTogglePublishMaterial(mat) {
+    try {
+      await togglePublishMaterial(mat.id, mat.published);
+      setMaterials((prev) =>
+        prev.map((m) => (m.id === mat.id ? { ...m, published: !m.published } : m))
+      );
+    } catch (err) {
+      alert("Erro ao alterar publicação: " + err.message);
+    }
+  }
+
+  async function handleDeleteMaterial(mat) {
+    if (!confirm(`Tem certeza que deseja excluir o material "${mat.title}"?`)) return;
+    try {
+      await deleteMaterial(mat);
+      setMaterials((prev) => prev.filter((m) => m.id !== mat.id));
+    } catch (err) {
+      alert("Erro ao excluir material: " + err.message);
+    }
+  }
+
+  // Filtered materials
+  const filteredMaterials = materials.filter((m) => {
+    const matchSubj = materialFilterSubject ? m.subject_id === materialFilterSubject : true;
+    const matchCat = materialFilterCategory ? m.category === materialFilterCategory : true;
+    return matchSubj && matchCat;
+  });
 
   if (authLoading) {
     return (
@@ -312,10 +481,19 @@ export default function AdminPanel() {
         <div>
           <h1 className="font-display text-4xl font-bold text-ink">⚙️ Painel Administrativo</h1>
           <p className="mt-2 text-ink-soft">
-            Gerencie matérias escolares, listas de exercícios e publicações
+            Gerencie listas de exercícios, matérias e materiais de apoio
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
+          {activeTab === "materials" && (
+            <button
+              onClick={handleOpenCreateMaterial}
+              className="press cursor-pointer inline-flex items-center gap-2 rounded-2xl bg-gradient-to-b from-[#72D6F5] to-[#33BEEC] px-5 py-3 text-sm font-bold text-white shadow-[0_6px_0_#1E9BC7] active:translate-y-1.5 active:shadow-none"
+            >
+              <FileUp className="h-5 w-5" />
+              Novo Material
+            </button>
+          )}
           {activeTab === "subjects" && (
             <button
               onClick={handleOpenCreateSubject}
@@ -336,7 +514,7 @@ export default function AdminPanel() {
       </div>
 
       {/* Navigation Tabs */}
-      <div className="mb-6 flex gap-2 border-b border-lilac/15 pb-4">
+      <div className="mb-6 flex flex-wrap gap-2 border-b border-lilac/15 pb-4">
         <button
           onClick={() => setActiveTab("lists")}
           className={cn(
@@ -360,6 +538,18 @@ export default function AdminPanel() {
         >
           <BookOpen className="h-4 w-4" />
           Gestão de Matérias ({subjects.length})
+        </button>
+        <button
+          onClick={() => setActiveTab("materials")}
+          className={cn(
+            "press cursor-pointer flex items-center gap-2 rounded-2xl px-5 py-2.5 font-display text-sm font-bold transition",
+            activeTab === "materials"
+              ? "bg-lilac text-white shadow-md"
+              : "bg-white/70 text-ink hover:bg-white"
+          )}
+        >
+          <FolderDown className="h-4 w-4" />
+          Gestão de Materiais ({materials.length})
         </button>
       </div>
 
@@ -483,7 +673,7 @@ export default function AdminPanel() {
             </div>
           </div>
         </div>
-      ) : (
+      ) : activeTab === "subjects" ? (
         /* ==================== TAB 2: SUBJECTS ==================== */
         <div className="space-y-6">
           {/* Modal / Form for Subject Create/Edit */}
@@ -696,7 +886,7 @@ export default function AdminPanel() {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {subjects.map((subj) => {
               const listCount = lists.filter((l) => l.subject === subj.id).length;
-              const IconComp = subj.icon || BookOpen;
+              const materialCount = materials.filter((m) => m.subject_id === subj.id).length;
 
               return (
                 <div
@@ -741,9 +931,12 @@ export default function AdminPanel() {
                       </p>
                     )}
 
-                    <div className="mt-4 flex items-center gap-2">
+                    <div className="mt-4 flex flex-wrap items-center gap-2">
                       <span className="rounded-full bg-lilac/10 px-2.5 py-1 text-xs font-bold text-lilac">
-                        {listCount} lista{listCount !== 1 ? "s" : ""} cadastrada{listCount !== 1 ? "s" : ""}
+                        {listCount} lista{listCount !== 1 ? "s" : ""}
+                      </span>
+                      <span className="rounded-full bg-sky/10 px-2.5 py-1 text-xs font-bold text-sky">
+                        {materialCount} material{materialCount !== 1 ? "is" : ""}
                       </span>
                     </div>
                   </div>
@@ -777,6 +970,423 @@ export default function AdminPanel() {
                 </div>
               );
             })}
+          </div>
+        </div>
+      ) : (
+        /* ==================== TAB 3: MATERIALS ==================== */
+        <div className="space-y-6">
+          {/* Create / Edit Material Modal */}
+          <AnimatePresence>
+            {(isCreatingMaterial || editingMaterial) && (
+              <motion.div
+                initial={{ opacity: 0, y: -16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                className="clay bg-white/95 p-6 shadow-xl"
+              >
+                <div className="mb-4 flex items-center justify-between border-b border-lilac/15 pb-3">
+                  <h3 className="font-display text-xl font-bold text-ink">
+                    {editingMaterial
+                      ? `✏️ Editar Material: ${editingMaterial.title}`
+                      : "📂 Novo Material de Apoio (PDF / Imagem / Documento)"}
+                  </h3>
+                  <button
+                    onClick={() => {
+                      setIsCreatingMaterial(false);
+                      setEditingMaterial(null);
+                      setSelectedFile(null);
+                    }}
+                    className="press rounded-full bg-white p-1.5 text-ink-soft hover:text-candy shadow-sm"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                </div>
+
+                {materialError && (
+                  <div className="mb-4 rounded-xl bg-[#FFE3F0] p-3 text-sm font-semibold text-[#a62f5f]">
+                    {materialError}
+                  </div>
+                )}
+
+                <form onSubmit={handleSaveMaterial} className="space-y-4">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div>
+                      <label className="mb-1 block text-xs font-bold text-ink uppercase tracking-wider">
+                        Título do Material
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="ex: Apostila Unidade 3 - Números Fracionários"
+                        value={materialForm.title}
+                        onChange={(e) =>
+                          setMaterialForm({ ...materialForm, title: e.target.value })
+                        }
+                        className="w-full rounded-2xl border-2 border-lilac/15 bg-white/90 px-4 py-2.5 text-sm font-semibold text-ink outline-none focus:border-lilac"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="mb-1 block text-xs font-bold text-ink uppercase tracking-wider">
+                        Matéria
+                      </label>
+                      <select
+                        value={materialForm.subject_id}
+                        onChange={(e) =>
+                          setMaterialForm({ ...materialForm, subject_id: e.target.value })
+                        }
+                        className="w-full rounded-2xl border-2 border-lilac/15 bg-white/90 px-4 py-2.5 text-sm font-semibold text-ink outline-none focus:border-lilac"
+                      >
+                        {subjects.map((s) => (
+                          <option key={s.id} value={s.id}>
+                            {s.emoji} {s.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div>
+                      <label className="mb-1 block text-xs font-bold text-ink uppercase tracking-wider">
+                        Categoria
+                      </label>
+                      <select
+                        value={materialForm.category}
+                        onChange={(e) =>
+                          setMaterialForm({ ...materialForm, category: e.target.value })
+                        }
+                        className="w-full rounded-2xl border-2 border-lilac/15 bg-white/90 px-4 py-2.5 text-sm font-semibold text-ink outline-none focus:border-lilac"
+                      >
+                        {MATERIAL_CATEGORIES.map((c) => (
+                          <option key={c.id} value={c.id}>
+                            {c.emoji} {c.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="mb-1 block text-xs font-bold text-ink uppercase tracking-wider">
+                        Ano Letivo
+                      </label>
+                      <input
+                        type="text"
+                        value={materialForm.ano_letivo}
+                        onChange={(e) =>
+                          setMaterialForm({ ...materialForm, ano_letivo: e.target.value })
+                        }
+                        className="w-full rounded-2xl border-2 border-lilac/15 bg-white/90 px-4 py-2.5 text-sm font-semibold text-ink outline-none focus:border-lilac"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="mb-1 block text-xs font-bold text-ink uppercase tracking-wider">
+                      Descrição / Tópicos Abordados
+                    </label>
+                    <textarea
+                      rows={2}
+                      placeholder="Breve descrição ou instruções sobre o material..."
+                      value={materialForm.description}
+                      onChange={(e) =>
+                        setMaterialForm({ ...materialForm, description: e.target.value })
+                      }
+                      className="w-full rounded-2xl border-2 border-lilac/15 bg-white/90 px-4 py-2.5 text-sm font-semibold text-ink outline-none focus:border-lilac resize-none"
+                    />
+                  </div>
+
+                  {/* File Upload Box */}
+                  <div>
+                    <label className="mb-1 block text-xs font-bold text-ink uppercase tracking-wider">
+                      {editingMaterial ? "Substituir Arquivo (Opcional)" : "Arquivo para Upload"}
+                    </label>
+
+                    <div
+                      onClick={() => materialFileInputRef.current?.click()}
+                      className={cn(
+                        "flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed p-6 text-center transition",
+                        selectedFile
+                          ? "border-emerald-400 bg-emerald-50/50"
+                          : "border-lilac/25 bg-lilac/5 hover:border-lilac/50 hover:bg-lilac/10"
+                      )}
+                    >
+                      <input
+                        ref={materialFileInputRef}
+                        type="file"
+                        accept=".pdf,.png,.jpg,.jpeg,.webp,.doc,.docx,.ppt,.pptx,.txt"
+                        className="hidden"
+                        onChange={(e) => {
+                          if (e.target.files && e.target.files[0]) {
+                            setSelectedFile(e.target.files[0]);
+                            if (!materialForm.title) {
+                              setMaterialForm({
+                                ...materialForm,
+                                title: e.target.files[0].name.replace(/\.[^/.]+$/, ""),
+                              });
+                            }
+                          }
+                        }}
+                      />
+
+                      {selectedFile ? (
+                        <div className="flex items-center gap-3 text-emerald-800">
+                          <Check className="h-6 w-6 text-emerald-600" />
+                          <div className="text-left">
+                            <p className="text-xs font-bold">{selectedFile.name}</p>
+                            <p className="text-[11px] text-emerald-600">
+                              {formatFileSize(selectedFile.size)} &middot; Pronto para upload
+                            </p>
+                          </div>
+                        </div>
+                      ) : editingMaterial ? (
+                        <div className="text-xs text-ink-soft">
+                          <p className="font-semibold text-ink">
+                            Arquivo atual:{" "}
+                            <span className="font-mono text-lilac">{editingMaterial.file_name}</span> (
+                            {formatFileSize(editingMaterial.file_size)})
+                          </p>
+                          <p className="mt-1 text-[11px]">Clique para selecionar outro arquivo se desejar substituir.</p>
+                        </div>
+                      ) : (
+                        <div>
+                          <FileUp className="mx-auto mb-2 h-8 w-8 text-lilac" />
+                          <p className="text-xs font-bold text-ink">
+                            Clique ou arraste um arquivo PDF, Imagem ou Documento
+                          </p>
+                          <p className="mt-1 text-[11px] text-ink-soft">
+                            PDF, JPEG, PNG, DOCX, PPTX (Máx. 50MB)
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Published status */}
+                  <div className="flex items-center gap-3 pt-2">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setMaterialForm({ ...materialForm, published: !materialForm.published })
+                      }
+                      className="press flex items-center gap-2 rounded-xl bg-white/80 px-3 py-1.5 text-xs font-bold text-ink shadow-sm"
+                    >
+                      {materialForm.published ? (
+                        <>
+                          <ToggleRight className="h-5 w-5 text-emerald-600" />
+                          <span className="text-emerald-700">Material publicado</span>
+                        </>
+                      ) : (
+                        <>
+                          <ToggleLeft className="h-5 w-5 text-ink-soft" />
+                          <span className="text-ink-soft">Material oculto (Rascunho)</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex justify-end gap-3 pt-3">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsCreatingMaterial(false);
+                        setEditingMaterial(null);
+                        setSelectedFile(null);
+                      }}
+                      className="press rounded-2xl bg-white/80 px-4 py-2.5 text-sm font-bold text-ink shadow-sm hover:bg-white"
+                    >
+                      Cancelar
+                    </button>
+                    <Button
+                      type="submit"
+                      variant="sky"
+                      size="md"
+                      disabled={isUploadingMaterial}
+                    >
+                      <span className="flex items-center gap-1.5">
+                        <Check className="h-4 w-4" />
+                        {isUploadingMaterial ? "Enviando arquivo..." : "Salvar Material"}
+                      </span>
+                    </Button>
+                  </div>
+                </form>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Filters for materials */}
+          <div className="clay-sm flex flex-wrap items-center justify-between gap-3 bg-white/80 p-4">
+            <div className="flex items-center gap-2 text-sm font-bold text-ink">
+              <Filter className="h-4 w-4 text-lilac" />
+              <span>Filtrar Materiais:</span>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              <select
+                value={materialFilterSubject}
+                onChange={(e) => setMaterialFilterSubject(e.target.value)}
+                className="rounded-xl border border-lilac/20 bg-white px-3 py-1.5 text-xs font-semibold text-ink outline-none"
+              >
+                <option value="">Todas as Matérias</option>
+                {subjects.map((s) => (
+                  <option key={s.id} value={s.id}>
+                    {s.emoji} {s.name}
+                  </option>
+                ))}
+              </select>
+
+              <select
+                value={materialFilterCategory}
+                onChange={(e) => setMaterialFilterCategory(e.target.value)}
+                className="rounded-xl border border-lilac/20 bg-white px-3 py-1.5 text-xs font-semibold text-ink outline-none"
+              >
+                <option value="">Todas as Categorias</option>
+                {MATERIAL_CATEGORIES.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.emoji} {c.label}
+                  </option>
+                ))}
+              </select>
+
+              {(materialFilterSubject || materialFilterCategory) && (
+                <button
+                  onClick={() => {
+                    setMaterialFilterSubject("");
+                    setMaterialFilterCategory("");
+                  }}
+                  className="press rounded-xl bg-candy-soft px-3 py-1.5 text-xs font-bold text-[#b03b6e]"
+                >
+                  Limpar
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Materials Table */}
+          <div className="clay overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead className="bg-white/50">
+                  <tr>
+                    <th className="px-4 py-3 text-left font-bold text-ink">Material</th>
+                    <th className="px-4 py-3 text-left font-bold text-ink">Matéria</th>
+                    <th className="px-4 py-3 text-left font-bold text-ink">Categoria</th>
+                    <th className="px-4 py-3 text-center font-bold text-ink">Tamanho</th>
+                    <th className="px-4 py-3 text-center font-bold text-ink">Status</th>
+                    <th className="px-4 py-3 text-center font-bold text-ink">Ações</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/50">
+                  {filteredMaterials.length === 0 ? (
+                    <tr>
+                      <td colSpan="6" className="px-4 py-8 text-center text-ink-soft">
+                        <div className="flex flex-col items-center justify-center gap-2">
+                          <FolderDown className="h-8 w-8 text-lilac/40" />
+                          <p className="font-semibold">Nenhum material de apoio cadastrado.</p>
+                          <p className="text-xs">
+                            Clique em <strong>Novo Material</strong> para fazer upload de apostilas, PDFs ou imagens.
+                          </p>
+                        </div>
+                      </td>
+                    </tr>
+                  ) : (
+                    filteredMaterials.map((mat) => {
+                      const subjectObj = subjects.find((s) => s.id === mat.subject_id);
+                      const catInfo = getCategoryInfo(mat.category);
+
+                      return (
+                        <tr key={mat.id} className="hover:bg-white/30 transition">
+                          <td className="px-4 py-3">
+                            <div className="min-w-0 max-w-xs sm:max-w-md">
+                              <p className="font-bold text-ink truncate">{mat.title}</p>
+                              <div className="mt-0.5 flex items-center gap-2 text-xs text-ink-soft">
+                                <span className="font-mono text-[11px] truncate">{mat.file_name}</span>
+                                {mat.ano_letivo && (
+                                  <>
+                                    <span>&middot;</span>
+                                    <span>{mat.ano_letivo}</span>
+                                  </>
+                                )}
+                              </div>
+                            </div>
+                          </td>
+
+                          <td className="px-4 py-3">
+                            <span className="inline-flex items-center gap-1 rounded-full bg-[#EEE6FF] px-2.5 py-1 text-xs font-bold text-[#A370FF]">
+                              <span>{subjectObj?.emoji || "📚"}</span>
+                              <span>{subjectObj?.name || mat.subject_id}</span>
+                            </span>
+                          </td>
+
+                          <td className="px-4 py-3">
+                            <span className="inline-flex items-center gap-1 rounded-full bg-sky/10 px-2.5 py-1 text-xs font-bold text-sky">
+                              <span>{catInfo.emoji}</span>
+                              <span>{catInfo.label}</span>
+                            </span>
+                          </td>
+
+                          <td className="px-4 py-3 text-center text-xs font-semibold text-ink-soft">
+                            {formatFileSize(mat.file_size)}
+                          </td>
+
+                          <td className="px-4 py-3 text-center">
+                            <button
+                              onClick={() => handleTogglePublishMaterial(mat)}
+                              className="press cursor-pointer inline-flex items-center justify-center gap-1 rounded-full bg-white/70 px-2.5 py-1 text-xs font-bold shadow-sm hover:text-lilac"
+                              title={mat.published ? "Ocultar material" : "Publicar material"}
+                            >
+                              {mat.published ? (
+                                <>
+                                  <Eye className="h-4 w-4 text-emerald-600" />
+                                  <span className="text-emerald-700">Ativo</span>
+                                </>
+                              ) : (
+                                <>
+                                  <EyeOff className="h-4 w-4 text-rose-500" />
+                                  <span className="text-rose-600">Oculto</span>
+                                </>
+                              )}
+                            </button>
+                          </td>
+
+                          <td className="px-4 py-3 text-center">
+                            <div className="flex items-center justify-center gap-1.5">
+                              {mat.file_url && (
+                                <a
+                                  href={mat.file_url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  download={mat.file_name}
+                                  className="press cursor-pointer rounded-full bg-white/80 p-1.5 text-ink-soft shadow-sm hover:text-sky"
+                                  title="Baixar / Abrir Arquivo"
+                                >
+                                  <Download className="h-4 w-4" />
+                                </a>
+                              )}
+                              <button
+                                onClick={() => handleOpenEditMaterial(mat)}
+                                className="press cursor-pointer rounded-full bg-white/80 p-1.5 text-ink-soft shadow-sm hover:text-lilac"
+                                title="Editar Material"
+                              >
+                                <Edit2 className="h-4 w-4" />
+                              </button>
+                              <button
+                                onClick={() => handleDeleteMaterial(mat)}
+                                className="press cursor-pointer rounded-full bg-white/80 p-1.5 text-ink-soft shadow-sm hover:text-candy"
+                                title="Excluir Material"
+                              >
+                                <Trash2 className="h-4 w-4" />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       )}
