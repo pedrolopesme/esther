@@ -37,6 +37,8 @@ import {
   Video,
   Music,
   Image as ImageIcon,
+  Gamepad2,
+  Trophy,
 } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 import { getSupabaseBrowserClient } from "../utils/supabase";
@@ -96,6 +98,8 @@ export default function ParentDashboard() {
   const [sessions, setSessions] = useState([]);
   const [materialAccesses, setMaterialAccesses] = useState([]);
   const [materials, setMaterials] = useState([]);
+  const [gameSessions, setGameSessions] = useState([]);
+  const [games, setGames] = useState([]);
   const [isLoadingChildren, setIsLoadingChildren] = useState(true);
   const [isLoadingData, setIsLoadingData] = useState(false);
 
@@ -105,7 +109,7 @@ export default function ParentDashboard() {
   // Top navigation view mode: "dashboard" | "children"
   const [currentView, setCurrentView] = useState("dashboard");
 
-  // Dashboard inner tabs: "performance" | "materials" | "errors" | "timeline"
+  // Dashboard inner tabs: "performance" | "games" | "materials" | "errors" | "timeline"
   const [activeTab, setActiveTab] = useState("performance");
 
   // Form states for registering children
@@ -149,12 +153,12 @@ export default function ParentDashboard() {
     loadChildren();
   }, [loadChildren]);
 
-  // Load all events, sessions, material accesses and materials for this parent's children
+  // Load all events, sessions, game sessions, material accesses and items for this parent's children
   const loadParentData = useCallback(async () => {
     if (!supabase || !user) return;
     setIsLoadingData(true);
 
-    const [eventsRes, sessionsRes, accessesRes, materialsRes] = await Promise.all([
+    const [eventsRes, sessionsRes, accessesRes, materialsRes, gameSessionsRes, gamesRes] = await Promise.all([
       supabase
         .from("child_events")
         .select("*")
@@ -173,6 +177,14 @@ export default function ParentDashboard() {
       supabase
         .from("materials")
         .select("id, title, description, subject_id, ano_letivo, file_url, file_name, file_size, file_type, media_type, category"),
+      supabase
+        .from("game_sessions")
+        .select("*")
+        .order("completed_at", { ascending: false })
+        .limit(200),
+      supabase
+        .from("games")
+        .select("id, slug, title, description, subject_id, ano_letivo, max_score, cover_url"),
     ]);
 
     if (!eventsRes.error && eventsRes.data) {
@@ -186,6 +198,12 @@ export default function ParentDashboard() {
     }
     if (!materialsRes.error && materialsRes.data) {
       setMaterials(materialsRes.data);
+    }
+    if (!gameSessionsRes.error && gameSessionsRes.data) {
+      setGameSessions(gameSessionsRes.data);
+    }
+    if (!gamesRes.error && gamesRes.data) {
+      setGames(gamesRes.data);
     }
 
     setIsLoadingData(false);
@@ -266,6 +284,15 @@ export default function ParentDashboard() {
     return map;
   }, [materials]);
 
+  // Map of game_id to game data
+  const gameMap = useMemo(() => {
+    const map = {};
+    for (const g of games) {
+      map[g.id] = g;
+    }
+    return map;
+  }, [games]);
+
   // Filtered data based on selected child filter
   const filteredSessions = useMemo(() => {
     if (selectedChildId === "all") return sessions;
@@ -282,6 +309,11 @@ export default function ParentDashboard() {
     return materialAccesses.filter((a) => a.child_id === selectedChildId);
   }, [materialAccesses, selectedChildId]);
 
+  const filteredGameSessions = useMemo(() => {
+    if (selectedChildId === "all") return gameSessions;
+    return gameSessions.filter((g) => g.child_id === selectedChildId);
+  }, [gameSessions, selectedChildId]);
+
   // Aggregated metrics
   const totalCompleted = filteredSessions.length;
   const totalCorrect = filteredSessions.reduce((acc, s) => acc + (s.correct_count || 0), 0);
@@ -290,6 +322,7 @@ export default function ParentDashboard() {
   const accuracyRate = totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0;
   const totalPoints = filteredSessions.reduce((acc, s) => acc + (s.points_earned || 0), 0);
   const totalMaterialsViewed = new Set(filteredMaterialAccesses.map((a) => `${a.child_id}_${a.material_id}`)).size;
+  const totalGamesPlayed = filteredGameSessions.length;
 
   // Group performance by subject
   const subjectStats = useMemo(() => {
@@ -421,7 +454,7 @@ export default function ParentDashboard() {
             Painel do Responsável 👨‍👩‍👧
           </h1>
           <p className="mt-1 text-xs text-ink-soft sm:text-sm">
-            Acompanhe a evolução, resoluções, acertos e materiais consumidos pelos seus filhos.
+            Acompanhe a evolução, minijogos, resoluções e materiais consumidos pelos seus filhos.
           </p>
         </div>
 
@@ -488,6 +521,16 @@ export default function ParentDashboard() {
           {/* Quick Metrics Cards */}
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             <Card className="flex flex-col items-center justify-center p-5 text-center">
+              <div className="mb-2 grid h-10 w-10 place-items-center rounded-2xl bg-indigo-500/10 text-indigo-600">
+                <Gamepad2 className="h-5 w-5" strokeWidth={2.5} />
+              </div>
+              <span className="text-xs font-bold text-ink-soft">Minijogos Jogados</span>
+              <p className="mt-1 font-display text-3xl font-bold text-indigo-600 sm:text-4xl">
+                {totalGamesPlayed}
+              </p>
+            </Card>
+
+            <Card className="flex flex-col items-center justify-center p-5 text-center">
               <div className="mb-2 grid h-10 w-10 place-items-center rounded-2xl bg-lilac/10 text-lilac">
                 <Award className="h-5 w-5" strokeWidth={2.5} />
               </div>
@@ -516,16 +559,6 @@ export default function ParentDashboard() {
                 {totalMaterialsViewed}
               </p>
             </Card>
-
-            <Card className="flex flex-col items-center justify-center p-5 text-center">
-              <div className="mb-2 grid h-10 w-10 place-items-center rounded-2xl bg-sun/10 text-[#d49911]">
-                <Flame className="h-5 w-5" strokeWidth={2.5} />
-              </div>
-              <span className="text-xs font-bold text-ink-soft">Estrelas Acumuladas</span>
-              <p className="mt-1 font-display text-3xl font-bold text-[#d49911] sm:text-4xl">
-                {totalPoints} ⭐
-              </p>
-            </Card>
           </div>
 
           {/* Nav Tabs within Dashboard */}
@@ -533,40 +566,51 @@ export default function ParentDashboard() {
             <button
               onClick={() => setActiveTab("performance")}
               className={cn(
-                "press flex flex-1 min-w-[140px] items-center justify-center gap-2 rounded-xl py-3 text-xs font-bold transition sm:text-sm",
+                "press flex flex-1 min-w-[130px] items-center justify-center gap-2 rounded-xl py-3 text-xs font-bold transition sm:text-sm",
                 activeTab === "performance"
                   ? "bg-candy text-white shadow-md"
                   : "text-ink-soft hover:text-ink"
               )}
             >
-              <BarChart3 className="h-4 w-4" /> Desempenho & Matérias
+              <BarChart3 className="h-4 w-4" /> Desempenho
+            </button>
+            <button
+              onClick={() => setActiveTab("games")}
+              className={cn(
+                "press flex flex-1 min-w-[130px] items-center justify-center gap-2 rounded-xl py-3 text-xs font-bold transition sm:text-sm",
+                activeTab === "games"
+                  ? "bg-candy text-white shadow-md"
+                  : "text-ink-soft hover:text-ink"
+              )}
+            >
+              <Gamepad2 className="h-4 w-4" /> Minijogos ({filteredGameSessions.length})
             </button>
             <button
               onClick={() => setActiveTab("materials")}
               className={cn(
-                "press flex flex-1 min-w-[140px] items-center justify-center gap-2 rounded-xl py-3 text-xs font-bold transition sm:text-sm",
+                "press flex flex-1 min-w-[130px] items-center justify-center gap-2 rounded-xl py-3 text-xs font-bold transition sm:text-sm",
                 activeTab === "materials"
                   ? "bg-candy text-white shadow-md"
                   : "text-ink-soft hover:text-ink"
               )}
             >
-              <FolderDown className="h-4 w-4" /> Materiais de Apoio ({materialReport.length})
+              <FolderDown className="h-4 w-4" /> Materiais ({materialReport.length})
             </button>
             <button
               onClick={() => setActiveTab("errors")}
               className={cn(
-                "press flex flex-1 min-w-[140px] items-center justify-center gap-2 rounded-xl py-3 text-xs font-bold transition sm:text-sm",
+                "press flex flex-1 min-w-[130px] items-center justify-center gap-2 rounded-xl py-3 text-xs font-bold transition sm:text-sm",
                 activeTab === "errors"
                   ? "bg-candy text-white shadow-md"
                   : "text-ink-soft hover:text-ink"
               )}
             >
-              <AlertTriangle className="h-4 w-4" /> Pontos de Atenção ({allErrors.length} erros)
+              <AlertTriangle className="h-4 w-4" /> Erros ({allErrors.length})
             </button>
             <button
               onClick={() => setActiveTab("timeline")}
               className={cn(
-                "press flex flex-1 min-w-[140px] items-center justify-center gap-2 rounded-xl py-3 text-xs font-bold transition sm:text-sm",
+                "press flex flex-1 min-w-[130px] items-center justify-center gap-2 rounded-xl py-3 text-xs font-bold transition sm:text-sm",
                 activeTab === "timeline"
                   ? "bg-candy text-white shadow-md"
                   : "text-ink-soft hover:text-ink"
@@ -691,7 +735,120 @@ export default function ParentDashboard() {
                 </div>
               )}
 
-              {/* TAB 2: MATERIAIS DE APOIO ACESSADOS */}
+              {/* TAB 2: MINIJOGOS EDUCATIVOS (GAME SESSIONS REPORT) */}
+              {activeTab === "games" && (
+                <Card className="p-6">
+                  <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
+                    <div>
+                      <h3 className="flex items-center gap-2 font-display text-lg font-bold text-ink">
+                        <Gamepad2 className="h-5 w-5 text-indigo-600" strokeWidth={2.5} />
+                        Desempenho nos Minijogos Educativos
+                      </h3>
+                      <p className="text-xs text-ink-soft sm:text-sm">
+                        Pontuações, tempo dedicado e histórico de partidas concluídas pelos filhos.
+                      </p>
+                    </div>
+
+                    <Badge tone="sky">
+                      {filteredGameSessions.length}{" "}
+                      {filteredGameSessions.length === 1 ? "partida registrada" : "partidas registradas"}
+                    </Badge>
+                  </div>
+
+                  {filteredGameSessions.length === 0 ? (
+                    <div className="py-12 text-center">
+                      <div className="mb-2 text-4xl">🎮</div>
+                      <p className="font-display text-lg font-bold text-ink">
+                        Nenhuma partida jogada ainda.
+                      </p>
+                      <p className="mt-1 text-xs text-ink-soft">
+                        Quando as crianças jogarem os minijogos educativos, as pontuações e acertos aparecerão aqui.
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      {filteredGameSessions.map((session) => {
+                        const theme = getSubject(session.subject_id);
+                        const childDisplayName = childMap[session.child_id] || "Estudante";
+                        const gameItem = gameMap[session.game_id];
+
+                        return (
+                          <div
+                            key={session.id}
+                            className="flex flex-col justify-between rounded-2xl border-2 border-indigo-500/20 bg-white/95 p-4 shadow-sm"
+                          >
+                            <div>
+                              <div className="mb-2 flex flex-wrap items-center justify-between gap-1">
+                                <div className="flex items-center gap-1.5">
+                                  <span>{theme?.emoji || "🎮"}</span>
+                                  <span className="font-display text-xs font-bold text-ink">
+                                    {theme?.name || session.subject_id}
+                                  </span>
+                                  <span className="text-[11px] font-bold text-candy">
+                                    ({childDisplayName})
+                                  </span>
+                                </div>
+                                <span className="text-[10px] text-ink-soft">
+                                  {formatDateTime(session.completed_at)}
+                                </span>
+                              </div>
+
+                              <div className="flex items-start gap-3 mb-3">
+                                {gameItem?.cover_url ? (
+                                  // eslint-disable-next-line @next/next/no-img-element
+                                  <img
+                                    src={gameItem.cover_url}
+                                    alt="Cover"
+                                    className="h-12 w-16 shrink-0 rounded-lg object-cover border border-slate-200"
+                                  />
+                                ) : (
+                                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-indigo-50 text-xl text-indigo-600">
+                                    🎮
+                                  </span>
+                                )}
+                                <div className="min-w-0 flex-1">
+                                  <p className="text-sm font-bold text-ink truncate">
+                                    {session.game_title}
+                                  </p>
+                                  <div className="mt-1 flex flex-wrap items-center gap-2">
+                                    <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-bold text-emerald-800">
+                                      <Trophy className="h-3.5 w-3.5 text-emerald-600" />
+                                      {session.score} / {session.max_score} pts ({session.score_pct}%)
+                                    </span>
+                                    {session.time_spent_seconds > 0 && (
+                                      <span className="text-[11px] text-ink-soft flex items-center gap-1">
+                                        <Clock className="h-3 w-3" />
+                                        {session.time_spent_seconds}s
+                                      </span>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            {session.details && Object.keys(session.details).length > 0 && (
+                              <div className="flex flex-wrap gap-1.5 pt-2 border-t border-indigo-100 text-[11px]">
+                                {session.details.acertos !== undefined && (
+                                  <span className="rounded-md bg-emerald-50 px-2 py-0.5 text-emerald-700 font-bold border border-emerald-200">
+                                    {session.details.acertos} acertos
+                                  </span>
+                                )}
+                                {session.details.erros !== undefined && (
+                                  <span className="rounded-md bg-rose-50 px-2 py-0.5 text-rose-700 font-bold border border-rose-200">
+                                    {session.details.erros} erros
+                                  </span>
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </Card>
+              )}
+
+              {/* TAB 3: MATERIAIS DE APOIO ACESSADOS */}
               {activeTab === "materials" && (
                 <Card className="p-6">
                   <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
@@ -762,7 +919,6 @@ export default function ParentDashboard() {
                               </div>
                             </div>
 
-                            {/* Status markers */}
                             <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-lilac/10 text-xs">
                               {item.viewed && (
                                 <span className="inline-flex items-center gap-1 rounded-full bg-mint-soft px-2.5 py-0.5 text-xs font-bold text-[#05795b]">
@@ -785,7 +941,7 @@ export default function ParentDashboard() {
                 </Card>
               )}
 
-              {/* TAB 3: PONTOS DE ATENÇÃO (ERROS) */}
+              {/* TAB 4: PONTOS DE ATENÇÃO (ERROS) */}
               {activeTab === "errors" && (
                 <Card className="p-6">
                   <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
@@ -868,7 +1024,7 @@ export default function ParentDashboard() {
                 </Card>
               )}
 
-              {/* TAB 4: LINHA DO TEMPO */}
+              {/* TAB 5: LINHA DO TEMPO */}
               {activeTab === "timeline" && (
                 <div className="space-y-6">
                   {events.length === 0 ? (
@@ -901,6 +1057,8 @@ export default function ParentDashboard() {
                               const isComplete = ev.event_type === "exercise_completed";
                               const isMatView = ev.event_type === "material_viewed";
                               const isMatDownload = ev.event_type === "material_downloaded";
+                              const isGameStart = ev.event_type === "game_started";
+                              const isGameComplete = ev.event_type === "game_completed";
 
                               const theme = getSubject(ev.subject);
                               const cName = childMap[ev.child_id] || "Estudante";
@@ -914,7 +1072,8 @@ export default function ParentDashboard() {
                                       isStart && "bg-sun-soft text-[#c79114]",
                                       isComplete && "bg-mint-soft text-[#078d6d]",
                                       isMatView && "bg-lilac-soft text-lilac",
-                                      isMatDownload && "bg-sky-soft text-[#1a8bb0]"
+                                      isMatDownload && "bg-sky-soft text-[#1a8bb0]",
+                                      (isGameStart || isGameComplete) && "bg-indigo-100 text-indigo-700"
                                     )}
                                   >
                                     {isLogin && <LogIn className="h-4 w-4" strokeWidth={2.5} />}
@@ -922,6 +1081,8 @@ export default function ParentDashboard() {
                                     {isComplete && <Award className="h-4 w-4" strokeWidth={2.5} />}
                                     {isMatView && <Eye className="h-4 w-4" strokeWidth={2.5} />}
                                     {isMatDownload && <Download className="h-4 w-4" strokeWidth={2.5} />}
+                                    {isGameStart && <Gamepad2 className="h-4 w-4" strokeWidth={2.5} />}
+                                    {isGameComplete && <Trophy className="h-4 w-4" strokeWidth={2.5} />}
                                   </span>
 
                                   <div className="min-w-0 flex-1">
@@ -933,6 +1094,8 @@ export default function ParentDashboard() {
                                         {isComplete && `concluiu lista de ${theme?.name || ev.subject || "exercícios"}`}
                                         {isMatView && `visualizou material de ${theme?.name || ev.subject || "apoio"}`}
                                         {isMatDownload && `baixou material de ${theme?.name || ev.subject || "apoio"}`}
+                                        {isGameStart && `iniciou o minijogo de ${theme?.name || ev.subject || "estudo"}`}
+                                        {isGameComplete && `concluiu o minijogo de ${theme?.name || ev.subject || "estudo"}`}
                                       </p>
                                       <span className="text-xs text-ink-soft">
                                         {new Date(ev.created_at).toLocaleTimeString("pt-BR", {
@@ -952,6 +1115,31 @@ export default function ParentDashboard() {
                                       <p className="mt-0.5 text-xs font-semibold text-ink-soft">
                                         📄 {ev.list_title || ev.metadata?.fileName || "Material de estudo"}
                                       </p>
+                                    )}
+
+                                    {(isGameStart || isGameComplete) && (
+                                      <p className="mt-0.5 text-xs font-semibold text-indigo-700 font-bold">
+                                        🎮 {ev.list_title || "Minijogo Educativo"}
+                                      </p>
+                                    )}
+
+                                    {isGameComplete && ev.metadata && (
+                                      <div className="mt-2 flex flex-wrap gap-2 text-xs">
+                                        <Badge tone="mint">
+                                          Pontuação: {ev.metadata.score}/{ev.metadata.maxScore} ({ev.metadata.scorePct}%)
+                                        </Badge>
+                                        {ev.metadata.starsEarned > 0 && (
+                                          <Badge tone="sun">
+                                            +{ev.metadata.starsEarned} ⭐
+                                          </Badge>
+                                        )}
+                                        {ev.metadata.timeSpentSeconds > 0 && (
+                                          <span className="flex items-center gap-1 text-ink-soft">
+                                            <Clock className="h-3 w-3" />
+                                            {ev.metadata.timeSpentSeconds}s
+                                          </span>
+                                        )}
+                                      </div>
                                     )}
 
                                     {isComplete && ev.metadata && (

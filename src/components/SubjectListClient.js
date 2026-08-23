@@ -29,6 +29,8 @@ import {
   Star,
   BookOpen,
   LayoutGrid,
+  Gamepad2,
+  Trophy,
 } from "lucide-react";
 import { getAvailableExerciseLists, getStudentStudyOverview } from "../utils/exerciseRepository";
 import { getSubject, getSubjectsFromDB, resolveSubject } from "../utils/subjects";
@@ -38,7 +40,9 @@ import {
   formatFileSize,
   detectMediaType,
 } from "../utils/materialRepository";
+import { getGames } from "../utils/gameRepository";
 import MaterialViewerModal from "./MaterialViewerModal";
+import { GameViewerModal } from "./GameComponents";
 import { useAuth } from "../hooks/useAuth";
 import { cn } from "../utils/cn";
 import Badge from "./ui/Badge";
@@ -60,15 +64,17 @@ export default function SubjectListClient({ subjectId }) {
   const [subject, setSubject] = useState(
     getSubject(subjectId) || resolveSubject({ id: subjectId, name: subjectId })
   );
-  const [activeTab, setActiveTab] = useState("all"); // 'all' | 'exercises' | 'materials'
+  const [activeTab, setActiveTab] = useState("all"); // 'all' | 'games' | 'materials' | 'exercises'
   const [exerciseLists, setExerciseLists] = useState([]);
   const [materials, setMaterials] = useState([]);
+  const [games, setGames] = useState([]);
   const [studyOverview, setStudyOverview] = useState({
     completedMap: {},
     recentSessions: [],
     needsReview: [],
   });
   const [selectedMaterial, setSelectedMaterial] = useState(null);
+  const [selectedGame, setSelectedGame] = useState(null);
 
   // Filters
   const [filterYear, setFilterYear] = useState("");
@@ -79,10 +85,11 @@ export default function SubjectListClient({ subjectId }) {
   const loadData = useCallback(async () => {
     try {
       setIsLoading(true);
-      const [dbSubjects, lists, mats, overview] = await Promise.all([
+      const [dbSubjects, lists, mats, gamesData, overview] = await Promise.all([
         getSubjectsFromDB(true),
         getAvailableExerciseLists(subjectId),
         getMaterials({ subjectId, publishedOnly: true, childId: child?.id }),
+        getGames({ subjectId, publishedOnly: true, childId: child?.id }),
         getStudentStudyOverview(child?.id, user?.id),
       ]);
 
@@ -91,6 +98,7 @@ export default function SubjectListClient({ subjectId }) {
 
       setExerciseLists(lists);
       setMaterials(mats);
+      setGames(gamesData);
       setStudyOverview(overview);
       setError(null);
     } catch (err) {
@@ -116,11 +124,19 @@ export default function SubjectListClient({ subjectId }) {
     return materials.filter((m) => m.accessStatus?.viewed || m.accessStatus?.downloaded).length;
   }, [materials]);
 
+  const gamesPlayedCount = useMemo(() => {
+    return games.filter((g) => g.playStatus?.played).length;
+  }, [games]);
+
   const uniqueYears = Array.from(
-    new Set([...exerciseLists.map((l) => l.ano_letivo), ...materials.map((m) => m.ano_letivo)].filter(Boolean))
+    new Set([
+      ...exerciseLists.map((l) => l.ano_letivo),
+      ...materials.map((m) => m.ano_letivo),
+      ...games.map((g) => g.ano_letivo),
+    ].filter(Boolean))
   );
 
-  // Filter lists & materials
+  // Filter lists, materials & games
   const filteredLists = exerciseLists.filter((l) => {
     return filterYear ? l.ano_letivo === filterYear : true;
   });
@@ -130,6 +146,10 @@ export default function SubjectListClient({ subjectId }) {
     const media = m.media_type || detectMediaType(m.file_type, m.file_name);
     const matchType = filterMediaType === "all" ? true : media === filterMediaType;
     return matchYear && matchType;
+  });
+
+  const filteredGames = games.filter((g) => {
+    return filterYear ? g.ano_letivo === filterYear : true;
   });
 
   function handleAccessLogged(materialId, action) {
@@ -206,11 +226,16 @@ export default function SubjectListClient({ subjectId }) {
           </div>
 
           <p className="text-white/90 text-sm sm:text-base font-medium">
-            {subject?.tag || "Explore listas de exercícios, videoaulas, áudios e apostilas organizadas para você."}
+            {subject?.tag || "Explore minijogos educativos, listas de exercícios e materiais de apoio organizados para você."}
           </p>
 
           {/* Quick Progress Metrics */}
           <div className="mt-5 flex flex-wrap items-center gap-2.5 text-xs font-bold">
+            <span className="rounded-2xl bg-white/95 px-3.5 py-1.5 text-ink shadow-sm flex items-center gap-1.5">
+              <Gamepad2 className="h-4 w-4 text-indigo-600" />
+              <span>{gamesPlayedCount} de {games.length} jogos jogados</span>
+            </span>
+
             <span className="rounded-2xl bg-white/95 px-3.5 py-1.5 text-ink shadow-sm flex items-center gap-1.5">
               <ListChecks className="h-4 w-4 text-lilac" />
               <span>{completedCount} de {exerciseLists.length} listas concluídas</span>
@@ -238,7 +263,19 @@ export default function SubjectListClient({ subjectId }) {
             )}
           >
             <LayoutGrid className="h-4 w-4" />
-            Tudo ({exerciseLists.length + materials.length})
+            Tudo ({games.length + exerciseLists.length + materials.length})
+          </button>
+          <button
+            onClick={() => setActiveTab("games")}
+            className={cn(
+              "press cursor-pointer flex items-center gap-1.5 rounded-2xl px-4 py-2 text-xs sm:text-sm font-bold transition",
+              activeTab === "games"
+                ? "bg-lilac text-white shadow-md"
+                : "bg-white/80 text-ink hover:bg-white"
+            )}
+          >
+            <Gamepad2 className="h-4 w-4 text-candy" />
+            Minijogos ({games.length})
           </button>
           <button
             onClick={() => setActiveTab("materials")}
@@ -283,7 +320,7 @@ export default function SubjectListClient({ subjectId }) {
             </select>
           )}
 
-          {activeTab !== "exercises" && (
+          {activeTab === "materials" && (
             <select
               value={filterMediaType}
               onChange={(e) => setFilterMediaType(e.target.value)}
@@ -321,7 +358,112 @@ export default function SubjectListClient({ subjectId }) {
         </div>
       ) : (
         <div className="space-y-10">
-          {/* ==================== 1. MATERIAIS DE APOIO ==================== */}
+          {/* ==================== 1. MINIJOGOS EDUCATIVOS ==================== */}
+          {(activeTab === "all" || activeTab === "games") && (
+            <section className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="grid h-8 w-8 place-items-center rounded-xl bg-indigo-500/15 text-indigo-600">
+                    <Gamepad2 className="h-4 w-4" />
+                  </span>
+                  <div>
+                    <h2 className="font-display text-xl font-bold text-ink">
+                      Minijogos de {subject?.name} ({filteredGames.length})
+                    </h2>
+                    <p className="text-xs text-ink-soft">
+                      Jogos interativos estilo Steam/arcade para fixar o aprendizado
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {filteredGames.length === 0 ? (
+                <div className="clay p-8 text-center text-ink-soft text-xs">
+                  Nenhum minijogo encontrado para esta matéria com os filtros atuais.
+                </div>
+              ) : (
+                <motion.div
+                  className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+                  variants={listVariants}
+                  initial="hidden"
+                  animate="show"
+                >
+                  {filteredGames.map((g) => {
+                    const played = g.playStatus?.played;
+
+                    return (
+                      <motion.div key={g.id} variants={cardVariants}>
+                        <div
+                          onClick={() => setSelectedGame(g)}
+                          className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] bg-gradient-to-b from-[#1e1b4b] to-[#0f172a] p-0 text-white shadow-xl transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl cursor-pointer border border-indigo-900/50 h-full"
+                        >
+                          {/* Banner / Cover */}
+                          <div className="relative h-40 w-full overflow-hidden bg-slate-900">
+                            {g.cover_url ? (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img
+                                src={g.cover_url}
+                                alt={g.title}
+                                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                              />
+                            ) : (
+                              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-950 text-4xl">
+                                🎮
+                              </div>
+                            )}
+
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#1e1b4b] via-transparent to-black/30" />
+
+                            <div className="absolute right-3 top-3">
+                              {!played ? (
+                                <span className="inline-flex animate-pulse items-center gap-1 rounded-full border border-pink-300 bg-[#ff477e] px-2.5 py-0.5 text-[10px] font-extrabold text-white shadow-md">
+                                  <Sparkles className="h-3 w-3" /> NOVO JOGO
+                                </span>
+                              ) : (
+                                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-950/80 border border-emerald-500/40 px-2.5 py-0.5 text-[10px] font-extrabold text-emerald-300 backdrop-blur-sm">
+                                  <Trophy className="h-3 w-3 text-emerald-400" /> {g.playStatus?.bestScore} pts
+                                </span>
+                              )}
+                            </div>
+
+                            <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-200 group-hover:opacity-100 bg-black/30 backdrop-blur-[2px]">
+                              <span className="grid h-12 w-12 place-items-center rounded-full bg-gradient-to-tr from-[#ffe381] to-[#ffb45f] text-slate-950 shadow-2xl transition-transform group-hover:scale-110">
+                                <Play className="ml-0.5 h-6 w-6 fill-current" />
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Content */}
+                          <div className="p-4 flex-1 flex flex-col justify-between">
+                            <div>
+                              <h3 className="font-display text-base font-bold text-white group-hover:text-[#ffe381] transition-colors line-clamp-1">
+                                {g.title}
+                              </h3>
+                              <p className="mt-1 text-xs text-slate-300 line-clamp-2 leading-relaxed">
+                                {g.description || "Divirta-se e aprenda com este minijogo!"}
+                              </p>
+                            </div>
+
+                            <div className="mt-4 flex items-center justify-between border-t border-indigo-900/60 pt-3 text-xs">
+                              <span className="text-[#ffd166] font-bold text-[11px]">
+                                Até {g.max_score || 100} pts
+                              </span>
+
+                              <span className="press inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 px-3 py-1 text-xs font-bold text-white shadow-md transition">
+                                <Play className="h-3 w-3 fill-current" /> Jogar
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </motion.div>
+              )}
+            </section>
+          )}
+
+          {/* ==================== 2. MATERIAIS DE APOIO ==================== */}
           {(activeTab === "all" || activeTab === "materials") && (
             <section className="space-y-4">
               <div className="flex items-center justify-between">
@@ -368,25 +510,36 @@ export default function SubjectListClient({ subjectId }) {
                             isViewed && "bg-emerald-50/20 ring-1 ring-emerald-400/40"
                           )}
                         >
-                        {isVideo && (
-                          <div className="relative -mx-4 -mt-4 mb-4 h-24 overflow-hidden rounded-t-[1.8rem] bg-gradient-to-br from-[#312e81] via-[#7c3aed] to-[#db2777] sm:-mx-5 sm:-mt-5">
+                          {isVideo && (
+                            <div className="relative -mx-4 -mt-4 mb-4 h-24 overflow-hidden rounded-t-[1.8rem] bg-gradient-to-br from-[#312e81] via-[#7c3aed] to-[#db2777] sm:-mx-5 sm:-mt-5">
                               <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,.35),transparent_35%),linear-gradient(135deg,transparent_45%,rgba(0,0,0,.25))]" />
                               <span className="absolute inset-0 grid place-items-center">
                                 <span className="grid h-11 w-11 place-items-center rounded-full bg-white/95 text-[#7c3aed] shadow-xl transition-transform group-hover:scale-110">
                                   <Play className="ml-0.5 h-5 w-5 fill-current" />
                                 </span>
                               </span>
-                              <span className="absolute bottom-2 left-2 rounded bg-black/60 px-2 py-0.5 text-[10px] font-extrabold tracking-wider text-white">VÍDEO</span>
+                              <span className="absolute bottom-2 left-2 rounded bg-black/60 px-2 py-0.5 text-[10px] font-extrabold tracking-wider text-white">
+                                VÍDEO
+                              </span>
                             </div>
                           )}
+
                           {isAudio && (
                             <div className="relative -mx-4 -mt-4 mb-4 flex h-24 items-center gap-3 overflow-hidden rounded-t-[1.8rem] bg-gradient-to-r from-[#24133f] via-[#4c1d95] to-[#0f766e] px-4 sm:-mx-5 sm:-mt-5 sm:px-5">
-                              <div className="grid h-14 w-14 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-[#a78bfa] to-[#2dd4bf] text-2xl shadow-lg ring-1 ring-white/30">🎧</div>
+                              <div className="grid h-14 w-14 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-[#a78bfa] to-[#2dd4bf] text-2xl shadow-lg ring-1 ring-white/30">
+                                🎧
+                              </div>
                               <div className="min-w-0 flex-1">
-                                <p className="truncate text-[10px] font-extrabold tracking-wider text-white/75">PODCAST DE ESTUDO</p>
+                                <p className="truncate text-[10px] font-extrabold tracking-wider text-white/75">
+                                  PODCAST DE ESTUDO
+                                </p>
                                 <div className="mt-2 flex h-4 items-center gap-0.5 opacity-90">
                                   {[3, 8, 14, 7, 18, 10, 5, 13, 8, 16, 6, 11].map((height, index) => (
-                                    <span key={index} className="w-1 rounded-full bg-white/80" style={{ height: `${height}px` }} />
+                                    <span
+                                      key={index}
+                                      className="w-1 rounded-full bg-white/80"
+                                      style={{ height: `${height}px` }}
+                                    />
                                   ))}
                                 </div>
                               </div>
@@ -395,6 +548,7 @@ export default function SubjectListClient({ subjectId }) {
                               </span>
                             </div>
                           )}
+
                           <div>
                             {/* Top Badges */}
                             <div className="flex items-start justify-between gap-2 mb-2.5">
@@ -442,7 +596,7 @@ export default function SubjectListClient({ subjectId }) {
             </section>
           )}
 
-          {/* ==================== 2. LISTAS DE EXERCÍCIOS ==================== */}
+          {/* ==================== 3. LISTAS DE EXERCÍCIOS ==================== */}
           {(activeTab === "all" || activeTab === "exercises") && (
             <section className="space-y-4">
               <div className="flex items-center justify-between">
@@ -549,6 +703,17 @@ export default function SubjectListClient({ subjectId }) {
             material={selectedMaterial}
             onClose={() => setSelectedMaterial(null)}
             onAccessLogged={handleAccessLogged}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Game Viewer Modal */}
+      <AnimatePresence>
+        {selectedGame && (
+          <GameViewerModal
+            game={selectedGame}
+            onClose={() => setSelectedGame(null)}
+            onGameCompleted={() => loadData()}
           />
         )}
       </AnimatePresence>

@@ -23,6 +23,8 @@ import {
   Flame,
   Star,
   BookOpen,
+  Gamepad2,
+  Trophy,
 } from "lucide-react";
 import {
   getLatestExerciseLists,
@@ -40,8 +42,10 @@ import {
   formatFileSize,
   detectMediaType,
 } from "../utils/materialRepository";
+import { getGames } from "../utils/gameRepository";
 import SubjectCard from "./SubjectCard";
 import MaterialViewerModal from "./MaterialViewerModal";
+import { GameViewerModal } from "./GameComponents";
 import Badge from "./ui/Badge";
 import Button from "./ui/Button";
 import Card from "./ui/Card";
@@ -66,6 +70,7 @@ export default function StudentStudyDashboard() {
   const [latestLists, setLatestLists] = useState([]);
   const [allMaterials, setAllMaterials] = useState([]);
   const [latestMaterials, setLatestMaterials] = useState([]);
+  const [games, setGames] = useState([]);
   const [studyOverview, setStudyOverview] = useState({
     recentSessions: [],
     completedMap: {},
@@ -73,6 +78,7 @@ export default function StudentStudyDashboard() {
     lastSession: null,
   });
   const [selectedMaterial, setSelectedMaterial] = useState(null);
+  const [selectedGame, setSelectedGame] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -82,10 +88,11 @@ export default function StudentStudyDashboard() {
   const loadDashboardData = useCallback(async () => {
     try {
       setIsLoading(true);
-      const [dbSubjects, lists, mats, overview] = await Promise.all([
+      const [dbSubjects, lists, mats, gamesData, overview] = await Promise.all([
         getSubjectsFromDB(false),
         getLatestExerciseLists(6),
         getMaterials({ publishedOnly: true, childId: child?.id }),
+        getGames({ publishedOnly: true, childId: child?.id }),
         getStudentStudyOverview(child?.id, user?.id),
       ]);
 
@@ -93,6 +100,7 @@ export default function StudentStudyDashboard() {
       setLatestLists(lists);
       setAllMaterials(mats);
       setLatestMaterials(mats.slice(0, 6));
+      setGames(gamesData);
       setStudyOverview(overview);
       setError(null);
     } catch (err) {
@@ -120,18 +128,22 @@ export default function StudentStudyDashboard() {
         return <FileText className="h-4 w-4 text-[#06D6A0]" />;
     }
   }
-  // Counts use the full published material catalog, while the home feed only shows recent materials.
+
+  // Count exercises & materials per subject
   const subjectStatsMap = {};
   for (const s of subjects) {
     const subjectMaterials = allMaterials.filter((m) => m.subject_id === s.id);
+    const subjectGames = games.filter((g) => g.subject_id === s.id);
     subjectStatsMap[s.id] = {
       lists: latestLists.filter((l) => l.subject === s.id).length,
       materials: subjectMaterials.length,
+      games: subjectGames.length,
       unseenMaterials: subjectMaterials.filter(
         (m) => !m.accessStatus?.viewed && !m.accessStatus?.downloaded
       ).length,
     };
   }
+
   return (
     <div className="mx-auto max-w-5xl px-4 pb-20 pt-6 sm:pt-10 space-y-10">
       {/* ---------- Hero Greeting & Quick Stats ---------- */}
@@ -151,7 +163,7 @@ export default function StudentStudyDashboard() {
             Olá, <span className="text-gradient">{studentName}</span>! Vamos aprender hoje? ✨
           </h1>
           <p className="mt-2 text-sm text-ink-soft sm:text-base">
-            Continue de onde você parou, assista aos vídeos, leia as apostilas e resolva seus exercícios!
+            Jogue minijogos divertidos, resolva exercícios e ganhe estrelas de conhecimento!
           </p>
 
           {/* Quick Metrics Badges */}
@@ -162,21 +174,136 @@ export default function StudentStudyDashboard() {
             </span>
 
             <span className="inline-flex items-center gap-1.5 rounded-2xl bg-white/90 px-3.5 py-2 text-xs font-bold text-ink shadow-sm">
+              <Gamepad2 className="h-4 w-4 text-indigo-600" />
+              <span>{games.length} Minijogos</span>
+            </span>
+
+            <span className="inline-flex items-center gap-1.5 rounded-2xl bg-white/90 px-3.5 py-2 text-xs font-bold text-ink shadow-sm">
               <BookOpen className="h-4 w-4 text-lilac" />
               <span>{subjects.length} Matérias</span>
             </span>
-
-            {studyOverview.lastSession && (
-              <span className="inline-flex items-center gap-1.5 rounded-2xl bg-emerald-50 px-3.5 py-2 text-xs font-bold text-emerald-800 shadow-sm border border-emerald-200">
-                <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-                <span>Último treino: {studyOverview.lastSession.list_title}</span>
-              </span>
-            )}
           </div>
         </div>
       </section>
 
-      {/* ---------- 1. ONDE VOCÊ PAROU / RECOMENDAÇÃO DE ESTUDO ---------- */}
+      {/* ---------- 1. STEAM-LIKE MINIJOGOS EDUCATIVOS ---------- */}
+      {games.length > 0 && (
+        <section className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <span className="grid h-9 w-9 place-items-center rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-md">
+                <Gamepad2 className="h-5 w-5" />
+              </span>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h2 className="font-display text-xl sm:text-2xl font-bold text-ink">
+                    Minijogos Educativos
+                  </h2>
+                  <span className="rounded-full bg-indigo-100 px-2.5 py-0.5 text-xs font-extrabold text-indigo-700">
+                    Jogar & Ganhar ⭐
+                  </span>
+                </div>
+                <p className="text-xs text-ink-soft">
+                  Jogos interativos estilo arcade para aprender brincando
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {games.map((g) => {
+              const subjectObj = subjects.find((s) => s.id === g.subject_id);
+              const played = g.playStatus?.played;
+
+              return (
+                <div
+                  key={g.id}
+                  onClick={() => setSelectedGame(g)}
+                  className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] bg-gradient-to-b from-[#1e1b4b] to-[#0f172a] p-0 text-white shadow-xl transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl cursor-pointer border border-indigo-900/50"
+                >
+                  {/* Game Cover / Banner (Steam style) */}
+                  <div className="relative h-44 w-full overflow-hidden bg-slate-900">
+                    {g.cover_url ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={g.cover_url}
+                        alt={g.title}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-950 text-5xl">
+                        🎮
+                      </div>
+                    )}
+
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1e1b4b] via-transparent to-black/30" />
+
+                    {/* Top badging */}
+                    <div className="absolute left-3 top-3 flex items-center gap-1.5">
+                      <span
+                        className="rounded-full px-2.5 py-0.5 text-[11px] font-extrabold shadow-md backdrop-blur-sm"
+                        style={{
+                          backgroundColor: `${subjectObj?.hex || "#A370FF"}EE`,
+                          color: "#ffffff",
+                        }}
+                      >
+                        {subjectObj?.emoji} {subjectObj?.name || g.subject_id}
+                      </span>
+                    </div>
+
+                    <div className="absolute right-3 top-3">
+                      {!played ? (
+                        <span className="inline-flex animate-pulse items-center gap-1 rounded-full border border-pink-300 bg-[#ff477e] px-2.5 py-0.5 text-[10px] font-extrabold text-white shadow-md">
+                          <Sparkles className="h-3 w-3" /> NOVO JOGO
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 rounded-full bg-emerald-950/80 border border-emerald-500/40 px-2.5 py-0.5 text-[10px] font-extrabold text-emerald-300 backdrop-blur-sm">
+                          <Trophy className="h-3 w-3 text-emerald-400" /> {g.playStatus?.bestScore} pts
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Play Button Overlay in Center */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-200 group-hover:opacity-100 bg-black/30 backdrop-blur-[2px]">
+                      <span className="grid h-14 w-14 place-items-center rounded-full bg-gradient-to-tr from-[#ffe381] to-[#ffb45f] text-slate-950 shadow-2xl transition-transform group-hover:scale-110">
+                        <Play className="ml-1 h-7 w-7 fill-current" />
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Body Content */}
+                  <div className="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 className="font-display text-lg font-bold text-white group-hover:text-[#ffe381] transition-colors line-clamp-1">
+                        {g.title}
+                      </h3>
+                      <p className="mt-1 text-xs text-slate-300 line-clamp-2 leading-relaxed">
+                        {g.description || "Divirta-se e teste suas habilidades neste minijogo educativo!"}
+                      </p>
+                    </div>
+
+                    {/* Card Footer */}
+                    <div className="mt-4 flex items-center justify-between border-t border-indigo-900/60 pt-3 text-xs">
+                      <div className="flex items-center gap-2 text-slate-400 text-[11px]">
+                        <span>{g.ano_letivo || "Ensino Fundamental"}</span>
+                        <span>&middot;</span>
+                        <span className="text-[#ffd166] font-bold">Até {g.max_score || 100} pts</span>
+                      </div>
+
+                      <span className="press inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-md transition">
+                        <Play className="h-3.5 w-3.5 fill-current" /> Jogar
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {/* ---------- 2. ONDE VOCÊ PAROU / RECOMENDAÇÃO DE ESTUDO ---------- */}
       {(studyOverview.lastSession || studyOverview.needsReview.length > 0) && (
         <section className="space-y-4">
           <div className="flex items-center justify-between">
@@ -285,7 +412,7 @@ export default function StudentStudyDashboard() {
         </section>
       )}
 
-      {/* ---------- 2. EXPLORAR POR MATÉRIA (CARDS COMPACTOS) ---------- */}
+      {/* ---------- 3. EXPLORAR POR MATÉRIA (CARDS COMPACTOS) ---------- */}
       <section className="space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -329,7 +456,7 @@ export default function StudentStudyDashboard() {
         )}
       </section>
 
-      {/* ---------- 3. MATERIAIS DE ESTUDO RECENTES (MULTIMÍDIA) ---------- */}
+      {/* ---------- 4. MATERIAIS DE ESTUDO RECENTES (MULTIMÍDIA) ---------- */}
       <section className="space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -367,7 +494,7 @@ export default function StudentStudyDashboard() {
                   key={mat.id}
                   onClick={() => setSelectedMaterial(mat)}
                   className={cn(
-                    "clay group relative flex flex-col justify-between overflow-hidden p-4 sm:p-5 transition-all hover:-translate-y-1 hover:shadow-xl cursor-pointer",
+                    "clay group relative flex cursor-pointer flex-col justify-between overflow-hidden p-4 transition-all hover:-translate-y-1 hover:shadow-xl sm:p-5",
                     isViewed && "bg-emerald-50/20 ring-1 ring-emerald-400/40",
                     isVideo && "bg-[#18181b] text-white",
                     isAudio && "bg-gradient-to-br from-[#24133f] via-[#4c1d95] to-[#0f766e] text-white"
@@ -408,7 +535,7 @@ export default function StudentStudyDashboard() {
                   )}
 
                   <div>
-                    <div className="flex items-start justify-between gap-2 mb-2.5">
+                    <div className="mb-2.5 flex items-start justify-between gap-2">
                       <span className={cn(
                         "inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-bold shadow-sm",
                         isVideo || isAudio ? "bg-white/15 text-white" : "bg-white/90 text-ink"
@@ -432,15 +559,20 @@ export default function StudentStudyDashboard() {
                       {mat.title}
                     </h3>
                     {mat.description && (
-                      <p className={cn("mt-1 text-xs line-clamp-2", isVideo || isAudio ? "text-white/65" : "text-ink-soft")}>
+                      <p className={cn(
+                        "mt-1 text-xs line-clamp-2",
+                        isVideo || isAudio ? "text-white/65" : "text-ink-soft"
+                      )}>
                         {mat.description}
                       </p>
                     )}
                   </div>
 
-
-                  <div className="mt-4 flex items-center justify-between border-t border-lilac/10 pt-3 text-[11px]">
-                    <span className="font-bold text-ink-soft">
+                  <div className={cn(
+                    "mt-4 flex items-center justify-between border-t pt-3 text-[11px]",
+                    isVideo || isAudio ? "border-white/15 text-white/70" : "border-lilac/10 text-ink-soft"
+                  )}>
+                    <span className="font-bold">
                       {subjectObj?.emoji} {subjectObj?.name || mat.subject_id}
                     </span>
                     <span
@@ -457,7 +589,7 @@ export default function StudentStudyDashboard() {
         )}
       </section>
 
-      {/* ---------- 4. ÚLTIMAS LISTAS DE EXERCÍCIOS PUBLICADAS ---------- */}
+      {/* ---------- 5. ÚLTIMAS LISTAS DE EXERCÍCIOS PUBLICADAS ---------- */}
       <section className="space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -546,6 +678,17 @@ export default function StudentStudyDashboard() {
           <MaterialViewerModal
             material={selectedMaterial}
             onClose={() => setSelectedMaterial(null)}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Game Viewer Modal */}
+      <AnimatePresence>
+        {selectedGame && (
+          <GameViewerModal
+            game={selectedGame}
+            onClose={() => setSelectedGame(null)}
+            onGameCompleted={() => loadDashboardData()}
           />
         )}
       </AnimatePresence>
