@@ -359,45 +359,85 @@ export default function StudentStudyDashboard() {
               const mediaType =
                 mat.media_type || detectMediaType(mat.file_type, mat.file_name);
               const isViewed = mat.accessStatus?.viewed || mat.accessStatus?.downloaded;
+              const isVideo = mediaType === "video";
+              const isAudio = mediaType === "audio";
 
               return (
                 <div
                   key={mat.id}
                   onClick={() => setSelectedMaterial(mat)}
                   className={cn(
-                    "clay group relative flex flex-col justify-between p-4 sm:p-5 transition-all hover:-translate-y-1 hover:shadow-xl cursor-pointer",
-                    isViewed && "bg-emerald-50/20 ring-1 ring-emerald-400/40"
+                    "clay group relative flex flex-col justify-between overflow-hidden p-4 sm:p-5 transition-all hover:-translate-y-1 hover:shadow-xl cursor-pointer",
+                    isViewed && "bg-emerald-50/20 ring-1 ring-emerald-400/40",
+                    isVideo && "bg-[#18181b] text-white",
+                    isAudio && "bg-gradient-to-br from-[#24133f] via-[#4c1d95] to-[#0f766e] text-white"
                   )}
                 >
+                  {isVideo && (
+                    <div className="relative -mx-4 -mt-4 mb-4 h-28 overflow-hidden bg-gradient-to-br from-[#312e81] via-[#7c3aed] to-[#db2777] sm:-mx-5 sm:-mt-5">
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,.35),transparent_35%),linear-gradient(135deg,transparent_45%,rgba(0,0,0,.25))]" />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="grid h-12 w-12 place-items-center rounded-full bg-white/95 text-[#7c3aed] shadow-xl transition-transform group-hover:scale-110">
+                          <Play className="ml-0.5 h-5 w-5 fill-current" />
+                        </span>
+                      </div>
+                      <span className="absolute bottom-2 left-2 rounded-md bg-black/60 px-2 py-0.5 text-[10px] font-extrabold tracking-wider text-white">
+                        VÍDEO
+                      </span>
+                    </div>
+                  )}
+
+                  {isAudio && (
+                    <div className="relative -mx-4 -mt-4 mb-4 flex h-28 items-center gap-3 overflow-hidden bg-black/15 px-4 sm:-mx-5 sm:-mt-5 sm:px-5">
+                      <div className="grid h-16 w-16 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-[#a78bfa] to-[#2dd4bf] text-3xl shadow-lg ring-1 ring-white/30">
+                        🎧
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-xs font-bold text-white/80">PODCAST DE ESTUDO</p>
+                        <p className="mt-0.5 truncate font-display text-sm font-bold text-white">Toque para ouvir</p>
+                        <div className="mt-2 flex h-5 items-center gap-0.5 opacity-90">
+                          {[3, 8, 14, 7, 18, 10, 5, 13, 8, 16, 6, 11, 4, 9, 15].map((height, index) => (
+                            <span key={index} className="w-1 rounded-full bg-white/80" style={{ height: `${height}px` }} />
+                          ))}
+                        </div>
+                      </div>
+                      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white text-[#4c1d95] shadow-lg transition-transform group-hover:scale-110">
+                        <Play className="h-4 w-4 fill-current" />
+                      </span>
+                    </div>
+                  )}
+
                   <div>
                     <div className="flex items-start justify-between gap-2 mb-2.5">
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-white/90 px-2.5 py-0.5 text-xs font-bold text-ink shadow-sm">
+                      <span className={cn(
+                        "inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-bold shadow-sm",
+                        isVideo || isAudio ? "bg-white/15 text-white" : "bg-white/90 text-ink"
+                      )}>
                         {getMediaIcon(mediaType)}
                         <span>{catInfo.label}</span>
                       </span>
 
-                      {isViewed ? (
-                        <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-800">
-                          <CheckCircle2 className="h-3 w-3 text-emerald-600" />
-                          Visto
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center gap-1 rounded-full bg-lilac/15 px-2 py-0.5 text-[10px] font-bold text-lilac">
+                      {!isViewed && (
+                        <span className="inline-flex animate-pulse items-center gap-1 rounded-full border border-[#ffb3ca] bg-[#ff477e] px-2.5 py-1 text-[10px] font-extrabold text-white shadow-[0_3px_0_#bd1f58]">
                           <Sparkles className="h-3 w-3" />
-                          Novo
+                          NOVO
                         </span>
                       )}
                     </div>
 
-                    <h3 className="font-display text-base font-bold text-ink group-hover:text-lilac transition-colors line-clamp-2">
+                    <h3 className={cn(
+                      "font-display text-base font-bold transition-colors line-clamp-2",
+                      isVideo || isAudio ? "text-white group-hover:text-white/80" : "text-ink group-hover:text-lilac"
+                    )}>
                       {mat.title}
                     </h3>
                     {mat.description && (
-                      <p className="mt-1 text-xs text-ink-soft line-clamp-2">
+                      <p className={cn("mt-1 text-xs line-clamp-2", isVideo || isAudio ? "text-white/65" : "text-ink-soft")}>
                         {mat.description}
                       </p>
                     )}
                   </div>
+
 
                   <div className="mt-4 flex items-center justify-between border-t border-lilac/10 pt-3 text-[11px]">
                     <span className="font-bold text-ink-soft">
@@ -463,14 +503,18 @@ export default function StudentStudyDashboard() {
                       {theme?.emoji || "📖"}
                     </span>
                     <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-2 mb-1">
+                      <div className="mb-1 flex items-center gap-2">
                         <span className="text-xs font-bold text-ink-soft">
                           {theme?.name || list.subject}
                         </span>
-                        {isCompleted && (
+                        {isCompleted ? (
                           <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-800">
                             <CheckCircle2 className="h-3 w-3 text-emerald-600" />
                             {isCompleted.bestScore}%
+                          </span>
+                        ) : (
+                          <span className="inline-flex animate-pulse items-center gap-1 rounded-full border border-[#ffb3ca] bg-[#ff477e] px-2.5 py-1 text-[10px] font-extrabold text-white shadow-[0_3px_0_#bd1f58]">
+                            <Sparkles className="h-3 w-3" /> NOVO
                           </span>
                         )}
                       </div>

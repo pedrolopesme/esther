@@ -79,7 +79,7 @@ export default function SubjectCard({ subject, listCount, materialCount, unseenM
             )}
             {unseenMaterialCount > 0 && (
               <span
-                className="inline-flex items-center gap-1 rounded-full bg-candy-soft px-2 py-0.5 text-[#a62f5f]"
+                className="inline-flex animate-pulse items-center gap-1 rounded-full border border-[#FF70A6]/60 bg-[#FF70A6] px-2.5 py-1 text-[10px] font-extrabold text-white shadow-[0_3px_0_#D93B74]"
                 title={`${unseenMaterialCount} material(is) ainda não visto(s) nesta matéria`}
               >
                 <AlertTriangle className="h-3 w-3" />

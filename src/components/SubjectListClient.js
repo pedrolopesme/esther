@@ -356,6 +356,8 @@ export default function SubjectListClient({ subjectId }) {
                     const mediaType =
                       mat.media_type || detectMediaType(mat.file_type, mat.file_name);
                     const isViewed = mat.accessStatus?.viewed || mat.accessStatus?.downloaded;
+                    const isVideo = mediaType === "video";
+                    const isAudio = mediaType === "audio";
 
                     return (
                       <motion.div key={mat.id} variants={cardVariants}>
@@ -366,6 +368,33 @@ export default function SubjectListClient({ subjectId }) {
                             isViewed && "bg-emerald-50/20 ring-1 ring-emerald-400/40"
                           )}
                         >
+                        {isVideo && (
+                          <div className="relative -mx-4 -mt-4 mb-4 h-24 overflow-hidden rounded-t-[1.8rem] bg-gradient-to-br from-[#312e81] via-[#7c3aed] to-[#db2777] sm:-mx-5 sm:-mt-5">
+                              <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,.35),transparent_35%),linear-gradient(135deg,transparent_45%,rgba(0,0,0,.25))]" />
+                              <span className="absolute inset-0 grid place-items-center">
+                                <span className="grid h-11 w-11 place-items-center rounded-full bg-white/95 text-[#7c3aed] shadow-xl transition-transform group-hover:scale-110">
+                                  <Play className="ml-0.5 h-5 w-5 fill-current" />
+                                </span>
+                              </span>
+                              <span className="absolute bottom-2 left-2 rounded bg-black/60 px-2 py-0.5 text-[10px] font-extrabold tracking-wider text-white">VÍDEO</span>
+                            </div>
+                          )}
+                          {isAudio && (
+                            <div className="relative -mx-4 -mt-4 mb-4 flex h-24 items-center gap-3 overflow-hidden rounded-t-[1.8rem] bg-gradient-to-r from-[#24133f] via-[#4c1d95] to-[#0f766e] px-4 sm:-mx-5 sm:-mt-5 sm:px-5">
+                              <div className="grid h-14 w-14 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-[#a78bfa] to-[#2dd4bf] text-2xl shadow-lg ring-1 ring-white/30">🎧</div>
+                              <div className="min-w-0 flex-1">
+                                <p className="truncate text-[10px] font-extrabold tracking-wider text-white/75">PODCAST DE ESTUDO</p>
+                                <div className="mt-2 flex h-4 items-center gap-0.5 opacity-90">
+                                  {[3, 8, 14, 7, 18, 10, 5, 13, 8, 16, 6, 11].map((height, index) => (
+                                    <span key={index} className="w-1 rounded-full bg-white/80" style={{ height: `${height}px` }} />
+                                  ))}
+                                </div>
+                              </div>
+                              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white text-[#4c1d95] shadow-lg transition-transform group-hover:scale-110">
+                                <Play className="h-3.5 w-3.5 fill-current" />
+                              </span>
+                            </div>
+                          )}
                           <div>
                             {/* Top Badges */}
                             <div className="flex items-start justify-between gap-2 mb-2.5">
@@ -374,15 +403,10 @@ export default function SubjectListClient({ subjectId }) {
                                 <span>{catInfo.label}</span>
                               </span>
 
-                              {isViewed ? (
-                                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-800">
-                                  <CheckCircle2 className="h-3 w-3 text-emerald-600" />
-                                  {mat.accessStatus?.downloaded ? "Baixado" : "Visto"}
-                                </span>
-                              ) : (
-                                <span className="inline-flex items-center gap-1 rounded-full bg-lilac/15 px-2 py-0.5 text-[10px] font-bold text-lilac">
+                              {!isViewed && (
+                                <span className="inline-flex animate-pulse items-center gap-1 rounded-full border border-[#ffb3ca] bg-[#ff477e] px-2.5 py-1 text-[10px] font-extrabold text-white shadow-[0_3px_0_#bd1f58]">
                                   <Sparkles className="h-3 w-3" />
-                                  Novo
+                                  NOVO
                                 </span>
                               )}
                             </div>
@@ -461,16 +485,15 @@ export default function SubjectListClient({ subjectId }) {
                           className="clay group flex items-start justify-between gap-3.5 p-5 transition-all hover:-translate-y-1 hover:shadow-xl h-full"
                         >
                           <div className="min-w-0 flex-1">
-                            <div className="flex flex-wrap items-center gap-2 mb-2">
+                            <div className="mb-2 flex flex-wrap items-center gap-2">
                               {sessionInfo ? (
                                 <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-bold text-emerald-800">
                                   <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
                                   Melhor nota: {sessionInfo.bestScore}%
                                 </span>
                               ) : (
-                                <span className="inline-flex items-center gap-1 rounded-full bg-lilac/15 px-2.5 py-0.5 text-xs font-bold text-lilac">
-                                  <Sparkles className="h-3 w-3" />
-                                  Pendente
+                                <span className="inline-flex animate-pulse items-center gap-1 rounded-full border border-[#ffb3ca] bg-[#ff477e] px-2.5 py-1 text-[10px] font-extrabold text-white shadow-[0_3px_0_#bd1f58]">
+                                  <Sparkles className="h-3 w-3" /> NOVO
                                 </span>
                               )}
 
