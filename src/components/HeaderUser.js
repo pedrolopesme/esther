@@ -7,6 +7,8 @@ import { Star, LogIn, LogOut, Settings, Users, User, ChevronDown } from "lucide-
 import { useAuth } from "../hooks/useAuth";
 import { POINTS_EVENT, getPoints } from "../utils/points";
 import { cn } from "../utils/cn";
+import { getChildAvatar } from "../utils/avatars";
+
 
 const PER_LEVEL = 100;
 const AVATARS = ["🐣", "🐥", "🦄", "🐰", "🦊", "🐼", "🐸", "🦋", "🌟", "👑"];
@@ -59,7 +61,9 @@ export default function HeaderUser() {
   const inLevel = points % PER_LEVEL;
   const pct = (inLevel / PER_LEVEL) * 100;
   const roleLabel = isChild ? "Criança" : isAdmin ? "Admin" : isParent ? "Responsável" : "Estudante";
-  const avatar = isChild ? "🐣" : AVATARS[Math.min(level - 1, AVATARS.length - 1)];
+  const avatar = isChild
+    ? getChildAvatar(child?.avatar).emoji
+    : AVATARS[Math.min(level - 1, AVATARS.length - 1)];
   const roleColor = isChild ? "bg-mint-soft text-[#05795b]" : isAdmin ? "bg-lilac/20 text-lilac" : isParent ? "bg-candy/20 text-candy" : "bg-sky-soft text-sky";
 
   async function handleLogout() {
@@ -95,21 +99,21 @@ export default function HeaderUser() {
         </Link>
       )}
       {/* Avatar + name with hover dropdown */}
-      <div
-        className="relative"
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
-      >
-        <div
+      <div className="relative">
+        <button
+          type="button"
+          aria-label="Abrir menu do usuário"
+          aria-expanded={open}
+          onClick={() => setOpen((currentOpen) => !currentOpen)}
           className={cn(
-            "flex cursor-pointer items-center gap-1.5 rounded-full bg-white/70 py-1 pl-1 pr-2 shadow-sm ring-1 ring-white transition sm:pr-2.5",
+            "flex cursor-pointer items-center gap-1.5 rounded-full bg-white/70 py-1 pl-1 pr-2 text-left shadow-sm ring-1 ring-white transition sm:pr-2.5",
             open ? "ring-lilac/40" : "hover:ring-lilac/40",
           )}
         >
           <span className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-sky-soft to-lilac-soft text-base shadow ring-2 ring-white sm:h-9 sm:w-9 sm:text-lg">
             {avatar}
           </span>
-          <span className="flex items-center gap-1 max-w-[7rem] sm:max-w-[10rem]">
+          <span className="flex max-w-[7rem] items-center gap-1 sm:max-w-[10rem]">
             <span className="truncate text-sm font-bold text-ink">{name}</span>
             <span className={cn("shrink-0 rounded-full px-1.5 py-0.5 text-[10px] font-bold leading-none", roleColor)}>
               {roleLabel}
@@ -121,27 +125,26 @@ export default function HeaderUser() {
               open && "rotate-180",
             )}
           />
-        </div>
-
+        </button>
         {/* Dropdown menu */}
         <div
           className={cn(
-            "absolute right-0 top-full z-50 mt-1 w-44 overflow-hidden rounded-2xl bg-white/95 shadow-xl ring-1 ring-lilac/10 backdrop-blur transition-all duration-150",
+            "absolute right-0 top-full z-50 mt-1 w-48 overflow-hidden rounded-2xl bg-white/95 shadow-xl ring-1 ring-lilac/10 backdrop-blur transition-all duration-150",
             open
               ? "pointer-events-auto translate-y-0 opacity-100"
               : "pointer-events-none -translate-y-1 opacity-0",
           )}
         >
-          {!isChild && (
           <Link
             href="/perfil"
+            onClick={() => setOpen(false)}
             className="flex items-center gap-2.5 px-4 py-2.5 text-sm font-semibold text-ink transition hover:bg-lilac/10"
           >
             <User className="h-4 w-4 text-lilac" />
-            Perfil
+            Editar perfil
           </Link>
-          )}
           <button
+            type="button"
             onClick={handleLogout}
             className="flex w-full items-center gap-2.5 px-4 py-2.5 text-sm font-semibold text-ink transition hover:bg-candy/10"
           >

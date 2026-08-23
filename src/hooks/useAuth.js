@@ -15,6 +15,7 @@ function loadChild() {
   }
 }
 
+
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
@@ -23,6 +24,14 @@ export function AuthProvider({ children }) {
   const [child, setChild] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const supabase = getSupabaseBrowserClient();
+  const updateChild = useCallback((updates) => {
+    setChild((currentChild) => {
+      if (!currentChild) return currentChild;
+      const nextChild = { ...currentChild, ...updates };
+      localStorage.setItem(CHILD_KEY, JSON.stringify(nextChild));
+      return nextChild;
+    });
+  }, []);
 
   // Load child from localStorage on mount
   useEffect(() => {
@@ -87,6 +96,7 @@ export function AuthProvider({ children }) {
     isAuthenticated: !!session?.user || !!child,
     supabase,
     refresh,
+    updateChild,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

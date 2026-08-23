@@ -6,6 +6,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { LogIn, UserPlus, Sparkles, ArrowLeft } from "lucide-react";
 import { getSupabaseBrowserClient } from "../utils/supabase";
+import { getStoredChildAvatar } from "../utils/avatars";
+
 import { logChildEvent } from "../utils/childEvents";
 
 const inputClass =
@@ -48,6 +50,7 @@ export default function LoginForm() {
             id: childData.child_id,
             display_name: childData.display_name,
             parent_id: childData.parent_id,
+            avatar: getStoredChildAvatar(childData.child_id),
           }));
           logChildEvent({
             childId: childData.child_id,
