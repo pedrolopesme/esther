@@ -59,3 +59,85 @@ export async function getExerciseData(subject, slug) {
   if (error) throw error;
   return normalizeList(data);
 }
+
+/**
+ * Fetch a holistic study overview for a student:
+ * - Completed sessions & scores
+ * - In-progress or recently practiced topics (where they stopped)
+ * - Needs study / low score topics (< 70%)
+ * - List stats per subject
+ */
+export async function getStudentStudyOverview(childId = null, userId = null) {
+  const supabase = getSupabaseBrowserClient();
+  if (!supabase) return { recentSessions: [], completedMap: {}, needsReview: [], lastSession: null };
+
+  try {
+    let sessionQuery = supabase
+      .from("exercise_sessions")
+      .select("*")
+      .order("completed_at", { ascending: false })
+      .limit(60);
+
+    if (childId) {
+      sessionQuery = sessionQuery.eq("child_id", childId);
+    } else if (userId) {
+      sessionQuery = sessionQuery.eq("user_id", userId);
+    }
+
+    const { data: sessionData, error: sessionErr } = await sessionQuery;
+    if (sessionErr) throw sessionErr;
+
+    const sessions = sessionData || [];
+    const completedMap = {};
+    const needsReview = [];
+
+    for (const s of sessions) {
+      const key = `${s.list_subject}/${s.list_slug}`;
+      const scorePct =
+        s.total_questions > 0
+          ? Math.round((s.correct_count / s.total_questions) * 100)
+          : 0;
+
+      if (!completedMap[key]) {
+        completedMap[key] = {
+          count: 0,
+          bestScore: scorePct,
+          lastScore: scorePct,
+          lastCompletedAt: s.completed_at,
+          title: s.list_title,
+          subject: s.list_subject,
+          slug: s.list_slug,
+        };
+      }
+      completedMap[key].count += 1;
+      if (scorePct > completedMap[key].bestScore) {
+        completedMap[key].bestScore = scorePct;
+      }
+
+      // If last score was low, mark as needs review
+      if (scorePct < 70 && !needsReview.some((n) => n.key === key)) {
+        needsReview.push({
+          key,
+          subject: s.list_subject,
+          slug: s.list_slug,
+          title: s.list_title,
+          lastScore: scorePct,
+          wrongCount: s.wrong_count,
+          completedAt: s.completed_at,
+        });
+      }
+    }
+
+    const lastSession = sessions.length > 0 ? sessions[0] : null;
+
+    return {
+      recentSessions: sessions.slice(0, 5),
+      completedMap,
+      needsReview: needsReview.slice(0, 4),
+      lastSession,
+    };
+  } catch (err) {
+    console.warn("Aviso ao carregar visão geral do estudante:", err);
+    return { recentSessions: [], completedMap: {}, needsReview: [], lastSession: null };
+  }
+}
