@@ -44,6 +44,8 @@ import {
 } from "../utils/subjects";
 import {
   MATERIAL_CATEGORIES,
+  MAX_FILE_SIZE_BYTES,
+  MAX_FILE_SIZE_LABEL,
   getMaterials,
   uploadMaterialFile,
   createMaterial,
@@ -351,6 +353,17 @@ export default function AdminPanel() {
   // ==================== MATERIAL ACTIONS ====================
   function handleSelectMaterialFile(file) {
     if (!file) return;
+    setMaterialError(null);
+
+    if (file.size > MAX_FILE_SIZE_BYTES) {
+      const formatted = formatFileSize(file.size);
+      setMaterialError(
+        `O arquivo selecionado (${formatted}) ultrapassa o limite máximo de ${MAX_FILE_SIZE_LABEL} por arquivo do Supabase (plano gratuito). Por favor, comprima o vídeo ou selecione um arquivo menor que 50MB.`
+      );
+      setSelectedFile(null);
+      return;
+    }
+
     setSelectedFile(file);
 
     // Auto-fill title from filename if title empty or default
@@ -1195,9 +1208,14 @@ export default function AdminPanel() {
 
                   {/* File Upload Box with full Drag and Drop */}
                   <div>
-                    <label className="mb-1 block text-xs font-bold text-ink uppercase tracking-wider">
-                      {editingMaterial ? "Substituir Arquivo (Opcional)" : "Arquivo de Mídia"}
-                    </label>
+                    <div className="flex items-center justify-between mb-1">
+                      <label className="block text-xs font-bold text-ink uppercase tracking-wider">
+                        {editingMaterial ? "Substituir Arquivo (Opcional)" : "Arquivo de Mídia"}
+                      </label>
+                      <span className="rounded-full bg-sun-soft px-2 py-0.5 text-[11px] font-bold text-[#b07804]">
+                        Limite máx: {MAX_FILE_SIZE_LABEL} por arquivo
+                      </span>
+                    </div>
 
                     <div
                       onDragEnter={handleMaterialDragEnter}
@@ -1264,7 +1282,7 @@ export default function AdminPanel() {
                               : "Clique ou arraste um Vídeo, Áudio, Imagem (PNG/JPG) ou PDF"}
                           </p>
                           <p className="mt-1 text-xs text-ink-soft">
-                            MP4, WebM, MP3, WAV, PNG, JPG, PDF (Até 200MB)
+                            MP4, WebM, MP3, WAV, PNG, JPG, PDF (Limite máx: <strong>50MB</strong>)
                           </p>
                         </div>
                       )}

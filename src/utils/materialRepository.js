@@ -1,6 +1,10 @@
 import { getSupabaseBrowserClient } from "./supabase";
 import { logChildEvent } from "./childEvents";
 
+// 50MB limit enforced by Supabase Storage Free Tier
+export const MAX_FILE_SIZE_BYTES = 52428800; // 50MB (50 * 1024 * 1024)
+export const MAX_FILE_SIZE_LABEL = "50MB";
+
 export const MATERIAL_CATEGORIES = [
   { id: "apostila", label: "Apostila", emoji: "📖", defaultMedia: "document" },
   { id: "resumo", label: "Resumo / Guia", emoji: "📝", defaultMedia: "document" },
@@ -151,11 +155,19 @@ export async function getMaterials({ subjectId, category, publishedOnly = false,
 }
 
 /**
- * Upload material file to Supabase storage bucket
+ * Upload material file to Supabase storage bucket with size validation
  */
 export async function uploadMaterialFile(file, { subjectId = "geral" } = {}) {
   const supabase = getSupabaseBrowserClient();
   if (!supabase) throw new Error("Supabase não inicializado.");
+
+  // Pre-validate file size against Supabase Free Tier limit
+  if (file.size > MAX_FILE_SIZE_BYTES) {
+    const fileSizeFormatted = formatFileSize(file.size);
+    throw new Error(
+      `O arquivo "${file.name}" possui ${fileSizeFormatted}, ultrapassando o limite máximo de ${MAX_FILE_SIZE_LABEL} por arquivo do Supabase (plano gratuito). Comprima o vídeo/arquivo ou use um formato menor.`
+    );
+  }
 
   const fileExt = file.name.split(".").pop();
   const cleanBaseName = file.name
@@ -177,6 +189,11 @@ export async function uploadMaterialFile(file, { subjectId = "geral" } = {}) {
 
   if (uploadError) {
     console.error("Erro no upload do arquivo:", uploadError);
+    if (uploadError.message?.includes("exceeded the maximum allowed size") || uploadError.statusCode === "413") {
+      throw new Error(
+        `O arquivo ultrapassa o limite de ${MAX_FILE_SIZE_LABEL} por objeto do Supabase. Reduza a resolução ou tamanho do vídeo.`
+      );
+    }
     throw uploadError;
   }
 
