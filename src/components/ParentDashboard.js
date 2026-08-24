@@ -503,6 +503,7 @@ export default function ParentDashboard() {
       let bestPct = 0;
       let bestCorrect = 0;
       let bestTotal = 0;
+      let lastDate = null;
       const allWrong = [];
       for (const s of entry.sessions) {
         const pct = s.total_questions > 0 ? Math.round((s.correct_count / s.total_questions) * 100) : 0;
@@ -511,6 +512,7 @@ export default function ParentDashboard() {
           bestCorrect = s.correct_count || 0;
           bestTotal = s.total_questions || 0;
         }
+        if (!lastDate || s.completed_at > lastDate) lastDate = s.completed_at;
         if (Array.isArray(s.wrong_details)) {
           for (const err of s.wrong_details) {
             allWrong.push({
@@ -529,6 +531,7 @@ export default function ParentDashboard() {
         bestTotal,
         attempts: entry.sessions.length,
         allWrong,
+        lastDate,
       };
     });
 
@@ -1346,6 +1349,7 @@ export default function ParentDashboard() {
                                       <p className="font-bold text-ink text-sm">{child.childName}</p>
                                       <p className="text-[10px] text-ink-soft">
                                         {child.attempts} {child.attempts === 1 ? "tentativa" : "tentativas"}
+                                        {child.lastDate && <> · {formatDateTime(child.lastDate)}</>}
                                       </p>
                                     </div>
                                   </div>
