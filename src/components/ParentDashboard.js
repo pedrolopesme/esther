@@ -1130,7 +1130,7 @@ export default function ParentDashboard() {
                       <table className="w-full text-sm">
                         <thead className="bg-slate-50 text-xs font-bold text-ink">
                           <tr>
-                            <th className="px-4 py-3 text-center">Data</th>
+                            <th className="px-4 py-3 text-center">Data Acesso</th>
                             <th className="px-4 py-3 text-left">Criança</th>
                             <th className="px-4 py-3 text-left">Matéria</th>
                             <th className="px-4 py-3 text-left">Título da Lista</th>
@@ -1361,7 +1361,7 @@ export default function ParentDashboard() {
                         <table className="w-full text-sm">
                           <thead className="bg-slate-50 text-xs font-bold text-ink">
                             <tr>
-                              <th className="px-4 py-3 text-center">Data</th>
+                              <th className="px-4 py-3 text-center">Data Acesso</th>
                               <th className="px-4 py-3 text-left">Criança</th>
                               <th className="px-4 py-3 text-left">Matéria</th>
                               <th className="px-4 py-3 text-left">Jogo</th>
@@ -1654,7 +1654,7 @@ export default function ParentDashboard() {
                         <table className="w-full text-sm">
                           <thead className="bg-slate-50 text-xs font-bold text-ink">
                             <tr>
-                              <th className="px-4 py-3 text-center">Último Acesso</th>
+                              <th className="px-4 py-3 text-center">Data Acesso</th>
                               <th className="px-4 py-3 text-left">Criança</th>
                               <th className="px-4 py-3 text-left">Matéria</th>
                               <th className="px-4 py-3 text-left">Material</th>
