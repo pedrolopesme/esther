@@ -94,6 +94,12 @@ export default function AdminPanel() {
   const [showUploadWizard, setShowUploadWizard] = useState(false);
   const [testingList, setTestingList] = useState(null);
 
+  // Lists search & filter state
+  const [listSearchTitle, setListSearchTitle] = useState("");
+  const [listFilterSubject, setListFilterSubject] = useState("");
+  const [listFilterGrade, setListFilterGrade] = useState("");
+  const [listFilterStatus, setListFilterStatus] = useState(""); // "" | "published" | "draft"
+  const [listFilterDate, setListFilterDate] = useState("");
   // Subject management state
   const [editingSubject, setEditingSubject] = useState(null);
   const [isCreatingSubject, setIsCreatingSubject] = useState(false);
@@ -814,6 +820,31 @@ export default function AdminPanel() {
         return <FileText className="h-4 w-4 text-[#06D6A0]" />;
     }
   }
+  // Unique grades for lists
+  const uniqueListGrades = Array.from(
+    new Set(lists.map((l) => l.ano_letivo).filter(Boolean))
+  );
+
+  // Filtered exercise lists
+  const filteredLists = lists.filter((l) => {
+    const matchTitle = listSearchTitle.trim()
+      ? l.title?.toLowerCase().includes(listSearchTitle.toLowerCase().trim()) ||
+        l.slug?.toLowerCase().includes(listSearchTitle.toLowerCase().trim())
+      : true;
+    const matchSubject = listFilterSubject ? l.subject === listFilterSubject : true;
+    const matchGrade = listFilterGrade ? l.ano_letivo === listFilterGrade : true;
+    const matchStatus =
+      listFilterStatus === "published"
+        ? l.published === true
+        : listFilterStatus === "draft"
+        ? l.published === false
+        : true;
+    const matchDate = listFilterDate
+      ? l.exercise_date && l.exercise_date.startsWith(listFilterDate)
+      : true;
+
+    return matchTitle && matchSubject && matchGrade && matchStatus && matchDate;
+  });
 
   // Filtered materials
   const filteredMaterials = materials.filter((m) => {
@@ -826,7 +857,6 @@ export default function AdminPanel() {
   const filteredGames = games.filter((g) => {
     return gameFilterSubject ? g.subject_id === gameFilterSubject : true;
   });
-
   if (authLoading) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center text-ink-soft">
@@ -959,22 +989,115 @@ export default function AdminPanel() {
       ) : activeTab === "lists" ? (
         /* ==================== TAB 1: LISTS ==================== */
         <div className="space-y-6">
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-            {subjects
-              .filter((s) => s.active)
-              .map((subject) => {
-                const count = lists.filter((l) => l.subject === subject.id).length;
-                return (
-                  <div
-                    key={subject.id}
-                    className="clay flex flex-col items-center gap-2 p-4 text-center"
-                  >
-                    <span className="text-3xl">{subject.emoji}</span>
-                    <span className="text-sm font-bold text-ink">{subject.name}</span>
-                    <span className="text-2xl font-bold text-lilac">{count}</span>
-                  </div>
-                );
-              })}
+          {/* Filters for Exercise Lists */}
+          <div className="clay-sm flex flex-col gap-3 bg-white/85 p-4 sm:p-5 shadow-sm">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex items-center gap-2 text-sm font-bold text-ink">
+                <Filter className="h-4 w-4 text-lilac" />
+                <span>Filtros de Busca:</span>
+                <span className="text-xs text-ink-soft font-normal">
+                  ({filteredLists.length} {filteredLists.length === 1 ? "lista encontrada" : "listas encontradas"})
+                </span>
+              </div>
+
+              {(listSearchTitle || listFilterSubject || listFilterGrade || listFilterStatus || listFilterDate) && (
+                <button
+                  onClick={() => {
+                    setListSearchTitle("");
+                    setListFilterSubject("");
+                    setListFilterGrade("");
+                    setListFilterStatus("");
+                    setListFilterDate("");
+                  }}
+                  className="press rounded-xl bg-candy-soft px-3 py-1.5 text-xs font-bold text-[#b03b6e] hover:-translate-y-0.5 transition"
+                >
+                  <X className="mr-1 inline h-3.5 w-3.5" /> Limpar Filtros
+                </button>
+              )}
+            </div>
+
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
+              {/* Search by name / slug */}
+              <div>
+                <label className="mb-1 block text-xs font-bold text-ink uppercase tracking-wider">
+                  Nome da Lista
+                </label>
+                <input
+                  type="text"
+                  placeholder="Buscar por título ou slug..."
+                  value={listSearchTitle}
+                  onChange={(e) => setListSearchTitle(e.target.value)}
+                  className="w-full rounded-xl border border-lilac/20 bg-white px-3 py-2 text-xs font-semibold text-ink outline-none focus:border-lilac transition placeholder:font-normal"
+                />
+              </div>
+
+              {/* Select Materia */}
+              <div>
+                <label className="mb-1 block text-xs font-bold text-ink uppercase tracking-wider">
+                  Matéria
+                </label>
+                <select
+                  value={listFilterSubject}
+                  onChange={(e) => setListFilterSubject(e.target.value)}
+                  className="w-full rounded-xl border border-lilac/20 bg-white px-3 py-2 text-xs font-semibold text-ink outline-none focus:border-lilac transition"
+                >
+                  <option value="">Todas as Matérias</option>
+                  {subjects.map((s) => (
+                    <option key={s.id} value={s.id}>
+                      {s.emoji} {s.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Select Serie / Ano Letivo */}
+              <div>
+                <label className="mb-1 block text-xs font-bold text-ink uppercase tracking-wider">
+                  Série / Ano
+                </label>
+                <select
+                  value={listFilterGrade}
+                  onChange={(e) => setListFilterGrade(e.target.value)}
+                  className="w-full rounded-xl border border-lilac/20 bg-white px-3 py-2 text-xs font-semibold text-ink outline-none focus:border-lilac transition"
+                >
+                  <option value="">Todas as Séries</option>
+                  {uniqueListGrades.map((grade) => (
+                    <option key={grade} value={grade}>
+                      {grade}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Select Status */}
+              <div>
+                <label className="mb-1 block text-xs font-bold text-ink uppercase tracking-wider">
+                  Status
+                </label>
+                <select
+                  value={listFilterStatus}
+                  onChange={(e) => setListFilterStatus(e.target.value)}
+                  className="w-full rounded-xl border border-lilac/20 bg-white px-3 py-2 text-xs font-semibold text-ink outline-none focus:border-lilac transition"
+                >
+                  <option value="">Todos os Status</option>
+                  <option value="published">🟢 Publicadas (Ativas)</option>
+                  <option value="draft">🔴 Ocultas (Rascunho)</option>
+                </select>
+              </div>
+
+              {/* Filter by Date */}
+              <div>
+                <label className="mb-1 block text-xs font-bold text-ink uppercase tracking-wider">
+                  Data
+                </label>
+                <input
+                  type="date"
+                  value={listFilterDate}
+                  onChange={(e) => setListFilterDate(e.target.value)}
+                  className="w-full rounded-xl border border-lilac/20 bg-white px-3 py-2 text-xs font-semibold text-ink outline-none focus:border-lilac transition"
+                />
+              </div>
+            </div>
           </div>
 
           <div className="clay overflow-hidden">
@@ -991,14 +1114,22 @@ export default function AdminPanel() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/50">
-                  {lists.length === 0 ? (
+                  {filteredLists.length === 0 ? (
                     <tr>
-                      <td colSpan="6" className="px-4 py-6 text-center text-ink-soft">
-                        Nenhuma lista de exercícios. Importe um JSON para começar!
+                      <td colSpan="6" className="px-4 py-8 text-center text-ink-soft">
+                        <div className="flex flex-col items-center justify-center gap-2">
+                          <ListChecks className="h-8 w-8 text-lilac/40" />
+                          <p className="font-semibold">Nenhuma lista de exercícios encontrada.</p>
+                          <p className="text-xs">
+                            {(listSearchTitle || listFilterSubject || listFilterGrade || listFilterStatus || listFilterDate)
+                              ? "Tente ajustar ou limpar os filtros de busca acima."
+                              : "Importe um arquivo JSON para cadastrar novas listas de exercícios."}
+                          </p>
+                        </div>
                       </td>
                     </tr>
                   ) : (
-                    lists.map((list) => {
+                    filteredLists.map((list) => {
                       const subjectObj = subjects.find((s) => s.id === list.subject);
                       return (
                         <tr key={list.id} className="hover:bg-white/30 transition">
