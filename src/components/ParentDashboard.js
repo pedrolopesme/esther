@@ -1130,12 +1130,12 @@ export default function ParentDashboard() {
                       <table className="w-full text-sm">
                         <thead className="bg-slate-50 text-xs font-bold text-ink">
                           <tr>
+                            <th className="px-4 py-3 text-center">Data</th>
+                            <th className="px-4 py-3 text-left">Criança</th>
                             <th className="px-4 py-3 text-left">Matéria</th>
                             <th className="px-4 py-3 text-left">Título da Lista</th>
-                            <th className="px-4 py-3 text-left">Criança</th>
                             <th className="px-4 py-3 text-center">Questões</th>
                             <th className="px-4 py-3 text-center">Aproveitamento</th>
-                            <th className="px-4 py-3 text-center">Data</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100">
@@ -1152,6 +1152,24 @@ export default function ParentDashboard() {
 
                               return (
                                 <tr key={item.sessionId} className="hover:bg-slate-50/70 transition cursor-pointer" onClick={() => !isPending && setSelectedListDetail(item)}>
+                                  {/* Date */}
+                                  <td className="px-4 py-3 text-center text-xs text-ink-soft font-semibold">
+                                    {isPending ? (
+                                      <span className="text-amber-700">Pendente</span>
+                                    ) : (
+                                      formatDateTime(item.completed_at)
+                                    )}
+                                  </td>
+
+                                  {/* Child */}
+                                  <td className="px-4 py-3">
+                                    {isPending ? (
+                                      <span className="text-xs text-ink-soft font-semibold">—</span>
+                                    ) : (
+                                      <span className="text-xs font-bold text-candy">{item.childName}</span>
+                                    )}
+                                  </td>
+
                                   {/* Subject */}
                                   <td className="px-4 py-3">
                                     <span className="inline-flex items-center gap-1 rounded-full bg-lilac/10 px-2.5 py-0.5 text-xs font-bold text-lilac">
@@ -1166,15 +1184,6 @@ export default function ParentDashboard() {
                                     <span className="text-[11px] text-ink-soft">
                                       {item.ano_letivo || "Ensino Fundamental"}
                                     </span>
-                                  </td>
-
-                                  {/* Child */}
-                                  <td className="px-4 py-3">
-                                    {isPending ? (
-                                      <span className="text-xs text-ink-soft font-semibold">—</span>
-                                    ) : (
-                                      <span className="text-xs font-bold text-candy">{item.childName}</span>
-                                    )}
                                   </td>
 
                                   {/* Question Count */}
@@ -1196,15 +1205,6 @@ export default function ParentDashboard() {
                                       )}>
                                         {item.pct}% ({item.correct_count}/{item.question_count})
                                       </span>
-                                    )}
-                                  </td>
-
-                                  {/* Date */}
-                                  <td className="px-4 py-3 text-center text-xs text-ink-soft font-semibold">
-                                    {isPending ? (
-                                      <span className="text-amber-700">Pendente</span>
-                                    ) : (
-                                      formatDateTime(item.completed_at)
                                     )}
                                   </td>
                                 </tr>
@@ -1361,12 +1361,12 @@ export default function ParentDashboard() {
                         <table className="w-full text-sm">
                           <thead className="bg-slate-50 text-xs font-bold text-ink">
                             <tr>
+                              <th className="px-4 py-3 text-center">Data</th>
+                              <th className="px-4 py-3 text-left">Criança</th>
                               <th className="px-4 py-3 text-left">Matéria</th>
                               <th className="px-4 py-3 text-left">Jogo</th>
-                              <th className="px-4 py-3 text-left">Criança</th>
                               <th className="px-4 py-3 text-center">Pontuação</th>
                               <th className="px-4 py-3 text-center">Tempo</th>
-                              <th className="px-4 py-3 text-center">Data</th>
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-slate-100">
@@ -1375,6 +1375,12 @@ export default function ParentDashboard() {
                               const childDisplayName = childMap[session.child_id] || "Estudante";
                               return (
                                 <tr key={session.id} className="hover:bg-slate-50/70 transition cursor-pointer" onClick={() => setSelectedGameDetail(session)}>
+                                  <td className="px-4 py-3 text-center text-xs text-ink-soft font-semibold">
+                                    {formatDateTime(session.completed_at)}
+                                  </td>
+                                  <td className="px-4 py-3">
+                                    <span className="text-xs font-bold text-candy">{childDisplayName}</span>
+                                  </td>
                                   <td className="px-4 py-3">
                                     <span className="inline-flex items-center gap-1 rounded-full bg-lilac/10 px-2.5 py-0.5 text-xs font-bold text-lilac">
                                       <span>{theme?.emoji || "🎮"}</span>
@@ -1383,9 +1389,6 @@ export default function ParentDashboard() {
                                   </td>
                                   <td className="px-4 py-3">
                                     <p className="font-bold text-ink line-clamp-1">{session.game_title}</p>
-                                  </td>
-                                  <td className="px-4 py-3">
-                                    <span className="text-xs font-bold text-candy">{childDisplayName}</span>
                                   </td>
                                   <td className="px-4 py-3 text-center">
                                     <span className="inline-flex items-center gap-1 font-bold text-emerald-700 text-xs">
@@ -1400,9 +1403,6 @@ export default function ParentDashboard() {
                                         {session.time_spent_seconds}s
                                       </span>
                                     ) : "—"}
-                                  </td>
-                                  <td className="px-4 py-3 text-center text-xs text-ink-soft font-semibold">
-                                    {formatDateTime(session.completed_at)}
                                   </td>
                                 </tr>
                               );
@@ -1654,12 +1654,12 @@ export default function ParentDashboard() {
                         <table className="w-full text-sm">
                           <thead className="bg-slate-50 text-xs font-bold text-ink">
                             <tr>
+                              <th className="px-4 py-3 text-center">Último Acesso</th>
+                              <th className="px-4 py-3 text-left">Criança</th>
                               <th className="px-4 py-3 text-left">Matéria</th>
                               <th className="px-4 py-3 text-left">Material</th>
-                              <th className="px-4 py-3 text-left">Criança</th>
                               <th className="px-4 py-3 text-center">Tipo</th>
                               <th className="px-4 py-3 text-center">Ações</th>
-                              <th className="px-4 py-3 text-center">Último Acesso</th>
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-slate-100">
@@ -1668,6 +1668,12 @@ export default function ParentDashboard() {
                               const catInfo = getCategoryInfo(item.category);
                               return (
                                 <tr key={idx} className="hover:bg-slate-50/70 transition">
+                                  <td className="px-4 py-3 text-center text-xs text-ink-soft font-semibold">
+                                    {formatDateTime(item.lastAccess)}
+                                  </td>
+                                  <td className="px-4 py-3">
+                                    <span className="text-xs font-bold text-candy">{item.childName}</span>
+                                  </td>
                                   <td className="px-4 py-3">
                                     <span className="inline-flex items-center gap-1 rounded-full bg-lilac/10 px-2.5 py-0.5 text-xs font-bold text-lilac">
                                       <span>{theme?.emoji || "📖"}</span>
@@ -1682,9 +1688,6 @@ export default function ParentDashboard() {
                                         <span className="text-[11px] text-ink-soft capitalize">{catInfo.label}</span>
                                       </div>
                                     </div>
-                                  </td>
-                                  <td className="px-4 py-3">
-                                    <span className="text-xs font-bold text-candy">{item.childName}</span>
                                   </td>
                                   <td className="px-4 py-3 text-center">
                                     <span className="text-xs font-semibold text-ink-soft capitalize">{item.mediaType}</span>
@@ -1704,9 +1707,6 @@ export default function ParentDashboard() {
                                         </span>
                                       )}
                                     </div>
-                                  </td>
-                                  <td className="px-4 py-3 text-center text-xs text-ink-soft font-semibold">
-                                    {formatDateTime(item.lastAccess)}
                                   </td>
                                 </tr>
                               );
