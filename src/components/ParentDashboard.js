@@ -125,6 +125,7 @@ export default function ParentDashboard() {
   const [listFilterSubject, setListFilterSubject] = useState("");
   const [listFilterStatus, setListFilterStatus] = useState("all"); // "all" | "done" | "pending"
   const [listFilterGrade, setListFilterGrade] = useState("");
+  const [selectedListDetail, setSelectedListDetail] = useState(null);
 
   // Form states for registering children
   const [childName, setChildName] = useState("");
@@ -475,6 +476,64 @@ export default function ParentDashboard() {
       };
     });
   }, [exerciseLists, filteredSessions, childMap]);
+  // Sessions for the selected list detail modal, grouped by child
+  const listDetailData = useMemo(() => {
+    if (!selectedListDetail) return null;
+    const key = `${selectedListDetail.subject}/${selectedListDetail.slug}`;
+    const relevantSessions = filteredSessions.filter(
+      (s) => `${s.list_subject}/${s.list_slug}` === key
+    );
+
+    // Group by child
+    const byChild = {};
+    for (const s of relevantSessions) {
+      const cid = s.child_id;
+      if (!byChild[cid]) {
+        byChild[cid] = {
+          childId: cid,
+          childName: childMap[cid] || "Estudante",
+          sessions: [],
+        };
+      }
+      byChild[cid].sessions.push(s);
+    }
+
+    // For each child, compute best score and collect all wrong answers
+    const children = Object.values(byChild).map((entry) => {
+      let bestPct = 0;
+      let bestCorrect = 0;
+      let bestTotal = 0;
+      const allWrong = [];
+      for (const s of entry.sessions) {
+        const pct = s.total_questions > 0 ? Math.round((s.correct_count / s.total_questions) * 100) : 0;
+        if (pct > bestPct) {
+          bestPct = pct;
+          bestCorrect = s.correct_count || 0;
+          bestTotal = s.total_questions || 0;
+        }
+        if (Array.isArray(s.wrong_details)) {
+          for (const err of s.wrong_details) {
+            allWrong.push({
+              question: err.question || "Questão sem enunciado",
+              selected: err.selected,
+              correct: err.correct,
+              completedAt: s.completed_at,
+            });
+          }
+        }
+      }
+      return {
+        ...entry,
+        bestPct,
+        bestCorrect,
+        bestTotal,
+        attempts: entry.sessions.length,
+        allWrong,
+      };
+    });
+
+    return { children, totalSessions: relevantSessions.length };
+  }, [selectedListDetail, filteredSessions, childMap]);
 
   // Filtered published lists table
   const filteredListsTableData = useMemo(() => {
@@ -1135,7 +1194,7 @@ export default function ParentDashboard() {
                               const theme = getSubject(item.subject);
 
                               return (
-                                <tr key={item.id} className="hover:bg-slate-50/70 transition">
+                                <tr key={item.id} className="hover:bg-slate-50/70 transition cursor-pointer" onClick={() => setSelectedListDetail(item)}>
                                   {/* Status */}
                                   <td className="px-4 py-3">
                                     {item.isDone ? (
@@ -1215,6 +1274,136 @@ export default function ParentDashboard() {
                   </div>
                 </Card>
               )}
+
+              {/* List Detail Modal */}
+              <AnimatePresence>
+                {selectedListDetail && listDetailData && (
+                  <motion.div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-ink/50 backdrop-blur-md p-3 sm:p-6"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    onClick={() => setSelectedListDetail(null)}
+                  >
+                    <motion.div
+                      className="clay relative flex max-h-[90vh] w-full max-w-2xl flex-col bg-cream/95 p-0 overflow-hidden shadow-2xl"
+                      initial={{ scale: 0.94, y: 20 }}
+                      animate={{ scale: 1, y: 0 }}
+                      exit={{ scale: 0.94, y: 20 }}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {/* Header */}
+                      <div className="flex items-center justify-between gap-3 border-b border-lilac/15 bg-white/80 px-5 py-4">
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div
+                            className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl text-xl shadow-sm"
+                            style={{ backgroundColor: `${getSubject(selectedListDetail.subject)?.hex || "#A370FF"}25` }}
+                          >
+                            {getSubject(selectedListDetail.subject)?.emoji || "📖"}
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <h3 className="font-display text-lg font-bold text-ink truncate">
+                              {selectedListDetail.title}
+                            </h3>
+                            <div className="flex flex-wrap items-center gap-2 text-xs text-ink-soft">
+                              <span>{getSubject(selectedListDetail.subject)?.name || selectedListDetail.subject}</span>
+                              <span>&middot;</span>
+                              <span>{selectedListDetail.ano_letivo || "Ensino Fundamental"}</span>
+                              <span>&middot;</span>
+                              <span>{selectedListDetail.question_count || 0} questões</span>
+                            </div>
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => setSelectedListDetail(null)}
+                          className="press grid h-9 w-9 place-items-center rounded-full bg-candy-soft text-[#b03b6e] shadow-sm"
+                        >
+                          <X className="h-4 w-4" />
+                        </button>
+                      </div>
+
+                      {/* Body */}
+                      <div className="flex-1 overflow-y-auto p-5 space-y-5">
+                        {listDetailData.children.length === 0 ? (
+                          <div className="py-12 text-center">
+                            <div className="mb-2 text-4xl">📋</div>
+                            <p className="font-display text-lg font-bold text-ink">
+                              Nenhuma criança realizou esta lista ainda.
+                            </p>
+                          </div>
+                        ) : (
+                          listDetailData.children.map((child) => {
+                            const good = child.bestPct >= 70;
+                            return (
+                              <div key={child.childId} className="rounded-2xl border border-lilac/15 bg-white shadow-sm overflow-hidden">
+                                {/* Child header */}
+                                <div className="flex items-center justify-between gap-3 bg-slate-50 px-4 py-3 border-b border-slate-100">
+                                  <div className="flex items-center gap-2.5">
+                                    <div className="grid h-9 w-9 place-items-center rounded-full bg-lilac/15 text-sm font-bold text-lilac">
+                                      {child.childName.charAt(0).toUpperCase()}
+                                    </div>
+                                    <div>
+                                      <p className="font-bold text-ink text-sm">{child.childName}</p>
+                                      <p className="text-[10px] text-ink-soft">
+                                        {child.attempts} {child.attempts === 1 ? "tentativa" : "tentativas"}
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <div className="flex items-center gap-2">
+                                    <span className={cn(
+                                      "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold",
+                                      good ? "bg-emerald-100 text-emerald-800" : "bg-amber-100 text-amber-800"
+                                    )}>
+                                      {good ? <CheckCircle2 className="h-3.5 w-3.5" /> : <Target className="h-3.5 w-3.5" />}
+                                      {child.bestPct}% de acerto
+                                    </span>
+                                    <span className="text-xs text-ink-soft font-semibold">
+                                      ({child.bestCorrect}/{child.bestTotal})
+                                    </span>
+                                  </div>
+                                </div>
+
+                                {/* Wrong answers */}
+                                {child.allWrong.length > 0 && (
+                                  <div className="px-4 py-3 space-y-2">
+                                    <p className="text-xs font-bold text-ink flex items-center gap-1.5">
+                                      <XCircle className="h-3.5 w-3.5 text-candy" />
+                                      Erros ({child.allWrong.length})
+                                    </p>
+                                    <div className="space-y-2">
+                                      {child.allWrong.map((err, i) => (
+                                        <div key={i} className="rounded-xl bg-candy-soft/30 border border-candy/10 p-3">
+                                          <p className="text-xs font-semibold text-ink line-clamp-2 mb-1.5">
+                                            {err.question}
+                                          </p>
+                                          <div className="flex flex-wrap gap-x-4 gap-y-1 text-[11px]">
+                                            <span className="text-red-600 font-semibold">
+                                              ✗ Marcada: {err.selected || "—"}
+                                            </span>
+                                            <span className="text-emerald-700 font-semibold">
+                                              ✓ Correta: {err.correct || "—"}
+                                            </span>
+                                          </div>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  </div>
+                                )}
+
+                                {child.allWrong.length === 0 && (
+                                  <div className="px-4 py-3 text-center">
+                                    <span className="text-xs font-bold text-emerald-700">🎉 Sem erros — desempenho perfeito!</span>
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })
+                        )}
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               {/* ==================== TAB 3: MINIJOGOS EDUCATIVOS ==================== */}
               {activeTab === "games" && (
