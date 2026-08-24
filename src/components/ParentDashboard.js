@@ -438,106 +438,70 @@ export default function ParentDashboard() {
     });
   }, [filteredSessions]);
 
-  // Table of all published lists with completion status for selected child
+  // One row per session (attempt), plus one row per unattempted published list
   const publishedListsTableData = useMemo(() => {
-    // Map sessions to list key for fast status resolution
-    const sessionMapByList = {};
-    for (const s of filteredSessions) {
+    const listMeta = {};
+    for (const l of exerciseLists) {
+      listMeta[`${l.subject}/${l.slug}`] = l;
+    }
+    const rows = filteredSessions.map((s) => {
       const key = `${s.list_subject}/${s.list_slug}`;
-      if (!sessionMapByList[key]) {
-        sessionMapByList[key] = {
-          attempts: 0,
-          bestScore: 0,
-          bestScorePct: 0,
-          lastDate: s.completed_at,
-          lastChildName: childMap[s.child_id] || "Estudante",
-        };
-      }
-      sessionMapByList[key].attempts += 1;
+      const list = listMeta[key];
       const pct = s.total_questions > 0 ? Math.round((s.correct_count / s.total_questions) * 100) : 0;
-      if (pct > sessionMapByList[key].bestScorePct) {
-        sessionMapByList[key].bestScorePct = pct;
-        sessionMapByList[key].bestScore = s.correct_count;
-      }
-    }
-
-    return exerciseLists.map((list) => {
-      const key = `${list.subject}/${list.slug}`;
-      const statusInfo = sessionMapByList[key] || null;
-      const isDone = !!statusInfo;
-
       return {
-        ...list,
-        isDone,
-        attempts: statusInfo?.attempts || 0,
-        bestScorePct: statusInfo?.bestScorePct ?? null,
-        bestScore: statusInfo?.bestScore ?? null,
-        lastDate: statusInfo?.lastDate || null,
-        lastChildName: statusInfo?.lastChildName || null,
+        rowType: "session",
+        sessionId: s.id,
+        subject: s.list_subject,
+        slug: s.list_slug,
+        title: s.list_title || list?.title || s.list_slug,
+        ano_letivo: list?.ano_letivo || null,
+        question_count: s.total_questions || list?.question_count || 0,
+        childId: s.child_id,
+        childName: childMap[s.child_id] || "Estudante",
+        correct_count: s.correct_count || 0,
+        wrong_count: s.wrong_count || 0,
+        pct,
+        points_earned: s.points_earned || 0,
+        completed_at: s.completed_at,
+        wrong_details: Array.isArray(s.wrong_details) ? s.wrong_details : [],
       };
     });
+    const attemptedKeys = new Set(filteredSessions.map((s) => `${s.list_subject}/${s.list_slug}`));
+    for (const l of exerciseLists) {
+      const key = `${l.subject}/${l.slug}`;
+      if (!attemptedKeys.has(key)) {
+        rows.push({
+          rowType: "pending",
+          sessionId: `pending-${l.id}`,
+          subject: l.subject,
+          slug: l.slug,
+          title: l.title,
+          ano_letivo: l.ano_letivo,
+          question_count: l.question_count || 0,
+          childId: null,
+          childName: null,
+          correct_count: 0,
+          wrong_count: 0,
+          pct: 0,
+          points_earned: 0,
+          completed_at: null,
+          wrong_details: [],
+        });
+      }
+    }
+    return rows;
   }, [exerciseLists, filteredSessions, childMap]);
-  // Sessions for the selected list detail modal, grouped by child
+
+  // Detail for the selected session (single execution)
   const listDetailData = useMemo(() => {
-    if (!selectedListDetail) return null;
-    const key = `${selectedListDetail.subject}/${selectedListDetail.slug}`;
-    const relevantSessions = filteredSessions.filter(
-      (s) => `${s.list_subject}/${s.list_slug}` === key
-    );
-
-    // Group by child
-    const byChild = {};
-    for (const s of relevantSessions) {
-      const cid = s.child_id;
-      if (!byChild[cid]) {
-        byChild[cid] = {
-          childId: cid,
-          childName: childMap[cid] || "Estudante",
-          sessions: [],
-        };
-      }
-      byChild[cid].sessions.push(s);
-    }
-
-    // For each child, compute best score and collect all wrong answers
-    const children = Object.values(byChild).map((entry) => {
-      let bestPct = 0;
-      let bestCorrect = 0;
-      let bestTotal = 0;
-      let lastDate = null;
-      const allWrong = [];
-      for (const s of entry.sessions) {
-        const pct = s.total_questions > 0 ? Math.round((s.correct_count / s.total_questions) * 100) : 0;
-        if (pct > bestPct) {
-          bestPct = pct;
-          bestCorrect = s.correct_count || 0;
-          bestTotal = s.total_questions || 0;
-        }
-        if (!lastDate || s.completed_at > lastDate) lastDate = s.completed_at;
-        if (Array.isArray(s.wrong_details)) {
-          for (const err of s.wrong_details) {
-            allWrong.push({
-              question: err.question || "Questão sem enunciado",
-              selected: err.selected,
-              correct: err.correct,
-              completedAt: s.completed_at,
-            });
-          }
-        }
-      }
-      return {
-        ...entry,
-        bestPct,
-        bestCorrect,
-        bestTotal,
-        attempts: entry.sessions.length,
-        allWrong,
-        lastDate,
-      };
-    });
-
-    return { children, totalSessions: relevantSessions.length };
-  }, [selectedListDetail, filteredSessions, childMap]);
+    if (!selectedListDetail || selectedListDetail.rowType !== "session") return null;
+    const wrong = selectedListDetail.wrong_details.map((err) => ({
+      question: err.question || "Questão sem enunciado",
+      selected: err.selected,
+      correct: err.correct,
+    }));
+    return { wrong };
+  }, [selectedListDetail]);
 
   // Filtered published lists table
   const filteredListsTableData = useMemo(() => {
@@ -550,11 +514,10 @@ export default function ParentDashboard() {
       const matchGrade = listFilterGrade ? item.ano_letivo === listFilterGrade : true;
       const matchStatus =
         listFilterStatus === "done"
-          ? item.isDone === true
+          ? item.rowType === "session"
           : listFilterStatus === "pending"
-          ? item.isDone === false
+          ? item.rowType === "pending"
           : true;
-
       return matchTitle && matchSubject && matchGrade && matchStatus;
     });
   }, [publishedListsTableData, listSearchTitle, listFilterSubject, listFilterGrade, listFilterStatus]);
@@ -1167,12 +1130,12 @@ export default function ParentDashboard() {
                       <table className="w-full text-sm">
                         <thead className="bg-slate-50 text-xs font-bold text-ink">
                           <tr>
-                            <th className="px-4 py-3 text-left">Status</th>
                             <th className="px-4 py-3 text-left">Matéria</th>
                             <th className="px-4 py-3 text-left">Título da Lista</th>
+                            <th className="px-4 py-3 text-left">Criança</th>
                             <th className="px-4 py-3 text-center">Questões</th>
                             <th className="px-4 py-3 text-center">Aproveitamento</th>
-                            <th className="px-4 py-3 text-center">Última Realização</th>
+                            <th className="px-4 py-3 text-center">Data</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100">
@@ -1185,24 +1148,10 @@ export default function ParentDashboard() {
                           ) : (
                             filteredListsTableData.map((item) => {
                               const theme = getSubject(item.subject);
+                              const isPending = item.rowType === "pending";
 
                               return (
-                                <tr key={item.id} className="hover:bg-slate-50/70 transition cursor-pointer" onClick={() => setSelectedListDetail(item)}>
-                                  {/* Status */}
-                                  <td className="px-4 py-3">
-                                    {item.isDone ? (
-                                      <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-bold text-emerald-800">
-                                        <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-                                        Feita
-                                      </span>
-                                    ) : (
-                                      <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-bold text-amber-800">
-                                        <CircleDashed className="h-4 w-4 text-amber-600" />
-                                        Não Feita
-                                      </span>
-                                    )}
-                                  </td>
-
+                                <tr key={item.sessionId} className="hover:bg-slate-50/70 transition cursor-pointer" onClick={() => !isPending && setSelectedListDetail(item)}>
                                   {/* Subject */}
                                   <td className="px-4 py-3">
                                     <span className="inline-flex items-center gap-1 rounded-full bg-lilac/10 px-2.5 py-0.5 text-xs font-bold text-lilac">
@@ -1219,42 +1168,43 @@ export default function ParentDashboard() {
                                     </span>
                                   </td>
 
+                                  {/* Child */}
+                                  <td className="px-4 py-3">
+                                    {isPending ? (
+                                      <span className="text-xs text-ink-soft font-semibold">—</span>
+                                    ) : (
+                                      <span className="text-xs font-bold text-candy">{item.childName}</span>
+                                    )}
+                                  </td>
+
                                   {/* Question Count */}
                                   <td className="px-4 py-3 text-center text-xs font-bold text-ink">
                                     {item.question_count || 0}
                                   </td>
 
-                                  {/* Best Score */}
+                                  {/* Score */}
                                   <td className="px-4 py-3 text-center">
-                                    {item.isDone ? (
-                                      <div>
-                                        <span className="inline-flex items-center gap-1 font-bold text-emerald-700 text-xs">
-                                          {item.bestScorePct}% de acerto
-                                        </span>
-                                        <p className="text-[10px] text-ink-soft">
-                                          ({item.attempts} {item.attempts === 1 ? "tentativa" : "tentativas"})
-                                        </p>
-                                      </div>
+                                    {isPending ? (
+                                      <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-bold text-amber-800">
+                                        <CircleDashed className="h-3.5 w-3.5" />
+                                        Pendente
+                                      </span>
                                     ) : (
-                                      <span className="text-xs text-ink-soft font-semibold">—</span>
+                                      <span className={cn(
+                                        "inline-flex items-center gap-1 font-bold text-xs",
+                                        item.pct >= 70 ? "text-emerald-700" : "text-amber-700"
+                                      )}>
+                                        {item.pct}% ({item.correct_count}/{item.question_count})
+                                      </span>
                                     )}
                                   </td>
 
-                                  {/* Last Completed Date */}
-                                  <td className="px-4 py-3 text-center text-xs text-ink-soft">
-                                    {item.lastDate ? (
-                                      <div>
-                                        <span className="font-semibold text-ink">
-                                          {formatDateTime(item.lastDate)}
-                                        </span>
-                                        {item.lastChildName && (
-                                          <p className="text-[10px] text-candy font-bold">
-                                            {item.lastChildName}
-                                          </p>
-                                        )}
-                                      </div>
+                                  {/* Date */}
+                                  <td className="px-4 py-3 text-center text-xs text-ink-soft font-semibold">
+                                    {isPending ? (
+                                      <span className="text-amber-700">Pendente</span>
                                     ) : (
-                                      <span className="text-amber-700 font-semibold">Pendente</span>
+                                      formatDateTime(item.completed_at)
                                     )}
                                   </td>
                                 </tr>
@@ -1316,82 +1266,59 @@ export default function ParentDashboard() {
                       </div>
 
                       {/* Body */}
-                      <div className="flex-1 overflow-y-auto p-5 space-y-5">
-                        {listDetailData.children.length === 0 ? (
-                          <div className="py-12 text-center">
-                            <div className="mb-2 text-4xl">📋</div>
-                            <p className="font-display text-lg font-bold text-ink">
-                              Nenhuma criança realizou esta lista ainda.
+                      <div className="flex-1 overflow-y-auto p-5 space-y-4">
+                        {/* Score summary */}
+                        <div className="flex items-center justify-between gap-3 rounded-2xl border border-lilac/15 bg-white p-4">
+                          <div className="flex items-center gap-2.5">
+                            <div className="grid h-9 w-9 place-items-center rounded-full bg-lilac/15 text-sm font-bold text-lilac">
+                              {selectedListDetail.childName?.charAt(0).toUpperCase()}
+                            </div>
+                            <div>
+                              <p className="font-bold text-ink text-sm">{selectedListDetail.childName}</p>
+                              <p className="text-[10px] text-ink-soft">{formatDateTime(selectedListDetail.completed_at)}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className={cn(
+                              "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold",
+                              selectedListDetail.pct >= 70 ? "bg-emerald-100 text-emerald-800" : "bg-amber-100 text-amber-800"
+                            )}>
+                              {selectedListDetail.pct >= 70 ? <CheckCircle2 className="h-3.5 w-3.5" /> : <Target className="h-3.5 w-3.5" />}
+                              {selectedListDetail.pct}% de acerto
+                            </span>
+                            <span className="text-xs text-ink-soft font-semibold">
+                              ({selectedListDetail.correct_count}/{selectedListDetail.question_count})
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Wrong answers */}
+                        {listDetailData.wrong.length > 0 ? (
+                          <div className="space-y-2">
+                            <p className="text-xs font-bold text-ink flex items-center gap-1.5">
+                              <XCircle className="h-3.5 w-3.5 text-candy" />
+                              Erros ({listDetailData.wrong.length})
                             </p>
+                            {listDetailData.wrong.map((err, i) => (
+                              <div key={i} className="rounded-xl bg-candy-soft/30 border border-candy/10 p-3">
+                                <p className="text-xs font-semibold text-ink line-clamp-2 mb-1.5">
+                                  {err.question}
+                                </p>
+                                <div className="flex flex-wrap gap-x-4 gap-y-1 text-[11px]">
+                                  <span className="text-red-600 font-semibold">
+                                    ✗ Marcada: {err.selected || "—"}
+                                  </span>
+                                  <span className="text-emerald-700 font-semibold">
+                                    ✓ Correta: {err.correct || "—"}
+                                  </span>
+                                </div>
+                              </div>
+                            ))}
                           </div>
                         ) : (
-                          listDetailData.children.map((child) => {
-                            const good = child.bestPct >= 70;
-                            return (
-                              <div key={child.childId} className="rounded-2xl border border-lilac/15 bg-white shadow-sm overflow-hidden">
-                                {/* Child header */}
-                                <div className="flex items-center justify-between gap-3 bg-slate-50 px-4 py-3 border-b border-slate-100">
-                                  <div className="flex items-center gap-2.5">
-                                    <div className="grid h-9 w-9 place-items-center rounded-full bg-lilac/15 text-sm font-bold text-lilac">
-                                      {child.childName.charAt(0).toUpperCase()}
-                                    </div>
-                                    <div>
-                                      <p className="font-bold text-ink text-sm">{child.childName}</p>
-                                      <p className="text-[10px] text-ink-soft">
-                                        {child.attempts} {child.attempts === 1 ? "tentativa" : "tentativas"}
-                                        {child.lastDate && <> · {formatDateTime(child.lastDate)}</>}
-                                      </p>
-                                    </div>
-                                  </div>
-                                  <div className="flex items-center gap-2">
-                                    <span className={cn(
-                                      "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold",
-                                      good ? "bg-emerald-100 text-emerald-800" : "bg-amber-100 text-amber-800"
-                                    )}>
-                                      {good ? <CheckCircle2 className="h-3.5 w-3.5" /> : <Target className="h-3.5 w-3.5" />}
-                                      {child.bestPct}% de acerto
-                                    </span>
-                                    <span className="text-xs text-ink-soft font-semibold">
-                                      ({child.bestCorrect}/{child.bestTotal})
-                                    </span>
-                                  </div>
-                                </div>
-
-                                {/* Wrong answers */}
-                                {child.allWrong.length > 0 && (
-                                  <div className="px-4 py-3 space-y-2">
-                                    <p className="text-xs font-bold text-ink flex items-center gap-1.5">
-                                      <XCircle className="h-3.5 w-3.5 text-candy" />
-                                      Erros ({child.allWrong.length})
-                                    </p>
-                                    <div className="space-y-2">
-                                      {child.allWrong.map((err, i) => (
-                                        <div key={i} className="rounded-xl bg-candy-soft/30 border border-candy/10 p-3">
-                                          <p className="text-xs font-semibold text-ink line-clamp-2 mb-1.5">
-                                            {err.question}
-                                          </p>
-                                          <div className="flex flex-wrap gap-x-4 gap-y-1 text-[11px]">
-                                            <span className="text-red-600 font-semibold">
-                                              ✗ Marcada: {err.selected || "—"}
-                                            </span>
-                                            <span className="text-emerald-700 font-semibold">
-                                              ✓ Correta: {err.correct || "—"}
-                                            </span>
-                                          </div>
-                                        </div>
-                                      ))}
-                                    </div>
-                                  </div>
-                                )}
-
-                                {child.allWrong.length === 0 && (
-                                  <div className="px-4 py-3 text-center">
-                                    <span className="text-xs font-bold text-emerald-700">🎉 Sem erros — desempenho perfeito!</span>
-                                  </div>
-                                )}
-                              </div>
-                            );
-                          })
+                          <div className="rounded-2xl border border-lilac/15 bg-white p-4 text-center">
+                            <span className="text-xs font-bold text-emerald-700">🎉 Sem erros — desempenho perfeito!</span>
+                          </div>
                         )}
                       </div>
                     </motion.div>
