@@ -494,10 +494,11 @@ export default function StudentStudyDashboard() {
                   key={mat.id}
                   onClick={() => setSelectedMaterial(mat)}
                   className={cn(
-                    "clay group relative flex cursor-pointer flex-col justify-between overflow-hidden p-4 transition-all hover:-translate-y-1 hover:shadow-xl sm:p-5",
+                    "group relative flex cursor-pointer flex-col justify-between overflow-hidden p-4 transition-all hover:-translate-y-1 hover:shadow-xl sm:p-5",
+                    !isVideo && !isAudio && "clay",
                     isViewed && "bg-emerald-50/20 ring-1 ring-emerald-400/40",
-                    isVideo && "bg-[#18181b] text-white",
-                    isAudio && "bg-gradient-to-br from-[#24133f] via-[#4c1d95] to-[#0f766e] text-white"
+                    isVideo && "bg-[#18181b] text-white rounded-[var(--radius-blob)] shadow-[var(--shadow-clay)] border-2 border-white/80",
+                    isAudio && "bg-gradient-to-br from-[#24133f] via-[#4c1d95] to-[#0f766e] text-white rounded-[var(--radius-blob)] shadow-[var(--shadow-clay)] border-2 border-white/80"
                   )}
                 >
                   {isVideo && (
