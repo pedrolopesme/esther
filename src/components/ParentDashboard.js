@@ -39,6 +39,13 @@ import {
   Image as ImageIcon,
   Gamepad2,
   Trophy,
+  ListChecks,
+  CircleDashed,
+  PieChart,
+  Layers,
+  ChevronRight,
+  Search,
+  X,
 } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 import { getSupabaseBrowserClient } from "../utils/supabase";
@@ -96,6 +103,7 @@ export default function ParentDashboard() {
   const [children, setChildren] = useState([]);
   const [events, setEvents] = useState([]);
   const [sessions, setSessions] = useState([]);
+  const [exerciseLists, setExerciseLists] = useState([]);
   const [materialAccesses, setMaterialAccesses] = useState([]);
   const [materials, setMaterials] = useState([]);
   const [gameSessions, setGameSessions] = useState([]);
@@ -109,8 +117,14 @@ export default function ParentDashboard() {
   // Top navigation view mode: "dashboard" | "children"
   const [currentView, setCurrentView] = useState("dashboard");
 
-  // Dashboard inner tabs: "performance" | "games" | "materials" | "errors" | "timeline"
+  // Dashboard inner tabs: "performance" | "lists" | "games" | "materials" | "errors" | "timeline"
   const [activeTab, setActiveTab] = useState("performance");
+
+  // Filter state for Lists tab
+  const [listSearchTitle, setListSearchTitle] = useState("");
+  const [listFilterSubject, setListFilterSubject] = useState("");
+  const [listFilterStatus, setListFilterStatus] = useState("all"); // "all" | "done" | "pending"
+  const [listFilterGrade, setListFilterGrade] = useState("");
 
   // Form states for registering children
   const [childName, setChildName] = useState("");
@@ -153,12 +167,20 @@ export default function ParentDashboard() {
     loadChildren();
   }, [loadChildren]);
 
-  // Load all events, sessions, game sessions, material accesses and items for this parent's children
+  // Load all events, sessions, published lists, game sessions, material accesses and items
   const loadParentData = useCallback(async () => {
     if (!supabase || !user) return;
     setIsLoadingData(true);
 
-    const [eventsRes, sessionsRes, accessesRes, materialsRes, gameSessionsRes, gamesRes] = await Promise.all([
+    const [
+      eventsRes,
+      sessionsRes,
+      listsRes,
+      accessesRes,
+      materialsRes,
+      gameSessionsRes,
+      gamesRes,
+    ] = await Promise.all([
       supabase
         .from("child_events")
         .select("*")
@@ -168,23 +190,30 @@ export default function ParentDashboard() {
         .from("exercise_sessions")
         .select("*")
         .order("completed_at", { ascending: false })
-        .limit(200),
+        .limit(300),
+      supabase
+        .from("exercise_lists")
+        .select("id, slug, title, description, subject, materia, ano_letivo, exercise_date, question_count, published")
+        .eq("published", true)
+        .order("exercise_date", { ascending: false }),
       supabase
         .from("material_accesses")
         .select("*")
         .order("created_at", { ascending: false })
-        .limit(200),
+        .limit(300),
       supabase
         .from("materials")
-        .select("id, title, description, subject_id, ano_letivo, file_url, file_name, file_size, file_type, media_type, category"),
+        .select("id, title, description, subject_id, ano_letivo, file_url, file_name, file_size, file_type, media_type, category")
+        .eq("published", true),
       supabase
         .from("game_sessions")
         .select("*")
         .order("completed_at", { ascending: false })
-        .limit(200),
+        .limit(300),
       supabase
         .from("games")
-        .select("id, slug, title, description, subject_id, ano_letivo, max_score, cover_url"),
+        .select("id, slug, title, description, subject_id, ano_letivo, max_score, cover_url")
+        .eq("published", true),
     ]);
 
     if (!eventsRes.error && eventsRes.data) {
@@ -192,6 +221,9 @@ export default function ParentDashboard() {
     }
     if (!sessionsRes.error && sessionsRes.data) {
       setSessions(sessionsRes.data);
+    }
+    if (!listsRes.error && listsRes.data) {
+      setExerciseLists(listsRes.data);
     }
     if (!accessesRes.error && accessesRes.data) {
       setMaterialAccesses(accessesRes.data);
@@ -314,15 +346,62 @@ export default function ParentDashboard() {
     return gameSessions.filter((g) => g.child_id === selectedChildId);
   }, [gameSessions, selectedChildId]);
 
-  // Aggregated metrics
+  // Aggregated metrics for Exercises
   const totalCompleted = filteredSessions.length;
   const totalCorrect = filteredSessions.reduce((acc, s) => acc + (s.correct_count || 0), 0);
   const totalWrong = filteredSessions.reduce((acc, s) => acc + (s.wrong_count || 0), 0);
   const totalQuestions = totalCorrect + totalWrong;
   const accuracyRate = totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0;
   const totalPoints = filteredSessions.reduce((acc, s) => acc + (s.points_earned || 0), 0);
-  const totalMaterialsViewed = new Set(filteredMaterialAccesses.map((a) => `${a.child_id}_${a.material_id}`)).size;
-  const totalGamesPlayed = filteredGameSessions.length;
+
+  // Activity Overview Totals (Completed vs Pending)
+  const totalPublishedLists = exerciseLists.length;
+  const totalPublishedMaterials = materials.length;
+  const totalPublishedGames = games.length;
+  const totalActivitiesCatalog = totalPublishedLists + totalPublishedMaterials + totalPublishedGames;
+
+  // Distinct completed exercise lists by child
+  const completedListKeys = useMemo(() => {
+    const set = new Set();
+    for (const s of filteredSessions) {
+      set.add(`${s.list_subject}/${s.list_slug}`);
+    }
+    return set;
+  }, [filteredSessions]);
+
+  const distinctDoneListsCount = completedListKeys.size;
+  const pendingListsCount = Math.max(0, totalPublishedLists - distinctDoneListsCount);
+
+  // Distinct materials viewed by child
+  const viewedMaterialIds = useMemo(() => {
+    const set = new Set();
+    for (const a of filteredMaterialAccesses) {
+      set.add(a.material_id);
+    }
+    return set;
+  }, [filteredMaterialAccesses]);
+
+  const distinctViewedMaterialsCount = viewedMaterialIds.size;
+  const pendingMaterialsCount = Math.max(0, totalPublishedMaterials - distinctViewedMaterialsCount);
+
+  // Distinct games played by child
+  const playedGameIds = useMemo(() => {
+    const set = new Set();
+    for (const g of filteredGameSessions) {
+      set.add(g.game_id);
+    }
+    return set;
+  }, [filteredGameSessions]);
+
+  const distinctPlayedGamesCount = playedGameIds.size;
+  const pendingGamesCount = Math.max(0, totalPublishedGames - distinctPlayedGamesCount);
+
+  // Total Activities Done vs Pending across all 3 pillars
+  const grandTotalActivitiesDone = distinctDoneListsCount + distinctViewedMaterialsCount + distinctPlayedGamesCount;
+  const grandTotalActivitiesPending = pendingListsCount + pendingMaterialsCount + pendingGamesCount;
+  const overallCompletionRate = totalActivitiesCatalog > 0
+    ? Math.round((grandTotalActivitiesDone / totalActivitiesCatalog) * 100)
+    : 0;
 
   // Group performance by subject
   const subjectStats = useMemo(() => {
@@ -356,6 +435,70 @@ export default function ParentDashboard() {
       };
     });
   }, [filteredSessions]);
+
+  // Table of all published lists with completion status for selected child
+  const publishedListsTableData = useMemo(() => {
+    // Map sessions to list key for fast status resolution
+    const sessionMapByList = {};
+    for (const s of filteredSessions) {
+      const key = `${s.list_subject}/${s.list_slug}`;
+      if (!sessionMapByList[key]) {
+        sessionMapByList[key] = {
+          attempts: 0,
+          bestScore: 0,
+          bestScorePct: 0,
+          lastDate: s.completed_at,
+          lastChildName: childMap[s.child_id] || "Estudante",
+        };
+      }
+      sessionMapByList[key].attempts += 1;
+      const pct = s.total_questions > 0 ? Math.round((s.correct_count / s.total_questions) * 100) : 0;
+      if (pct > sessionMapByList[key].bestScorePct) {
+        sessionMapByList[key].bestScorePct = pct;
+        sessionMapByList[key].bestScore = s.correct_count;
+      }
+    }
+
+    return exerciseLists.map((list) => {
+      const key = `${list.subject}/${list.slug}`;
+      const statusInfo = sessionMapByList[key] || null;
+      const isDone = !!statusInfo;
+
+      return {
+        ...list,
+        isDone,
+        attempts: statusInfo?.attempts || 0,
+        bestScorePct: statusInfo?.bestScorePct ?? null,
+        bestScore: statusInfo?.bestScore ?? null,
+        lastDate: statusInfo?.lastDate || null,
+        lastChildName: statusInfo?.lastChildName || null,
+      };
+    });
+  }, [exerciseLists, filteredSessions, childMap]);
+
+  // Filtered published lists table
+  const filteredListsTableData = useMemo(() => {
+    return publishedListsTableData.filter((item) => {
+      const matchTitle = listSearchTitle.trim()
+        ? item.title?.toLowerCase().includes(listSearchTitle.toLowerCase().trim()) ||
+          item.slug?.toLowerCase().includes(listSearchTitle.toLowerCase().trim())
+        : true;
+      const matchSubject = listFilterSubject ? item.subject === listFilterSubject : true;
+      const matchGrade = listFilterGrade ? item.ano_letivo === listFilterGrade : true;
+      const matchStatus =
+        listFilterStatus === "done"
+          ? item.isDone === true
+          : listFilterStatus === "pending"
+          ? item.isDone === false
+          : true;
+
+      return matchTitle && matchSubject && matchGrade && matchStatus;
+    });
+  }, [publishedListsTableData, listSearchTitle, listFilterSubject, listFilterGrade, listFilterStatus]);
+
+  const uniqueGrades = useMemo(() => {
+    return Array.from(new Set(exerciseLists.map((l) => l.ano_letivo).filter(Boolean)));
+  }, [exerciseLists]);
 
   // Extract all wrong answers for analysis
   const allErrors = useMemo(() => {
@@ -454,7 +597,7 @@ export default function ParentDashboard() {
             Painel do Responsável 👨‍👩‍👧
           </h1>
           <p className="mt-1 text-xs text-ink-soft sm:text-sm">
-            Acompanhe a evolução, minijogos, resoluções e materiais consumidos pelos seus filhos.
+            Acompanhe a evolução, status de cada lista de exercícios, minijogos e materiais consumidos.
           </p>
         </div>
 
@@ -521,22 +664,12 @@ export default function ParentDashboard() {
           {/* Quick Metrics Cards */}
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             <Card className="flex flex-col items-center justify-center p-5 text-center">
-              <div className="mb-2 grid h-10 w-10 place-items-center rounded-2xl bg-indigo-500/10 text-indigo-600">
-                <Gamepad2 className="h-5 w-5" strokeWidth={2.5} />
-              </div>
-              <span className="text-xs font-bold text-ink-soft">Minijogos Jogados</span>
-              <p className="mt-1 font-display text-3xl font-bold text-indigo-600 sm:text-4xl">
-                {totalGamesPlayed}
-              </p>
-            </Card>
-
-            <Card className="flex flex-col items-center justify-center p-5 text-center">
               <div className="mb-2 grid h-10 w-10 place-items-center rounded-2xl bg-lilac/10 text-lilac">
-                <Award className="h-5 w-5" strokeWidth={2.5} />
+                <ListChecks className="h-5 w-5" strokeWidth={2.5} />
               </div>
-              <span className="text-xs font-bold text-ink-soft">Listas Concluídas</span>
+              <span className="text-xs font-bold text-ink-soft">Listas Feitas vs Total</span>
               <p className="mt-1 font-display text-3xl font-bold text-lilac sm:text-4xl">
-                {totalCompleted}
+                {distinctDoneListsCount} <span className="text-lg text-ink-soft">/ {totalPublishedLists}</span>
               </p>
             </Card>
 
@@ -551,12 +684,22 @@ export default function ParentDashboard() {
             </Card>
 
             <Card className="flex flex-col items-center justify-center p-5 text-center">
-              <div className="mb-2 grid h-10 w-10 place-items-center rounded-2xl bg-sky/10 text-sky">
-                <FolderDown className="h-5 w-5" strokeWidth={2.5} />
+              <div className="mb-2 grid h-10 w-10 place-items-center rounded-2xl bg-indigo-500/10 text-indigo-600">
+                <Gamepad2 className="h-5 w-5" strokeWidth={2.5} />
               </div>
-              <span className="text-xs font-bold text-ink-soft">Materiais Acessados</span>
-              <p className="mt-1 font-display text-3xl font-bold text-sky sm:text-4xl">
-                {totalMaterialsViewed}
+              <span className="text-xs font-bold text-ink-soft">Minijogos Jogados</span>
+              <p className="mt-1 font-display text-3xl font-bold text-indigo-600 sm:text-4xl">
+                {distinctPlayedGamesCount} <span className="text-lg text-ink-soft">/ {totalPublishedGames}</span>
+              </p>
+            </Card>
+
+            <Card className="flex flex-col items-center justify-center p-5 text-center">
+              <div className="mb-2 grid h-10 w-10 place-items-center rounded-2xl bg-sun/10 text-[#d49911]">
+                <Flame className="h-5 w-5" strokeWidth={2.5} />
+              </div>
+              <span className="text-xs font-bold text-ink-soft">Estrelas Acumuladas</span>
+              <p className="mt-1 font-display text-3xl font-bold text-[#d49911] sm:text-4xl">
+                {totalPoints} ⭐
               </p>
             </Card>
           </div>
@@ -572,7 +715,18 @@ export default function ParentDashboard() {
                   : "text-ink-soft hover:text-ink"
               )}
             >
-              <BarChart3 className="h-4 w-4" /> Desempenho
+              <BarChart3 className="h-4 w-4" /> Desempenho Geral
+            </button>
+            <button
+              onClick={() => setActiveTab("lists")}
+              className={cn(
+                "press flex flex-1 min-w-[130px] items-center justify-center gap-2 rounded-xl py-3 text-xs font-bold transition sm:text-sm",
+                activeTab === "lists"
+                  ? "bg-candy text-white shadow-md"
+                  : "text-ink-soft hover:text-ink"
+              )}
+            >
+              <ListChecks className="h-4 w-4" /> Lista de Exercícios ({distinctDoneListsCount}/{totalPublishedLists})
             </button>
             <button
               onClick={() => setActiveTab("games")}
@@ -627,115 +781,442 @@ export default function ParentDashboard() {
             </div>
           ) : (
             <>
-              {/* TAB 1: DESEMPENHO */}
+              {/* ==================== TAB 1: DESEMPENHO GERAL & GRÁFICOS ==================== */}
               {activeTab === "performance" && (
-                <div className="grid gap-6 lg:grid-cols-2">
-                  {/* Visual Accuracy Ratio */}
-                  <Card className="flex flex-col justify-between p-6">
-                    <div>
-                      <h3 className="mb-2 flex items-center gap-2 font-display text-lg font-bold text-ink">
-                        <TrendingUp className="h-5 w-5 text-mint" strokeWidth={2.5} />
-                        Proporção de Acertos vs Erros
-                      </h3>
-                      <p className="mb-6 text-xs text-ink-soft">
-                        Visão consolidada de todas as respostas registradas nas listas.
-                      </p>
+                <div className="space-y-6">
+                  {/* Overview Balance of Done vs Pending Activities */}
+                  <Card className="p-6">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
+                      <div>
+                        <h3 className="flex items-center gap-2 font-display text-xl font-bold text-ink">
+                          <PieChart className="h-5 w-5 text-lilac" strokeWidth={2.5} />
+                          Visão Geral de Todas as Atividades (Feitas vs Pendentes)
+                        </h3>
+                        <p className="text-xs text-ink-soft sm:text-sm">
+                          Balanço de participação considerando listas de exercícios, minijogos e materiais de apoio.
+                        </p>
+                      </div>
 
-                      {totalQuestions === 0 ? (
-                        <div className="py-12 text-center text-sm text-ink-soft">
-                          Nenhum exercício resolvido ainda.
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-lilac/15 px-3 py-1 text-xs font-bold text-lilac">
+                        Progresso Total: {overallCompletionRate}%
+                      </span>
+                    </div>
+
+                    {/* Progress multi-segment graph */}
+                    <div className="mb-6 space-y-2">
+                      <div className="flex justify-between text-xs font-bold">
+                        <span className="text-emerald-700 flex items-center gap-1">
+                          <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
+                          {grandTotalActivitiesDone} Atividades Feitas ({overallCompletionRate}%)
+                        </span>
+                        <span className="text-amber-700 flex items-center gap-1">
+                          <CircleDashed className="h-3.5 w-3.5 text-amber-600" />
+                          {grandTotalActivitiesPending} Pendentes ({100 - overallCompletionRate}%)
+                        </span>
+                      </div>
+
+                      <div className="flex h-5 w-full overflow-hidden rounded-full bg-black/5 p-1 shadow-inner">
+                        <div
+                          className="rounded-full bg-gradient-to-r from-mint to-sky transition-all duration-700"
+                          style={{ width: `${overallCompletionRate}%` }}
+                        />
+                        <div
+                          className="rounded-full bg-gradient-to-r from-amber-300 to-candy-soft transition-all duration-700"
+                          style={{ width: `${100 - overallCompletionRate}%` }}
+                        />
+                      </div>
+                    </div>
+
+                    {/* 3 Activity Category Cards breakdown */}
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                      {/* Exercise Lists */}
+                      <div className="rounded-2xl border-2 border-lilac/15 bg-white/90 p-4">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-lilac">
+                            <ListChecks className="h-4 w-4" /> Listas de Exercícios
+                          </span>
+                          <span className="text-[11px] font-bold text-ink-soft">
+                            {distinctDoneListsCount}/{totalPublishedLists}
+                          </span>
                         </div>
-                      ) : (
-                        <div className="space-y-5">
-                          <div>
-                            <div className="mb-2 flex justify-between text-xs font-bold">
-                              <span className="flex items-center gap-1.5 text-[#05795b]">
-                                <CheckCircle2 className="h-4 w-4 text-mint" />
-                                {totalCorrect} Acertos ({accuracyRate}%)
-                              </span>
-                              <span className="flex items-center gap-1.5 text-[#a62f5f]">
-                                <XCircle className="h-4 w-4 text-candy" />
-                                {totalWrong} Erros ({100 - accuracyRate}%)
-                              </span>
-                            </div>
-
-                            {/* Dual gradient bar */}
-                            <div className="flex h-6 w-full overflow-hidden rounded-full bg-black/5 p-1 shadow-inner">
-                              <div
-                                className="rounded-full bg-gradient-to-r from-mint to-sky transition-all duration-700"
-                                style={{ width: `${accuracyRate}%` }}
-                              />
-                              <div
-                                className="rounded-full bg-gradient-to-r from-candy to-sun transition-all duration-700"
-                                style={{ width: `${100 - accuracyRate}%` }}
-                              />
-                            </div>
-                          </div>
-
-                          <div className="grid grid-cols-2 gap-3 pt-3">
-                            <div className="rounded-2xl bg-mint-soft p-4 text-center">
-                              <span className="text-xs font-semibold text-[#05795b]">Taxa de Sucesso</span>
-                              <p className="mt-0.5 font-display text-2xl font-bold text-[#05795b]">
-                                {accuracyRate}%
-                              </p>
-                            </div>
-                            <div className="rounded-2xl bg-candy-soft p-4 text-center">
-                              <span className="text-xs font-semibold text-[#a62f5f]">Total Respondido</span>
-                              <p className="mt-0.5 font-display text-2xl font-bold text-[#a62f5f]">
-                                {totalQuestions} questões
-                              </p>
-                            </div>
-                          </div>
+                        <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100 mb-2">
+                          <div
+                            className="h-full rounded-full bg-lilac"
+                            style={{
+                              width: `${totalPublishedLists > 0 ? (distinctDoneListsCount / totalPublishedLists) * 100 : 0}%`,
+                            }}
+                          />
                         </div>
-                      )}
+                        <p className="text-[11px] text-ink-soft">
+                          <strong className="text-emerald-700">{distinctDoneListsCount} feitas</strong> &middot;{" "}
+                          <span className="text-amber-700">{pendingListsCount} pendentes</span>
+                        </p>
+                      </div>
+
+                      {/* Educational Games */}
+                      <div className="rounded-2xl border-2 border-indigo-500/15 bg-white/90 p-4">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600">
+                            <Gamepad2 className="h-4 w-4" /> Minijogos Educativos
+                          </span>
+                          <span className="text-[11px] font-bold text-ink-soft">
+                            {distinctPlayedGamesCount}/{totalPublishedGames}
+                          </span>
+                        </div>
+                        <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100 mb-2">
+                          <div
+                            className="h-full rounded-full bg-indigo-600"
+                            style={{
+                              width: `${totalPublishedGames > 0 ? (distinctPlayedGamesCount / totalPublishedGames) * 100 : 0}%`,
+                            }}
+                          />
+                        </div>
+                        <p className="text-[11px] text-ink-soft">
+                          <strong className="text-emerald-700">{distinctPlayedGamesCount} jogados</strong> &middot;{" "}
+                          <span className="text-amber-700">{pendingGamesCount} pendentes</span>
+                        </p>
+                      </div>
+
+                      {/* Study Materials */}
+                      <div className="rounded-2xl border-2 border-sky/15 bg-white/90 p-4">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-sky">
+                            <FolderDown className="h-4 w-4" /> Materiais de Estudo
+                          </span>
+                          <span className="text-[11px] font-bold text-ink-soft">
+                            {distinctViewedMaterialsCount}/{totalPublishedMaterials}
+                          </span>
+                        </div>
+                        <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100 mb-2">
+                          <div
+                            className="h-full rounded-full bg-sky"
+                            style={{
+                              width: `${totalPublishedMaterials > 0 ? (distinctViewedMaterialsCount / totalPublishedMaterials) * 100 : 0}%`,
+                            }}
+                          />
+                        </div>
+                        <p className="text-[11px] text-ink-soft">
+                          <strong className="text-emerald-700">{distinctViewedMaterialsCount} vistos</strong> &middot;{" "}
+                          <span className="text-amber-700">{pendingMaterialsCount} pendentes</span>
+                        </p>
+                      </div>
                     </div>
                   </Card>
 
-                  {/* Subject Breakdown Chart */}
-                  <Card className="p-6">
-                    <h3 className="mb-2 flex items-center gap-2 font-display text-lg font-bold text-ink">
-                      <BookOpen className="h-5 w-5 text-lilac" strokeWidth={2.5} />
-                      Aproveitamento por Matéria
-                    </h3>
-                    <p className="mb-6 text-xs text-ink-soft">
-                      Desempenho relativo e volume de listas por disciplina.
-                    </p>
+                  <div className="grid gap-6 lg:grid-cols-2">
+                    {/* Visual Accuracy Ratio */}
+                    <Card className="flex flex-col justify-between p-6">
+                      <div>
+                        <h3 className="mb-2 flex items-center gap-2 font-display text-lg font-bold text-ink">
+                          <TrendingUp className="h-5 w-5 text-mint" strokeWidth={2.5} />
+                          Proporção de Acertos vs Erros nas Listas
+                        </h3>
+                        <p className="mb-6 text-xs text-ink-soft">
+                          Visão consolidada de todas as respostas registradas nas listas de exercícios.
+                        </p>
 
-                    {subjectStats.length === 0 ? (
-                      <div className="py-12 text-center text-sm text-ink-soft">
-                        Nenhum dado por matéria disponível.
-                      </div>
-                    ) : (
-                      <div className="space-y-4">
-                        {subjectStats.map((sub) => (
-                          <div key={sub.subjectId} className="space-y-1.5">
-                            <div className="flex items-center justify-between text-xs font-bold">
-                              <span className="flex items-center gap-1.5 text-ink">
-                                <span>{sub.emoji}</span>
-                                <span>{sub.name}</span>
-                              </span>
-                              <span className="text-ink-soft">
-                                {sub.correctCount}/{sub.total} ({sub.rate}%)
-                              </span>
+                        {totalQuestions === 0 ? (
+                          <div className="py-12 text-center text-sm text-ink-soft">
+                            Nenhum exercício resolvido ainda.
+                          </div>
+                        ) : (
+                          <div className="space-y-5">
+                            <div>
+                              <div className="mb-2 flex justify-between text-xs font-bold">
+                                <span className="flex items-center gap-1.5 text-[#05795b]">
+                                  <CheckCircle2 className="h-4 w-4 text-mint" />
+                                  {totalCorrect} Acertos ({accuracyRate}%)
+                                </span>
+                                <span className="flex items-center gap-1.5 text-[#a62f5f]">
+                                  <XCircle className="h-4 w-4 text-candy" />
+                                  {totalWrong} Erros ({100 - accuracyRate}%)
+                                </span>
+                              </div>
+
+                              <div className="flex h-6 w-full overflow-hidden rounded-full bg-black/5 p-1 shadow-inner">
+                                <div
+                                  className="rounded-full bg-gradient-to-r from-mint to-sky transition-all duration-700"
+                                  style={{ width: `${accuracyRate}%` }}
+                                />
+                                <div
+                                  className="rounded-full bg-gradient-to-r from-candy to-sun transition-all duration-700"
+                                  style={{ width: `${100 - accuracyRate}%` }}
+                                />
+                              </div>
                             </div>
-                            <div className="h-3.5 w-full overflow-hidden rounded-full bg-black/5 p-0.5">
-                              <div
-                                className="h-full rounded-full transition-all duration-500"
-                                style={{
-                                  width: `${sub.rate}%`,
-                                  backgroundColor: sub.hex,
-                                }}
-                              />
+
+                            <div className="grid grid-cols-2 gap-3 pt-3">
+                              <div className="rounded-2xl bg-mint-soft p-4 text-center">
+                                <span className="text-xs font-semibold text-[#05795b]">Taxa de Sucesso</span>
+                                <p className="mt-0.5 font-display text-2xl font-bold text-[#05795b]">
+                                  {accuracyRate}%
+                                </p>
+                              </div>
+                              <div className="rounded-2xl bg-candy-soft p-4 text-center">
+                                <span className="text-xs font-semibold text-[#a62f5f]">Total Respondido</span>
+                                <p className="mt-0.5 font-display text-2xl font-bold text-[#a62f5f]">
+                                  {totalQuestions} questões
+                                </p>
+                              </div>
                             </div>
                           </div>
-                        ))}
+                        )}
                       </div>
-                    )}
-                  </Card>
+                    </Card>
+
+                    {/* Subject Breakdown Chart */}
+                    <Card className="p-6">
+                      <h3 className="mb-2 flex items-center gap-2 font-display text-lg font-bold text-ink">
+                        <BookOpen className="h-5 w-5 text-lilac" strokeWidth={2.5} />
+                        Aproveitamento por Matéria
+                      </h3>
+                      <p className="mb-6 text-xs text-ink-soft">
+                        Desempenho relativo e volume de listas por disciplina.
+                      </p>
+
+                      {subjectStats.length === 0 ? (
+                        <div className="py-12 text-center text-sm text-ink-soft">
+                          Nenhum dado por matéria disponível.
+                        </div>
+                      ) : (
+                        <div className="space-y-4">
+                          {subjectStats.map((sub) => (
+                            <div key={sub.subjectId} className="space-y-1.5">
+                              <div className="flex items-center justify-between text-xs font-bold">
+                                <span className="flex items-center gap-1.5 text-ink">
+                                  <span>{sub.emoji}</span>
+                                  <span>{sub.name}</span>
+                                </span>
+                                <span className="text-ink-soft">
+                                  {sub.correctCount}/{sub.total} ({sub.rate}%)
+                                </span>
+                              </div>
+                              <div className="h-3.5 w-full overflow-hidden rounded-full bg-black/5 p-0.5">
+                                <div
+                                  className="h-full rounded-full transition-all duration-500"
+                                  style={{
+                                    width: `${sub.rate}%`,
+                                    backgroundColor: sub.hex,
+                                  }}
+                                />
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </Card>
+                  </div>
                 </div>
               )}
 
-              {/* TAB 2: MINIJOGOS EDUCATIVOS (GAME SESSIONS REPORT) */}
+              {/* ==================== TAB 2: LISTA DE EXERCÍCIOS (TABLE FEITAS VS NÃO FEITAS) ==================== */}
+              {activeTab === "lists" && (
+                <Card className="p-6 space-y-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <div>
+                      <h3 className="flex items-center gap-2 font-display text-xl font-bold text-ink">
+                        <ListChecks className="h-5 w-5 text-lilac" strokeWidth={2.5} />
+                        Status de Conclusão das Listas de Exercícios
+                      </h3>
+                      <p className="text-xs text-ink-soft sm:text-sm">
+                        Confira abaixo todas as listas publicadas e saiba exatamente quais o seu filho já fez ou ainda não fez.
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800">
+                        {distinctDoneListsCount} Concluídas
+                      </span>
+                      <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800">
+                        {pendingListsCount} Pendentes
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Filter controls */}
+                  <div className="clay-sm flex flex-col gap-3 bg-white/80 p-4">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <span className="text-xs font-bold text-ink flex items-center gap-1.5">
+                        <Filter className="h-3.5 w-3.5 text-lilac" /> Filtrar Listas:
+                      </span>
+
+                      {(listSearchTitle || listFilterSubject || listFilterStatus !== "all" || listFilterGrade) && (
+                        <button
+                          onClick={() => {
+                            setListSearchTitle("");
+                            setListFilterSubject("");
+                            setListFilterStatus("all");
+                            setListFilterGrade("");
+                          }}
+                          className="press rounded-xl bg-candy-soft px-3 py-1 text-xs font-bold text-[#b03b6e]"
+                        >
+                          <X className="mr-1 inline h-3 w-3" /> Limpar Filtros
+                        </button>
+                      )}
+                    </div>
+
+                    <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
+                      {/* Search */}
+                      <input
+                        type="text"
+                        placeholder="Buscar por nome da lista..."
+                        value={listSearchTitle}
+                        onChange={(e) => setListSearchTitle(e.target.value)}
+                        className="rounded-xl border border-lilac/20 bg-white px-3 py-1.5 text-xs font-semibold text-ink outline-none focus:border-lilac"
+                      />
+
+                      {/* Status */}
+                      <select
+                        value={listFilterStatus}
+                        onChange={(e) => setListFilterStatus(e.target.value)}
+                        className="rounded-xl border border-lilac/20 bg-white px-3 py-1.5 text-xs font-semibold text-ink outline-none focus:border-lilac"
+                      >
+                        <option value="all">Todos os Status (Feitas e Não Feitas)</option>
+                        <option value="done">✅ Feitas / Concluídas</option>
+                        <option value="pending">⏳ Não Feitas / Pendentes</option>
+                      </select>
+
+                      {/* Subject */}
+                      <select
+                        value={listFilterSubject}
+                        onChange={(e) => setListFilterSubject(e.target.value)}
+                        className="rounded-xl border border-lilac/20 bg-white px-3 py-1.5 text-xs font-semibold text-ink outline-none focus:border-lilac"
+                      >
+                        <option value="">Todas as Matérias</option>
+                        {Array.from(new Set(exerciseLists.map((l) => l.subject))).map((subjId) => {
+                          const theme = getSubject(subjId);
+                          return (
+                            <option key={subjId} value={subjId}>
+                              {theme?.emoji || "📖"} {theme?.name || subjId}
+                            </option>
+                          );
+                        })}
+                      </select>
+
+                      {/* Grade */}
+                      <select
+                        value={listFilterGrade}
+                        onChange={(e) => setListFilterGrade(e.target.value)}
+                        className="rounded-xl border border-lilac/20 bg-white px-3 py-1.5 text-xs font-semibold text-ink outline-none focus:border-lilac"
+                      >
+                        <option value="">Todas as Séries</option>
+                        {uniqueGrades.map((g) => (
+                          <option key={g} value={g}>
+                            {g}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Table */}
+                  <div className="overflow-hidden rounded-2xl border border-lilac/15 bg-white shadow-sm">
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-sm">
+                        <thead className="bg-slate-50 text-xs font-bold text-ink">
+                          <tr>
+                            <th className="px-4 py-3 text-left">Status</th>
+                            <th className="px-4 py-3 text-left">Matéria</th>
+                            <th className="px-4 py-3 text-left">Título da Lista</th>
+                            <th className="px-4 py-3 text-center">Questões</th>
+                            <th className="px-4 py-3 text-center">Aproveitamento</th>
+                            <th className="px-4 py-3 text-center">Última Realização</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-100">
+                          {filteredListsTableData.length === 0 ? (
+                            <tr>
+                              <td colSpan="6" className="px-4 py-8 text-center text-ink-soft text-xs">
+                                Nenhuma lista encontrada com os filtros selecionados.
+                              </td>
+                            </tr>
+                          ) : (
+                            filteredListsTableData.map((item) => {
+                              const theme = getSubject(item.subject);
+
+                              return (
+                                <tr key={item.id} className="hover:bg-slate-50/70 transition">
+                                  {/* Status */}
+                                  <td className="px-4 py-3">
+                                    {item.isDone ? (
+                                      <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-bold text-emerald-800">
+                                        <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+                                        Feita
+                                      </span>
+                                    ) : (
+                                      <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-bold text-amber-800">
+                                        <CircleDashed className="h-4 w-4 text-amber-600" />
+                                        Não Feita
+                                      </span>
+                                    )}
+                                  </td>
+
+                                  {/* Subject */}
+                                  <td className="px-4 py-3">
+                                    <span className="inline-flex items-center gap-1 rounded-full bg-lilac/10 px-2.5 py-0.5 text-xs font-bold text-lilac">
+                                      <span>{theme?.emoji || "📖"}</span>
+                                      <span>{theme?.name || item.subject}</span>
+                                    </span>
+                                  </td>
+
+                                  {/* Title & Grade */}
+                                  <td className="px-4 py-3">
+                                    <p className="font-bold text-ink line-clamp-1">{item.title}</p>
+                                    <span className="text-[11px] text-ink-soft">
+                                      {item.ano_letivo || "Ensino Fundamental"}
+                                    </span>
+                                  </td>
+
+                                  {/* Question Count */}
+                                  <td className="px-4 py-3 text-center text-xs font-bold text-ink">
+                                    {item.question_count || 0}
+                                  </td>
+
+                                  {/* Best Score */}
+                                  <td className="px-4 py-3 text-center">
+                                    {item.isDone ? (
+                                      <div>
+                                        <span className="inline-flex items-center gap-1 font-bold text-emerald-700 text-xs">
+                                          {item.bestScorePct}% de acerto
+                                        </span>
+                                        <p className="text-[10px] text-ink-soft">
+                                          ({item.attempts} {item.attempts === 1 ? "tentativa" : "tentativas"})
+                                        </p>
+                                      </div>
+                                    ) : (
+                                      <span className="text-xs text-ink-soft font-semibold">—</span>
+                                    )}
+                                  </td>
+
+                                  {/* Last Completed Date */}
+                                  <td className="px-4 py-3 text-center text-xs text-ink-soft">
+                                    {item.lastDate ? (
+                                      <div>
+                                        <span className="font-semibold text-ink">
+                                          {formatDateTime(item.lastDate)}
+                                        </span>
+                                        {item.lastChildName && (
+                                          <p className="text-[10px] text-candy font-bold">
+                                            {item.lastChildName}
+                                          </p>
+                                        )}
+                                      </div>
+                                    ) : (
+                                      <span className="text-amber-700 font-semibold">Pendente</span>
+                                    )}
+                                  </td>
+                                </tr>
+                              );
+                            })
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </Card>
+              )}
+
+              {/* ==================== TAB 3: MINIJOGOS EDUCATIVOS ==================== */}
               {activeTab === "games" && (
                 <Card className="p-6">
                   <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
@@ -848,7 +1329,7 @@ export default function ParentDashboard() {
                 </Card>
               )}
 
-              {/* TAB 3: MATERIAIS DE APOIO ACESSADOS */}
+              {/* ==================== TAB 4: MATERIAIS DE APOIO ACESSADOS ==================== */}
               {activeTab === "materials" && (
                 <Card className="p-6">
                   <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
@@ -941,7 +1422,7 @@ export default function ParentDashboard() {
                 </Card>
               )}
 
-              {/* TAB 4: PONTOS DE ATENÇÃO (ERROS) */}
+              {/* ==================== TAB 5: PONTOS DE ATENÇÃO (ERROS) ==================== */}
               {activeTab === "errors" && (
                 <Card className="p-6">
                   <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
@@ -1024,7 +1505,7 @@ export default function ParentDashboard() {
                 </Card>
               )}
 
-              {/* TAB 5: LINHA DO TEMPO */}
+              {/* ==================== TAB 6: LINHA DO TEMPO ==================== */}
               {activeTab === "timeline" && (
                 <div className="space-y-6">
                   {events.length === 0 ? (
