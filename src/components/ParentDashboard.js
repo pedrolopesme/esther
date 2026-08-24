@@ -126,6 +126,7 @@ export default function ParentDashboard() {
   const [listFilterStatus, setListFilterStatus] = useState("all"); // "all" | "done" | "pending"
   const [listFilterGrade, setListFilterGrade] = useState("");
   const [selectedListDetail, setSelectedListDetail] = useState(null);
+  const [selectedGameDetail, setSelectedGameDetail] = useState(null);
 
   // Form states for registering children
   const [childName, setChildName] = useState("");
@@ -813,17 +814,6 @@ export default function ParentDashboard() {
               <FolderDown className="h-4 w-4" /> Materiais ({materialReport.length})
             </button>
             <button
-              onClick={() => setActiveTab("errors")}
-              className={cn(
-                "press flex flex-1 min-w-[130px] items-center justify-center gap-2 rounded-xl py-3 text-xs font-bold transition sm:text-sm",
-                activeTab === "errors"
-                  ? "bg-candy text-white shadow-md"
-                  : "text-ink-soft hover:text-ink"
-              )}
-            >
-              <AlertTriangle className="h-4 w-4" /> Erros ({allErrors.length})
-            </button>
-            <button
               onClick={() => setActiveTab("timeline")}
               className={cn(
                 "press flex flex-1 min-w-[130px] items-center justify-center gap-2 rounded-xl py-3 text-xs font-bold transition sm:text-sm",
@@ -1411,10 +1401,10 @@ export default function ParentDashboard() {
 
               {/* ==================== TAB 3: MINIJOGOS EDUCATIVOS ==================== */}
               {activeTab === "games" && (
-                <Card className="p-6">
-                  <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
+                <Card className="p-6 space-y-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                     <div>
-                      <h3 className="flex items-center gap-2 font-display text-lg font-bold text-ink">
+                      <h3 className="flex items-center gap-2 font-display text-xl font-bold text-ink">
                         <Gamepad2 className="h-5 w-5 text-indigo-600" strokeWidth={2.5} />
                         Desempenho nos Minijogos Educativos
                       </h3>
@@ -1422,7 +1412,6 @@ export default function ParentDashboard() {
                         Pontuações, tempo dedicado e histórico de partidas concluídas pelos filhos.
                       </p>
                     </div>
-
                     <Badge tone="sky">
                       {filteredGameSessions.length}{" "}
                       {filteredGameSessions.length === 1 ? "partida registrada" : "partidas registradas"}
@@ -1440,94 +1429,274 @@ export default function ParentDashboard() {
                       </p>
                     </div>
                   ) : (
-                    <div className="grid gap-3 sm:grid-cols-2">
-                      {filteredGameSessions.map((session) => {
-                        const theme = getSubject(session.subject_id);
-                        const childDisplayName = childMap[session.child_id] || "Estudante";
-                        const gameItem = gameMap[session.game_id];
-
-                        return (
-                          <div
-                            key={session.id}
-                            className="flex flex-col justify-between rounded-2xl border-2 border-indigo-500/20 bg-white/95 p-4 shadow-sm"
-                          >
-                            <div>
-                              <div className="mb-2 flex flex-wrap items-center justify-between gap-1">
-                                <div className="flex items-center gap-1.5">
-                                  <span>{theme?.emoji || "🎮"}</span>
-                                  <span className="font-display text-xs font-bold text-ink">
-                                    {theme?.name || session.subject_id}
-                                  </span>
-                                  <span className="text-[11px] font-bold text-candy">
-                                    ({childDisplayName})
-                                  </span>
-                                </div>
-                                <span className="text-[10px] text-ink-soft">
-                                  {formatDateTime(session.completed_at)}
-                                </span>
-                              </div>
-
-                              <div className="flex items-start gap-3 mb-3">
-                                {gameItem?.cover_url ? (
-                                  // eslint-disable-next-line @next/next/no-img-element
-                                  <img
-                                    src={gameItem.cover_url}
-                                    alt="Cover"
-                                    className="h-12 w-16 shrink-0 rounded-lg object-cover border border-slate-200"
-                                  />
-                                ) : (
-                                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-indigo-50 text-xl text-indigo-600">
-                                    🎮
-                                  </span>
-                                )}
-                                <div className="min-w-0 flex-1">
-                                  <p className="text-sm font-bold text-ink truncate">
-                                    {session.game_title}
-                                  </p>
-                                  <div className="mt-1 flex flex-wrap items-center gap-2">
-                                    <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-bold text-emerald-800">
-                                      <Trophy className="h-3.5 w-3.5 text-emerald-600" />
-                                      {session.score} / {session.max_score} pts ({session.score_pct}%)
+                    <div className="overflow-hidden rounded-2xl border border-lilac/15 bg-white shadow-sm">
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-sm">
+                          <thead className="bg-slate-50 text-xs font-bold text-ink">
+                            <tr>
+                              <th className="px-4 py-3 text-left">Matéria</th>
+                              <th className="px-4 py-3 text-left">Jogo</th>
+                              <th className="px-4 py-3 text-left">Criança</th>
+                              <th className="px-4 py-3 text-center">Pontuação</th>
+                              <th className="px-4 py-3 text-center">Tempo</th>
+                              <th className="px-4 py-3 text-center">Data</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-slate-100">
+                            {filteredGameSessions.map((session) => {
+                              const theme = getSubject(session.subject_id);
+                              const childDisplayName = childMap[session.child_id] || "Estudante";
+                              return (
+                                <tr key={session.id} className="hover:bg-slate-50/70 transition cursor-pointer" onClick={() => setSelectedGameDetail(session)}>
+                                  <td className="px-4 py-3">
+                                    <span className="inline-flex items-center gap-1 rounded-full bg-lilac/10 px-2.5 py-0.5 text-xs font-bold text-lilac">
+                                      <span>{theme?.emoji || "🎮"}</span>
+                                      <span>{theme?.name || session.subject_id}</span>
                                     </span>
-                                    {session.time_spent_seconds > 0 && (
-                                      <span className="text-[11px] text-ink-soft flex items-center gap-1">
+                                  </td>
+                                  <td className="px-4 py-3">
+                                    <p className="font-bold text-ink line-clamp-1">{session.game_title}</p>
+                                  </td>
+                                  <td className="px-4 py-3">
+                                    <span className="text-xs font-bold text-candy">{childDisplayName}</span>
+                                  </td>
+                                  <td className="px-4 py-3 text-center">
+                                    <span className="inline-flex items-center gap-1 font-bold text-emerald-700 text-xs">
+                                      <Trophy className="h-3.5 w-3.5 text-emerald-600" />
+                                      {session.score}/{session.max_score} ({session.score_pct}%)
+                                    </span>
+                                  </td>
+                                  <td className="px-4 py-3 text-center text-xs text-ink-soft">
+                                    {session.time_spent_seconds > 0 ? (
+                                      <span className="flex items-center justify-center gap-1">
                                         <Clock className="h-3 w-3" />
                                         {session.time_spent_seconds}s
                                       </span>
-                                    )}
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
-                            {session.details && Object.keys(session.details).length > 0 && (
-                              <div className="flex flex-wrap gap-1.5 pt-2 border-t border-indigo-100 text-[11px]">
-                                {session.details.acertos !== undefined && (
-                                  <span className="rounded-md bg-emerald-50 px-2 py-0.5 text-emerald-700 font-bold border border-emerald-200">
-                                    {session.details.acertos} acertos
-                                  </span>
-                                )}
-                                {session.details.erros !== undefined && (
-                                  <span className="rounded-md bg-rose-50 px-2 py-0.5 text-rose-700 font-bold border border-rose-200">
-                                    {session.details.erros} erros
-                                  </span>
-                                )}
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })}
+                                    ) : "—"}
+                                  </td>
+                                  <td className="px-4 py-3 text-center text-xs text-ink-soft font-semibold">
+                                    {formatDateTime(session.completed_at)}
+                                  </td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   )}
                 </Card>
               )}
 
+              {/* Game Detail Modal */}
+              <AnimatePresence>
+                {selectedGameDetail && (
+                  <motion.div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-ink/50 backdrop-blur-md p-3 sm:p-6"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    onClick={() => setSelectedGameDetail(null)}
+                  >
+                    <motion.div
+                      className="clay relative flex max-h-[90vh] w-full max-w-lg flex-col bg-cream/95 p-0 overflow-hidden shadow-2xl"
+                      initial={{ scale: 0.94, y: 20 }}
+                      animate={{ scale: 1, y: 0 }}
+                      exit={{ scale: 0.94, y: 20 }}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <div className="flex items-center justify-between gap-3 border-b border-lilac/15 bg-white/80 px-5 py-4">
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div
+                            className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl text-xl shadow-sm"
+                            style={{ backgroundColor: `${getSubject(selectedGameDetail.subject_id)?.hex || "#6366F1"}25` }}
+                          >
+                            {getSubject(selectedGameDetail.subject_id)?.emoji || "🎮"}
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <h3 className="font-display text-lg font-bold text-ink truncate">
+                              {selectedGameDetail.game_title}
+                            </h3>
+                            <div className="flex flex-wrap items-center gap-2 text-xs text-ink-soft">
+                              <span>{getSubject(selectedGameDetail.subject_id)?.name || selectedGameDetail.subject_id}</span>
+                              <span>&middot;</span>
+                              <span>{childMap[selectedGameDetail.child_id] || "Estudante"}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => setSelectedGameDetail(null)}
+                          className="press grid h-9 w-9 place-items-center rounded-full bg-candy-soft text-[#b03b6e] shadow-sm"
+                        >
+                          <X className="h-4 w-4" />
+                        </button>
+                      </div>
+
+                      <div className="flex-1 overflow-y-auto p-5 space-y-4">
+                        <div className="rounded-2xl border border-lilac/15 bg-white p-4 text-center">
+                          <p className="text-xs font-bold text-ink-soft mb-2">Pontuação</p>
+                          <div className="flex items-center justify-center gap-3">
+                            <Trophy className="h-8 w-8 text-emerald-600" />
+                            <span className="font-display text-4xl font-bold text-ink">{selectedGameDetail.score}</span>
+                            <span className="text-lg text-ink-soft font-semibold">/ {selectedGameDetail.max_score}</span>
+                          </div>
+                          <span className={cn(
+                            "mt-2 inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-bold",
+                            selectedGameDetail.score_pct >= 70 ? "bg-emerald-100 text-emerald-800" : "bg-amber-100 text-amber-800"
+                          )}>
+                            {selectedGameDetail.score_pct}% de aproveitamento
+                          </span>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-3">
+                          <div className="rounded-2xl border border-lilac/15 bg-white p-3 text-center">
+                            <p className="text-[10px] font-bold text-ink-soft mb-1">Tempo</p>
+                            <p className="font-bold text-ink flex items-center justify-center gap-1">
+                              <Clock className="h-4 w-4 text-lilac" />
+                              {selectedGameDetail.time_spent_seconds > 0 ? `${selectedGameDetail.time_spent_seconds}s` : "—"}
+                            </p>
+                          </div>
+                          <div className="rounded-2xl border border-lilac/15 bg-white p-3 text-center">
+                            <p className="text-[10px] font-bold text-ink-soft mb-1">Data</p>
+                            <p className="font-bold text-ink text-sm">{formatDateTime(selectedGameDetail.completed_at)}</p>
+                          </div>
+                        </div>
+
+                        {selectedGameDetail.details && Object.keys(selectedGameDetail.details).length > 0 && (
+                          <div className="rounded-2xl border border-lilac/15 bg-white p-4">
+                            <p className="text-xs font-bold text-ink mb-3">Detalhes da Partida</p>
+                            <div className="flex flex-wrap gap-2">
+                              {selectedGameDetail.details.acertos !== undefined && (
+                                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-700 border border-emerald-200">
+                                  <CheckCircle2 className="h-3.5 w-3.5" />
+                                  {selectedGameDetail.details.acertos} acertos
+                                </span>
+                              )}
+                              {selectedGameDetail.details.erros !== undefined && (
+                                <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50 px-3 py-1.5 text-xs font-bold text-rose-700 border border-rose-200">
+                                  <XCircle className="h-3.5 w-3.5" />
+                                  {selectedGameDetail.details.erros} erros
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              <AnimatePresence>
+                {selectedGameDetail && (
+                  <motion.div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-ink/50 backdrop-blur-md p-3 sm:p-6"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    onClick={() => setSelectedGameDetail(null)}
+                  >
+                    <motion.div
+                      className="clay relative flex max-h-[90vh] w-full max-w-lg flex-col bg-cream/95 p-0 overflow-hidden shadow-2xl"
+                      initial={{ scale: 0.94, y: 20 }}
+                      animate={{ scale: 1, y: 0 }}
+                      exit={{ scale: 0.94, y: 20 }}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {/* Header */}
+                      <div className="flex items-center justify-between gap-3 border-b border-lilac/15 bg-white/80 px-5 py-4">
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div
+                            className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl text-xl shadow-sm"
+                            style={{ backgroundColor: `${getSubject(selectedGameDetail.subject_id)?.hex || "#6366F1"}25` }}
+                          >
+                            {getSubject(selectedGameDetail.subject_id)?.emoji || "🎮"}
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <h3 className="font-display text-lg font-bold text-ink truncate">
+                              {selectedGameDetail.game_title}
+                            </h3>
+                            <div className="flex flex-wrap items-center gap-2 text-xs text-ink-soft">
+                              <span>{getSubject(selectedGameDetail.subject_id)?.name || selectedGameDetail.subject_id}</span>
+                              <span>&middot;</span>
+                              <span>{childMap[selectedGameDetail.child_id] || "Estudante"}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => setSelectedGameDetail(null)}
+                          className="press grid h-9 w-9 place-items-center rounded-full bg-candy-soft text-[#b03b6e] shadow-sm"
+                        >
+                          <X className="h-4 w-4" />
+                        </button>
+                      </div>
+
+                      {/* Body */}
+                      <div className="flex-1 overflow-y-auto p-5 space-y-4">
+                        {/* Score */}
+                        <div className="rounded-2xl border border-lilac/15 bg-white p-4 text-center">
+                          <p className="text-xs font-bold text-ink-soft mb-2">Pontuação</p>
+                          <div className="flex items-center justify-center gap-3">
+                            <Trophy className="h-8 w-8 text-emerald-600" />
+                            <span className="font-display text-4xl font-bold text-ink">
+                              {selectedGameDetail.score}
+                            </span>
+                            <span className="text-lg text-ink-soft font-semibold">/ {selectedGameDetail.max_score}</span>
+                          </div>
+                          <span className={cn(
+                            "mt-2 inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-bold",
+                            selectedGameDetail.score_pct >= 70 ? "bg-emerald-100 text-emerald-800" : "bg-amber-100 text-amber-800"
+                          )}>
+                            {selectedGameDetail.score_pct}% de aproveitamento
+                          </span>
+                        </div>
+
+                        {/* Stats */}
+                        <div className="grid grid-cols-2 gap-3">
+                          <div className="rounded-2xl border border-lilac/15 bg-white p-3 text-center">
+                            <p className="text-[10px] font-bold text-ink-soft mb-1">Tempo</p>
+                            <p className="font-bold text-ink flex items-center justify-center gap-1">
+                              <Clock className="h-4 w-4 text-lilac" />
+                              {selectedGameDetail.time_spent_seconds > 0 ? `${selectedGameDetail.time_spent_seconds}s` : "—"}
+                            </p>
+                          </div>
+                          <div className="rounded-2xl border border-lilac/15 bg-white p-3 text-center">
+                            <p className="text-[10px] font-bold text-ink-soft mb-1">Data</p>
+                            <p className="font-bold text-ink text-sm">{formatDateTime(selectedGameDetail.completed_at)}</p>
+                          </div>
+                        </div>
+
+                        {/* Details */}
+                        {selectedGameDetail.details && Object.keys(selectedGameDetail.details).length > 0 && (
+                          <div className="rounded-2xl border border-lilac/15 bg-white p-4">
+                            <p className="text-xs font-bold text-ink mb-3">Detalhes da Partida</p>
+                            <div className="flex flex-wrap gap-2">
+                              {selectedGameDetail.details.acertos !== undefined && (
+                                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-700 border border-emerald-200">
+                                  <CheckCircle2 className="h-3.5 w-3.5" />
+                                  {selectedGameDetail.details.acertos} acertos
+                                </span>
+                              )}
+                              {selectedGameDetail.details.erros !== undefined && (
+                                <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50 px-3 py-1.5 text-xs font-bold text-rose-700 border border-rose-200">
+                                  <XCircle className="h-3.5 w-3.5" />
+                                  {selectedGameDetail.details.erros} erros
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
               {/* ==================== TAB 4: MATERIAIS DE APOIO ACESSADOS ==================== */}
               {activeTab === "materials" && (
-                <Card className="p-6">
-                  <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
+                <Card className="p-6 space-y-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                     <div>
-                      <h3 className="flex items-center gap-2 font-display text-lg font-bold text-ink">
+                      <h3 className="flex items-center gap-2 font-display text-xl font-bold text-ink">
                         <FolderDown className="h-5 w-5 text-sky" strokeWidth={2.5} />
                         Materiais de Estudo Acessados pelos Filhos
                       </h3>
@@ -1535,7 +1704,6 @@ export default function ParentDashboard() {
                         Vídeos, áudios, imagens e PDFs visualizados ou baixados para estudo.
                       </p>
                     </div>
-
                     <Badge tone="sky">
                       {materialReport.length}{" "}
                       {materialReport.length === 1 ? "material consumido" : "materiais consumidos"}
@@ -1554,151 +1722,77 @@ export default function ParentDashboard() {
                       </p>
                     </div>
                   ) : (
-                    <div className="grid gap-3 sm:grid-cols-2">
-                      {materialReport.map((item, idx) => {
-                        const theme = getSubject(item.subjectId);
-                        const catInfo = getCategoryInfo(item.category);
-
-                        return (
-                          <div
-                            key={idx}
-                            className="flex flex-col justify-between rounded-2xl border-2 border-sky/15 bg-white/90 p-4 shadow-sm"
-                          >
-                            <div>
-                              <div className="mb-2 flex flex-wrap items-center justify-between gap-1">
-                                <div className="flex items-center gap-1.5">
-                                  <span>{theme?.emoji || "📖"}</span>
-                                  <span className="font-display text-xs font-bold text-ink">
-                                    {theme?.name || item.subjectId}
-                                  </span>
-                                  <span className="text-[11px] font-bold text-candy">
-                                    ({item.childName})
-                                  </span>
-                                </div>
-                                <span className="text-[10px] text-ink-soft">
-                                  {formatDateTime(item.lastAccess)}
-                                </span>
-                              </div>
-
-                              <div className="flex items-start gap-2 mb-3">
-                                <span className="text-xl mt-0.5">{catInfo.emoji}</span>
-                                <div className="min-w-0 flex-1">
-                                  <p className="text-sm font-bold text-ink truncate">
-                                    {item.title}
-                                  </p>
-                                  <span className="text-xs text-ink-soft capitalize">
-                                    {item.mediaType} &middot; {catInfo.label}
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-lilac/10 text-xs">
-                              {item.viewed && (
-                                <span className="inline-flex items-center gap-1 rounded-full bg-mint-soft px-2.5 py-0.5 text-xs font-bold text-[#05795b]">
-                                  <Eye className="h-3.5 w-3.5" />
-                                  Visualizado ({item.viewCount}x)
-                                </span>
-                              )}
-                              {item.downloaded && (
-                                <span className="inline-flex items-center gap-1 rounded-full bg-sky-soft px-2.5 py-0.5 text-xs font-bold text-[#1a8bb0]">
-                                  <Download className="h-3.5 w-3.5" />
-                                  Baixado ({item.downloadCount}x)
-                                </span>
-                              )}
-                            </div>
-                          </div>
-                        );
-                      })}
+                    <div className="overflow-hidden rounded-2xl border border-lilac/15 bg-white shadow-sm">
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-sm">
+                          <thead className="bg-slate-50 text-xs font-bold text-ink">
+                            <tr>
+                              <th className="px-4 py-3 text-left">Matéria</th>
+                              <th className="px-4 py-3 text-left">Material</th>
+                              <th className="px-4 py-3 text-left">Criança</th>
+                              <th className="px-4 py-3 text-center">Tipo</th>
+                              <th className="px-4 py-3 text-center">Ações</th>
+                              <th className="px-4 py-3 text-center">Último Acesso</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-slate-100">
+                            {materialReport.map((item, idx) => {
+                              const theme = getSubject(item.subjectId);
+                              const catInfo = getCategoryInfo(item.category);
+                              return (
+                                <tr key={idx} className="hover:bg-slate-50/70 transition">
+                                  <td className="px-4 py-3">
+                                    <span className="inline-flex items-center gap-1 rounded-full bg-lilac/10 px-2.5 py-0.5 text-xs font-bold text-lilac">
+                                      <span>{theme?.emoji || "📖"}</span>
+                                      <span>{theme?.name || item.subjectId}</span>
+                                    </span>
+                                  </td>
+                                  <td className="px-4 py-3">
+                                    <div className="flex items-center gap-2">
+                                      <span className="text-base">{catInfo.emoji}</span>
+                                      <div className="min-w-0">
+                                        <p className="font-bold text-ink line-clamp-1">{item.title}</p>
+                                        <span className="text-[11px] text-ink-soft capitalize">{catInfo.label}</span>
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td className="px-4 py-3">
+                                    <span className="text-xs font-bold text-candy">{item.childName}</span>
+                                  </td>
+                                  <td className="px-4 py-3 text-center">
+                                    <span className="text-xs font-semibold text-ink-soft capitalize">{item.mediaType}</span>
+                                  </td>
+                                  <td className="px-4 py-3 text-center">
+                                    <div className="flex items-center justify-center gap-2">
+                                      {item.viewed && (
+                                        <span className="inline-flex items-center gap-1 rounded-full bg-mint-soft px-2 py-0.5 text-[10px] font-bold text-[#05795b]">
+                                          <Eye className="h-3 w-3" />
+                                          {item.viewCount}x
+                                        </span>
+                                      )}
+                                      {item.downloaded && (
+                                        <span className="inline-flex items-center gap-1 rounded-full bg-sky-soft px-2 py-0.5 text-[10px] font-bold text-[#1a8bb0]">
+                                          <Download className="h-3 w-3" />
+                                          {item.downloadCount}x
+                                        </span>
+                                      )}
+                                    </div>
+                                  </td>
+                                  <td className="px-4 py-3 text-center text-xs text-ink-soft font-semibold">
+                                    {formatDateTime(item.lastAccess)}
+                                  </td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   )}
                 </Card>
               )}
 
-              {/* ==================== TAB 5: PONTOS DE ATENÇÃO (ERROS) ==================== */}
-              {activeTab === "errors" && (
-                <Card className="p-6">
-                  <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
-                    <div>
-                      <h3 className="flex items-center gap-2 font-display text-lg font-bold text-ink">
-                        <AlertTriangle className="h-5 w-5 text-candy" strokeWidth={2.5} />
-                        Erros Detalhados para Revisão
-                      </h3>
-                      <p className="text-xs text-ink-soft sm:text-sm">
-                        Questões em que as crianças erraram, prontas para revisão orientada pelos pais.
-                      </p>
-                    </div>
-
-                    <Badge tone="candy">
-                      {allErrors.length} {allErrors.length === 1 ? "ponto de atenção" : "pontos de atenção"}
-                    </Badge>
-                  </div>
-
-                  {allErrors.length === 0 ? (
-                    <div className="py-12 text-center">
-                      <div className="mb-2 text-4xl">🌟</div>
-                      <p className="font-display text-lg font-bold text-mint">
-                        Nenhum erro registrado no filtro selecionado!
-                      </p>
-                      <p className="mt-1 text-xs text-ink-soft">
-                        Desempenho perfeito nas listas resolvidas.
-                      </p>
-                    </div>
-                  ) : (
-                    <div className="grid gap-3 sm:grid-cols-2">
-                      {allErrors.map((err, idx) => (
-                        <div
-                          key={idx}
-                          className="flex flex-col justify-between rounded-2xl border-2 border-candy/15 bg-white/90 p-4 shadow-sm"
-                        >
-                          <div>
-                            <div className="mb-2 flex flex-wrap items-center justify-between gap-1">
-                              <div className="flex items-center gap-1.5">
-                                <span>{err.subjectEmoji}</span>
-                                <span className="font-display text-xs font-bold text-ink">
-                                  {err.subjectName}
-                                </span>
-                                <span className="text-[11px] text-ink-soft">({err.childName})</span>
-                              </div>
-                              <span className="text-[10px] text-ink-soft">
-                                {formatDateTime(err.completedAt)}
-                              </span>
-                            </div>
-
-                            <p className="mb-3 text-xs font-bold text-ink sm:text-sm">
-                              ❓ {err.question}
-                            </p>
-                          </div>
-
-                          <div className="space-y-1.5 text-xs">
-                            {err.selected !== undefined && (
-                              <div className="flex items-start gap-2 rounded-xl bg-candy-soft p-2 text-[#a62f5f]">
-                                <XCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-candy" />
-                                <div>
-                                  <span className="font-bold">Marcou: </span>
-                                  <span>{String(err.selected)}</span>
-                                </div>
-                              </div>
-                            )}
-
-                            {err.correct !== undefined && (
-                              <div className="flex items-start gap-2 rounded-xl bg-mint-soft p-2 text-[#05795b]">
-                                <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-mint" />
-                                <div>
-                                  <span className="font-bold">Correto: </span>
-                                  <span>{String(err.correct)}</span>
-                                </div>
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </Card>
-              )}
-
-              {/* ==================== TAB 6: LINHA DO TEMPO ==================== */}
+              {/* ==================== TAB 5: LINHA DO TEMPO ==================== */}
               {activeTab === "timeline" && (
                 <div className="space-y-6">
                   {events.length === 0 ? (
