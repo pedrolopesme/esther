@@ -125,6 +125,9 @@ export default function ParentDashboard() {
   const [listFilterSubject, setListFilterSubject] = useState("");
   const [listFilterStatus, setListFilterStatus] = useState("all"); // "all" | "done" | "pending"
   const [listFilterGrade, setListFilterGrade] = useState("");
+  const [listSortField, setListSortField] = useState("created_at"); // "created_at" | "title" | "question_count"
+  const [listSortDir, setListSortDir] = useState("desc"); // "asc" | "desc"
+  const [listFilterAccess, setListFilterAccess] = useState("all"); // "all" | "pending" | "accessed"
   const [selectedListAccesses, setSelectedListAccesses] = useState(null);
   const [selectedSessionDetail, setSelectedSessionDetail] = useState(null);
   const [selectedGameDetail, setSelectedGameDetail] = useState(null);
@@ -462,6 +465,7 @@ export default function ParentDashboard() {
         question_count: list.question_count || 0,
         accessCount: sessions.length,
         sessions,
+        created_at: list.created_at || list.exercise_date || null,
       };
     });
   }, [exerciseLists, filteredSessions]);
@@ -475,15 +479,29 @@ export default function ParentDashboard() {
         : true;
       const matchSubject = listFilterSubject ? item.subject === listFilterSubject : true;
       const matchGrade = listFilterGrade ? item.ano_letivo === listFilterGrade : true;
-      const matchStatus =
-        listFilterStatus === "done"
+      const matchAccess =
+        listFilterAccess === "accessed"
           ? item.accessCount > 0
-          : listFilterStatus === "pending"
+          : listFilterAccess === "pending"
           ? item.accessCount === 0
           : true;
-      return matchTitle && matchSubject && matchGrade && matchStatus;
+      return matchTitle && matchSubject && matchGrade && matchAccess;
+    }).sort((a, b) => {
+      const dir = listSortDir === "asc" ? 1 : -1;
+      if (listSortField === "created_at") {
+        const da = a.created_at ? new Date(a.created_at).getTime() : 0;
+        const db = b.created_at ? new Date(b.created_at).getTime() : 0;
+        return (db - da) * dir;
+      }
+      if (listSortField === "title") {
+        return (a.title || "").localeCompare(b.title || "") * dir;
+      }
+      if (listSortField === "question_count") {
+        return ((a.question_count || 0) - (b.question_count || 0)) * dir;
+      }
+      return 0;
     });
-  }, [publishedListsTableData, listSearchTitle, listFilterSubject, listFilterGrade, listFilterStatus]);
+  }, [publishedListsTableData, listSearchTitle, listFilterSubject, listFilterGrade, listFilterAccess, listSortField, listSortDir]);
 
   // Accesses for the selected list (modal data)
   const listAccessesData = useMemo(() => {
@@ -1086,12 +1104,12 @@ export default function ParentDashboard() {
                         <Filter className="h-3.5 w-3.5 text-lilac" /> Filtrar Listas:
                       </span>
 
-                      {(listSearchTitle || listFilterSubject || listFilterStatus !== "all" || listFilterGrade) && (
+                      {(listSearchTitle || listFilterSubject || listFilterAccess !== "all" || listFilterGrade) && (
                         <button
                           onClick={() => {
                             setListSearchTitle("");
                             setListFilterSubject("");
-                            setListFilterStatus("all");
+                            setListFilterAccess("all");
                             setListFilterGrade("");
                           }}
                           className="press rounded-xl bg-candy-soft px-3 py-1 text-xs font-bold text-[#b03b6e]"
@@ -1111,15 +1129,15 @@ export default function ParentDashboard() {
                         className="rounded-xl border border-lilac/20 bg-white px-3 py-1.5 text-xs font-semibold text-ink outline-none focus:border-lilac"
                       />
 
-                      {/* Status */}
+                      {/* Access filter */}
                       <select
-                        value={listFilterStatus}
-                        onChange={(e) => setListFilterStatus(e.target.value)}
+                        value={listFilterAccess}
+                        onChange={(e) => setListFilterAccess(e.target.value)}
                         className="rounded-xl border border-lilac/20 bg-white px-3 py-1.5 text-xs font-semibold text-ink outline-none focus:border-lilac"
                       >
-                        <option value="all">Todos os Status (Feitas e Não Feitas)</option>
-                        <option value="done">✅ Feitas / Concluídas</option>
-                        <option value="pending">⏳ Não Feitas / Pendentes</option>
+                        <option value="all">Todos os Acessos</option>
+                        <option value="accessed">✅ Acessados</option>
+                        <option value="pending">⏳ Pendentes</option>
                       </select>
 
                       {/* Subject */}
@@ -1162,15 +1180,22 @@ export default function ParentDashboard() {
                         <thead className="bg-slate-50 text-xs font-bold text-ink">
                           <tr>
                             <th className="px-4 py-3 text-left">Matéria</th>
-                            <th className="px-4 py-3 text-left">Título da Lista</th>
-                            <th className="px-4 py-3 text-center">Questões</th>
+                            <th className="px-4 py-3 text-center cursor-pointer select-none hover:text-lilac transition" onClick={() => { setListSortField("created_at"); setListSortDir((d) => d === "asc" ? "desc" : "asc"); }}>
+                              Data Criação {listSortField === "created_at" && (listSortDir === "asc" ? "↑" : "↓")}
+                            </th>
+                            <th className="px-4 py-3 text-left cursor-pointer select-none hover:text-lilac transition" onClick={() => { setListSortField("title"); setListSortDir((d) => d === "asc" ? "desc" : "asc"); }}>
+                              Título {listSortField === "title" && (listSortDir === "asc" ? "↑" : "↓")}
+                            </th>
+                            <th className="px-4 py-3 text-center cursor-pointer select-none hover:text-lilac transition" onClick={() => { setListSortField("question_count"); setListSortDir((d) => d === "asc" ? "desc" : "asc"); }}>
+                              Questões {listSortField === "question_count" && (listSortDir === "asc" ? "↑" : "↓")}
+                            </th>
                             <th className="px-4 py-3 text-center">Acessos</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100">
                           {filteredListsTableData.length === 0 ? (
                             <tr>
-                              <td colSpan="4" className="px-4 py-8 text-center text-ink-soft text-xs">
+                              <td colSpan="5" className="px-4 py-8 text-center text-ink-soft text-xs">
                                 Nenhuma lista encontrada com os filtros selecionados.
                               </td>
                             </tr>
@@ -1184,6 +1209,9 @@ export default function ParentDashboard() {
                                       <span>{theme?.emoji || "📖"}</span>
                                       <span>{theme?.name || item.subject}</span>
                                     </span>
+                                  </td>
+                                  <td className="px-4 py-3 text-center text-xs text-ink-soft font-semibold">
+                                    {item.created_at ? formatDateTime(item.created_at) : "—"}
                                   </td>
                                   <td className="px-4 py-3">
                                     <p className="font-bold text-ink line-clamp-1">{item.title}</p>
