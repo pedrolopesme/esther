@@ -125,7 +125,8 @@ export default function ParentDashboard() {
   const [listFilterSubject, setListFilterSubject] = useState("");
   const [listFilterStatus, setListFilterStatus] = useState("all"); // "all" | "done" | "pending"
   const [listFilterGrade, setListFilterGrade] = useState("");
-  const [selectedListDetail, setSelectedListDetail] = useState(null);
+  const [selectedListAccesses, setSelectedListAccesses] = useState(null);
+  const [selectedSessionDetail, setSelectedSessionDetail] = useState(null);
   const [selectedGameDetail, setSelectedGameDetail] = useState(null);
   const [materialFilterStatus, setMaterialFilterStatus] = useState("all"); // "all" | "viewed" | "not_viewed"
 
@@ -439,70 +440,31 @@ export default function ParentDashboard() {
     });
   }, [filteredSessions]);
 
-  // One row per session (attempt), plus one row per unattempted published list
+  // One row per published list, with session count
   const publishedListsTableData = useMemo(() => {
-    const listMeta = {};
-    for (const l of exerciseLists) {
-      listMeta[`${l.subject}/${l.slug}`] = l;
-    }
-    const rows = filteredSessions.map((s) => {
+    // Group sessions by list key
+    const sessionsByList = {};
+    for (const s of filteredSessions) {
       const key = `${s.list_subject}/${s.list_slug}`;
-      const list = listMeta[key];
-      const pct = s.total_questions > 0 ? Math.round((s.correct_count / s.total_questions) * 100) : 0;
+      if (!sessionsByList[key]) sessionsByList[key] = [];
+      sessionsByList[key].push(s);
+    }
+
+    return exerciseLists.map((list) => {
+      const key = `${list.subject}/${list.slug}`;
+      const sessions = sessionsByList[key] || [];
       return {
-        rowType: "session",
-        sessionId: s.id,
-        subject: s.list_subject,
-        slug: s.list_slug,
-        title: s.list_title || list?.title || s.list_slug,
-        ano_letivo: list?.ano_letivo || null,
-        question_count: s.total_questions || list?.question_count || 0,
-        childId: s.child_id,
-        childName: childMap[s.child_id] || "Estudante",
-        correct_count: s.correct_count || 0,
-        wrong_count: s.wrong_count || 0,
-        pct,
-        points_earned: s.points_earned || 0,
-        completed_at: s.completed_at,
-        wrong_details: Array.isArray(s.wrong_details) ? s.wrong_details : [],
+        id: list.id,
+        subject: list.subject,
+        slug: list.slug,
+        title: list.title,
+        ano_letivo: list.ano_letivo,
+        question_count: list.question_count || 0,
+        accessCount: sessions.length,
+        sessions,
       };
     });
-    const attemptedKeys = new Set(filteredSessions.map((s) => `${s.list_subject}/${s.list_slug}`));
-    for (const l of exerciseLists) {
-      const key = `${l.subject}/${l.slug}`;
-      if (!attemptedKeys.has(key)) {
-        rows.push({
-          rowType: "pending",
-          sessionId: `pending-${l.id}`,
-          subject: l.subject,
-          slug: l.slug,
-          title: l.title,
-          ano_letivo: l.ano_letivo,
-          question_count: l.question_count || 0,
-          childId: null,
-          childName: null,
-          correct_count: 0,
-          wrong_count: 0,
-          pct: 0,
-          points_earned: 0,
-          completed_at: null,
-          wrong_details: [],
-        });
-      }
-    }
-    return rows;
-  }, [exerciseLists, filteredSessions, childMap]);
-
-  // Detail for the selected session (single execution)
-  const listDetailData = useMemo(() => {
-    if (!selectedListDetail || selectedListDetail.rowType !== "session") return null;
-    const wrong = selectedListDetail.wrong_details.map((err) => ({
-      question: err.question || "Questão sem enunciado",
-      selected: err.selected,
-      correct: err.correct,
-    }));
-    return { wrong };
-  }, [selectedListDetail]);
+  }, [exerciseLists, filteredSessions]);
 
   // Filtered published lists table
   const filteredListsTableData = useMemo(() => {
@@ -515,13 +477,42 @@ export default function ParentDashboard() {
       const matchGrade = listFilterGrade ? item.ano_letivo === listFilterGrade : true;
       const matchStatus =
         listFilterStatus === "done"
-          ? item.rowType === "session"
+          ? item.accessCount > 0
           : listFilterStatus === "pending"
-          ? item.rowType === "pending"
+          ? item.accessCount === 0
           : true;
       return matchTitle && matchSubject && matchGrade && matchStatus;
     });
   }, [publishedListsTableData, listSearchTitle, listFilterSubject, listFilterGrade, listFilterStatus]);
+
+  // Accesses for the selected list (modal data)
+  const listAccessesData = useMemo(() => {
+    if (!selectedListAccesses) return null;
+    return selectedListAccesses.sessions.map((s) => {
+      const pct = s.total_questions > 0 ? Math.round((s.correct_count / s.total_questions) * 100) : 0;
+      return {
+        sessionId: s.id,
+        childId: s.child_id,
+        childName: childMap[s.child_id] || "Estudante",
+        correct_count: s.correct_count || 0,
+        wrong_count: s.wrong_count || 0,
+        total_questions: s.total_questions || 0,
+        pct,
+        completed_at: s.completed_at,
+        wrong_details: Array.isArray(s.wrong_details) ? s.wrong_details : [],
+      };
+    });
+  }, [selectedListAccesses, childMap]);
+
+  // Errors for the selected session (drill-down modal)
+  const sessionErrorsData = useMemo(() => {
+    if (!selectedSessionDetail) return null;
+    return selectedSessionDetail.wrong_details.map((err) => ({
+      question: err.question || "Questão sem enunciado",
+      selected: err.selected,
+      correct: err.correct,
+    }));
+  }, [selectedSessionDetail]);
 
   const uniqueGrades = useMemo(() => {
     return Array.from(new Set(exerciseLists.map((l) => l.ano_letivo).filter(Boolean)));
@@ -1170,80 +1161,52 @@ export default function ParentDashboard() {
                       <table className="w-full text-sm">
                         <thead className="bg-slate-50 text-xs font-bold text-ink">
                           <tr>
-                            <th className="px-4 py-3 text-center">Data Acesso</th>
-                            <th className="px-4 py-3 text-left">Criança</th>
                             <th className="px-4 py-3 text-left">Matéria</th>
                             <th className="px-4 py-3 text-left">Título da Lista</th>
                             <th className="px-4 py-3 text-center">Questões</th>
-                            <th className="px-4 py-3 text-center">Aproveitamento</th>
+                            <th className="px-4 py-3 text-center">Acessos</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100">
                           {filteredListsTableData.length === 0 ? (
                             <tr>
-                              <td colSpan="6" className="px-4 py-8 text-center text-ink-soft text-xs">
+                              <td colSpan="4" className="px-4 py-8 text-center text-ink-soft text-xs">
                                 Nenhuma lista encontrada com os filtros selecionados.
                               </td>
                             </tr>
                           ) : (
                             filteredListsTableData.map((item) => {
                               const theme = getSubject(item.subject);
-                              const isPending = item.rowType === "pending";
-
                               return (
-                                <tr key={item.sessionId} className="hover:bg-slate-50/70 transition cursor-pointer" onClick={() => !isPending && setSelectedListDetail(item)}>
-                                  {/* Date */}
-                                  <td className="px-4 py-3 text-center text-xs text-ink-soft font-semibold">
-                                    {isPending ? (
-                                      <span className="text-amber-700">Pendente</span>
-                                    ) : (
-                                      formatDateTime(item.completed_at)
-                                    )}
-                                  </td>
-
-                                  {/* Child */}
-                                  <td className="px-4 py-3">
-                                    {isPending ? (
-                                      <span className="text-xs text-ink-soft font-semibold">—</span>
-                                    ) : (
-                                      <span className="text-xs font-bold text-candy">{item.childName}</span>
-                                    )}
-                                  </td>
-
-                                  {/* Subject */}
+                                <tr key={item.id} className="hover:bg-slate-50/70 transition">
                                   <td className="px-4 py-3">
                                     <span className="inline-flex items-center gap-1 rounded-full bg-lilac/10 px-2.5 py-0.5 text-xs font-bold text-lilac">
                                       <span>{theme?.emoji || "📖"}</span>
                                       <span>{theme?.name || item.subject}</span>
                                     </span>
                                   </td>
-
-                                  {/* Title & Grade */}
                                   <td className="px-4 py-3">
                                     <p className="font-bold text-ink line-clamp-1">{item.title}</p>
                                     <span className="text-[11px] text-ink-soft">
                                       {item.ano_letivo || "Ensino Fundamental"}
                                     </span>
                                   </td>
-
-                                  {/* Question Count */}
                                   <td className="px-4 py-3 text-center text-xs font-bold text-ink">
                                     {item.question_count || 0}
                                   </td>
-
-                                  {/* Score */}
                                   <td className="px-4 py-3 text-center">
-                                    {isPending ? (
+                                    {item.accessCount > 0 ? (
+                                      <button
+                                        onClick={(e) => { e.stopPropagation(); setSelectedListAccesses(item); }}
+                                        className="press inline-flex items-center gap-1.5 rounded-full bg-lilac/15 px-3 py-1.5 text-xs font-bold text-lilac hover:bg-lilac/25 transition"
+                                      >
+                                        <Eye className="h-3.5 w-3.5" />
+                                        Ver acessos ({item.accessCount})
+                                      </button>
+                                    ) : (
                                       <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-bold text-amber-800">
                                         <CircleDashed className="h-3.5 w-3.5" />
                                         Pendente
-                                      </span>
-                                    ) : (
-                                      <span className={cn(
-                                        "inline-flex items-center gap-1 font-bold text-xs",
-                                        item.pct >= 70 ? "text-emerald-700" : "text-amber-700"
-                                      )}>
-                                        {item.pct}% ({item.correct_count}/{item.question_count})
                                       </span>
                                     )}
                                   </td>
@@ -1258,15 +1221,15 @@ export default function ParentDashboard() {
                 </Card>
               )}
 
-              {/* List Detail Modal */}
+              {/* Acessos Modal — list of sessions for a list */}
               <AnimatePresence>
-                {selectedListDetail && listDetailData && (
+                {selectedListAccesses && listAccessesData && (
                   <motion.div
                     className="fixed inset-0 z-50 flex items-center justify-center bg-ink/50 backdrop-blur-md p-3 sm:p-6"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    onClick={() => setSelectedListDetail(null)}
+                    onClick={() => { setSelectedListAccesses(null); setSelectedSessionDetail(null); }}
                   >
                     <motion.div
                       className="clay relative flex max-h-[90vh] w-full max-w-2xl flex-col bg-cream/95 p-0 overflow-hidden shadow-2xl"
@@ -1280,25 +1243,27 @@ export default function ParentDashboard() {
                         <div className="flex items-center gap-3 min-w-0">
                           <div
                             className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl text-xl shadow-sm"
-                            style={{ backgroundColor: `${getSubject(selectedListDetail.subject)?.hex || "#A370FF"}25` }}
+                            style={{ backgroundColor: `${getSubject(selectedListAccesses.subject)?.hex || "#A370FF"}25` }}
                           >
-                            {getSubject(selectedListDetail.subject)?.emoji || "📖"}
+                            {getSubject(selectedListAccesses.subject)?.emoji || "📖"}
                           </div>
                           <div className="min-w-0 flex-1">
                             <h3 className="font-display text-lg font-bold text-ink truncate">
-                              {selectedListDetail.title}
+                              {selectedListAccesses.title}
                             </h3>
                             <div className="flex flex-wrap items-center gap-2 text-xs text-ink-soft">
-                              <span>{getSubject(selectedListDetail.subject)?.name || selectedListDetail.subject}</span>
+                              <span>{getSubject(selectedListAccesses.subject)?.name || selectedListAccesses.subject}</span>
                               <span>&middot;</span>
-                              <span>{selectedListDetail.ano_letivo || "Ensino Fundamental"}</span>
+                              <span>{selectedListAccesses.ano_letivo || "Ensino Fundamental"}</span>
                               <span>&middot;</span>
-                              <span>{selectedListDetail.question_count || 0} questões</span>
+                              <span>{selectedListAccesses.question_count || 0} questões</span>
+                              <span>&middot;</span>
+                              <span>{listAccessesData.length} {listAccessesData.length === 1 ? "acesso" : "acessos"}</span>
                             </div>
                           </div>
                         </div>
                         <button
-                          onClick={() => setSelectedListDetail(null)}
+                          onClick={() => { setSelectedListAccesses(null); setSelectedSessionDetail(null); }}
                           className="press grid h-9 w-9 place-items-center rounded-full bg-candy-soft text-[#b03b6e] shadow-sm"
                         >
                           <X className="h-4 w-4" />
@@ -1306,60 +1271,92 @@ export default function ParentDashboard() {
                       </div>
 
                       {/* Body */}
-                      <div className="flex-1 overflow-y-auto p-5 space-y-4">
-                        {/* Score summary */}
-                        <div className="flex items-center justify-between gap-3 rounded-2xl border border-lilac/15 bg-white p-4">
-                          <div className="flex items-center gap-2.5">
-                            <div className="grid h-9 w-9 place-items-center rounded-full bg-lilac/15 text-sm font-bold text-lilac">
-                              {selectedListDetail.childName?.charAt(0).toUpperCase()}
-                            </div>
-                            <div>
-                              <p className="font-bold text-ink text-sm">{selectedListDetail.childName}</p>
-                              <p className="text-[10px] text-ink-soft">{formatDateTime(selectedListDetail.completed_at)}</p>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <span className={cn(
-                              "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold",
-                              selectedListDetail.pct >= 70 ? "bg-emerald-100 text-emerald-800" : "bg-amber-100 text-amber-800"
-                            )}>
-                              {selectedListDetail.pct >= 70 ? <CheckCircle2 className="h-3.5 w-3.5" /> : <Target className="h-3.5 w-3.5" />}
-                              {selectedListDetail.pct}% de acerto
-                            </span>
-                            <span className="text-xs text-ink-soft font-semibold">
-                              ({selectedListDetail.correct_count}/{selectedListDetail.question_count})
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Wrong answers */}
-                        {listDetailData.wrong.length > 0 ? (
-                          <div className="space-y-2">
-                            <p className="text-xs font-bold text-ink flex items-center gap-1.5">
-                              <XCircle className="h-3.5 w-3.5 text-candy" />
-                              Erros ({listDetailData.wrong.length})
-                            </p>
-                            {listDetailData.wrong.map((err, i) => (
-                              <div key={i} className="rounded-xl bg-candy-soft/30 border border-candy/10 p-3">
-                                <p className="text-xs font-semibold text-ink line-clamp-2 mb-1.5">
-                                  {err.question}
-                                </p>
-                                <div className="flex flex-wrap gap-x-4 gap-y-1 text-[11px]">
-                                  <span className="text-red-600 font-semibold">
-                                    ✗ Marcada: {err.selected || "—"}
-                                  </span>
-                                  <span className="text-emerald-700 font-semibold">
-                                    ✓ Correta: {err.correct || "—"}
-                                  </span>
+                      <div className="flex-1 overflow-y-auto p-5 space-y-3">
+                        {listAccessesData.map((acc) => (
+                          <div key={acc.sessionId}>
+                            <button
+                              onClick={() => setSelectedSessionDetail(selectedSessionDetail?.sessionId === acc.sessionId ? null : acc)}
+                              className={cn(
+                                "w-full flex items-center justify-between gap-3 rounded-2xl border p-4 text-left transition hover:shadow-md",
+                                selectedSessionDetail?.sessionId === acc.sessionId
+                                  ? "border-lilac bg-lilac/5"
+                                  : "border-lilac/15 bg-white"
+                              )}
+                            >
+                              <div className="flex items-center gap-2.5 min-w-0">
+                                <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-lilac/15 text-sm font-bold text-lilac">
+                                  {acc.childName.charAt(0).toUpperCase()}
+                                </div>
+                                <div className="min-w-0">
+                                  <p className="font-bold text-ink text-sm">{acc.childName}</p>
+                                  <p className="text-[10px] text-ink-soft">{formatDateTime(acc.completed_at)}</p>
                                 </div>
                               </div>
-                            ))}
+                              <div className="flex items-center gap-2 shrink-0">
+                                <span className={cn(
+                                  "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold",
+                                  acc.pct >= 70 ? "bg-emerald-100 text-emerald-800" : "bg-amber-100 text-amber-800"
+                                )}>
+                                  {acc.pct >= 70 ? <CheckCircle2 className="h-3.5 w-3.5" /> : <Target className="h-3.5 w-3.5" />}
+                                  {acc.pct}%
+                                </span>
+                                <span className="text-xs text-ink-soft font-semibold">
+                                  ({acc.correct_count}/{acc.total_questions})
+                                </span>
+                                {acc.wrong_details.length > 0 && (
+                                  <ChevronRight className={cn(
+                                    "h-4 w-4 text-ink-soft transition-transform",
+                                    selectedSessionDetail?.sessionId === acc.sessionId && "rotate-90"
+                                  )} />
+                                )}
+                              </div>
+                            </button>
+
+                            {/* Inline errors expansion */}
+                            <AnimatePresence>
+                              {selectedSessionDetail?.sessionId === acc.sessionId && acc.wrong_details.length > 0 && (
+                                <motion.div
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: "auto", opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  className="overflow-hidden"
+                                >
+                                  <div className="space-y-2 px-2 pt-2 pb-1">
+                                    {sessionErrorsData?.map((err, i) => (
+                                      <div key={i} className="rounded-xl bg-candy-soft/30 border border-candy/10 p-3">
+                                        <p className="text-xs font-semibold text-ink line-clamp-2 mb-1.5">
+                                          {err.question}
+                                        </p>
+                                        <div className="flex flex-wrap gap-x-4 gap-y-1 text-[11px]">
+                                          <span className="text-red-600 font-semibold">
+                                            ✗ Marcada: {err.selected || "—"}
+                                          </span>
+                                          <span className="text-emerald-700 font-semibold">
+                                            ✓ Correta: {err.correct || "—"}
+                                          </span>
+                                        </div>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </motion.div>
+                              )}
+                              {selectedSessionDetail?.sessionId === acc.sessionId && acc.wrong_details.length === 0 && (
+                                <motion.div
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: "auto", opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  className="overflow-hidden"
+                                >
+                                  <div className="px-2 pt-2 pb-1">
+                                    <div className="rounded-xl bg-emerald-50 border border-emerald-200 p-3 text-center">
+                                      <span className="text-xs font-bold text-emerald-700">🎉 Sem erros — desempenho perfeito!</span>
+                                    </div>
+                                  </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
                           </div>
-                        ) : (
-                          <div className="rounded-2xl border border-lilac/15 bg-white p-4 text-center">
-                            <span className="text-xs font-bold text-emerald-700">🎉 Sem erros — desempenho perfeito!</span>
-                          </div>
-                        )}
+                        ))}
                       </div>
                     </motion.div>
                   </motion.div>
