@@ -127,6 +127,7 @@ export default function ParentDashboard() {
   const [listFilterGrade, setListFilterGrade] = useState("");
   const [selectedListDetail, setSelectedListDetail] = useState(null);
   const [selectedGameDetail, setSelectedGameDetail] = useState(null);
+  const [materialFilterStatus, setMaterialFilterStatus] = useState("all"); // "all" | "viewed" | "not_viewed"
 
   // Form states for registering children
   const [childName, setChildName] = useState("");
@@ -551,7 +552,7 @@ export default function ParentDashboard() {
     return list;
   }, [filteredSessions, childMap]);
 
-  // Grouped material accesses report
+  // Grouped material accesses report + unaccessed published materials
   const materialReport = useMemo(() => {
     const map = {};
     for (const acc of filteredMaterialAccesses) {
@@ -586,10 +587,49 @@ export default function ParentDashboard() {
         map[key].lastAccess = acc.created_at;
       }
     }
-    return Object.values(map).sort(
-      (a, b) => new Date(b.lastAccess) - new Date(a.lastAccess)
-    );
-  }, [filteredMaterialAccesses, childMap, materialMap]);
+
+    // Add unaccessed published materials for each child
+    const activeChildren = children.filter((c) => c.active);
+    for (const child of activeChildren) {
+      for (const mat of materials) {
+        const key = `${child.id}_${mat.id}`;
+        if (!map[key]) {
+          map[key] = {
+            childId: child.id,
+            childName: child.name,
+            materialId: mat.id,
+            title: mat.title || "Material de Apoio",
+            subjectId: mat.subject_id || "geral",
+            category: mat.category || "apostila",
+            mediaType: mat.media_type || "document",
+            fileSize: mat.file_size || 0,
+            viewed: false,
+            downloaded: false,
+            viewCount: 0,
+            downloadCount: 0,
+            lastAccess: null,
+          };
+        }
+      }
+    }
+
+    return Object.values(map).sort((a, b) => {
+      // Accessed first, then by date desc; unaccessed last
+      if (a.lastAccess && b.lastAccess) return new Date(b.lastAccess) - new Date(a.lastAccess);
+      if (a.lastAccess) return -1;
+      if (b.lastAccess) return 1;
+      return a.title.localeCompare(b.title);
+    });
+  }, [filteredMaterialAccesses, childMap, materialMap, children, materials]);
+
+  // Filtered material report
+  const filteredMaterialReport = useMemo(() => {
+    return materialReport.filter((item) => {
+      if (materialFilterStatus === "viewed") return item.viewed || item.downloaded;
+      if (materialFilterStatus === "not_viewed") return !item.viewed && !item.downloaded;
+      return true;
+    });
+  }, [materialReport, materialFilterStatus]);
 
   const eventDayGroups = useMemo(() => groupByDay(filteredEvents), [filteredEvents]);
 
@@ -1618,34 +1658,56 @@ export default function ParentDashboard() {
                 )}
               </AnimatePresence>
 
-              {/* ==================== TAB 4: MATERIAIS DE APOIO ACESSADOS ==================== */}
+              {/* ==================== TAB 4: MATERIAIS DE APOIO ==================== */}
               {activeTab === "materials" && (
                 <Card className="p-6 space-y-6">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                     <div>
                       <h3 className="flex items-center gap-2 font-display text-xl font-bold text-ink">
                         <FolderDown className="h-5 w-5 text-sky" strokeWidth={2.5} />
-                        Materiais de Estudo Acessados pelos Filhos
+                        Materiais de Estudo
                       </h3>
                       <p className="text-xs text-ink-soft sm:text-sm">
-                        Vídeos, áudios, imagens e PDFs visualizados ou baixados para estudo.
+                        Todos os materiais publicados e o status de acesso de cada filho.
                       </p>
                     </div>
                     <Badge tone="sky">
-                      {materialReport.length}{" "}
-                      {materialReport.length === 1 ? "material consumido" : "materiais consumidos"}
+                      {filteredMaterialReport.length}{" "}
+                      {filteredMaterialReport.length === 1 ? "material" : "materiais"}
                     </Badge>
                   </div>
 
-                  {materialReport.length === 0 ? (
+                  {/* Filter */}
+                  <div className="clay-sm flex flex-col gap-3 bg-white/80 p-4">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <span className="text-xs font-bold text-ink flex items-center gap-1.5">
+                        <Filter className="h-3.5 w-3.5 text-lilac" /> Filtrar Materiais:
+                      </span>
+                      {materialFilterStatus !== "all" && (
+                        <button
+                          onClick={() => setMaterialFilterStatus("all")}
+                          className="press rounded-xl bg-candy-soft px-3 py-1 text-xs font-bold text-[#b03b6e]"
+                        >
+                          <X className="mr-1 inline h-3 w-3" /> Limpar Filtros
+                        </button>
+                      )}
+                    </div>
+                    <select
+                      value={materialFilterStatus}
+                      onChange={(e) => setMaterialFilterStatus(e.target.value)}
+                      className="rounded-xl border border-lilac/20 bg-white px-3 py-1.5 text-xs font-semibold text-ink outline-none focus:border-lilac"
+                    >
+                      <option value="all">Todos os Materiais</option>
+                      <option value="viewed">✅ Já Visualizados / Baixados</option>
+                      <option value="not_viewed">⏳ Não Visualizados</option>
+                    </select>
+                  </div>
+
+                  {filteredMaterialReport.length === 0 ? (
                     <div className="py-12 text-center">
                       <div className="mb-2 text-4xl">📂</div>
                       <p className="font-display text-lg font-bold text-ink">
-                        Nenhum material de apoio acessado ainda.
-                      </p>
-                      <p className="mt-1 text-xs text-ink-soft">
-                        Quando as crianças abrirem ou baixarem vídeos, PDFs ou áudios nas matérias,
-                        o histórico aparecerá detalhado aqui.
+                        Nenhum material encontrado com os filtros selecionados.
                       </p>
                     </div>
                   ) : (
@@ -1663,13 +1725,21 @@ export default function ParentDashboard() {
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-slate-100">
-                            {materialReport.map((item, idx) => {
+                            {filteredMaterialReport.map((item, idx) => {
                               const theme = getSubject(item.subjectId);
                               const catInfo = getCategoryInfo(item.category);
+                              const isAccessed = item.viewed || item.downloaded;
                               return (
-                                <tr key={idx} className="hover:bg-slate-50/70 transition">
-                                  <td className="px-4 py-3 text-center text-xs text-ink-soft font-semibold">
-                                    {formatDateTime(item.lastAccess)}
+                                <tr key={idx} className={cn("hover:bg-slate-50/70 transition", !isAccessed && "bg-amber-50/30")}>
+                                  <td className="px-4 py-3 text-center text-xs font-semibold">
+                                    {isAccessed ? (
+                                      <span className="text-ink-soft">{formatDateTime(item.lastAccess)}</span>
+                                    ) : (
+                                      <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-1 text-[10px] font-bold text-amber-800">
+                                        <CircleDashed className="h-3 w-3" />
+                                        Não visualizado
+                                      </span>
+                                    )}
                                   </td>
                                   <td className="px-4 py-3">
                                     <span className="text-xs font-bold text-candy">{item.childName}</span>
@@ -1705,6 +1775,9 @@ export default function ParentDashboard() {
                                           <Download className="h-3 w-3" />
                                           {item.downloadCount}x
                                         </span>
+                                      )}
+                                      {!isAccessed && (
+                                        <span className="text-[10px] text-ink-soft">—</span>
                                       )}
                                     </div>
                                   </td>
