@@ -94,6 +94,80 @@ function groupByDay(events) {
   return Object.entries(groups).sort(([a], [b]) => b.localeCompare(a));
 }
 
+/* ---------------- Analytics helpers ---------------- */
+
+/** Local-date key (YYYY-MM-DD). Avoids the UTC drift of toISOString(). */
+function dayKey(value) {
+  const d = value instanceof Date ? value : new Date(value);
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${d.getFullYear()}-${m}-${day}`;
+}
+
+/** Midnight-anchored local Date, n days before today. */
+function daysAgo(n) {
+  const d = new Date();
+  d.setHours(0, 0, 0, 0);
+  d.setDate(d.getDate() - n);
+  return d;
+}
+
+/** Ordered list of the last `span` local days, oldest first. */
+function buildDaySpan(span) {
+  const out = new Array(span);
+  for (let i = 0; i < span; i += 1) {
+    const d = daysAgo(span - 1 - i);
+    out[i] = { key: dayKey(d), date: d, count: 0, lists: 0, games: 0, materials: 0 };
+  }
+  return out;
+}
+
+/**
+ * Current and longest run of consecutive active days.
+ * An empty *today* does not break the current streak — the day is not over yet.
+ */
+function computeStreaks(days) {
+  let longest = 0;
+  let run = 0;
+  for (const d of days) {
+    if (d.count > 0) {
+      run += 1;
+      if (run > longest) longest = run;
+    } else {
+      run = 0;
+    }
+  }
+
+  let i = days.length - 1;
+  if (i >= 0 && days[i].count === 0) i -= 1;
+  let current = 0;
+  for (; i >= 0; i -= 1) {
+    if (days[i].count > 0) current += 1;
+    else break;
+  }
+
+  return { current, longest };
+}
+
+/** Start of the week (Sunday, local midnight) containing `value`. */
+function startOfWeek(value) {
+  const d = new Date(value);
+  d.setHours(0, 0, 0, 0);
+  d.setDate(d.getDate() - d.getDay());
+  return d;
+}
+
+const WEEK_MS = 604800000;
+
+/** Weekday initials for the study-rhythm chart. */
+const WEEKDAY_INITIALS = ["D", "S", "T", "Q", "Q", "S", "S"];
+
+/** Commitment score weights — regularity dominates, it is the habit that matters. */
+const COMMITMENT_WEIGHTS = { consistency: 0.4, coverage: 0.35, accuracy: 0.25 };
+
+/** Active days in a 30-day window that count as a fully consistent routine. */
+const TARGET_ACTIVE_DAYS = 12;
+
 export default function ParentDashboard() {
   const router = useRouter();
   const { isParent, isLoading: authLoading, user } = useAuth();
@@ -442,6 +516,280 @@ export default function ParentDashboard() {
       };
     });
   }, [filteredSessions]);
+
+  /* ---------------- Engagement analytics ---------------- */
+
+  /** Daily activity over the last 30 days, across all three pillars. */
+  const activityDays = useMemo(() => {
+    const span = buildDaySpan(30);
+    const index = {};
+    for (const d of span) index[d.key] = d;
+
+    const bump = (iso, field) => {
+      if (!iso) return;
+      const slot = index[dayKey(iso)];
+      if (!slot) return;
+      slot.count += 1;
+      slot[field] += 1;
+    };
+
+    for (const s of filteredSessions) bump(s.completed_at, "lists");
+    for (const g of filteredGameSessions) bump(g.completed_at, "games");
+    for (const a of filteredMaterialAccesses) bump(a.created_at, "materials");
+
+    return span;
+  }, [filteredSessions, filteredGameSessions, filteredMaterialAccesses]);
+
+  const streaks = useMemo(() => computeStreaks(activityDays), [activityDays]);
+
+  const activeDays30 = useMemo(
+    () => activityDays.reduce((n, d) => n + (d.count > 0 ? 1 : 0), 0),
+    [activityDays]
+  );
+
+  const activeDays7 = useMemo(
+    () => activityDays.slice(-7).reduce((n, d) => n + (d.count > 0 ? 1 : 0), 0),
+    [activityDays]
+  );
+
+  const peakDayCount = useMemo(
+    () => activityDays.reduce((max, d) => (d.count > max ? d.count : max), 0),
+    [activityDays]
+  );
+
+  /** Most recent activity across pillars. ISO strings compare lexicographically. */
+  const lastActivityAt = useMemo(() => {
+    let latest = null;
+    const consider = (iso) => {
+      if (iso && (!latest || iso > latest)) latest = iso;
+    };
+    for (const s of filteredSessions) consider(s.completed_at);
+    for (const g of filteredGameSessions) consider(g.completed_at);
+    for (const a of filteredMaterialAccesses) consider(a.created_at);
+    return latest;
+  }, [filteredSessions, filteredGameSessions, filteredMaterialAccesses]);
+
+  const daysSinceLastActivity = useMemo(() => {
+    if (!lastActivityAt) return null;
+    const last = new Date(lastActivityAt);
+    last.setHours(0, 0, 0, 0);
+    return Math.round((daysAgo(0).getTime() - last.getTime()) / 86400000);
+  }, [lastActivityAt]);
+
+  /**
+   * Commitment score (0-100): weighted blend of routine regularity, catalog
+   * coverage and answer accuracy. Regularity carries the most weight because
+   * a steady habit is what parents are actually trying to build.
+   */
+  const commitment = useMemo(() => {
+    const consistency = Math.min(100, Math.round((activeDays30 / TARGET_ACTIVE_DAYS) * 100));
+    const coverage = overallCompletionRate;
+    const accuracy = accuracyRate;
+    const score = Math.round(
+      consistency * COMMITMENT_WEIGHTS.consistency +
+        coverage * COMMITMENT_WEIGHTS.coverage +
+        accuracy * COMMITMENT_WEIGHTS.accuracy
+    );
+
+    let label = "Sem dados";
+    let hex = "#94a3b8";
+    let advice = "Ainda não há atividades registradas para avaliar o comprometimento.";
+
+    if (totalCompleted > 0 || distinctPlayedGamesCount > 0 || distinctViewedMaterialsCount > 0) {
+      if (score >= 75) {
+        label = "Excelente";
+        hex = "#10b981";
+        advice = "Rotina consistente e bom aproveitamento. Vale reconhecer o esforço!";
+      } else if (score >= 50) {
+        label = "Bom";
+        hex = "#4CC9F0";
+        advice = "Bom caminho. Aumentar a frequência semanal traria o maior ganho agora.";
+      } else if (score >= 25) {
+        label = "Irregular";
+        hex = "#f59e0b";
+        advice = "Os estudos acontecem em picos. Combinar dias fixos na semana ajuda a criar rotina.";
+      } else {
+        label = "Precisa de atenção";
+        hex = "#FF70A6";
+        advice = "Participação baixa. Vale sentar junto e definir uma meta pequena e semanal.";
+      }
+    }
+
+    return { score, consistency, coverage, accuracy, label, hex, advice };
+  }, [
+    activeDays30,
+    overallCompletionRate,
+    accuracyRate,
+    totalCompleted,
+    distinctPlayedGamesCount,
+    distinctViewedMaterialsCount,
+  ]);
+
+  /** Accuracy and volume per week for the last 8 weeks. */
+  const weeklyTrend = useMemo(() => {
+    const WEEKS = 8;
+    const anchor = startOfWeek(new Date());
+    const anchorMs = anchor.getTime();
+
+    const buckets = new Array(WEEKS);
+    for (let i = 0; i < WEEKS; i += 1) {
+      const start = new Date(anchor);
+      start.setDate(start.getDate() - (WEEKS - 1 - i) * 7);
+      buckets[i] = { start, correct: 0, wrong: 0, sessions: 0 };
+    }
+
+    for (const s of filteredSessions) {
+      if (!s.completed_at) continue;
+      const weeksBack = Math.round((anchorMs - startOfWeek(s.completed_at).getTime()) / WEEK_MS);
+      const idx = WEEKS - 1 - weeksBack;
+      if (idx < 0 || idx >= WEEKS) continue;
+      buckets[idx].correct += s.correct_count || 0;
+      buckets[idx].wrong += s.wrong_count || 0;
+      buckets[idx].sessions += 1;
+    }
+
+    return buckets.map((b) => {
+      const total = b.correct + b.wrong;
+      return {
+        label: `${String(b.start.getDate()).padStart(2, "0")}/${String(b.start.getMonth() + 1).padStart(2, "0")}`,
+        rate: total > 0 ? Math.round((b.correct / total) * 100) : null,
+        sessions: b.sessions,
+        total,
+      };
+    });
+  }, [filteredSessions]);
+
+  /**
+   * Geometry for the weekly combo chart: volume bars plus an accuracy line.
+   * Computed once per data change so the SVG stays declarative.
+   */
+  const weeklyChart = useMemo(() => {
+    const W = 320;
+    const H = 110;
+    const slot = W / weeklyTrend.length;
+    const maxSessions = weeklyTrend.reduce((m, w) => (w.sessions > m ? w.sessions : m), 0);
+
+    const bars = weeklyTrend.map((w, i) => {
+      const barH = maxSessions > 0 ? (w.sessions / maxSessions) * (H * 0.72) : 0;
+      return {
+        label: w.label,
+        sessions: w.sessions,
+        rate: w.rate,
+        x: i * slot + slot * 0.24,
+        width: slot * 0.52,
+        y: H - barH,
+        height: barH,
+        cx: i * slot + slot / 2,
+        cy: w.rate === null ? null : H - (w.rate / 100) * H,
+      };
+    });
+
+    const line = bars
+      .filter((b) => b.cy !== null)
+      .map((b) => `${b.cx.toFixed(1)},${b.cy.toFixed(1)}`)
+      .join(" ");
+
+    return { W, H, bars, line, maxSessions, hasData: maxSessions > 0 };
+  }, [weeklyTrend]);
+
+  /** Per-child commitment ranking. Always uses unfiltered data. */
+  const childEngagement = useMemo(() => {
+    if (children.length === 0) return [];
+
+    const since = daysAgo(29).getTime();
+    const byChild = {};
+    for (const c of children) {
+      byChild[c.id] = {
+        childId: c.id,
+        name: c.name,
+        active: c.active,
+        correct: 0,
+        wrong: 0,
+        points: 0,
+        games: 0,
+        materials: 0,
+        listKeys: new Set(),
+        days: new Set(),
+      };
+    }
+
+    const markDay = (entry, iso) => {
+      if (!iso) return;
+      if (new Date(iso).getTime() >= since) entry.days.add(dayKey(iso));
+    };
+
+    for (const s of sessions) {
+      const e = byChild[s.child_id];
+      if (!e) continue;
+      e.correct += s.correct_count || 0;
+      e.wrong += s.wrong_count || 0;
+      e.points += s.points_earned || 0;
+      e.listKeys.add(`${s.list_subject}/${s.list_slug}`);
+      markDay(e, s.completed_at);
+    }
+    for (const g of gameSessions) {
+      const e = byChild[g.child_id];
+      if (!e) continue;
+      e.games += 1;
+      markDay(e, g.completed_at);
+    }
+    for (const a of materialAccesses) {
+      const e = byChild[a.child_id];
+      if (!e) continue;
+      e.materials += 1;
+      markDay(e, a.created_at);
+    }
+
+    return Object.values(byChild)
+      .map((e) => {
+        const answered = e.correct + e.wrong;
+        const accuracy = answered > 0 ? Math.round((e.correct / answered) * 100) : 0;
+        const activeDays = e.days.size;
+        const consistency = Math.min(100, Math.round((activeDays / TARGET_ACTIVE_DAYS) * 100));
+        const coverage =
+          totalPublishedLists > 0 ? Math.round((e.listKeys.size / totalPublishedLists) * 100) : 0;
+        const score = Math.round(
+          consistency * COMMITMENT_WEIGHTS.consistency +
+            coverage * COMMITMENT_WEIGHTS.coverage +
+            accuracy * COMMITMENT_WEIGHTS.accuracy
+        );
+        return {
+          ...e,
+          doneLists: e.listKeys.size,
+          answered,
+          accuracy,
+          activeDays,
+          score,
+        };
+      })
+      .sort((a, b) => b.score - a.score);
+  }, [children, sessions, gameSessions, materialAccesses, totalPublishedLists]);
+
+  /** Best attempt per list, kept only when it still sits below the 70% bar. */
+  const reviewTargets = useMemo(() => {
+    const best = {};
+    for (const s of filteredSessions) {
+      const key = `${s.list_subject}/${s.list_slug}`;
+      const total = s.total_questions || 0;
+      const pct = total > 0 ? Math.round((s.correct_count / total) * 100) : 0;
+      const prev = best[key];
+      if (!prev || pct > prev.pct) {
+        best[key] = {
+          key,
+          pct,
+          subject: s.list_subject,
+          title: s.list_title || s.list_slug,
+          childName: childMap[s.child_id] || "Estudante",
+          completedAt: s.completed_at,
+          wrongCount: s.wrong_count || 0,
+        };
+      }
+    }
+    return Object.values(best)
+      .filter((r) => r.pct < 70)
+      .sort((a, b) => a.pct - b.pct)
+      .slice(0, 5);
+  }, [filteredSessions, childMap]);
 
   // One row per published list, with session count
   const publishedListsTableData = useMemo(() => {
@@ -850,230 +1198,672 @@ export default function ParentDashboard() {
               {/* ==================== TAB 1: DESEMPENHO GERAL & GRÁFICOS ==================== */}
               {activeTab === "performance" && (
                 <div className="space-y-6">
-                  {/* Overview Balance of Done vs Pending Activities */}
-                  <Card className="p-6">
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
-                      <div>
-                        <h3 className="flex items-center gap-2 font-display text-xl font-bold text-ink">
-                          <PieChart className="h-5 w-5 text-lilac" strokeWidth={2.5} />
-                          Visão Geral de Todas as Atividades (Feitas vs Pendentes)
-                        </h3>
-                        <p className="text-xs text-ink-soft sm:text-sm">
-                          Balanço de participação considerando listas de exercícios, minijogos e materiais de apoio.
-                        </p>
-                      </div>
-
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-lilac/15 px-3 py-1 text-xs font-bold text-lilac">
-                        Progresso Total: {overallCompletionRate}%
-                      </span>
-                    </div>
-
-                    {/* Progress multi-segment graph */}
-                    <div className="mb-6 space-y-2">
-                      <div className="flex justify-between text-xs font-bold">
-                        <span className="text-emerald-700 flex items-center gap-1">
-                          <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
-                          {grandTotalActivitiesDone} Atividades Feitas ({overallCompletionRate}%)
-                        </span>
-                        <span className="text-amber-700 flex items-center gap-1">
-                          <CircleDashed className="h-3.5 w-3.5 text-amber-600" />
-                          {grandTotalActivitiesPending} Pendentes ({100 - overallCompletionRate}%)
-                        </span>
-                      </div>
-
-                      <div className="flex h-5 w-full overflow-hidden rounded-full bg-black/5 p-1 shadow-inner">
-                        <div
-                          className="rounded-full bg-gradient-to-r from-mint to-sky transition-all duration-700"
-                          style={{ width: `${overallCompletionRate}%` }}
-                        />
-                        <div
-                          className="rounded-full bg-gradient-to-r from-amber-300 to-candy-soft transition-all duration-700"
-                          style={{ width: `${100 - overallCompletionRate}%` }}
-                        />
-                      </div>
-                    </div>
-
-                    {/* 3 Activity Category Cards breakdown */}
-                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-                      {/* Exercise Lists */}
-                      <div className="rounded-2xl border-2 border-lilac/15 bg-white/90 p-4">
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-lilac">
-                            <ListChecks className="h-4 w-4" /> Listas de Exercícios
-                          </span>
-                          <span className="text-[11px] font-bold text-ink-soft">
-                            {distinctDoneListsCount}/{totalPublishedLists}
-                          </span>
-                        </div>
-                        <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100 mb-2">
-                          <div
-                            className="h-full rounded-full bg-lilac"
-                            style={{
-                              width: `${totalPublishedLists > 0 ? (distinctDoneListsCount / totalPublishedLists) * 100 : 0}%`,
-                            }}
+                  {/* ---------- Commitment hero ---------- */}
+                  <Card className="overflow-hidden p-0">
+                    <div className="flex flex-col gap-6 p-6 sm:flex-row sm:items-center">
+                      {/* Radial gauge */}
+                      <div className="relative mx-auto grid h-40 w-40 shrink-0 place-items-center sm:mx-0">
+                        <svg viewBox="0 0 120 120" className="h-40 w-40 -rotate-90">
+                          <circle
+                            cx="60"
+                            cy="60"
+                            r="52"
+                            fill="none"
+                            stroke="rgba(15,23,42,.07)"
+                            strokeWidth="13"
                           />
-                        </div>
-                        <p className="text-[11px] text-ink-soft">
-                          <strong className="text-emerald-700">{distinctDoneListsCount} feitas</strong> &middot;{" "}
-                          <span className="text-amber-700">{pendingListsCount} pendentes</span>
-                        </p>
-                      </div>
-
-                      {/* Educational Games */}
-                      <div className="rounded-2xl border-2 border-indigo-500/15 bg-white/90 p-4">
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600">
-                            <Gamepad2 className="h-4 w-4" /> Minijogos Educativos
-                          </span>
-                          <span className="text-[11px] font-bold text-ink-soft">
-                            {distinctPlayedGamesCount}/{totalPublishedGames}
-                          </span>
-                        </div>
-                        <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100 mb-2">
-                          <div
-                            className="h-full rounded-full bg-indigo-600"
-                            style={{
-                              width: `${totalPublishedGames > 0 ? (distinctPlayedGamesCount / totalPublishedGames) * 100 : 0}%`,
+                          <motion.circle
+                            cx="60"
+                            cy="60"
+                            r="52"
+                            fill="none"
+                            stroke={commitment.hex}
+                            strokeWidth="13"
+                            strokeLinecap="round"
+                            strokeDasharray={2 * Math.PI * 52}
+                            initial={{ strokeDashoffset: 2 * Math.PI * 52 }}
+                            animate={{
+                              strokeDashoffset: 2 * Math.PI * 52 * (1 - commitment.score / 100),
                             }}
+                            transition={{ duration: 0.9, ease: "easeOut" }}
                           />
-                        </div>
-                        <p className="text-[11px] text-ink-soft">
-                          <strong className="text-emerald-700">{distinctPlayedGamesCount} jogados</strong> &middot;{" "}
-                          <span className="text-amber-700">{pendingGamesCount} pendentes</span>
-                        </p>
-                      </div>
-
-                      {/* Study Materials */}
-                      <div className="rounded-2xl border-2 border-sky/15 bg-white/90 p-4">
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-sky">
-                            <FolderDown className="h-4 w-4" /> Materiais de Estudo
+                        </svg>
+                        <div className="absolute flex flex-col items-center">
+                          <span
+                            className="font-display text-4xl font-bold leading-none"
+                            style={{ color: commitment.hex }}
+                          >
+                            {commitment.score}
                           </span>
-                          <span className="text-[11px] font-bold text-ink-soft">
-                            {distinctViewedMaterialsCount}/{totalPublishedMaterials}
+                          <span className="mt-0.5 text-[10px] font-bold uppercase tracking-wider text-ink-soft">
+                            de 100
                           </span>
                         </div>
-                        <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100 mb-2">
-                          <div
-                            className="h-full rounded-full bg-sky"
-                            style={{
-                              width: `${totalPublishedMaterials > 0 ? (distinctViewedMaterialsCount / totalPublishedMaterials) * 100 : 0}%`,
-                            }}
-                          />
-                        </div>
-                        <p className="text-[11px] text-ink-soft">
-                          <strong className="text-emerald-700">{distinctViewedMaterialsCount} vistos</strong> &middot;{" "}
-                          <span className="text-amber-700">{pendingMaterialsCount} pendentes</span>
-                        </p>
                       </div>
-                    </div>
-                  </Card>
 
-                  <div className="grid gap-6 lg:grid-cols-2">
-                    {/* Visual Accuracy Ratio */}
-                    <Card className="flex flex-col justify-between p-6">
-                      <div>
-                        <h3 className="mb-2 flex items-center gap-2 font-display text-lg font-bold text-ink">
-                          <TrendingUp className="h-5 w-5 text-mint" strokeWidth={2.5} />
-                          Proporção de Acertos vs Erros nas Listas
-                        </h3>
-                        <p className="mb-6 text-xs text-ink-soft">
-                          Visão consolidada de todas as respostas registradas nas listas de exercícios.
-                        </p>
-
-                        {totalQuestions === 0 ? (
-                          <div className="py-12 text-center text-sm text-ink-soft">
-                            Nenhum exercício resolvido ainda.
-                          </div>
-                        ) : (
-                          <div className="space-y-5">
-                            <div>
-                              <div className="mb-2 flex justify-between text-xs font-bold">
-                                <span className="flex items-center gap-1.5 text-[#05795b]">
-                                  <CheckCircle2 className="h-4 w-4 text-mint" />
-                                  {totalCorrect} Acertos ({accuracyRate}%)
-                                </span>
-                                <span className="flex items-center gap-1.5 text-[#a62f5f]">
-                                  <XCircle className="h-4 w-4 text-candy" />
-                                  {totalWrong} Erros ({100 - accuracyRate}%)
-                                </span>
-                              </div>
-
-                              <div className="flex h-6 w-full overflow-hidden rounded-full bg-black/5 p-1 shadow-inner">
-                                <div
-                                  className="rounded-full bg-gradient-to-r from-mint to-sky transition-all duration-700"
-                                  style={{ width: `${accuracyRate}%` }}
-                                />
-                                <div
-                                  className="rounded-full bg-gradient-to-r from-candy to-sun transition-all duration-700"
-                                  style={{ width: `${100 - accuracyRate}%` }}
-                                />
-                              </div>
-                            </div>
-
-                            <div className="grid grid-cols-2 gap-3 pt-3">
-                              <div className="rounded-2xl bg-mint-soft p-4 text-center">
-                                <span className="text-xs font-semibold text-[#05795b]">Taxa de Sucesso</span>
-                                <p className="mt-0.5 font-display text-2xl font-bold text-[#05795b]">
-                                  {accuracyRate}%
-                                </p>
-                              </div>
-                              <div className="rounded-2xl bg-candy-soft p-4 text-center">
-                                <span className="text-xs font-semibold text-[#a62f5f]">Total Respondido</span>
-                                <p className="mt-0.5 font-display text-2xl font-bold text-[#a62f5f]">
-                                  {totalQuestions} questões
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </Card>
-
-                    {/* Subject Breakdown Chart */}
-                    <Card className="p-6">
-                      <h3 className="mb-2 flex items-center gap-2 font-display text-lg font-bold text-ink">
-                        <BookOpen className="h-5 w-5 text-lilac" strokeWidth={2.5} />
-                        Aproveitamento por Matéria
-                      </h3>
-                      <p className="mb-6 text-xs text-ink-soft">
-                        Desempenho relativo e volume de listas por disciplina.
-                      </p>
-
-                      {subjectStats.length === 0 ? (
-                        <div className="py-12 text-center text-sm text-ink-soft">
-                          Nenhum dado por matéria disponível.
+                      {/* Score breakdown */}
+                      <div className="min-w-0 flex-1">
+                        <div className="mb-1 flex flex-wrap items-center gap-2">
+                          <h3 className="flex items-center gap-2 font-display text-xl font-bold text-ink">
+                            <Award className="h-5 w-5 text-lilac" strokeWidth={2.5} />
+                            Comprometimento
+                          </h3>
+                          <span
+                            className="rounded-full px-2.5 py-0.5 text-xs font-bold text-white shadow-sm"
+                            style={{ backgroundColor: commitment.hex }}
+                          >
+                            {commitment.label}
+                          </span>
                         </div>
-                      ) : (
-                        <div className="space-y-4">
-                          {subjectStats.map((sub) => (
-                            <div key={sub.subjectId} className="space-y-1.5">
-                              <div className="flex items-center justify-between text-xs font-bold">
-                                <span className="flex items-center gap-1.5 text-ink">
-                                  <span>{sub.emoji}</span>
-                                  <span>{sub.name}</span>
+                        <p className="mb-4 text-xs text-ink-soft sm:text-sm">{commitment.advice}</p>
+
+                        <div className="space-y-2.5">
+                          {[
+                            {
+                              icon: <Flame className="h-3.5 w-3.5" />,
+                              name: "Regularidade",
+                              value: commitment.consistency,
+                              hint: `${activeDays30} de 30 dias com atividade`,
+                              color: "#f59e0b",
+                            },
+                            {
+                              icon: <Layers className="h-3.5 w-3.5" />,
+                              name: "Cobertura do conteúdo",
+                              value: commitment.coverage,
+                              hint: `${grandTotalActivitiesDone} de ${totalActivitiesCatalog} atividades`,
+                              color: "#A370FF",
+                            },
+                            {
+                              icon: <Target className="h-3.5 w-3.5" />,
+                              name: "Aproveitamento",
+                              value: commitment.accuracy,
+                              hint: `${totalCorrect} acertos em ${totalQuestions} questões`,
+                              color: "#10b981",
+                            },
+                          ].map((row) => (
+                            <div key={row.name}>
+                              <div className="mb-1 flex items-center justify-between gap-2 text-[11px]">
+                                <span
+                                  className="flex items-center gap-1.5 font-bold"
+                                  style={{ color: row.color }}
+                                >
+                                  {row.icon}
+                                  {row.name}
                                 </span>
-                                <span className="text-ink-soft">
-                                  {sub.correctCount}/{sub.total} ({sub.rate}%)
+                                <span className="shrink-0 text-ink-soft">
+                                  <strong className="text-ink">{row.value}%</strong> &middot; {row.hint}
                                 </span>
                               </div>
-                              <div className="h-3.5 w-full overflow-hidden rounded-full bg-black/5 p-0.5">
-                                <div
-                                  className="h-full rounded-full transition-all duration-500"
-                                  style={{
-                                    width: `${sub.rate}%`,
-                                    backgroundColor: sub.hex,
-                                  }}
+                              <div className="h-2 w-full overflow-hidden rounded-full bg-black/5">
+                                <motion.div
+                                  className="h-full rounded-full"
+                                  style={{ backgroundColor: row.color }}
+                                  initial={{ width: 0 }}
+                                  animate={{ width: `${row.value}%` }}
+                                  transition={{ duration: 0.7, ease: "easeOut" }}
                                 />
                               </div>
                             </div>
                           ))}
                         </div>
+                      </div>
+                    </div>
+
+                    {/* Streak strip */}
+                    <div className="grid grid-cols-2 divide-x divide-lilac/10 border-t border-lilac/10 bg-white/60 sm:grid-cols-4">
+                      <div className="p-4 text-center">
+                        <span className="flex items-center justify-center gap-1 text-[11px] font-bold text-ink-soft">
+                          <Flame className="h-3.5 w-3.5 text-amber-500" /> Sequência atual
+                        </span>
+                        <p className="mt-0.5 font-display text-xl font-bold text-ink">
+                          {streaks.current} {streaks.current === 1 ? "dia" : "dias"}
+                        </p>
+                      </div>
+                      <div className="p-4 text-center">
+                        <span className="flex items-center justify-center gap-1 text-[11px] font-bold text-ink-soft">
+                          <Trophy className="h-3.5 w-3.5 text-lilac" /> Melhor sequência
+                        </span>
+                        <p className="mt-0.5 font-display text-xl font-bold text-ink">
+                          {streaks.longest} {streaks.longest === 1 ? "dia" : "dias"}
+                        </p>
+                      </div>
+                      <div className="p-4 text-center">
+                        <span className="flex items-center justify-center gap-1 text-[11px] font-bold text-ink-soft">
+                          <CalendarDays className="h-3.5 w-3.5 text-sky" /> Esta semana
+                        </span>
+                        <p className="mt-0.5 font-display text-xl font-bold text-ink">
+                          {activeDays7}/7 dias
+                        </p>
+                      </div>
+                      <div className="p-4 text-center">
+                        <span className="flex items-center justify-center gap-1 text-[11px] font-bold text-ink-soft">
+                          <Clock className="h-3.5 w-3.5 text-candy" /> Última atividade
+                        </span>
+                        <p className="mt-0.5 font-display text-xl font-bold text-ink">
+                          {daysSinceLastActivity === null
+                            ? "—"
+                            : daysSinceLastActivity === 0
+                            ? "Hoje"
+                            : daysSinceLastActivity === 1
+                            ? "Ontem"
+                            : `${daysSinceLastActivity} dias`}
+                        </p>
+                      </div>
+                    </div>
+                  </Card>
+
+                  {/* ---------- Study rhythm: 30-day activity ---------- */}
+                  <Card className="p-6">
+                    <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                      <div>
+                        <h3 className="flex items-center gap-2 font-display text-lg font-bold text-ink">
+                          <Activity className="h-5 w-5 text-candy" strokeWidth={2.5} />
+                          Ritmo de Estudo — últimos 30 dias
+                        </h3>
+                        <p className="text-xs text-ink-soft sm:text-sm">
+                          Cada barra é um dia. Barras espalhadas de forma regular indicam rotina;
+                          vazios longos indicam que o estudo parou.
+                        </p>
+                      </div>
+                      <span className="shrink-0 self-start rounded-full bg-candy-soft px-3 py-1 text-xs font-bold text-[#b03b6e] sm:self-auto">
+                        {activeDays30} dias ativos
+                      </span>
+                    </div>
+
+                    {peakDayCount === 0 ? (
+                      <div className="py-10 text-center">
+                        <div className="mb-2 text-4xl">🌱</div>
+                        <p className="font-display text-base font-bold text-ink">
+                          Nenhuma atividade nos últimos 30 dias.
+                        </p>
+                        <p className="mt-1 text-xs text-ink-soft">
+                          Assim que a criança fizer uma lista, jogar ou abrir um material, o ritmo aparece aqui.
+                        </p>
+                      </div>
+                    ) : (
+                      <>
+                        <div className="flex h-28 items-end gap-[3px]">
+                          {activityDays.map((d) => {
+                            const ratio = peakDayCount > 0 ? d.count / peakDayCount : 0;
+                            const isToday = d.key === dayKey(new Date());
+                            return (
+                              <div
+                                key={d.key}
+                                className="group relative flex h-full flex-1 flex-col justify-end"
+                                title={`${d.date.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" })} — ${d.count} ${d.count === 1 ? "atividade" : "atividades"}`}
+                              >
+                                <motion.div
+                                  className={cn(
+                                    "w-full rounded-t-[4px] rounded-b-sm transition-colors",
+                                    d.count === 0
+                                      ? "bg-slate-200/70"
+                                      : ratio > 0.66
+                                      ? "bg-gradient-to-t from-lilac to-candy"
+                                      : ratio > 0.33
+                                      ? "bg-gradient-to-t from-sky to-lilac"
+                                      : "bg-gradient-to-t from-mint to-sky",
+                                    isToday && "ring-2 ring-candy ring-offset-1"
+                                  )}
+                                  initial={{ height: 2 }}
+                                  animate={{
+                                    height: d.count === 0 ? 4 : `${Math.max(10, ratio * 100)}%`,
+                                  }}
+                                  transition={{ duration: 0.5, ease: "easeOut" }}
+                                />
+                              </div>
+                            );
+                          })}
+                        </div>
+
+                        {/* Weekday ruler */}
+                        <div className="mt-1.5 flex gap-[3px]">
+                          {activityDays.map((d) => (
+                            <span
+                              key={`lbl-${d.key}`}
+                              className="flex-1 text-center text-[8px] font-bold text-ink-soft/60"
+                            >
+                              {WEEKDAY_INITIALS[d.date.getDay()]}
+                            </span>
+                          ))}
+                        </div>
+
+                        {/* Legend */}
+                        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1.5 border-t border-lilac/10 pt-3 text-[11px] font-semibold text-ink-soft">
+                          <span className="flex items-center gap-1.5">
+                            <span className="h-2.5 w-2.5 rounded-sm bg-slate-200" /> Sem atividade
+                          </span>
+                          <span className="flex items-center gap-1.5">
+                            <span className="h-2.5 w-2.5 rounded-sm bg-gradient-to-t from-mint to-sky" /> Leve
+                          </span>
+                          <span className="flex items-center gap-1.5">
+                            <span className="h-2.5 w-2.5 rounded-sm bg-gradient-to-t from-sky to-lilac" /> Moderado
+                          </span>
+                          <span className="flex items-center gap-1.5">
+                            <span className="h-2.5 w-2.5 rounded-sm bg-gradient-to-t from-lilac to-candy" /> Intenso
+                          </span>
+                          <span className="ml-auto">Pico: {peakDayCount} atividades em um dia</span>
+                        </div>
+                      </>
+                    )}
+                  </Card>
+
+                  {/* ---------- Weekly evolution + catalog coverage ---------- */}
+                  <div className="grid gap-6 lg:grid-cols-5">
+                    {/* Weekly combo chart */}
+                    <Card className="p-6 lg:col-span-3">
+                      <h3 className="flex items-center gap-2 font-display text-lg font-bold text-ink">
+                        <TrendingUp className="h-5 w-5 text-mint" strokeWidth={2.5} />
+                        Evolução Semanal
+                      </h3>
+                      <p className="mb-5 text-xs text-ink-soft sm:text-sm">
+                        Barras = listas resolvidas por semana. Linha = aproveitamento (%).
+                      </p>
+
+                      {!weeklyChart.hasData ? (
+                        <div className="py-10 text-center text-sm text-ink-soft">
+                          Nenhuma lista resolvida nas últimas 8 semanas.
+                        </div>
+                      ) : (
+                        <>
+                          <svg
+                            viewBox={`0 0 ${weeklyChart.W} ${weeklyChart.H}`}
+                            className="h-36 w-full overflow-visible"
+                            preserveAspectRatio="none"
+                          >
+                            {/* Reference grid at 50% and 100% accuracy */}
+                            {[0, 50, 100].map((pct) => (
+                              <line
+                                key={pct}
+                                x1="0"
+                                x2={weeklyChart.W}
+                                y1={weeklyChart.H - (pct / 100) * weeklyChart.H}
+                                y2={weeklyChart.H - (pct / 100) * weeklyChart.H}
+                                stroke="rgba(15,23,42,.08)"
+                                strokeWidth="1"
+                                strokeDasharray={pct === 0 ? "0" : "4 4"}
+                              />
+                            ))}
+
+                            {/* Volume bars */}
+                            {weeklyChart.bars.map((b) => (
+                              <rect
+                                key={`bar-${b.label}`}
+                                x={b.x}
+                                y={b.y}
+                                width={b.width}
+                                height={b.height}
+                                rx="3"
+                                fill="rgba(163,112,255,.22)"
+                              />
+                            ))}
+
+                            {/* Accuracy line */}
+                            {weeklyChart.line && (
+                              <motion.polyline
+                                points={weeklyChart.line}
+                                fill="none"
+                                stroke="#10b981"
+                                strokeWidth="2.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                initial={{ pathLength: 0 }}
+                                animate={{ pathLength: 1 }}
+                                transition={{ duration: 0.9, ease: "easeOut" }}
+                                vectorEffect="non-scaling-stroke"
+                              />
+                            )}
+
+                            {/* Accuracy points */}
+                            {weeklyChart.bars
+                              .filter((b) => b.cy !== null)
+                              .map((b) => (
+                                <circle
+                                  key={`pt-${b.label}`}
+                                  cx={b.cx}
+                                  cy={b.cy}
+                                  r="3.5"
+                                  fill="#fff"
+                                  stroke="#10b981"
+                                  strokeWidth="2.5"
+                                  vectorEffect="non-scaling-stroke"
+                                />
+                              ))}
+                          </svg>
+
+                          <div className="mt-2 flex">
+                            {weeklyChart.bars.map((b) => (
+                              <div key={`wl-${b.label}`} className="flex-1 text-center">
+                                <span className="block text-[9px] font-bold text-ink-soft">{b.label}</span>
+                                <span className="block text-[10px] font-bold text-ink">
+                                  {b.rate === null ? "—" : `${b.rate}%`}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </>
                       )}
                     </Card>
+
+                    {/* Catalog coverage donut */}
+                    <Card className="p-6 lg:col-span-2">
+                      <h3 className="flex items-center gap-2 font-display text-lg font-bold text-ink">
+                        <PieChart className="h-5 w-5 text-lilac" strokeWidth={2.5} />
+                        Cobertura do Catálogo
+                      </h3>
+                      <p className="mb-4 text-xs text-ink-soft sm:text-sm">
+                        Quanto do conteúdo disponível já foi consumido.
+                      </p>
+
+                      <div className="relative mx-auto mb-4 grid h-36 w-36 place-items-center">
+                        <svg viewBox="0 0 120 120" className="h-36 w-36 -rotate-90">
+                          <circle
+                            cx="60"
+                            cy="60"
+                            r="48"
+                            fill="none"
+                            stroke="rgba(15,23,42,.07)"
+                            strokeWidth="16"
+                          />
+                          <motion.circle
+                            cx="60"
+                            cy="60"
+                            r="48"
+                            fill="none"
+                            stroke="#A370FF"
+                            strokeWidth="16"
+                            strokeLinecap="round"
+                            strokeDasharray={2 * Math.PI * 48}
+                            initial={{ strokeDashoffset: 2 * Math.PI * 48 }}
+                            animate={{
+                              strokeDashoffset: 2 * Math.PI * 48 * (1 - overallCompletionRate / 100),
+                            }}
+                            transition={{ duration: 0.9, ease: "easeOut" }}
+                          />
+                        </svg>
+                        <div className="absolute flex flex-col items-center">
+                          <span className="font-display text-3xl font-bold text-lilac">
+                            {overallCompletionRate}%
+                          </span>
+                          <span className="text-[10px] font-bold text-ink-soft">
+                            {grandTotalActivitiesDone}/{totalActivitiesCatalog}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="space-y-2.5">
+                        {[
+                          {
+                            icon: <ListChecks className="h-3.5 w-3.5" />,
+                            name: "Listas",
+                            done: distinctDoneListsCount,
+                            total: totalPublishedLists,
+                            color: "#A370FF",
+                          },
+                          {
+                            icon: <Gamepad2 className="h-3.5 w-3.5" />,
+                            name: "Minijogos",
+                            done: distinctPlayedGamesCount,
+                            total: totalPublishedGames,
+                            color: "#6366F1",
+                          },
+                          {
+                            icon: <FolderDown className="h-3.5 w-3.5" />,
+                            name: "Materiais",
+                            done: distinctViewedMaterialsCount,
+                            total: totalPublishedMaterials,
+                            color: "#4CC9F0",
+                          },
+                        ].map((row) => {
+                          const pct = row.total > 0 ? Math.round((row.done / row.total) * 100) : 0;
+                          return (
+                            <div key={row.name}>
+                              <div className="mb-1 flex items-center justify-between text-[11px] font-bold">
+                                <span className="flex items-center gap-1.5" style={{ color: row.color }}>
+                                  {row.icon}
+                                  {row.name}
+                                </span>
+                                <span className="text-ink-soft">
+                                  {row.done}/{row.total} ({pct}%)
+                                </span>
+                              </div>
+                              <div className="h-2 w-full overflow-hidden rounded-full bg-black/5">
+                                <motion.div
+                                  className="h-full rounded-full"
+                                  style={{ backgroundColor: row.color }}
+                                  initial={{ width: 0 }}
+                                  animate={{ width: `${pct}%` }}
+                                  transition={{ duration: 0.7, ease: "easeOut" }}
+                                />
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </Card>
                   </div>
+
+                  {/* ---------- Subject performance + attention points ---------- */}
+                  <div className="grid gap-6 lg:grid-cols-2">
+                    <Card className="p-6">
+                      <h3 className="flex items-center gap-2 font-display text-lg font-bold text-ink">
+                        <BookOpen className="h-5 w-5 text-lilac" strokeWidth={2.5} />
+                        Aproveitamento por Matéria
+                      </h3>
+                      <p className="mb-5 text-xs text-ink-soft sm:text-sm">
+                        Onde a criança vai bem e onde precisa de apoio.
+                      </p>
+
+                      {subjectStats.length === 0 ? (
+                        <div className="py-10 text-center text-sm text-ink-soft">
+                          Nenhum dado por matéria disponível.
+                        </div>
+                      ) : (
+                        <div className="space-y-3.5">
+                          {subjectStats
+                            .slice()
+                            .sort((a, b) => b.rate - a.rate)
+                            .map((sub) => (
+                              <div key={sub.subjectId}>
+                                <div className="mb-1 flex items-center justify-between gap-2 text-xs">
+                                  <span className="flex min-w-0 items-center gap-1.5 font-bold text-ink">
+                                    <span className="shrink-0">{sub.emoji}</span>
+                                    <span className="truncate">{sub.name}</span>
+                                  </span>
+                                  <span className="flex shrink-0 items-center gap-2">
+                                    <span className="text-[10px] font-semibold text-ink-soft">
+                                      {sub.completedCount}{" "}
+                                      {sub.completedCount === 1 ? "lista" : "listas"}
+                                    </span>
+                                    <span
+                                      className={cn(
+                                        "rounded-full px-2 py-0.5 text-[10px] font-bold",
+                                        sub.rate >= 70
+                                          ? "bg-emerald-100 text-emerald-800"
+                                          : "bg-amber-100 text-amber-800"
+                                      )}
+                                    >
+                                      {sub.rate}%
+                                    </span>
+                                  </span>
+                                </div>
+                                <div className="h-3 w-full overflow-hidden rounded-full bg-black/5 p-0.5">
+                                  <motion.div
+                                    className="h-full rounded-full"
+                                    style={{ backgroundColor: sub.hex }}
+                                    initial={{ width: 0 }}
+                                    animate={{ width: `${sub.rate}%` }}
+                                    transition={{ duration: 0.6, ease: "easeOut" }}
+                                  />
+                                </div>
+                              </div>
+                            ))}
+                        </div>
+                      )}
+                    </Card>
+
+                    <Card className="p-6">
+                      <h3 className="flex items-center gap-2 font-display text-lg font-bold text-ink">
+                        <AlertTriangle className="h-5 w-5 text-candy" strokeWidth={2.5} />
+                        Pontos de Atenção
+                      </h3>
+                      <p className="mb-5 text-xs text-ink-soft sm:text-sm">
+                        O que merece uma conversa ou uma nova tentativa.
+                      </p>
+
+                      <div className="space-y-2.5">
+                        {/* Inactivity warning */}
+                        {daysSinceLastActivity !== null && daysSinceLastActivity >= 3 && (
+                          <div className="flex items-start gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 p-3">
+                            <Clock className="mt-0.5 h-4 w-4 shrink-0 text-amber-600" />
+                            <div>
+                              <p className="text-xs font-bold text-amber-900">
+                                {daysSinceLastActivity} dias sem estudar
+                              </p>
+                              <p className="text-[11px] text-amber-800">
+                                A última atividade foi em {formatDateTime(lastActivityAt)}.
+                              </p>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Low streak warning */}
+                        {activeDays7 === 0 && peakDayCount > 0 && (
+                          <div className="flex items-start gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 p-3">
+                            <CalendarDays className="mt-0.5 h-4 w-4 shrink-0 text-amber-600" />
+                            <div>
+                              <p className="text-xs font-bold text-amber-900">
+                                Nenhum estudo nesta semana
+                              </p>
+                              <p className="text-[11px] text-amber-800">
+                                Retomar hoje evita perder o ritmo já conquistado.
+                              </p>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Lists below 70% */}
+                        {reviewTargets.map((r) => {
+                          const theme = getSubject(r.subject);
+                          return (
+                            <div
+                              key={r.key}
+                              className="flex items-start gap-2.5 rounded-2xl border border-candy/15 bg-candy-soft/30 p-3"
+                            >
+                              <span className="mt-0.5 shrink-0 text-base">{theme?.emoji || "📖"}</span>
+                              <div className="min-w-0 flex-1">
+                                <p className="truncate text-xs font-bold text-ink">{r.title}</p>
+                                <p className="text-[11px] text-ink-soft">
+                                  {r.childName} &middot; {theme?.name || r.subject} &middot;{" "}
+                                  {r.wrongCount} {r.wrongCount === 1 ? "erro" : "erros"}
+                                </p>
+                              </div>
+                              <span className="shrink-0 rounded-full bg-white px-2 py-0.5 text-[10px] font-bold text-[#b03b6e] shadow-sm">
+                                {r.pct}%
+                              </span>
+                            </div>
+                          );
+                        })}
+
+                        {/* All clear */}
+                        {reviewTargets.length === 0 &&
+                          !(daysSinceLastActivity !== null && daysSinceLastActivity >= 3) &&
+                          !(activeDays7 === 0 && peakDayCount > 0) && (
+                            <div className="py-8 text-center">
+                              <div className="mb-2 text-4xl">🌟</div>
+                              <p className="font-display text-base font-bold text-mint">
+                                Nenhum ponto de atenção!
+                              </p>
+                              <p className="mt-1 text-xs text-ink-soft">
+                                Rotina em dia e nenhuma lista abaixo de 70%.
+                              </p>
+                            </div>
+                          )}
+                      </div>
+                    </Card>
+                  </div>
+
+                  {/* ---------- Per-child comparison ---------- */}
+                  {selectedChildId === "all" && childEngagement.length > 1 && (
+                    <Card className="p-6">
+                      <h3 className="flex items-center gap-2 font-display text-lg font-bold text-ink">
+                        <Users className="h-5 w-5 text-lilac" strokeWidth={2.5} />
+                        Comparativo entre Filhos
+                      </h3>
+                      <p className="mb-5 text-xs text-ink-soft sm:text-sm">
+                        Score de comprometimento de cada criança nos últimos 30 dias.
+                      </p>
+
+                      <div className="space-y-3">
+                        {childEngagement.map((c, idx) => (
+                          <div
+                            key={c.childId}
+                            className={cn(
+                              "rounded-2xl border p-4",
+                              idx === 0
+                                ? "border-lilac/30 bg-lilac/5"
+                                : "border-lilac/10 bg-white/70",
+                              !c.active && "opacity-60"
+                            )}
+                          >
+                            <div className="mb-2.5 flex items-center justify-between gap-3">
+                              <div className="flex min-w-0 items-center gap-2.5">
+                                <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-lilac/15 text-sm font-bold text-lilac">
+                                  {c.name.charAt(0).toUpperCase()}
+                                </div>
+                                <div className="min-w-0">
+                                  <p className="flex items-center gap-1.5 truncate text-sm font-bold text-ink">
+                                    {c.name}
+                                    {idx === 0 && c.score > 0 && (
+                                      <Trophy className="h-3.5 w-3.5 shrink-0 text-amber-500" />
+                                    )}
+                                  </p>
+                                  <p className="text-[10px] text-ink-soft">
+                                    {c.activeDays} dias ativos &middot; {c.doneLists} listas &middot;{" "}
+                                    {c.games} jogos &middot; {c.materials} materiais
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="shrink-0 text-right">
+                                <p className="font-display text-2xl font-bold leading-none text-lilac">
+                                  {c.score}
+                                </p>
+                                <span className="text-[10px] font-bold text-ink-soft">score</span>
+                              </div>
+                            </div>
+
+                            <div className="h-2 w-full overflow-hidden rounded-full bg-black/5">
+                              <motion.div
+                                className="h-full rounded-full bg-gradient-to-r from-mint via-sky to-lilac"
+                                initial={{ width: 0 }}
+                                animate={{ width: `${c.score}%` }}
+                                transition={{ duration: 0.7, ease: "easeOut" }}
+                              />
+                            </div>
+
+                            <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-[10px] font-semibold text-ink-soft">
+                              <span>
+                                Aproveitamento:{" "}
+                                <strong
+                                  className={c.accuracy >= 70 ? "text-emerald-700" : "text-amber-700"}
+                                >
+                                  {c.accuracy}%
+                                </strong>
+                              </span>
+                              <span>
+                                Estrelas: <strong className="text-[#d49911]">{c.points} ⭐</strong>
+                              </span>
+                              <span>
+                                Questões: <strong className="text-ink">{c.answered}</strong>
+                              </span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </Card>
+                  )}
                 </div>
               )}
+
 
               {/* ==================== TAB 2: LISTA DE EXERCÍCIOS (TABLE FEITAS VS NÃO FEITAS) ==================== */}
               {activeTab === "lists" && (
