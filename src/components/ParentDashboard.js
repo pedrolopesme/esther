@@ -736,49 +736,6 @@ export default function ParentDashboard() {
             ))}
           </div>
 
-          {/* Quick Metrics Cards */}
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-            <Card className="flex flex-col items-center justify-center p-5 text-center">
-              <div className="mb-2 grid h-10 w-10 place-items-center rounded-2xl bg-lilac/10 text-lilac">
-                <ListChecks className="h-5 w-5" strokeWidth={2.5} />
-              </div>
-              <span className="text-xs font-bold text-ink-soft">Listas Feitas vs Total</span>
-              <p className="mt-1 font-display text-3xl font-bold text-lilac sm:text-4xl">
-                {distinctDoneListsCount} <span className="text-lg text-ink-soft">/ {totalPublishedLists}</span>
-              </p>
-            </Card>
-
-            <Card className="flex flex-col items-center justify-center p-5 text-center">
-              <div className="mb-2 grid h-10 w-10 place-items-center rounded-2xl bg-mint/10 text-mint">
-                <Target className="h-5 w-5" strokeWidth={2.5} />
-              </div>
-              <span className="text-xs font-bold text-ink-soft">Taxa de Acerto</span>
-              <p className="mt-1 font-display text-3xl font-bold text-mint sm:text-4xl">
-                {accuracyRate}%
-              </p>
-            </Card>
-
-            <Card className="flex flex-col items-center justify-center p-5 text-center">
-              <div className="mb-2 grid h-10 w-10 place-items-center rounded-2xl bg-indigo-500/10 text-indigo-600">
-                <Gamepad2 className="h-5 w-5" strokeWidth={2.5} />
-              </div>
-              <span className="text-xs font-bold text-ink-soft">Minijogos Jogados</span>
-              <p className="mt-1 font-display text-3xl font-bold text-indigo-600 sm:text-4xl">
-                {distinctPlayedGamesCount} <span className="text-lg text-ink-soft">/ {totalPublishedGames}</span>
-              </p>
-            </Card>
-
-            <Card className="flex flex-col items-center justify-center p-5 text-center">
-              <div className="mb-2 grid h-10 w-10 place-items-center rounded-2xl bg-sun/10 text-[#d49911]">
-                <Flame className="h-5 w-5" strokeWidth={2.5} />
-              </div>
-              <span className="text-xs font-bold text-ink-soft">Estrelas Acumuladas</span>
-              <p className="mt-1 font-display text-3xl font-bold text-[#d49911] sm:text-4xl">
-                {totalPoints} ⭐
-              </p>
-            </Card>
-          </div>
-
           {/* Nav Tabs within Dashboard */}
           <div className="flex flex-wrap rounded-2xl bg-white/80 p-1.5 shadow-sm ring-1 ring-black/5">
             <button
@@ -837,6 +794,51 @@ export default function ParentDashboard() {
               <Activity className="h-4 w-4" /> Linha do Tempo
             </button>
           </div>
+
+          {/* Quick Metrics Cards — only on Desempenho tab */}
+          {activeTab === "performance" && (
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+              <Card className="flex flex-col items-center justify-center p-5 text-center">
+                <div className="mb-2 grid h-10 w-10 place-items-center rounded-2xl bg-lilac/10 text-lilac">
+                  <ListChecks className="h-5 w-5" strokeWidth={2.5} />
+                </div>
+                <span className="text-xs font-bold text-ink-soft">Listas Feitas vs Total</span>
+                <p className="mt-1 font-display text-3xl font-bold text-lilac sm:text-4xl">
+                  {distinctDoneListsCount} <span className="text-lg text-ink-soft">/ {totalPublishedLists}</span>
+                </p>
+              </Card>
+
+              <Card className="flex flex-col items-center justify-center p-5 text-center">
+                <div className="mb-2 grid h-10 w-10 place-items-center rounded-2xl bg-mint/10 text-mint">
+                  <Target className="h-5 w-5" strokeWidth={2.5} />
+                </div>
+                <span className="text-xs font-bold text-ink-soft">Taxa de Acerto</span>
+                <p className="mt-1 font-display text-3xl font-bold text-mint sm:text-4xl">
+                  {accuracyRate}%
+                </p>
+              </Card>
+
+              <Card className="flex flex-col items-center justify-center p-5 text-center">
+                <div className="mb-2 grid h-10 w-10 place-items-center rounded-2xl bg-indigo-500/10 text-indigo-600">
+                  <Gamepad2 className="h-5 w-5" strokeWidth={2.5} />
+                </div>
+                <span className="text-xs font-bold text-ink-soft">Minijogos Jogados</span>
+                <p className="mt-1 font-display text-3xl font-bold text-indigo-600 sm:text-4xl">
+                  {distinctPlayedGamesCount} <span className="text-lg text-ink-soft">/ {totalPublishedGames}</span>
+                </p>
+              </Card>
+
+              <Card className="flex flex-col items-center justify-center p-5 text-center">
+                <div className="mb-2 grid h-10 w-10 place-items-center rounded-2xl bg-sun/10 text-[#d49911]">
+                  <Flame className="h-5 w-5" strokeWidth={2.5} />
+                </div>
+                <span className="text-xs font-bold text-ink-soft">Estrelas Acumuladas</span>
+                <p className="mt-1 font-display text-3xl font-bold text-[#d49911] sm:text-4xl">
+                  {totalPoints} ⭐
+                </p>
+              </Card>
+            </div>
+          )}
 
           {/* Loading Indicator */}
           {isLoadingData ? (
