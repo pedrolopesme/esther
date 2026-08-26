@@ -91,7 +91,7 @@ export async function getGames({ subjectId, publishedOnly = false, childId = nul
 
   const gamesList = data || [];
 
-  // If childId is provided or active child in localStorage, attach play status & best score
+  // Always try to resolve childId: prefer explicit param, fallback to localStorage
   let effectiveChildId = childId;
   if (!effectiveChildId && typeof window !== "undefined") {
     try {
@@ -101,13 +101,28 @@ export async function getGames({ subjectId, publishedOnly = false, childId = nul
       }
     } catch {}
   }
-
-  if (effectiveChildId && gamesList.length > 0) {
+  // Also try auth session user_id as fallback
+  let effectiveUserId = null;
+  if (!effectiveChildId) {
     try {
-      const { data: sessions } = await supabase
+      const { data: sessionData } = await supabase.auth.getSession();
+      if (sessionData?.session?.user) {
+        effectiveUserId = sessionData.session.user.id;
+      }
+    } catch {}
+  }
+
+  if ((effectiveChildId || effectiveUserId) && gamesList.length > 0) {
+    try {
+      let sessionQuery = supabase
         .from("game_sessions")
-        .select("game_id, score, max_score, score_pct, time_spent_seconds, completed_at")
-        .eq("child_id", effectiveChildId);
+        .select("game_id, score, max_score, score_pct, time_spent_seconds, completed_at");
+      if (effectiveChildId) {
+        sessionQuery = sessionQuery.eq("child_id", effectiveChildId);
+      } else if (effectiveUserId) {
+        sessionQuery = sessionQuery.eq("user_id", effectiveUserId);
+      }
+      const { data: sessions } = await sessionQuery;
 
       const statusMap = {};
       (sessions || []).forEach((s) => {

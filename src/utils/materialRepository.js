@@ -110,7 +110,7 @@ export async function getMaterials({ subjectId, category, publishedOnly = false,
 
   const materialsList = data || [];
 
-  // If childId is provided or active child in localStorage, attach access status
+  // Always try to resolve childId: prefer explicit param, fallback to localStorage
   let effectiveChildId = childId;
   if (!effectiveChildId && typeof window !== "undefined") {
     try {
@@ -120,13 +120,28 @@ export async function getMaterials({ subjectId, category, publishedOnly = false,
       }
     } catch {}
   }
-
-  if (effectiveChildId && materialsList.length > 0) {
+  // Also try auth session user_id as fallback
+  let effectiveUserId = null;
+  if (!effectiveChildId && typeof window !== "undefined") {
     try {
-      const { data: accesses } = await supabase
+      const { data: sessionData } = await supabase.auth.getSession();
+      if (sessionData?.session?.user) {
+        effectiveUserId = sessionData.session.user.id;
+      }
+    } catch {}
+  }
+
+  if ((effectiveChildId || effectiveUserId) && materialsList.length > 0) {
+    try {
+      let accessQuery = supabase
         .from("material_accesses")
-        .select("material_id, action, created_at")
-        .eq("child_id", effectiveChildId);
+        .select("material_id, action, created_at");
+      if (effectiveChildId) {
+        accessQuery = accessQuery.eq("child_id", effectiveChildId);
+      } else if (effectiveUserId) {
+        accessQuery = accessQuery.eq("user_id", effectiveUserId);
+      }
+      const { data: accesses } = await accessQuery;
 
       const accessMap = {};
       (accesses || []).forEach((acc) => {
