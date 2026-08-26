@@ -1120,26 +1120,6 @@ export default function ParentDashboard() {
                     </div>
 
                     <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
-                      {/* Search */}
-                      <input
-                        type="text"
-                        placeholder="Buscar por nome da lista..."
-                        value={listSearchTitle}
-                        onChange={(e) => setListSearchTitle(e.target.value)}
-                        className="rounded-xl border border-lilac/20 bg-white px-3 py-1.5 text-xs font-semibold text-ink outline-none focus:border-lilac"
-                      />
-
-                      {/* Access filter */}
-                      <select
-                        value={listFilterAccess}
-                        onChange={(e) => setListFilterAccess(e.target.value)}
-                        className="rounded-xl border border-lilac/20 bg-white px-3 py-1.5 text-xs font-semibold text-ink outline-none focus:border-lilac"
-                      >
-                        <option value="all">Todos os Acessos</option>
-                        <option value="accessed">✅ Acessados</option>
-                        <option value="pending">⏳ Pendentes</option>
-                      </select>
-
                       {/* Subject */}
                       <select
                         value={listFilterSubject}
@@ -1157,6 +1137,15 @@ export default function ParentDashboard() {
                         })}
                       </select>
 
+                      {/* Search */}
+                      <input
+                        type="text"
+                        placeholder="Buscar por nome da lista..."
+                        value={listSearchTitle}
+                        onChange={(e) => setListSearchTitle(e.target.value)}
+                        className="rounded-xl border border-lilac/20 bg-white px-3 py-1.5 text-xs font-semibold text-ink outline-none focus:border-lilac"
+                      />
+
                       {/* Grade */}
                       <select
                         value={listFilterGrade}
@@ -1170,6 +1159,17 @@ export default function ParentDashboard() {
                           </option>
                         ))}
                       </select>
+
+                      {/* Access filter */}
+                      <select
+                        value={listFilterAccess}
+                        onChange={(e) => setListFilterAccess(e.target.value)}
+                        className="rounded-xl border border-lilac/20 bg-white px-3 py-1.5 text-xs font-semibold text-ink outline-none focus:border-lilac"
+                      >
+                        <option value="all">Todos os Acessos</option>
+                        <option value="accessed">✅ Acessados</option>
+                        <option value="pending">⏳ Pendentes</option>
+                      </select>
                     </div>
                   </div>
 
@@ -1179,10 +1179,10 @@ export default function ParentDashboard() {
                       <table className="w-full text-sm">
                         <thead className="bg-slate-50 text-xs font-bold text-ink">
                           <tr>
-                            <th className="px-4 py-3 text-left">Matéria</th>
                             <th className="px-4 py-3 text-center cursor-pointer select-none hover:text-lilac transition" onClick={() => { setListSortField("created_at"); setListSortDir((d) => d === "asc" ? "desc" : "asc"); }}>
                               Data Criação {listSortField === "created_at" && (listSortDir === "asc" ? "↑" : "↓")}
                             </th>
+                            <th className="px-4 py-3 text-left">Matéria</th>
                             <th className="px-4 py-3 text-left cursor-pointer select-none hover:text-lilac transition" onClick={() => { setListSortField("title"); setListSortDir((d) => d === "asc" ? "desc" : "asc"); }}>
                               Título {listSortField === "title" && (listSortDir === "asc" ? "↑" : "↓")}
                             </th>
@@ -1204,14 +1204,14 @@ export default function ParentDashboard() {
                               const theme = getSubject(item.subject);
                               return (
                                 <tr key={item.id} className="hover:bg-slate-50/70 transition">
+                                  <td className="px-4 py-3 text-center text-xs text-ink-soft font-semibold">
+                                    {item.created_at ? formatDateTime(item.created_at) : "—"}
+                                  </td>
                                   <td className="px-4 py-3">
                                     <span className="inline-flex items-center gap-1 rounded-full bg-lilac/10 px-2.5 py-0.5 text-xs font-bold text-lilac">
                                       <span>{theme?.emoji || "📖"}</span>
                                       <span>{theme?.name || item.subject}</span>
                                     </span>
-                                  </td>
-                                  <td className="px-4 py-3 text-center text-xs text-ink-soft font-semibold">
-                                    {item.created_at ? formatDateTime(item.created_at) : "—"}
                                   </td>
                                   <td className="px-4 py-3">
                                     <p className="font-bold text-ink line-clamp-1">{item.title}</p>
@@ -1226,10 +1226,10 @@ export default function ParentDashboard() {
                                     {item.accessCount > 0 ? (
                                       <button
                                         onClick={(e) => { e.stopPropagation(); setSelectedListAccesses(item); }}
-                                        className="press inline-flex items-center gap-1.5 rounded-full bg-lilac/15 px-3 py-1.5 text-xs font-bold text-lilac hover:bg-lilac/25 transition"
+                                        className="press inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-lilac/15 px-3 py-1.5 text-xs font-bold text-lilac hover:bg-lilac/25 transition"
                                       >
-                                        <Eye className="h-3.5 w-3.5" />
-                                        Ver acessos ({item.accessCount})
+                                        <Eye className="h-3.5 w-3.5 shrink-0" />
+                                        <span className="whitespace-nowrap">Ver acessos ({item.accessCount})</span>
                                       </button>
                                     ) : (
                                       <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-bold text-amber-800">
