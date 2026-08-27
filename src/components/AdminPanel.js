@@ -914,13 +914,15 @@ export default function AdminPanel() {
               Nova Matéria
             </button>
           )}
-          <button
-            onClick={() => setShowUploadWizard(true)}
-            className="press cursor-pointer inline-flex items-center gap-2 rounded-2xl bg-gradient-to-b from-[#B48CFF] to-[#9257FF] px-5 py-3 text-sm font-bold text-white shadow-[0_6px_0_#7A3FE0] active:translate-y-1.5 active:shadow-none"
-          >
-            <Upload className="h-5 w-5" />
-            Importar JSON
-          </button>
+          {activeTab === "lists" && (
+            <button
+              onClick={() => setShowUploadWizard(true)}
+              className="press cursor-pointer inline-flex items-center gap-2 rounded-2xl bg-gradient-to-b from-[#B48CFF] to-[#9257FF] px-5 py-3 text-sm font-bold text-white shadow-[0_6px_0_#7A3FE0] active:translate-y-1.5 active:shadow-none"
+            >
+              <Upload className="h-5 w-5" />
+              Importar JSON
+            </button>
+          )}
         </div>
       </div>
 
