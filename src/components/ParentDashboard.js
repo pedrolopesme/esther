@@ -210,7 +210,13 @@ export default function ParentDashboard() {
   const [gameSortDir, setGameSortDir] = useState("desc"); // "asc" | "desc"
   const [selectedGameAccesses, setSelectedGameAccesses] = useState(null);
   const [selectedGameSessionDetail, setSelectedGameSessionDetail] = useState(null);
+
+  // Materials tab: filter, sorting + accesses drill-down
   const [materialFilterStatus, setMaterialFilterStatus] = useState("all"); // "all" | "viewed" | "not_viewed"
+  const [materialSortField, setMaterialSortField] = useState("created_at"); // "created_at" | "title" | "subject" | "mediaType"
+  const [materialSortDir, setMaterialSortDir] = useState("desc"); // "asc" | "desc"
+  const [selectedMaterialAccesses, setSelectedMaterialAccesses] = useState(null);
+  const [selectedMaterialChildDetail, setSelectedMaterialChildDetail] = useState(null);
 
   // Form states for registering children
   const [childName, setChildName] = useState("");
@@ -289,7 +295,7 @@ export default function ParentDashboard() {
         .limit(300),
       supabase
         .from("materials")
-        .select("id, title, description, subject_id, ano_letivo, file_url, file_name, file_size, file_type, media_type, category")
+        .select("id, title, description, subject_id, ano_letivo, file_url, file_name, file_size, file_type, media_type, category, created_at")
         .eq("published", true),
       supabase
         .from("game_sessions")
@@ -392,24 +398,6 @@ export default function ParentDashboard() {
     }
     return map;
   }, [children]);
-
-  // Map of material_id to material data
-  const materialMap = useMemo(() => {
-    const map = {};
-    for (const m of materials) {
-      map[m.id] = m;
-    }
-    return map;
-  }, [materials]);
-
-  // Map of game_id to game data
-  const gameMap = useMemo(() => {
-    const map = {};
-    for (const g of games) {
-      map[g.id] = g;
-    }
-    return map;
-  }, [games]);
 
   // Filtered data based on selected child filter
   const filteredSessions = useMemo(() => {
@@ -976,84 +964,102 @@ export default function ParentDashboard() {
     return list;
   }, [filteredSessions, childMap]);
 
-  // Grouped material accesses report + unaccessed published materials
+  /**
+   * One row per published material, with its access events grouped by child.
+   * A material with no events at all is still listed, as pending.
+   */
   const materialReport = useMemo(() => {
-    const map = {};
+    // Group access events by material, then by child
+    const byMaterial = {};
     for (const acc of filteredMaterialAccesses) {
-      const key = `${acc.child_id}_${acc.material_id}`;
-      const mat = materialMap[acc.material_id];
-      if (!map[key]) {
-        map[key] = {
+      let entry = byMaterial[acc.material_id];
+      if (!entry) {
+        entry = { accessCount: 0, byChild: {} };
+        byMaterial[acc.material_id] = entry;
+      }
+      entry.accessCount += 1;
+
+      let child = entry.byChild[acc.child_id];
+      if (!child) {
+        child = {
           childId: acc.child_id,
           childName: childMap[acc.child_id] || "Estudante",
-          materialId: acc.material_id,
-          title: mat?.title || "Material de Apoio",
-          subjectId: mat?.subject_id || "geral",
-          category: mat?.category || "apostila",
-          mediaType: mat?.media_type || "document",
-          fileSize: mat?.file_size || 0,
-          viewed: false,
-          downloaded: false,
           viewCount: 0,
           downloadCount: 0,
+          firstAccess: acc.created_at,
           lastAccess: acc.created_at,
+          events: [],
         };
+        entry.byChild[acc.child_id] = child;
       }
-      if (acc.action === "view") {
-        map[key].viewed = true;
-        map[key].viewCount += 1;
-      }
-      if (acc.action === "download") {
-        map[key].downloaded = true;
-        map[key].downloadCount += 1;
-      }
-      if (new Date(acc.created_at) > new Date(map[key].lastAccess)) {
-        map[key].lastAccess = acc.created_at;
-      }
+      if (acc.action === "view") child.viewCount += 1;
+      if (acc.action === "download") child.downloadCount += 1;
+      if (acc.created_at < child.firstAccess) child.firstAccess = acc.created_at;
+      if (acc.created_at > child.lastAccess) child.lastAccess = acc.created_at;
+      child.events.push({ action: acc.action, created_at: acc.created_at });
     }
 
-    // Add unaccessed published materials for each child
-    const activeChildren = children.filter((c) => c.active);
-    for (const child of activeChildren) {
-      for (const mat of materials) {
-        const key = `${child.id}_${mat.id}`;
-        if (!map[key]) {
-          map[key] = {
-            childId: child.id,
-            childName: child.name,
-            materialId: mat.id,
-            title: mat.title || "Material de Apoio",
-            subjectId: mat.subject_id || "geral",
-            category: mat.category || "apostila",
-            mediaType: mat.media_type || "document",
-            fileSize: mat.file_size || 0,
-            viewed: false,
-            downloaded: false,
-            viewCount: 0,
-            downloadCount: 0,
-            lastAccess: null,
-          };
-        }
-      }
-    }
+    return materials.map((mat) => {
+      const entry = byMaterial[mat.id];
+      const childAccesses = entry
+        ? Object.values(entry.byChild)
+            .map((c) => ({
+              ...c,
+              events: c.events.slice().sort((a, b) => (a.created_at < b.created_at ? 1 : -1)),
+            }))
+            .sort((a, b) => (a.lastAccess < b.lastAccess ? 1 : -1))
+        : [];
 
-    return Object.values(map).sort((a, b) => {
-      // Accessed first, then by date desc; unaccessed last
-      if (a.lastAccess && b.lastAccess) return new Date(b.lastAccess) - new Date(a.lastAccess);
-      if (a.lastAccess) return -1;
-      if (b.lastAccess) return 1;
-      return a.title.localeCompare(b.title);
+      return {
+        id: mat.id,
+        title: mat.title || "Material de Apoio",
+        subjectId: mat.subject_id || "geral",
+        category: mat.category || "apostila",
+        mediaType: mat.media_type || "document",
+        fileSize: mat.file_size || 0,
+        created_at: mat.created_at || null,
+        accessCount: entry?.accessCount || 0,
+        childCount: childAccesses.length,
+        childAccesses,
+      };
     });
-  }, [filteredMaterialAccesses, childMap, materialMap, children, materials]);
+  }, [filteredMaterialAccesses, childMap, materials]);
 
-  // Filtered material report
+  /** Materials filtered by access status, then ordered by the clicked column. */
   const filteredMaterialReport = useMemo(() => {
-    return materialReport.filter((item) => {
-      if (materialFilterStatus === "viewed") return item.viewed || item.downloaded;
-      if (materialFilterStatus === "not_viewed") return !item.viewed && !item.downloaded;
-      return true;
-    });
-  }, [materialReport, materialFilterStatus]);
+    const dir = materialSortDir === "asc" ? 1 : -1;
+    return materialReport
+      .filter((item) => {
+        if (materialFilterStatus === "viewed") return item.accessCount > 0;
+        if (materialFilterStatus === "not_viewed") return item.accessCount === 0;
+        return true;
+      })
+      .sort((a, b) => {
+        if (materialSortField === "created_at") {
+          const da = a.created_at ? new Date(a.created_at).getTime() : 0;
+          const db = b.created_at ? new Date(b.created_at).getTime() : 0;
+          return (da - db) * dir;
+        }
+        if (materialSortField === "title") {
+          return (a.title || "").localeCompare(b.title || "") * dir;
+        }
+        if (materialSortField === "subject") {
+          const na = getSubject(a.subjectId)?.name || a.subjectId || "";
+          const nb = getSubject(b.subjectId)?.name || b.subjectId || "";
+          return na.localeCompare(nb) * dir;
+        }
+        if (materialSortField === "mediaType") {
+          return (a.mediaType || "").localeCompare(b.mediaType || "") * dir;
+        }
+        return 0;
+      });
+  }, [materialReport, materialFilterStatus, materialSortField, materialSortDir]);
+
+  /** Per-child accesses for the selected material (modal data). */
+  const materialAccessesData = useMemo(() => {
+    if (!selectedMaterialAccesses) return null;
+    return selectedMaterialAccesses.childAccesses;
+  }, [selectedMaterialAccesses]);
 
   const eventDayGroups = useMemo(() => groupByDay(filteredEvents), [filteredEvents]);
 
@@ -2548,19 +2554,23 @@ export default function ParentDashboard() {
                         Materiais de Estudo
                       </h3>
                       <p className="text-xs text-ink-soft sm:text-sm">
-                        Todos os materiais publicados e o status de acesso de cada filho.
+                        Todos os materiais publicados. Clique em “Ver acessos” para ver quem abriu ou baixou.
                       </p>
                     </div>
-                    <Badge tone="sky">
-                      {filteredMaterialReport.length}{" "}
-                      {filteredMaterialReport.length === 1 ? "material" : "materiais"}
-                    </Badge>
+                    <div className="flex shrink-0 items-center gap-2">
+                      <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800">
+                        {distinctViewedMaterialsCount} Acessados
+                      </span>
+                      <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800">
+                        {pendingMaterialsCount} Pendentes
+                      </span>
+                    </div>
                   </div>
 
                   {/* Filter */}
                   <div className="clay-sm flex flex-col gap-3 bg-white/80 p-4">
                     <div className="flex flex-wrap items-center justify-between gap-2">
-                      <span className="text-xs font-bold text-ink flex items-center gap-1.5">
+                      <span className="flex items-center gap-1.5 text-xs font-bold text-ink">
                         <Filter className="h-3.5 w-3.5 text-lilac" /> Filtrar Materiais:
                       </span>
                       {materialFilterStatus !== "all" && (
@@ -2578,8 +2588,8 @@ export default function ParentDashboard() {
                       className="rounded-xl border border-lilac/20 bg-white px-3 py-1.5 text-xs font-semibold text-ink outline-none focus:border-lilac"
                     >
                       <option value="all">Todos os Materiais</option>
-                      <option value="viewed">✅ Já Visualizados / Baixados</option>
-                      <option value="not_viewed">⏳ Não Visualizados</option>
+                      <option value="viewed">✅ Já Acessados</option>
+                      <option value="not_viewed">⏳ Não Acessados</option>
                     </select>
                   </div>
 
@@ -2596,33 +2606,41 @@ export default function ParentDashboard() {
                         <table className="w-full text-sm">
                           <thead className="bg-slate-50 text-xs font-bold text-ink">
                             <tr>
-                              <th className="px-4 py-3 text-center">Data Acesso</th>
-                              <th className="px-4 py-3 text-left">Criança</th>
-                              <th className="px-4 py-3 text-left">Matéria</th>
-                              <th className="px-4 py-3 text-left">Material</th>
-                              <th className="px-4 py-3 text-center">Tipo</th>
-                              <th className="px-4 py-3 text-center">Ações</th>
+                              <th
+                                className="px-4 py-3 text-center cursor-pointer select-none transition hover:text-lilac"
+                                onClick={() => { setMaterialSortField("created_at"); setMaterialSortDir((d) => (d === "asc" ? "desc" : "asc")); }}
+                              >
+                                Data Criação {materialSortField === "created_at" && (materialSortDir === "asc" ? "↑" : "↓")}
+                              </th>
+                              <th
+                                className="px-4 py-3 text-left cursor-pointer select-none transition hover:text-lilac"
+                                onClick={() => { setMaterialSortField("subject"); setMaterialSortDir((d) => (d === "asc" ? "desc" : "asc")); }}
+                              >
+                                Matéria {materialSortField === "subject" && (materialSortDir === "asc" ? "↑" : "↓")}
+                              </th>
+                              <th
+                                className="px-4 py-3 text-left cursor-pointer select-none transition hover:text-lilac"
+                                onClick={() => { setMaterialSortField("title"); setMaterialSortDir((d) => (d === "asc" ? "desc" : "asc")); }}
+                              >
+                                Material {materialSortField === "title" && (materialSortDir === "asc" ? "↑" : "↓")}
+                              </th>
+                              <th
+                                className="px-4 py-3 text-center cursor-pointer select-none transition hover:text-lilac"
+                                onClick={() => { setMaterialSortField("mediaType"); setMaterialSortDir((d) => (d === "asc" ? "desc" : "asc")); }}
+                              >
+                                Tipo {materialSortField === "mediaType" && (materialSortDir === "asc" ? "↑" : "↓")}
+                              </th>
+                              <th className="px-4 py-3 text-center">Acessos</th>
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-slate-100">
-                            {filteredMaterialReport.map((item, idx) => {
+                            {filteredMaterialReport.map((item) => {
                               const theme = getSubject(item.subjectId);
                               const catInfo = getCategoryInfo(item.category);
-                              const isAccessed = item.viewed || item.downloaded;
                               return (
-                                <tr key={idx} className={cn("hover:bg-slate-50/70 transition", !isAccessed && "bg-amber-50/30")}>
-                                  <td className="px-4 py-3 text-center text-xs font-semibold">
-                                    {isAccessed ? (
-                                      <span className="text-ink-soft">{formatDateTime(item.lastAccess)}</span>
-                                    ) : (
-                                      <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-1 text-[10px] font-bold text-amber-800">
-                                        <CircleDashed className="h-3 w-3" />
-                                        Não visualizado
-                                      </span>
-                                    )}
-                                  </td>
-                                  <td className="px-4 py-3">
-                                    <span className="text-xs font-bold text-candy">{item.childName}</span>
+                                <tr key={item.id} className="hover:bg-slate-50/70 transition">
+                                  <td className="px-4 py-3 text-center text-xs font-semibold text-ink-soft">
+                                    {item.created_at ? formatDateTime(item.created_at) : "—"}
                                   </td>
                                   <td className="px-4 py-3">
                                     <span className="inline-flex items-center gap-1 rounded-full bg-lilac/10 px-2.5 py-0.5 text-xs font-bold text-lilac">
@@ -2635,31 +2653,28 @@ export default function ParentDashboard() {
                                       <span className="text-base">{catInfo.emoji}</span>
                                       <div className="min-w-0">
                                         <p className="font-bold text-ink line-clamp-1">{item.title}</p>
-                                        <span className="text-[11px] text-ink-soft capitalize">{catInfo.label}</span>
+                                        <span className="text-[11px] capitalize text-ink-soft">{catInfo.label}</span>
                                       </div>
                                     </div>
                                   </td>
                                   <td className="px-4 py-3 text-center">
-                                    <span className="text-xs font-semibold text-ink-soft capitalize">{item.mediaType}</span>
+                                    <span className="text-xs font-semibold capitalize text-ink-soft">{item.mediaType}</span>
                                   </td>
                                   <td className="px-4 py-3 text-center">
-                                    <div className="flex items-center justify-center gap-2">
-                                      {item.viewed && (
-                                        <span className="inline-flex items-center gap-1 rounded-full bg-mint-soft px-2 py-0.5 text-[10px] font-bold text-[#05795b]">
-                                          <Eye className="h-3 w-3" />
-                                          {item.viewCount}x
-                                        </span>
-                                      )}
-                                      {item.downloaded && (
-                                        <span className="inline-flex items-center gap-1 rounded-full bg-sky-soft px-2 py-0.5 text-[10px] font-bold text-[#1a8bb0]">
-                                          <Download className="h-3 w-3" />
-                                          {item.downloadCount}x
-                                        </span>
-                                      )}
-                                      {!isAccessed && (
-                                        <span className="text-[10px] text-ink-soft">—</span>
-                                      )}
-                                    </div>
+                                    {item.accessCount > 0 ? (
+                                      <button
+                                        onClick={(e) => { e.stopPropagation(); setSelectedMaterialAccesses(item); setSelectedMaterialChildDetail(null); }}
+                                        className="press inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-lilac/15 px-3 py-1.5 text-xs font-bold text-lilac transition hover:bg-lilac/25"
+                                      >
+                                        <Eye className="h-3.5 w-3.5 shrink-0" />
+                                        <span className="whitespace-nowrap">Ver acessos ({item.accessCount})</span>
+                                      </button>
+                                    ) : (
+                                      <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-amber-100 px-2.5 py-1 text-xs font-bold text-amber-800">
+                                        <CircleDashed className="h-3.5 w-3.5 shrink-0" />
+                                        Pendente
+                                      </span>
+                                    )}
                                   </td>
                                 </tr>
                               );
@@ -2671,6 +2686,187 @@ export default function ParentDashboard() {
                   )}
                 </Card>
               )}
+
+              {/* Material Accesses Modal — per-child accesses, with drill-down */}
+              <AnimatePresence>
+                {selectedMaterialAccesses && materialAccessesData && (
+                  <motion.div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-ink/50 backdrop-blur-md p-3 sm:p-6"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    onClick={() => { setSelectedMaterialAccesses(null); setSelectedMaterialChildDetail(null); }}
+                  >
+                    <motion.div
+                      className="clay relative flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden bg-cream/95 p-0 shadow-2xl"
+                      initial={{ scale: 0.94, y: 20 }}
+                      animate={{ scale: 1, y: 0 }}
+                      exit={{ scale: 0.94, y: 20 }}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {/* Header */}
+                      <div className="flex items-center justify-between gap-3 border-b border-lilac/15 bg-white/80 px-5 py-4">
+                        <div className="flex min-w-0 items-center gap-3">
+                          <div
+                            className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl text-xl shadow-sm"
+                            style={{ backgroundColor: `${getSubject(selectedMaterialAccesses.subjectId)?.hex || "#4CC9F0"}25` }}
+                          >
+                            {getCategoryInfo(selectedMaterialAccesses.category).emoji}
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <h3 className="truncate font-display text-lg font-bold text-ink">
+                              {selectedMaterialAccesses.title}
+                            </h3>
+                            <div className="flex flex-wrap items-center gap-2 text-xs text-ink-soft">
+                              <span>{getSubject(selectedMaterialAccesses.subjectId)?.name || selectedMaterialAccesses.subjectId}</span>
+                              <span>&middot;</span>
+                              <span className="capitalize">{selectedMaterialAccesses.mediaType}</span>
+                              <span>&middot;</span>
+                              <span>{formatFileSize(selectedMaterialAccesses.fileSize)}</span>
+                              <span>&middot;</span>
+                              <span>
+                                {selectedMaterialAccesses.accessCount}{" "}
+                                {selectedMaterialAccesses.accessCount === 1 ? "acesso" : "acessos"} por{" "}
+                                {materialAccessesData.length}{" "}
+                                {materialAccessesData.length === 1 ? "criança" : "crianças"}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => { setSelectedMaterialAccesses(null); setSelectedMaterialChildDetail(null); }}
+                          className="press grid h-9 w-9 place-items-center rounded-full bg-candy-soft text-[#b03b6e] shadow-sm"
+                        >
+                          <X className="h-4 w-4" />
+                        </button>
+                      </div>
+
+                      {/* Body */}
+                      <div className="flex-1 space-y-3 overflow-y-auto p-5">
+                        {materialAccessesData.map((acc) => {
+                          const isOpen = selectedMaterialChildDetail?.childId === acc.childId;
+                          const total = acc.viewCount + acc.downloadCount;
+                          return (
+                            <div key={acc.childId}>
+                              <button
+                                onClick={() => setSelectedMaterialChildDetail(isOpen ? null : acc)}
+                                className={cn(
+                                  "flex w-full items-center justify-between gap-3 rounded-2xl border p-4 text-left transition hover:shadow-md",
+                                  isOpen ? "border-lilac bg-lilac/5" : "border-lilac/15 bg-white"
+                                )}
+                              >
+                                <div className="flex min-w-0 items-center gap-2.5">
+                                  <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-lilac/15 text-sm font-bold text-lilac">
+                                    {acc.childName.charAt(0).toUpperCase()}
+                                  </div>
+                                  <div className="min-w-0">
+                                    <p className="text-sm font-bold text-ink">{acc.childName}</p>
+                                    <p className="text-[10px] text-ink-soft">
+                                      Último acesso: {formatDateTime(acc.lastAccess)}
+                                    </p>
+                                  </div>
+                                </div>
+                                <div className="flex shrink-0 items-center gap-2">
+                                  {acc.viewCount > 0 && (
+                                    <span className="inline-flex items-center gap-1 rounded-full bg-mint-soft px-2 py-0.5 text-[10px] font-bold text-[#05795b]">
+                                      <Eye className="h-3 w-3" />
+                                      {acc.viewCount}x
+                                    </span>
+                                  )}
+                                  {acc.downloadCount > 0 && (
+                                    <span className="inline-flex items-center gap-1 rounded-full bg-sky-soft px-2 py-0.5 text-[10px] font-bold text-[#1a8bb0]">
+                                      <Download className="h-3 w-3" />
+                                      {acc.downloadCount}x
+                                    </span>
+                                  )}
+                                  <ChevronRight
+                                    className={cn(
+                                      "h-4 w-4 text-ink-soft transition-transform",
+                                      isOpen && "rotate-90"
+                                    )}
+                                  />
+                                </div>
+                              </button>
+
+                              {/* Inline detail expansion */}
+                              <AnimatePresence>
+                                {isOpen && (
+                                  <motion.div
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: "auto", opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    className="overflow-hidden"
+                                  >
+                                    <div className="space-y-3 px-2 pb-1 pt-2">
+                                      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+                                        <div className="rounded-xl border border-lilac/15 bg-white p-3 text-center">
+                                          <p className="mb-1 text-[10px] font-bold text-ink-soft">Visualizações</p>
+                                          <p className="font-display text-lg font-bold text-[#05795b]">
+                                            {acc.viewCount}
+                                          </p>
+                                        </div>
+                                        <div className="rounded-xl border border-lilac/15 bg-white p-3 text-center">
+                                          <p className="mb-1 text-[10px] font-bold text-ink-soft">Downloads</p>
+                                          <p className="font-display text-lg font-bold text-[#1a8bb0]">
+                                            {acc.downloadCount}
+                                          </p>
+                                        </div>
+                                        <div className="rounded-xl border border-lilac/15 bg-white p-3 text-center">
+                                          <p className="mb-1 text-[10px] font-bold text-ink-soft">Primeiro acesso</p>
+                                          <p className="text-xs font-bold text-ink">
+                                            {formatDateTime(acc.firstAccess)}
+                                          </p>
+                                        </div>
+                                        <div className="rounded-xl border border-lilac/15 bg-white p-3 text-center">
+                                          <p className="mb-1 text-[10px] font-bold text-ink-soft">Total de acessos</p>
+                                          <p className="font-display text-lg font-bold text-ink">{total}</p>
+                                        </div>
+                                      </div>
+
+                                      {/* Event history */}
+                                      <div className="rounded-xl border border-lilac/15 bg-white p-3">
+                                        <p className="mb-2 flex items-center gap-1.5 text-xs font-bold text-ink">
+                                          <Clock className="h-3.5 w-3.5 text-lilac" />
+                                          Histórico ({acc.events.length})
+                                        </p>
+                                        <div className="max-h-40 space-y-1.5 overflow-y-auto">
+                                          {acc.events.map((ev, i) => (
+                                            <div
+                                              key={i}
+                                              className="flex items-center justify-between gap-2 rounded-lg bg-slate-50 px-2.5 py-1.5"
+                                            >
+                                              <span
+                                                className={cn(
+                                                  "inline-flex items-center gap-1 text-[11px] font-bold",
+                                                  ev.action === "download" ? "text-[#1a8bb0]" : "text-[#05795b]"
+                                                )}
+                                              >
+                                                {ev.action === "download" ? (
+                                                  <Download className="h-3 w-3" />
+                                                ) : (
+                                                  <Eye className="h-3 w-3" />
+                                                )}
+                                                {ev.action === "download" ? "Baixou" : "Visualizou"}
+                                              </span>
+                                              <span className="text-[11px] font-semibold text-ink-soft">
+                                                {formatDateTime(ev.created_at)}
+                                              </span>
+                                            </div>
+                                          ))}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </motion.div>
+                                )}
+                              </AnimatePresence>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               {/* ==================== TAB 5: LINHA DO TEMPO ==================== */}
               {activeTab === "timeline" && (
