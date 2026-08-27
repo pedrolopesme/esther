@@ -204,7 +204,12 @@ export default function ParentDashboard() {
   const [listFilterAccess, setListFilterAccess] = useState("all"); // "all" | "pending" | "accessed"
   const [selectedListAccesses, setSelectedListAccesses] = useState(null);
   const [selectedSessionDetail, setSelectedSessionDetail] = useState(null);
-  const [selectedGameDetail, setSelectedGameDetail] = useState(null);
+
+  // Games tab: sorting + accesses drill-down
+  const [gameSortField, setGameSortField] = useState("created_at"); // "created_at" | "title" | "subject"
+  const [gameSortDir, setGameSortDir] = useState("desc"); // "asc" | "desc"
+  const [selectedGameAccesses, setSelectedGameAccesses] = useState(null);
+  const [selectedGameSessionDetail, setSelectedGameSessionDetail] = useState(null);
   const [materialFilterStatus, setMaterialFilterStatus] = useState("all"); // "all" | "viewed" | "not_viewed"
 
   // Form states for registering children
@@ -293,7 +298,7 @@ export default function ParentDashboard() {
         .limit(300),
       supabase
         .from("games")
-        .select("id, slug, title, description, subject_id, ano_letivo, max_score, cover_url")
+        .select("id, slug, title, description, subject_id, ano_letivo, max_score, cover_url, created_at")
         .eq("published", true),
     ]);
 
@@ -839,7 +844,7 @@ export default function ParentDashboard() {
       if (listSortField === "created_at") {
         const da = a.created_at ? new Date(a.created_at).getTime() : 0;
         const db = b.created_at ? new Date(b.created_at).getTime() : 0;
-        return (db - da) * dir;
+        return (da - db) * dir;
       }
       if (listSortField === "title") {
         return (a.title || "").localeCompare(b.title || "") * dir;
@@ -879,6 +884,68 @@ export default function ParentDashboard() {
       correct: err.correct,
     }));
   }, [selectedSessionDetail]);
+
+  /** One row per published game, carrying its sessions and access count. */
+  const gamesTableData = useMemo(() => {
+    const sessionsByGame = {};
+    for (const s of filteredGameSessions) {
+      if (!sessionsByGame[s.game_id]) sessionsByGame[s.game_id] = [];
+      sessionsByGame[s.game_id].push(s);
+    }
+
+    return games.map((game) => {
+      const gameSessions = sessionsByGame[game.id] || [];
+      return {
+        id: game.id,
+        slug: game.slug,
+        title: game.title,
+        subject: game.subject_id,
+        ano_letivo: game.ano_letivo,
+        max_score: game.max_score || 100,
+        cover_url: game.cover_url || null,
+        created_at: game.created_at || null,
+        accessCount: gameSessions.length,
+        sessions: gameSessions,
+      };
+    });
+  }, [games, filteredGameSessions]);
+
+  /** Games table ordered by the clicked column. */
+  const sortedGamesTableData = useMemo(() => {
+    const dir = gameSortDir === "asc" ? 1 : -1;
+    return gamesTableData.slice().sort((a, b) => {
+      if (gameSortField === "created_at") {
+        const da = a.created_at ? new Date(a.created_at).getTime() : 0;
+        const db = b.created_at ? new Date(b.created_at).getTime() : 0;
+        return (da - db) * dir;
+      }
+      if (gameSortField === "title") {
+        return (a.title || "").localeCompare(b.title || "") * dir;
+      }
+      if (gameSortField === "subject") {
+        const na = getSubject(a.subject)?.name || a.subject || "";
+        const nb = getSubject(b.subject)?.name || b.subject || "";
+        return na.localeCompare(nb) * dir;
+      }
+      return 0;
+    });
+  }, [gamesTableData, gameSortField, gameSortDir]);
+
+  /** Accesses for the selected game (modal data). */
+  const gameAccessesData = useMemo(() => {
+    if (!selectedGameAccesses) return null;
+    return selectedGameAccesses.sessions.map((s) => ({
+      sessionId: s.id,
+      childId: s.child_id,
+      childName: childMap[s.child_id] || "Estudante",
+      score: s.score || 0,
+      max_score: s.max_score || selectedGameAccesses.max_score,
+      score_pct: Number(s.score_pct) || 0,
+      time_spent_seconds: s.time_spent_seconds || 0,
+      completed_at: s.completed_at,
+      details: s.details && typeof s.details === "object" ? s.details : null,
+    }));
+  }, [selectedGameAccesses, childMap]);
 
   const uniqueGrades = useMemo(() => {
     return Array.from(new Set(exerciseLists.map((l) => l.ano_letivo).filter(Boolean)));
@@ -2190,26 +2257,30 @@ export default function ParentDashboard() {
                     <div>
                       <h3 className="flex items-center gap-2 font-display text-xl font-bold text-ink">
                         <Gamepad2 className="h-5 w-5 text-indigo-600" strokeWidth={2.5} />
-                        Desempenho nos Minijogos Educativos
+                        Minijogos Educativos
                       </h3>
                       <p className="text-xs text-ink-soft sm:text-sm">
-                        Pontuações, tempo dedicado e histórico de partidas concluídas pelos filhos.
+                        Todos os minijogos publicados. Clique em “Ver acessos” para ver quem jogou e como foi.
                       </p>
                     </div>
-                    <Badge tone="sky">
-                      {filteredGameSessions.length}{" "}
-                      {filteredGameSessions.length === 1 ? "partida registrada" : "partidas registradas"}
-                    </Badge>
+                    <div className="flex shrink-0 items-center gap-2">
+                      <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800">
+                        {distinctPlayedGamesCount} Jogados
+                      </span>
+                      <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800">
+                        {pendingGamesCount} Pendentes
+                      </span>
+                    </div>
                   </div>
 
-                  {filteredGameSessions.length === 0 ? (
+                  {sortedGamesTableData.length === 0 ? (
                     <div className="py-12 text-center">
                       <div className="mb-2 text-4xl">🎮</div>
                       <p className="font-display text-lg font-bold text-ink">
-                        Nenhuma partida jogada ainda.
+                        Nenhum minijogo publicado ainda.
                       </p>
                       <p className="mt-1 text-xs text-ink-soft">
-                        Quando as crianças jogarem os minijogos educativos, as pontuações e acertos aparecerão aqui.
+                        Quando um minijogo for publicado, ele aparecerá aqui com o histórico de partidas.
                       </p>
                     </div>
                   ) : (
@@ -2218,48 +2289,79 @@ export default function ParentDashboard() {
                         <table className="w-full text-sm">
                           <thead className="bg-slate-50 text-xs font-bold text-ink">
                             <tr>
-                              <th className="px-4 py-3 text-center">Data Acesso</th>
-                              <th className="px-4 py-3 text-left">Criança</th>
-                              <th className="px-4 py-3 text-left">Matéria</th>
-                              <th className="px-4 py-3 text-left">Jogo</th>
-                              <th className="px-4 py-3 text-center">Pontuação</th>
-                              <th className="px-4 py-3 text-center">Tempo</th>
+                              <th
+                                className="px-4 py-3 text-center cursor-pointer select-none transition hover:text-lilac"
+                                onClick={() => { setGameSortField("created_at"); setGameSortDir((d) => (d === "asc" ? "desc" : "asc")); }}
+                              >
+                                Data Criação {gameSortField === "created_at" && (gameSortDir === "asc" ? "↑" : "↓")}
+                              </th>
+                              <th
+                                className="px-4 py-3 text-left cursor-pointer select-none transition hover:text-lilac"
+                                onClick={() => { setGameSortField("subject"); setGameSortDir((d) => (d === "asc" ? "desc" : "asc")); }}
+                              >
+                                Matéria {gameSortField === "subject" && (gameSortDir === "asc" ? "↑" : "↓")}
+                              </th>
+                              <th
+                                className="px-4 py-3 text-left cursor-pointer select-none transition hover:text-lilac"
+                                onClick={() => { setGameSortField("title"); setGameSortDir((d) => (d === "asc" ? "desc" : "asc")); }}
+                              >
+                                Jogo {gameSortField === "title" && (gameSortDir === "asc" ? "↑" : "↓")}
+                              </th>
+                              <th className="px-4 py-3 text-center">Capa</th>
+                              <th className="px-4 py-3 text-center">Acessos</th>
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-slate-100">
-                            {filteredGameSessions.map((session) => {
-                              const theme = getSubject(session.subject_id);
-                              const childDisplayName = childMap[session.child_id] || "Estudante";
+                            {sortedGamesTableData.map((item) => {
+                              const theme = getSubject(item.subject);
                               return (
-                                <tr key={session.id} className="hover:bg-slate-50/70 transition cursor-pointer" onClick={() => setSelectedGameDetail(session)}>
-                                  <td className="px-4 py-3 text-center text-xs text-ink-soft font-semibold">
-                                    {formatDateTime(session.completed_at)}
-                                  </td>
-                                  <td className="px-4 py-3">
-                                    <span className="text-xs font-bold text-candy">{childDisplayName}</span>
+                                <tr key={item.id} className="hover:bg-slate-50/70 transition">
+                                  <td className="px-4 py-3 text-center text-xs font-semibold text-ink-soft">
+                                    {item.created_at ? formatDateTime(item.created_at) : "—"}
                                   </td>
                                   <td className="px-4 py-3">
                                     <span className="inline-flex items-center gap-1 rounded-full bg-lilac/10 px-2.5 py-0.5 text-xs font-bold text-lilac">
                                       <span>{theme?.emoji || "🎮"}</span>
-                                      <span>{theme?.name || session.subject_id}</span>
+                                      <span>{theme?.name || item.subject}</span>
                                     </span>
                                   </td>
                                   <td className="px-4 py-3">
-                                    <p className="font-bold text-ink line-clamp-1">{session.game_title}</p>
-                                  </td>
-                                  <td className="px-4 py-3 text-center">
-                                    <span className="inline-flex items-center gap-1 font-bold text-emerald-700 text-xs">
-                                      <Trophy className="h-3.5 w-3.5 text-emerald-600" />
-                                      {session.score}/{session.max_score} ({session.score_pct}%)
+                                    <p className="font-bold text-ink line-clamp-1">{item.title}</p>
+                                    <span className="text-[11px] text-ink-soft">
+                                      {item.ano_letivo || "Ensino Fundamental"}
                                     </span>
                                   </td>
-                                  <td className="px-4 py-3 text-center text-xs text-ink-soft">
-                                    {session.time_spent_seconds > 0 ? (
-                                      <span className="flex items-center justify-center gap-1">
-                                        <Clock className="h-3 w-3" />
-                                        {session.time_spent_seconds}s
+                                  <td className="px-4 py-3">
+                                    <div className="flex justify-center">
+                                      {item.cover_url ? (
+                                        // eslint-disable-next-line @next/next/no-img-element
+                                        <img
+                                          src={item.cover_url}
+                                          alt={`Capa de ${item.title}`}
+                                          className="h-10 w-16 shrink-0 rounded-lg border border-slate-200 object-cover"
+                                        />
+                                      ) : (
+                                        <span className="grid h-10 w-16 shrink-0 place-items-center rounded-lg bg-indigo-50 text-lg text-indigo-600">
+                                          🎮
+                                        </span>
+                                      )}
+                                    </div>
+                                  </td>
+                                  <td className="px-4 py-3 text-center">
+                                    {item.accessCount > 0 ? (
+                                      <button
+                                        onClick={(e) => { e.stopPropagation(); setSelectedGameAccesses(item); setSelectedGameSessionDetail(null); }}
+                                        className="press inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-lilac/15 px-3 py-1.5 text-xs font-bold text-lilac transition hover:bg-lilac/25"
+                                      >
+                                        <Eye className="h-3.5 w-3.5 shrink-0" />
+                                        <span className="whitespace-nowrap">Ver acessos ({item.accessCount})</span>
+                                      </button>
+                                    ) : (
+                                      <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-amber-100 px-2.5 py-1 text-xs font-bold text-amber-800">
+                                        <CircleDashed className="h-3.5 w-3.5 shrink-0" />
+                                        Pendente
                                       </span>
-                                    ) : "—"}
+                                    )}
                                   </td>
                                 </tr>
                               );
@@ -2272,115 +2374,18 @@ export default function ParentDashboard() {
                 </Card>
               )}
 
-              {/* Game Detail Modal */}
+              {/* Game Accesses Modal — sessions for one game, with drill-down */}
               <AnimatePresence>
-                {selectedGameDetail && (
+                {selectedGameAccesses && gameAccessesData && (
                   <motion.div
                     className="fixed inset-0 z-50 flex items-center justify-center bg-ink/50 backdrop-blur-md p-3 sm:p-6"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    onClick={() => setSelectedGameDetail(null)}
+                    onClick={() => { setSelectedGameAccesses(null); setSelectedGameSessionDetail(null); }}
                   >
                     <motion.div
-                      className="clay relative flex max-h-[90vh] w-full max-w-lg flex-col bg-cream/95 p-0 overflow-hidden shadow-2xl"
-                      initial={{ scale: 0.94, y: 20 }}
-                      animate={{ scale: 1, y: 0 }}
-                      exit={{ scale: 0.94, y: 20 }}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <div className="flex items-center justify-between gap-3 border-b border-lilac/15 bg-white/80 px-5 py-4">
-                        <div className="flex items-center gap-3 min-w-0">
-                          <div
-                            className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl text-xl shadow-sm"
-                            style={{ backgroundColor: `${getSubject(selectedGameDetail.subject_id)?.hex || "#6366F1"}25` }}
-                          >
-                            {getSubject(selectedGameDetail.subject_id)?.emoji || "🎮"}
-                          </div>
-                          <div className="min-w-0 flex-1">
-                            <h3 className="font-display text-lg font-bold text-ink truncate">
-                              {selectedGameDetail.game_title}
-                            </h3>
-                            <div className="flex flex-wrap items-center gap-2 text-xs text-ink-soft">
-                              <span>{getSubject(selectedGameDetail.subject_id)?.name || selectedGameDetail.subject_id}</span>
-                              <span>&middot;</span>
-                              <span>{childMap[selectedGameDetail.child_id] || "Estudante"}</span>
-                            </div>
-                          </div>
-                        </div>
-                        <button
-                          onClick={() => setSelectedGameDetail(null)}
-                          className="press grid h-9 w-9 place-items-center rounded-full bg-candy-soft text-[#b03b6e] shadow-sm"
-                        >
-                          <X className="h-4 w-4" />
-                        </button>
-                      </div>
-
-                      <div className="flex-1 overflow-y-auto p-5 space-y-4">
-                        <div className="rounded-2xl border border-lilac/15 bg-white p-4 text-center">
-                          <p className="text-xs font-bold text-ink-soft mb-2">Pontuação</p>
-                          <div className="flex items-center justify-center gap-3">
-                            <Trophy className="h-8 w-8 text-emerald-600" />
-                            <span className="font-display text-4xl font-bold text-ink">{selectedGameDetail.score}</span>
-                            <span className="text-lg text-ink-soft font-semibold">/ {selectedGameDetail.max_score}</span>
-                          </div>
-                          <span className={cn(
-                            "mt-2 inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-bold",
-                            selectedGameDetail.score_pct >= 70 ? "bg-emerald-100 text-emerald-800" : "bg-amber-100 text-amber-800"
-                          )}>
-                            {selectedGameDetail.score_pct}% de aproveitamento
-                          </span>
-                        </div>
-
-                        <div className="grid grid-cols-2 gap-3">
-                          <div className="rounded-2xl border border-lilac/15 bg-white p-3 text-center">
-                            <p className="text-[10px] font-bold text-ink-soft mb-1">Tempo</p>
-                            <p className="font-bold text-ink flex items-center justify-center gap-1">
-                              <Clock className="h-4 w-4 text-lilac" />
-                              {selectedGameDetail.time_spent_seconds > 0 ? `${selectedGameDetail.time_spent_seconds}s` : "—"}
-                            </p>
-                          </div>
-                          <div className="rounded-2xl border border-lilac/15 bg-white p-3 text-center">
-                            <p className="text-[10px] font-bold text-ink-soft mb-1">Data</p>
-                            <p className="font-bold text-ink text-sm">{formatDateTime(selectedGameDetail.completed_at)}</p>
-                          </div>
-                        </div>
-
-                        {selectedGameDetail.details && Object.keys(selectedGameDetail.details).length > 0 && (
-                          <div className="rounded-2xl border border-lilac/15 bg-white p-4">
-                            <p className="text-xs font-bold text-ink mb-3">Detalhes da Partida</p>
-                            <div className="flex flex-wrap gap-2">
-                              {selectedGameDetail.details.acertos !== undefined && (
-                                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-700 border border-emerald-200">
-                                  <CheckCircle2 className="h-3.5 w-3.5" />
-                                  {selectedGameDetail.details.acertos} acertos
-                                </span>
-                              )}
-                              {selectedGameDetail.details.erros !== undefined && (
-                                <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50 px-3 py-1.5 text-xs font-bold text-rose-700 border border-rose-200">
-                                  <XCircle className="h-3.5 w-3.5" />
-                                  {selectedGameDetail.details.erros} erros
-                                </span>
-                              )}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </motion.div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-              <AnimatePresence>
-                {selectedGameDetail && (
-                  <motion.div
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-ink/50 backdrop-blur-md p-3 sm:p-6"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    onClick={() => setSelectedGameDetail(null)}
-                  >
-                    <motion.div
-                      className="clay relative flex max-h-[90vh] w-full max-w-lg flex-col bg-cream/95 p-0 overflow-hidden shadow-2xl"
+                      className="clay relative flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden bg-cream/95 p-0 shadow-2xl"
                       initial={{ scale: 0.94, y: 20 }}
                       animate={{ scale: 1, y: 0 }}
                       exit={{ scale: 0.94, y: 20 }}
@@ -2388,26 +2393,40 @@ export default function ParentDashboard() {
                     >
                       {/* Header */}
                       <div className="flex items-center justify-between gap-3 border-b border-lilac/15 bg-white/80 px-5 py-4">
-                        <div className="flex items-center gap-3 min-w-0">
-                          <div
-                            className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl text-xl shadow-sm"
-                            style={{ backgroundColor: `${getSubject(selectedGameDetail.subject_id)?.hex || "#6366F1"}25` }}
-                          >
-                            {getSubject(selectedGameDetail.subject_id)?.emoji || "🎮"}
-                          </div>
+                        <div className="flex min-w-0 items-center gap-3">
+                          {selectedGameAccesses.cover_url ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                              src={selectedGameAccesses.cover_url}
+                              alt={`Capa de ${selectedGameAccesses.title}`}
+                              className="h-11 w-16 shrink-0 rounded-xl border border-slate-200 object-cover shadow-sm"
+                            />
+                          ) : (
+                            <div
+                              className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl text-xl shadow-sm"
+                              style={{ backgroundColor: `${getSubject(selectedGameAccesses.subject)?.hex || "#6366F1"}25` }}
+                            >
+                              {getSubject(selectedGameAccesses.subject)?.emoji || "🎮"}
+                            </div>
+                          )}
                           <div className="min-w-0 flex-1">
-                            <h3 className="font-display text-lg font-bold text-ink truncate">
-                              {selectedGameDetail.game_title}
+                            <h3 className="truncate font-display text-lg font-bold text-ink">
+                              {selectedGameAccesses.title}
                             </h3>
                             <div className="flex flex-wrap items-center gap-2 text-xs text-ink-soft">
-                              <span>{getSubject(selectedGameDetail.subject_id)?.name || selectedGameDetail.subject_id}</span>
+                              <span>{getSubject(selectedGameAccesses.subject)?.name || selectedGameAccesses.subject}</span>
                               <span>&middot;</span>
-                              <span>{childMap[selectedGameDetail.child_id] || "Estudante"}</span>
+                              <span>{selectedGameAccesses.ano_letivo || "Ensino Fundamental"}</span>
+                              <span>&middot;</span>
+                              <span>
+                                {gameAccessesData.length}{" "}
+                                {gameAccessesData.length === 1 ? "acesso" : "acessos"}
+                              </span>
                             </div>
                           </div>
                         </div>
                         <button
-                          onClick={() => setSelectedGameDetail(null)}
+                          onClick={() => { setSelectedGameAccesses(null); setSelectedGameSessionDetail(null); }}
                           className="press grid h-9 w-9 place-items-center rounded-full bg-candy-soft text-[#b03b6e] shadow-sm"
                         >
                           <X className="h-4 w-4" />
@@ -2415,60 +2434,104 @@ export default function ParentDashboard() {
                       </div>
 
                       {/* Body */}
-                      <div className="flex-1 overflow-y-auto p-5 space-y-4">
-                        {/* Score */}
-                        <div className="rounded-2xl border border-lilac/15 bg-white p-4 text-center">
-                          <p className="text-xs font-bold text-ink-soft mb-2">Pontuação</p>
-                          <div className="flex items-center justify-center gap-3">
-                            <Trophy className="h-8 w-8 text-emerald-600" />
-                            <span className="font-display text-4xl font-bold text-ink">
-                              {selectedGameDetail.score}
-                            </span>
-                            <span className="text-lg text-ink-soft font-semibold">/ {selectedGameDetail.max_score}</span>
-                          </div>
-                          <span className={cn(
-                            "mt-2 inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-bold",
-                            selectedGameDetail.score_pct >= 70 ? "bg-emerald-100 text-emerald-800" : "bg-amber-100 text-amber-800"
-                          )}>
-                            {selectedGameDetail.score_pct}% de aproveitamento
-                          </span>
-                        </div>
+                      <div className="flex-1 space-y-3 overflow-y-auto p-5">
+                        {gameAccessesData.map((acc) => {
+                          const isOpen = selectedGameSessionDetail?.sessionId === acc.sessionId;
+                          const good = acc.score_pct >= 70;
+                          return (
+                            <div key={acc.sessionId}>
+                              <button
+                                onClick={() => setSelectedGameSessionDetail(isOpen ? null : acc)}
+                                className={cn(
+                                  "flex w-full items-center justify-between gap-3 rounded-2xl border p-4 text-left transition hover:shadow-md",
+                                  isOpen ? "border-lilac bg-lilac/5" : "border-lilac/15 bg-white"
+                                )}
+                              >
+                                <div className="flex min-w-0 items-center gap-2.5">
+                                  <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-lilac/15 text-sm font-bold text-lilac">
+                                    {acc.childName.charAt(0).toUpperCase()}
+                                  </div>
+                                  <div className="min-w-0">
+                                    <p className="text-sm font-bold text-ink">{acc.childName}</p>
+                                    <p className="text-[10px] text-ink-soft">{formatDateTime(acc.completed_at)}</p>
+                                  </div>
+                                </div>
+                                <div className="flex shrink-0 items-center gap-2">
+                                  <span
+                                    className={cn(
+                                      "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold",
+                                      good ? "bg-emerald-100 text-emerald-800" : "bg-amber-100 text-amber-800"
+                                    )}
+                                  >
+                                    <Trophy className="h-3.5 w-3.5" />
+                                    {acc.score_pct}%
+                                  </span>
+                                  <span className="text-xs font-semibold text-ink-soft">
+                                    ({acc.score}/{acc.max_score})
+                                  </span>
+                                  <ChevronRight
+                                    className={cn(
+                                      "h-4 w-4 text-ink-soft transition-transform",
+                                      isOpen && "rotate-90"
+                                    )}
+                                  />
+                                </div>
+                              </button>
 
-                        {/* Stats */}
-                        <div className="grid grid-cols-2 gap-3">
-                          <div className="rounded-2xl border border-lilac/15 bg-white p-3 text-center">
-                            <p className="text-[10px] font-bold text-ink-soft mb-1">Tempo</p>
-                            <p className="font-bold text-ink flex items-center justify-center gap-1">
-                              <Clock className="h-4 w-4 text-lilac" />
-                              {selectedGameDetail.time_spent_seconds > 0 ? `${selectedGameDetail.time_spent_seconds}s` : "—"}
-                            </p>
-                          </div>
-                          <div className="rounded-2xl border border-lilac/15 bg-white p-3 text-center">
-                            <p className="text-[10px] font-bold text-ink-soft mb-1">Data</p>
-                            <p className="font-bold text-ink text-sm">{formatDateTime(selectedGameDetail.completed_at)}</p>
-                          </div>
-                        </div>
-
-                        {/* Details */}
-                        {selectedGameDetail.details && Object.keys(selectedGameDetail.details).length > 0 && (
-                          <div className="rounded-2xl border border-lilac/15 bg-white p-4">
-                            <p className="text-xs font-bold text-ink mb-3">Detalhes da Partida</p>
-                            <div className="flex flex-wrap gap-2">
-                              {selectedGameDetail.details.acertos !== undefined && (
-                                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-700 border border-emerald-200">
-                                  <CheckCircle2 className="h-3.5 w-3.5" />
-                                  {selectedGameDetail.details.acertos} acertos
-                                </span>
-                              )}
-                              {selectedGameDetail.details.erros !== undefined && (
-                                <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50 px-3 py-1.5 text-xs font-bold text-rose-700 border border-rose-200">
-                                  <XCircle className="h-3.5 w-3.5" />
-                                  {selectedGameDetail.details.erros} erros
-                                </span>
-                              )}
+                              {/* Inline detail expansion */}
+                              <AnimatePresence>
+                                {isOpen && (
+                                  <motion.div
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: "auto", opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    className="overflow-hidden"
+                                  >
+                                    <div className="px-2 pb-1 pt-2">
+                                      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+                                        <div className="rounded-xl border border-lilac/15 bg-white p-3 text-center">
+                                          <p className="mb-1 text-[10px] font-bold text-ink-soft">Pontuação</p>
+                                          <p className="font-display text-lg font-bold text-ink">
+                                            {acc.score}
+                                            <span className="text-xs font-semibold text-ink-soft">
+                                              /{acc.max_score}
+                                            </span>
+                                          </p>
+                                        </div>
+                                        <div className="rounded-xl border border-lilac/15 bg-white p-3 text-center">
+                                          <p className="mb-1 text-[10px] font-bold text-ink-soft">Aproveitamento</p>
+                                          <p
+                                            className={cn(
+                                              "font-display text-lg font-bold",
+                                              good ? "text-emerald-700" : "text-amber-700"
+                                            )}
+                                          >
+                                            {acc.score_pct}%
+                                          </p>
+                                        </div>
+                                        <div className="rounded-xl border border-lilac/15 bg-white p-3 text-center">
+                                          <p className="mb-1 text-[10px] font-bold text-ink-soft">Tempo</p>
+                                          <p className="flex items-center justify-center gap-1 font-display text-lg font-bold text-ink">
+                                            <Clock className="h-3.5 w-3.5 text-lilac" />
+                                            {acc.time_spent_seconds > 0 ? `${acc.time_spent_seconds}s` : "—"}
+                                          </p>
+                                        </div>
+                                        <div className="rounded-xl border border-lilac/15 bg-white p-3 text-center">
+                                          <p className="mb-1 text-[10px] font-bold text-ink-soft">Acertos / Erros</p>
+                                          <p className="font-display text-lg font-bold text-ink">
+                                            {acc.details?.acertos ?? "—"}
+                                            <span className="text-xs font-semibold text-ink-soft"> / </span>
+                                            {acc.details?.erros ?? "—"}
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </motion.div>
+                                )}
+                              </AnimatePresence>
                             </div>
-                          </div>
-                        )}
+                          );
+                        })}
                       </div>
                     </motion.div>
                   </motion.div>
