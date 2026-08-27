@@ -149,14 +149,51 @@ button:not(:disabled) {
   100% { background-position: 200% 0; }
 }
 
+/* ---------- Playground decorations (child home) ---------- */
+@keyframes drift {
+  0%   { transform: translateX(-12%); }
+  100% { transform: translateX(112%); }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.6); }
+  50%      { opacity: 1;    transform: scale(1); }
+}
+@keyframes swing {
+  0%, 100% { transform: rotate(-2.5deg); }
+  50%      { transform: rotate(2.5deg); }
+}
+@keyframes rainbow-pan {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
 .anim-float { animation: float 6s ease-in-out infinite; }
 .anim-float-slow { animation: float-slow 8s ease-in-out infinite; }
 .anim-wiggle { animation: wiggle 2.4s ease-in-out infinite; }
 .anim-sparkle { animation: sparkle 2.6s ease-in-out infinite; }
 .anim-bob { animation: bob 3s ease-in-out infinite; }
+.anim-drift { animation: drift 38s linear infinite; }
+.anim-twinkle { animation: twinkle 3.4s ease-in-out infinite; }
+.anim-swing { animation: swing 4s ease-in-out infinite; transform-origin: top center; }
+.anim-rainbow {
+  background-size: 220% 220%;
+  animation: rainbow-pan 9s ease-in-out infinite;
+}
+
+/* Confetti sprinkle overlay, purely decorative */
+.bg-confetti {
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(255, 112, 166, 0.5) 0 3px, transparent 3px),
+    radial-gradient(circle at 78% 12%, rgba(76, 201, 240, 0.5) 0 3px, transparent 3px),
+    radial-gradient(circle at 34% 72%, rgba(255, 209, 102, 0.55) 0 3px, transparent 3px),
+    radial-gradient(circle at 62% 58%, rgba(6, 214, 160, 0.45) 0 3px, transparent 3px),
+    radial-gradient(circle at 90% 80%, rgba(163, 112, 255, 0.5) 0 3px, transparent 3px);
+  background-size: 180px 180px;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .anim-float, .anim-float-slow, .anim-wiggle, .anim-sparkle, .anim-bob {
+  .anim-float, .anim-float-slow, .anim-wiggle, .anim-sparkle, .anim-bob,
+  .anim-drift, .anim-twinkle, .anim-swing, .anim-rainbow {
     animation: none;
   }
   html { scroll-behavior: auto; }

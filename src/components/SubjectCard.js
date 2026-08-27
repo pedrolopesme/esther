@@ -2,88 +2,87 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ChevronRight, ListChecks, FolderDown, AlertTriangle } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { cn } from "../utils/cn";
 
 const cardVariants = {
-  hidden: { y: 16, opacity: 0, scale: 0.96 },
-  show: { y: 0, opacity: 1, scale: 1, transition: { type: "spring", stiffness: 260, damping: 20 } },
+  hidden: { y: 20, opacity: 0, scale: 0.9 },
+  show: { y: 0, opacity: 1, scale: 1, transition: { type: "spring", stiffness: 260, damping: 18 } },
 };
 
 /**
- * Compact & cheerful Kawaii Subject Card for the student dashboard.
- * Designed to fit comfortably in responsive 2, 3 or 4 columns without overwhelming the page.
+ * Playful subject tile for the student playground.
+ * Reads as a chunky toy button: colored planet orb, soft color wash and a
+ * pressable 3D shadow tinted with the subject hue.
  */
 export default function SubjectCard({ subject, listCount, materialCount, unseenMaterialCount = 0 }) {
-  const Icon = subject.icon;
+  const hex = subject.hex || "#A370FF";
+  const hasNews = unseenMaterialCount > 0;
 
   return (
-    <motion.div variants={cardVariants}>
+    <motion.div variants={cardVariants} className="h-full">
       <motion.div
-        whileHover={{ y: -6, scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        transition={{ type: "spring", stiffness: 320, damping: 18 }}
+        className="h-full"
+        whileHover={{ y: -8, rotate: -1.5 }}
+        whileTap={{ scale: 0.96, y: -2 }}
+        transition={{ type: "spring", stiffness: 340, damping: 16 }}
       >
         <Link
           href={`/materias/${subject.id}`}
-          className="clay group relative flex flex-col justify-between overflow-hidden p-4 sm:p-5 transition-all hover:shadow-xl"
+          aria-label={`Abrir ${subject.name}`}
+          className="group relative flex h-full flex-col items-center gap-2 overflow-hidden rounded-[1.9rem] border-[3px] border-white bg-cloud p-4 text-center outline-none transition-shadow focus-visible:ring-4 focus-visible:ring-lilac/40 sm:p-5"
+          style={{
+            backgroundImage: `radial-gradient(120% 90% at 50% -10%, ${hex}2E 0%, #ffffff 68%)`,
+            boxShadow: `0 8px 0 ${hex}55, 0 16px 28px -14px ${hex}88`,
+          }}
         >
-          {/* Subtle colored accent top border */}
-          <div
-            className="absolute left-0 top-0 h-1.5 w-full bg-gradient-to-r"
+          {/* Sparkle badge for unseen content */}
+          {hasNews && (
+            <span
+              className="absolute right-2.5 top-2.5 z-10 inline-flex items-center gap-1 rounded-full bg-[#ff477e] px-2 py-0.5 text-[10px] font-extrabold text-white shadow-[0_2px_0_#bd1f58]"
+              title={`${unseenMaterialCount} novidade(s) nesta matéria`}
+            >
+              <Sparkles className="h-2.5 w-2.5" />
+              {unseenMaterialCount}
+            </span>
+          )}
+
+          {/* Planet orb */}
+          <span
+            aria-hidden="true"
+            className={cn(
+              "grid h-16 w-16 shrink-0 place-items-center rounded-full text-3xl shadow-inner transition-transform duration-300 group-hover:scale-110 sm:h-[4.5rem] sm:w-[4.5rem] sm:text-4xl",
+              hasNews && "anim-bob"
+            )}
             style={{
-              backgroundImage: `linear-gradient(to right, ${subject.hex}, #ffffff)`,
+              background: `radial-gradient(circle at 32% 28%, #ffffff 0%, ${hex}44 55%, ${hex}77 100%)`,
             }}
-          />
+          >
+            {subject.emoji}
+          </span>
 
-          <div>
-            <div className="flex items-start justify-between gap-2 mb-3">
-              <div
-                className="grid h-12 w-12 place-items-center rounded-2xl text-2xl shadow-sm transition-transform group-hover:scale-105"
-                style={{ backgroundColor: `${subject.hex}22` }}
-              >
-                {subject.emoji}
-              </div>
+          <h3 className="font-display text-sm font-bold leading-tight text-ink sm:text-base">
+            {subject.name}
+          </h3>
 
+          {/* Counts as tiny chips */}
+          <div className="mt-auto flex flex-wrap items-center justify-center gap-1">
+            {listCount > 0 && (
               <span
-                className="grid h-8 w-8 place-items-center rounded-full bg-white shadow-sm transition-transform duration-200 group-hover:translate-x-1"
-                style={{ color: subject.hex }}
+                className="rounded-full px-2 py-0.5 text-[10px] font-extrabold text-white"
+                style={{ backgroundColor: hex }}
               >
-                <ChevronRight className="h-4 w-4" strokeWidth={2.5} />
-              </span>
-            </div>
-
-            <h3 className="font-display text-lg font-bold text-ink group-hover:text-lilac transition-colors truncate">
-              {subject.name}
-            </h3>
-            {subject.tag && (
-              <p className="mt-0.5 text-xs text-ink-soft truncate">
-                {subject.tag}
-              </p>
-            )}
-          </div>
-
-          {/* Counts and unseen material alert */}
-          <div className="mt-4 flex flex-wrap items-center gap-1.5 border-t border-lilac/10 pt-3 text-[11px] font-bold text-ink-soft">
-            {typeof listCount === "number" && (
-              <span className="inline-flex items-center gap-1 rounded-full bg-lilac/10 px-2 py-0.5 text-lilac">
-                <ListChecks className="h-3 w-3" />
-                {listCount} listas
+                {listCount} {listCount === 1 ? "lista" : "listas"}
               </span>
             )}
-            {typeof materialCount === "number" && materialCount > 0 && (
-              <span className="inline-flex items-center gap-1 rounded-full bg-sky/10 px-2 py-0.5 text-sky">
-                <FolderDown className="h-3 w-3" />
-                {materialCount} materiais
+            {materialCount > 0 && (
+              <span className="rounded-full bg-ink/10 px-2 py-0.5 text-[10px] font-extrabold text-ink-soft">
+                {materialCount} {materialCount === 1 ? "material" : "materiais"}
               </span>
             )}
-            {unseenMaterialCount > 0 && (
-              <span
-                className="inline-flex animate-pulse items-center gap-1 rounded-full border border-[#FF70A6]/60 bg-[#FF70A6] px-2.5 py-1 text-[10px] font-extrabold text-white shadow-[0_3px_0_#D93B74]"
-                title={`${unseenMaterialCount} material(is) ainda não visto(s) nesta matéria`}
-              >
-                <AlertTriangle className="h-3 w-3" />
-                {unseenMaterialCount} novo{unseenMaterialCount !== 1 ? "s" : ""}
+            {listCount === 0 && materialCount === 0 && (
+              <span className="rounded-full bg-ink/5 px-2 py-0.5 text-[10px] font-bold text-ink-soft">
+                em breve ✨
               </span>
             )}
           </div>
