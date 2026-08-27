@@ -294,7 +294,7 @@ export default function UploadWizard({ onClose, onSaved }) {
         ano_letivo: formData.ano_letivo,
         exercise_date: formData.exercise_date,
         exercises: rawExercises,
-        published: false,
+        published: true,
       };
 
       const { error: insertError } = await supabase
@@ -777,11 +777,11 @@ export default function UploadWizard({ onClose, onSaved }) {
                   </div>
                 </div>
 
-                <div className="rounded-xl bg-[#FFF3D6] p-4">
-                  <p className="text-sm font-semibold text-amber-800">
-                    ⚠️ A lista será salva associada à matéria{" "}
-                    <strong>{subjectInfo?.name}</strong> como{" "}
-                    <strong>não publicada</strong>. Você poderá publicá-la no painel.
+                <div className="rounded-xl bg-[#DBF9F1] p-4">
+                  <p className="text-sm font-semibold text-emerald-800">
+                    ✅ A lista será salva associada à matéria{" "}
+                    <strong>{subjectInfo?.name}</strong> e já ficará{" "}
+                    <strong>disponível</strong> para as crianças. Você pode ocultá-la no painel.
                   </p>
                 </div>
 
