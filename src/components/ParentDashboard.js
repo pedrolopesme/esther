@@ -226,6 +226,9 @@ export default function ParentDashboard() {
   const [childGradeLevel, setChildGradeLevel] = useState("");
   const [gradeLevels, setGradeLevels] = useState([]);
   const [isLoadingGradeLevels, setIsLoadingGradeLevels] = useState(true);
+  const [registerError, setRegisterError] = useState(null);
+  const [registerSuccess, setRegisterSuccess] = useState(null);
+  const [isRegistering, setIsRegistering] = useState(false);
   // Edit child states
   const [editingChildId, setEditingChildId] = useState(null);
   const [editName, setEditName] = useState("");
