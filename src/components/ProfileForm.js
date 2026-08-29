@@ -111,6 +111,11 @@ export default function ProfileForm() {
           <p className="mt-1 text-sm text-ink-soft">
             {isChild ? "Escolha um companheiro para sua aventura!" : user.email}
           </p>
+          {isChild && child?.grade_level_name && (
+            <p className="mt-0.5 text-xs font-medium text-lilac">
+              {child.grade_level_name} · {child.grade_level_stage}
+            </p>
+          )}
         </div>
 
         <form className="space-y-5" onSubmit={handleSubmit}>

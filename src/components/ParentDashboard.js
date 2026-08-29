@@ -46,6 +46,7 @@ import {
   ChevronRight,
   Search,
   X,
+  Pencil,
 } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 import { getSupabaseBrowserClient } from "../utils/supabase";
@@ -222,9 +223,16 @@ export default function ParentDashboard() {
   const [childName, setChildName] = useState("");
   const [childUsername, setChildUsername] = useState("");
   const [childPassword, setChildPassword] = useState("");
-  const [registerError, setRegisterError] = useState(null);
-  const [registerSuccess, setRegisterSuccess] = useState(null);
-  const [isRegistering, setIsRegistering] = useState(false);
+  const [childGradeLevel, setChildGradeLevel] = useState("");
+  const [gradeLevels, setGradeLevels] = useState([]);
+  const [isLoadingGradeLevels, setIsLoadingGradeLevels] = useState(true);
+  // Edit child states
+  const [editingChildId, setEditingChildId] = useState(null);
+  const [editName, setEditName] = useState("");
+  const [editGradeLevel, setEditGradeLevel] = useState("");
+  const [editPassword, setEditPassword] = useState("");
+  const [isSavingEdit, setIsSavingEdit] = useState(false);
+  const [editError, setEditError] = useState(null);
 
   // Redirect non-parents
   useEffect(() => {
@@ -237,7 +245,7 @@ export default function ParentDashboard() {
     setIsLoadingChildren(true);
     const { data, error } = await supabase
       .from("children")
-      .select("id, display_name, username, active, created_at")
+      .select("id, display_name, username, active, created_at, grade_level_id, grade_levels(name, stage)")
       .eq("parent_id", user.id)
       .order("created_at", { ascending: true });
 
@@ -249,15 +257,38 @@ export default function ParentDashboard() {
           username: row.username,
           active: row.active ?? true,
           createdAt: row.created_at,
+          gradeLevelId: row.grade_level_id,
+          gradeLevelName: row.grade_levels?.name || "",
+          gradeLevelStage: row.grade_levels?.stage || "",
         }))
       );
     }
     setIsLoadingChildren(false);
   }, [supabase, user]);
 
+  // Load grade levels for the registration form
+  const loadGradeLevels = useCallback(async () => {
+    if (!supabase) return;
+    const { data, error } = await supabase
+      .from("grade_levels")
+      .select("id, name, stage, sort_order")
+      .order("sort_order", { ascending: true });
+
+    if (!error && data) {
+      setGradeLevels(data);
+      // Default to "1º ano" (sort_order = 6)
+      const defaultGrade = data.find((g) => g.sort_order === 6);
+      if (defaultGrade) setChildGradeLevel(defaultGrade.id);
+    }
+    setIsLoadingGradeLevels(false);
+  }, [supabase]);
+
   useEffect(() => {
     loadChildren();
   }, [loadChildren]);
+  useEffect(() => {
+    loadGradeLevels();
+  }, [loadGradeLevels]);
 
   // Load all events, sessions, published lists, game sessions, material accesses and items
   const loadParentData = useCallback(async () => {
@@ -357,6 +388,60 @@ export default function ParentDashboard() {
     );
   }
 
+  // Start editing a child — pre-fill form
+  function handleStartEdit(child) {
+    setEditingChildId(child.id);
+    setEditName(child.name);
+    setEditGradeLevel(child.gradeLevelId || "");
+    setEditPassword("");
+    setEditError(null);
+  }
+
+  // Cancel editing
+  function handleCancelEdit() {
+    setEditingChildId(null);
+    setEditName("");
+    setEditGradeLevel("");
+    setEditPassword("");
+    setEditError(null);
+  }
+
+  // Save edited child
+  async function handleSaveEdit(childId) {
+    if (!supabase || !user) return;
+    if (!editName.trim()) {
+      setEditError("O nome não pode ficar vazio.");
+      return;
+    }
+    if (editPassword && editPassword.length < 6) {
+      setEditError("A senha precisa ter pelo menos 6 caracteres.");
+      return;
+    }
+
+    setIsSavingEdit(true);
+    setEditError(null);
+
+    try {
+      const { data, error } = await supabase.rpc("update_child", {
+        p_child_id: childId,
+        p_display_name: editName.trim(),
+        p_password: editPassword || null,
+        p_grade_level_id: editGradeLevel || null,
+      });
+      if (error) throw error;
+      if (!data.ok) {
+        setEditError(data.error);
+      } else {
+        handleCancelEdit();
+        loadChildren();
+      }
+    } catch (err) {
+      setEditError(err.message || "Erro ao salvar.");
+    } finally {
+      setIsSavingEdit(false);
+    }
+  }
+
   // Register new child
   async function handleRegisterChild(e) {
     e.preventDefault();
@@ -369,6 +454,7 @@ export default function ParentDashboard() {
         p_display_name: childName.trim(),
         p_username: childUsername.trim(),
         p_password: childPassword,
+        p_grade_level_id: childGradeLevel,
       });
       if (error) throw error;
       if (!data.ok) {
@@ -380,6 +466,8 @@ export default function ParentDashboard() {
         setChildName("");
         setChildUsername("");
         setChildPassword("");
+        const defaultGrade = gradeLevels.find((g) => g.sort_order === 6);
+        if (defaultGrade) setChildGradeLevel(defaultGrade.id);
         loadChildren();
         loadParentData();
       }
@@ -3043,56 +3131,164 @@ export default function ParentDashboard() {
               </div>
             ) : (
               <ul className="divide-y divide-lilac/10">
-                {children.map((child) => (
-                  <li key={child.id} className="flex items-center justify-between py-4">
-                    <div className="flex items-center gap-3">
-                      <span className="grid h-11 w-11 place-items-center rounded-2xl bg-lilac/15 text-2xl">
-                        {child.active ? "🐣" : "💤"}
-                      </span>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <p className="font-display font-bold text-ink">{child.name}</p>
-                          <span
-                            className={cn(
-                              "rounded-full px-2 py-0.5 text-[10px] font-bold",
-                              child.active
-                                ? "bg-mint-soft text-[#05795b]"
-                                : "bg-black/10 text-ink-soft"
-                            )}
-                          >
-                            {child.active ? "Ativo" : "Desativado"}
+                {children.map((child) => {
+                  const isEditing = editingChildId === child.id;
+                  return (
+                    <li key={child.id} className="py-4">
+                      {/* Row: info + actions */}
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <span className="grid h-11 w-11 place-items-center rounded-2xl bg-lilac/15 text-2xl">
+                            {child.active ? "🐣" : "💤"}
                           </span>
+                          <div>
+                            <div className="flex items-center gap-2">
+                              <p className="font-display font-bold text-ink">{child.name}</p>
+                              <span
+                                className={cn(
+                                  "rounded-full px-2 py-0.5 text-[10px] font-bold",
+                                  child.active
+                                    ? "bg-mint-soft text-[#05795b]"
+                                    : "bg-black/10 text-ink-soft"
+                                )}
+                              >
+                                {child.active ? "Ativo" : "Desativado"}
+                              </span>
+                            </div>
+                            <p className="text-xs text-ink-soft">
+                              Usuário de acesso: <span className="font-bold text-lilac">{child.username}</span>
+                            </p>
+                            {child.gradeLevelName && !isEditing && (
+                              <p className="text-xs text-ink-soft">
+                                Série: <span className="font-medium text-ink">{child.gradeLevelName}</span>
+                              </p>
+                            )}
+                          </div>
                         </div>
-                        <p className="text-xs text-ink-soft">
-                          Usuário de acesso: <span className="font-bold text-lilac">{child.username}</span>
-                        </p>
-                      </div>
-                    </div>
 
-                    <button
-                      onClick={() => handleToggleChildActive(child)}
-                      className={cn(
-                        "press flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold transition",
-                        child.active
-                          ? "bg-candy-soft text-[#a62f5f] hover:bg-candy hover:text-white"
-                          : "bg-mint-soft text-[#05795b] hover:bg-mint hover:text-white"
+                        <div className="flex items-center gap-1.5">
+                          <button
+                            onClick={() => (isEditing ? handleCancelEdit() : handleStartEdit(child))}
+                            className={cn(
+                              "press flex items-center gap-1 rounded-full px-2.5 py-1.5 text-xs font-bold transition",
+                              isEditing
+                                ? "bg-ink-soft/15 text-ink-soft hover:bg-ink-soft/25"
+                                : "bg-sky-soft/60 text-sky hover:bg-sky-soft"
+                            )}
+                            title={isEditing ? "Cancelar edição" : "Editar dados"}
+                          >
+                            <Pencil className="h-3.5 w-3.5" />
+                          </button>
+                          <button
+                            onClick={() => handleToggleChildActive(child)}
+                            className={cn(
+                              "press flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold transition",
+                              child.active
+                                ? "bg-candy-soft text-[#a62f5f] hover:bg-candy hover:text-white"
+                                : "bg-mint-soft text-[#05795b] hover:bg-mint hover:text-white"
+                            )}
+                            title={child.active ? "Desativar conta do filho" : "Reativar conta do filho"}
+                          >
+                            {child.active ? (
+                              <>
+                                <UserX className="h-3.5 w-3.5" />
+                                <span>Desativar</span>
+                              </>
+                            ) : (
+                              <>
+                                <UserCheck className="h-3.5 w-3.5" />
+                                <span>Ativar</span>
+                              </>
+                            )}
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Inline edit form */}
+                      {isEditing && (
+                        <motion.div
+                          className="mt-3 space-y-3 rounded-2xl border-2 border-sky/20 bg-sky-soft/30 p-4"
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <div>
+                            <label className="mb-1 block text-[11px] font-bold text-ink">Nome</label>
+                            <input
+                              type="text"
+                              required
+                              value={editName}
+                              onChange={(e) => setEditName(e.target.value)}
+                              className={inputClass}
+                            />
+                          </div>
+                          <div>
+                            <label className="mb-1 block text-[11px] font-bold text-ink">Série</label>
+                            <select
+                              value={editGradeLevel}
+                              onChange={(e) => setEditGradeLevel(e.target.value)}
+                              className={inputClass}
+                            >
+                              {(() => {
+                                const stages = {};
+                                for (const g of gradeLevels) {
+                                  if (!stages[g.stage]) stages[g.stage] = [];
+                                  stages[g.stage].push(g);
+                                }
+                                return Object.entries(stages).map(([stage, levels]) => (
+                                  <optgroup key={stage} label={stage}>
+                                    {levels.map((l) => (
+                                      <option key={l.id} value={l.id}>
+                                        {l.name}
+                                      </option>
+                                    ))}
+                                  </optgroup>
+                                ));
+                              })()}
+                            </select>
+                          </div>
+                          <div>
+                            <label className="mb-1 block text-[11px] font-bold text-ink">
+                              Nova Senha{" "}
+                              <span className="font-normal text-ink-soft">(deixe em branco para manter)</span>
+                            </label>
+                            <input
+                              type="password"
+                              value={editPassword}
+                              onChange={(e) => setEditPassword(e.target.value)}
+                              placeholder="••••••"
+                              className={inputClass}
+                            />
+                          </div>
+
+                          {editError && (
+                            <p className="rounded-xl bg-candy-soft px-3 py-1.5 text-xs font-bold text-[#a62f5f]">
+                              {editError}
+                            </p>
+                          )}
+
+                          <div className="flex gap-2">
+                            <Button
+                              variant="sky"
+                              className="flex-1"
+                              disabled={isSavingEdit}
+                              onClick={() => handleSaveEdit(child.id)}
+                            >
+                              {isSavingEdit ? "Salvando..." : "Salvar"}
+                            </Button>
+                            <button
+                              type="button"
+                              onClick={handleCancelEdit}
+                              className="press rounded-2xl bg-ink-soft/10 px-4 py-2 text-xs font-bold text-ink-soft transition hover:bg-ink-soft/20"
+                            >
+                              Cancelar
+                            </button>
+                          </div>
+                        </motion.div>
                       )}
-                      title={child.active ? "Desativar conta do filho" : "Reativar conta do filho"}
-                    >
-                      {child.active ? (
-                        <>
-                          <UserX className="h-3.5 w-3.5" />
-                          <span>Desativar</span>
-                        </>
-                      ) : (
-                        <>
-                          <UserCheck className="h-3.5 w-3.5" />
-                          <span>Ativar</span>
-                        </>
-                      )}
-                    </button>
-                  </li>
-                ))}
+                    </li>
+                  );
+                })}
               </ul>
             )}
           </Card>
@@ -3152,6 +3348,37 @@ export default function ParentDashboard() {
                   onChange={(e) => setChildPassword(e.target.value)}
                   className={inputClass}
                 />
+              </div>
+
+              <div>
+                <label className="mb-1 block text-xs font-bold text-ink">Série</label>
+                {isLoadingGradeLevels ? (
+                  <div className="py-2 text-xs text-ink-soft">Carregando séries...</div>
+                ) : (
+                  <select
+                    required
+                    value={childGradeLevel}
+                    onChange={(e) => setChildGradeLevel(e.target.value)}
+                    className={inputClass}
+                  >
+                    {(() => {
+                      const stages = {};
+                      for (const g of gradeLevels) {
+                        if (!stages[g.stage]) stages[g.stage] = [];
+                        stages[g.stage].push(g);
+                      }
+                      return Object.entries(stages).map(([stage, levels]) => (
+                        <optgroup key={stage} label={stage}>
+                          {levels.map((l) => (
+                            <option key={l.id} value={l.id}>
+                              {l.name}
+                            </option>
+                          ))}
+                        </optgroup>
+                      ));
+                    })()}
+                  </select>
+                )}
               </div>
 
               <Button

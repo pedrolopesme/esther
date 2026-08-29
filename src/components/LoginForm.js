@@ -51,6 +51,9 @@ export default function LoginForm() {
             display_name: childData.display_name,
             parent_id: childData.parent_id,
             avatar: getStoredChildAvatar(childData.child_id),
+            grade_level_id: childData.grade_level_id,
+            grade_level_name: childData.grade_level_name,
+            grade_level_stage: childData.grade_level_stage,
           }));
           logChildEvent({
             childId: childData.child_id,
