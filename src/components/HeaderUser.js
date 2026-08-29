@@ -21,6 +21,7 @@ export default function HeaderUser() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    if (!isChild) return;
     setPoints(getPoints());
     const handleUpdate = (e) => {
       setPoints(typeof e?.detail === "number" ? e.detail : getPoints());
@@ -33,7 +34,7 @@ export default function HeaderUser() {
       window.removeEventListener(POINTS_EVENT, handleUpdate);
       window.removeEventListener("storage", handleUpdate);
     };
-  }, []);
+  }, [isChild]);
 
   // Loading skeleton
   if (isLoading) {
@@ -154,17 +155,19 @@ export default function HeaderUser() {
         </div>
       </div>
 
-      {/* Stars */}
-      <div
-        className={cn(
-          "press flex items-center gap-1 rounded-full bg-gradient-to-br from-sun-soft to-candy-soft px-2.5 py-1.5 shadow-sm ring-1 ring-white",
-          pop && "-translate-y-1 scale-110",
-        )}
-        title={`${points} estrelas · Nível ${level}`}
-      >
-        <Star className="h-3.5 w-3.5 fill-sun text-sun anim-bob" strokeWidth={2} />
-        <span className="font-display text-xs font-bold text-ink">{points}</span>
-      </div>
+      {/* Stars — children only */}
+      {isChild && (
+        <div
+          className={cn(
+            "press flex items-center gap-1 rounded-full bg-gradient-to-br from-sun-soft to-candy-soft px-2.5 py-1.5 shadow-sm ring-1 ring-white",
+            pop && "-translate-y-1 scale-110",
+          )}
+          title={`${points} estrelas · Nível ${level}`}
+        >
+          <Star className="h-3.5 w-3.5 fill-sun text-sun anim-bob" strokeWidth={2} />
+          <span className="font-display text-xs font-bold text-ink">{points}</span>
+        </div>
+      )}
     </div>
   );
 }
