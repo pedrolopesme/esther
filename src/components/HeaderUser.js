@@ -61,7 +61,9 @@ export default function HeaderUser() {
   const level = Math.floor(points / PER_LEVEL) + 1;
   const inLevel = points % PER_LEVEL;
   const pct = (inLevel / PER_LEVEL) * 100;
-  const roleLabel = isChild ? "Criança" : isAdmin ? "Admin" : isParent ? "Responsável" : "Estudante";
+  const roleLabel = isChild
+    ? (child?.grade_level_name || "Criança")
+    : isAdmin ? "Admin" : isParent ? "Responsável" : "Estudante";
   const avatar = isChild
     ? getChildAvatar(child?.avatar).emoji
     : AVATARS[Math.min(level - 1, AVATARS.length - 1)];
