@@ -114,9 +114,9 @@ export default function HeaderUser() {
           <span className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-sky-soft to-lilac-soft text-base shadow ring-2 ring-white sm:h-9 sm:w-9 sm:text-lg">
             {avatar}
           </span>
-          <span className="flex max-w-[7rem] items-center gap-1 sm:max-w-[10rem]">
+          <span className="flex max-w-[7rem] flex-col items-start leading-tight sm:max-w-[10rem]">
             <span className="truncate text-sm font-bold text-ink">{name}</span>
-            <span className={cn("shrink-0 rounded-full px-1.5 py-0.5 text-[10px] font-bold leading-none", roleColor)}>
+            <span className={cn("rounded-full px-1.5 py-0.5 text-[10px] font-bold leading-none", roleColor)}>
               {roleLabel}
             </span>
           </span>
