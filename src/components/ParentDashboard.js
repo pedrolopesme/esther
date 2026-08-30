@@ -160,9 +160,6 @@ function startOfWeek(value) {
 
 const WEEK_MS = 604800000;
 
-/** Weekday initials for the study-rhythm chart. */
-const WEEKDAY_INITIALS = ["D", "S", "T", "Q", "Q", "S", "S"];
-
 /** Commitment score weights — regularity dominates, it is the habit that matters. */
 const COMMITMENT_WEIGHTS = { consistency: 0.4, coverage: 0.35, accuracy: 0.25 };
 
@@ -319,7 +316,7 @@ export default function ParentDashboard() {
         .limit(300),
       supabase
         .from("exercise_lists")
-        .select("id, slug, title, description, subject, materia, ano_letivo, exercise_date, question_count, published")
+.select("id, slug, title, description, subject, materia, grade_level_id, exercise_date, question_count, published")
         .eq("published", true)
         .order("exercise_date", { ascending: false }),
       supabase
@@ -329,7 +326,7 @@ export default function ParentDashboard() {
         .limit(300),
       supabase
         .from("materials")
-        .select("id, title, description, subject_id, ano_letivo, file_url, file_name, file_size, file_type, media_type, category, created_at")
+.select("id, title, description, subject_id, grade_level_id, file_url, file_name, file_size, file_type, media_type, category, created_at")
         .eq("published", true),
       supabase
         .from("game_sessions")
@@ -338,7 +335,7 @@ export default function ParentDashboard() {
         .limit(300),
       supabase
         .from("games")
-        .select("id, slug, title, description, subject_id, ano_letivo, max_score, cover_url, created_at")
+.select("id, slug, title, description, subject_id, grade_level_id, max_score, cover_url, created_at")
         .eq("published", true),
     ]);
 
@@ -893,7 +890,7 @@ export default function ParentDashboard() {
         subject: list.subject,
         slug: list.slug,
         title: list.title,
-        ano_letivo: list.ano_letivo,
+grade_level_id: list.grade_level_id,
         question_count: list.question_count || 0,
         accessCount: sessions.length,
         sessions,
@@ -910,7 +907,7 @@ export default function ParentDashboard() {
           item.slug?.toLowerCase().includes(listSearchTitle.toLowerCase().trim())
         : true;
       const matchSubject = listFilterSubject ? item.subject === listFilterSubject : true;
-      const matchGrade = listFilterGrade ? item.ano_letivo === listFilterGrade : true;
+const matchGrade = listFilterGrade ? item.grade_level_id === listFilterGrade : true;
       const matchAccess =
         listFilterAccess === "accessed"
           ? item.accessCount > 0
@@ -979,7 +976,7 @@ export default function ParentDashboard() {
         slug: game.slug,
         title: game.title,
         subject: game.subject_id,
-        ano_letivo: game.ano_letivo,
+grade_level_id: game.grade_level_id,
         max_score: game.max_score || 100,
         cover_url: game.cover_url || null,
         created_at: game.created_at || null,
@@ -1026,8 +1023,8 @@ export default function ParentDashboard() {
     }));
   }, [selectedGameAccesses, childMap]);
 
-  const uniqueGrades = useMemo(() => {
-    return Array.from(new Set(exerciseLists.map((l) => l.ano_letivo).filter(Boolean)));
+const uniqueGrades = useMemo(() => {
+    return Array.from(new Set(exerciseLists.map((l) => l.grade_level_id).filter(Boolean)));
   }, [exerciseLists]);
 
   // Extract all wrong answers for analysis
@@ -1586,7 +1583,7 @@ export default function ParentDashboard() {
                               key={`lbl-${d.key}`}
                               className="flex-1 text-center text-[8px] font-bold text-ink-soft/60"
                             >
-                              {WEEKDAY_INITIALS[d.date.getDay()]}
+                              {d.date.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" })}
                             </span>
                           ))}
                         </div>
@@ -2109,11 +2106,14 @@ export default function ParentDashboard() {
                         className="rounded-xl border border-lilac/20 bg-white px-3 py-1.5 text-xs font-semibold text-ink outline-none focus:border-lilac"
                       >
                         <option value="">Todas as Séries</option>
-                        {uniqueGrades.map((g) => (
-                          <option key={g} value={g}>
-                            {g}
-                          </option>
-                        ))}
+{uniqueGrades.map((gid) => {
+                          const gl = gradeLevels.find((l) => l.id === gid);
+                          return (
+                            <option key={gid} value={gid}>
+                              {gl?.name || gid}
+                            </option>
+);
+                        })}
                       </select>
 
                       {/* Access filter */}
@@ -2172,7 +2172,7 @@ export default function ParentDashboard() {
                                   <td className="px-4 py-3">
                                     <p className="font-bold text-ink line-clamp-1">{item.title}</p>
                                     <span className="text-[11px] text-ink-soft">
-                                      {item.ano_letivo || "Ensino Fundamental"}
+{gradeLevels.find((g) => g.id === item.grade_level_id)?.name || "—"}
                                     </span>
                                   </td>
                                   <td className="px-4 py-3 text-center text-xs font-bold text-ink">
@@ -2238,7 +2238,7 @@ export default function ParentDashboard() {
                             <div className="flex flex-wrap items-center gap-2 text-xs text-ink-soft">
                               <span>{getSubject(selectedListAccesses.subject)?.name || selectedListAccesses.subject}</span>
                               <span>&middot;</span>
-                              <span>{selectedListAccesses.ano_letivo || "Ensino Fundamental"}</span>
+<span>{gradeLevels.find((g) => g.id === selectedListAccesses.grade_level_id)?.name || "—"}</span>
                               <span>&middot;</span>
                               <span>{selectedListAccesses.question_count || 0} questões</span>
                               <span>&middot;</span>
@@ -2425,7 +2425,7 @@ export default function ParentDashboard() {
                                   <td className="px-4 py-3">
                                     <p className="font-bold text-ink line-clamp-1">{item.title}</p>
                                     <span className="text-[11px] text-ink-soft">
-                                      {item.ano_letivo || "Ensino Fundamental"}
+{gradeLevels.find((g) => g.id === item.grade_level_id)?.name || "—"}
                                     </span>
                                   </td>
                                   <td className="px-4 py-3">
@@ -2513,7 +2513,7 @@ export default function ParentDashboard() {
                             <div className="flex flex-wrap items-center gap-2 text-xs text-ink-soft">
                               <span>{getSubject(selectedGameAccesses.subject)?.name || selectedGameAccesses.subject}</span>
                               <span>&middot;</span>
-                              <span>{selectedGameAccesses.ano_letivo || "Ensino Fundamental"}</span>
+<span>{gradeLevels.find((g) => g.id === selectedGameAccesses.grade_level_id)?.name || "—"}</span>
                               <span>&middot;</span>
                               <span>
                                 {gameAccessesData.length}{" "}

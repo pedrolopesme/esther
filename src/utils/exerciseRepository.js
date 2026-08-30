@@ -1,6 +1,6 @@
 import { getSupabaseBrowserClient } from "./supabase";
 
-const LIST_SUMMARY_COLUMNS = "id, slug, title, description, subject, materia, ano_letivo, exercise_date, created_at, question_count, published";
+const LIST_SUMMARY_COLUMNS = "id, slug, title, description, subject, materia, grade_level_id, exercise_date, created_at, question_count, published";
 const LIST_DETAIL_COLUMNS = `${LIST_SUMMARY_COLUMNS}, exercises`;
 
 function normalizeList(row) {

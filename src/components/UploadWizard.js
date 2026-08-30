@@ -103,12 +103,13 @@ export default function UploadWizard({ onClose, onSaved }) {
   const [subjects, setSubjects] = useState(STATIC_SUBJECTS);
   const [jsonError, setJsonError] = useState(null);
   const [rawExercises, setRawExercises] = useState([]);
+const [gradeLevels, setGradeLevels] = useState([]);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     subject: "matematica",
     slug: "",
-    ano_letivo: "3º ano do Ensino Fundamental",
+    grade_level_id: "",
     exercise_date: new Date().toISOString().slice(0, 10),
   });
   const [stats, setStats] = useState({ total: 0, types: {} });
@@ -134,8 +135,25 @@ export default function UploadWizard({ onClose, onSaved }) {
       const data = await getSubjectsFromDB(false);
       setSubjects(data);
     }
-    loadSubjects();
+loadSubjects();
   }, []);
+
+  useEffect(() => {
+    async function loadGradeLevels() {
+      const { data } = await supabase
+        .from("grade_levels")
+        .select("id, name, stage, sort_order")
+        .order("sort_order", { ascending: true });
+      if (data) {
+        setGradeLevels(data);
+        const defaultGrade = data.find((g) => g.sort_order === 6);
+        if (defaultGrade) {
+          setFormData((prev) => ({ ...prev, grade_level_id: defaultGrade.id }));
+        }
+      }
+    }
+    loadGradeLevels();
+  }, [supabase]);
 
   const handleFile = useCallback((file) => {
     setJsonError(null);
@@ -171,14 +189,15 @@ export default function UploadWizard({ onClose, onSaved }) {
           typeCounts[ex.type] = (typeCounts[ex.type] || 0) + 1;
         });
 
-        setFormData({
+setFormData((prev) => ({
+          ...prev,
           title,
           description,
           subject: detectedSubj,
           slug: buildSlug(title),
-          ano_letivo: json.ano_letivo || "3º ano do Ensino Fundamental",
           exercise_date: date,
-        });
+          // grade_level_id mantém o valor atual (não vem mais do JSON)
+        }));
         setStats({ total: exercises.length, types: typeCounts });
         setStep(1);
       } catch {
@@ -290,8 +309,8 @@ export default function UploadWizard({ onClose, onSaved }) {
         description: formData.description,
         subject: formData.subject,
         slug: formData.slug || buildSlug(formData.title),
-        materia: chosenSubject?.name || formData.subject,
-        ano_letivo: formData.ano_letivo,
+materia: chosenSubject?.name || formData.subject,
+        grade_level_id: formData.grade_level_id,
         exercise_date: formData.exercise_date,
         exercises: rawExercises,
         published: true,
@@ -458,7 +477,7 @@ export default function UploadWizard({ onClose, onSaved }) {
   "title": "Nome da lista",
   "description": "Descrição curta",
   "materia": "Ciências",
-  "ano_letivo": "4º ano do Ensino Fundamental",
+  "ano_letivo": "4º ano do Ensino Fundamental",  // ignorado — série selecionada no formulário
   "data": "2026-08-22",
   "exercises": [
     {
@@ -665,18 +684,32 @@ export default function UploadWizard({ onClose, onSaved }) {
                       }
                     />
                   </div>
-                  <div>
+<div>
                     <label className="mb-1.5 block text-sm font-bold text-ink">
-                      Ano letivo
+                      Série
                     </label>
-                    <input
-                      type="text"
+                    <select
                       className="w-full rounded-xl border-2 border-lilac/15 bg-white/80 px-4 py-2.5 text-ink outline-none focus:border-lilac transition"
-                      value={formData.ano_letivo}
+                      value={formData.grade_level_id}
                       onChange={(e) =>
-                        setFormData({ ...formData, ano_letivo: e.target.value })
+                        setFormData({ ...formData, grade_level_id: e.target.value })
                       }
-                    />
+                    >
+                      {(() => {
+                        const stages = {};
+                        for (const g of gradeLevels) {
+                          if (!stages[g.stage]) stages[g.stage] = [];
+                          stages[g.stage].push(g);
+                        }
+                        return Object.entries(stages).map(([stage, levels]) => (
+                          <optgroup key={stage} label={stage}>
+                            {levels.map((l) => (
+                              <option key={l.id} value={l.id}>{l.name}</option>
+                            ))}
+                          </optgroup>
+                        ));
+                      })()}
+                    </select>
                   </div>
                 </div>
               </motion.div>
@@ -719,7 +752,7 @@ export default function UploadWizard({ onClose, onSaved }) {
                           {subjectInfo?.name}
                         </span>
                         <span className="rounded-full bg-[#E1F6FD] px-2.5 py-0.5 text-xs font-bold text-[#4CC9F0]">
-                          {formData.ano_letivo}
+{gradeLevels.find((g) => g.id === formData.grade_level_id)?.name || "—"}
                         </span>
                         <span className="rounded-full bg-[#DBF9F1] px-2.5 py-0.5 text-xs font-bold text-[#06D6A0]">
                           {stats.total} questões

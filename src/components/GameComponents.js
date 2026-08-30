@@ -153,7 +153,7 @@ export function GameDrawer({ game, onClose, rawHtml = null }) {
                 </span>
               </div>
               <p className="text-xs text-slate-400 truncate">
-                {subjectObj?.name || game?.subject_id || "Geral"} &middot; {game?.ano_letivo || "Ensino Fundamental"}
+{subjectObj?.name || game?.subject_id || "Geral"}
               </p>
             </div>
           </div>
@@ -403,7 +403,7 @@ export function GameViewerModal({ game, onClose, onGameCompleted }) {
               <div className="flex items-center gap-2 text-xs text-slate-400">
                 <span className="font-bold text-lilac">{subjectObj?.name || game.subject_id}</span>
                 <span>&middot;</span>
-                <span>{game.ano_letivo || "4º ano"}</span>
+<span>{game.grade_level_name || ""}</span>
                 {game.max_score && (
                   <>
                     <span>&middot;</span>

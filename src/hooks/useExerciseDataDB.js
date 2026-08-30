@@ -24,7 +24,7 @@ export function useExerciseDataDB(subject, listId) {
         // Buscar a lista de exercícios pelo slug
         const { data, error: fetchError } = await supabase
           .from("exercise_lists")
-          .select("*")
+.select("*, grade_levels(name, stage)")
           .eq("subject", subject)
           .eq("slug", listId)
           .single();
@@ -42,8 +42,10 @@ export function useExerciseDataDB(subject, listId) {
           nome: data.title,
           title: data.title,
           description: data.description,
-          materia: data.materia || subject,
-          ano_letivo: data.ano_letivo,
+materia: data.materia || subject,
+          grade_level_id: data.grade_level_id,
+          grade_level_name: data.grade_levels?.name || "",
+          grade_level_stage: data.grade_levels?.stage || "",
           data: data.exercise_date,
           exercises: data.exercises || [],
         };

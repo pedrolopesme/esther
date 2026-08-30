@@ -94,8 +94,8 @@ export default function ExerciseListClient({ subject, listId: listIdProp }) {
         </div>
         <div className="relative mt-5 flex flex-wrap gap-2">
           <Badge tone="neutral" icon={BookMarked} className="bg-white/90">{exerciseData.materia}</Badge>
-          {exerciseData.ano_letivo && (
-            <Badge tone="neutral" icon={GraduationCap} className="bg-white/90">{exerciseData.ano_letivo}</Badge>
+{exerciseData.grade_level_name && (
+            <Badge tone="neutral" icon={GraduationCap} className="bg-white/90">{exerciseData.grade_level_name}</Badge>
           )}
           {formattedDate && (
             <Badge tone="neutral" icon={CalendarDays} className="bg-white/90">{formattedDate}</Badge>

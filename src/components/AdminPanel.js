@@ -127,8 +127,8 @@ export default function AdminPanel() {
   const [materialForm, setMaterialForm] = useState({
     title: "",
     description: "",
-    subject_id: "matematica",
-    ano_letivo: "3º ano do Ensino Fundamental",
+subject_id: "matematica",
+    grade_level_id: "",
     category: "apostila",
     published: true,
   });
@@ -149,8 +149,8 @@ export default function AdminPanel() {
     slug: "",
     title: "",
     description: "",
-    subject_id: "ciencias",
-    ano_letivo: "4º ano",
+subject_id: "ciencias",
+    grade_level_id: "",
     target_age: 9,
     version: "1.0.0",
     max_score: 100,
@@ -162,6 +162,7 @@ export default function AdminPanel() {
   const [isGameDragActive, setIsGameDragActive] = useState(false);
   const gameDragCounterRef = useRef(0);
 
+const [gradeLevels, setGradeLevels] = useState([]);
   const supabase = getSupabaseBrowserClient();
 
   // Auth protection
@@ -169,7 +170,26 @@ export default function AdminPanel() {
     if (!authLoading && !isAdmin) {
       router.push("/");
     }
-  }, [isAdmin, authLoading, router]);
+}, [isAdmin, authLoading, router]);
+
+  // Load grade levels
+  useEffect(() => {
+    async function loadGradeLevels() {
+      const { data } = await supabase
+        .from("grade_levels")
+        .select("id, name, stage, sort_order")
+        .order("sort_order", { ascending: true });
+      if (data) {
+        setGradeLevels(data);
+        const defaultGrade = data.find((g) => g.sort_order === 6);
+        if (defaultGrade) {
+          setMaterialForm((prev) => ({ ...prev, grade_level_id: prev.grade_level_id || defaultGrade.id }));
+          setGameForm((prev) => ({ ...prev, grade_level_id: prev.grade_level_id || defaultGrade.id }));
+        }
+      }
+    }
+    loadGradeLevels();
+  }, [supabase]);
 
   // Prevent browser default behavior on drop outside targets
   useEffect(() => {
@@ -473,8 +493,8 @@ export default function AdminPanel() {
     setMaterialForm({
       title: "",
       description: "",
-      subject_id: subjects[0]?.id || "matematica",
-      ano_letivo: "3º ano do Ensino Fundamental",
+subject_id: subjects[0]?.id || "matematica",
+      grade_level_id: gradeLevels.find((g) => g.sort_order === 6)?.id || "",
       category: "apostila",
       published: true,
     });
@@ -490,7 +510,7 @@ export default function AdminPanel() {
       title: mat.title,
       description: mat.description || "",
       subject_id: mat.subject_id,
-      ano_letivo: mat.ano_letivo || "3º ano do Ensino Fundamental",
+      grade_level_id: mat.grade_level_id || gradeLevels.find((g) => g.sort_order === 6)?.id || "",
       category: mat.category || "apostila",
       published: mat.published ?? true,
     });
@@ -523,8 +543,8 @@ export default function AdminPanel() {
         const payload = {
           title: materialForm.title,
           description: materialForm.description,
-          subject_id: materialForm.subject_id,
-          ano_letivo: materialForm.ano_letivo,
+subject_id: materialForm.subject_id,
+          grade_level_id: materialForm.grade_level_id,
           category: materialForm.category,
           published: materialForm.published,
         };
@@ -543,7 +563,7 @@ export default function AdminPanel() {
           title: materialForm.title,
           description: materialForm.description,
           subject_id: materialForm.subject_id,
-          ano_letivo: materialForm.ano_letivo,
+          grade_level_id: materialForm.grade_level_id,
           category: materialForm.category,
           published: materialForm.published,
           file_url: fileInfo.fileUrl,
@@ -617,8 +637,8 @@ export default function AdminPanel() {
           title: parsed.title || formatTitleFromFileName(file.name),
           description: parsed.description || "",
           slug: buildSlug(parsed.title || file.name.replace(/\.html$/, "")),
-          subject_id: matchedSubj?.id || prev.subject_id || "ciencias",
-          ano_letivo: parsed.grade || prev.ano_letivo || "4º ano",
+subject_id: matchedSubj?.id || prev.subject_id || "ciencias",
+          // grade_level_id mantém o valor atual (não vem mais do arquivo)
           target_age: parsed.targetAge || prev.target_age || 9,
           version: parsed.version || "1.0.0",
           max_score: parsed.maxScore || 100,
@@ -677,8 +697,8 @@ export default function AdminPanel() {
       slug: "",
       title: "",
       description: "",
-      subject_id: subjects[0]?.id || "ciencias",
-      ano_letivo: "4º ano",
+subject_id: subjects[0]?.id || "ciencias",
+      grade_level_id: gradeLevels.find((g) => g.sort_order === 6)?.id || "",
       target_age: 9,
       version: "1.0.0",
       max_score: 100,
@@ -700,7 +720,7 @@ export default function AdminPanel() {
       title: gameItem.title,
       description: gameItem.description || "",
       subject_id: gameItem.subject_id,
-      ano_letivo: gameItem.ano_letivo || "4º ano",
+      grade_level_id: gameItem.grade_level_id || gradeLevels.find((g) => g.sort_order === 6)?.id || "",
       target_age: gameItem.target_age || 9,
       version: gameItem.version || "1.0.0",
       max_score: gameItem.max_score || 100,
@@ -738,8 +758,8 @@ export default function AdminPanel() {
         const payload = {
           title: gameForm.title,
           description: gameForm.description,
-          subject_id: gameForm.subject_id,
-          ano_letivo: gameForm.ano_letivo,
+subject_id: gameForm.subject_id,
+          grade_level_id: gameForm.grade_level_id,
           target_age: Number(gameForm.target_age) || 9,
           version: gameForm.version,
           max_score: Number(gameForm.max_score) || 100,
@@ -760,7 +780,7 @@ export default function AdminPanel() {
           title: gameForm.title,
           description: gameForm.description,
           subject_id: gameForm.subject_id,
-          ano_letivo: gameForm.ano_letivo,
+          grade_level_id: gameForm.grade_level_id,
           target_age: Number(gameForm.target_age) || 9,
           version: gameForm.version,
           max_score: Number(gameForm.max_score) || 100,
@@ -820,9 +840,9 @@ export default function AdminPanel() {
         return <FileText className="h-4 w-4 text-[#06D6A0]" />;
     }
   }
-  // Unique grades for lists
-  const uniqueListGrades = Array.from(
-    new Set(lists.map((l) => l.ano_letivo).filter(Boolean))
+// Unique grades for lists (using grade_level_id)
+  const uniqueListGradeIds = Array.from(
+    new Set(lists.map((l) => l.grade_level_id).filter(Boolean))
   );
 
   // Filtered exercise lists
@@ -832,7 +852,7 @@ export default function AdminPanel() {
         l.slug?.toLowerCase().includes(listSearchTitle.toLowerCase().trim())
       : true;
     const matchSubject = listFilterSubject ? l.subject === listFilterSubject : true;
-    const matchGrade = listFilterGrade ? l.ano_letivo === listFilterGrade : true;
+    const matchGrade = listFilterGrade ? l.grade_level_id === listFilterGrade : true;
     const matchStatus =
       listFilterStatus === "published"
         ? l.published === true
@@ -1063,11 +1083,14 @@ export default function AdminPanel() {
                   className="w-full rounded-xl border border-lilac/20 bg-white px-3 py-2 text-xs font-semibold text-ink outline-none focus:border-lilac transition"
                 >
                   <option value="">Todas as Séries</option>
-                  {uniqueListGrades.map((grade) => (
-                    <option key={grade} value={grade}>
-                      {grade}
-                    </option>
-                  ))}
+{uniqueListGradeIds.map((gid) => {
+                    const gl = gradeLevels.find((g) => g.id === gid);
+                    return (
+                      <option key={gid} value={gid}>
+                        {gl?.name || gid}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
 
@@ -1359,18 +1382,32 @@ export default function AdminPanel() {
                   </div>
 
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                    <div>
+<div>
                       <label className="mb-1 block text-xs font-bold text-ink uppercase tracking-wider">
-                        Ano Letivo / Série
+                        Série
                       </label>
-                      <input
-                        type="text"
-                        value={gameForm.ano_letivo}
+                      <select
+                        value={gameForm.grade_level_id}
                         onChange={(e) =>
-                          setGameForm({ ...gameForm, ano_letivo: e.target.value })
+                          setGameForm({ ...gameForm, grade_level_id: e.target.value })
                         }
                         className="w-full rounded-2xl border-2 border-lilac/15 bg-white/90 px-4 py-2.5 text-sm font-semibold text-ink outline-none focus:border-lilac"
-                      />
+                      >
+                        {(() => {
+                          const stages = {};
+                          for (const g of gradeLevels) {
+                            if (!stages[g.stage]) stages[g.stage] = [];
+                            stages[g.stage].push(g);
+                          }
+                          return Object.entries(stages).map(([stage, levels]) => (
+                            <optgroup key={stage} label={stage}>
+                              {levels.map((l) => (
+                                <option key={l.id} value={l.id}>{l.name}</option>
+                              ))}
+                            </optgroup>
+                          ));
+                        })()}
+                      </select>
                     </div>
 
                     <div>
@@ -1470,8 +1507,8 @@ export default function AdminPanel() {
                             setTestingGame(
                               editingGame || {
                                 title: gameForm.title || "Preview",
-                                subject_id: gameForm.subject_id,
-                                ano_letivo: gameForm.ano_letivo,
+subject_id: gameForm.subject_id,
+                                grade_level_id: gameForm.grade_level_id,
                                 max_score: gameForm.max_score,
                                 version: gameForm.version,
                                 rawHtml: selectedGameHtml,
@@ -1603,7 +1640,7 @@ export default function AdminPanel() {
                                     {gameItem.file_name}
                                   </span>
                                   <span>&middot;</span>
-                                  <span>{gameItem.ano_letivo}</span>
+<span>{gradeLevels.find((g) => g.id === gameItem.grade_level_id)?.name || "—"}</span>
                                 </div>
                               </div>
                             </div>
@@ -1771,18 +1808,32 @@ export default function AdminPanel() {
                       </select>
                     </div>
 
-                    <div>
+<div>
                       <label className="mb-1 block text-xs font-bold text-ink uppercase tracking-wider">
-                        Ano Letivo
+                        Série
                       </label>
-                      <input
-                        type="text"
-                        value={materialForm.ano_letivo}
+                      <select
+                        value={materialForm.grade_level_id}
                         onChange={(e) =>
-                          setMaterialForm({ ...materialForm, ano_letivo: e.target.value })
+                          setMaterialForm({ ...materialForm, grade_level_id: e.target.value })
                         }
                         className="w-full rounded-2xl border-2 border-lilac/15 bg-white/90 px-4 py-2.5 text-sm font-semibold text-ink outline-none focus:border-lilac"
-                      />
+                      >
+                        {(() => {
+                          const stages = {};
+                          for (const g of gradeLevels) {
+                            if (!stages[g.stage]) stages[g.stage] = [];
+                            stages[g.stage].push(g);
+                          }
+                          return Object.entries(stages).map(([stage, levels]) => (
+                            <optgroup key={stage} label={stage}>
+                              {levels.map((l) => (
+                                <option key={l.id} value={l.id}>{l.name}</option>
+                              ))}
+                            </optgroup>
+                          ));
+                        })()}
+                      </select>
                     </div>
                   </div>
 
@@ -2028,12 +2079,10 @@ export default function AdminPanel() {
                               </div>
                               <div className="mt-0.5 flex items-center gap-2 text-xs text-ink-soft">
                                 <span className="font-mono text-[11px] truncate">{mat.file_name}</span>
-                                {mat.ano_letivo && (
-                                  <>
+<>
                                     <span>&middot;</span>
-                                    <span>{mat.ano_letivo}</span>
+                                    <span>{gradeLevels.find((g) => g.id === mat.grade_level_id)?.name || "—"}</span>
                                   </>
-                                )}
                               </div>
                             </div>
                           </td>

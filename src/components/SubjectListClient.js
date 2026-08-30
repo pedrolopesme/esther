@@ -41,6 +41,7 @@ import {
   detectMediaType,
 } from "../utils/materialRepository";
 import { getGames } from "../utils/gameRepository";
+import { getSupabaseBrowserClient } from "../utils/supabase";
 import MaterialViewerModal from "./MaterialViewerModal";
 import { GameViewerModal } from "./GameComponents";
 import { useAuth } from "../hooks/useAuth";
@@ -77,20 +78,23 @@ export default function SubjectListClient({ subjectId }) {
   const [selectedGame, setSelectedGame] = useState(null);
 
   // Filters
-  const [filterYear, setFilterYear] = useState("");
+const [filterYear, setFilterYear] = useState("");
   const [filterMediaType, setFilterMediaType] = useState("all");
+  const [gradeLevels, setGradeLevels] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const loadData = useCallback(async () => {
     try {
       setIsLoading(true);
-      const [dbSubjects, lists, mats, gamesData, overview] = await Promise.all([
+const supabase = getSupabaseBrowserClient();
+      const [dbSubjects, lists, mats, gamesData, overview, gradeLevelsRes] = await Promise.all([
         getSubjectsFromDB(true),
         getAvailableExerciseLists(subjectId),
         getMaterials({ subjectId, publishedOnly: true, childId: child?.id }),
         getGames({ subjectId, publishedOnly: true, childId: child?.id }),
         getStudentStudyOverview(child?.id, user?.id),
+        supabase.from("grade_levels").select("id, name, stage, sort_order").order("sort_order"),
       ]);
 
       const matched = dbSubjects.find((s) => s.id === subjectId);
@@ -98,8 +102,9 @@ export default function SubjectListClient({ subjectId }) {
 
       setExerciseLists(lists);
       setMaterials(mats);
-      setGames(gamesData);
+setGames(gamesData);
       setStudyOverview(overview);
+      setGradeLevels(gradeLevelsRes.data || []);
       setError(null);
     } catch (err) {
       console.error("Erro ao carregar dashboard da matéria:", err);
@@ -128,28 +133,28 @@ export default function SubjectListClient({ subjectId }) {
     return games.filter((g) => g.playStatus?.played).length;
   }, [games]);
 
-  const uniqueYears = Array.from(
+const uniqueGradeIds = Array.from(
     new Set([
-      ...exerciseLists.map((l) => l.ano_letivo),
-      ...materials.map((m) => m.ano_letivo),
-      ...games.map((g) => g.ano_letivo),
+      ...exerciseLists.map((l) => l.grade_level_id),
+      ...materials.map((m) => m.grade_level_id),
+      ...games.map((g) => g.grade_level_id),
     ].filter(Boolean))
   );
 
   // Filter lists, materials & games
   const filteredLists = exerciseLists.filter((l) => {
-    return filterYear ? l.ano_letivo === filterYear : true;
+    return filterYear ? l.grade_level_id === filterYear : true;
   });
 
   const filteredMaterials = materials.filter((m) => {
-    const matchYear = filterYear ? m.ano_letivo === filterYear : true;
+    const matchYear = filterYear ? m.grade_level_id === filterYear : true;
     const media = m.media_type || detectMediaType(m.file_type, m.file_name);
     const matchType = filterMediaType === "all" ? true : media === filterMediaType;
     return matchYear && matchType;
   });
 
   const filteredGames = games.filter((g) => {
-    return filterYear ? g.ano_letivo === filterYear : true;
+    return filterYear ? g.grade_level_id === filterYear : true;
   });
 
   function handleAccessLogged(materialId, action) {
@@ -305,19 +310,22 @@ export default function SubjectListClient({ subjectId }) {
 
         {/* Filter Controls */}
         <div className="flex flex-wrap items-center gap-2">
-          {uniqueYears.length > 0 && (
+{uniqueGradeIds.length > 0 && (
             <select
               value={filterYear}
               onChange={(e) => setFilterYear(e.target.value)}
               className="rounded-xl border border-lilac/20 bg-white/90 px-3 py-1.5 text-xs font-semibold text-ink outline-none"
             >
-              <option value="">Todos os Anos</option>
-              {uniqueYears.map((yr) => (
-                <option key={yr} value={yr}>
-                  {yr}
-                </option>
-              ))}
-            </select>
+              <option value="">Todas as Séries</option>
+              {uniqueGradeIds.map((gid) => {
+                const gl = gradeLevels.find((l) => l.id === gid);
+                return (
+                  <option key={gid} value={gid}>
+                    {gl?.name || gid}
+</option>
+                  );
+                })}
+              </select>
           )}
 
           {activeTab === "materials" && (
@@ -651,9 +659,9 @@ export default function SubjectListClient({ subjectId }) {
                                 </span>
                               )}
 
-                              {list.ano_letivo && (
+{list.grade_level_id && (
                                 <span className="rounded-full bg-white/80 px-2.5 py-0.5 text-[11px] font-bold text-ink-soft shadow-sm">
-                                  {list.ano_letivo}
+                                  {gradeLevels.find((g) => g.id === list.grade_level_id)?.name || "—"}
                                 </span>
                               )}
                             </div>
